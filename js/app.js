@@ -8,7 +8,7 @@
   /* ---------- État ---------- */
   var defaults = {
     profile: null, level: null, domains: [], boursier: null, budget: null, done: false,
-    metDomain: 'Tous', metCat: 'Toutes', q: '', calCat: 'Toutes', track: 'Administratif',
+    metDomain: null, metCat: 'Toutes', q: '', calCat: 'Toutes', track: 'Administratif',
     prepBudget: null, alert: false
   };
   var S = load();
@@ -16,7 +16,10 @@
   function load() {
     try {
       var raw = localStorage.getItem(KEY);
-      return Object.assign({}, defaults, raw ? JSON.parse(raw) : {});
+      var st = Object.assign({}, defaults, raw ? JSON.parse(raw) : {});
+      /* À chaque ouverture, l'onglet Métiers repart des choix du profil */
+      st.metDomain = null;
+      return st;
     } catch (e) { return Object.assign({}, defaults); }
   }
   function save() {
@@ -36,6 +39,7 @@
     grid: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></svg>',
     layers: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/></svg>',
     book: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h14v16H6a2 2 0 0 0-2 2z"/><path d="M4 21V5"/></svg>',
+    lock: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>',
     user: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>'
   };
 
@@ -53,14 +57,30 @@
   function catShort(c) { return c === 'X' ? '<span style="font-size:11px">CDD</span>' : c; }
   function norm(s) { return s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase(); }
 
+  /* Pastille de catégorie : la lettre est décorative, le libellé est lu par les lecteurs d'écran */
+  function catBadge(c, size) {
+    return '<span class="cat ' + (size || '') + ' cat-' + c + '" aria-hidden="true">' + catShort(c) + '</span><span class="sr-only">' + catLabel(c) + ', </span>';
+  }
+  /* Lien externe : ouverture dans un nouvel onglet signalée (RGAA 13.2) */
+  function ext(href, label, cls) {
+    return '<a class="' + (cls || 'btn mt-s') + '" href="' + href + '" target="_blank" rel="noopener" title="' + esc(label) + ' (nouvelle fenêtre)">' +
+      esc(label) + '<span class="sr-only"> (nouvelle fenêtre)</span></a>';
+  }
+  function announce(msg) {
+    var live = document.getElementById('live');
+    if (!live) return;
+    live.textContent = '';
+    setTimeout(function () { live.textContent = msg; }, 50);
+  }
+
   function back(href, label) { return '<a class="back" href="' + href + '">' + I.back + esc(label) + '</a>'; }
   function progress(n) {
-    var out = '<div class="progress" aria-label="Étape ' + n + ' sur 3">';
+    var out = '<div class="progress" aria-hidden="true">';
     for (var i = 1; i <= 3; i++) out += '<span class="' + (i <= n ? 'on' : '') + '"></span>';
     return out + '</div>';
   }
   function tabbar(active) {
-    var tabs = [['accueil', 'Accueil', I.home], ['metiers', 'Métiers', I.grid], ['concours', 'Concours', I.layers], ['prepas', 'Prépas', I.book], ['profil', 'Profil', I.user]];
+    var tabs = [['accueil', 'Accueil', I.home], ['metiers', 'Métiers', I.grid], ['concours', 'Concours', I.layers], ['prepas', 'Prépas', I.book], ['moi', 'Profil', I.user]];
     return '<nav class="tabbar" aria-label="Navigation principale">' + tabs.map(function (t) {
       var on = t[0] === active;
       return '<a href="#/' + t[0] + '" class="' + (on ? 'on' : '') + '"' + (on ? ' aria-current="page"' : '') + '>' + t[2] + t[1] + '</a>';
@@ -83,6 +103,22 @@
     if (!S.domains.length) return D.jobs;
     return D.jobs.filter(function (j) { return S.domains.indexOf(j.domain) > -1; });
   }
+  /* Niveau atteint : 0 sans diplôme, 1 brevet ou CAP, 2 bac, 3 bac+2, 4 bac+3, 5 bac+5 */
+  var RANK = {
+    '6e': 0, '5e': 0, '4e': 0, '3e': 0, 'Seconde': 1, 'Première': 1, 'Terminale': 1,
+    'Bac+1 / +2': 2, 'Bac+3': 4, 'Bac+5': 5,
+    'Sans diplôme': 0, 'Brevet': 1, 'CAP / BEP': 1, 'Bac': 2, 'Bac+2': 3
+  };
+  function userRank() { return S.level && RANK[S.level] !== undefined ? RANK[S.level] : null; }
+  function isOpen(j) { var r = userRank(); return r !== null && r >= j.lvl; }
+  var NEED = ['', 'Avec le brevet ou un CAP', 'Avec le bac', 'Avec un Bac+2', 'Avec un Bac+3', 'Avec un Bac+5'];
+
+  /* Domaine actif de l'onglet Métiers : par défaut, les choix du profil */
+  function activeDomain() {
+    if (S.metDomain) return S.metDomain;
+    return S.domains.length ? 'Pour vous' : 'Tous';
+  }
+
   function upcoming() {
     var today = new Date().toISOString().slice(0, 10);
     return D.calendar.filter(function (c) { return c.date >= today; });
@@ -112,7 +148,11 @@
           return '<button type="button" class="chip' + (on ? ' on' : '') + '" aria-pressed="' + on + '"' + attr('action', 'level') + attr('v', l) + '>' + esc(l) + '</button>';
         }).join('') + '</div></section>';
     }
-    html += '</main><div class="footer"><button type="button" class="btn" data-action="go" data-v="interets"' + (S.profile && S.level ? '' : ' disabled') + '>Continuer</button></div>';
+    var ready = S.profile && S.level;
+    html += '<p class="notice mt-m">' + I.lock + '<span>Vos réponses restent sur cet appareil. Rien n’est envoyé, aucun compte, aucun traceur. <a href="#/confidentialite">Données personnelles</a></span></p>';
+    html += '</main><div class="footer">' +
+      (ready ? '' : '<span class="small" id="hint-continue" style="text-align:center">Choisissez un profil puis un niveau pour continuer.</span>') +
+      '<button type="button" class="btn" data-action="go" data-v="interets"' + (ready ? '' : ' disabled aria-describedby="hint-continue"') + '>Continuer</button></div>';
     return html;
   };
 
@@ -182,16 +222,33 @@
 
   function jobRows() {
     var q = norm(S.q || '');
+    var dom = activeDomain();
     var list = D.jobs.filter(function (j) {
-      if (S.metDomain !== 'Tous' && j.domain !== S.metDomain) return false;
+      if (dom === 'Pour vous' && S.domains.indexOf(j.domain) === -1) return false;
+      if (dom !== 'Pour vous' && dom !== 'Tous' && j.domain !== dom) return false;
       if (S.metCat !== 'Toutes' && j.cat !== S.metCat) return false;
       if (q && norm(j.name + ' ' + j.domain).indexOf(q) === -1) return false;
       return true;
     });
-    if (!list.length) return '<p class="empty">Aucun métier avec ces filtres.</p>';
+    if (!list.length) {
+      return '<p class="empty">Aucun métier avec ces filtres.' +
+        (dom === 'Pour vous' ? ' <button type="button" class="text-btn" data-action="metDomain" data-v="Tous">Voir tous les métiers</button>' : '') + '</p>';
+    }
+    /* Ce qui est accessible avec le niveau actuel remonte en tête */
+    list = list.slice().sort(function (a, b) {
+      var oa = isOpen(a) ? 0 : 1, ob = isOpen(b) ? 0 : 1;
+      return oa - ob || a.lvl - b.lvl;
+    });
+    var ranked = userRank() !== null;
     return list.map(function (j) {
-      return '<a class="list-row" href="#/metier/' + j.id + '"><span class="cat cat-' + j.cat + '" aria-label="' + catLabel(j.cat) + '">' + catShort(j.cat) + '</span>' +
-        '<div class="main"><span class="name">' + esc(j.name) + '</span><span class="meta">' + esc(j.access + ' · ' + j.dip) + '</span></div>' + I.chev + '</a>';
+      var badge = '';
+      if (ranked) {
+        badge = isOpen(j)
+          ? '<span class="fit on">Accessible dès maintenant</span>'
+          : '<span class="fit">' + esc(NEED[j.lvl] || 'Plus tard') + '</span>';
+      }
+      return '<a class="list-row" href="#/metier/' + j.id + '">' + catBadge(j.cat) +
+        '<div class="main"><span class="name">' + esc(j.name) + '</span><span class="meta">' + esc(j.domain + ' · ' + j.access) + '</span>' + badge + '</div>' + I.chev + '</a>';
     }).join('');
   }
 
@@ -199,14 +256,21 @@
     var withJobs = D.domains.filter(function (d) { return D.jobs.some(function (j) { return j.domain === d; }); });
     var mine = S.domains.filter(function (d) { return withJobs.indexOf(d) > -1; });
     var others = withJobs.filter(function (d) { return mine.indexOf(d) === -1; });
-    var doms = ['Tous'].concat(mine, others);
+    var doms = (S.domains.length ? ['Pour vous'] : []).concat(['Tous'], mine, others);
+    var dom = activeDomain();
+    var who = isParent() ? 'Ses choix' : 'Vos choix';
+    var recap = S.domains.length
+      ? who + ' : ' + S.domains.join(', ') + (S.level ? ' · ' + S.level : '')
+      : (S.level ? 'Niveau : ' + S.level : '');
     return '<main class="screen" style="padding-top:32px">' +
       '<span class="eyebrow">Explorer</span><h1>Métiers</h1>' +
+      (recap ? '<p class="small" style="margin:0">' + esc(recap) + ' · <a href="#/interets">Modifier</a></p>' : '') +
       '<label class="search">' + I.search + '<span class="sr-only">Rechercher un métier</span>' +
       '<input type="search" id="q" placeholder="Rechercher un métier" value="' + esc(S.q || '') + '" autocomplete="off"></label>' +
       '<div class="row" style="flex-wrap:nowrap;overflow-x:auto;padding-bottom:2px;margin-right:-24px;padding-right:24px">' + doms.map(function (d) {
-        var on = S.metDomain === d;
-        return '<button type="button" class="chip blue' + (on ? ' on' : '') + '" style="flex:none" aria-pressed="' + on + '"' + attr('action', 'metDomain') + attr('v', d) + '>' + esc(d === 'Tous' ? 'Tous les domaines' : d) + '</button>';
+        var on = dom === d;
+        var label = d === 'Tous' ? 'Tous les domaines' : d;
+        return '<button type="button" class="chip blue' + (on ? ' on' : '') + '" style="flex:none" aria-pressed="' + on + '"' + attr('action', 'metDomain') + attr('v', d) + '>' + esc(label) + '</button>';
       }).join('') + '</div>' +
       '<div class="row">' + ['Toutes', 'A', 'B', 'C'].map(function (c) {
         var on = S.metCat === c;
@@ -265,14 +329,14 @@
         return '<button type="button" class="chip blue' + (on ? ' on' : '') + '" style="min-width:52px;justify-content:center" aria-pressed="' + on + '"' + attr('action', 'calCat') + attr('v', c) + '>' + c + '</button>';
       }).join('') + '</div>' +
       '<span class="small">Date limite d’inscription</span>' +
-      '<div class="list">' + (list.length ? list.map(function (c) {
+      '<div class="list calendar-list">' + (list.length ? list.map(function (c) {
         var d = fmtDate(c.date);
         return '<div class="list-row static"><div class="date"><b>' + d.day + '</b><span>' + d.month + '</span></div>' +
           '<div class="main"><span class="name" style="font-size:15px">' + esc(c.name) + '</span><span class="meta" style="font-size:12px">' + esc(c.meta) + '</span></div>' +
-          '<span class="cat sm cat-' + c.cat + '">' + c.cat + '</span></div>';
+          catBadge(c.cat, 'sm') + '</div>';
       }).join('') : '<p class="empty">Aucun concours de cette catégorie dans les prochaines clôtures.</p>') + '</div>' +
       '<span class="small">Source : calendrier général des concours de la fonction publique d’État.</span>' +
-      '<a class="btn mt-s" href="' + D.calendarUrl + '" target="_blank" rel="noopener">Voir tous les concours</a>' +
+      ext(D.calendarUrl, 'Voir tous les concours') +
       '</main>' + tabbar('concours');
   };
 
@@ -301,7 +365,7 @@
         return '<div class="list-row static" style="align-items:flex-start;padding:16px 0"><span class="cat sm ' + w.bg + '">' + (i + 1) + '</span>' +
           '<div class="main" style="gap:4px"><span class="name">' + esc(w.t) + '</span><span class="meta" style="font-size:14px;line-height:1.4;color:var(--ink-2)">' + esc(w.d) + '</span></div></div>';
       }).join('') + '</div>' +
-      '<a class="btn mt-s" href="' + D.jobsUrl + '" target="_blank" rel="noopener">Voir les offres d’emploi</a></main>' + tabbar('accueil');
+      ext(D.jobsUrl, 'Voir les offres d’emploi') + '</main>' + tabbar('accueil');
   };
 
   screens.prepas = function () {
@@ -322,7 +386,88 @@
         return '<div class="prep' + (hi ? ' hi' : '') + '"><div class="head"><h3 style="font-size:16px">' + esc(p.t) + '</h3><span class="price">' + esc(p.price) + '</span></div><p>' + esc(p.d) + '</p></div>';
       }).join('') + '</div>' +
       '<div class="bourse"><div><b>5 000 € / an</b><span>Bourse Talents 2026-2027, pour les élèves des Prépas Talents.</span></div><span class="dot" style="width:12px;height:12px;border-radius:999px;background:#FFC800;flex:none"></span></div>' +
-      '<a class="btn mt-s" href="' + D.prepsMapUrl + '" target="_blank" rel="noopener">Voir la carte des prépas</a></main>' + tabbar('prepas');
+      ext(D.prepsMapUrl, 'Voir la carte des Prépas Talents') + '</main>' + tabbar('prepas');
+  };
+
+  /* ---------- Profil et informations légales ---------- */
+  var PROFILE_LABEL = { etu: 'Étudiant·e', par: 'Parent', rec: 'En reconversion' };
+
+  screens.moi = function () {
+    var rows = [
+      ['Profil', S.profile ? PROFILE_LABEL[S.profile] : 'Non renseigné'],
+      [isParent() ? 'Niveau de votre enfant' : 'Niveau', S.level || 'Non renseigné'],
+      ['Domaines', S.domains.length ? S.domains.join(', ') : 'Tous'],
+      ['Boursier·e', S.boursier || 'Non renseigné'],
+      ['Budget', S.budget || 'Non renseigné']
+    ];
+    return '<main class="screen" style="padding-top:32px">' +
+      '<span class="eyebrow">Profil</span><h1>Vos choix</h1>' +
+      '<dl class="list" style="margin:0">' + rows.map(function (r) {
+        return '<div class="list-row static" style="min-height:58px;flex-direction:column;align-items:flex-start;justify-content:center;gap:3px"><dt class="meta">' + esc(r[0]) + '</dt><dd class="name" style="margin:0;font-size:15px">' + esc(r[1]) + '</dd></div>';
+      }).join('') + '</dl>' +
+      '<a class="btn mt-s" href="#/profil">Modifier mes choix</a>' +
+      '<button type="button" class="btn danger" data-action="wipe">Effacer mes données</button>' +
+      '<p class="notice">' + I.lock + '<span>Ces informations sont enregistrées uniquement dans ce navigateur. Elles ne sont envoyées à personne.</span></p>' +
+      '<div class="list mt-m">' +
+      '<a class="list-row" href="#/confidentialite"><div class="main"><span class="name">Données personnelles</span></div>' + I.chev + '</a>' +
+      '<a class="list-row" href="#/accessibilite"><div class="main"><span class="name">Accessibilité : partiellement conforme</span></div>' + I.chev + '</a>' +
+      '<a class="list-row" href="#/mentions"><div class="main"><span class="name">Mentions légales</span></div>' + I.chev + '</a>' +
+      '</div></main>' + tabbar('moi');
+  };
+
+  screens.confidentialite = function () {
+    var L = D.legal;
+    return '<main class="screen top-tight">' + back('#/moi', 'Profil') +
+      '<span class="eyebrow">RGPD</span><h1 class="sm">Données personnelles</h1>' +
+      '<div class="prose">' +
+      '<p><strong>En bref : vos réponses restent sur votre appareil.</strong> Pas de compte, pas de cookie, pas de mesure d’audience, pas de publicité.</p>' +
+      '<h2>Responsable du traitement</h2><p><span class="todo">' + esc(L.publisher) + '</span>, ' + '<span class="todo">' + esc(L.address) + '</span>. Contact : <span class="todo">' + esc(L.contact) + '</span>.</p>' +
+      '<h2>Ce qui est enregistré</h2><ul>' +
+      '<li>Le profil (étudiant·e, parent, reconversion) et le niveau d’étude.</li>' +
+      '<li>Les domaines choisis, la situation de bourse et le budget indiqués.</li>' +
+      '<li>Les réglages d’affichage (filtres, alerte).</li></ul>' +
+      '<p>Aucun nom, aucune adresse e-mail, aucun numéro n’est demandé.</p>' +
+      '<h2>Où et combien de temps</h2><p>Dans le stockage local de votre navigateur (localStorage), jamais sur un serveur. Ces données restent jusqu’à ce que vous les effaciez, depuis l’onglet Profil ou les réglages de votre navigateur.</p>' +
+      '<h2>Pourquoi</h2><p>Uniquement pour adapter les contenus à votre situation (intérêt légitime à rendre le service demandé). Ce stockage est nécessaire au service : il ne demande pas de consentement.</p>' +
+      '<h2>Hébergement</h2><p>L’application est hébergée par ' + esc(L.host) + '. Comme tout hébergeur, il peut enregistrer l’adresse IP des visiteur·ses dans ses journaux techniques, pour la sécurité du service.</p>' +
+      '<h2>Liens externes</h2><p>Les liens vers des sites publics (calendrier des concours, offres d’emploi, carte des prépas) ouvrent ces sites, qui ont leur propre politique de confidentialité.</p>' +
+      '<h2>Vos droits</h2><p>Vous pouvez à tout moment consulter, modifier ou effacer vos données depuis l’onglet Profil. Pour toute question, écrivez à <span class="todo">' + esc(L.contact) + '</span>. Vous pouvez aussi saisir la CNIL : ' + ext('https://www.cnil.fr/fr/plaintes', 'cnil.fr', '') + '.</p>' +
+      '<p class="small">Mise à jour : ' + esc(L.updated) + '</p>' +
+      '</div></main>' + tabbar('moi');
+  };
+
+  screens.accessibilite = function () {
+    var L = D.legal;
+    return '<main class="screen top-tight">' + back('#/moi', 'Profil') +
+      '<span class="eyebrow">RGAA</span><h1 class="sm">Déclaration d’accessibilité</h1>' +
+      '<div class="prose">' +
+      '<p><span class="todo">' + esc(L.publisher) + '</span> s’engage à rendre cette application accessible, conformément à l’article 47 de la loi n° 2005-102 du 11 février 2005.</p>' +
+      '<h2>État de conformité</h2><p>Cette application est <strong>partiellement conforme</strong> au référentiel général d’amélioration de l’accessibilité (RGAA) version 4.1. Aucun audit externe n’a encore été réalisé : le taux de conformité n’est pas encore mesuré.</p>' +
+      '<h2>Ce qui est déjà pris en compte</h2><ul>' +
+      '<li>Lien d’évitement, titres hiérarchisés et titre de page à chaque écran.</li>' +
+      '<li>Navigation complète au clavier, focus visible et conservé après chaque choix.</li>' +
+      '<li>État des choix annoncé aux lecteurs d’écran (boutons pressés, interrupteur, résultats des filtres).</li>' +
+      '<li>Contrastes de texte d’au moins 4,5:1, zones cliquables d’au moins 44 px.</li>' +
+      '<li>Informations jamais portées par la couleur seule, liens externes signalés.</li>' +
+      '<li>Zoom et agrandissement du texte autorisés, animations réduites si demandé.</li></ul>' +
+      '<h2>Établissement de cette déclaration</h2><p>Déclaration établie le ' + esc(L.updated) + ', sur la base d’une auto-évaluation. Technologies : HTML, CSS, JavaScript.</p>' +
+      '<h2>Retour d’information et contact</h2><p>Si vous n’arrivez pas à accéder à un contenu ou à un service, écrivez à <span class="todo">' + esc(L.contact) + '</span> pour être orienté·e vers une alternative accessible.</p>' +
+      '<h2>Voies de recours</h2><p>Si vous n’obtenez pas de réponse satisfaisante, vous pouvez saisir le Défenseur des droits : ' + ext('https://formulaire.defenseurdesdroits.fr/', 'formulaire en ligne', '') + ', ou par courrier gratuit, sans affranchissement : Défenseur des droits, Libre réponse 71120, 75342 Paris CEDEX 07.</p>' +
+      '</div></main>' + tabbar('moi');
+  };
+
+  screens.mentions = function () {
+    var L = D.legal;
+    return '<main class="screen top-tight">' + back('#/moi', 'Profil') +
+      '<span class="eyebrow">Informations</span><h1 class="sm">Mentions légales</h1>' +
+      '<div class="prose">' +
+      '<h2>Éditeur</h2><p><span class="todo">' + esc(L.publisher) + '</span><br><span class="todo">' + esc(L.address) + '</span><br>Contact : <span class="todo">' + esc(L.contact) + '</span></p>' +
+      '<h2>Directeur·rice de la publication</h2><p><span class="todo">' + esc(L.director) + '</span></p>' +
+      '<h2>Conception</h2><p>' + esc(L.design) + '</p>' +
+      '<h2>Hébergement</h2><p>' + esc(L.host) + ', ' + esc(L.hostAddress) + '</p>' +
+      '<h2>Sources</h2><p>Calendrier des concours et bourses Talents : fonction-publique.gouv.fr. Les informations sont données à titre indicatif : vérifiez toujours l’avis de concours officiel.</p>' +
+      '<h2>Police de caractères</h2><p>DM Sans, sous licence SIL Open Font License, hébergée avec l’application.</p>' +
+      '</div></main>' + tabbar('moi');
   };
 
   /* ---------- Routeur ---------- */
@@ -332,12 +477,45 @@
     return { name: parts[0] || (S.done ? 'accueil' : 'profil'), arg: parts[1] };
   }
 
+  var lastRoute = null;
+  var booted = false;
   function render() {
     var r = route();
+    var key = r.name + '/' + (r.arg || '');
+    var changed = key !== lastRoute;
+    lastRoute = key;
+
+    /* On retient l'élément qui a le focus pour le retrouver après le re-rendu */
+    var a = document.activeElement;
+    var focusSel = null;
+    if (!changed && a && root.contains(a)) {
+      if (a.id) focusSel = '#' + a.id;
+      else if (a.getAttribute('data-action')) {
+        focusSel = '[data-action="' + a.getAttribute('data-action') + '"]' + (a.getAttribute('data-v') !== null ? '[data-v="' + a.getAttribute('data-v').replace(/"/g, '\\"') + '"]' : '');
+      }
+    }
+
     var fn = screens[r.name] || screens[S.done ? 'accueil' : 'profil'];
     root.innerHTML = fn(r.arg);
+    var main = root.querySelector('main');
+    if (main) main.id = 'contenu';
     var t = root.querySelector('h1');
+    if (t) t.setAttribute('tabindex', '-1');
     document.title = (t ? t.textContent + ' · ' : '') + 'Orientation fonction publique';
+
+    if (changed) {
+      /* Au premier chargement on laisse le focus en haut de page (lien d'évitement) */
+      if (t && booted) t.focus({ preventScroll: true });
+    } else if (focusSel) {
+      var el = root.querySelector(focusSel);
+      if (el) el.focus({ preventScroll: true });
+    }
+  }
+
+  function countAnnounce() {
+    var rows = root.querySelectorAll('#jobs .list-row, .calendar-list .list-row');
+    var n = rows.length;
+    announce(n === 0 ? 'Aucun résultat' : (n === 1 ? '1 résultat' : n + ' résultats'));
   }
 
   window.addEventListener('hashchange', function () { render(); window.scrollTo(0, 0); });
@@ -354,20 +532,28 @@
         var i = S.domains.indexOf(v);
         var next = S.domains.slice();
         if (i > -1) next.splice(i, 1); else next.push(v);
-        set({ domains: next }); break;
+        set({ domains: next, metDomain: null }); break;
       }
       case 'boursier': set({ boursier: v }); break;
       case 'budget': set({ budget: v, prepBudget: null }); break;
       case 'go': location.hash = '#/' + v; break;
       case 'finish': S.done = true; save(); location.hash = '#/accueil'; break;
       case 'skip': S.done = true; save(); break;
-      case 'metDomain': set({ metDomain: v }); break;
-      case 'metCat': set({ metCat: v }); break;
-      case 'calCat': set({ calCat: v }); break;
-      case 'track': set({ track: v }); break;
+      case 'metDomain': set({ metDomain: v }); countAnnounce(); break;
+      case 'metCat': set({ metCat: v }); countAnnounce(); break;
+      case 'calCat': set({ calCat: v }); countAnnounce(); break;
+      case 'track': set({ track: v }); announce('Parcours ' + v + ' affiché'); break;
       case 'prepBudget': set({ prepBudget: v }); break;
       case 'toggleBoursier': set({ boursier: S.boursier === 'Oui' ? 'Non' : 'Oui' }); break;
-      case 'alert': set({ alert: !S.alert }); break;
+      case 'alert': set({ alert: !S.alert }); announce(S.alert ? 'Alerte activée' : 'Alerte désactivée'); break;
+      case 'wipe':
+        if (window.confirm('Effacer toutes vos réponses de cet appareil ?')) {
+          try { localStorage.removeItem(KEY); } catch (err) { /* rien à effacer */ }
+          S = Object.assign({}, defaults, { domains: [] });
+          announce('Vos données ont été effacées');
+          if (location.hash === '#/profil') render(); else location.hash = '#/profil';
+        }
+        break;
     }
   });
 
@@ -377,7 +563,11 @@
     S.q = e.target.value; save();
     var box = document.getElementById('jobs');
     if (box) box.innerHTML = jobRows();
+    clearTimeout(searchTimer);
+    searchTimer = setTimeout(countAnnounce, 600);
   });
+  var searchTimer = null;
 
   render();
+  booted = true;
 })();

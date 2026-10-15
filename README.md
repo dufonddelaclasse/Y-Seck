@@ -40,12 +40,31 @@ Toutes les données sont dans `js/data.js`. Ce sont des données de démonstrati
 
 À compléter : fonctions publiques territoriale et hospitalière dans le calendrier, salaires de départ, fiches métiers complètes.
 
+## Accessibilité (RGAA)
+
+- Lien d'évitement, titre de page et `h1` à chaque écran, focus placé sur le titre à chaque changement d'écran.
+- Focus conservé après chaque choix, navigation complète au clavier.
+- États annoncés : `aria-pressed`, interrupteur `role="switch"`, nombre de résultats des filtres dans une zone `role="status"`.
+- Contrastes d'au moins 4,5:1, cibles d'au moins 44 px, liens externes signalés « nouvelle fenêtre ».
+- Aucune violation détectée par axe-core (WCAG 2.1 A et AA) sur les 15 écrans.
+- Déclaration d'accessibilité dans l'app (Profil › Accessibilité). Statut : partiellement conforme, en attendant un audit RGAA complet.
+
+## Données personnelles (RGPD)
+
+- Aucun compte, aucun nom ni e-mail demandé, aucun cookie, aucune mesure d'audience.
+- Les réponses restent dans le `localStorage` du navigateur. Le bouton « Effacer mes données » les supprime.
+- Police DM Sans hébergée dans le dépôt : aucune requête vers Google Fonts ni vers un autre service tiers.
+- Pages Données personnelles et Mentions légales dans l'app.
+
+**À compléter avant diffusion** : éditeur, adresse, contact et directeur·rice de la publication, dans `js/data.js` (`legal`).
+
 ## Structure
 
 ```
 index.html
 css/style.css
-js/data.js   données
+fonts/       DM Sans (licence OFL)
+js/data.js   données et mentions légales
 js/app.js    état, routeur (#/ecran) et écrans
 ```
 

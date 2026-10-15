@@ -1,3 +1,10 @@
+/* DM Sans, hébergée localement (licence OFL) : aucune requête vers un service tiers */
+@font-face { font-family: 'DM Sans'; font-style: normal; font-weight: 400; font-display: swap; src: url(../fonts/dm-sans-latin-400-normal.woff2) format('woff2'); }
+@font-face { font-family: 'DM Sans'; font-style: normal; font-weight: 500; font-display: swap; src: url(../fonts/dm-sans-latin-500-normal.woff2) format('woff2'); }
+@font-face { font-family: 'DM Sans'; font-style: normal; font-weight: 600; font-display: swap; src: url(../fonts/dm-sans-latin-600-normal.woff2) format('woff2'); }
+@font-face { font-family: 'DM Sans'; font-style: normal; font-weight: 700; font-display: swap; src: url(../fonts/dm-sans-latin-700-normal.woff2) format('woff2'); }
+@font-face { font-family: 'DM Sans'; font-style: normal; font-weight: 800; font-display: swap; src: url(../fonts/dm-sans-latin-800-normal.woff2) format('woff2'); }
+
 :root {
   --blue: #000091;
   --blue-hover: #1212FF;
@@ -35,6 +42,11 @@ a:hover { color: var(--blue-hover); }
 button { font-family: inherit; cursor: pointer; }
 
 :focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+h1:focus { outline: none; }
+
+/* Lien d'évitement (RGAA 12.7) */
+.skip { position: absolute; left: 8px; top: -60px; z-index: 10; padding: 12px 16px; border-radius: 999px; background: var(--blue); color: #FFFFFF; font-weight: 600; text-decoration: none; }
+.skip:focus { top: 8px; color: #FFFFFF; }
 
 .app {
   max-width: 430px;
@@ -97,7 +109,7 @@ h3 { margin: 0; font-size: 17px; font-weight: 700; }
 /* Chips */
 .chip {
   display: inline-flex; align-items: center; justify-content: space-between; gap: 8px;
-  min-height: 42px; padding: 0 16px;
+  min-height: 44px; padding: 0 16px;
   border-radius: 999px; border: 1px solid var(--line-2);
   background: #FFFFFF; color: var(--ink);
   font-size: 15px; font-weight: 500;
@@ -110,7 +122,7 @@ h3 { margin: 0; font-size: 17px; font-weight: 700; }
 .chip.wide { min-height: 48px; padding: 0 16px 0 18px; }
 
 /* Buttons */
-.footer { position: sticky; bottom: 0; padding: 14px 24px 26px; background: #FFFFFF; display: flex; flex-direction: column; gap: 10px; }
+.footer { position: sticky; bottom: 0; flex: none; padding: 14px 24px calc(26px + env(safe-area-inset-bottom, 0px)); background: #FFFFFF; display: flex; flex-direction: column; gap: 10px; }
 .btn {
   display: flex; align-items: center; justify-content: center; gap: 8px;
   min-height: 54px; padding: 0 24px; width: 100%;
@@ -122,7 +134,20 @@ h3 { margin: 0; font-size: 17px; font-weight: 700; }
 .btn[disabled] { background: var(--soft); border-color: var(--soft); color: #6A6A75; cursor: not-allowed; }
 .btn.outline { background: #FFFFFF; color: var(--blue); min-height: 48px; font-size: 15px; }
 .btn.outline:hover { background: #F5F5FE; }
-.link-plain { font-size: 14px; font-weight: 500; padding: 12px 0; text-decoration: none; }
+.link-plain { display: inline-flex; align-items: center; min-height: 44px; font-size: 14px; font-weight: 500; text-decoration: none; }
+.text-btn { display: inline; min-height: 0; padding: 0; border: none; background: none; color: var(--blue); font: inherit; text-decoration: underline; cursor: pointer; }
+
+/* Pages d'information (accessibilité, confidentialité, mentions) */
+.prose { display: flex; flex-direction: column; gap: 10px; font-size: 15px; line-height: 1.55; color: var(--ink-2); }
+.prose h2 { margin-top: 14px; font-size: 18px; color: var(--ink); }
+.prose p, .prose ul { margin: 0; }
+.prose ul { padding-left: 20px; }
+.prose li { margin-bottom: 4px; }
+.todo { background: var(--yellow-tint); padding: 0 4px; border-radius: 4px; }
+.notice { display: flex; gap: 10px; align-items: flex-start; font-size: 13px; line-height: 1.45; color: var(--muted); }
+.notice svg { width: 16px; height: 16px; flex: none; margin-top: 2px; color: var(--blue); }
+.btn.danger { background: #FFFFFF; color: var(--red); border-color: var(--red); min-height: 48px; font-size: 15px; }
+.btn.danger:hover { background: #FFF0F0; color: var(--red); }
 
 /* Cards */
 .card {
@@ -162,6 +187,9 @@ h3 { margin: 0; font-size: 17px; font-weight: 700; }
 .list-row .meta { font-size: 13px; color: var(--muted); }
 .list-row .chev { width: 18px; height: 18px; color: var(--blue); flex: none; }
 .list-row.static:hover { background: transparent; }
+
+.fit { align-self: flex-start; margin-top: 4px; padding: 3px 9px; border-radius: 999px; background: var(--soft); font-size: 12px; font-weight: 600; color: var(--ink-2); }
+.fit.on { background: var(--mint-tint); color: #00573F; }
 
 .cat { flex: none; width: 38px; height: 38px; border-radius: 999px; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 800; color: var(--ink); }
 .cat.sm { width: 30px; height: 30px; font-size: 13px; }
@@ -241,12 +269,18 @@ h3 { margin: 0; font-size: 17px; font-weight: 700; }
 .empty { padding: 20px 0; font-size: 15px; color: var(--muted); margin: 0; }
 
 /* Tab bar */
-.tabbar { position: sticky; bottom: 0; display: flex; height: 76px; border-top: 1px solid var(--line); background: #FFFFFF; padding-bottom: env(safe-area-inset-bottom); }
-.tabbar a { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; text-decoration: none; color: var(--muted); font-size: 11px; font-weight: 500; }
-.tabbar a::before { content: ''; width: 24px; height: 2px; border-radius: 2px; margin-bottom: 8px; background: transparent; }
+/* Hauteur fixe + zone de sécurité ajoutée par-dessus : la barre ne s'écrase jamais
+   quand la barre d'outils du navigateur mobile se replie au scroll */
+.tabbar { position: sticky; bottom: 0; z-index: 5; display: flex; flex: none; height: calc(76px + env(safe-area-inset-bottom, 0px)); padding-bottom: env(safe-area-inset-bottom, 0px); border-top: 1px solid var(--line); background: #FFFFFF; }
+.tabbar a { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; height: 76px; text-decoration: none; color: var(--muted); font-size: 11px; font-weight: 500; }
+.tabbar a::before { content: ''; flex: none; width: 24px; height: 2px; border-radius: 2px; margin-bottom: 8px; background: transparent; }
 .tabbar a.on { color: var(--blue); font-weight: 700; }
 .tabbar a.on::before { background: var(--blue); }
-.tabbar svg { width: 24px; height: 24px; }
+.tabbar svg { flex: none; width: 24px; height: 24px; min-width: 24px; min-height: 24px; }
+
+/* Aucune icône ou pastille ne rétrécit, quelle que soit la place disponible */
+svg { flex-shrink: 0; }
+.cat, .num, .go, .icon-btn, .chev, .check, .dot, .pin { flex-shrink: 0; }
 
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; }
