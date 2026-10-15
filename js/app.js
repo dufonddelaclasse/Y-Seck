@@ -173,9 +173,68 @@
     return D.calendar.filter(function (c) { return c.date >= today; });
   }
 
-  /* ---------- Écrans : onboarding ---------- */
+  /* ---------- Écrans : introduction ---------- */
   var screens = {};
   var STEPS = 4;
+
+  function introDots(n) {
+    return '<div class="intro-dots" aria-hidden="true">' + [1, 2, 3].map(function (i) { return '<span class="' + (i === n ? 'on' : '') + '"></span>'; }).join('') + '</div>';
+  }
+
+  screens.bienvenue = function () {
+    return '<main class="screen welcome">' +
+      '<div class="welcome-deco" aria-hidden="true"><span class="cat-Ap">A+</span><span class="cat-A">A</span><span class="cat-B">B</span><span class="cat-C">C</span></div>' +
+      '<div class="welcome-txt">' +
+      '<h1 class="wordmark">Y-Seck</h1>' +
+      '<p class="welcome-lead">Tous les métiers de la fonction publique, et le chemin pour y arriver.</p>' +
+      '<p class="welcome-sub">Avec ou sans concours, avec ou sans diplôme\u00a0: trouvez les métiers qui vous ressemblent, les études et les prépas pour les atteindre.</p>' +
+      '</div>' +
+      introDots(1) +
+      '</main><div class="footer welcome-foot"><a class="btn white" href="#/versants">Commencer</a>' +
+      (S.done ? '<a class="link-plain white-link" href="#/accueil">Aller à mon parcours</a>' : '') + '</div>';
+  };
+
+  screens.versants = function () {
+    var fps = [
+      { k: 'E', t: 'La fonction publique d’État', d: 'Elle fait tourner les services de l’État, partout en France.', ex: 'Ministères, préfectures, écoles et lycées, tribunaux, impôts, police, armées.', tint: 'tint-blue', dot: 'var(--blue)' },
+      { k: 'T', t: 'La fonction publique territoriale', d: 'Elle travaille au plus près des habitant·es, dans leur ville, leur département, leur région.', ex: 'Mairies, intercommunalités, conseils départementaux et régionaux.', tint: 'tint-mint', dot: 'var(--mint)' },
+      { k: 'H', t: 'La fonction publique hospitalière', d: 'Elle soigne et accompagne, dans les établissements publics de santé.', ex: 'Hôpitaux publics, EHPAD publics, établissements sociaux et médico-sociaux.', tint: 'tint-cyan', dot: '#22C7E0' }
+    ];
+    return '<main class="screen">' +
+      '<div class="topbar">' + back('#/bienvenue', 'Retour') + '<span class="eyebrow">Comprendre 1 / 2</span></div>' +
+      '<h1 class="mt-m">3 fonctions publiques</h1>' +
+      '<p class="lead">Travailler dans le service public, c’est travailler pour l’un de ces trois employeurs.</p>' +
+      '<div class="stack mt-s">' + fps.map(function (f) {
+        return '<section class="explain ' + f.tint + '" aria-label="' + esc(f.t) + '">' +
+          '<h2 class="explain-t"><span class="dot" style="background:' + f.dot + '"></span>' + esc(f.t) + '</h2>' +
+          '<p>' + esc(f.d) + '</p><p class="ex"><b>Où ?</b> ' + esc(f.ex) + '</p></section>';
+      }).join('') + '</div>' +
+      '<div class="callout tint-yellow"><span class="pin"></span><p>Bon à savoir : un même métier existe souvent dans les trois. Et au cours d’une carrière, on peut passer de l’une à l’autre.</p></div>' +
+      '</main><div class="footer"><a class="btn" href="#/categories-intro">J’ai compris</a></div>';
+  };
+
+  screens['categories-intro'] = function () {
+    var cats = [
+      { id: 'A+', t: 'Les cadres supérieurs', d: 'Ils dirigent les grandes administrations et pilotent les politiques publiques.', dip: 'Bac+3 minimum, souvent Bac+5', ex: 'Directeur·rice d’hôpital, magistrat·e, commissaire', tint: 'tint-blue' },
+      { id: 'A', t: 'Concevoir, élaborer, manager', d: 'Ils imaginent les projets, préparent les décisions et encadrent des équipes.', dip: 'Bac+3 minimum', ex: 'Attaché·e, inspecteur·rice, professeur·e, infirmier·ère', tint: 'tint-mint' },
+      { id: 'B', t: 'Appliquer, rédiger, gérer', d: 'Ils mettent en œuvre les décisions, suivent les dossiers et peuvent encadrer une petite équipe.', dip: 'Bac minimum', ex: 'Greffier·ère, technicien·ne, gardien·ne de la paix', tint: 'tint-cyan' },
+      { id: 'C', t: 'Exécuter, accueillir, assurer', d: 'Ils font tourner le service au quotidien, sur le terrain et au contact du public.', dip: 'Brevet, CAP, BEP, ou sans diplôme', ex: 'Adjoint·e administratif·ve, agent·e technique, ATSEM', tint: 'tint-yellow' }
+    ];
+    return '<main class="screen">' +
+      '<div class="topbar">' + back('#/versants', 'Retour') + '<span class="eyebrow">Comprendre 2 / 2</span></div>' +
+      '<h1 class="mt-m">4 catégories</h1>' +
+      '<p class="lead">Chaque poste appartient à une catégorie. Elle dépend du niveau de responsabilité et du diplôme demandé pour y entrer.</p>' +
+      '<div class="stack mt-s">' + cats.map(function (c) {
+        return '<section class="explain row-x ' + c.tint + '" aria-label="Catégorie ' + c.id + '">' +
+          '<span class="cat lg ' + catClass(c.id) + '" aria-hidden="true">' + c.id + '</span>' +
+          '<div class="explain-body"><h2 class="explain-t"><span class="sr-only">Catégorie ' + c.id + ' : </span>' + esc(c.t) + '</h2>' +
+          '<p>' + esc(c.d) + '</p><p class="ex"><b>Pour y entrer :</b> ' + esc(c.dip) + '</p><p class="ex"><b>Par exemple :</b> ' + esc(c.ex) + '</p></div></section>';
+      }).join('') + '</div>' +
+      '<div class="callout tint-blue"><span class="pin"></span><p>Rien n’est figé : on peut monter de catégorie au cours de sa carrière, par concours interne ou par promotion.</p></div>' +
+      '</main><div class="footer"><button type="button" class="btn" data-action="startProfile">Démarrer mon profil</button></div>';
+  };
+
+  /* ---------- Écrans : onboarding ---------- */
 
   screens.profil = function () {
     var profiles = [['etu', 'Étudiant·e'], ['par', 'Parent'], ['rec', 'En reconversion']];
@@ -249,7 +308,12 @@
         var on = S.budget === b;
         return '<button type="button" class="opt sm' + (on ? ' on' : '') + '" aria-pressed="' + on + '"' + attr('action', 'budget') + attr('v', b) + '><span>' + b + '</span>' + (on ? I.check : '') + '</button>';
       }).join('') + '</div>' +
-      (S.boursier === 'Oui' ? '<div class="callout tint-yellow mt-s"><span class="pin red"></span><p>Les Prépas Talents sont gratuites. En plus, 5 000 € par an de bourse.</p></div>' : '') +
+      '<section class="callout tint-yellow mt-s talents-box" aria-label="Qu’est-ce qu’une Prépa Talents ?"><span class="pin red"></span><div>' +
+      '<h2 class="h3">C’est quoi, une Prépa Talents ?</h2>' +
+      '<p>Une préparation <b>gratuite</b> aux concours de catégorie A, A+ et B, dans une université, un IEP ou une école du service public. Plus de 100 en France, outre-mer compris.</p>' +
+      '<p>Au programme : cours, entraînements aux épreuves et un·e tuteur·rice qui vous suit toute l’année.</p>' +
+      '<p><b>' + (S.boursier === 'Oui' ? 'Bonne nouvelle : ' : '') + 'une bourse de 5 000 € par an</b> est versée aux élèves. L’entrée se fait sur dossier et entretien, selon les ressources et la motivation.</p>' +
+      '</div></section>' +
       '</main><div class="footer"><button type="button" class="btn" data-action="finish">Voir ' + (isParent() ? 'son parcours' : 'mon parcours') + '</button></div>';
   };
 
@@ -601,6 +665,7 @@
       '<button type="button" class="btn danger" data-action="wipe">Effacer mes données</button>' +
       '<p class="notice">' + I.lock + '<span>Ces informations sont enregistrées uniquement dans ce navigateur. Elles ne sont envoyées à personne.</span></p>' +
       '<div class="list mt-m">' +
+      '<a class="list-row" href="#/versants"><div class="main"><span class="name">Comprendre la fonction publique</span><span class="meta">Les 3 fonctions publiques et les 4 catégories</span></div>' + I.chev + '</a>' +
       '<a class="list-row" href="#/confidentialite"><div class="main"><span class="name">Données personnelles</span></div>' + I.chev + '</a>' +
       '<a class="list-row" href="#/accessibilite"><div class="main"><span class="name">Accessibilité : partiellement conforme</span></div>' + I.chev + '</a>' +
       '<a class="list-row" href="#/mentions"><div class="main"><span class="name">Mentions légales</span></div>' + I.chev + '</a>' +
@@ -666,7 +731,7 @@
   function route() {
     var h = location.hash.replace(/^#\/?/, '');
     var parts = h.split('/');
-    return { name: parts[0] || (S.done ? 'accueil' : 'profil'), arg: parts[1], arg2: parts[2] };
+    return { name: parts[0] || (S.done ? 'accueil' : (S.introSeen ? 'profil' : 'bienvenue')), arg: parts[1], arg2: parts[2] };
   }
 
   var lastRoute = null;
@@ -692,7 +757,7 @@
     if (main) main.id = 'contenu';
     var t = root.querySelector('h1');
     if (t) t.setAttribute('tabindex', '-1');
-    document.title = (t ? t.textContent + ' · ' : '') + 'Orientation fonction publique';
+    document.title = (t ? t.textContent + ' · ' : '') + 'Y-Seck';
 
     if (changed) {
       if (t && booted) t.focus({ preventScroll: true });
@@ -729,6 +794,7 @@
       case 'boursier': set({ boursier: v }); break;
       case 'budget': set({ budget: v, prepBudget: null }); break;
       case 'go': location.hash = '#/' + v; break;
+      case 'startProfile': S.introSeen = true; save(); location.hash = '#/profil'; break;
       case 'finish': S.done = true; save(); location.hash = '#/accueil'; break;
       case 'skip': S.done = true; save(); break;
       case 'metDomain':

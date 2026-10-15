@@ -16,11 +16,11 @@ puis aller sur http://localhost:8000.
 
 ## Parcours
 
-1. **Onboarding en 4 étapes**
+1. **Introduction en 3 écrans** : accueil Y-Seck, les 3 fonctions publiques (État, territoriale, hospitalière), les 4 catégories (A+, A, B, C). Puis **onboarding en 4 étapes**
    - Profil (étudiant·e, parent, reconversion) et niveau d'étude. Pour un parent : « le niveau d'étude de votre enfant ».
    - Domaines d'intérêt, en choix illimités.
    - Façon de travailler : 35 traits en 5 groupes (avec qui, où, comment, ce qui plaît, caractère), en choix illimités.
-   - Bourse et budget.
+   - Bourse et budget, avec un encadré qui explique ce qu'est une Prépa Talents.
 2. **Tableau de bord** : métiers classés selon les domaines et les traits, concours accessibles selon le niveau, aides.
 3. **Métiers** (65, sur les 3 versants) : les domaines choisis sont présélectionnés et filtrent la liste. On peut en ajouter, en retirer, ou tout afficher. Filtres A+, A, B, C et État, territoriale, hospitalière. Chaque métier indique si le niveau requis est atteint et les traits qui correspondent.
 4. **Fiche métier** : accès étape par étape. L'étape du concours a un lien « Prochaines dates » vers le calendrier officiel, et la fiche renvoie aux Prépas Talents qui préparent ce concours.
