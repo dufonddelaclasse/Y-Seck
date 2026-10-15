@@ -16,29 +16,30 @@ puis aller sur http://localhost:8000.
 
 ## Parcours
 
-1. **Onboarding en 3 étapes**
-   - Profil (étudiant·e, parent, reconversion) et niveau d'étude. Le niveau n'apparaît qu'après le choix du profil, et devient « le niveau d'étude de votre enfant » pour un parent.
+1. **Onboarding en 4 étapes**
+   - Profil (étudiant·e, parent, reconversion) et niveau d'étude. Pour un parent : « le niveau d'étude de votre enfant ».
    - Domaines d'intérêt, en choix illimités.
+   - Façon de travailler : 35 traits en 5 groupes (avec qui, où, comment, ce qui plaît, caractère), en choix illimités.
    - Bourse et budget.
-2. **Tableau de bord** : métiers qui correspondent, concours accessibles selon le niveau, aides.
-3. **Métiers** : recherche, filtres par domaine et par catégorie, fiche métier avec accès et évolution.
-4. **Concours** : catégories A, B, C (dont le brevet pour certains concours C) et conditions communes.
-5. **Calendrier** : prochaines clôtures d'inscription, filtrables par catégorie.
-6. **Études** : parcours conseillés (administratif, technique, social, dès le brevet).
-7. **Sans concours** : contractuel·le, PACTE, apprentissage, catégorie C sans concours.
-8. **Prépas** : filtre par budget, mise en avant des Prépas Talents pour les boursier·es, bourse Talents.
+2. **Tableau de bord** : métiers classés selon les domaines et les traits, concours accessibles selon le niveau, aides.
+3. **Métiers** (65, sur les 3 versants) : les domaines choisis sont présélectionnés et filtrent la liste. On peut en ajouter, en retirer, ou tout afficher. Filtres A+, A, B, C et État, territoriale, hospitalière. Chaque métier indique si le niveau requis est atteint et les traits qui correspondent.
+4. **Fiche métier** : accès étape par étape. L'étape du concours a un lien « Prochaines dates » vers le calendrier officiel, et la fiche renvoie aux Prépas Talents qui préparent ce concours.
+5. **Concours** : 4 catégories (A+, A, B, C). Un clic déplie la catégorie : métiers concernés et lieux des épreuves par versant, en métropole et en outre-mer.
+6. **Calendrier** : prochaines clôtures d'inscription, filtrables par catégorie.
+7. **Études** : parcours conseillés (administratif, technique, social, dès le brevet).
+8. **Sans concours** : contractuel·le, PACTE, apprentissage, recrutement sans concours.
+9. **Prépas**, chaque type cliquable :
+   - Prépas Talents : les 106 prépas, filtrées selon les concours des métiers choisis et par région, outre-mer compris.
+   - IPAG et CPAG : les 27 instituts, par région, plus la formation à distance.
+   - IEP et masters d'administration publique, métropole et outre-mer.
+   - Préparations privées, liste non exhaustive.
 
-Les choix sont gardés dans le navigateur (`localStorage`). L'onglet Profil permet de les modifier.
+## À venir
 
-## Données
-
-Toutes les données sont dans `js/data.js`. Ce sont des données de démonstration, à brancher sur des sources maintenues :
-
-- Calendrier : [calendrier général des concours](https://www.fonction-publique.gouv.fr/devenir-agent-public/calendrier-general-concours) (fonction publique d'État uniquement, consulté le 15/10/2026).
-- Bourse Talents : 5 000 € par an en 2026-2027 ([fonction-publique.gouv.fr](https://www.fonction-publique.gouv.fr/toutes-les-actualites/bourses-talents-5-000-euros-par-pour-les-eleves-des-prepas-talents)).
-- Carte des Prépas Talents : [fonction-publique.gouv.fr](https://www.fonction-publique.gouv.fr/devenir-agent-public/les-prepas-talents-pres-de-chez-vous).
-
-À compléter : fonctions publiques territoriale et hospitalière dans le calendrier, salaires de départ, fiches métiers complètes.
+- « Je me prépare » : annales, rapports de jury, conseils de méthode, ressources gratuites.
+- « Mon parcours » : métiers favoris, échéances, prochaines étapes.
+- « Mes opportunités » : offres de choisirleservicepublic.gouv.fr (jeu de données data.gouv.fr), stages et apprentissages par territoire.
+- Import complet du répertoire des métiers de la fonction publique (RMFP, 1 069 métiers), du répertoire territorial (CNFPT) et du répertoire santé.
 
 ## Accessibilité (RGAA)
 
@@ -46,7 +47,7 @@ Toutes les données sont dans `js/data.js`. Ce sont des données de démonstrati
 - Focus conservé après chaque choix, navigation complète au clavier.
 - États annoncés : `aria-pressed`, interrupteur `role="switch"`, nombre de résultats des filtres dans une zone `role="status"`.
 - Contrastes d'au moins 4,5:1, cibles d'au moins 44 px, liens externes signalés « nouvelle fenêtre ».
-- Aucune violation détectée par axe-core (WCAG 2.1 A et AA) sur les 15 écrans.
+- Aucune violation détectée par axe-core (WCAG 2.1 A et AA) sur les 21 écrans.
 - Déclaration d'accessibilité dans l'app (Profil › Accessibilité). Statut : partiellement conforme, en attendant un audit RGAA complet.
 
 ## Données personnelles (RGPD)
