@@ -129,8 +129,33 @@ def read_workbook(path, db):
             if page is not None and (not str(page).isdigit() or int(page)<1):raise ValueError('Page de source invalide : '+id)
             if year is not None and (not str(year).isdigit() or not 1000<=int(year)<=2100):raise ValueError('Année invalide : '+id)
             book.update(title=string(title),authors=string(authors),subjects=parts(subjects),year=string(year),url=string(url),sourcePage=int(page) if page else None,coverUrl=string(cover_url))
+            if len(row)>8:
+                categories,fps,route_ids,selection=(row[8:]+[None]*4)[:4]
+                categories=parts(categories);fps=parts(fps);route_ids=parts(route_ids)
+                if not categories or not set(categories)<={'A+','A','B','C'}:raise ValueError('Catégories bibliographiques invalides : '+id)
+                if not set(fps)<={'E','T','H'}:raise ValueError('Versants bibliographiques invalides : '+id)
+                if not set(route_ids)<={r['id'] for r in result['routes']}:raise ValueError('Corps bibliographique inconnu : '+id)
+                source_url(selection)
+                book.update(categories=categories,fps=fps,routeIds=route_ids,selectionUrl=string(selection))
             books[id]=book
         unique(seen,'Ouvrages');result['books']=list(books.values())
+    if 'Ressources' in wb.sheetnames:
+        resources=[];known_routes={r['id'] for r in result['routes']}
+        for row in rows(wb,'Ressources'):
+            id,title,kind,cats,fps,concours,route_ids,year,url,source,name,scope,checked,note=(row+[None]*14)[:14]
+            id=string(id);cats=parts(cats);fps=parts(fps);route_ids=parts(route_ids)
+            if not title or kind not in ['sujet','rapport','copie','entrainement','annuaire','bibliographie']:raise ValueError('Ressource invalide : '+id)
+            if not cats or not set(cats)<={'A+','A','B','C'} or not fps or not set(fps)<={'E','T','H'}:raise ValueError('Catégorie ou versant de ressource invalide : '+id)
+            if not set(route_ids)<=known_routes:raise ValueError('Corps de ressource inconnu : '+id)
+            if scope not in ['document','directory']:raise ValueError('Portée de ressource invalide : '+id)
+            source_url(string(url).replace('http://','https://',1));source_url(source)
+            if year is not None and (not str(year).isdigit() or not 1900<=int(year)<=2100):raise ValueError('Session invalide : '+id)
+            resource=dict(id=id,title=string(title),kind=kind,categories=cats,fps=fps,concours=string(concours),routeIds=route_ids,year=string(year),url=string(url),sourceUrl=string(source),sourceName=string(name),scope=scope,checked=date(checked))
+            if note:resource['note']=string(note)
+            resources.append(resource)
+        unique(resources,'Ressources')
+        if len({r['url'] for r in resources})!=len(resources):raise ValueError('URL de ressource en double')
+        result['studyResources']=resources
     result['sources']=[dict(zip(['id','name','url','checked','note'],row[:5])) for row in rows(wb,'Sources')]
     for source in result['sources']:source['checked']=date(source['checked']);source_url(source['url'])
     for path,type,value in [r[:3] for r in rows(wb,'Reglages')]:

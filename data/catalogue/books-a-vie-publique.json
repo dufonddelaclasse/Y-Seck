@@ -1,0 +1,489 @@
+{
+  "books": [
+    {
+      "id": "vp-book-304268",
+      "title": "Questions contemporaines",
+      "authors": "Collectif",
+      "subjects": [
+        "Méthodes et concours"
+      ],
+      "year": "2026",
+      "url": "https://www.vie-publique.fr/catalogue/304268-questions-contemporaines",
+      "coverUrl": "https://www.vie-publique.fr/files/styles/large/public/collection_number/9782111744080.jpg?itok=WLOb7A0x",
+      "categories": [
+        "A"
+      ],
+      "sourceName": "Vie-publique / La Documentation française",
+      "selectionUrl": "https://www.vie-publique.fr/catalogue/293178-selection-douvrages-preparation-aux-concours-administratifs"
+    },
+    {
+      "id": "vp-book-301611",
+      "title": "Les politiques sociales aux concours",
+      "authors": "Gilles Nezosi ; Maurice-Pierre Planel",
+      "subjects": [
+        "Méthodes et concours"
+      ],
+      "year": "2026",
+      "url": "https://www.vie-publique.fr/catalogue/301611-les-politiques-sociales-aux-concours",
+      "coverUrl": "https://www.vie-publique.fr/files/styles/large/public/collection_number/9782111742789_2.jpg?itok=W-oVEO33",
+      "categories": [
+        "A"
+      ],
+      "sourceName": "Vie-publique / La Documentation française",
+      "selectionUrl": "https://www.vie-publique.fr/catalogue/293178-selection-douvrages-preparation-aux-concours-administratifs",
+      "replaces": [
+        "book-f0bf8e3ce4d8"
+      ]
+    },
+    {
+      "id": "vp-book-279317",
+      "title": "Le cas pratique aux concours",
+      "authors": "Hervé Macquart",
+      "subjects": [
+        "Méthodes et concours"
+      ],
+      "year": "2026",
+      "url": "https://www.vie-publique.fr/catalogue/279317-le-cas-pratique-aux-concours",
+      "coverUrl": "https://www.vie-publique.fr/files/styles/large/public/collection_number/9782111742581.jpg?itok=yAYY4-BH",
+      "categories": [
+        "A"
+      ],
+      "sourceName": "Vie-publique / La Documentation française",
+      "selectionUrl": "https://www.vie-publique.fr/catalogue/293178-selection-douvrages-preparation-aux-concours-administratifs"
+    },
+    {
+      "id": "vp-book-282811",
+      "title": "La note aux concours",
+      "authors": "Pierre Gevart ; Hervé Macquart",
+      "subjects": [
+        "Méthodes et concours"
+      ],
+      "year": "2025",
+      "url": "https://www.vie-publique.fr/catalogue/282811-la-note-aux-concours",
+      "coverUrl": "https://www.vie-publique.fr/files/styles/large/public/collection_number/9782111742239.jpg?itok=pM3finiJ",
+      "categories": [
+        "A"
+      ],
+      "sourceName": "Vie-publique / La Documentation française",
+      "selectionUrl": "https://www.vie-publique.fr/catalogue/293178-selection-douvrages-preparation-aux-concours-administratifs"
+    },
+    {
+      "id": "vp-book-23147",
+      "title": "Les finances publiques aux concours",
+      "authors": "Franck Waserman",
+      "subjects": [
+        "Méthodes et concours",
+        "Finances publiques"
+      ],
+      "year": "2025",
+      "url": "https://www.vie-publique.fr/catalogue/23147-les-finances-publiques-aux-concours",
+      "coverUrl": "https://www.vie-publique.fr/files/styles/large/public/collection_number/9782111741027.jpg?itok=lqZpeQOW",
+      "categories": [
+        "A"
+      ],
+      "sourceName": "Vie-publique / La Documentation française",
+      "selectionUrl": "https://www.vie-publique.fr/catalogue/293178-selection-douvrages-preparation-aux-concours-administratifs"
+    },
+    {
+      "id": "vp-book-23070",
+      "title": "L'entretien avec le jury",
+      "authors": "Chantal Perrin-Van Hille",
+      "subjects": [
+        "Méthodes et concours"
+      ],
+      "year": "2025",
+      "url": "https://www.vie-publique.fr/catalogue/23070-lentretien-avec-le-jury",
+      "coverUrl": "https://www.vie-publique.fr/files/styles/large/public/collection_number/9782111740976_0.jpg?itok=7h17PA_H",
+      "categories": [
+        "A"
+      ],
+      "sourceName": "Vie-publique / La Documentation française",
+      "selectionUrl": "https://www.vie-publique.fr/catalogue/293178-selection-douvrages-preparation-aux-concours-administratifs"
+    },
+    {
+      "id": "vp-book-293400",
+      "title": "Les concours ITRF et ITA",
+      "authors": "Sylvie Beyssade",
+      "subjects": [
+        "Méthodes et concours"
+      ],
+      "year": "2024",
+      "url": "https://www.vie-publique.fr/catalogue/293400-les-concours-itrf-et-ita",
+      "coverUrl": "https://www.vie-publique.fr/files/styles/large/public/collection_number/9782111578753.jpg?itok=DaR188H9",
+      "categories": [
+        "A"
+      ],
+      "sourceName": "Vie-publique / La Documentation française",
+      "selectionUrl": "https://www.vie-publique.fr/catalogue/293178-selection-douvrages-preparation-aux-concours-administratifs"
+    },
+    {
+      "id": "vp-book-271994",
+      "title": "L'économie aux concours",
+      "authors": "Jean-Louis Doney",
+      "subjects": [
+        "Méthodes et concours"
+      ],
+      "year": "2023",
+      "url": "https://www.vie-publique.fr/catalogue/271994-leconomie-aux-concours",
+      "coverUrl": "https://www.vie-publique.fr/files/styles/large/public/collection_number/9782111577527_0.jpg?itok=_2K_S4tt",
+      "categories": [
+        "A"
+      ],
+      "sourceName": "Vie-publique / La Documentation française",
+      "selectionUrl": "https://www.vie-publique.fr/catalogue/293178-selection-douvrages-preparation-aux-concours-administratifs",
+      "replaces": [
+        "book-9654e4942b8b"
+      ]
+    },
+    {
+      "id": "vp-book-295173",
+      "title": "Préparer les concours européens",
+      "authors": "Nicolas Dross",
+      "subjects": [
+        "Méthodes et concours",
+        "Questions européennes"
+      ],
+      "year": "2024",
+      "url": "https://www.vie-publique.fr/catalogue/295173-preparer-les-concours-europeens",
+      "coverUrl": "https://www.vie-publique.fr/files/styles/large/public/collection_number/9782111578456.jpg?itok=GBlPx6Ct",
+      "categories": [
+        "A"
+      ],
+      "sourceName": "Vie-publique / La Documentation française",
+      "selectionUrl": "https://www.vie-publique.fr/catalogue/293178-selection-douvrages-preparation-aux-concours-administratifs"
+    },
+    {
+      "id": "vp-book-23201",
+      "title": "Les politiques publiques",
+      "authors": "Collectif",
+      "subjects": [
+        "Méthodes et concours"
+      ],
+      "year": "2023",
+      "url": "https://www.vie-publique.fr/catalogue/23201-les-politiques-publiques",
+      "coverUrl": "https://www.vie-publique.fr/files/styles/large/public/collection_number/9782111577053_0.jpg?itok=8BesLJLW",
+      "categories": [
+        "A"
+      ],
+      "sourceName": "Vie-publique / La Documentation française",
+      "selectionUrl": "https://www.vie-publique.fr/catalogue/293178-selection-douvrages-preparation-aux-concours-administratifs"
+    },
+    {
+      "id": "vp-book-288689",
+      "title": "La RAEP : la valorisation du parcours professionnel",
+      "authors": "Claire Marliac ; Laurence Verot",
+      "subjects": [
+        "Méthodes et concours"
+      ],
+      "year": "2026",
+      "url": "https://www.vie-publique.fr/catalogue/288689-la-raep-la-valorisation-du-parcours-professionnel",
+      "coverUrl": "https://www.vie-publique.fr/files/styles/large/public/collection_number/9782111743236.jpg?itok=bK5-AKRf",
+      "categories": [
+        "A"
+      ],
+      "sourceName": "Vie-publique / La Documentation française",
+      "selectionUrl": "https://www.vie-publique.fr/catalogue/293178-selection-douvrages-preparation-aux-concours-administratifs"
+    },
+    {
+      "id": "vp-book-285742",
+      "title": "Le droit public aux concours",
+      "authors": "Collectif",
+      "subjects": [
+        "Méthodes et concours",
+        "Droit public"
+      ],
+      "year": "2025",
+      "url": "https://www.vie-publique.fr/catalogue/285742-le-droit-public-aux-concours",
+      "coverUrl": "https://www.vie-publique.fr/files/styles/large/public/collection_number/9782111741683_0.jpg?itok=76uYjg2e",
+      "categories": [
+        "A"
+      ],
+      "sourceName": "Vie-publique / La Documentation française",
+      "selectionUrl": "https://www.vie-publique.fr/catalogue/293178-selection-douvrages-preparation-aux-concours-administratifs",
+      "replaces": [
+        "book-fded65f5fee6"
+      ]
+    },
+    {
+      "id": "vp-book-23162",
+      "title": "Les institutions de la France",
+      "authors": "Frank Baron ; Manuel Delamarre",
+      "subjects": [
+        "Administration et institutions"
+      ],
+      "year": "2025",
+      "url": "https://www.vie-publique.fr/catalogue/23162-les-institutions-de-la-france",
+      "coverUrl": "https://www.vie-publique.fr/files/styles/large/public/collection_number/9782111740334.jpg?itok=hQOrbw5z",
+      "categories": [
+        "A"
+      ],
+      "sourceName": "Vie-publique / La Documentation française",
+      "selectionUrl": "https://www.vie-publique.fr/catalogue/293178-selection-douvrages-preparation-aux-concours-administratifs"
+    },
+    {
+      "id": "vp-book-291656",
+      "title": "Quels services publics pour demain ?",
+      "authors": "Cahiers français, n° 436",
+      "subjects": [
+        "Administration et institutions"
+      ],
+      "year": "2023",
+      "url": "https://www.vie-publique.fr/catalogue/291656-quels-services-publics-pour-demain",
+      "coverUrl": "https://www.vie-publique.fr/files/styles/large/public/collection_number/9782111577701.jpg?itok=ohWugYDt",
+      "categories": [
+        "A"
+      ],
+      "sourceName": "Vie-publique / La Documentation française",
+      "selectionUrl": "https://www.vie-publique.fr/catalogue/293178-selection-douvrages-preparation-aux-concours-administratifs"
+    },
+    {
+      "id": "vp-book-285942",
+      "title": "L'administration et les institutions administratives",
+      "authors": "Manuel Delamarre",
+      "subjects": [
+        "Administration et institutions"
+      ],
+      "year": "2022",
+      "url": "https://www.vie-publique.fr/catalogue/285942-ladministration-et-les-institutions-administratives",
+      "coverUrl": "https://www.vie-publique.fr/files/styles/large/public/collection_number/9782111574663.jpg?itok=e3sYreHi",
+      "categories": [
+        "A"
+      ],
+      "sourceName": "Vie-publique / La Documentation française",
+      "selectionUrl": "https://www.vie-publique.fr/catalogue/293178-selection-douvrages-preparation-aux-concours-administratifs"
+    },
+    {
+      "id": "vp-book-285232",
+      "title": "Comprendre l'administration",
+      "authors": "Eric Gristi ; Manuel Delamarre",
+      "subjects": [
+        "Administration et institutions"
+      ],
+      "year": "2022",
+      "url": "https://www.vie-publique.fr/catalogue/285232-comprendre-ladministration",
+      "coverUrl": "https://www.vie-publique.fr/files/styles/large/public/collection_number/9782111575868.jpg?itok=K8DeivnU",
+      "categories": [
+        "A"
+      ],
+      "sourceName": "Vie-publique / La Documentation française",
+      "selectionUrl": "https://www.vie-publique.fr/catalogue/293178-selection-douvrages-preparation-aux-concours-administratifs",
+      "replaces": [
+        "book-644f9f5f81e0"
+      ]
+    },
+    {
+      "id": "vp-book-23094",
+      "title": "Les collectivités territoriales et la décentralisation",
+      "authors": "Michel Verpeaux ; Christine Rimbault",
+      "subjects": [
+        "Administration et institutions"
+      ],
+      "year": "2024",
+      "url": "https://www.vie-publique.fr/catalogue/23094-les-collectivites-territoriales-et-la-decentralisation",
+      "coverUrl": "https://www.vie-publique.fr/files/styles/large/public/collection_number/9782111578265.jpg?itok=st9ObjRW",
+      "categories": [
+        "A"
+      ],
+      "sourceName": "Vie-publique / La Documentation française",
+      "selectionUrl": "https://www.vie-publique.fr/catalogue/293178-selection-douvrages-preparation-aux-concours-administratifs"
+    },
+    {
+      "id": "vp-book-294278",
+      "title": "La GRH dans la fonction publique",
+      "authors": "Sophie Lebret ; Anne-Caroline Sandeau-Gruber",
+      "subjects": [
+        "Management public"
+      ],
+      "year": "2024",
+      "url": "https://www.vie-publique.fr/catalogue/294278-la-grh-dans-la-fonction-publique",
+      "coverUrl": "https://www.vie-publique.fr/files/styles/large/public/collection_number/9782111578722.jpg?itok=AGgosrw1",
+      "categories": [
+        "A"
+      ],
+      "sourceName": "Vie-publique / La Documentation française",
+      "selectionUrl": "https://www.vie-publique.fr/catalogue/293178-selection-douvrages-preparation-aux-concours-administratifs"
+    },
+    {
+      "id": "vp-book-281188",
+      "title": "La transformation numérique des administrations",
+      "authors": "Hélène Bégon",
+      "subjects": [
+        "Management public"
+      ],
+      "year": "2021",
+      "url": "https://www.vie-publique.fr/catalogue/281188-la-transformation-numerique-des-administrations",
+      "coverUrl": "https://www.vie-publique.fr/files/styles/large/public/collection_number/9782111574793_0.jpg?itok=lpi-glEK",
+      "categories": [
+        "A"
+      ],
+      "sourceName": "Vie-publique / La Documentation française",
+      "selectionUrl": "https://www.vie-publique.fr/catalogue/293178-selection-douvrages-preparation-aux-concours-administratifs"
+    },
+    {
+      "id": "vp-book-279410",
+      "title": "Innovation publique et nouvelles formes de management public",
+      "authors": "Angelina Armandy ; Madina Rival",
+      "subjects": [
+        "Management public"
+      ],
+      "year": "2021",
+      "url": "https://www.vie-publique.fr/catalogue/279410-innovation-publique-et-nouvelles-formes-de-management-public",
+      "coverUrl": "https://www.vie-publique.fr/files/styles/large/public/collection_number/9782111572904.jpg?itok=DVzQiZNu",
+      "categories": [
+        "A"
+      ],
+      "sourceName": "Vie-publique / La Documentation française",
+      "selectionUrl": "https://www.vie-publique.fr/catalogue/293178-selection-douvrages-preparation-aux-concours-administratifs"
+    },
+    {
+      "id": "vp-book-292156",
+      "title": "Guide de la laïcité dans la fonction publique",
+      "authors": "Direction générale de l’administration et de la fonction publique ; Direction des libertés publiques et des affaires juridiques",
+      "subjects": [
+        "Management public"
+      ],
+      "year": "2023",
+      "url": "https://www.vie-publique.fr/catalogue/292156-guide-de-la-laicite-dans-la-fonction-publique",
+      "coverUrl": "https://www.vie-publique.fr/files/styles/large/public/collection_number/9782111579675.jpg?itok=NKZCsflG",
+      "categories": [
+        "A"
+      ],
+      "sourceName": "Vie-publique / La Documentation française",
+      "selectionUrl": "https://www.vie-publique.fr/catalogue/293178-selection-douvrages-preparation-aux-concours-administratifs"
+    },
+    {
+      "id": "vp-book-24089",
+      "title": "Fonction publique territoriale",
+      "authors": "Frédéric Espinasse",
+      "subjects": [
+        "Management public"
+      ],
+      "year": "2025",
+      "url": "https://www.vie-publique.fr/catalogue/24089-fonction-publique-territoriale",
+      "coverUrl": "https://www.vie-publique.fr/files/styles/large/public/collection_number/9782111741515.jpg?itok=XQTvlZ99",
+      "categories": [
+        "A"
+      ],
+      "sourceName": "Vie-publique / La Documentation française",
+      "selectionUrl": "https://www.vie-publique.fr/catalogue/293178-selection-douvrages-preparation-aux-concours-administratifs"
+    },
+    {
+      "id": "vp-book-295330",
+      "title": "Parlons budget en 30 questions",
+      "authors": "Jean-Marie Monnier",
+      "subjects": [
+        "Finances publiques"
+      ],
+      "year": "2024",
+      "url": "https://www.vie-publique.fr/catalogue/295330-parlons-budget-en-30-questions",
+      "coverUrl": "https://www.vie-publique.fr/files/styles/large/public/collection_number/9782111578944.jpg?itok=4y3noPD-",
+      "categories": [
+        "A"
+      ],
+      "sourceName": "Vie-publique / La Documentation française",
+      "selectionUrl": "https://www.vie-publique.fr/catalogue/293178-selection-douvrages-preparation-aux-concours-administratifs"
+    },
+    {
+      "id": "vp-book-292513",
+      "title": "Finances locales",
+      "authors": "Franck Waserman",
+      "subjects": [
+        "Finances publiques"
+      ],
+      "year": "2024",
+      "url": "https://www.vie-publique.fr/catalogue/292513-finances-locales",
+      "coverUrl": "https://www.vie-publique.fr/files/styles/large/public/collection_number/9782111577732.jpg?itok=3-Z0BnF9",
+      "categories": [
+        "A"
+      ],
+      "sourceName": "Vie-publique / La Documentation française",
+      "selectionUrl": "https://www.vie-publique.fr/catalogue/293178-selection-douvrages-preparation-aux-concours-administratifs"
+    },
+    {
+      "id": "vp-book-23145",
+      "title": "Finances publiques",
+      "authors": "Franck Waserman",
+      "subjects": [
+        "Finances publiques"
+      ],
+      "year": "2026",
+      "url": "https://www.vie-publique.fr/catalogue/23145-finances-publiques",
+      "coverUrl": "https://www.vie-publique.fr/files/styles/large/public/collection_number/9782111742116.jpg?itok=DCoemge8",
+      "categories": [
+        "A"
+      ],
+      "sourceName": "Vie-publique / La Documentation française",
+      "selectionUrl": "https://www.vie-publique.fr/catalogue/293178-selection-douvrages-preparation-aux-concours-administratifs",
+      "replaces": [
+        "book-a9d527efcf5d"
+      ]
+    },
+    {
+      "id": "vp-book-295175",
+      "title": "60 ans d'exécution des décisions du juge administratif",
+      "authors": "Conseil d’État",
+      "subjects": [
+        "Droit public"
+      ],
+      "year": "2024",
+      "url": "https://www.vie-publique.fr/catalogue/295175-60-ans-dexecution-des-decisions-du-juge-administratif",
+      "coverUrl": "https://www.vie-publique.fr/files/styles/large/public/collection_number/9782111740211.jpg?itok=zQjFCKXZ",
+      "categories": [
+        "A"
+      ],
+      "sourceName": "Vie-publique / La Documentation française",
+      "selectionUrl": "https://www.vie-publique.fr/catalogue/293178-selection-douvrages-preparation-aux-concours-administratifs"
+    },
+    {
+      "id": "vp-book-22758",
+      "title": "La justice",
+      "authors": "Nicolas Braconnay ; Édouard Le Boulanger",
+      "subjects": [
+        "Droit public"
+      ],
+      "year": "2026",
+      "url": "https://www.vie-publique.fr/catalogue/22758-la-justice",
+      "coverUrl": "https://www.vie-publique.fr/files/styles/large/public/collection_number/9782111742727_0.jpg?itok=zxmwrj0j",
+      "categories": [
+        "A"
+      ],
+      "sourceName": "Vie-publique / La Documentation française",
+      "selectionUrl": "https://www.vie-publique.fr/catalogue/293178-selection-douvrages-preparation-aux-concours-administratifs"
+    },
+    {
+      "id": "vp-book-22752",
+      "title": "La juridiction administrative",
+      "authors": "Patrick Gérard",
+      "subjects": [
+        "Droit public"
+      ],
+      "year": "2022",
+      "url": "https://www.vie-publique.fr/catalogue/22752-la-juridiction-administrative",
+      "coverUrl": "https://www.vie-publique.fr/files/styles/large/public/collection_number/9782111575165_0.jpg?itok=vkropZFE",
+      "categories": [
+        "A"
+      ],
+      "sourceName": "Vie-publique / La Documentation française",
+      "selectionUrl": "https://www.vie-publique.fr/catalogue/293178-selection-douvrages-preparation-aux-concours-administratifs"
+    },
+    {
+      "id": "vp-book-262498",
+      "title": "L'Europe aux concours",
+      "authors": "Michel Dumoulin",
+      "subjects": [
+        "Questions européennes"
+      ],
+      "year": "2024",
+      "url": "https://www.vie-publique.fr/catalogue/262498-leurope-aux-concours",
+      "coverUrl": "https://www.vie-publique.fr/files/styles/large/public/collection_number/9782111578692.jpg?itok=-fOsnLZm",
+      "categories": [
+        "A"
+      ],
+      "sourceName": "Vie-publique / La Documentation française",
+      "selectionUrl": "https://www.vie-publique.fr/catalogue/293178-selection-douvrages-preparation-aux-concours-administratifs",
+      "replaces": [
+        "book-a8f074410fea"
+      ]
+    }
+  ]
+}

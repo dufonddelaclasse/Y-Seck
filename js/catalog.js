@@ -45,6 +45,7 @@
   });
   D.calendar = P.calendar;
   D.books = P.books || []; D.bookSource = P.bookSource;
+  D.studyResources = P.studyResources || [];
   D.examPortals = { E: D.calendarUrl, H: 'https://www.concours-fph.ars.sante.fr/', T: 'https://www.concours-territorial.fr/' };
   D.teacherResources = D.teacherResources || 'https://www.devenirenseignant.gouv.fr/ressources';
 })();

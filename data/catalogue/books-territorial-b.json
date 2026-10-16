@@ -1,0 +1,290 @@
+{
+  "books": [
+    {
+      "id": "cnfpt-book-0b52fedaf4aa",
+      "title": "Rédacteur territorial, rédacteur principal de 2ème classe : externe, interne, 3e concours et examens professionnels, catégorie B. Annales corrigées",
+      "authors": "BELLEGO Olivier",
+      "subjects": [
+        "Méthodes et concours territoriaux"
+      ],
+      "year": "2025",
+      "coverUrl": "https://www.cnfpt.fr/sites/default/files/inline-images/r%C3%A9dac%201.jpg",
+      "url": "https://www.cnfpt.fr/nous-connaitre/notre-organisation/delegations/lespace-documentation/preparation-concours-examens/redacteur/hauts-france",
+      "categories": [
+        "B"
+      ],
+      "fps": [
+        "T"
+      ],
+      "routeIds": [
+        "redacteur"
+      ],
+      "sourceName": "CNFPT · Hauts-de-France",
+      "selectionUrl": "https://www.cnfpt.fr/nous-connaitre/notre-organisation/delegations/lespace-documentation/preparation-concours-examens/redacteur/hauts-france"
+    },
+    {
+      "id": "cnfpt-book-4203d59524f7",
+      "title": "Rédacteur territorial, rédacteur principal : externe, interne et examen professionnel",
+      "authors": "DESLANDES Luc ; GENINASCA Fabienne ; LEBRUN Pierre-Brice",
+      "subjects": [
+        "Méthodes et concours territoriaux"
+      ],
+      "year": "2025",
+      "coverUrl": "https://www.cnfpt.fr/sites/default/files/inline-images/r%C3%A9dac%202.jpg",
+      "url": "https://www.cnfpt.fr/nous-connaitre/notre-organisation/delegations/lespace-documentation/preparation-concours-examens/redacteur/hauts-france",
+      "categories": [
+        "B"
+      ],
+      "fps": [
+        "T"
+      ],
+      "routeIds": [
+        "redacteur"
+      ],
+      "sourceName": "CNFPT · Hauts-de-France",
+      "selectionUrl": "https://www.cnfpt.fr/nous-connaitre/notre-organisation/delegations/lespace-documentation/preparation-concours-examens/redacteur/hauts-france"
+    },
+    {
+      "id": "cnfpt-book-f5ec50e52a8b",
+      "title": "Rédacteur territorial Rédacteur principal - Concours externe, interne, 3e voie et examens professionnels, Catégorie B - 2025-2026",
+      "authors": "DRAPP CHRISTINE ; MULERO Mickael",
+      "subjects": [
+        "Méthodes et concours territoriaux"
+      ],
+      "year": "2025",
+      "coverUrl": "https://www.cnfpt.fr/sites/default/files/inline-images/r%C3%A9dac%203.jpg",
+      "url": "https://www.cnfpt.fr/nous-connaitre/notre-organisation/delegations/lespace-documentation/preparation-concours-examens/redacteur/hauts-france",
+      "categories": [
+        "B"
+      ],
+      "fps": [
+        "T"
+      ],
+      "routeIds": [
+        "redacteur"
+      ],
+      "sourceName": "CNFPT · Hauts-de-France",
+      "selectionUrl": "https://www.cnfpt.fr/nous-connaitre/notre-organisation/delegations/lespace-documentation/preparation-concours-examens/redacteur/hauts-france"
+    },
+    {
+      "id": "cnfpt-book-a59d6fda5438",
+      "title": "Concours rédacteur territorial, rédacteur principal de 2e classe - Externe, interne, 3e voie, catégorie B. Tout-en-un",
+      "authors": "BELLEGO OLIVIER",
+      "subjects": [
+        "Méthodes et concours territoriaux"
+      ],
+      "year": "2024",
+      "coverUrl": "https://www.cnfpt.fr/sites/default/files/inline-images/r%C3%A9dacteur%20territorial%20vuibert.jpg",
+      "url": "https://www.cnfpt.fr/nous-connaitre/notre-organisation/delegations/lespace-documentation/preparation-concours-examens/redacteur/hauts-france",
+      "categories": [
+        "B"
+      ],
+      "fps": [
+        "T"
+      ],
+      "routeIds": [
+        "redacteur"
+      ],
+      "sourceName": "CNFPT · Hauts-de-France",
+      "selectionUrl": "https://www.cnfpt.fr/nous-connaitre/notre-organisation/delegations/lespace-documentation/preparation-concours-examens/redacteur/hauts-france"
+    },
+    {
+      "id": "cnfpt-book-b7a0d94674c1",
+      "title": "Rédacteur territorial et rédacteur principal de 2e classe : tout-en-un",
+      "authors": "DALENS MARC",
+      "subjects": [
+        "Méthodes et concours territoriaux"
+      ],
+      "year": "2024",
+      "coverUrl": "https://www.cnfpt.fr/sites/default/files/inline-images/r%C3%A9dacteur%20territorial%20studyrama.jpg",
+      "url": "https://www.cnfpt.fr/nous-connaitre/notre-organisation/delegations/lespace-documentation/preparation-concours-examens/redacteur/hauts-france",
+      "categories": [
+        "B"
+      ],
+      "fps": [
+        "T"
+      ],
+      "routeIds": [
+        "redacteur"
+      ],
+      "sourceName": "CNFPT · Hauts-de-France",
+      "selectionUrl": "https://www.cnfpt.fr/nous-connaitre/notre-organisation/delegations/lespace-documentation/preparation-concours-examens/redacteur/hauts-france"
+    },
+    {
+      "id": "cnfpt-book-abd632241d34",
+      "title": "Annales corrigées - Rédacteur, rédacteur principal de 2e classe - concours externe, interne et 3e concours - Catégorie B - 2023",
+      "authors": "CENTRE DE GESTION DE LA FPT DE LA PETITE COURONNE ILE-DE-FRANCE",
+      "subjects": [
+        "Méthodes et concours territoriaux"
+      ],
+      "year": "2023",
+      "coverUrl": "https://www.cnfpt.fr/sites/default/files/inline-images/R%C3%A9dacteur%20documentation%20fran%C3%A7aise.jpg",
+      "url": "https://www.cnfpt.fr/nous-connaitre/notre-organisation/delegations/lespace-documentation/preparation-concours-examens/redacteur/hauts-france",
+      "categories": [
+        "B"
+      ],
+      "fps": [
+        "T"
+      ],
+      "routeIds": [
+        "redacteur"
+      ],
+      "sourceName": "CNFPT · Hauts-de-France",
+      "selectionUrl": "https://www.cnfpt.fr/nous-connaitre/notre-organisation/delegations/lespace-documentation/preparation-concours-examens/redacteur/hauts-france"
+    },
+    {
+      "id": "cnfpt-book-f053a9abfdc1",
+      "title": "Rédacteur territorial, rédacteur territorial principal - Externe, interne, 3e voie - Tout-en-un",
+      "authors": "PIAN FRANCIS ; PIPARD THAVEZ DOMINIQUE",
+      "subjects": [
+        "Méthodes et concours territoriaux"
+      ],
+      "year": "2023",
+      "coverUrl": "https://www.cnfpt.fr/sites/default/files/inline-images/redac%20dunod.jpg",
+      "url": "https://www.cnfpt.fr/nous-connaitre/notre-organisation/delegations/lespace-documentation/preparation-concours-examens/redacteur/hauts-france",
+      "categories": [
+        "B"
+      ],
+      "fps": [
+        "T"
+      ],
+      "routeIds": [
+        "redacteur"
+      ],
+      "sourceName": "CNFPT · Hauts-de-France",
+      "selectionUrl": "https://www.cnfpt.fr/nous-connaitre/notre-organisation/delegations/lespace-documentation/preparation-concours-examens/redacteur/hauts-france"
+    },
+    {
+      "id": "cnfpt-book-4ecb579a3c3e",
+      "title": "Rédacteur territorial, rédacteur principal de 2e classe - Externe, interne, 3e voie, catégorie B. Annales corrigées, entraînement intensif",
+      "authors": "BELLEGO OLIVIER",
+      "subjects": [
+        "Méthodes et concours territoriaux"
+      ],
+      "year": "2023",
+      "coverUrl": "https://www.cnfpt.fr/sites/default/files/inline-images/R%C3%A9dacteur%20vuibert%20annales%20corrig%C3%A9es.jpg",
+      "url": "https://www.cnfpt.fr/nous-connaitre/notre-organisation/delegations/lespace-documentation/preparation-concours-examens/redacteur/hauts-france",
+      "categories": [
+        "B"
+      ],
+      "fps": [
+        "T"
+      ],
+      "routeIds": [
+        "redacteur"
+      ],
+      "sourceName": "CNFPT · Hauts-de-France",
+      "selectionUrl": "https://www.cnfpt.fr/nous-connaitre/notre-organisation/delegations/lespace-documentation/preparation-concours-examens/redacteur/hauts-france"
+    },
+    {
+      "id": "cnfpt-book-e64a739edbc9",
+      "title": "Rédacteur territorial et Rédacteur principal Catégorie B - . Concours externe, interne, 3e voie et examens professionnels - Edition 2023-2024",
+      "authors": "TUCCINARDI PASCAL ; MANGO LEONARD ; DEBILLY CATHERINE ; PIOZ PATRICIA",
+      "subjects": [
+        "Méthodes et concours territoriaux"
+      ],
+      "year": "2023",
+      "coverUrl": "https://www.cnfpt.fr/sites/default/files/inline-images/R%C3%A9dacteur%20Nathan.jpg",
+      "url": "https://www.cnfpt.fr/nous-connaitre/notre-organisation/delegations/lespace-documentation/preparation-concours-examens/redacteur/hauts-france",
+      "categories": [
+        "B"
+      ],
+      "fps": [
+        "T"
+      ],
+      "routeIds": [
+        "redacteur"
+      ],
+      "sourceName": "CNFPT · Hauts-de-France",
+      "selectionUrl": "https://www.cnfpt.fr/nous-connaitre/notre-organisation/delegations/lespace-documentation/preparation-concours-examens/redacteur/hauts-france"
+    },
+    {
+      "id": "cnfpt-book-f22d8780836e",
+      "title": "Concours rédacteur territorial, rédacteur principal catégorie B. Externe, interne et examen professionnel",
+      "authors": "DESLANDES LUC ; GENINASCA FABIENNE ; LEBRUN PIERRE-BRICE ; LEPRETRE PASCAL",
+      "subjects": [
+        "Méthodes et concours territoriaux"
+      ],
+      "year": "2023",
+      "coverUrl": "https://www.cnfpt.fr/sites/default/files/inline-images/R%C3%A9dacteur%20vuibert%20tout%20en%20un%20-%20couverture%20orange.jpg",
+      "url": "https://www.cnfpt.fr/nous-connaitre/notre-organisation/delegations/lespace-documentation/preparation-concours-examens/redacteur/hauts-france",
+      "categories": [
+        "B"
+      ],
+      "fps": [
+        "T"
+      ],
+      "routeIds": [
+        "redacteur"
+      ],
+      "sourceName": "CNFPT · Hauts-de-France",
+      "selectionUrl": "https://www.cnfpt.fr/nous-connaitre/notre-organisation/delegations/lespace-documentation/preparation-concours-examens/redacteur/hauts-france"
+    },
+    {
+      "id": "cnfpt-book-c53b5f864c59",
+      "title": "Rédacteur territorial/Rédacteur principal. Concours externe, interne, 3e voie et examens professionnels, Catégorie B - Edition 2023-2024",
+      "authors": "DRAPP CHRISTINE ; RAPATOUT BRUNO ; LE PAGE BRIGITTE",
+      "subjects": [
+        "Méthodes et concours territoriaux"
+      ],
+      "year": "2023",
+      "coverUrl": "https://www.cnfpt.fr/sites/default/files/inline-images/R%C3%A9dacteur%20territorial%20foucher.jpg",
+      "url": "https://www.cnfpt.fr/nous-connaitre/notre-organisation/delegations/lespace-documentation/preparation-concours-examens/redacteur/hauts-france",
+      "categories": [
+        "B"
+      ],
+      "fps": [
+        "T"
+      ],
+      "routeIds": [
+        "redacteur"
+      ],
+      "sourceName": "CNFPT · Hauts-de-France",
+      "selectionUrl": "https://www.cnfpt.fr/nous-connaitre/notre-organisation/delegations/lespace-documentation/preparation-concours-examens/redacteur/hauts-france"
+    },
+    {
+      "id": "cnfpt-book-ad0e100781ef",
+      "title": "Annales corrigées - Rédacteur territorial principal de 2e et 1re classe - Examen professionnel (sujets 2020)",
+      "authors": "CENTRE DE GESTION DE LA FPT DE LA PETITE COURONNE ILE-DE-FRANCE",
+      "subjects": [
+        "Méthodes et concours territoriaux"
+      ],
+      "year": "2022",
+      "coverUrl": "https://www.cnfpt.fr/sites/default/files/inline-images/redacteur_annales_corrigees.jpg",
+      "url": "https://www.cnfpt.fr/nous-connaitre/notre-organisation/delegations/lespace-documentation/preparation-concours-examens/redacteur/hauts-france",
+      "categories": [
+        "B"
+      ],
+      "fps": [
+        "T"
+      ],
+      "routeIds": [
+        "redacteur"
+      ],
+      "sourceName": "CNFPT · Hauts-de-France",
+      "selectionUrl": "https://www.cnfpt.fr/nous-connaitre/notre-organisation/delegations/lespace-documentation/preparation-concours-examens/redacteur/hauts-france"
+    },
+    {
+      "id": "cnfpt-book-0b87de733d29",
+      "title": "Annales corrigées concours de Rédacteur principal de 2e et 1re classe 2018. Examens - Examens d'avancement de grade et de promotion interne. Catégorie B / CENTRE INTERDEPARTEMENTAL DE GESTION DE LA PETITE COURONNE ; CDG SEINE ET MARNE - Documentation française (La), 2018",
+      "authors": "CENTRE INTERDEPARTEMENTAL DE GESTION DE LA PETITE COURONNE ; CDG SEINE ET MARNE - Documentation française (La), 2018",
+      "subjects": [
+        "Méthodes et concours territoriaux"
+      ],
+      "year": "2018",
+      "coverUrl": "https://www.cnfpt.fr/sites/default/files/inline-images/5_6.jpg",
+      "url": "https://www.cnfpt.fr/nous-connaitre/notre-organisation/delegations/lespace-documentation/preparation-concours-examens/redacteur/hauts-france",
+      "categories": [
+        "B"
+      ],
+      "fps": [
+        "T"
+      ],
+      "routeIds": [
+        "redacteur"
+      ],
+      "sourceName": "CNFPT · Hauts-de-France",
+      "selectionUrl": "https://www.cnfpt.fr/nous-connaitre/notre-organisation/delegations/lespace-documentation/preparation-concours-examens/redacteur/hauts-france"
+    }
+  ]
+}

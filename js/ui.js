@@ -116,6 +116,7 @@
     contextHeading=options.root.querySelector('h1');
     updateContext();
     if(kind==='filters')content('Filtrer les métiers',options.filters);
+    if(kind==='resource-filters')content('Filtrer les ressources',options.resourceFilters);
   }
   window.YSECK_UI = {icons:icons,init:init,afterRender:afterRender,open:open,close:close,current:function(){return kind;}};
 })();

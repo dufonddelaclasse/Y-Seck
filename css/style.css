@@ -802,3 +802,15 @@ button.category-choice.cat-CDD { --cat-fill:var(--cat-cdd); --cat-ink:#FFF; }
 html[data-contrast="true"] :is(.cat,.tag).cat-CDD { background:#000; color:#FFF; }
 
 .contract-label { align-self:flex-start; }
+
+/* Documents de préparation : source et nature du document restent lisibles. */
+.resource-heading { display:flex; align-items:flex-start; justify-content:space-between; gap:12px; }
+.resource-heading h1 { flex:1; min-width:0; }
+.resource-heading .icon-btn { flex:none; margin-top:4px; }
+.study-list { min-width:0; }
+.study-card.external-link,.study-card.external-link:hover { display:block; padding:20px 0 !important; border-bottom:1px solid var(--line) !important; color:var(--muted); text-decoration:none !important; overflow-wrap:anywhere; }
+.study-card h3 { font-size:1rem; line-height:1.4; margin:10px 0 6px; color:var(--muted); text-decoration:underline; text-underline-offset:3px; }
+.study-card p { margin:6px 0; }
+.study-meta { display:flex; flex-wrap:wrap; gap:6px; }
+.study-open { display:flex; align-items:center; justify-content:space-between; margin-top:10px; color:var(--muted); text-decoration:underline; font-size:.875rem; }
+.study-open svg { width:18px; height:18px; flex:none; }

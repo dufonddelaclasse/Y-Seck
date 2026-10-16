@@ -5,8 +5,8 @@ import assert from 'node:assert/strict';
 // Exerce les écrans avec le catalogue réel, sans serveur ni navigateur.
 const root = new URL('../', import.meta.url);
 const manifest = JSON.parse(fs.readFileSync(new URL('data/catalogue.json', root), 'utf8'));
-const db = {};
-for (const part of manifest.parts) {
+const db = process.env.CATALOGUE_TEST_FILE ? JSON.parse(fs.readFileSync(process.env.CATALOGUE_TEST_FILE,'utf8')) : {};
+for (const part of process.env.CATALOGUE_TEST_FILE ? [] : manifest.parts) {
   const data = JSON.parse(fs.readFileSync(new URL('data/' + part, root), 'utf8'));
   for (const [key, value] of Object.entries(data)) {
     if (Array.isArray(value)) (db[key] ||= []).push(...value); else db[key] = value;
@@ -25,9 +25,9 @@ vm.createContext(context);
 for (const file of ['js/data.js','js/catalog.js','js/ui.js']) vm.runInContext(fs.readFileSync(new URL(file,root),'utf8'),context);
 context.window.YSECK_UI.afterRender=()=>{};
 let source=fs.readFileSync(new URL('js/app.js',root),'utf8');
-source=source.replace('  UI.init();\n  render();\n  booted = true;', '  window.tests={screens,S,filteredJobs,jobFilters,jobCategories,isContractJob,prepHref,examsFor,tabbar};');
+source=source.replace('  UI.init();\n  render();\n  booted = true;', '  window.tests={screens,S,filteredJobs,jobFilters,jobCategories,isContractJob,prepHref,examsFor,tabbar,categoryBooks,bookList,studyResources};');
 vm.runInContext(source,context);
-const {screens,S,filteredJobs,jobFilters,isContractJob,prepHref,examsFor,tabbar}=context.window.tests;
+const {screens,S,filteredJobs,jobFilters,isContractJob,prepHref,examsFor,tabbar,categoryBooks,bookList,studyResources}=context.window.tests;
 const data=context.window.DATA;
 Object.assign(S,{profile:'etu',name:'Test',level:'Doctorat',domains:[],metDomains:[],traits:[],budget:'Plus de 1 000 €',prepBudget:'2',boursier:'Non'});
 const fixed=data.jobs.filter(j=>['A+','A','B','C'].includes(j.cat)&&!isContractJob(j));
@@ -39,7 +39,8 @@ for (const j of fixed) {
   assert(!html.includes('>Pour vos choix<'),j.id);
   assert(!html.includes('href="#/sans-concours'),j.id);
   for(const f of ['E','T','H'])assert.equal(html.includes('<b>'+data.fps[f]+'</b>'),j.fp.includes(f),'Versant non pertinent : '+j.id+' '+f);
-  assert.equal(html.includes('Recommandations bibliographiques'),['A','A+'].includes(j.cat),'Bibliographie : '+j.id);
+  assert(html.includes('Recommandations bibliographiques'),'Bibliographie : '+j.id);
+  assert(html.includes('href="#/annales/'+j.id+'"'),'Annales : '+j.id);
   assert.equal(html.includes('href="#/calendrier/'+j.id+'"'),examsFor(j).length>0,'Dates : '+j.id);
   assert(html.includes('href="#/etudes/'+j.id+'"'));
   assert(html.includes('href="#/handicap/'+j.id+'"'));
@@ -90,7 +91,7 @@ assert(screens.etudes('greffier').includes('École nationale des greffes'));
 assert(screens.etudes('greffier').includes('href="#/preparer/greffier"'));
 assert(screens.prepa('privees','greffier').includes('href="#/preparer/greffier"'));
 assert(!screens.prepa('privees','greffier').includes('Ipesup'));
-assert(screens.bibliographie('greffier').includes('<h1>Se préparer</h1>'));
+assert(screens.bibliographie('greffier').includes('href="#/ressources-biblio/greffier"'));
 assert(screens.handicap('dev').includes('href="#/sans-concours/dev"'));
 Object.assign(S,{calCat:'A',calFp:'Tous',calQ:'',calView:'upcoming'});
 const hospitalJob=data.jobs.find(j=>j.id==='aah');
@@ -99,4 +100,51 @@ S.boursier='Oui';
 assert(!screens.preparer('magasinier').includes('class="bourse"'),'Pas de bourse Talents recommandée à une préparation de catégorie C.');
 assert(!screens.preparer('magasinier').includes('href="#/prepa/talents'));
 assert.equal(JSON.stringify(data.crosswalk),JSON.stringify(db.links));
+const additions=data.books.filter(b=>b.id.startsWith('vp-book-'));
+assert.equal(additions.length,29);
+assert.equal(new Set(additions.map(b=>b.url)).size,29);
+const aJob=data.jobs.find(j=>j.id==='aah'),apJob=data.jobs.find(j=>j.id==='admin-etat');
+assert.equal(categoryBooks(aJob).length,156,'Les six ouvrages déjà présents ne doivent pas être affichés deux fois en A.');
+assert.equal(categoryBooks(apJob).length,133,'La sélection A+ doit rester inchangée.');
+for(const book of additions){
+  assert.deepEqual(Array.from(book.categories),['A']);
+  assert(book.authors&&book.year&&book.coverUrl&&book.subjects.length);
+  assert(categoryBooks(aJob).some(b=>b.id===book.id));
+  assert(!categoryBooks(apJob).some(b=>b.id===book.id));
+}
+Object.assign(S,{bookQ:'',bookSubject:'Toutes',bookCategory:'A+'});
+assert(screens.bibliographie('aah').includes('156 ouvrages'),'Le métier A impose sa catégorie même après une visite en A+.');
+assert(!screens.bibliographie('admin-etat').includes('Consulter la sélection Vie-publique'));
+assert(screens.bibliographie().includes('aria-pressed="true" data-action="bookCategory" data-v="A+"'));
+S.bookCategory='A';assert.equal(categoryBooks().length,156);
+S.bookQ='questions contemporaines';
+assert(bookList(aJob).includes('Questions contemporaines'));
+S.bookQ='';S.bookSubject='Management public';assert(bookList(aJob).includes('Innovation publique'));
+screens.bibliographie('admin-etat');assert.equal(S.bookSubject,'Toutes','Un thème propre à A ne doit pas masquer toute la sélection A+.');
+assert(data.studyResources.length>1800);
+assert.equal(new Set(data.studyResources.map(r=>r.url)).size,data.studyResources.length,'Un seul lien par document.');
+assert(data.studyResources.every(r=>/^https?:\/\//.test(r.url)&&/^https:\/\//.test(r.sourceUrl)&&r.title&&!r.title.includes('opens in a new window')));
+assert(data.studyResources.filter(r=>r.url.includes('Sujets_zero')).every(r=>r.kind==='entrainement'),'Les sujets zéro ne sont pas des annales de sessions passées.');
+for(const cat of ['A+','A','B','C'])for(const fp of ['E','T','H']){
+  assert(data.studyResources.some(r=>r.kind!=='bibliographie'&&r.categories.includes(cat)&&r.fps.includes(fp)),cat+' '+fp+' annales');
+  assert(data.studyResources.some(r=>r.kind==='bibliographie'&&r.categories.includes(cat)&&r.fps.includes(fp)),cat+' '+fp+' bibliographies');
+}
+for(const j of fixed){
+  const docs=studyResources(j,false,false);
+  assert(docs.length,'Une source documentaire doit exister pour '+j.id);
+  assert(docs.every(r=>r.categories.some(c=>j.cat===c)&&r.fps.some(f=>j.fp.includes(f))));
+}
+const hospitalDocs=studyResources(aJob,false,false);
+assert(hospitalDocs.some(r=>r.sourceName==='Centre national de gestion'&&r.kind==='sujet'));
+assert(!hospitalDocs.some(r=>r.concours==='Directeur d’hôpital - concours'),'Ne pas associer les sujets DH aux attachés hospitaliers.');
+Object.assign(S,{resCat:'C',resFp:'E',resKind:'sujet',resYear:'Toutes',resQ:''});
+assert(studyResources(null,false,true).length,'Des sujets C État doivent être indexés.');
+assert(studyResources(null,false,true).every(r=>r.categories.includes('C')&&r.fps.includes('E')&&r.kind==='sujet'));
+Object.assign(S,{resCat:'B',resFp:'T',resKind:'Tous',resYear:'2025',resQ:'rédacteur'});
+assert(studyResources(null,false,true).length,'La recherche croisant concours, versant, catégorie et année fonctionne.');
+assert.equal(categoryBooks(data.jobs.find(j=>j.id==='greffier')).length,0,'Ne pas proposer les manuels de rédacteur territorial aux greffiers.');
+assert(categoryBooks(data.jobs.find(j=>j.id==='redacteur')).length>0);
+assert(screens.annales('dev').includes('Entrer sans concours'));
 console.log('Contrôles réussis :',counts,';',contracts.length,'CDD ; VAR préservés, dates, versants, orientation, aides, filtres et navigation.');
+console.log('Bibliographie vérifiée : 29 références Vie-publique réservées à A, 6 doublons évités, 133 références A+ préservées.');
+console.log('Ressources vérifiées :',data.studyResources.length,'liens uniques, 12 combinaisons catégorie/versant, filtres et associations par concours.');

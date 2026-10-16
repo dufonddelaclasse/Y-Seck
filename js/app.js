@@ -15,7 +15,8 @@
     showContracts: true, prepBudget: null, alert: false, openCat: null, region: 'Toutes', talentsAll: false,
     name: '', location: null, favorites: [], children: [], activeChild: null, personalProfiles: {},
     metMode: 'mine', jobLimit: 60, calFp: 'Tous', calView: 'upcoming', calLimit: 40, calQ: '',
-    contrast: false, largeText: false, dysFont: false, bookQ: '', bookSubject: 'Toutes'
+    contrast: false, largeText: false, dysFont: false, bookQ: '', bookSubject: 'Toutes', bookCategory: 'A', bookFp: 'Tous',
+    resQ: '', resCat: 'Toutes', resFp: 'Tous', resKind: 'Tous', resYear: 'Toutes', resLimit: 40
   };
   var PERSON_FIELDS = ['name', 'level', 'domains', 'traits', 'boursier', 'budget', 'done', 'location', 'favorites'];
   var S = load();
@@ -771,7 +772,8 @@
       return true;
     });
     return '<section class="stack mt-l" id="preparations"><span class="eyebrow">Se préparer</span><h2 id="prep-title" tabindex="-1">Prépas et aides</h2>' +
-      (cats.some(function(c){return c==='A'||c==='A+';})?'<a class="btn outline" href="#/bibliographie'+(job?'/'+job.id:'')+'">Recommandations bibliographiques</a>':'') +
+      '<a class="btn outline" href="#/annales'+(job?'/'+job.id:'')+'">'+I.book+'Annales et rapports de jury</a>' +
+      '<a class="btn outline" href="#/bibliographie'+(job?'/'+job.id:'')+'">Recommandations bibliographiques</a>' +
       '<div class="row" role="group" aria-label="Budget">' + opts.map(function (o) { return chip('prepBudget', o[0], o[1], b === o[0], 'blue'); }).join('') + '</div>' +
       '<button type="button" class="switch-row" role="switch" aria-checked="' + on + '" data-action="toggleBoursier"><span>' + (isParent() ? 'Mon enfant est boursier·e' : 'Je suis boursier·e') + '</span><span class="switch" aria-hidden="true"></span></button>' +
       (list.length?'':'<p class="empty">Aucune préparation pour ce métier avec ce budget.</p>') + '<div class="stack">' + list.map(function (p) {
@@ -869,8 +871,63 @@
       '<p class="small m0">Liste non exhaustive, sans classement ni partenariat.</p>' + foot;
   };
 
-  function bookList() {
-    var q=norm(S.bookQ),list=D.books.filter(function(b){return (S.bookSubject==='Toutes'||b.subjects.indexOf(S.bookSubject)>-1)&&(!q||norm(b.title+' '+b.authors).indexOf(q)>-1);});
+  var RESOURCE_KINDS = {sujet:'Sujet',rapport:'Rapport de jury',copie:'Meilleure copie',entrainement:'Entraînement',annuaire:'Annuaire officiel',bibliographie:'Bibliographie'};
+  function studyMatches(r, job) {
+    if(!job)return true;
+    if(!r.categories.some(function(c){return jobCategories(job).indexOf(c)>-1;})||!r.fps.some(function(f){return job.fp.indexOf(f)>-1;}))return false;
+    var routes=[job.id].concat(job.routeIds||[]);
+    return r.routeIds.length?r.routeIds.some(function(id){return routes.indexOf(id)>-1;}):r.scope==='directory';
+  }
+  function studyResources(job, bibliography, applyFilters) {
+    var q=norm(S.resQ);
+    return D.studyResources.filter(function(r){
+      if((r.kind==='bibliographie')!==!!bibliography||!studyMatches(r,job))return false;
+      if(!applyFilters)return true;
+      return (job||S.resCat==='Toutes'||r.categories.indexOf(S.resCat)>-1)&&
+        (S.resFp==='Tous'||r.fps.indexOf(S.resFp)>-1)&&
+        (S.resKind==='Tous'||r.kind===S.resKind)&&
+        (S.resYear==='Toutes'||r.year===S.resYear)&&
+        (!q||norm(r.title+' '+r.concours+' '+r.sourceName+' '+r.year).indexOf(q)>-1);
+    });
+  }
+  function resourceRows(list, directories) {
+    return list.map(function(r){return '<a class="study-card external-link" href="'+esc(r.url)+'" target="_blank" rel="noopener"><div class="study-meta"><span class="tag">'+esc(RESOURCE_KINDS[r.kind])+'</span>'+(r.year?'<span class="tag">'+esc(r.year)+'</span>':'')+'</div><h3 class="no-icon">'+esc(r.title)+'</h3>'+(r.concours?'<p>'+esc(r.concours)+'</p>':'')+'<p class="small">'+esc(r.sourceName+' · '+r.fps.map(function(f){return D.fps[f];}).join(', '))+'</p>'+(r.note?'<p class="small">'+esc(r.note)+'</p>':'')+'<span class="study-open">'+(directories?'Consulter la source':'Consulter le document')+I.chev+'</span></a>';}).join('');
+  }
+  function studyResults(job, bibliography) {
+    var all=studyResources(job,bibliography,true),docs=all.filter(function(r){return r.scope!=='directory';}),directories=all.filter(function(r){return r.scope==='directory';});
+    return '<p class="small" role="status">'+docs.length+' document'+(docs.length>1?'s':'')+' · '+directories.length+' source'+(directories.length>1?'s':'')+' documentaire'+(directories.length>1?'s':'')+'</p>'+
+      (docs.length?'<div class="study-list">'+resourceRows(docs.slice(0,S.resLimit),false)+'</div>'+(docs.length>S.resLimit?'<button type="button" class="btn outline" data-action="moreResources">Afficher 40 documents de plus</button>':''):'<p class="empty">Aucun document indexé avec ces critères.</p><button type="button" class="text-btn" data-action="resetResources">Réinitialiser les filtres</button>')+
+      (directories.length?'<h2 class="mt-m">Consulter les collections complètes</h2><div class="study-list">'+resourceRows(directories,true)+'</div>':'');
+  }
+  function studyFilters(job,bibliography) {
+    var all=studyResources(job,bibliography,false),years=[];all.forEach(function(r){if(r.year&&years.indexOf(r.year)<0)years.push(r.year);});years.sort().reverse();
+    return (job?'<p class="body">'+esc(job.name)+'</p><p class="small">'+esc(jobCategories(job).join(', ')+' · '+fpNames(job.fp).join(', '))+'</p>':'<h3>Catégorie</h3><div class="row" role="group" aria-label="Catégorie des ressources">'+['Toutes','A+','A','B','C'].map(function(c){return chip('resCat',c,c,S.resCat===c,'blue');}).join('')+'</div>')+
+      '<h3>Fonction publique</h3><div class="row">'+['Tous','E','T','H'].filter(function(f){return !job||f==='Tous'||job.fp.indexOf(f)>-1;}).map(function(f){return chip('resFp',f,f==='Tous'?'Tous les versants':D.fps[f],S.resFp===f);}).join('')+'</div>'+
+      (!bibliography?'<label class="select mt-m"><span>Type de document</span><select id="resource-kind">'+['Tous','sujet','rapport','copie','entrainement','annuaire'].map(function(k){return '<option value="'+k+'"'+(S.resKind===k?' selected':'')+'>'+esc(RESOURCE_KINDS[k]||'Tous les documents')+'</option>';}).join('')+'</select></label>':'')+
+      '<label class="select mt-m"><span>Session ou année d’édition</span><select id="resource-year">'+['Toutes'].concat(years).map(function(y){return '<option'+(S.resYear===y?' selected':'')+'>'+esc(y)+'</option>';}).join('')+'</select></label>'+
+      '<button type="button" class="text-btn mt-s" data-action="resetResources">Réinitialiser les filtres</button><div class="sheet-actions"><button type="button" class="btn" data-ui="close">Afficher les résultats</button></div>';
+  }
+  function studyScreen(jobId,bibliography) {
+    var job=jobById(jobId),title=bibliography?'Bibliographies des concours':'Annales et rapports de jury';
+    if(job&&isContractJob(job))return screens['sans-concours'](job.id);
+    return '<main class="screen top-tight">'+back(bibliography?'#/bibliographie'+(job?'/'+job.id:''):job?prepHref(job):'#/concours',bibliography?'Bibliographie':job?'Se préparer':'Concours et prépas')+
+      '<span class="eyebrow">S’entraîner et réviser</span><div class="resource-heading"><h1 class="sm">'+title+'</h1><button type="button" class="icon-btn" data-action="resourceFilters" aria-label="Filtrer les ressources">'+I.settings+'</button></div>'+
+      (job?'<p class="body">'+esc(job.name)+'</p>':'')+'<p class="small">'+(bibliography?'Sélections de lecture et catalogues publiés par les organismes de concours et leurs bibliothèques.':'Sujets, copies et rapports publiés par les organisateurs. Les collections complètes donnent accès aux archives des autres sessions.')+'</p>'+
+      '<div class="row">'+(job?jobCategories(job).map(function(c){return '<span class="tag">Catégorie '+esc(c)+'</span>';}).join(''):'<span class="tag">'+esc(S.resCat==='Toutes'?'A+, A, B et C':'Catégorie '+S.resCat)+'</span>')+'<span class="tag">'+esc(S.resFp==='Tous'?(job?fpNames(job.fp).join(', '):'3 versants'):D.fps[S.resFp])+'</span>'+(S.resKind!=='Tous'?'<span class="tag">'+esc(RESOURCE_KINDS[S.resKind])+'</span>':'')+(S.resYear!=='Toutes'?'<span class="tag">'+esc(S.resYear)+'</span>':'')+'</div>'+
+      searchField('res-q','Rechercher un concours ou un document','Concours, matière ou session',S.resQ)+'<div id="study-results">'+studyResults(job,bibliography)+'</div><p class="small mt-m">Les anciens sujets peuvent correspondre à des épreuves modifiées depuis. Vérifiez le programme de la session préparée.</p></main>'+tabbar(job?'metiers':'concours');
+  }
+  screens.annales=function(jobId){return studyScreen(jobId,false);};
+  screens['ressources-biblio']=function(jobId){return studyScreen(jobId,true);};
+
+  function bibliographyCategory(job) { return job && ['A+','A','B','C'].indexOf(job.cat)>-1 ? job.cat : ['A+','A','B','C'].indexOf(S.bookCategory)>-1 ? S.bookCategory : 'A'; }
+  function categoryBooks(job) {
+    var category=bibliographyCategory(job),available=D.books.filter(function(b){return (!b.categories?['A','A+'].indexOf(category)>-1:b.categories.indexOf(category)>-1)&&(!b.fps||!b.fps.length||b.fps.some(function(f){return job?job.fp.indexOf(f)>-1:S.bookFp==='Tous'||S.bookFp===f;}))&&(!job||!b.routeIds||!b.routeIds.length||b.routeIds.some(function(id){return [job.id].concat(job.routeIds||[]).indexOf(id)>-1;}));}),replaced={};
+    available.forEach(function(b){(b.replaces||[]).forEach(function(id){replaced[id]=true;});});
+    // Les éditions de la sélection A sont prioritaires ; le fonds INSP reste intact pour A+.
+    return available.filter(function(b){return !replaced[b.id];}).sort(function(a,b){return Number(b.id.indexOf('vp-book-')===0)-Number(a.id.indexOf('vp-book-')===0);});
+  }
+  function bookList(job) {
+    var q=norm(S.bookQ),list=categoryBooks(job).filter(function(b){return (S.bookSubject==='Toutes'||b.subjects.indexOf(S.bookSubject)>-1)&&(!q||norm(b.title+' '+b.authors).indexOf(q)>-1);});
     return '<p class="small" role="status">' + list.length + ' ouvrage' + (list.length>1?'s':'') + '</p><div class="book-list">' + (list.length?list.map(function(b){
       var title=b.title.split(' : ')[0];
       var body=(b.coverUrl||b.cover?'<img src="' + esc(b.coverUrl||b.cover) + '" alt="Couverture de ' + esc(b.title) + '" loading="lazy" width="66" height="92">':'<span class="book-cover-placeholder" aria-hidden="true">'+I.book+'</span>')+'<div><h2 class="book-title">' + esc(title) + '</h2><p>' + esc(b.authors) + '</p></div>';
@@ -878,14 +935,19 @@
     }).join(''):'<p class="empty">Aucun ouvrage avec ces critères.</p>') + '</div>';
   }
   screens.bibliographie = function (jobId) {
-    var job=jobById(jobId);if(job&&!jobCategories(job).some(function(c){return c==='A'||c==='A+';}))return screens.preparer(job.id);
-    var subjects=[];D.books.forEach(function(b){b.subjects.forEach(function(t){if(subjects.indexOf(t)<0)subjects.push(t);});});
+    var job=jobById(jobId);if(job&&isContractJob(job))return screens['sans-concours'](job.id);
+    var category=bibliographyCategory(job),subjects=[];categoryBooks(job).forEach(function(b){b.subjects.forEach(function(t){if(subjects.indexOf(t)<0)subjects.push(t);});});
+    if(subjects.indexOf(S.bookSubject)<0)S.bookSubject='Toutes';
     return '<main class="screen top-tight">' + back(job?prepHref(job):'#/concours/prepas',job?'Se préparer':'Concours et prépas') +
-      '<span class="eyebrow">Lire et préparer</span><h1>Bibliographie</h1><p class="small m0">Sélection indicative de l’INSP · septembre 2026.</p>' +
-      searchField('book-q','Rechercher un titre ou un auteur','Titre ou auteur',S.bookQ) +
-      '<label class="select"><span>Thématique</span><select id="book-subject">' + ['Toutes'].concat(subjects).map(function(t){return '<option' + (S.bookSubject===t?' selected':'') + '>' + esc(t) + '</option>';}).join('') + '</select></label>' +
-      '<div id="books">' + bookList() + '</div>' +
-      '<p class="small">Ces lectures ne remplacent pas le programme du concours.</p>' + ext(D.bookSource.url,'Consulter la sélection INSP','link-plain') + '</main>' + tabbar(job?'metiers':'concours');
+      '<span class="eyebrow">Lire et préparer</span><h1>Bibliographie</h1>' +
+      (job?'<p class="small m0">Catégorie '+esc(category)+'</p>':'<div class="chips" role="group" aria-label="Catégorie des ouvrages">'+['A+','A','B','C'].map(function(c){return chip('bookCategory',c,'Catégorie '+c,category===c);}).join('')+'</div>') +
+      '<p class="small">'+(category==='A'?'Lectures générales : sélections INSP et Vie-publique.':category==='A+'?'Lectures générales : sélection de l’INSP.':'Consultez les bibliographies complètes des concours de catégorie '+category+'.')+'</p>' +
+      '<a class="btn outline" href="#/ressources-biblio'+(job?'/'+job.id:'')+'">'+I.book+'Bibliographies des concours</a>' +
+      (categoryBooks(job).length?searchField('book-q','Rechercher un titre ou un auteur','Titre ou auteur',S.bookQ) +
+      '<label class="select"><span>Thématique</span><select id="book-subject">' + ['Toutes'].concat(subjects).map(function(t){return '<option' + (S.bookSubject===t?' selected':'') + '>' + esc(t) + '</option>';}).join('') + '</select></label>':'') +
+      '<div id="books">' + (categoryBooks(job).length?bookList(job):'<p class="small">Les listes de titres et d’auteurs figurent dans les bibliographies des organismes ci-dessus.</p>') + '</div>' +
+      '<p class="small">Ces lectures ne remplacent pas le programme du concours.</p>' + (['A','A+'].indexOf(category)>-1?ext(D.bookSource.url,'Consulter la sélection INSP','link-plain'):'') +
+      (category==='A'?ext('https://www.vie-publique.fr/catalogue/293178-selection-douvrages-preparation-aux-concours-administratifs','Consulter la sélection Vie-publique','link-plain mt-s'):'') + '</main>' + tabbar(job?'metiers':'concours');
   };
 
   screens.handicap = function (jobId) {
@@ -1009,6 +1071,7 @@
     var animateJob=changed&&r.name==='metier'&&jobSlideRequested&&!matchMedia('(prefers-reduced-motion: reduce)').matches;
     jobSlideRequested=false;
     lastRoute = key;
+    if(changed&&['annales','ressources-biblio'].indexOf(r.name)>-1){S.resQ='';S.resCat=r.name==='ressources-biblio'?bibliographyCategory(jobById(r.arg)):'Toutes';S.resFp='Tous';S.resKind='Tous';S.resYear='Toutes';S.resLimit=40;}
     if(changed&&r.name==='calendrier'&&r.arg){S.calCat='Toutes';S.calFp='Tous';S.calQ='';S.calView='upcoming';S.calLimit=40;}
     if(changed&&r.name==='prepa'&&r.arg==='talents'&&r.arg2)S.talentsAll=false;
     if (changed && r.name === 'metiers') {
@@ -1044,7 +1107,7 @@
     if (t) t.setAttribute('tabindex', '-1');
     document.title = (t ? t.textContent + ' · ' : '') + 'Y-Seck';
     var contextJob=r.name==='metier'&&D.jobs.find(function(j){return j.id===r.arg;});
-    UI.afterRender({root:root,title:t?t.textContent:'Y-Seck',isJobs:r.name==='metiers',category:contextJob&&['A+','A','B','C','CDD'].indexOf(displayCategory(contextJob))>-1?{label:displayCategory(contextJob),className:catClass(displayCategory(contextJob))}:null,summary:r.name==='metiers'?filterSummary():'',filters:r.name==='metiers'?jobFilters():'',changed:changed});
+    UI.afterRender({root:root,title:t?t.textContent:'Y-Seck',isJobs:r.name==='metiers',category:contextJob&&['A+','A','B','C','CDD'].indexOf(displayCategory(contextJob))>-1?{label:displayCategory(contextJob),className:catClass(displayCategory(contextJob))}:null,summary:r.name==='metiers'?filterSummary():'',filters:r.name==='metiers'?jobFilters():'',resourceFilters:['annales','ressources-biblio'].indexOf(r.name)>-1?studyFilters(jobById(r.arg),r.name==='ressources-biblio'):'',changed:changed});
 
     if (changed) {
       if (t && booted) t.focus({ preventScroll: true });
@@ -1152,6 +1215,7 @@
         if(v==='q'){S.q='';S.jobLimit=60;}
         else if(v==='cal-q'){S.calQ='';S.calLimit=40;}
         else if(v==='book-q')S.bookQ='';
+        else if(v==='res-q'){S.resQ='';S.resLimit=40;}
         else if(v==='location-query'){locationQuery='';locationResults=[];locationStatus='';locationSearchId++;}
         else break;
         save(); render();
@@ -1185,6 +1249,11 @@
       case 'track': set({ track: v }); announce('Parcours ' + v + ' affiché'); break;
       case 'openCat': set({ openCat: S.openCat === v ? null : v }); break;
       case 'prepBudget': set({ prepBudget: v }); break;
+      case 'bookCategory': if(['A+','A','B','C'].indexOf(v)>-1)set({bookCategory:v,bookSubject:'Toutes'}); break;
+      case 'resourceFilters': UI.open('resource-filters','Filtrer les ressources',studyFilters(jobById(route().arg),route().name==='ressources-biblio'),el); break;
+      case 'resCat': case 'resFp': var resChange={resLimit:40}; resChange[a]=v; set(resChange); break;
+      case 'moreResources': set({resLimit:S.resLimit+40}); break;
+      case 'resetResources': set({resCat:'Toutes',resFp:'Tous',resKind:'Tous',resYear:'Toutes',resQ:'',resLimit:40}); break;
       case 'talentsAll': set({ talentsAll: v === 'all' }); countAnnounce('#talents .list-row'); break;
       case 'toggleBoursier': set({ boursier: S.boursier === 'Oui' ? 'Non' : 'Oui' }); break;
       case 'alert': set({ alert: !S.alert }); announce(S.alert ? 'Alerte activée' : 'Alerte désactivée'); break;
@@ -1199,6 +1268,11 @@
     }
   });
 
+  document.addEventListener('change',function(e){
+    if(e.target.id==='resource-kind')set({resKind:e.target.value,resLimit:40});
+    if(e.target.id==='resource-year')set({resYear:e.target.value,resLimit:40});
+  });
+
   root.addEventListener('change', function (e) {
     if (e.target.id === 'book-subject') { set({bookSubject:e.target.value}); return; }
     if (e.target.id === 'region') { set({ region: e.target.value }); countAnnounce('.screen .list .list-row'); }
@@ -1208,7 +1282,8 @@
   root.addEventListener('input', function (e) {
     if(e.target.matches('.search input')){var clear=e.target.closest('.search').querySelector('.search-clear');if(clear)clear.hidden=!e.target.value;}
     if(e.target.id==='location-query'){locationQuery=e.target.value;locationSearchId++;return;}
-    if (e.target.id === 'book-q') { S.bookQ=e.target.value;save();document.getElementById('books').innerHTML=bookList();return; }
+    if(e.target.id==='res-q'){S.resQ=e.target.value;S.resLimit=40;save();document.getElementById('study-results').innerHTML=studyResults(jobById(route().arg),route().name==='ressources-biblio');return;}
+    if (e.target.id === 'book-q') { S.bookQ=e.target.value;save();document.getElementById('books').innerHTML=bookList(jobById(route().arg));return; }
     if (e.target.id === 'cal-q') {
       S.calQ = e.target.value; S.calLimit = 40; save();
       clearTimeout(searchTimer); searchTimer = setTimeout(render, 350); return;

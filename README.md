@@ -18,7 +18,7 @@ Ouvrir http://localhost:8000. Un serveur est nécessaire à la recherche locale 
 - Filtres par domaine, catégorie et versant ; à partir de Bac+5, seules les fiches associées à une catégorie B, A ou A+ sont affichées. Une catégorie variable ne constitue pas une condition de diplôme.
 - 23 centres d’intérêt, dont diplomatie, renseignement, mer, architecture et protection animale. Les thèmes transversaux s’appuient sur les domaines, familles et intitulés RMFP ; les domaines principaux et les correspondances statutaires sont conservés. `node scripts/check_interests.mjs` contrôle la couverture de chaque thème.
 - Fiches métiers, activités et compétences du répertoire, voies d’accès sourcées, dates de concours et favoris par profil.
-- Espace commun « Concours et prépas », bibliographie INSP, annales enseignantes, parcours d’études, voies sans concours et informations handicap.
+- Pages « Se préparer » adaptées au métier : catégorie, versants, dates disponibles, études, annales, bibliographies et aides. Les catégories variables conservent l’espace commun du tableau de bord. Les emplois contractuels identifiés portent la pastille CDD et leur propre parcours sans concours. La navigation principale comporte Accueil, Métiers, Favoris et Profil.
 - Prépas Talents triées par distance à la commune renseignée, parmi les résultats du filtre choisi. Distances indicatives à vol d’oiseau entre centres de communes ; formations à distance en dernier.
 - Contraste renforcé, texte agrandi et police OpenDyslexic facultatifs. La conformité RGAA reste à évaluer par un audit complet.
 
@@ -26,9 +26,17 @@ Ouvrir http://localhost:8000. Un serveur est nécessaire à la recherche locale 
 
 `data/catalogue.json` est l’index de la base de référence, répartie dans `data/catalogue/`. `js/catalog-data.js` charge ces données pour le navigateur. Le répertoire RMFP décrit des fonctions, pas une équivalence unique avec un grade ou un concours. Les correspondances portent donc un statut `proposé`, `validé` ou `rejeté`. Les fonctions sans correspondance documentée restent consultables, avec un renvoi aux portails officiels.
 
-Le classeur interne comporte dix onglets : Pilotage, Metiers, Contenus, CorpsGrades, Correspondances, Concours, Preparations, Ouvrages, Sources et Reglages. Il contient uniquement des données éditoriales publiques, aucun profil utilisateur.
+Le classeur interne comporte onze onglets : Pilotage, Metiers, Contenus, CorpsGrades, Correspondances, Concours, Preparations, Ouvrages, Ressources, Sources et Reglages. Il contient uniquement des données éditoriales publiques, aucun profil utilisateur.
 
 L’onglet Ouvrages permet d’actualiser les titres, auteur·rice·s, thématiques et notices. Les couvertures extraites du PDF sont conservées par identifiant ; une URL HTTPS peut les remplacer. L’import des anciens classeurs sans cet onglet conserve la bibliographie.
+
+Les colonnes Catégories, Versants et Corps IDs limitent les ouvrages aux concours concernés. La sélection Vie-publique ajoutée en octobre 2026 reste réservée à A ; elle ne complète pas A+. Les éditions déjà présentes sont regroupées dans la vue A sans supprimer leur notice INSP d’origine.
+
+L’onglet Ressources contient les sujets, rapports, meilleures copies, entraînements, bibliographies et annuaires officiels. Chaque lien conserve son identifiant, sa session lorsqu’elle est publiée, sa page source, son organisme et ses Corps IDs. `document` désigne une référence individuelle ; `directory` donne accès à une collection complète. Les liens aux concours réutilisent les identifiants de CorpsGrades, indépendamment des correspondances métier/grade existantes. Les anciennes copies sans onglet Ressources conservent l’index courant.
+
+Les sources comprennent l’annuaire DGAFP et les ministères, l’INSP, l’ENM, la gendarmerie, les CDG Auvergne-Rhône-Alpes, le CNFPT/INET, le CNG, l’EHESP et l’AP-HP. L’index couvre les catégories A+, A, B, C et les trois versants ; il ne constitue pas une copie exhaustive des archives de tous les organisateurs. Les annuaires restent accessibles pour les autres sessions et spécialités. Une absence de sujet indexé ne signifie pas qu’aucun concours ou document n’existe ; certains recrutements sur titres ne comportent pas de sujet écrit. Les bibliographies sont indicatives et leur édition doit être rapprochée du programme en vigueur.
+
+`node scripts/check_preparation.mjs` contrôle les parcours métiers, la séparation CDD/VAR, les catégories et versants des ressources, les filtres et la séparation des bibliographies A/A+.
 
 ### Importer un classeur
 
