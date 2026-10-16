@@ -4,7 +4,7 @@
   var D = window.DATA;
   var root = document.getElementById('app');
   var UI = window.YSECK_UI;
-  var expandedDatesJob = null, jobSlideRequested = false;
+  var expandedDatesJob = null, jobSlideRequested = false, expandedPrepCategories = {};
   var talentIntroAnimate = false, interestGesture = null;
   var KEY = 'ofp-state-v1';
 
@@ -12,7 +12,7 @@
   var defaults = {
     profile: null, level: null, domains: [], traits: [], boursier: null, budget: null, done: false,
     metDomains: null, metCat: 'Toutes', metFp: 'Tous', q: '', calCat: 'Toutes', track: 'Administratif',
-    prepBudget: null, alert: false, openCat: null, region: 'Toutes', talentsAll: false,
+    showContracts: true, prepBudget: null, alert: false, openCat: null, region: 'Toutes', talentsAll: false,
     name: '', location: null, favorites: [], children: [], activeChild: null, personalProfiles: {},
     metMode: 'mine', jobLimit: 60, calFp: 'Tous', calView: 'upcoming', calLimit: 40, calQ: '',
     contrast: false, largeText: false, dysFont: false, bookQ: '', bookSubject: 'Toutes'
@@ -121,9 +121,13 @@
   function domainLabel(id) { return (D.domainLabels || {})[id] || id; }
   function norm(s) { return String(s).normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[’']/g, ' ').toLowerCase(); }
   function isParent() { return S.profile === 'par'; }
+  function isContractJob(j) { return j.cat === 'X' || j.cat === 'CDD' || j.contractual === true; }
+  function displayCategory(j) { return isContractJob(j) ? 'CDD' : j.cat; }
+  function jobById(id) { return D.jobs.find(function(j){return j.id===id;}); }
+  function prepHref(j) { return isContractJob(j) ? '#/sans-concours/' + j.id : (j.cat === 'V' ? '#/concours' : '#/preparer/' + j.id); }
   function catClass(c) { return c === 'A+' ? 'cat-Ap' : (c === 'V' ? 'cat-X' : 'cat-' + c); }
-  function catLabel(c) { return c === 'X' ? 'Contrat' : (c === 'V' ? 'Catégorie selon le poste' : 'Catégorie ' + c); }
-  function catShort(c) { return c === 'X' || c === 'V' ? '<span style="font-size:0.6875rem">' + (c === 'V' ? 'Var.' : 'CT') + '</span>' : c; }
+  function catLabel(c) { return c === 'CDD' || c === 'X' ? 'CDD · emploi contractuel' : (c === 'V' ? 'Catégorie selon le poste' : 'Catégorie ' + c); }
+  function catShort(c) { return c === 'CDD' || c === 'X' ? 'CDD' : c === 'V' ? '<span style="font-size:0.6875rem">' + 'Var.' + '</span>' : c; }
   function catBadge(c, size) {
     return '<span class="cat ' + (size || '') + ' ' + catClass(c) + '" aria-hidden="true">' + catShort(c) + '</span><span class="sr-only">' + catLabel(c) + ', </span>';
   }
@@ -151,8 +155,8 @@
     return out + '</div>';
   }
   function tabbar(active) {
-    if (active === 'prepas') active = 'concours';
-    var tabs = [['accueil', isParent() ? 'Famille' : 'Accueil', I.home], ['metiers', 'Métiers', I.grid], ['concours', 'Concours', I.layers], ['favoris', 'Favoris', I.bookmark], ['moi', 'Profil', I.user]];
+    if (active === 'prepas' || active === 'concours') active = 'accueil';
+    var tabs = [['accueil', isParent() ? 'Famille' : 'Accueil', I.home], ['metiers', 'Métiers', I.grid], ['favoris', 'Favoris', I.bookmark], ['moi', 'Profil', I.user]];
     return '<nav class="tabbar" aria-label="Navigation principale">' + tabs.map(function (t) {
       var on = t[0] === active;
       return '<a href="#/' + t[0] + '" class="' + (on ? 'on' : '') + '"' + (on ? ' aria-current="page"' : '') + '>' + t[2] + t[1] + '</a>';
@@ -249,8 +253,8 @@
     return rank!==null&&minimum!==undefined&&rank>=minimum?'<span class="category-fit">'+I.check+'<span>Niveau d’étude compatible</span></span>':'';
   }
   function isOpen(j) { var r = userRank(); return j.lvl !== null && r !== null && r >= j.lvl; }
-  function jobCategories(j) { return j.categories && j.categories.length ? j.categories : [j.cat]; }
-  function passesLevelCategory(j) { return !(userRank() >= 5) || jobCategories(j).some(function (c) { return ['B', 'A', 'A+'].indexOf(c) > -1; }); }
+  function jobCategories(j) { if(isContractJob(j))return ['CDD']; return j.categories && j.categories.length ? j.categories : [j.cat]; }
+  function passesLevelCategory(j) { return isContractJob(j) ? S.showContracts !== false : !(userRank() >= 5) || jobCategories(j).some(function (c) { return ['B', 'A', 'A+'].indexOf(c) > -1; }); }
 
   function reachable() {
     var l = S.level;
@@ -303,11 +307,16 @@
       return false;
     });
   }
-  function calendarRows(list, limit) {
+  function calendarCategory(session,job) {
+    if(!job||session.cat!=='V')return session.cat;
+    var cats=[];(session.routeIds||[]).forEach(function(id){var r=D.accessRoutes[id];if((job.routeIds||[]).indexOf(id)>-1&&r&&cats.indexOf(r.cat)===-1)cats.push(r.cat);});
+    return cats.length===1?cats[0]:session.cat;
+  }
+  function calendarRows(list, limit, job) {
     if (!list.length) return '<p class="empty">Aucune session publiée pour cette sélection.</p>';
     return list.slice(0, limit || 40).map(function (c) {
       var status = c.provisional ? 'Calendrier prévisionnel' : (c.date && c.date < todayISO() ? 'Candidatures closes' : 'Session publiée');
-      return '<article class="prep"><div class="head"><h3 class="h3">' + esc(c.name) + '</h3>' + catBadge(c.cat, 'sm') + '</div><p>' + esc(D.fps[c.fp] + ' · ' + c.voie) + '</p>' +
+      return '<article class="prep"><div class="head"><h3 class="h3">' + esc(c.name) + '</h3>' + catBadge(calendarCategory(c,job), 'sm') + '</div><p>' + esc(D.fps[c.fp] + ' · ' + c.voie) + '</p>' +
         (c.location ? '<p>' + esc(c.location + (c.employer ? ' · ' + c.employer : '')) + '</p>' : '') +
         '<span class="small">' + status + '</span><dl class="exam-dates"><dt>Ouverture</dt><dd>' + esc(c.openLabel || c.open || 'Non publiée') + '</dd><dt>Clôture</dt><dd>' + esc(c.closeLabel || c.date || 'Non publiée') + '</dd><dt>Écrits ou sélection</dt><dd>' + esc(c.writtenLabel || 'Non publiés') + '</dd><dt>Oraux</dt><dd>' + esc(c.oralLabel || 'Non publiés') + '</dd></dl>' +
         ext(c.url, 'Voir l’avis officiel', 'link-plain') + '<p class="small m0">Source : ' + esc(c.source) + ' · vérifiée le ' + esc(c.checked) + '</p></article>';
@@ -517,7 +526,7 @@
         badges += isOpen(j) ? '<span class="fit on">' + (compatible?'<span class="job-fit-check" aria-hidden="true">'+I.check+'</span>':'') + (j.qualification ? 'Diplôme spécifique requis' : 'Niveau d’études compatible<br>Conditions à vérifier') + '</span>' : '<span class="fit">' + esc(NEED[j.lvl] || 'Conditions à vérifier') + '</span>';
       }
       if (shared.length) badges += '<span class="fit like">' + (isParent() ? 'Ce qui lui ressemble' : 'Ce qui vous ressemble') + ' : ' + esc(shared.slice(0, 2).map(traitLabel).join(', ').toLowerCase()) + '</span>';
-      return '<a class="list-row job-row job-' + catClass(j.cat) + '" href="#/metier/' + j.id + '">' + catBadge(j.cat) +
+      return '<a class="list-row job-row job-' + catClass(displayCategory(j)) + '" href="#/metier/' + j.id + '">' + catBadge(displayCategory(j)) +
         '<div class="main"><span class="name">' + esc(j.name) + '</span><span class="meta">' + esc(j.domain + ' · ' + fpNames(j.fp).join(', ')) + '</span>' +
         (badges ? '<span class="fits">' + badges + '</span>' : '') + '</div>' + I.chev + '</a>';
   }
@@ -530,17 +539,20 @@
 
   function filterSummary() {
     var doms = activeDomains();
+    var label = S.metCat === 'Toutes' ? (userRank() >= 5 ? 'A+, A, B' + (S.showContracts ? ' et CDD' : '') : 'Toutes catégories') : (S.metCat==='CDD'?'CDD':'Catégorie '+S.metCat);
     return '<span class="tag">' + (doms.length ? doms.length + ' domaine' + (doms.length > 1 ? 's' : '') : 'Tous les domaines') + '</span>' +
-      '<span class="tag' + (S.metCat === 'Toutes' ? '' : ' fill ' + catClass(S.metCat)) + '">' + esc(S.metCat === 'Toutes' ? (userRank() >= 5 ? 'B, A, A+' : 'Toutes catégories') : 'Catégorie ' + S.metCat) + '</span><span class="tag">' + esc(S.metFp === 'Tous' ? '3 versants' : D.fps[S.metFp]) + '</span>';
+      '<span class="tag' + (S.metCat === 'Toutes' ? '' : ' fill ' + catClass(S.metCat)) + '">' + esc(label) + '</span><span class="tag">' + esc(S.metFp === 'Tous' ? '3 versants' : D.fps[S.metFp]) + '</span>' +
+      (S.showContracts===false?'<span class="tag">Contractuels masqués</span>':'');
   }
   function jobFilters() {
     var doms = activeDomains();
     var order = S.domains.concat(D.domains.filter(function (d) {return S.domains.indexOf(d) === -1;}));
     return '<section class="stack"><h3>Votre sélection</h3><div class="row">' +
       chip('forYou', '', isParent() ? 'Pour votre enfant' : 'Pour vous', S.metMode === 'mine') + chip('allDomains', '', 'Tous les domaines', S.metMode === 'all') + '</div></section>' +
-      '<section class="stack mt-m"><h3>Domaines</h3><div class="row" role="group" aria-label="Domaines">' + order.map(function(d){return chip('metDomain',d,domainLabel(d),doms.indexOf(d)>-1);}).join('') + '</div></section>' +
-      '<section class="stack mt-m"><h3>Catégories</h3><div class="row" role="group" aria-label="Catégorie">' + (userRank()>=5 ? ['Toutes','A+','A','B'] : ['Toutes','A+','A','B','C']).map(function(c){return chip('metCat',c,c==='Toutes'?'Toutes':c,S.metCat===c);}).join('') + '</div></section>' +
+      '<section class="stack mt-m"><h3>Catégories</h3><div class="row" role="group" aria-label="Catégorie">' + (userRank()>=5 ? ['Toutes','A+','A','B','CDD'] : ['Toutes','A+','A','B','C','CDD']).map(function(c){return chip('metCat',c,c==='Toutes'?'Toutes':c,S.metCat===c);}).join('') + '</div></section>' +
       '<section class="stack mt-m"><h3>Versants</h3><div class="row" role="group" aria-label="Versants">' + ['Tous','E','T','H'].map(function(f){return chip('metFp',f,f==='Tous'?'3 versants':D.fps[f],S.metFp===f);}).join('') + '</div></section>' +
+      '<button type="button" class="switch-row mt-m" role="switch" aria-checked="' + (S.showContracts!==false) + '" data-action="showContracts"><span>Afficher les emplois contractuels</span><span class="switch" aria-hidden="true"></span></button>' +
+      '<section class="stack mt-m"><h3>Domaines</h3><div class="row" role="group" aria-label="Domaines">' + order.map(function(d){return chip('metDomain',d,domainLabel(d),doms.indexOf(d)>-1);}).join('') + '</div></section>' +
       '<div class="sheet-actions"><button type="button" class="btn" data-ui="close">Afficher ' + filteredJobs().length + ' métiers</button></div>';
   }
   screens.metiers = function () {
@@ -572,10 +584,10 @@
       else if (j.rmfpCode) ladder = [[j.name, 'Métier'], ['formation, expérience et mobilité'], ['Évolution selon le corps et l’employeur', 'Selon le poste']];
       else ladder = [[j.name, 'Contrat'], ['concours interne selon les conditions'], ['Fonctionnaire titulaire', 'A, B ou C']];
     }
-    var dates = examsFor(j);
+    var dates = isContractJob(j) ? [] : examsFor(j);
     var shared = sharedTraits(j);
     return '<main class="screen top-tight">' + back('#/metiers', 'Métiers') +
-      '<div class="row job-meta" role="group" aria-label="Catégorie, centres d’intérêt et versants" tabindex="0"><span class="tag fill ' + catClass(j.cat) + '">' + catLabel(j.cat) + '</span>' +
+      '<div class="row job-meta" role="group" aria-label="Catégorie, centres d’intérêt et versants" tabindex="0"><span class="tag fill ' + catClass(displayCategory(j)) + '">' + catLabel(displayCategory(j)) + '</span>' +
       (j.interests || [j.domain]).map(function (d) { return '<span class="tag">' + esc(domainLabel(d)) + '</span>'; }).join('') +
       fpNames(j.fp).map(function (f) { return '<span class="tag">' + esc(f) + '</span>'; }).join('') + '</div>' +
       '<h1 class="sm">' + esc(j.name) + '</h1><p class="body">' + esc(j.desc.length>300?j.desc.slice(0,297).replace(/\s+\S*$/,'')+'…':j.desc) + '</p>' +
@@ -588,14 +600,14 @@
         var txt = exam ? s.slice(1) : s;
         return '<div class="list-row static"><span class="num">' + (i + 1) + '</span><span class="step-txt">' + esc(txt) + '</span></div>';
       }).join('') + '</div>' +
-      '<section class="stack mt-m"><h2>Dates des concours</h2>' + calendarRows(dates, expandedDatesJob===j.id ? dates.length : 2) +
-      (dates.length > 2 ? '<button type="button" class="btn outline" data-action="moreJobDates"' + attr('v',j.id) + '>' + (expandedDatesJob===j.id?'Réduire les dates':'Afficher les ' + (dates.length-2) + ' autres sessions') + '</button>' : '') + '</section>' +
+      (dates.length ? '<section class="stack mt-m"><h2>Dates des concours</h2>' + calendarRows(dates, expandedDatesJob===j.id ? dates.length : 2, j) +
+      (dates.length > 2 ? '<button type="button" class="btn outline" data-action="moreJobDates"' + attr('v',j.id) + '>' + (expandedDatesJob===j.id?'Réduire les dates':'Afficher les ' + (dates.length-2) + ' autres sessions') + '</button>' : '') + '</section>' : '') +
       '<h2 class="eyebrow mt-m">Évoluer</h2><div class="ladder">' + ladder.map(function (r) {
         if (r.length === 1) return '<div class="via">↓ ' + esc(r[0]) + '</div>';
         var t = r[1] === 'A+' ? 'tint-blue' : (r[1] === 'A' ? 'tint-mint' : (r[1] === 'C' ? 'tint-yellow' : tint[j.cat]));
         return '<div class="rung ' + t + '"><span>' + esc(r[0]) + '</span><small>' + esc(r[1]) + '</small></div>';
       }).join('') + '</div>' +
-      '<a class="btn mt-m" href="#/concours/prepas">' + I.book + 'Se préparer</a>' +
+      '<a class="btn mt-m" href="' + prepHref(j) + '">' + (isContractJob(j) ? I.route + 'Entrer sans concours' : I.book + 'Se préparer') + '</a>' +
       ext('https://www.fonction-publique.gouv.fr/toutes-les-publications/repertoire-commun-des-metiers-de-la-fonction-publique', 'Consulter la source métier sur fonction-publique.gouv.fr', 'link-plain') + '</main>' + tabbar('metiers');
   };
 
@@ -637,29 +649,64 @@
       '<h2 class="eyebrow mt-m">Pour toutes et tous</h2>' +
       '<div class="checks">' + D.conditions.map(function (k) { return '<div>' + I.check + '<span>' + esc(k) + '</span></div>'; }).join('') + '</div>' +
       '<div class="grid-2 mt-m"><a class="btn outline" href="#/calendrier">Calendrier</a><a class="btn outline" href="#/etudes">Quelles études ?</a></div>' +
-      '<a class="btn outline" href="#/sans-concours">Entrer sans concours</a>' +
       '<a class="btn outline" href="#/handicap">Handicap : accès et aménagements</a>' + preparationContent() + '</main>' + tabbar('concours');
+  };
+
+  function preparationCategoryCard(c, job) {
+    var open = expandedPrepCategories[job.id] === c.id;
+    var panelId = 'prep-' + job.id + '-' + catClass(c.id);
+    var fps = job.fp.split('').filter(function(f){return D.fps[f];});
+    var routes=(job.routeIds||[]).map(function(id){return D.accessRoutes[id];}).filter(function(r){return r&&r.cat===c.id;});
+    return '<div class="catcard-wrap ' + c.tint + (open?' open':'') + '"><button type="button" class="catcard" aria-expanded="' + open + '" aria-controls="' + panelId + '" data-action="openPrepCat"' + attr('v',c.id) + attr('job',job.id) + '><span class="cat lg ' + catClass(c.id) + '" aria-hidden="true">' + c.id + '</span>' +
+      '<span class="txt"><b>Catégorie ' + c.id + '</b><span class="role">' + esc(job.qualification || (job.lvl!==null?DIP[job.lvl]:c.dip)) + '</span><span class="ex">' + esc(fpNames(job.fp).join(' · ')) + '</span></span>' + I.down + '</button>' +
+      (open?'<div class="cat-panel" id="' + panelId + '"><h3>Accès à ce métier</h3>' + fps.map(function(f){
+        var matching=routes.filter(function(r){return r.fp.indexOf(f)>-1;});
+        return '<div class="exam"><div class="exam-head"><b>' + esc(D.fps[f]) + '</b></div><p class="small">' + esc(job.access) + '</p>' +
+          (matching.length?matching.map(function(r){return '<p class="small">'+esc(r.name)+'</p>'+ext(r.source,'Conditions et avis officiels','link-plain');}).join(''):ext(job.source,'Consulter les conditions officielles','link-plain')) + '</div>';
+      }).join('') + '<p class="small m0">Les lieux, les épreuves et les conditions sont précisés dans l’avis propre au concours.</p></div>':'') + '</div>';
+  }
+  screens.preparer = function(id) {
+    var job=jobById(id);
+    if(!job)return screens.metiers();
+    if(isContractJob(job))return screens['sans-concours'](id);
+    if(job.cat==='V')return screens.concours();
+    var cats=D.categories.filter(function(c){return jobCategories(job).indexOf(c.id)>-1;});
+    if(!Object.prototype.hasOwnProperty.call(expandedPrepCategories,job.id))expandedPrepCategories[job.id]=cats.length?cats[0].id:null;
+    var dates=examsFor(job);
+    return '<main class="screen top-tight">' + back('#/metier/'+job.id,'Métier') + '<h1>Se préparer</h1><p class="body">' + esc(job.name) + '</p><h2 class="mt-m">Concours</h2><div class="stack">' + cats.map(function(c){return preparationCategoryCard(c,job);}).join('') + '</div>' +
+      (dates.length?'<a class="btn outline" href="#/calendrier/'+job.id+'">'+I.calendar+'Dates des concours ('+dates.length+')</a>':'') +
+      '<a class="btn outline" href="#/etudes/'+job.id+'">'+I.graduation+'Quelles études choisir ?</a><a class="btn outline" href="#/handicap/'+job.id+'">Handicap : accès et aménagements</a>' + preparationContent(job) + '</main>' + tabbar('metiers');
   };
 
   screens.calendrier = function (jobId) {
     var job = D.jobs.find(function (j) { return j.id === jobId; });
     var base = job ? examsFor(job, S.calView === 'all') : (S.calView === 'all' ? D.calendar : upcoming());
     var list = base.filter(function (c) {
-      return (S.calCat === 'Toutes' || c.cat === S.calCat) && (S.calFp === 'Tous' || c.fp === S.calFp) && (!S.calQ || norm(c.name + ' ' + (c.location || '')).indexOf(norm(S.calQ)) > -1);
+      return (S.calCat === 'Toutes' || calendarCategory(c,job) === S.calCat) && (S.calFp === 'Tous' || c.fp === S.calFp) && (!S.calQ || norm(c.name + ' ' + (c.location || '')).indexOf(norm(S.calQ)) > -1);
     }).slice().sort(function (a,b) { return (a.date || '9999').localeCompare(b.date || '9999'); });
-    return '<main class="screen top-tight">' + back(job ? '#/metier/' + job.id : '#/concours', job ? 'Métier' : 'Concours et prépas') +
+    return '<main class="screen top-tight">' + back(job ? '#/preparer/' + job.id : '#/concours', job ? 'Se préparer' : 'Concours et prépas') +
       '<span class="eyebrow">Calendrier</span><h1 class="sm">Dates des concours</h1>' + (job ? '<p class="body">' + esc(job.name) + '</p>' : '') +
       searchField('cal-q','Rechercher un concours ou une ville','Concours ou ville',S.calQ) +
       '<div class="row" role="group" aria-label="Sessions">' + chip('calView','upcoming','À venir',S.calView === 'upcoming','blue') + chip('calView','all','Toutes les sessions',S.calView === 'all','blue') + '</div>' +
-      '<div class="row" role="group" aria-label="Catégorie">' + ['Toutes','A+','A','B','C'].map(function(c) { return chip('calCat',c,c,S.calCat===c,'narrow'); }).join('') + '</div>' +
-      '<div class="row" role="group" aria-label="Versant">' + ['Tous','E','T','H'].map(function(f) { return chip('calFp',f,f==='Tous'?'3 versants':D.fps[f],S.calFp===f,'blue'); }).join('') + '</div>' +
+      '<div class="row" role="group" aria-label="Catégorie">' + ['Toutes'].concat(job ? jobCategories(job).filter(function(c){return ['A+','A','B','C'].indexOf(c)>-1;}) : ['A+','A','B','C']).map(function(c) { return chip('calCat',c,c,S.calCat===c,'narrow'); }).join('') + '</div>' +
+      '<div class="row" role="group" aria-label="Versant">' + ['Tous'].concat(job ? job.fp.split('') : ['E','T','H']).map(function(f) { return chip('calFp',f,f==='Tous'?(job?'Tous':'3 versants'):D.fps[f],S.calFp===f,'blue'); }).join('') + '</div>' +
       '<p class="small m0">' + list.length + ' sessions · sources vérifiées le ' + esc(D.catalogChecked) + '. Les dates CNFPT 2027 sont prévisionnelles.</p>' +
-      '<div class="stack calendar-list">' + calendarRows(list, S.calLimit) + '</div>' +
+      '<div class="stack calendar-list">' + calendarRows(list, S.calLimit, job) + '</div>' +
       (list.length > S.calLimit ? '<button type="button" class="btn outline" data-action="moreCalendar">Afficher 40 sessions de plus</button>' : '') +
-      '</main>' + tabbar('concours');
+      '</main>' + tabbar(job?'metiers':'concours');
   };
 
-  screens.etudes = function () {
+  screens.etudes = function (jobId) {
+    var job=jobById(jobId);
+    if(job) {
+      var routes=(job.routeIds||[]).map(function(id){return D.accessRoutes[id];}).filter(Boolean);
+      return '<main class="screen top-tight">'+back(prepHref(job),'Se préparer')+'<span class="eyebrow">Orientation</span><h1 class="sm">Quelles études choisir ?</h1><p class="body">'+esc(job.name)+'</p>' +
+        '<h2 class="mt-m">Études et conditions d’accès</h2><dl class="profile"><dt>Diplôme</dt><dd>'+esc(job.qualification||(job.lvl!==null?DIP[job.lvl]:'À vérifier selon le corps, le cadre d’emplois et l’offre'))+'</dd><dt>Accès</dt><dd>'+esc(job.access)+'</dd></dl>'+
+        '<div class="timeline">'+job.steps.map(function(step,i){return '<div class="tl"><div class="rail"><span class="node"></span>'+(i<job.steps.length-1?'<span class="bar"></span>':'')+'</div><div class="txt"><span>'+esc(step.replace(/^\*/,''))+'</span></div></div>';}).join('')+'</div>'+
+        (routes.length?'<h2>Les voies d’accès de ce métier</h2><div class="stack">'+routes.map(function(r){return '<article class="prep"><h3>'+esc(r.name)+'</h3><p>'+esc(r.access+' · '+fpNames(r.fp).join(', '))+'</p>'+ext(r.source,'Consulter les conditions officielles','link-plain')+'</article>';}).join('')+'</div>':'')+
+        '<a class="btn mt-m" href="'+prepHref(job)+'">Voir les prépas et les aides</a></main>'+tabbar('metiers');
+    }
+
     var tracks = { 'Administratif': 1, 'Technique': 1, 'Social': 1, 'Dès le brevet': 1 };
     var data = {
       'Administratif': { tip: 'Les IPAG et CPAG sont les instituts des universités dédiés aux concours administratifs.', steps: [
@@ -690,7 +737,10 @@
       '<a class="btn mt-s" href="#/prepas">Trouver une prépa</a></main>' + tabbar('concours');
   };
 
-  screens['sans-concours'] = function () {
+  screens['sans-concours'] = function (jobId) {
+    var job=jobById(jobId);
+    if(job&&isContractJob(job))return '<main class="screen top-tight">'+back('#/metier/'+job.id,'Métier')+'<span class="eyebrow">Emploi contractuel</span><h1 class="sm">Entrer sans concours</h1><p class="body">'+esc(job.name)+'</p><span class="tag fill cat-CDD contract-label">CDD</span><p class="lead">'+esc(job.access)+'</p><h2>Pour candidater</h2><div class="list steps">'+job.steps.map(function(step,i){return '<div class="list-row static"><span class="num">'+(i+1)+'</span><span class="step-txt">'+esc(step.replace(/^\*/,''))+'</span></div>';}).join('')+'</div><a class="btn outline" href="#/handicap/'+job.id+'">Handicap : accès et aménagements</a>'+ext(D.jobsUrl,'Consulter les offres d’emploi','link-plain')+'</main>'+tabbar('metiers');
+
     return '<main class="screen top-tight">' + back('#/accueil', 'Accueil') +
       '<span class="eyebrow">Autres voies</span><h1 class="sm">Sans concours, c’est possible</h1>' +
       '<p class="lead sm">4 portes d’entrée dans le service public.</p>' +
@@ -703,26 +753,35 @@
   };
 
   /* ---------- Prépas ---------- */
-  function preparationContent() {
+  function preparationContent(job) {
     var opts = [['0', 'Gratuit'], ['1', 'Moins de 1 000 €'], ['2', 'Tous budgets']];
     var b = S.prepBudget;
     if (b === null) b = S.budget === 'Gratuit uniquement' ? '0' : (S.budget === 'Moins de 1 000 €' ? '1' : '2');
     var on = S.boursier === 'Oui';
-    var keys = prepKeys(myJobs());
+    var keys = prepKeys(job?[job]:myJobs());
     var nbT = D.talents.filter(function (t) { return talentMatches(t, keys).length; }).length;
-    var list = D.preps.filter(function (p) { return p.budget <= parseInt(b, 10) && (!p.talents || on); });
+    var cats=job?jobCategories(job):myJobs().reduce(function(a,j){return a.concat(jobCategories(j));},[]);
+    var administrative=!job||/administr|attache|greff|directeur|direction|conservat/.test(norm(job.name))||['Administration','Finances','Diplomatie','Justice','Renseignement','Communication','Citoyens','Inspection'].indexOf(job.domain)>-1;
+    var list = D.preps.filter(function (p) {
+      if(p.budget>parseInt(b,10)||p.talents&&!on)return false;
+      if(!job)return true;
+      if(p.id==='talents')return nbT>0&&cats.some(function(c){return ['A+','A','B'].indexOf(c)>-1;});
+      if(p.id==='ipag')return administrative;
+      if(p.id==='iep')return administrative&&cats.some(function(c){return c==='A'||c==='A+';});
+      return true;
+    });
     return '<section class="stack mt-l" id="preparations"><span class="eyebrow">Se préparer</span><h2 id="prep-title" tabindex="-1">Prépas et aides</h2>' +
-      '<a class="btn outline" href="#/bibliographie">Recommandations bibliographiques</a>' +
+      (cats.some(function(c){return c==='A'||c==='A+';})?'<a class="btn outline" href="#/bibliographie'+(job?'/'+job.id:'')+'">Recommandations bibliographiques</a>':'') +
       '<div class="row" role="group" aria-label="Budget">' + opts.map(function (o) { return chip('prepBudget', o[0], o[1], b === o[0], 'blue'); }).join('') + '</div>' +
       '<button type="button" class="switch-row" role="switch" aria-checked="' + on + '" data-action="toggleBoursier"><span>' + (isParent() ? 'Mon enfant est boursier·e' : 'Je suis boursier·e') + '</span><span class="switch" aria-hidden="true"></span></button>' +
-      '<div class="stack">' + list.map(function (p) {
+      (list.length?'':'<p class="empty">Aucune préparation pour ce métier avec ce budget.</p>') + '<div class="stack">' + list.map(function (p) {
         var hi = p.talents && on;
-        var extra = p.id === 'talents' && S.domains.length ? '<span class="fit on">' + nbT + ' pour ' + (isParent() ? 'ses' : 'vos') + ' choix</span>' : '';
-        return '<a class="prep' + (hi ? ' hi talents-feature' : '') + '" href="#/prepa/' + p.id + '">'+(hi?'<img class="talents-logo" src="assets/prepa-talents.png" alt="Prépa Talents" width="220" height="80">':'')+'<div class="head"><h2 class="h3'+(hi?' no-icon':'')+'">' + esc(p.t) + '</h2><span class="price">' + esc(p.price) + '</span></div>' +
+        var extra = p.id === 'talents' && (job||S.domains.length) ? '<span class="fit on">' + nbT + (job?' pour ce métier':' pour '+(isParent()?'ses':'vos')+' choix') + '</span>' : '';
+        return '<a class="prep' + (hi ? ' hi talents-feature' : '') + '" href="#/prepa/' + p.id + (job?'/'+job.id:'') + '">'+(hi?'<img class="talents-logo" src="assets/prepa-talents.png" alt="Prépa Talents" width="220" height="80">':'')+'<div class="head"><h2 class="h3'+(hi?' no-icon':'')+'">' + esc(p.t) + '</h2><span class="price">' + esc(p.price) + '</span></div>' +
           '<p>' + esc(p.d) + '</p><span class="prep-foot">' + extra + '<span class="more">Voir le détail' + I.chev + '</span></span></a>';
       }).join('') + '</div>' +
-      (on ? '<div class="bourse"><div><b>' + esc(D.talentsGrantLabel || '5 000 €') + ' / an</b><span>Bourse Talents ' + esc(D.talentsGrantYear || '2026-2027') + ', pour les élèves des Prépas Talents.</span></div><span class="dot big" aria-hidden="true"></span></div>' : '') +
-      '<a class="link-plain" href="#/handicap">Handicap : prévoir les aménagements</a></section>';
+      (on && (!job || nbT>0&&cats.some(function(c){return ['A+','A','B'].indexOf(c)>-1;})) ? '<div class="bourse"><div><b>' + esc(D.talentsGrantLabel || '5 000 €') + ' / an</b><span>Bourse Talents ' + esc(D.talentsGrantYear || '2026-2027') + ', pour les élèves des Prépas Talents.</span></div><span class="dot big" aria-hidden="true"></span></div>' : '') +
+      '<a class="link-plain" href="#/handicap'+(job?'/'+job.id:'')+'">Handicap : prévoir les aménagements</a></section>';
    }
   screens.prepas = function () { return screens.concours(); };
 
@@ -757,17 +816,18 @@
   }
 
   screens.prepa = function (id, arg2) {
+    var contextJob=jobById(arg2);
     var p = D.preps.filter(function (x) { return x.id === id; })[0];
-    if (!p || (id==='talents' && S.boursier!=='Oui')) return screens.prepas();
-    var head = '<main class="screen top-tight">' + back('#/prepas', 'Prépas') +
+    if (!p || (id==='talents' && S.boursier!=='Oui')) return contextJob?screens.preparer(contextJob.id):screens.prepas();
+    var head = '<main class="screen top-tight">' + back(contextJob?prepHref(contextJob):'#/prepas',contextJob?'Se préparer':'Prépas') +
       '<span class="eyebrow">' + esc(p.price) + '</span><h1 class="sm">' + esc(p.t) + '</h1>';
-    var foot = '</main>' + tabbar('prepas');
+    var foot = '</main>' + tabbar(contextJob?'metiers':'prepas');
 
     if (id === 'talents') {
       var job = arg2 ? D.jobs.filter(function (j) { return j.id === arg2; })[0] : null;
       var r = talentsList(job);
       var scope = job ? 'pour ' + job.name : (S.domains.length ? 'pour ' + (isParent() ? 'ses' : 'vos') + ' choix' : '');
-      return '<main class="screen top-tight">'+back('#/concours','Concours et prépas')+
+      return '<main class="screen top-tight">'+back(contextJob?prepHref(contextJob):'#/concours',contextJob?'Se préparer':'Concours et prépas')+
         talentsFeature('Prépas Talents','<p>Préparations gratuites, avec tutorat, aux concours A, A+ et B.</p>','h1') +
         (S.location ? '<p class="small m0">Du plus proche au plus éloigné de ' + esc(S.location.label) + '. Distances entre centres des communes.</p>' : '<a class="link-plain" href="#/moi">Ajouter un lieu de vie pour classer par proximité</a>') +
         regionSelect() +
@@ -798,13 +858,13 @@
     }
     /* privées */
     var cats = {};
-    myJobs().forEach(function (j) { cats[j.cat] = true; });
+    (contextJob?[contextJob]:myJobs()).forEach(function (j) { jobCategories(j).forEach(function(c){cats[c]=true;}); });
     return head +
       '<p class="body">Payantes, à distance ou en présentiel. Elles ne remplacent pas l’inscription au concours. Comparez les tarifs et demandez les taux de réussite.</p>' +
-      '<div class="list">' + D.privees.map(function (x) {
+      '<div class="list">' + D.privees.filter(function(x){return !contextJob||x.tags.split(' ').some(function(c){return cats[c];});}).map(function (x) {
         var fit = x.tags.split(' ').some(function (t) { return cats[t]; }) && S.domains.length;
         return '<div class="list-row static top"><div class="main"><span class="name sm">' + esc(x.name) + '</span><span class="meta">' + esc(x.mode + ' · concours ' + x.tags) + '</span><span class="meta long">' + esc(x.note) + '</span>' +
-          (fit ? '<span class="fits"><span class="fit on">Prépare à des concours de ' + (isParent() ? 'ses' : 'vos') + ' choix</span></span>' : '') + '</div></div>';
+          (fit ? '<span class="fits"><span class="fit on">' + (contextJob?'Préparation de catégorie '+contextJob.cat:'Prépare à des concours de '+(isParent()?'ses':'vos')+' choix') + '</span></span>' : '') + '</div></div>';
       }).join('') + '</div>' +
       '<p class="small m0">Liste non exhaustive, sans classement ni partenariat.</p>' + foot;
   };
@@ -817,18 +877,20 @@
       return b.url?'<a class="book-card external-link" href="' + esc(b.url) + '" target="_blank" rel="noopener" title="' + esc(b.title) + '">' + body + '</a>':'<article class="book-card" title="' + esc(b.title) + '">' + body + '</article>';
     }).join(''):'<p class="empty">Aucun ouvrage avec ces critères.</p>') + '</div>';
   }
-  screens.bibliographie = function () {
+  screens.bibliographie = function (jobId) {
+    var job=jobById(jobId);if(job&&!jobCategories(job).some(function(c){return c==='A'||c==='A+';}))return screens.preparer(job.id);
     var subjects=[];D.books.forEach(function(b){b.subjects.forEach(function(t){if(subjects.indexOf(t)<0)subjects.push(t);});});
-    return '<main class="screen top-tight">' + back('#/concours/prepas','Concours et prépas') +
+    return '<main class="screen top-tight">' + back(job?prepHref(job):'#/concours/prepas',job?'Se préparer':'Concours et prépas') +
       '<span class="eyebrow">Lire et préparer</span><h1>Bibliographie</h1><p class="small m0">Sélection indicative de l’INSP · septembre 2026.</p>' +
       searchField('book-q','Rechercher un titre ou un auteur','Titre ou auteur',S.bookQ) +
       '<label class="select"><span>Thématique</span><select id="book-subject">' + ['Toutes'].concat(subjects).map(function(t){return '<option' + (S.bookSubject===t?' selected':'') + '>' + esc(t) + '</option>';}).join('') + '</select></label>' +
       '<div id="books">' + bookList() + '</div>' +
-      '<p class="small">Ces lectures ne remplacent pas le programme du concours.</p>' + ext(D.bookSource.url,'Consulter la sélection INSP','link-plain') + '</main>' + tabbar('concours');
+      '<p class="small">Ces lectures ne remplacent pas le programme du concours.</p>' + ext(D.bookSource.url,'Consulter la sélection INSP','link-plain') + '</main>' + tabbar(job?'metiers':'concours');
   };
 
-  screens.handicap = function () {
-    return '<main class="screen top-tight">' + back('#/concours', 'Concours') +
+  screens.handicap = function (jobId) {
+    var job=jobById(jobId);
+    return '<main class="screen top-tight">' + back(job?prepHref(job):'#/concours',job?(isContractJob(job)?'Entrer sans concours':'Se préparer'):'Concours') +
       '<span class="eyebrow">Être accompagné·e</span><h1 class="sm">Handicap : accès et aménagements</h1>' +
       '<div class="prose"><p>Vous pouvez demander des adaptations des épreuves. Il existe aussi une voie de recrutement spécifique, sous conditions.</p>' +
       '<h2>Adapter les épreuves</h2><p>Du temps supplémentaire, des pauses ou une aide humaine ou technique peuvent être prévus selon vos besoins.</p>' +
@@ -837,7 +899,7 @@
       '<p>Ce contrat peut conduire à une titularisation après évaluation des aptitudes. Elle n’est pas automatique.</p>' +
       '<h2>Préparer votre démarche</h2><p>Demandez les modalités au service recruteur ou à son référent handicap. Vous n’avez aucune information de santé à renseigner dans cette application.</p></div>' +
       ext('https://www.service-public.gouv.fr/particuliers/vosdroits/F430', 'Vérifier les démarches sur Service Public') +
-      '<a class="btn outline" href="#/accessibilite">Adapter la lecture de l’application</a></main>' + tabbar('concours');
+      '<a class="btn outline" href="#/accessibilite">Adapter la lecture de l’application</a></main>' + tabbar(job?'metiers':'concours');
   };
 
 
@@ -947,6 +1009,8 @@
     var animateJob=changed&&r.name==='metier'&&jobSlideRequested&&!matchMedia('(prefers-reduced-motion: reduce)').matches;
     jobSlideRequested=false;
     lastRoute = key;
+    if(changed&&r.name==='calendrier'&&r.arg){S.calCat='Toutes';S.calFp='Tous';S.calQ='';S.calView='upcoming';S.calLimit=40;}
+    if(changed&&r.name==='prepa'&&r.arg==='talents'&&r.arg2)S.talentsAll=false;
     if (changed && r.name === 'metiers') {
       hintUntil = Date.now() + 5000;
       clearTimeout(hintTimer);
@@ -980,7 +1044,7 @@
     if (t) t.setAttribute('tabindex', '-1');
     document.title = (t ? t.textContent + ' · ' : '') + 'Y-Seck';
     var contextJob=r.name==='metier'&&D.jobs.find(function(j){return j.id===r.arg;});
-    UI.afterRender({root:root,title:t?t.textContent:'Y-Seck',isJobs:r.name==='metiers',category:contextJob&&['A+','A','B','C'].indexOf(contextJob.cat)>-1?{label:contextJob.cat,className:catClass(contextJob.cat)}:null,summary:r.name==='metiers'?filterSummary():'',filters:r.name==='metiers'?jobFilters():'',changed:changed});
+    UI.afterRender({root:root,title:t?t.textContent:'Y-Seck',isJobs:r.name==='metiers',category:contextJob&&['A+','A','B','C','CDD'].indexOf(displayCategory(contextJob))>-1?{label:displayCategory(contextJob),className:catClass(displayCategory(contextJob))}:null,summary:r.name==='metiers'?filterSummary():'',filters:r.name==='metiers'?jobFilters():'',changed:changed});
 
     if (changed) {
       if (t && booted) t.focus({ preventScroll: true });
@@ -1036,6 +1100,8 @@
     var v = el.getAttribute('data-v');
     var i, next;
     switch (a) {
+      case 'showContracts': set({showContracts:S.showContracts===false,metCat:S.metCat==='CDD'?'Toutes':S.metCat,jobLimit:60}); countAnnounce(); break;
+      case 'openPrepCat': var prepJob=el.getAttribute('data-job'); expandedPrepCategories[prepJob]=expandedPrepCategories[prepJob]===v?null:v; render(); break;
       case 'openFilters': UI.open('filters','Filtrer les métiers',jobFilters(),el); break;
       case 'jobDetails': UI.open('details','Plus de détails',jobDetails(v),el); break;
       case 'confirmName': confirmName(); break;
@@ -1100,7 +1166,7 @@
       case 'forYou': set({ metDomains: null, metMode: 'mine', metCat: 'Toutes', metFp: 'Tous', q: '', jobLimit: 60 }); countAnnounce(); break;
       case 'allDomains': set({ metDomains: [], metMode: 'all', jobLimit: 60 }); countAnnounce(); break;
       case 'moreJobs': set({ jobLimit: S.jobLimit + 60 }); break;
-      case 'metCat': set({ metCat: v, jobLimit: 60 }); countAnnounce(); break;
+      case 'metCat': set({ metCat: v, showContracts:v==='CDD'?true:S.showContracts, jobLimit: 60 }); countAnnounce(); break;
       case 'metFp': set({ metFp: v, jobLimit: 60 }); countAnnounce(); break;
       case 'calCat': set({ calCat: v }); countAnnounce(); break;
       case 'calFp': set({ calFp: v, calLimit: 40 }); break;

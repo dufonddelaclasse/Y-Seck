@@ -792,3 +792,13 @@ html[data-contrast="true"] .home-shortcuts a { color:#000; border-color:#000; }
 html:is([data-large-text="true"],[data-dys-font="true"]) .home-feature { grid-template-columns:auto minmax(0,1fr); }
 html:is([data-large-text="true"],[data-dys-font="true"]) .home-go { grid-column:2; justify-self:end; }
 html:is([data-large-text="true"],[data-dys-font="true"]) .home-shortcuts { grid-template-columns:minmax(0,1fr); }
+
+/* CDD : repère réservé aux emplois contractuels identifiés. */
+:root { --cat-cdd:#B053D3; }
+:is(.cat,.tag).cat-CDD { background:var(--cat-cdd); color:#FFF; border-color:transparent; }
+.cat.cat-CDD { font-size:.6875rem; letter-spacing:-.02em; }
+button.category-choice.cat-CDD { --cat-fill:var(--cat-cdd); --cat-ink:#FFF; }
+.job-row.job-cat-CDD { --job-tint:#F3E6FA; }
+html[data-contrast="true"] :is(.cat,.tag).cat-CDD { background:#000; color:#FFF; }
+
+.contract-label { align-self:flex-start; }
