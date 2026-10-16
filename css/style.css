@@ -628,10 +628,10 @@ html:is([data-large-text="true"],[data-dys-font="true"]) .book-card img { width:
 @supports not (overflow:clip) { html { overflow-x:hidden; } }
 
 /* Domaines : cartes de sélection avec coche, dans le bleu de l’application. */
-.interest-option { position:relative; display:flex; align-items:center; min-height:104px; padding:16px 14px; border:1px solid #CDD2EB; border-radius:16px; background:#FFF; color:var(--blue); text-align:left; font:500 1rem/1.4 var(--font); overflow-wrap:anywhere; }
+.interest-option { position:relative; display:flex; align-items:center; min-height:104px; padding:32px 14px 16px; border:1px solid #CDD2EB; border-radius:16px; background:#FFF; color:var(--blue); text-align:left; font:500 1rem/1.4 var(--font); overflow-wrap:normal; }
 @media (hover:hover) and (pointer:fine) { .app:not(.touch-input) .interest-option:not(.on):hover { background:#F5F7FF; border-color:var(--blue); } }
 .interest-option.on { border-color:var(--blue); box-shadow:inset 0 0 0 1px var(--blue); background:#EEF2FF; }
-.interest-name { min-width:0; padding-right:22px; }
+.interest-name { min-width:0; }
 .interest-check { display:none; position:absolute; right:12px; top:14px; width:19px; height:19px; border:1.5px solid currentColor; border-radius:50%; align-items:center; justify-content:center; }
 .interest-option.on .interest-check { display:flex; }
 .interest-check svg { width:13px; height:13px; }
