@@ -4,7 +4,7 @@
   var D = window.DATA;
   var root = document.getElementById('app');
   var UI = window.YSECK_UI;
-  var expandedDatesJob = null;
+  var expandedDatesJob = null, jobSlideRequested = false;
   var talentIntroAnimate = false, interestGesture = null;
   var KEY = 'ofp-state-v1';
 
@@ -519,9 +519,12 @@
       var ranked = userRank() !== null;
       var shared = sharedTraits(j);
       var badges = '';
-      if (ranked && j.lvl !== null) badges += isOpen(j) ? '<span class="fit on">' + (j.qualification ? 'Diplôme spécifique requis' : 'Niveau d’études compatible · conditions à vérifier') + '</span>' : '<span class="fit">' + esc(NEED[j.lvl] || 'Conditions à vérifier') + '</span>';
+      if (ranked && j.lvl !== null) {
+        var compatible=isOpen(j)&&!j.qualification;
+        badges += isOpen(j) ? '<span class="fit on">' + (compatible?'<span class="job-fit-check" aria-hidden="true">'+I.check+'</span>':'') + (j.qualification ? 'Diplôme spécifique requis' : 'Niveau d’études compatible<br>Conditions à vérifier') + '</span>' : '<span class="fit">' + esc(NEED[j.lvl] || 'Conditions à vérifier') + '</span>';
+      }
       if (shared.length) badges += '<span class="fit like">' + (isParent() ? 'Ce qui lui ressemble' : 'Ce qui vous ressemble') + ' : ' + esc(shared.slice(0, 2).map(traitLabel).join(', ').toLowerCase()) + '</span>';
-      return '<a class="list-row" href="#/metier/' + j.id + '">' + catBadge(j.cat) +
+      return '<a class="list-row job-row job-' + catClass(j.cat) + '" href="#/metier/' + j.id + '">' + catBadge(j.cat) +
         '<div class="main"><span class="name">' + esc(j.name) + '</span><span class="meta">' + esc(j.domain + ' · ' + fpNames(j.fp).join(', ')) + '</span>' +
         (badges ? '<span class="fits">' + badges + '</span>' : '') + '</div>' + I.chev + '</a>';
   }
@@ -948,6 +951,8 @@
     var r = route();
     var key = r.name + '/' + (r.arg || '') + '/' + (r.arg2 || '');
     var changed = key !== lastRoute;
+    var animateJob=changed&&r.name==='metier'&&jobSlideRequested&&!matchMedia('(prefers-reduced-motion: reduce)').matches;
+    jobSlideRequested=false;
     lastRoute = key;
     if (changed && r.name === 'metiers') {
       hintUntil = Date.now() + 5000;
@@ -969,8 +974,13 @@
     root.innerHTML = fn(r.arg, r.arg2);
     talentIntroAnimate=false;
     var main = root.querySelector('main');
+    root.classList.toggle('job-transition',animateJob);
     if (main) {
       main.id = 'contenu';
+      if(animateJob){
+        main.classList.add('job-slide-in');
+        main.addEventListener('animationend',function(e){if(e.target===main){main.classList.remove('job-slide-in');root.classList.remove('job-transition');}});
+      }
       if (['accessibilite','accueil','enfant','bienvenue','versants','categories-intro'].indexOf(r.name) === -1) main.insertAdjacentHTML('beforeend', '<a class="link-plain mt-s" href="#/accessibilite">Confort de lecture et accessibilité</a>');
     }
     var t = root.querySelector('h1');
@@ -1021,6 +1031,8 @@
   window.addEventListener('scroll',function(){if(interestGesture&&interestGesture.down)interestGesture.moved=true;},{passive:true});
 
   document.addEventListener('click', function (e) {
+    var jobLink=e.target.closest('a[href^="#/metier/"]');
+    if(jobLink&&!e.defaultPrevented&&e.button===0&&!e.metaKey&&!e.ctrlKey&&!e.shiftKey&&!e.altKey&&jobLink.getAttribute('href')!==location.hash)jobSlideRequested=true;
     var el = e.target.closest('[data-action]');
     if (!el) return;
     var a = el.getAttribute('data-action');
