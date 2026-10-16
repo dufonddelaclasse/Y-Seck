@@ -1,74 +1,70 @@
-# Orientation fonction publique (POC)
+# Y-Seck — orientation dans le service public
 
-Prototype d'application mobile pour orienter les jeunes, et leurs parents, vers les métiers et les concours de la fonction publique.
+Application mobile en HTML, CSS et JavaScript. La charte existante est conservée : DM Sans, bleu #000091 et pastilles menthe, cyan et jaune.
 
-HTML, CSS et JavaScript, sans dépendance ni build.
+## Lancer la preview
 
-## Lancer
-
-Ouvrir `index.html` dans un navigateur, ou servir le dossier :
-
-```bash
+```sh
 python3 -m http.server 8000
 ```
 
-puis aller sur http://localhost:8000.
+Ouvrir http://localhost:8000. Un serveur est nécessaire à la recherche locale de communes.
 
 ## Parcours
 
-1. **Introduction en 3 écrans** : accueil Y-Seck, les 3 fonctions publiques (État, territoriale, hospitalière), les 4 catégories (A+, A, B, C). Puis **onboarding en 4 étapes**
-   - Profil (étudiant·e, parent, reconversion) et niveau d'étude. Pour un parent : « le niveau d'étude de votre enfant ».
-   - Domaines d'intérêt, en choix illimités.
-   - Façon de travailler : 35 traits en 5 groupes (avec qui, où, comment, ce qui plaît, caractère), en choix illimités.
-   - Bourse et budget, avec un encadré qui explique ce qu'est une Prépa Talents.
-2. **Tableau de bord** : métiers classés selon les domaines et les traits, concours accessibles selon le niveau, aides.
-3. **Métiers** (65, sur les 3 versants) : les domaines choisis sont présélectionnés et filtrent la liste. On peut en ajouter, en retirer, ou tout afficher. Filtres A+, A, B, C et État, territoriale, hospitalière. Chaque métier indique si le niveau requis est atteint et les traits qui correspondent.
-4. **Fiche métier** : accès étape par étape. L'étape du concours a un lien « Prochaines dates » vers le calendrier officiel, et la fiche renvoie aux Prépas Talents qui préparent ce concours.
-5. **Concours** : 4 catégories (A+, A, B, C). Un clic déplie la catégorie : métiers concernés et lieux des épreuves par versant, en métropole et en outre-mer.
-6. **Calendrier** : prochaines clôtures d'inscription, filtrables par catégorie.
-7. **Études** : parcours conseillés (administratif, technique, social, dès le brevet).
-8. **Sans concours** : contractuel·le, PACTE, apprentissage, recrutement sans concours.
-9. **Prépas**, chaque type cliquable :
-   - Prépas Talents : les 106 prépas, filtrées selon les concours des métiers choisis et par région, outre-mer compris.
-   - IPAG et CPAG : les 27 instituts, par région, plus la formation à distance.
-   - IEP et masters d'administration publique, métropole et outre-mer.
-   - Préparations privées, liste non exhaustive.
+- Questionnaire initial en quatre étapes, puis accueil personnel étudiant ou espace famille avec plusieurs profils enfants indépendants.
+- 1 069 métiers RMFP et 65 fiches d’accès existantes. Les domaines renseignés sont présélectionnés ; le bouton « Pour vous » ou « Pour votre enfant » les rétablit.
+- Filtres par domaine, catégorie et versant ; à partir de Bac+5, seules les fiches associées à une catégorie B, A ou A+ sont affichées. Une catégorie variable ne constitue pas une condition de diplôme.
+- Fiches métiers, activités et compétences du répertoire, voies d’accès sourcées, dates de concours et favoris par profil.
+- Espace commun « Concours et prépas », bibliographie INSP, annales enseignantes, parcours d’études, voies sans concours et informations handicap.
+- Prépas Talents triées par distance à la commune renseignée, parmi les résultats du filtre choisi. Distances indicatives à vol d’oiseau entre centres de communes ; formations à distance en dernier.
+- Contraste renforcé, texte agrandi et police OpenDyslexic facultatifs. La conformité RGAA reste à évaluer par un audit complet.
 
-## À venir
+## Base éditoriale et maintenance
 
-- « Je me prépare » : annales, rapports de jury, conseils de méthode, ressources gratuites.
-- « Mon parcours » : métiers favoris, échéances, prochaines étapes.
-- « Mes opportunités » : offres de choisirleservicepublic.gouv.fr (jeu de données data.gouv.fr), stages et apprentissages par territoire.
-- Import complet du répertoire des métiers de la fonction publique (RMFP, 1 069 métiers), du répertoire territorial (CNFPT) et du répertoire santé.
+`data/catalogue.json` est l’index de la base de référence, répartie dans `data/catalogue/`. `js/catalog-data.js` charge ces données pour le navigateur. Le répertoire RMFP décrit des fonctions, pas une équivalence unique avec un grade ou un concours. Les correspondances portent donc un statut `proposé`, `validé` ou `rejeté`. Les fonctions sans correspondance documentée restent consultables, avec un renvoi aux portails officiels.
 
-## Accessibilité (RGAA)
+Le classeur interne comporte neuf onglets : Pilotage, Metiers, Contenus, CorpsGrades, Correspondances, Concours, Preparations, Sources et Reglages. Il contient uniquement des données éditoriales publiques, aucun profil utilisateur.
 
-- Lien d'évitement, titre de page et `h1` à chaque écran, focus placé sur le titre à chaque changement d'écran.
-- Focus conservé après chaque choix, navigation complète au clavier.
-- États annoncés : `aria-pressed`, interrupteur `role="switch"`, nombre de résultats des filtres dans une zone `role="status"`.
-- Contrastes d'au moins 4,5:1, cibles d'au moins 44 px, liens externes signalés « nouvelle fenêtre ».
-- Aucune violation détectée par axe-core (WCAG 2.1 A et AA) sur les 21 écrans.
-- Déclaration d'accessibilité dans l'app (Profil › Accessibilité). Statut : partiellement conforme, en attendant un audit RGAA complet.
+### Importer un classeur
 
-## Données personnelles (RGPD)
+Avec Python 3 et les dépendances de `scripts/requirements.txt` :
 
-- Aucun compte, aucun nom ni e-mail demandé, aucun cookie, aucune mesure d'audience.
-- Les réponses restent dans le `localStorage` du navigateur. Le bouton « Effacer mes données » les supprime.
-- Police DM Sans hébergée dans le dépôt : aucune requête vers Google Fonts ni vers un autre service tiers.
-- Pages Données personnelles et Mentions légales dans l'app.
-
-**À compléter avant diffusion** : éditeur, adresse, contact et directeur·rice de la publication, dans `js/data.js` (`legal`).
-
-## Structure
-
-```
-index.html
-css/style.css
-fonts/       DM Sans (licence OFL)
-js/data.js   données et mentions légales
-js/app.js    état, routeur (#/ecran) et écrans
+```sh
+python3 scripts/import_workbook.py /chemin/Y-Seck_base_interne.xlsx --check
+python3 scripts/import_workbook.py /chemin/Y-Seck_base_interne.xlsx
 ```
 
-## Direction artistique
+Le contrôle vérifie les identifiants, les références, les catégories, les sources et les dates. Les lignes absentes sont conservées ; pour masquer un métier, utiliser `Actif = FALSE`, et pour écarter un rapprochement, `rejeté`. Un lien validé n’est pas rétrogradé par une ancienne copie du classeur. Une copie plus ancienne qu’un avis déjà actualisé est refusée. L’import crée une sauvegarde locale sous `work/backups/`.
 
-DM Sans, bleu #000091, traits fins de 1 px, pilules arrondies. Pastilles de catégorie : A menthe, B cyan, C jaune.
+### Actualiser les calendriers officiels
+
+```sh
+python3 scripts/update_calendars.py --check
+python3 scripts/update_calendars.py
+```
+
+Le premier appel contrôle la collecte ; le second actualise SCORE et ARS. Les identifiants, correspondances manuelles et anciens avis sont conservés. Les nouveaux avis sont rattachés aux corps connus quand une règle correspond. Les rapprochements métiers supplémentaires restent à vérifier. Le calendrier territorial 2027 du CNFPT est prévisionnel et reste une source à actualiser séparément.
+
+Après une actualisation automatique, réexporter un nouveau classeur avant de reprendre les modifications dans Excel. Le script `scripts/export_workbook.mjs` utilise le runtime tableur fourni dans Codex (`@oai/artifact-tool`) :
+
+```sh
+node scripts/export_workbook.mjs /chemin/Y-Seck_base_interne.xlsx
+```
+
+Pour la mise en ligne, vérifier la preview puis publier le dossier `data/` complet. Le classeur interne n’est pas publié avec le site.
+
+## Sources et limites
+
+- Répertoire commun des métiers de la fonction publique, version 1 fournie, avec intitulés inclusifs et contenu source conservé.
+- Offres Choisir le service public : catégories agrégées par intitulé exact, sans déduction automatique du diplôme ou d’une équivalence statutaire.
+- SCORE : 178 avis ; ARS : 468 avis ; CNFPT : 8 concours et examens prévisionnels 2027. Photographie vérifiée le 16 octobre 2026 ; les avis des organisateurs font référence.
+- Prépas Talents, IPAG/CPAG, Onisep, Devenir enseignant, INSP et Service-Public : liens accessibles dans les écrans et les sources.
+- La bibliographie INSP concerne ses concours d’entrée ; certaines thématiques peuvent aider à préparer d’autres concours A selon leur programme.
+- Le jeu public de communes de l’API Découpage administratif est fourni localement dans `data/communes.json`. La recherche n’envoie aucune commune saisie à une API externe.
+
+## Données personnelles
+
+Aucun compte ni mesure d’audience. Pseudo, réponses, profils enfants, commune et favoris restent dans le stockage du navigateur. L’effacement est disponible dans le profil. Les polices DM Sans et OpenDyslexic sont hébergées dans le dépôt sous licence OFL.
+
+Les coordonnées de l’éditeur et du contact restent à compléter dans les réglages avant une diffusion officielle.
