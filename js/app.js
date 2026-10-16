@@ -324,7 +324,7 @@
   }
 
   screens.bienvenue = function () {
-    return '<main class="screen intro-welcome"><h1>Tous les métiers de la fonction publique, et le chemin pour y arriver</h1>' +
+    return '<main class="screen intro-welcome"><section class="welcome-hero"><img class="welcome-logo" src="assets/y-seck-logo-gradient.png" alt="Quelle fonction ?" width="3000" height="1205"><h1>Tous les métiers de la fonction publique, et le chemin pour y arriver</h1></section>' +
       '<ul class="welcome-checks">' + ['Avec ou sans concours, avec ou sans diplôme.','Trouvez les métiers qui vous ressemblent.','Les études et les prépas pour les atteindre.'].map(function(text){return '<li>'+I.check+'<span>'+text+'</span></li>';}).join('') + '</ul>' +
       '</main><div class="footer intro-footer"><a class="btn" href="#/versants">Commencer</a>' +
       (S.done ? '<a class="link-plain" href="#/accueil">Aller à mon parcours</a>' : '') + '</div>';
