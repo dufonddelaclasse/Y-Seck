@@ -5,6 +5,7 @@
   var root = document.getElementById('app');
   var UI = window.YSECK_UI;
   var expandedDatesJob = null;
+  var talentIntroAnimate = false, interestGesture = null;
   var KEY = 'ofp-state-v1';
 
   /* ---------- État ---------- */
@@ -47,6 +48,14 @@
   function childName() { var c = activeChild(); return c ? c.name || 'votre enfant' : 'votre enfant'; }
   function familyEstablished() { return isParent() && S.children.some(function(c){return c.done;}); }
   function identityReady() { return !!(S.profile && S.name.trim() && S.level); }
+  function confirmName() {
+    var input=document.getElementById('person-name');
+    if(!input||!input.value.trim())return;
+    S.name=input.value.trim();input.value=S.name;save();
+    input.blur();
+    var button=document.getElementById('name-confirm');if(button)button.focus({preventScroll:true});
+    announce('Prénom enregistré.');
+  }
 
   function load() {
     try {
@@ -309,9 +318,9 @@
   var screens = {};
   var STEPS = 4;
 
-  function talentsFeature(title,body,heading) {
+  function talentsFeature(title,body,heading,extraClass) {
     heading=heading||'h2';
-    return '<section class="talents-feature"><img class="talents-logo" src="assets/prepa-talents.png" alt="Prépa Talents" width="220" height="80"><'+heading+' class="no-icon">'+title+'</'+heading+'>'+body+'</section>';
+    return '<section class="talents-feature'+(extraClass?' '+extraClass:'')+'"><img class="talents-logo" src="assets/prepa-talents.png" alt="Prépa Talents" width="220" height="80"><'+heading+' class="no-icon">'+title+'</'+heading+'>'+body+'</section>';
   }
 
   screens.bienvenue = function () {
@@ -354,7 +363,7 @@
       '<div class="stack mt-s">' + cats.map(function (c) {
         return '<section class="explain row-x ' + c.tint + '" aria-label="Catégorie ' + c.id + '">' +
           '<span class="cat lg ' + catClass(c.id) + '" aria-hidden="true">' + c.id + '</span>' +
-          '<div class="explain-body"><h2 class="explain-t"><span class="sr-only">Catégorie ' + c.id + ' : </span>' + esc(c.t) + '</h2>' +
+          '<div class="explain-body"><h2 class="explain-t no-icon"><span class="sr-only">Catégorie ' + c.id + ' : </span>' + esc(c.t) + '</h2>' +
           '<p>' + esc(c.d) + '</p><p class="ex"><b>Pour y entrer :</b> ' + esc(c.dip) + '</p><p class="ex"><b>Par exemple :</b> ' + esc(c.ex) + '</p>' + categoryFit(c.id) + '</div></section>';
       }).join('') + '</div>' +
       '<div class="callout tint-blue"><span class="pin"></span><p>Rien n’est figé : on peut monter de catégorie au cours de sa carrière, par concours interne ou par promotion.</p></div>' +
@@ -378,7 +387,7 @@
     var title=isParent()?'Son niveau d’études':'Votre niveau d’études';
     return '<form id="identity-form" class="profile-form"><main class="screen identity-screen"><div class="topbar">' + back(familyEstablished()?'#/accueil':'#/choix-profil','Retour') + '<span class="eyebrow">Étape 1 / '+STEPS+'</span></div>'+progress(1,STEPS)+
       '<h1 class="mt-l" id="identity-title">'+(isParent()?'Le prénom de votre enfant':'Votre prénom')+'</h1>'+
-      '<input class="name-line" id="person-name" name="first-name" aria-labelledby="identity-title" aria-describedby="name-hint" required maxlength="50" autocomplete="'+(isParent()?'off':'given-name')+'" placeholder="Prénom ou pseudo" value="'+esc(S.name)+'">'+
+      '<div class="name-entry"><input class="name-line" id="person-name" name="first-name" aria-labelledby="identity-title" aria-describedby="name-hint" required maxlength="50" enterkeyhint="done" autocomplete="'+(isParent()?'off':'given-name')+'" placeholder="Prénom ou pseudo" value="'+esc(S.name)+'"><button type="button" class="name-confirm" id="name-confirm" data-action="confirmName" aria-label="Valider le prénom"'+(S.name.trim()?'':' disabled')+'>'+I.check+'</button></div>'+
       '<p class="small m0" id="name-hint">'+(isParent()?'Le prénom ou pseudo qui identifiera son parcours.':'Le prénom ou pseudo affiché dans votre espace.')+'</p>'+
       '<section class="stack mt-m" aria-label="'+title+'"><h2>'+title+'</h2><div class="row">'+list.map(function(l){return chip('level',l,l,S.level===l);}).join('')+'</div></section>'+
       '<p class="notice mt-m">'+I.lock+'<span>Vos réponses restent sur cet appareil. Rien n’est envoyé, aucun compte, aucun traceur. <a href="#/confidentialite">Données personnelles</a></span></p>'+
@@ -433,10 +442,10 @@
         var on = S.budget === b;
         return '<button type="button" class="opt sm' + (on ? ' on' : '') + '" aria-pressed="' + on + '"' + attr('action', 'budget') + attr('v', b) + '><span>' + b + '</span>' + (on ? I.check : '') + '</button>';
       }).join('') + '</div>' +
-      talentsFeature('C’est quoi, une Prépa Talents ?',
+      (S.boursier==='Oui'?talentsFeature('C’est quoi, une Prépa Talents ?',
       '<p>Une préparation <b>gratuite</b> aux concours de catégorie A, A+ et B, dans une université, un IEP ou une école du service public. Plus de 100 en France, outre-mer compris.</p>' +
       '<p>Au programme : cours, entraînements aux épreuves et un·e tuteur·rice qui vous suit toute l’année.</p>' +
-      '<p><b>Une bourse de ' + esc(D.talentsGrantLabel || '5 000 €') + ' par an</b> est versée aux élèves. L’entrée se fait sur dossier et entretien, selon les ressources et la motivation.</p>') +
+      '<p><b>Une bourse de ' + esc(D.talentsGrantLabel || '5 000 €') + ' par an</b> est versée aux élèves. L’entrée se fait sur dossier et entretien, selon les ressources et la motivation.</p>','h2',talentIntroAnimate?'talents-enter':''):'') +
       '</main><div class="footer"><a class="btn" href="#/accueil" data-action="finish">Voir ' + (isParent() ? 'son parcours' : 'mon parcours') + '</a></div>';
   };
 
@@ -956,7 +965,9 @@
     }
 
     var fn = screens[r.name] || screens[S.done ? 'accueil' : 'profil'];
+    if(changed&&r.name==='situation'&&S.boursier==='Oui')talentIntroAnimate=true;
     root.innerHTML = fn(r.arg, r.arg2);
+    talentIntroAnimate=false;
     var main = root.querySelector('main');
     if (main) {
       main.id = 'contenu';
@@ -992,15 +1003,37 @@
 
   window.addEventListener('hashchange', function () { render(); window.scrollTo(0, 0); });
 
+  /* Le glissement tactile laisse le navigateur défiler ; seul un tap bref sélectionne une carte. */
+  root.addEventListener('pointerdown',function(e){
+    interestGesture=null;
+    var touch=e.pointerType==='touch'||e.pointerType==='pen',card=e.target.closest('.interest-option');
+    root.classList.toggle('touch-input',touch);
+    if(touch&&card)interestGesture={id:e.pointerId,x:e.clientX,y:e.clientY,start:Date.now(),down:true,moved:false,ended:0};
+  },{passive:true});
+  window.addEventListener('pointermove',function(e){
+    var g=interestGesture;if(g&&g.down&&g.id===e.pointerId&&Math.hypot(e.clientX-g.x,e.clientY-g.y)>10)g.moved=true;
+  },{passive:true});
+  window.addEventListener('pointerup',function(e){
+    var g=interestGesture;if(!g||g.id!==e.pointerId)return;
+    g.down=false;g.ended=Date.now();if(Math.hypot(e.clientX-g.x,e.clientY-g.y)>10||g.ended-g.start>700)g.moved=true;
+  },{passive:true});
+  window.addEventListener('pointercancel',function(e){var g=interestGesture;if(g&&g.id===e.pointerId){g.down=false;g.moved=true;g.ended=Date.now();}},{passive:true});
+  window.addEventListener('scroll',function(){if(interestGesture&&interestGesture.down)interestGesture.moved=true;},{passive:true});
+
   document.addEventListener('click', function (e) {
     var el = e.target.closest('[data-action]');
     if (!el) return;
     var a = el.getAttribute('data-action');
+    if(a==='domain'&&e.detail!==0&&interestGesture){
+      var gesture=interestGesture;interestGesture=null;
+      if((gesture.down||Date.now()-gesture.ended<750)&&(gesture.down||gesture.moved)){e.preventDefault();return;}
+    }
     var v = el.getAttribute('data-v');
     var i, next;
     switch (a) {
       case 'openFilters': UI.open('filters','Filtrer les métiers',jobFilters(),el); break;
       case 'jobDetails': UI.open('details','Plus de détails',jobDetails(v),el); break;
+      case 'confirmName': confirmName(); break;
       case 'moreJobDates': expandedDatesJob=expandedDatesJob===v?null:v; render(); break;
       case 'profile':
         if (familyEstablished() && v !== 'par') break;
@@ -1038,7 +1071,7 @@
         i = S.traits.indexOf(v); next = S.traits.slice();
         if (i > -1) next.splice(i, 1); else next.push(v);
         set({ traits: next }); break;
-      case 'boursier': set({ boursier: v }); break;
+      case 'boursier': talentIntroAnimate=v==='Oui'&&S.boursier!=='Oui'; set({ boursier: v }); break;
       case 'budget': set({ budget: v, prepBudget: null }); break;
       case 'go': location.hash = '#/' + v; break;
       case 'startProfile': S.introSeen = true; save(); navigate(familyEstablished()?'#/profil':'#/choix-profil'); break;
@@ -1110,8 +1143,8 @@
     }
     if (e.target.id === 'person-name') {
       S.name = e.target.value; save();
-      var continueButton=document.getElementById('identity-continue'),hint=document.getElementById('hint-continue');
-      if(continueButton)continueButton.disabled=!identityReady();if(hint)hint.hidden=identityReady();return;
+      var continueButton=document.getElementById('identity-continue'),hint=document.getElementById('hint-continue'),confirmButton=document.getElementById('name-confirm');
+      if(continueButton)continueButton.disabled=!identityReady();if(hint)hint.hidden=identityReady();if(confirmButton)confirmButton.disabled=!S.name.trim();return;
     }
     if (e.target.id !== 'q') return;
     S.q = e.target.value; S.jobLimit = 60; save();
@@ -1121,9 +1154,12 @@
     searchTimer = setTimeout(function () { countAnnounce('#jobs .list-row'); }, 600);
   });
 
+  root.addEventListener('keydown',function(e){
+    if(e.target.id==='person-name'&&e.key==='Enter'&&!e.isComposing&&e.keyCode!==229){e.preventDefault();confirmName();}
+  });
   root.addEventListener('submit',function(e){
     if(e.target.id!=='identity-form')return;
-    e.preventDefault();if(!identityReady())return;
+    e.preventDefault();if(document.activeElement&&document.activeElement.id==='person-name'){confirmName();return;}if(!identityReady())return;
     S.name=S.name.trim();save();navigate('#/interets');
   });
 

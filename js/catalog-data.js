@@ -19,7 +19,7 @@
       data[key] = Array.isArray(p[key]) ? (data[key] || []).concat(p[key]) : p[key];
     }); });
     window.PUBLIC_DATA = data;
-    return script('js/catalog.js?v=20261016-6').then(function () { return script('js/app.js?v=20261016-6'); });
+    return script('js/catalog.js?v=20261016-6').then(function () { return script('js/app.js?v=20261016-7'); });
   }).catch(function () {
     root.innerHTML = '<main class="screen"><h1>Chargement interrompu</h1><p>Les données n’ont pas pu être chargées. Vérifiez votre connexion puis réessayez.</p><button class="btn" id="retry-data">Réessayer</button></main>';
     document.getElementById('retry-data').addEventListener('click', function () { location.reload(); });
