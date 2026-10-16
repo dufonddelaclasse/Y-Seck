@@ -762,7 +762,7 @@ html[data-contrast="true"] .job-fit-check { background:#000; color:#FFF; }
 
 /* Espace personnel : deux accès principaux en dégradé et deux raccourcis discrets. */
 .personal-home { gap:12px; }
-.home-profile-meta { display:flex; flex-wrap:nowrap; align-items:center; gap:8px; min-width:0; max-width:100%; padding:2px 0; overflow-x:auto; overflow-y:hidden; overscroll-behavior-x:contain; scrollbar-width:none; }
+.home-profile-meta { display:flex; flex-wrap:nowrap; align-items:center; gap:8px; min-width:0; width:calc(100% + 48px); max-width:none; margin:0 -24px; padding:2px 24px; overflow-x:auto; overflow-y:hidden; overscroll-behavior-x:contain; scrollbar-width:none; }
 .home-profile-meta::-webkit-scrollbar { display:none; }
 .personal-home .study-level { flex:none; margin:0; white-space:nowrap; }
 .home-interest { display:inline-flex; flex:none; align-items:center; padding:6px 12px; border:1px solid #D9D9DF; border-radius:999px; background:#FFF; color:#626268; font-size:.875rem; font-weight:400; line-height:1.35; white-space:nowrap; }
