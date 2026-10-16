@@ -1,6 +1,6 @@
 # Y-Seck — orientation dans le service public
 
-Application mobile en HTML, CSS et JavaScript. La charte existante est conservée : DM Sans, bleu #000091 et pastilles menthe, cyan et jaune.
+Application mobile en HTML, CSS et JavaScript : DM Sans, bleu #000091 pour la navigation, pastilles de catégories bleu vif, bleu, vert et jaune, et fonds en dégradé radial.
 
 ## Lancer la preview
 
@@ -12,7 +12,8 @@ Ouvrir http://localhost:8000. Un serveur est nécessaire à la recherche locale 
 
 ## Parcours
 
-- Questionnaire initial en quatre étapes, puis accueil personnel étudiant ou espace famille avec plusieurs profils enfants indépendants.
+- Choix du profil, puis questionnaire en quatre étapes : prénom ou pseudo obligatoire et niveau d’études, centres d’intérêt, préférences de travail, situation. Un retour permet de corriger le choix initial du profil ; l’ajout d’un enfant dans une famille existante commence directement par son prénom.
+- Accueil personnel étudiant ou espace famille avec plusieurs profils enfants indépendants.
 - 1 069 métiers RMFP et 65 fiches d’accès existantes. Les domaines renseignés sont présélectionnés ; le bouton « Pour vous » ou « Pour votre enfant » les rétablit.
 - Filtres par domaine, catégorie et versant ; à partir de Bac+5, seules les fiches associées à une catégorie B, A ou A+ sont affichées. Une catégorie variable ne constitue pas une condition de diplôme.
 - 23 centres d’intérêt, dont diplomatie, renseignement, mer, architecture et protection animale. Les thèmes transversaux s’appuient sur les domaines, familles et intitulés RMFP ; les domaines principaux et les correspondances statutaires sont conservés. `node scripts/check_interests.mjs` contrôle la couverture de chaque thème.

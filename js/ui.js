@@ -8,6 +8,9 @@
     home: '<path d="M3.5 10.5 11 4a1.5 1.5 0 0 1 2 0l7.5 6.5V19a1.5 1.5 0 0 1-1.5 1.5H15v-7H9v7H5A1.5 1.5 0 0 1 3.5 19z"/>',
     compass: '<circle cx="12" cy="12" r="8.5"/><path d="m15.5 8.5-2 5-5 2 2-5z"/>',
     graduation: '<path d="m2 9 10-5 10 5-10 5zM6 11v6c4 3 8 3 12 0v-6M22 9v7"/>',
+    government: '<path d="m3 8 9-5 9 5zM4 21h16M5 18h14M6 10v6m4-6v6m4-6v6m4-6v6"/>',
+    city: '<path d="M3 21h18M4 21V10l5-4 5 4v11M14 21V6h6v15M7 13h4m-4 4h4M17 9h.01M17 13h.01M17 17h.01"/>',
+    hospital: '<path d="M4 21V6h16v15M9 21v-5h6v5M12 3v8m-4-4h8M7 13h.01M17 13h.01"/>',
     back: '<path d="m14.5 5-7 7 7 7"/>',
     book: '<path d="M12 5.5C9 3.5 5.5 3.5 3 4.5v15c3-1 6-.5 9 1 3-1.5 6-2 9-1v-15c-2.5-1-6-1-9 1zm0 0v15"/>',
     calendar: '<rect x="4" y="5.5" width="16" height="15" rx="2.5"/><path d="M8 3v5m8-5v5M4 11h16m-11 4h.01M12 15h.01M15 15h.01M9 18h.01M12 18h.01"/>',
@@ -52,7 +55,7 @@
     return icons.info;
   }
   function decorate(scope) {
-    scope.querySelectorAll('h2:not(.sheet-title):not(.book-title), h3:not(.book-title)').forEach(function (h) {
+    scope.querySelectorAll('h2:not(.sheet-title):not(.book-title):not(.no-icon), h3:not(.book-title):not(.no-icon)').forEach(function (h) {
       if (h.querySelector('svg')) return;
       h.classList.add('section-heading'); h.insertAdjacentHTML('afterbegin', headingIcon(h.textContent));
     });
