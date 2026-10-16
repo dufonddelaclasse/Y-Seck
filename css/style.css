@@ -752,7 +752,11 @@ html[data-contrast="true"] .job-fit-check { background:#000; color:#FFF; }
 
 /* Espace personnel : deux accès principaux en dégradé et deux raccourcis discrets. */
 .personal-home { gap:12px; }
-.personal-home .study-level { margin:2px 0; }
+.home-profile-meta { display:flex; flex-wrap:nowrap; align-items:center; gap:8px; min-width:0; max-width:100%; padding:2px 0; overflow-x:auto; overflow-y:hidden; overscroll-behavior-x:contain; scrollbar-width:none; }
+.home-profile-meta::-webkit-scrollbar { display:none; }
+.personal-home .study-level { flex:none; margin:0; white-space:nowrap; }
+.home-interest { display:inline-flex; flex:none; align-items:center; padding:6px 12px; border:1px solid #D9D9DF; border-radius:999px; background:#FFF; color:#626268; font-size:.875rem; font-weight:400; line-height:1.35; white-space:nowrap; }
+html[data-contrast="true"] .home-interest { color:#000; border-color:#000; }
 .personal-home .lead { margin-top:2px; }
 .home-features { display:flex; flex-direction:column; gap:8px; }
 .home-feature { display:grid; grid-template-columns:auto minmax(0,1fr) 34px; align-items:center; gap:12px; min-height:90px; padding:20px 18px; border-radius:22px; color:var(--ink); text-decoration:none; }
