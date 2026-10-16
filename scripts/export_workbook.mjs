@@ -26,13 +26,13 @@ async function table(name,headers,rows,widths){
 }
 const guide=wb.worksheets.add('Pilotage');sheets.Pilotage=guide;guide.showGridLines=false;guide.tabColor='#000091';
 guide.getRange('A2').values=[['Maintenance de la base Y-Seck']];guide.getRange('A2').format.font={name:'Arial',size:16,bold:true,color:'#161616'};
-guide.getRange('A4:C11').values=[['Données','Nombre','Utilisation'],['Métiers','','Catalogue et fiches d’accès'],['Corps et grades','','Diplômes et voies de recrutement'],['Rapprochements validés','','Liens confirmés par l’équipe'],['Rapprochements proposés','','À vérifier avant de les confirmer'],['Sessions de concours','','Dates et avis officiels'],['Préparations','','Talents, IPAG, IEP et autres'],['Sources','','Origine et date de vérification']];
+guide.getRange('A4:C12').values=[['Données','Nombre','Utilisation'],['Métiers','','Catalogue et fiches d’accès'],['Corps et grades','','Diplômes et voies de recrutement'],['Rapprochements validés','','Liens confirmés par l’équipe'],['Rapprochements proposés','','À vérifier avant de les confirmer'],['Sessions de concours','','Dates et avis officiels'],['Préparations','','Talents, IPAG, IEP et autres'],['Sources','','Origine et date de vérification'],['Ouvrages','','Bibliographie et notices documentaires']];
 guide.getRange('A14:C20').values=[['Étape','Action','Point à préserver'],[1,'Mettre à jour les données dans les onglets correspondants.','Garder les identifiants des lignes existantes.'],[2,'Confirmer ou rejeter les correspondances métier / corps.','Un métier RMFP n’impose pas un grade unique.'],[3,'Actualiser les dates et conserver le lien de l’avis officiel.','Les dates CNFPT 2027 restent prévisionnelles.'],[4,'Enregistrer une copie datée du classeur.','Conserver le fichier précédent pour revenir en arrière.'],[5,'Importer le classeur avec le script fourni.','Le contrôle refuse les identifiants et liens incohérents.'],[6,'Vérifier la preview puis publier les fichiers générés.','Les correspondances validées sont conservées.']];
 guide.getRange('A23:C27').values=[['Repère','Signification',''],['proposé','Piste de rapprochement, à vérifier avec le service recruteur.',''],['validé','Rapprochement vérifié par l’équipe, source renseignée.',''],['rejeté','Rapprochement conservé pour historique, masqué dans l’app.',''],['Textes longs','Le contenu complet reste dans la cellule. Agrandir la ligne ou utiliser la barre de formule.','']];
 guide.getRange('A1:C29').format.font={name:'Arial',size:10,color:'#161616'};guide.getRange('A2').format.font={name:'Arial',size:16,bold:true};
 guide.getRange('A1:A29').format.columnWidth=30;guide.getRange('B1:B29').format.columnWidth=45;guide.getRange('C1:C29').format.columnWidth=78;guide.getRange('A1:C29').format.rowHeight=28;
 for(const row of [4,14,23])guide.getRange(`A${row}:C${row}`).format={fill:'#E0F8FC',font:{name:'Arial',size:10,bold:true},rowHeight:30};
-guide.getRange('B4:B11').format.horizontalAlignment='center';
+guide.getRange('B4:B12').format.horizontalAlignment='center';
 guide.getRange('A15:C20').format.wrapText=true;guide.getRange('A15:C20').format.rowHeight=55;
 guide.getRange('A24:C27').format.wrapText=true;guide.getRange('A24:C27').format.rowHeight=55;
 const jobs=[...db.legacyJobs.map(j=>({...j,origin:'Accès'})),...db.rmfp.map(j=>({...j,origin:'RMFP'}))];
@@ -58,20 +58,21 @@ concours.getRange('F2:G1000').setNumberFormat('dd/mm/yyyy');concours.getRange('P
 const prepRows=db.talents.map(t=>[t.id,'talents',t.name,t.city,t.cp,t.concours.join(' | '),t.online,t.coords?.[0]??'',t.coords?.[1]??'','',db.settings.talentsMapUrl]);
 for(const [group,rows] of Object.entries(db.otherPreps))for(const t of rows)prepRows.push([t.id,group,t.name,t.city||'',t.dep||'',t.tags||'',/distance/.test(t.mode||''),'','',t.note||'',group==='ipag'?db.settings.ipagUrl:'']);
 await table('Preparations',['Identifiant','Type','Établissement','Commune','Code postal ou département','Concours préparés','À distance','Longitude','Latitude','Notes','Source URL'],prepRows,[35,15,85,35,28,110,14,15,15,100,75]);
+await table('Ouvrages',['Identifiant','Titre','Auteur·rice·s','Thématiques','Année','Notice URL','Page du PDF INSP','Couverture URL (facultatif)'],(db.books||[]).map(b=>[b.id,b.title,b.authors,flat(b.subjects),b.year?Number(b.year):'',b.url||'',b.sourcePage||'',b.coverUrl||'']),[28,85,65,45,12,85,22,85]);
 await table('Sources',['Identifiant','Source','URL','Vérifiée le','Périmètre'],db.sources.map(s=>[s.id,s.name,s.url,dates(s.checked),s.note]),[20,65,90,18,110]);
 sheets.Sources.getRange('D2:D100').setNumberFormat('dd/mm/yyyy');
 const settings=[];
 function flatten(value,path){if(value!==null&&typeof value==='object'){Object.entries(value).forEach(([k,v])=>flatten(v,path?path+'.'+k:k));}else settings.push([path,typeof value,value]);}
 flatten(db.settings,'');
 await table('Reglages',['Identifiant du champ','Type','Valeur'],settings,[75,15,125]);
-const formulas=[['=COUNTA(Metiers!A2:A5000)'],['=COUNTA(CorpsGrades!A2:A5000)'],['=COUNTIF(Correspondances!D2:D5000,"validé")'],['=COUNTIF(Correspondances!D2:D5000,"proposé")'],['=COUNTA(Concours!A2:A5000)'],['=COUNTA(Preparations!A2:A5000)'],['=COUNTA(Sources!A2:A5000)']];guide.getRange('B5:B11').formulas=formulas;
+const formulas=[['=COUNTA(Metiers!A2:A5000)'],['=COUNTA(CorpsGrades!A2:A5000)'],['=COUNTIF(Correspondances!D2:D5000,"validé")'],['=COUNTIF(Correspondances!D2:D5000,"proposé")'],['=COUNTA(Concours!A2:A5000)'],['=COUNTA(Preparations!A2:A5000)'],['=COUNTA(Sources!A2:A5000)'],['=COUNTA(Ouvrages!A2:A5000)']];guide.getRange('B5:B12').formulas=formulas;
 const linkEnd=Math.max(2000,db.links.length+1000);
 metiers.getRange(`U2:W${jobs.length+1}`).formulas=jobs.map((j,i)=>{const n=i+2;return [`=COUNTIFS(Correspondances!B$2:B$${linkEnd},A${n},Correspondances!D$2:D$${linkEnd},"validé")`,`=COUNTIFS(Correspondances!B$2:B$${linkEnd},A${n},Correspondances!D$2:D$${linkEnd},"proposé")`,`=IF(U${n}>0,"Lien validé",IF(V${n}>0,"À confirmer","À documenter"))`];});
 wb.recalculate();
-console.log((await wb.inspect({kind:'table',range:'Pilotage!A4:C11',tableMaxRows:8,tableMaxCols:3,maxChars:2500})).ndjson);
+console.log((await wb.inspect({kind:'table',range:'Pilotage!A4:C12',tableMaxRows:9,tableMaxCols:3,maxChars:2500})).ndjson);
 const errors=await wb.inspect({kind:'match',searchTerm:'#REF!|#DIV/0!|#VALUE!|#NAME\\?|#N/A|#NUM!',options:{useRegex:true,maxResults:20},maxChars:1500});console.log(errors.ndjson);
 for(const name of Object.keys(sheets)){
- const range=name==='Pilotage'?'A2:C11':name==='Contenus'?'A1:D4':name==='Reglages'?'A1:C6':name==='Correspondances'?'A1:F5':name==='Metiers'?'A1:F5':name==='Concours'?'A1:G5':name==='Preparations'?'A1:E5':name==='Sources'?'A1:D5':'A1:E5';
+ const range=name==='Pilotage'?'A2:C12':name==='Contenus'?'A1:D4':name==='Reglages'?'A1:C6':name==='Correspondances'?'A1:F5':name==='Metiers'?'A1:F5':name==='Concours'?'A1:G5':name==='Preparations'?'A1:E5':name==='Sources'?'A1:D5':name==='Ouvrages'?'A1:D5':'A1:E5';
  const preview=await wb.render({sheetName:name,range,scale:1.25,format:'png'});
  await fs.writeFile(new URL('preview-'+name+'.png',previewDir),new Uint8Array(await preview.arrayBuffer()));
 }

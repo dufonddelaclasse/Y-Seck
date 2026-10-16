@@ -24,7 +24,9 @@ Ouvrir http://localhost:8000. Un serveur est nécessaire à la recherche locale 
 
 `data/catalogue.json` est l’index de la base de référence, répartie dans `data/catalogue/`. `js/catalog-data.js` charge ces données pour le navigateur. Le répertoire RMFP décrit des fonctions, pas une équivalence unique avec un grade ou un concours. Les correspondances portent donc un statut `proposé`, `validé` ou `rejeté`. Les fonctions sans correspondance documentée restent consultables, avec un renvoi aux portails officiels.
 
-Le classeur interne comporte neuf onglets : Pilotage, Metiers, Contenus, CorpsGrades, Correspondances, Concours, Preparations, Sources et Reglages. Il contient uniquement des données éditoriales publiques, aucun profil utilisateur.
+Le classeur interne comporte dix onglets : Pilotage, Metiers, Contenus, CorpsGrades, Correspondances, Concours, Preparations, Ouvrages, Sources et Reglages. Il contient uniquement des données éditoriales publiques, aucun profil utilisateur.
+
+L’onglet Ouvrages permet d’actualiser les titres, auteur·rice·s, thématiques et notices. Les couvertures extraites du PDF sont conservées par identifiant ; une URL HTTPS peut les remplacer. L’import des anciens classeurs sans cet onglet conserve la bibliographie.
 
 ### Importer un classeur
 

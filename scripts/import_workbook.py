@@ -118,6 +118,19 @@ def read_workbook(path, db):
         preps[id]=(group,t)
     result['talents']=[t for group,t in preps.values() if group=='talents'];result['otherPreps']={g:[t for group,t in preps.values() if group==g] for g in ['ipag','iep','privees']}
     unique([t for _,t in preps.values()],'Preparations')
+    # L’onglet est facultatif pour préserver la compatibilité avec les anciens exports.
+    if 'Ouvrages' in wb.sheetnames:
+        books={b['id']:b for b in result.get('books',[])};seen=[]
+        for row in rows(wb,'Ouvrages'):
+            id,title,authors,subjects,year,url,page,cover_url=(row+[None]*8)[:8]
+            id=string(id);seen.append({'id':id});book=books.get(id,{'id':id})
+            if not title or not authors:raise ValueError('Titre ou auteur manquant : '+id)
+            source_url(url);source_url(cover_url)
+            if page is not None and (not str(page).isdigit() or int(page)<1):raise ValueError('Page de source invalide : '+id)
+            if year is not None and (not str(year).isdigit() or not 1000<=int(year)<=2100):raise ValueError('Année invalide : '+id)
+            book.update(title=string(title),authors=string(authors),subjects=parts(subjects),year=string(year),url=string(url),sourcePage=int(page) if page else None,coverUrl=string(cover_url))
+            books[id]=book
+        unique(seen,'Ouvrages');result['books']=list(books.values())
     result['sources']=[dict(zip(['id','name','url','checked','note'],row[:5])) for row in rows(wb,'Sources')]
     for source in result['sources']:source['checked']=date(source['checked']);source_url(source['url'])
     for path,type,value in [r[:3] for r in rows(wb,'Reglages')]:

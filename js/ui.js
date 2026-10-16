@@ -1,0 +1,92 @@
+/* Panneaux, confirmation des liens et rappel de contexte au défilement. */
+(function () {
+  'use strict';
+  var icons = {}, paths = {
+    settings: '<path d="M3 7h3m6 0h9M3 17h9m6 0h3"/><path d="M9 5c-1-2-4-1-3 1 0 2 3 4 3 4s3-2 3-4c1-2-2-3-3-1zM15 15c-1-2-4-1-3 1 0 2 3 4 3 4s3-2 3-4c1-2-2-3-3-1z"/>',
+    heart: '<path d="M12 20S3 14.6 3 8.5a4.5 4.5 0 0 1 9-1 4.5 4.5 0 0 1 9 1C21 14.6 12 20 12 20z"/>',
+    bookmark: '<path d="M7 3.5h10a1.5 1.5 0 0 1 1.5 1.5v15L12 16l-6.5 4V5A1.5 1.5 0 0 1 7 3.5z"/>',
+    home: '<path d="M3.5 10.5 11 4a1.5 1.5 0 0 1 2 0l7.5 6.5V19a1.5 1.5 0 0 1-1.5 1.5H15v-7H9v7H5A1.5 1.5 0 0 1 3.5 19z"/>',
+    compass: '<circle cx="12" cy="12" r="8.5"/><path d="m15.5 8.5-2 5-5 2 2-5z"/>',
+    book: '<path d="M12 5.5C9 3.5 5.5 3.5 3 4.5v15c3-1 6-.5 9 1 3-1.5 6-2 9-1v-15c-2.5-1-6-1-9 1zm0 0v15"/>',
+    calendar: '<rect x="4" y="5.5" width="16" height="15" rx="2.5"/><path d="M8 3v5m8-5v5M4 11h16m-11 4h.01M12 15h.01M15 15h.01M9 18h.01M12 18h.01"/>',
+    route: '<circle cx="6" cy="5" r="2"/><circle cx="18" cy="19" r="2"/><path d="M6 7v6a3 3 0 0 0 3 3h6a3 3 0 0 0 0-6h-3"/>',
+    growth: '<path d="M4 19h16M6 15l5-5 4 3 5-7m-5 0h5v5"/>',
+    info: '<circle cx="12" cy="12" r="8.5"/><path d="M12 11v6m0-10h.01"/>',
+    user: '<circle cx="12" cy="8" r="3.5"/><path d="M5 21c0-8 14-8 14 0"/>',
+    close: '<path d="m6 6 12 12M6 18 18 6"/>'
+  };
+  Object.keys(paths).forEach(function (k) { icons[k] = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + paths[k] + '</svg>'; });
+  var dialog, toolbar, cfg, kind = null, returnTo, pendingUrl = '', observer;
+  function esc(s) { return String(s).replace(/[&<>"']/g, function(c) { return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+  function headingIcon(text) {
+    if (/domaine|catégor/i.test(text)) return icons.compass;
+    if (/sélection|préférence|façon|caractère/i.test(text)) return icons.settings;
+    if (/versant|lieu/i.test(text)) return icons.home;
+    if (/accéder|parcours|étape|démarche/i.test(text)) return icons.route;
+    if (/évoluer|perspectives/i.test(text)) return icons.growth;
+    if (/date|calendrier|session/i.test(text)) return icons.calendar;
+    if (/favori/i.test(text)) return icons.heart;
+    if (/prépa|préparer|bibliogra|ressource|étude/i.test(text)) return icons.book;
+    if (/profil|famille|enfant/i.test(text)) return icons.user;
+    return icons.info;
+  }
+  function decorate(scope) {
+    scope.querySelectorAll('h2:not(.sheet-title):not(.book-title), h3:not(.book-title)').forEach(function (h) {
+      if (h.querySelector('svg')) return;
+      h.classList.add('section-heading'); h.insertAdjacentHTML('afterbegin', headingIcon(h.textContent));
+    });
+  }
+  function content(title, html) {
+    var active = document.activeElement, action = active && active.dataset.action, value = active && active.dataset.v;
+    var scroll = dialog.querySelector('.sheet-content') ? dialog.querySelector('.sheet-content').scrollTop : 0;
+    dialog.innerHTML = '<div class="sheet-shell"><div class="sheet-handle" aria-hidden="true"></div><header class="sheet-head"><h2 class="sheet-title" id="sheet-title">' + esc(title) + '</h2><button type="button" class="icon-btn" data-ui="close" aria-label="Fermer le panneau">' + icons.close + '</button></header><div class="sheet-content">' + html + '</div></div>';
+    decorate(dialog); dialog.querySelector('.sheet-content').scrollTop = scroll;
+    if (action) {
+      var el = Array.from(dialog.querySelectorAll('[data-action]')).find(function (e) { return e.dataset.action === action && e.dataset.v === value; });
+      if (el) el.focus({preventScroll:true});
+    }
+  }
+  function open(type, title, html, trigger) {
+    if (!dialog) return;
+    if (dialog.open) close();
+    kind = type; returnTo = trigger || document.activeElement;
+    content(title, html); document.documentElement.classList.add('has-sheet'); dialog.showModal();
+    dialog.querySelector('[data-ui="close"]').focus({preventScroll:true});
+  }
+  function close() { if (dialog && dialog.open) dialog.close(); kind = null; document.documentElement.classList.remove('has-sheet'); }
+  function init() {
+    dialog = document.createElement('dialog'); dialog.className = 'sheet'; dialog.setAttribute('aria-labelledby','sheet-title'); document.body.appendChild(dialog);
+    toolbar = document.createElement('header'); toolbar.className = 'context-bar'; toolbar.hidden = true; document.body.appendChild(toolbar);
+    dialog.addEventListener('close', function () {
+      if (dialog.open) return;
+      kind = null; pendingUrl = ''; document.documentElement.classList.remove('has-sheet');
+      var target = returnTo && returnTo.isConnected ? returnTo : document.getElementById('filters-open');
+      if (target) target.focus({preventScroll:true});
+    });
+    dialog.addEventListener('click', function (e) {
+      var b = e.target.closest('[data-ui]');
+      if (b && b.dataset.ui === 'close') close();
+      if (b && b.dataset.ui === 'continue') { var url = pendingUrl; close(); window.open(url, '_blank', 'noopener,noreferrer'); }
+      if (e.target === dialog) { var r=dialog.getBoundingClientRect(); if (e.clientY<r.top || e.clientX<r.left || e.clientX>r.right || e.clientY>r.bottom) close(); }
+    });
+    toolbar.addEventListener('click',function(e) { if (e.target.closest('[data-ui="top"]')) {window.scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});var h=document.querySelector('main h1');if(h)h.focus({preventScroll:true});} });
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest('a[href]'); if (!a || e.defaultPrevented) return;
+      var u; try {u=new URL(a.href,location.href);}catch(err){return;}
+      if (!/^https?:$/.test(u.protocol) || u.origin === location.origin) return;
+      e.preventDefault();
+      open('external','Site externe','<p class="body">Vous allez être redirigé vers un site externe.</p><p class="small external-host">' + esc(u.hostname) + '</p><div class="sheet-actions"><button class="btn" type="button" data-ui="continue">Continuer</button><button class="btn outline" type="button" data-ui="close">Annuler</button></div>',a);
+      pendingUrl=u.href;
+    });
+  }
+  function afterRender(options) {
+    cfg=options; if(options.changed && kind)close(); decorate(options.root);
+    options.root.querySelectorAll('a[href]').forEach(function(a){try{var u=new URL(a.href,location.href);if(/^https?:$/.test(u.protocol)&&u.origin!==location.origin){a.classList.add('external-link');if(/(^|\.)gouv\.fr$/.test(u.hostname)||u.hostname==='service-public.fr')a.classList.add('government-link');}}catch(err){/* lien local */}});
+    toolbar.innerHTML = '<button class="context-title" type="button" data-ui="top" aria-label="Revenir au début : ' + esc(options.title) + '">' + esc(options.title) + '</button>' + (options.isJobs ? '<button class="icon-btn" type="button" data-action="openFilters" aria-label="Régler les filtres métiers">' + icons.settings + '</button><div class="context-summary">' + options.summary + '</div>' : '');
+    if(observer)observer.disconnect();
+    var h=options.root.querySelector('h1');
+    if(h){observer=new IntersectionObserver(function(entries){toolbar.hidden=entries[0].boundingClientRect.top>=0;},{threshold:0});observer.observe(h);}else toolbar.hidden=true;
+    if(kind==='filters')content('Filtrer les métiers',options.filters);
+  }
+  window.YSECK_UI = {icons:icons,init:init,afterRender:afterRender,open:open,close:close,current:function(){return kind;}};
+})();
