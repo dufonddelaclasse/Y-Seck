@@ -453,23 +453,16 @@
   function personalHome() {
     var jobs = myJobs();
     var sub = S.domains.slice(0, 3).map(domainLabel).join(', ') + (S.domains.length > 3 ? '…' : '');
-    var cards = [
-      ['#/metiers', 'tint-mint', 'var(--mint)', isParent() ? 'Ses métiers à découvrir' : 'Vos métiers à découvrir', jobs.length + ' pistes selon ' + (isParent() ? 'ses' : 'vos') + ' choix.'],
-      ['#/concours', 'tint-cyan', '#22C7E0', 'Comment y accéder', reachable()]
-    ];
-    return '<main class="screen pt">' +
+    return '<main class="screen pt personal-home">' +
       '<span class="eyebrow">' + (isParent() ? 'Parcours de votre enfant' : 'Votre espace personnel') + '</span>' +
       '<h1>' + (isParent() ? esc(childName()) : (S.name ? 'Bonjour ' + esc(S.name) : 'Votre avenir, à votre rythme')) + '</h1>' +
       (S.level ? '<span class="study-level">' + I.graduation + '<span>' + esc(S.level) + '</span></span>' : '') +
       '<p class="lead">Découvrez les métiers publics qui correspondent à ' + (isParent() ? 'ses' : 'vos') + ' envies.</p>' +
       (isParent() ? '<a class="link-plain" href="#/accueil">Tous les parcours de la famille</a>' : '') +
       (sub ? '<p class="small m0">' + esc(sub) + '</p>' : '') +
-      '<div class="stack mt-s">' + cards.map(function (c) {
-        return '<a class="card ' + c[1] + '" href="' + c[0] + '"><div class="card-txt">' +
-          '<span class="t"><span class="dot" style="background:' + c[2] + '"></span>' + c[3] + '</span><span class="d">' + esc(c[4]) + '</span></div>' +
-          '<span class="go">' + I.arrow + '</span></a>';
-      }).join('') + '</div>' +
-      '<div class="grid-2"><a class="prep" href="#/favoris"><b>' + S.favorites.length + '</b><span>' + (isParent() ? 'Ses métiers favoris' : 'Vos métiers favoris') + '</span></a><a class="prep" href="#/interets"><b>' + (isParent() ? 'Son projet' : 'Votre projet') + '</b><span>Affiner les préférences</span></a></div>' +
+      '<div class="home-features mt-s"><a class="home-feature home-discover" href="#/metiers" data-action="discoverJobs"><span class="home-count">' + jobs.length + '</span><span class="home-feature-copy"><b>' + (isParent() ? 'Ses métiers à découvrir' : 'Vos métiers à découvrir') + '</b><span>sélectionnés pour ' + (isParent() ? 'votre enfant' : 'vous') + '.</span></span><span class="home-go">' + I.arrow + '</span></a>' +
+      '<a class="home-feature home-access" href="#/concours"><img class="home-signpost" src="assets/logo-panneaux.png" alt="" width="1000" height="1224"><span class="home-feature-copy"><b>Comment y accéder</b><span>' + esc(reachable()) + '</span></span><span class="home-go">' + I.arrow + '</span></a></div>' +
+      '<div class="grid-2 home-shortcuts"><a href="#/favoris"><b>' + S.favorites.length + '</b><span>' + (isParent() ? 'Ses métiers favoris' : 'Vos métiers favoris') + '</span></a><a href="#/interets"><b>' + (isParent() ? 'Son projet' : 'Votre projet') + '</b><span>Affiner les préférences</span></a></div>' +
       '</main>' + tabbar('accueil');
   }
   screens.accueil = function () { return isParent() ? screens.famille() : personalHome(); };
@@ -1103,6 +1096,7 @@
         next = activeDomains().slice(); i = next.indexOf(v);
         if (i > -1) next.splice(i, 1); else next.push(v);
         set({ metDomains: next, metMode: 'custom', jobLimit: 60 }); countAnnounce(); break;
+      case 'discoverJobs': e.preventDefault(); clearTimeout(searchTimer); Object.assign(S,{metDomains:null,metMode:'mine',metCat:'Toutes',metFp:'Tous',q:'',jobLimit:60}); save(); navigate('#/metiers'); break;
       case 'forYou': set({ metDomains: null, metMode: 'mine', metCat: 'Toutes', metFp: 'Tous', q: '', jobLimit: 60 }); countAnnounce(); break;
       case 'allDomains': set({ metDomains: [], metMode: 'all', jobLimit: 60 }); countAnnounce(); break;
       case 'moreJobs': set({ jobLimit: S.jobLimit + 60 }); break;

@@ -749,3 +749,32 @@ html[data-contrast="true"] .details-toggle { background:#FFF; border-color:#000;
 @media (prefers-reduced-motion:reduce) { .job-slide-in { animation:none; } }
 html[data-contrast="true"] .job-row .fit { background:#FFF; color:#000; border:1px solid #000; }
 html[data-contrast="true"] .job-fit-check { background:#000; color:#FFF; }
+
+/* Espace personnel : deux accès principaux en dégradé et deux raccourcis discrets. */
+.personal-home { gap:12px; }
+.personal-home .study-level { margin:2px 0; }
+.personal-home .lead { margin-top:2px; }
+.home-features { display:flex; flex-direction:column; gap:8px; }
+.home-feature { display:grid; grid-template-columns:auto minmax(0,1fr) 34px; align-items:center; gap:12px; min-height:90px; padding:20px 18px; border-radius:22px; color:var(--ink); text-decoration:none; }
+.home-feature:hover { color:var(--ink); }
+.home-discover { background:linear-gradient(110deg,#00A1C4 0%,#009DE5 43%,#958BFF 100%); color:#FFF; }
+.home-discover:hover { color:#FFF; }
+.home-count { min-width:42px; font-size:2.5rem; font-weight:700; line-height:1; letter-spacing:-.045em; font-variant-numeric:tabular-nums; }
+.home-feature-copy { display:flex; flex-direction:column; min-width:0; font-size:1rem; line-height:1.25; letter-spacing:-.025em; }
+.home-feature-copy b { font-weight:700; }
+.home-go { display:grid; place-items:center; width:34px; height:34px; border:1px solid #E8E8F6; border-radius:50%; background:#FFF; color:var(--blue); }
+.home-go svg { width:18px; height:18px; }
+.home-access { grid-template-columns:42px minmax(0,1fr) 34px; min-height:126px; background:linear-gradient(110deg,#B9DFD8 0%,#D4D1FF 100%); }
+.home-signpost { display:block; width:42px; height:auto; }
+.home-access .home-feature-copy { gap:4px; }
+.home-shortcuts { gap:10px; }
+.home-shortcuts a { display:flex; flex-direction:column; gap:7px; min-width:0; min-height:96px; padding:15px 18px; border:1px solid var(--line); border-radius:22px; color:var(--ink); text-decoration:none; font-size:1rem; line-height:1.3; }
+.home-shortcuts a:hover { color:var(--ink); border-color:var(--blue); }
+.home-shortcuts b { font-weight:700; }
+html[data-contrast="true"] .home-feature { background:#FFF; color:#000; border:1px solid #000; }
+html[data-contrast="true"] .home-go { color:#000; border-color:#000; }
+html[data-contrast="true"] .home-shortcuts a { color:#000; border-color:#000; }
+@media (max-width:359px) { .home-feature { gap:10px; padding:18px 14px; } .home-count { min-width:36px; font-size:2.125rem; } .home-access { grid-template-columns:36px minmax(0,1fr) 30px; } .home-signpost { width:36px; } .home-go { width:30px; height:30px; } .home-shortcuts a { padding:15px 14px; } }
+html:is([data-large-text="true"],[data-dys-font="true"]) .home-feature { grid-template-columns:auto minmax(0,1fr); }
+html:is([data-large-text="true"],[data-dys-font="true"]) .home-go { grid-column:2; justify-self:end; }
+html:is([data-large-text="true"],[data-dys-font="true"]) .home-shortcuts { grid-template-columns:minmax(0,1fr); }
