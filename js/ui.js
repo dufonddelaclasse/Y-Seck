@@ -7,6 +7,8 @@
     bookmark: '<path d="M7 3.5h10a1.5 1.5 0 0 1 1.5 1.5v15L12 16l-6.5 4V5A1.5 1.5 0 0 1 7 3.5z"/>',
     home: '<path d="M3.5 10.5 11 4a1.5 1.5 0 0 1 2 0l7.5 6.5V19a1.5 1.5 0 0 1-1.5 1.5H15v-7H9v7H5A1.5 1.5 0 0 1 3.5 19z"/>',
     compass: '<circle cx="12" cy="12" r="8.5"/><path d="m15.5 8.5-2 5-5 2 2-5z"/>',
+    graduation: '<path d="m2 9 10-5 10 5-10 5zM6 11v6c4 3 8 3 12 0v-6M22 9v7"/>',
+    back: '<path d="m14.5 5-7 7 7 7"/>',
     book: '<path d="M12 5.5C9 3.5 5.5 3.5 3 4.5v15c3-1 6-.5 9 1 3-1.5 6-2 9-1v-15c-2.5-1-6-1-9 1zm0 0v15"/>',
     calendar: '<rect x="4" y="5.5" width="16" height="15" rx="2.5"/><path d="M8 3v5m8-5v5M4 11h16m-11 4h.01M12 15h.01M15 15h.01M9 18h.01M12 18h.01"/>',
     route: '<circle cx="6" cy="5" r="2"/><circle cx="18" cy="19" r="2"/><path d="M6 7v6a3 3 0 0 0 3 3h6a3 3 0 0 0 0-6h-3"/>',
@@ -16,7 +18,26 @@
     close: '<path d="m6 6 12 12M6 18 18 6"/>'
   };
   Object.keys(paths).forEach(function (k) { icons[k] = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + paths[k] + '</svg>'; });
-  var dialog, toolbar, cfg, kind = null, returnTo, pendingUrl = '', observer;
+  var dialog, toolbar, cfg, kind = null, returnTo, pendingUrl = '', contextHeading, scrollFrame;
+  function updateContext(){
+    toolbar.hidden=!contextHeading||window.scrollY<=0||contextHeading.getBoundingClientRect().top>=0;
+  }
+  function scheduleContext(){
+    if(scrollFrame)return;
+    scrollFrame=requestAnimationFrame(function(){scrollFrame=null;updateContext();});
+  }
+  var historySession='yseck-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2),historyPosition=0;
+  function tagHistory(){history.replaceState(Object.assign({},history.state,{yseckNavigation:{session:historySession,index:historyPosition,url:location.href}}),'',location.href);}
+  function syncHistory(){
+    var mark=history.state&&history.state.yseckNavigation;
+    if(mark&&mark.session===historySession&&mark.url===location.href)historyPosition=mark.index;
+    else {historyPosition++;tagHistory();}
+  }
+  function goBack(){
+    if(historyPosition>0){history.back();return;}
+    var link=cfg&&cfg.root.querySelector('a.back[href]');
+    location.hash=link?link.getAttribute('href'):(location.hash==='#/accueil'?'#/profil':'#/accueil');
+  }
   function esc(s) { return String(s).replace(/[&<>"']/g, function(c) { return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
   function headingIcon(text) {
     if (/domaine|catégor/i.test(text)) return icons.compass;
@@ -55,8 +76,11 @@
   }
   function close() { if (dialog && dialog.open) dialog.close(); kind = null; document.documentElement.classList.remove('has-sheet'); }
   function init() {
+    tagHistory();
     dialog = document.createElement('dialog'); dialog.className = 'sheet'; dialog.setAttribute('aria-labelledby','sheet-title'); document.body.appendChild(dialog);
     toolbar = document.createElement('header'); toolbar.className = 'context-bar'; toolbar.hidden = true; document.body.appendChild(toolbar);
+    window.addEventListener('scroll',scheduleContext,{passive:true});
+    window.addEventListener('resize',scheduleContext);
     dialog.addEventListener('close', function () {
       if (dialog.open) return;
       kind = null; pendingUrl = ''; document.documentElement.classList.remove('has-sheet');
@@ -69,7 +93,10 @@
       if (b && b.dataset.ui === 'continue') { var url = pendingUrl; close(); window.open(url, '_blank', 'noopener,noreferrer'); }
       if (e.target === dialog) { var r=dialog.getBoundingClientRect(); if (e.clientY<r.top || e.clientX<r.left || e.clientX>r.right || e.clientY>r.bottom) close(); }
     });
-    toolbar.addEventListener('click',function(e) { if (e.target.closest('[data-ui="top"]')) {window.scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});var h=document.querySelector('main h1');if(h)h.focus({preventScroll:true});} });
+    toolbar.addEventListener('click',function(e) {
+      if(e.target.closest('[data-ui="back"]'))goBack();
+      if (e.target.closest('[data-ui="top"]')) {window.scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});var h=document.querySelector('main h1');if(h)h.focus({preventScroll:true});}
+    });
     document.addEventListener('click', function (e) {
       var a = e.target.closest('a[href]'); if (!a || e.defaultPrevented) return;
       var u; try {u=new URL(a.href,location.href);}catch(err){return;}
@@ -80,12 +107,11 @@
     });
   }
   function afterRender(options) {
-    cfg=options; if(options.changed && kind)close(); decorate(options.root);
+    cfg=options; if(options.changed){syncHistory();if(kind)close();} decorate(options.root);
     options.root.querySelectorAll('a[href]').forEach(function(a){try{var u=new URL(a.href,location.href);if(/^https?:$/.test(u.protocol)&&u.origin!==location.origin){a.classList.add('external-link');if(/(^|\.)gouv\.fr$/.test(u.hostname)||u.hostname==='service-public.fr')a.classList.add('government-link');}}catch(err){/* lien local */}});
-    toolbar.innerHTML = '<button class="context-title" type="button" data-ui="top" aria-label="Revenir au début : ' + esc(options.title) + '">' + esc(options.title) + '</button>' + (options.isJobs ? '<button class="icon-btn" type="button" data-action="openFilters" aria-label="Régler les filtres métiers">' + icons.settings + '</button><div class="context-summary">' + options.summary + '</div>' : '');
-    if(observer)observer.disconnect();
-    var h=options.root.querySelector('h1');
-    if(h){observer=new IntersectionObserver(function(entries){toolbar.hidden=entries[0].boundingClientRect.top>=0;},{threshold:0});observer.observe(h);}else toolbar.hidden=true;
+    toolbar.innerHTML = '<button class="icon-btn context-back" type="button" data-ui="back" aria-label="Retour à l’écran précédent">'+icons.back+'</button><button class="context-title" type="button" data-ui="top" aria-label="Revenir au début : ' + esc(options.title) + '">' + esc(options.title) + '</button>' + (options.category ? '<span class="cat context-category '+esc(options.category.className)+'" aria-label="Catégorie '+esc(options.category.label)+'">'+esc(options.category.label)+'</span>' : '') + (options.isJobs ? '<button class="icon-btn" type="button" data-action="openFilters" aria-label="Régler les filtres métiers">' + icons.settings + '</button><div class="context-summary">' + options.summary + '</div>' : '');
+    contextHeading=options.root.querySelector('h1');
+    updateContext();
     if(kind==='filters')content('Filtrer les métiers',options.filters);
   }
   window.YSECK_UI = {icons:icons,init:init,afterRender:afterRender,open:open,close:close,current:function(){return kind;}};

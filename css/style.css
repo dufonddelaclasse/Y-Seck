@@ -585,12 +585,15 @@ html.has-sheet { overflow:hidden; }
 .sheet-content .profile dt { color:var(--muted); }
 .sheet-content .profile dd { margin:0; }
 .external-host { background:#F5F5F3; border-radius:10px; padding:10px 12px; }
-.context-bar { position:fixed; top:0; left:50%; transform:translateX(-50%); width:100%; max-width:430px; z-index:8; background:rgba(255,255,255,.97); border-bottom:1px solid #DEDEDA; padding:calc(8px + env(safe-area-inset-top,0px)) 16px 8px; display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:center; gap:4px 10px; backdrop-filter:blur(10px); }
+.context-bar { position:fixed; top:0; left:50%; transform:translateX(-50%); width:100%; max-width:430px; z-index:8; background:rgba(255,255,255,.97); border-bottom:1px solid #DEDEDA; padding:calc(8px + env(safe-area-inset-top,0px)) 16px 8px; display:grid; grid-template-columns:44px minmax(0,1fr) auto; align-items:center; gap:4px 10px; backdrop-filter:blur(10px); }
 .context-bar[hidden] { display:none; }
 .context-title { padding:6px 0; border:0; background:transparent; font:600 .9375rem var(--font); color:var(--blue); text-align:left; overflow:hidden; white-space:nowrap; text-overflow:ellipsis; min-height:36px; }
 .context-summary { grid-column:1/-1; display:flex; flex-wrap:wrap; gap:5px; }
 .context-summary .tag { font-size:.6875rem; padding:4px 8px; border:0; }
 .context-bar .icon-btn { border:0; }
+.context-category { justify-self:end; width:38px; height:38px; }
+.job-meta { flex-wrap:nowrap; overflow-x:auto; max-width:100%; padding-bottom:5px; scrollbar-width:thin; scrollbar-color:#C9CEEC transparent; overscroll-behavior-x:contain; -webkit-overflow-scrolling:touch; }
+.job-meta > .tag { flex:none; white-space:nowrap; }
 
 /* Bibliographie : les couvertures sont celles du PDF fourni. */
 .book-list { display:flex; flex-direction:column; }
@@ -622,3 +625,26 @@ html:is([data-large-text="true"],[data-dys-font="true"]) .book-card img { width:
 .search input::-webkit-search-cancel-button { -webkit-appearance:none; }
 .search input,.field input,.select select { font-size:max(16px,1rem); }
 @supports not (overflow:clip) { html { overflow-x:hidden; } }
+
+/* Domaines : cartes de sélection avec coche, dans le bleu de l’application. */
+.interest-option { position:relative; display:flex; align-items:center; min-height:104px; padding:16px 14px; border:1px solid #CDD2EB; border-radius:16px; background:#FFF; color:var(--blue); text-align:left; font:500 1rem/1.4 var(--font); overflow-wrap:anywhere; }
+.interest-option:hover { background:#F5F7FF; border-color:var(--blue); }
+.interest-option.on { border-color:var(--blue); box-shadow:inset 0 0 0 1px var(--blue); background:#EEF2FF; font-weight:700; }
+.interest-name { min-width:0; }
+.interest-option.on .interest-name { padding-right:22px; }
+.interest-check { display:none; position:absolute; right:12px; top:14px; width:19px; height:19px; border:1.5px solid currentColor; border-radius:50%; align-items:center; justify-content:center; }
+.interest-option.on .interest-check { display:flex; }
+.interest-check svg { width:13px; height:13px; }
+.interest-footer { display:flex; justify-content:space-between; align-items:center; gap:12px; }
+.interest-footer .text-btn { min-height:44px; flex:none; }
+.interest-footer .text-btn:disabled { color:var(--muted); cursor:default; text-decoration:none; }
+.study-level { display:inline-flex; align-self:flex-start; align-items:center; gap:7px; padding:6px 12px; border-radius:999px; background:#F0F0F1; color:#626268; font-size:.875rem; font-weight:600; }
+.study-level svg { width:19px; height:19px; }
+.catcard > .cat { align-self:flex-start; }
+.catcard .txt { gap:5px; }
+.category-fit { display:inline-flex; align-self:flex-start; align-items:center; gap:6px; max-width:100%; margin-top:8px; padding:5px 9px; border-radius:999px; background:#FFF; color:#5D5D63; font-size:.6875rem; font-weight:600; line-height:1.35; }
+.category-fit svg { width:14px; height:14px; color:var(--blue); }
+.category-fit > span { min-width:0; }
+@media (max-width:359px) { .interest-grid { grid-template-columns:minmax(0,1fr); } .interest-option { min-height:78px; } }
+html:is([data-large-text="true"],[data-dys-font="true"]) .interest-grid { grid-template-columns:minmax(0,1fr); }
+html[data-contrast="true"] :is(.interest-option,.interest-option.on,.study-level,.category-fit) { background:#FFF; color:#000; border:1px solid #000; }

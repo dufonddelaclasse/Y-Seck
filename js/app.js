@@ -107,6 +107,7 @@
     return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; });
   }
   function attr(name, val) { return ' data-' + name + '="' + esc(val) + '"'; }
+  function domainLabel(id) { return (D.domainLabels || {})[id] || id; }
   function norm(s) { return String(s).normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[’']/g, ' ').toLowerCase(); }
   function isParent() { return S.profile === 'par'; }
   function catClass(c) { return c === 'A+' ? 'cat-Ap' : (c === 'V' ? 'cat-X' : 'cat-' + c); }
@@ -232,6 +233,10 @@
   var NEED = ['', 'Avec le brevet ou un CAP', 'Avec le bac', 'Avec un Bac+2', 'Avec un Bac+3', 'Avec un Bac+5', 'Avec un doctorat'];
   var DIP = ['Sans diplôme', 'Brevet ou CAP', 'Bac', 'Bac+2', 'Bac+3', 'Bac+5', 'Doctorat'];
   function userRank() { return S.level && RANK[S.level] !== undefined ? RANK[S.level] : null; }
+  function categoryFit(category) {
+    var rank=userRank(),minimum={'A+':4,A:4,B:2,C:0}[category];
+    return rank!==null&&minimum!==undefined&&rank>=minimum?'<span class="category-fit">'+I.check+'<span>Niveau d’étude compatible</span></span>':'';
+  }
   function isOpen(j) { var r = userRank(); return j.lvl !== null && r !== null && r >= j.lvl; }
   function jobCategories(j) { return j.categories && j.categories.length ? j.categories : [j.cat]; }
   function passesLevelCategory(j) { return !(userRank() >= 5) || jobCategories(j).some(function (c) { return ['B', 'A', 'A+'].indexOf(c) > -1; }); }
@@ -249,9 +254,10 @@
 
   /* ---------- Correspondance métiers ---------- */
   function sharedTraits(j) { return (j.traits || []).filter(function (t) { return S.traits.indexOf(t) > -1; }); }
-  function score(j) { return (S.domains.indexOf(j.domain) > -1 ? 3 : 0) + sharedTraits(j).length; }
+  function matchesDomains(job, domains) { return domains.some(function(id){return (job.interests || [job.domain]).indexOf(id)>-1;}); }
+  function score(j) { return (matchesDomains(j,S.domains) ? 3 : 0) + sharedTraits(j).length; }
   function myJobs() {
-    var base = D.jobs.filter(function (j) { return passesLevelCategory(j) && (!S.domains.length || S.domains.indexOf(j.domain) > -1); });
+    var base = D.jobs.filter(function (j) { return passesLevelCategory(j) && (!S.domains.length || matchesDomains(j,S.domains)); });
     return base.sort(function (a, b) { return score(b) - score(a); });
   }
   function activeDomains() { return S.metDomains === null ? S.domains.slice() : S.metDomains; }
@@ -352,7 +358,7 @@
         return '<section class="explain row-x ' + c.tint + '" aria-label="Catégorie ' + c.id + '">' +
           '<span class="cat lg ' + catClass(c.id) + '" aria-hidden="true">' + c.id + '</span>' +
           '<div class="explain-body"><h2 class="explain-t"><span class="sr-only">Catégorie ' + c.id + ' : </span>' + esc(c.t) + '</h2>' +
-          '<p>' + esc(c.d) + '</p><p class="ex"><b>Pour y entrer :</b> ' + esc(c.dip) + '</p><p class="ex"><b>Par exemple :</b> ' + esc(c.ex) + '</p></div></section>';
+          '<p>' + esc(c.d) + '</p><p class="ex"><b>Pour y entrer :</b> ' + esc(c.dip) + '</p><p class="ex"><b>Par exemple :</b> ' + esc(c.ex) + '</p>' + categoryFit(c.id) + '</div></section>';
       }).join('') + '</div>' +
       '<div class="callout tint-blue"><span class="pin"></span><p>Rien n’est figé : on peut monter de catégorie au cours de sa carrière, par concours interne ou par promotion.</p></div>' +
       '</main><div class="footer"><button type="button" class="btn" data-action="startProfile">Démarrer mon profil</button></div>';
@@ -394,11 +400,11 @@
       progress(2, STEPS) +
       '<h1 class="mt-l">' + (isParent() ? 'Ce qui attire votre enfant' : 'Ce qui vous attire') + '</h1>' +
       '<p class="lead">Choisissez autant de domaines que vous voulez.</p>' +
-      '<div class="grid-2 mt-s">' + D.domains.map(function (d) {
+      '<div class="grid-2 interest-grid mt-s">' + D.domains.map(function (d) {
         var on = S.domains.indexOf(d) > -1;
-        return '<button type="button" class="chip wide' + (on ? ' on' : '') + '" aria-pressed="' + on + '"' + attr('action', 'domain') + attr('v', d) + '><span>' + esc(d) + '</span>' + (on ? I.check : '') + '</button>';
+        return '<button type="button" class="interest-option' + (on ? ' on' : '') + '" aria-pressed="' + on + '"' + attr('action', 'domain') + attr('v', d) + '><span class="interest-name">' + esc(domainLabel(d)) + '</span><span class="interest-check" aria-hidden="true">' + (on ? I.check : '') + '</span></button>';
       }).join('') + '</div></main>' +
-      '<div class="footer"><span class="small center">' + count + '</span><a class="btn" href="#/traits">Continuer</a></div>';
+      '<div class="footer"><div class="interest-footer"><span class="small">' + count + '</span><button type="button" class="text-btn" data-action="clearDomains"' + (n ? '' : ' disabled') + '>Effacer</button></div><a class="btn" href="#/traits">Continuer</a></div>';
   };
 
   screens.traits = function () {
@@ -446,7 +452,7 @@
   /* ---------- Tableau de bord ---------- */
   function personalHome() {
     var jobs = myJobs();
-    var sub = [S.level, S.domains.slice(0, 3).join(', ') + (S.domains.length > 3 ? '…' : '')].filter(Boolean).join(' · ');
+    var sub = S.domains.slice(0, 3).map(domainLabel).join(', ') + (S.domains.length > 3 ? '…' : '');
     var cards = [
       ['#/metiers', 'tint-mint', 'var(--mint)', isParent() ? 'Ses métiers à découvrir' : 'Vos métiers à découvrir', jobs.length + ' pistes selon ' + (isParent() ? 'ses' : 'vos') + ' choix.'],
       ['#/concours', 'tint-cyan', '#22C7E0', 'Comment y accéder', reachable()]
@@ -454,8 +460,10 @@
     return '<main class="screen pt">' +
       '<span class="eyebrow">' + (isParent() ? 'Parcours de votre enfant' : 'Votre espace personnel') + '</span>' +
       '<h1>' + (isParent() ? esc(childName()) : (S.name ? 'Bonjour ' + esc(S.name) : 'Votre avenir, à votre rythme')) + '</h1>' +
-      (isParent() ? '<a class="link-plain" href="#/accueil">Tous les parcours de la famille</a>' : '<p class="lead">Découvrez les métiers publics qui correspondent à vos envies.</p>') +
-      (sub ? '<p class="lead sm">' + esc(sub) + '</p>' : '') +
+      (S.level ? '<span class="study-level">' + I.graduation + '<span>' + esc(S.level) + '</span></span>' : '') +
+      '<p class="lead">Découvrez les métiers publics qui correspondent à ' + (isParent() ? 'ses' : 'vos') + ' envies.</p>' +
+      (isParent() ? '<a class="link-plain" href="#/accueil">Tous les parcours de la famille</a>' : '') +
+      (sub ? '<p class="small m0">' + esc(sub) + '</p>' : '') +
       '<div class="stack mt-s">' + cards.map(function (c) {
         return '<a class="card ' + c[1] + '" href="' + c[0] + '"><div class="card-txt">' +
           '<span class="t"><span class="dot" style="background:' + c[2] + '"></span>' + c[3] + '</span><span class="d">' + esc(c[4]) + '</span></div>' +
@@ -474,7 +482,7 @@
       '<p class="lead">Accompagnez chaque enfant à son rythme, dans un seul espace.</p>' +
       '<div class="grid-2"><div class="prep"><b>' + S.children.length + '</b><span>Parcours accompagnés</span></div><div class="prep"><b>' + completed + '</b><span>Profils complétés</span></div></div>' +
       '<h2 class="mt-m">Les parcours de votre famille</h2><div class="stack">' + S.children.map(function (c) {
-        return '<button type="button" class="prep family-card" data-action="openChild"' + attr('v', c.id) + '><span class="head"><b>' + esc(c.name || 'Votre enfant') + '</b>' + I.chev + '</span><span class="small">' + esc(c.level || 'Niveau à renseigner') + ' · ' + (c.done ? 'Profil complété' : 'Profil initial') + '</span><span class="row">' + c.domains.map(function (d) { return '<span class="tag">' + esc(d) + '</span>'; }).join('') + '</span><span class="small">' + c.favorites.length + ' métier' + (c.favorites.length > 1 ? 's' : '') + ' favori' + (c.favorites.length > 1 ? 's' : '') + '</span></button>';
+        return '<button type="button" class="prep family-card" data-action="openChild"' + attr('v', c.id) + '><span class="head"><b>' + esc(c.name || 'Votre enfant') + '</b>' + I.chev + '</span><span class="small">' + esc(c.level || 'Niveau à renseigner') + ' · ' + (c.done ? 'Profil complété' : 'Profil initial') + '</span><span class="row">' + c.domains.map(function (d) { return '<span class="tag">' + esc(domainLabel(d)) + '</span>'; }).join('') + '</span><span class="small">' + c.favorites.length + ' métier' + (c.favorites.length > 1 ? 's' : '') + ' favori' + (c.favorites.length > 1 ? 's' : '') + '</span></button>';
       }).join('') + '</div><button type="button" class="btn outline" data-action="addChild">Ajouter un profil</button>' +
       '<p class="small">Chaque enfant conserve ses choix, son lieu de vie et ses favoris. Les informations restent sur cet appareil.</p></main>' + tabbar('accueil');
   };
@@ -497,10 +505,10 @@
     var doms = activeDomains();
     var list = D.jobs.filter(function (j) {
       if (!passesLevelCategory(j)) return false;
-      if (doms.length && doms.indexOf(j.domain) === -1) return false;
+      if (doms.length && !matchesDomains(j,doms)) return false;
       if (S.metCat !== 'Toutes' && jobCategories(j).indexOf(S.metCat) === -1) return false;
       if (S.metFp !== 'Tous' && j.fp.indexOf(S.metFp) === -1) return false;
-      if (q && norm(j.name + ' ' + j.domain + ' ' + (j.rmfpDomain || '') + ' ' + (j.sourceName || '') + ' ' + (j.aliases || []).join(' ')).indexOf(q) === -1) return false;
+      if (q && norm(j.name + ' ' + j.domain + ' ' + (j.rmfpDomain || '') + ' ' + (j.sourceName || '') + ' ' + (j.aliases || []).join(' ') + ' ' + (j.interests || []).map(domainLabel).join(' ')).indexOf(q) === -1) return false;
       return true;
     });
     return list.slice().sort(function (a, b) {
@@ -534,7 +542,7 @@
     var order = S.domains.concat(D.domains.filter(function (d) {return S.domains.indexOf(d) === -1;}));
     return '<section class="stack"><h3>Votre sélection</h3><div class="row">' +
       chip('forYou', '', isParent() ? 'Pour votre enfant' : 'Pour vous', S.metMode === 'mine') + chip('allDomains', '', 'Tous les domaines', S.metMode === 'all') + '</div></section>' +
-      '<section class="stack mt-m"><h3>Domaines</h3><div class="row" role="group" aria-label="Domaines">' + order.map(function(d){return chip('metDomain',d,d,doms.indexOf(d)>-1);}).join('') + '</div></section>' +
+      '<section class="stack mt-m"><h3>Domaines</h3><div class="row" role="group" aria-label="Domaines">' + order.map(function(d){return chip('metDomain',d,domainLabel(d),doms.indexOf(d)>-1);}).join('') + '</div></section>' +
       '<section class="stack mt-m"><h3>Catégories</h3><div class="row" role="group" aria-label="Catégorie">' + (userRank()>=5 ? ['Toutes','A+','A','B'] : ['Toutes','A+','A','B','C']).map(function(c){return chip('metCat',c,c==='Toutes'?'Toutes':c,S.metCat===c);}).join('') + '</div></section>' +
       '<section class="stack mt-m"><h3>Versants</h3><div class="row" role="group" aria-label="Versants">' + ['Tous','E','T','H'].map(function(f){return chip('metFp',f,f==='Tous'?'3 versants':D.fps[f],S.metFp===f);}).join('') + '</div></section>' +
       '<div class="sheet-actions"><button type="button" class="btn" data-ui="close">Afficher ' + filteredJobs().length + ' métiers</button></div>';
@@ -571,7 +579,8 @@
     var dates = examsFor(j);
     var shared = sharedTraits(j);
     return '<main class="screen top-tight">' + back('#/metiers', 'Métiers') +
-      '<div class="row"><span class="tag fill ' + catClass(j.cat) + '">' + catLabel(j.cat) + '</span><span class="tag">' + esc(j.domain) + '</span>' +
+      '<div class="row job-meta" role="group" aria-label="Catégorie, centres d’intérêt et versants" tabindex="0"><span class="tag fill ' + catClass(j.cat) + '">' + catLabel(j.cat) + '</span>' +
+      (j.interests || [j.domain]).map(function (d) { return '<span class="tag">' + esc(domainLabel(d)) + '</span>'; }).join('') +
       fpNames(j.fp).map(function (f) { return '<span class="tag">' + esc(f) + '</span>'; }).join('') + '</div>' +
       '<h1 class="sm">' + esc(j.name) + '</h1><p class="body">' + esc(j.desc.length>300?j.desc.slice(0,297).replace(/\s+\S*$/,'')+'…':j.desc) + '</p>' +
       '<button type="button" class="btn outline" data-action="favorite"' + attr('v', j.id) + ' aria-pressed="' + (S.favorites.indexOf(j.id) > -1) + '">' + I.bookmark + (S.favorites.indexOf(j.id) > -1 ? 'Retirer des favoris' : 'Ajouter aux favoris') + '</button>' +
@@ -626,7 +635,7 @@
         return '<div class="catcard-wrap ' + c.tint + (open ? ' open' : '') + '">' +
           '<button type="button" class="catcard" aria-expanded="' + open + '" aria-controls="' + panelId + '"' + attr('action', 'openCat') + attr('v', c.id) + '>' +
           '<span class="cat lg ' + catClass(c.id) + '" aria-hidden="true">' + c.id + '</span>' +
-          '<span class="txt"><span class="sr-only">Catégorie ' + c.id + ' : </span><b>' + esc(c.dip) + '</b><span class="role">' + esc(c.role) + '</span><span class="ex">' + esc(c.ex) + '</span></span>' +
+          '<span class="txt"><span class="sr-only">Catégorie ' + c.id + ' : </span><b>' + esc(c.dip) + '</b><span class="role">' + esc(c.role) + '</span><span class="ex">' + esc(c.ex) + '</span>' + categoryFit(c.id) + '</span>' +
           I.down + '</button>' + panel + '</div>';
       }).join('') + '</div>' +
       '<h2 class="eyebrow mt-m">Pour toutes et tous</h2>' +
@@ -843,7 +852,7 @@
     var rows = [
       ['Profil', S.profile ? PROFILE_LABEL[S.profile] : 'Non renseigné'],
       [isParent() ? 'Niveau de votre enfant' : 'Niveau', S.level || 'Non renseigné'],
-      ['Domaines', S.domains.length ? S.domains.join(', ') : 'Tous'],
+      ['Domaines', S.domains.length ? S.domains.map(domainLabel).join(', ') : 'Tous'],
       ['Façon de travailler', S.traits.length ? S.traits.map(traitLabel).join(', ') : 'Non renseignée'],
       ['Boursier·e', S.boursier || 'Non renseigné'],
       ['Budget', S.budget || 'Non renseigné']
@@ -965,7 +974,8 @@
     var t = root.querySelector('h1');
     if (t) t.setAttribute('tabindex', '-1');
     document.title = (t ? t.textContent + ' · ' : '') + 'Y-Seck';
-    UI.afterRender({root:root,title:t?t.textContent:'Y-Seck',isJobs:r.name==='metiers',summary:r.name==='metiers'?filterSummary():'',filters:r.name==='metiers'?jobFilters():'',changed:changed});
+    var contextJob=r.name==='metier'&&D.jobs.find(function(j){return j.id===r.arg;});
+    UI.afterRender({root:root,title:t?t.textContent:'Y-Seck',isJobs:r.name==='metiers',category:contextJob&&['A+','A','B','C'].indexOf(contextJob.cat)>-1?{label:contextJob.cat,className:catClass(contextJob.cat)}:null,summary:r.name==='metiers'?filterSummary():'',filters:r.name==='metiers'?jobFilters():'',changed:changed});
 
     if (changed) {
       if (t && booted) t.focus({ preventScroll: true });
@@ -1032,6 +1042,7 @@
         i = S.domains.indexOf(v); next = S.domains.slice();
         if (i > -1) next.splice(i, 1); else next.push(v);
         set({ domains: next, metDomains: null, metMode: 'mine', jobLimit: 60 }); break;
+      case 'clearDomains': set({domains:[],metDomains:null,metMode:'mine',jobLimit:60}); announce('Les domaines sélectionnés ont été effacés.'); break;
       case 'trait':
         i = S.traits.indexOf(v); next = S.traits.slice();
         if (i > -1) next.splice(i, 1); else next.push(v);
