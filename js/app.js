@@ -35,7 +35,7 @@
     Object.assign(S, blankPerson(), p);
     S.metDomains = null; S.metMode = 'mine'; S.metCat = 'Toutes'; S.metFp = 'Tous'; S.q = ''; S.jobLimit = 60; S.region = 'Toutes';
     S.prepBudget = null; S.talentsAll = false; S.calCat = 'Toutes'; S.calFp = 'Tous'; S.calQ = ''; S.calLimit = 40;
-    locationResults = []; locationStatus = '';
+    locationResults = []; locationStatus = ''; locationQuery = ''; locationSearchId++;
   }
   function ensureFamily() {
     if (!S.children.length) {
@@ -149,6 +149,11 @@
   function chip(action, value, label, on, extraCls) {
     return '<button type="button" class="chip' + (extraCls ? ' ' + extraCls : '') + ((action === 'metCat' || action === 'calCat') && value !== 'Toutes' ? ' category-choice ' + catClass(value) : '') + (on ? ' on' : '') + '" aria-pressed="' + on + '"' + attr('action', action) + attr('v', value) + '>' + esc(label) + '</button>';
   }
+  function searchField(id, label, placeholder, value) {
+    return '<div class="search">' + I.search + '<label class="sr-only" for="' + id + '">' + esc(label) + '</label>' +
+      '<input type="search" id="' + id + '" placeholder="' + esc(placeholder) + '" value="' + esc(value || '') + '" autocomplete="off">' +
+      '<button type="button" class="search-clear" data-action="clearSearch"' + attr('v',id) + ' aria-label="Effacer la recherche"' + (value ? '' : ' hidden') + '>' + I.close + '</button></div>';
+  }
 
   /* ---------- Régions (code postal) ---------- */
   var REG = {
@@ -177,10 +182,10 @@
       '</select></label>';
   }
   function inRegion(code) { return S.region === 'Toutes' || regionOf(code) === S.region; }
-  var locationResults = [], locationStatus = '', communes = null;
+  var locationResults = [], locationStatus = '', locationQuery = '', locationSearchId = 0, communes = null;
   function locationForm() {
     return '<section class="stack mt-m"><h2 class="h3">' + (isParent() ? 'Son lieu de vie' : 'Votre lieu de vie') + '</h2><p class="small m0">' + (S.location ? esc(S.location.label) : 'Ajoutez une commune pour classer les Prépas Talents par proximité.') + '</p>' +
-      '<label class="field"><span>Commune ou code postal</span><input id="location-query" autocomplete="postal-code" placeholder="Ex. : Lyon ou 69003"></label><button type="button" class="btn outline" data-action="searchLocation">Rechercher la commune</button>' +
+      searchField('location-query','Commune ou code postal','Ex. : Lyon ou 69003',locationQuery) + '<button type="button" class="btn outline" data-action="searchLocation">Rechercher la commune</button>' +
       '<p class="small m0" role="status">' + esc(locationStatus) + '</p><div class="stack">' + locationResults.map(function (c, i) { return '<button type="button" class="chip" data-action="selectLocation"' + attr('v', i) + '>' + esc(c.label) + '</button>'; }).join('') + '</div>' +
       (S.location ? '<button type="button" class="text-btn" data-action="clearLocation">Retirer la commune</button>' : '') +
       '<p class="small m0">La recherche et le calcul des distances se font sur cet appareil. La commune saisie n’est transmise à aucun service externe.</p></section>';
@@ -188,6 +193,7 @@
   async function searchLocation() {
     var input = document.getElementById('location-query');
     var query = input ? input.value.trim() : '';
+    var request = ++locationSearchId;
     if (query.length < 2) { locationStatus = 'Saisissez une commune ou un code postal.'; render(); return; }
     var owner = isParent() ? S.activeChild : S.profile;
     locationStatus = 'Recherche de communes…'; locationResults = []; render();
@@ -200,13 +206,13 @@
           var part = await fetch('data/' + path); if (!part.ok) throw new Error('communes'); return part.json();
         })));
       }
-      if (owner !== (isParent() ? S.activeChild : S.profile)) return;
+      if (request !== locationSearchId || owner !== (isParent() ? S.activeChild : S.profile)) return;
       var q = norm(query);
       locationResults = communes.filter(function (c) { return /^\d{5}$/.test(query) ? c[2].indexOf(query) > -1 : norm(c[0]).indexOf(q) > -1; })
         .sort(function (a, b) { return (norm(a[0]) === q ? -1 : 0) - (norm(b[0]) === q ? -1 : 0) || a[0].localeCompare(b[0], 'fr'); }).slice(0, 12)
         .map(function (c) { return { label: c[0] + ' (' + c[2].join(', ') + ')', code: c[1], lon: c[3], lat: c[4] }; });
       locationStatus = locationResults.length ? 'Choisissez votre commune.' : 'Aucune commune trouvée. Essayez une autre orthographe.';
-    } catch (err) { locationStatus = 'Le référentiel de communes est indisponible. Réessayez plus tard.'; }
+    } catch (err) { if(request !== locationSearchId)return; locationStatus = 'Le référentiel de communes est indisponible. Réessayez plus tard.'; }
     render();
   }
   function distanceTo(t) {
@@ -434,7 +440,7 @@
       '<p>Au programme : cours, entraînements aux épreuves et un·e tuteur·rice qui vous suit toute l’année.</p>' +
       '<p><b>' + (S.boursier === 'Oui' ? 'Bonne nouvelle : ' : '') + 'une bourse de ' + esc(D.talentsGrantLabel || '5 000 €') + ' par an</b> est versée aux élèves. L’entrée se fait sur dossier et entretien, selon les ressources et la motivation.</p>' +
       '</div></section>' +
-      '</main><div class="footer"><button type="button" class="btn" data-action="finish">Voir ' + (isParent() ? 'son parcours' : 'mon parcours') + '</button></div>';
+      '</main><div class="footer"><a class="btn" href="#/accueil" data-action="finish">Voir ' + (isParent() ? 'son parcours' : 'mon parcours') + '</a></div>';
   };
 
   /* ---------- Tableau de bord ---------- */
@@ -521,7 +527,7 @@
   function filterSummary() {
     var doms = activeDomains();
     return '<span class="tag">' + (doms.length ? doms.length + ' domaine' + (doms.length > 1 ? 's' : '') : 'Tous les domaines') + '</span>' +
-      '<span class="tag">' + esc(S.metCat === 'Toutes' ? (userRank() >= 5 ? 'B, A, A+' : 'Toutes catégories') : 'Catégorie ' + S.metCat) + '</span><span class="tag">' + esc(S.metFp === 'Tous' ? '3 versants' : D.fps[S.metFp]) + '</span>';
+      '<span class="tag' + (S.metCat === 'Toutes' ? '' : ' fill ' + catClass(S.metCat)) + '">' + esc(S.metCat === 'Toutes' ? (userRank() >= 5 ? 'B, A, A+' : 'Toutes catégories') : 'Catégorie ' + S.metCat) + '</span><span class="tag">' + esc(S.metFp === 'Tous' ? '3 versants' : D.fps[S.metFp]) + '</span>';
   }
   function jobFilters() {
     var doms = activeDomains();
@@ -538,7 +544,7 @@
       '<span class="eyebrow">Explorer</span><div class="title-row"><h1>' + (isParent() ? 'Ses métiers' : 'Vos métiers') + '</h1><button id="filters-open" type="button" class="icon-btn" data-action="openFilters" aria-label="Régler les filtres métiers">' + I.settings + '</button></div>' + childSelector() +
       (Date.now() < hintUntil ? '<p class="filter-hint" role="status">Utilisez les réglages pour filtrer les métiers par catégorie.</p>' : '') +
       '<div class="row filter-summary" aria-label="Filtres actifs">' + filterSummary() + '</div>' +
-      '<label class="search">' + I.search + '<span class="sr-only">Rechercher un métier</span><input type="search" id="q" placeholder="Rechercher un métier" value="' + esc(S.q || '') + '" autocomplete="off"></label>' +
+      searchField('q','Rechercher un métier','Rechercher un métier',S.q) +
       '<div class="list" id="jobs">' + jobRows() + '</div></main>' + tabbar('metiers');
   };
   function jobDetails(id) {
@@ -638,7 +644,7 @@
     }).slice().sort(function (a,b) { return (a.date || '9999').localeCompare(b.date || '9999'); });
     return '<main class="screen top-tight">' + back(job ? '#/metier/' + job.id : '#/concours', job ? 'Métier' : 'Concours et prépas') +
       '<span class="eyebrow">Calendrier</span><h1 class="sm">Dates des concours</h1>' + (job ? '<p class="body">' + esc(job.name) + '</p>' : '') +
-      '<label class="search">' + I.search + '<span class="sr-only">Rechercher un concours ou une ville</span><input id="cal-q" type="search" placeholder="Concours ou ville" value="' + esc(S.calQ) + '"></label>' +
+      searchField('cal-q','Rechercher un concours ou une ville','Concours ou ville',S.calQ) +
       '<div class="row" role="group" aria-label="Sessions">' + chip('calView','upcoming','À venir',S.calView === 'upcoming','blue') + chip('calView','all','Toutes les sessions',S.calView === 'all','blue') + '</div>' +
       '<div class="row" role="group" aria-label="Catégorie">' + ['Toutes','A+','A','B','C'].map(function(c) { return chip('calCat',c,c,S.calCat===c,'narrow'); }).join('') + '</div>' +
       '<div class="row" role="group" aria-label="Versant">' + ['Tous','E','T','H'].map(function(f) { return chip('calFp',f,f==='Tous'?'3 versants':D.fps[f],S.calFp===f,'blue'); }).join('') + '</div>' +
@@ -810,7 +816,7 @@
     var subjects=[];D.books.forEach(function(b){b.subjects.forEach(function(t){if(subjects.indexOf(t)<0)subjects.push(t);});});
     return '<main class="screen top-tight">' + back('#/concours/prepas','Concours et prépas') +
       '<span class="eyebrow">Lire et préparer</span><h1>Bibliographie</h1><p class="small m0">Sélection indicative de l’INSP · septembre 2026.</p>' +
-      '<label class="search">' + I.search + '<span class="sr-only">Rechercher un titre ou un auteur</span><input type="search" id="book-q" placeholder="Titre ou auteur" value="' + esc(S.bookQ) + '"></label>' +
+      searchField('book-q','Rechercher un titre ou un auteur','Titre ou auteur',S.bookQ) +
       '<label class="select"><span>Thématique</span><select id="book-subject">' + ['Toutes'].concat(subjects).map(function(t){return '<option' + (S.bookSubject===t?' selected':'') + '>' + esc(t) + '</option>';}).join('') + '</select></label>' +
       '<div id="books">' + bookList() + '</div>' +
       '<p class="small">Ces lectures ne remplacent pas le programme du concours.</p>' + ext(D.bookSource.url,'Consulter la sélection INSP','link-plain') + '</main>' + tabbar('concours');
@@ -959,7 +965,7 @@
     var t = root.querySelector('h1');
     if (t) t.setAttribute('tabindex', '-1');
     document.title = (t ? t.textContent + ' · ' : '') + 'Y-Seck';
-    UI.afterRender({root:root,title:t?t.textContent:'Y-Seck',isJobs:r.name==='metiers',summary:filterSummary(),filters:jobFilters(),changed:changed});
+    UI.afterRender({root:root,title:t?t.textContent:'Y-Seck',isJobs:r.name==='metiers',summary:r.name==='metiers'?filterSummary():'',filters:r.name==='metiers'?jobFilters():'',changed:changed});
 
     if (changed) {
       if (t && booted) t.focus({ preventScroll: true });
@@ -975,6 +981,12 @@
   function countAnnounce(sel) {
     var n = root.querySelectorAll(sel || '#jobs .list-row, .calendar-list .list-row, #talents .list-row').length;
     announce(n === 0 ? 'Aucun résultat' : (n === 1 ? '1 résultat' : n + ' résultats'));
+  }
+
+  function navigate(hash) {
+    /* Afficher l’écran dans le même clic, sans attendre l’événement hashchange. */
+    if (location.hash !== hash) history.pushState(null, '', hash);
+    render(); window.scrollTo(0, 0);
   }
 
   window.addEventListener('hashchange', function () { render(); window.scrollTo(0, 0); });
@@ -1028,7 +1040,18 @@
       case 'budget': set({ budget: v, prepBudget: null }); break;
       case 'go': location.hash = '#/' + v; break;
       case 'startProfile': S.introSeen = true; save(); location.hash = '#/profil'; break;
-      case 'finish': S.done = true; save(); location.hash = '#/accueil'; break;
+      case 'finish': e.preventDefault(); S.done = true; save(); navigate('#/accueil'); break;
+      case 'clearSearch': {
+        e.preventDefault(); clearTimeout(searchTimer);
+        if(v==='q'){S.q='';S.jobLimit=60;}
+        else if(v==='cal-q'){S.calQ='';S.calLimit=40;}
+        else if(v==='book-q')S.bookQ='';
+        else if(v==='location-query'){locationQuery='';locationResults=[];locationStatus='';locationSearchId++;}
+        else break;
+        save(); render();
+        var searchInput=document.getElementById(v);if(searchInput)searchInput.focus({preventScroll:true});
+        announce('Recherche effacée. La liste complète pour vos filtres est affichée.'); break;
+      }
       case 'skip': S.done = true; save(); break;
       case 'metDomain':
         next = activeDomains().slice(); i = next.indexOf(v);
@@ -1077,6 +1100,8 @@
 
   var searchTimer = null;
   root.addEventListener('input', function (e) {
+    if(e.target.matches('.search input')){var clear=e.target.closest('.search').querySelector('.search-clear');if(clear)clear.hidden=!e.target.value;}
+    if(e.target.id==='location-query'){locationQuery=e.target.value;locationSearchId++;return;}
     if (e.target.id === 'book-q') { S.bookQ=e.target.value;save();document.getElementById('books').innerHTML=bookList();return; }
     if (e.target.id === 'cal-q') {
       S.calQ = e.target.value; S.calLimit = 40; save();
