@@ -20,6 +20,7 @@ Ouvrir http://localhost:8000. Un serveur est nécessaire à la recherche locale 
 - Fiches métiers, activités et compétences du répertoire, voies d’accès sourcées, dates de concours et favoris par profil.
 - Pages « Se préparer » adaptées au métier : catégories retenues, versants, dates disponibles, études, aides documentaires et prépas. Les métiers à catégorie variable ont aussi leur page personnelle ; les catégories encore indéterminées restent explicitement à préciser. Les emplois contractuels identifiés portent la pastille CDD et leur propre parcours sans concours. La navigation principale comporte Accueil, Métiers, Favoris et Profil.
 - Prépas Talents triées par distance à la commune renseignée, parmi les résultats du filtre choisi. Distances indicatives à vol d’oiseau entre centres de communes ; formations à distance en dernier.
+- Les mises à jour sont signalées au retour dans un ancien onglet. Le bouton « Actualiser » renouvelle le document et conserve la fiche consultée et les réponses enregistrées ; aucune actualisation automatique pendant le parcours ou la saisie.
 - Contraste renforcé, texte agrandi et police OpenDyslexic facultatifs. La conformité RGAA reste à évaluer par un audit complet.
 
 ## Base éditoriale et maintenance

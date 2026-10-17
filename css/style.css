@@ -758,7 +758,12 @@ html[data-contrast="true"] .details-toggle { background:#FFF; border-color:#000;
 .preparation-card .catcard .role { font-size:1rem; font-weight:400; }
 .preparation-card .cat-panel > h3 { font-size:1.125rem; }
 .preparation-card .exam { border-radius:20px; padding:18px; }
-.preparation-card .exam-route h4 { font-size:1rem; line-height:1.4; }
+.preparation-card .cat-panel { gap:16px; padding:4px 16px 18px; }
+.preparation-card .cat-panel > h3 { margin:0 2px; }
+.preparation-card .exam-route + .exam-route { margin-top:0; padding-top:18px; border-top:0; }
+.preparation-card .exam-route h4 { margin:0 0 18px; font-size:1rem; line-height:1.4; }
+.preparation-card .exam-route dl { margin:0; }
+.preparation-card .exam-route dd { margin-bottom:18px; }
 .preparation-card .exam-head { font-size:.75rem; color:var(--muted); font-weight:400; }
 .preparation-card .exam-route dt { font-size:.8125rem; font-weight:600; }
 .official-exam-links { display:flex; flex-direction:column; align-items:flex-start; gap:12px; margin-top:8px; }
@@ -836,3 +841,12 @@ html[data-contrast="true"] :is(.cat,.tag).cat-CDD { background:#000; color:#FFF;
 .study-meta { display:flex; flex-wrap:wrap; gap:6px; }
 .study-open { display:flex; align-items:center; justify-content:space-between; margin-top:10px; color:var(--muted); text-decoration:underline; font-size:.875rem; }
 .study-open svg { width:18px; height:18px; flex:none; }
+
+/* Une mise à jour reste facultative et laisse le parcours en cours intact. */
+.update-notice { position:fixed; z-index:9; bottom:calc(82px + env(safe-area-inset-bottom,0px)); left:50%; transform:translateX(-50%); display:flex; flex-wrap:wrap; align-items:center; gap:10px; width:calc(100% - 32px); max-width:398px; padding:14px 16px; border:1px solid #CFD5F1; border-radius:20px; background:#F2F4FF; color:var(--blue); box-shadow:0 4px 20px #00009114; }
+.update-notice[hidden] { display:none; }
+.update-notice-copy { flex-basis:100%; font-size:.875rem; line-height:1.4; }
+.update-notice button { min-height:44px; padding:8px 14px; border-radius:999px; font:500 .875rem var(--font); }
+.update-notice-action { border:1px solid var(--blue); background:var(--blue); color:#FFF; }
+.update-notice-dismiss { border:1px solid #CFD5F1; background:#FFF; color:var(--blue); }
+html[data-contrast="true"] .update-notice { background:#FFF; color:#000; border-color:#000; }

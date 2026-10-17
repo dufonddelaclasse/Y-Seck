@@ -46,6 +46,12 @@ for (const j of fixed) {
   assert(html.includes('href="#/handicap/'+j.id+'"'));
   assert(html.includes('role="group" aria-label="Budget"'));
   assert(html.includes('>Aides</h2>')&&html.includes('>Prépas</h2>')&&!html.includes('Prépas et aides'),'Aides et prépas séparées : '+j.id);
+  for(const match of html.matchAll(/<section class="exam exam-route"[^>]*>([\s\S]*?)<\/section>/g)){
+    const exam=match[1];
+    assert.equal((exam.match(/<h4>/g)||[]).length,1,'Un concours par encart blanc : '+j.id);
+    const fields=['<h4>','Organisé par','Épreuves en métropole','Épreuves en outre-mer','official-exam-links'];
+    for(let i=1;i<fields.length;i++)assert(exam.indexOf(fields[i])>exam.indexOf(fields[i-1]),'Organisation de l’encart concours : '+j.id+' '+fields[i]);
+  }
   assert(!html.includes('href="#/prepa/talents'),'Talents masqués pour les non-boursiers : '+j.id);
   for(const session of examsFor(j,true))assert.equal(calendarCategory(session,j),j.cat,'Date d’une autre catégorie dans '+j.id+' : '+session.name);
   for(const rid of j.routeIds){const r=data.accessRoutes[rid];if(r.cat===j.cat)for(const fp of r.fp)if(j.fp.includes(fp)){
