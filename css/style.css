@@ -756,6 +756,12 @@ html[data-contrast="true"] .details-toggle { background:#FFF; border-color:#000;
 .exam-route dd { margin:0 0 12px; line-height:1.5; }
 .preparation-card .catcard .txt > b { font-size:1.1875rem; line-height:1.25; }
 .preparation-card .catcard .role { font-size:1rem; font-weight:400; }
+.preparation-fps { display:flex; flex-direction:column; align-items:flex-start; gap:6px; margin-top:6px; min-width:0; }
+.preparation-fp { display:inline-flex; align-items:flex-start; gap:7px; max-width:100%; padding:7px 9px; border-radius:8px; background:var(--blue); color:#FFF; font-size:.8125rem; line-height:1.4; }
+.preparation-fp > svg { flex:none; width:19px; height:19px; }
+.preparation-fp > span { min-width:0; }
+.preparation-level { margin-top:10px; text-align:left; }
+html[data-contrast="true"] .preparation-fp { background:#FFF; color:#000; border:1px solid #000; }
 .preparation-card .cat-panel > h3 { font-size:1.125rem; }
 .preparation-card .exam { border-radius:20px; padding:18px; }
 .preparation-card .cat-panel { gap:16px; padding:4px 16px 18px; }

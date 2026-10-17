@@ -694,12 +694,12 @@
   function preparationCategoryCard(c, job) {
     var open = expandedPrepCategories[job.id] === c.id;
     var panelId = 'prep-' + job.id + '-' + catClass(c.id);
-    var fps = job.fp.split('').filter(function(f){return D.fps[f];});
     var routes=jobRoutes(job).filter(function(r){return r.cat===c.id;});
+    var fps = job.fp.split('').filter(function(f){return D.fps[f]&&(!routes.length||routes.some(function(r){return r.fp.indexOf(f)>-1;}));});
     var titles=[];routes.forEach(function(r){fps.forEach(function(f){var e=(r.examInfo||{})[f];if(e&&e.cardTitle&&titles.indexOf(e.cardTitle)===-1)titles.push(e.cardTitle);});});
     var title=titles.length===1?titles[0]:'Concours de catégorie '+c.id;
     return '<div class="catcard-wrap preparation-card ' + c.tint + (open?' open':'') + '"><button type="button" class="catcard" aria-expanded="' + open + '" aria-controls="' + panelId + '" data-action="openPrepCat"' + attr('v',c.id) + attr('job',job.id) + '><span class="cat lg ' + catClass(c.id) + '" aria-hidden="true">' + c.id + '</span>' +
-      '<span class="txt"><b>'+esc(title)+'</b><span class="role">Catégorie ' + c.id + '</span>'+categoryFit(c.id)+'<span class="ex">' + esc(fpNames(job.fp).join(' · ')) + '</span></span>' + (open?'':I.down) + '</button>' +
+      '<span class="txt"><b>'+esc(title)+'</b><span class="role">Catégorie ' + c.id + '</span><span class="preparation-fps">'+fps.map(function(f){var labels={E:'Fonction publique de l’État',T:'Fonction publique territoriale',H:'Fonction publique hospitalière'},icons={E:I.government,T:I.city,H:I.hospital};return '<span class="preparation-fp">'+icons[f]+'<span>'+labels[f]+'</span></span>';}).join('')+'</span>'+preparationLevel(c,job,routes)+'</span>' + (open?'':I.down) + '</button>' +
       (open?'<div class="cat-panel" id="' + panelId + '"><h3>Accès à ce métier</h3>' + fps.map(function(f){
         var matching=routes.filter(function(r){return r.fp.indexOf(f)>-1;});
         return matching.length?matching.map(function(r){
@@ -708,6 +708,16 @@
           return '<section class="exam exam-route" data-fp="'+f+'"><h4>'+esc(e.name||r.name)+'</h4><dl><dt>Organisé par</dt><dd>'+esc(e.org||'Structure à confirmer dans l’avis du concours')+'</dd><dt>Épreuves en métropole</dt><dd>'+esc(e.metro||'Lieux non précisés : consulter l’avis du concours.')+'</dd><dt>Épreuves en outre-mer</dt><dd>'+esc(e.om||'Centre non confirmé : consulter l’avis du concours.')+'</dd></dl><div class="official-exam-links">'+links.map(function(l){return ext(l.url,l.label,'link-plain');}).join('')+'</div></section>';
         }).join(''):'<div class="exam" data-fp="'+f+'"><p class="small">Le corps ou cadre d’emplois doit être précisé dans l’offre pour identifier le concours et son organisateur. Les dates et lieux ne sont pas encore associés à ce métier.</p></div>';
       }).join('') + '<p class="small m0">Les lieux, les épreuves et les conditions sont précisés dans l’avis propre au concours.</p><button type="button" class="preparation-collapse" data-action="openPrepCat"'+attr('v',c.id)+attr('job',job.id)+' aria-label="Réduire les informations du concours">'+I.down+'</button></div>':'') + '</div>';
+  }
+  function preparationLevel(category,job,routes) {
+    var levels=[],complete=routes.length>0;
+    routes.forEach(function(r){if(typeof r.lvl==='number'&&DIP[r.lvl]!==undefined){if(levels.indexOf(r.lvl)===-1)levels.push(r.lvl);}else complete=false;});
+    var minimum=complete&&levels.length===1?levels[0]:(job.cat===category.id&&typeof job.lvl==='number'?job.lvl:null);
+    var qualifications=routes.map(function(r){var sourceJob=jobById(r.id);return r.qualification||(sourceJob&&sourceJob.qualification)||(/sur titres?/.test(norm(r.access))?'selon le concours':null);});
+    var qualification=job.qualification||(qualifications.some(Boolean)?(qualifications.every(function(q){return q&&q===qualifications[0];})?qualifications[0]:'selon le concours'):null);
+    var compatible=!qualification&&minimum!==null&&userRank()!==null&&userRank()>=minimum;
+    var label=qualification?'Diplôme requis : '+qualification:compatible?'Niveau d’étude compatible':minimum===null?'Niveau requis selon le concours':minimum===0?'Aucun diplôme requis':'Niveau '+DIP[minimum]+' requis';
+    return '<span class="category-fit preparation-level">'+(compatible?I.check:'')+'<span>'+esc(label)+'</span></span>';
   }
   screens.preparer = function(id) {
     var job=jobById(id);
@@ -744,7 +754,7 @@
     if(job) {
       var routes=jobRoutes(job);
       return '<main class="screen top-tight">'+back(prepHref(job),'Se préparer')+'<span class="eyebrow">Orientation</span><h1 class="sm">Quelles études choisir ?</h1><p class="body">'+esc(job.name)+'</p>' +
-        '<h2 class="mt-m">Études et conditions d’accès</h2><dl class="profile"><dt>Diplôme</dt><dd>'+esc(job.qualification||(job.lvl!==null?DIP[job.lvl]:'À vérifier selon le corps, le cadre d’emplois et l’offre'))+'</dd><dt>Accès</dt><dd>'+esc(job.access)+'</dd></dl>'+
+        '<h2 class="mt-m">Études et conditions d’accès</h2>'+
         '<div class="timeline">'+job.steps.map(function(step,i){return '<div class="tl"><div class="rail"><span class="node"></span>'+(i<job.steps.length-1?'<span class="bar"></span>':'')+'</div><div class="txt"><span>'+esc(step.replace(/^\*/,''))+'</span></div></div>';}).join('')+'</div>'+
         (routes.length?'<h2>Les voies d’accès de ce métier</h2><div class="stack">'+routes.map(function(r){return '<article class="prep"><h3>'+esc(r.name)+'</h3><p>'+esc(r.access+' · '+fpNames(r.fp).join(', '))+'</p>'+ext(r.source,'Consulter les conditions officielles','link-plain')+'</article>';}).join('')+'</div>':'')+
         '<a class="btn mt-m" href="'+prepHref(job)+'">Voir les prépas et les aides</a></main>'+tabbar('metiers');

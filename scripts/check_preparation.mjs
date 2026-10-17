@@ -38,7 +38,10 @@ for (const j of fixed) {
   assert(html.includes('href="#/metier/'+j.id+'"'),j.id);
   assert(!html.includes('>Pour vos choix<'),j.id);
   assert(!html.includes('href="#/sans-concours'),j.id);
-  for(const f of ['E','T','H'])assert.equal(html.includes('data-fp="'+f+'"'),j.fp.includes(f),'Versant non pertinent : '+j.id+' '+f);
+  const routes=j.routeIds.map(id=>data.accessRoutes[id]).filter(r=>r.cat===j.cat&&r.fp.split('').some(fp=>j.fp.includes(fp)));
+  for(const f of ['E','T','H'])assert.equal(html.includes('data-fp="'+f+'"'),j.fp.includes(f)&&(!routes.length||routes.some(r=>r.fp.includes(f))),'Versant non pertinent : '+j.id+' '+f);
+  assert(html.indexOf('preparation-fps')<html.indexOf('preparation-level'),'Le niveau vient après le versant : '+j.id);
+  assert(!screens.etudes(j.id).includes('<dl class="profile">'),'Les lignes Diplôme / Accès sont retirées de l’orientation : '+j.id);
   assert(html.includes('Recommandations bibliographiques'),'Bibliographie : '+j.id);
   assert(html.includes('href="#/annales/'+j.id+'"'),'Annales : '+j.id);
   assert.equal(html.includes('href="#/calendrier/'+j.id+'"'),examsFor(j).length>0,'Dates : '+j.id);
@@ -64,6 +67,16 @@ assert(fixed.some(j=>examsFor(j).length>0),'Un cas avec dates doit être vérifi
 assert(fixed.some(j=>examsFor(j).length===0),'Un cas sans date doit être vérifié.');
 // Régression INSP / inspecteurs : une route partagée ne suffit jamais à changer la catégorie d’un avis.
 const administrator=data.jobs.find(j=>j.id==='admin-etat');
+assert(screens.preparer('admin-terr').includes('Fonction publique territoriale')&&!screens.preparer('admin-terr').includes('Fonction publique de l’État'));
+assert(screens.preparer('admin-etat').includes('Fonction publique de l’État'));
+S.level='Bac+3';
+assert(screens.preparer('admin-terr').includes('Niveau d’étude compatible'));
+assert(screens.preparer('ingenieur-terr').includes('Niveau Bac+5 requis')&&!screens.preparer('ingenieur-terr').includes('Niveau d’étude compatible'),'Le niveau du concours prime sur le minimum de la catégorie.');
+assert(!screens.preparer('atsem').includes('Niveau d’étude compatible'),'Un niveau compatible ne prouve pas le diplôme spécifique requis.');
+assert(screens.preparer('fpsan014').includes('Diplôme requis')&&!screens.preparer('fpsan014').includes('Niveau d’étude compatible'),'La qualification du concours est conservée pour les métiers RMFP réglementés.');
+S.level=null;
+assert(screens.preparer('admin-terr').includes('Niveau Bac+3 requis'));
+S.level='Doctorat';
 const wrongSession={id:'regression-category',name:'Concours inspecteur B',cat:'B',fp:'E',voie:'Concours externe',date:'2099-01-01',routeIds:['admin-etat']};
 data.calendar.push(wrongSession);
 assert(!examsFor(administrator,true).some(c=>c.id===wrongSession.id));
