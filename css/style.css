@@ -191,7 +191,10 @@ h3 { margin: 0; font-size: 1.0625rem; font-weight: 700; }
   border-bottom: 1px solid var(--line);
   text-decoration: none; color: var(--ink);
 }
-.list-row:hover { color: var(--ink); background: #FAFAFD; }
+.list-row:hover { color: var(--ink); }
+@media (hover:hover) and (pointer:fine) {
+  :where(.app:not(.touch-input)) .list-row:hover { background:#FAFAFD; }
+}
 .list-row .main { flex: 1; display: flex; flex-direction: column; gap: 3px; min-width: 0; }
 .list-row .name { font-size: 1rem; font-weight: 600; line-height: 1.25; }
 .list-row .meta { font-size: 0.8125rem; color: var(--muted); }
@@ -224,7 +227,9 @@ h3 { margin: 0; font-size: 1.0625rem; font-weight: 700; }
 .num { flex: none; width: 28px; height: 28px; border-radius: 999px; border: 1px solid var(--blue); color: var(--blue); display: flex; align-items: center; justify-content: center; font-size: 0.8125rem; font-weight: 700; }
 
 .ladder { display: flex; flex-direction: column; gap: 4px; }
-.rung { display: flex; justify-content: space-between; align-items: center; border-radius: 16px; padding: 12px 16px; font-size: 0.9375rem; font-weight: 600; }
+.rung { display: flex; justify-content: space-between; align-items: center; gap:12px; border-radius: 16px; padding: 12px 16px; font-size: 0.9375rem; font-weight: 600; }
+.rung > span:first-child { flex:1; min-width:0; }
+.rung-categories { display:flex; flex:none; flex-wrap:wrap; align-items:center; justify-content:flex-end; gap:4px; }
 .rung small { font-size: 0.75rem; font-weight: 700; }
 .ladder .via { padding-left: 16px; font-size: 0.75rem; color: var(--muted); }
 
