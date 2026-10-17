@@ -26,7 +26,13 @@ Ouvrir http://localhost:8000. Un serveur est nécessaire à la recherche locale 
 
 `data/catalogue.json` est l’index de la base de référence, répartie dans `data/catalogue/`. `js/catalog-data.js` charge ces données pour le navigateur. Le répertoire RMFP décrit des fonctions, pas une équivalence unique avec un grade ou un concours. Les correspondances portent donc un statut `proposé`, `validé` ou `rejeté`. Les fonctions sans correspondance documentée restent consultables, avec un renvoi aux portails officiels.
 
-Le classeur interne comporte onze onglets : Pilotage, Metiers, Contenus, CorpsGrades, Correspondances, Concours, Preparations, Ouvrages, Ressources, Sources et Reglages. Il contient uniquement des données éditoriales publiques, aucun profil utilisateur.
+Le classeur interne comporte douze onglets : Pilotage, Metiers, Contenus, CorpsGrades, Epreuves, Correspondances, Concours, Preparations, Ouvrages, Ressources, Sources et Reglages. Il contient uniquement des données éditoriales publiques, aucun profil utilisateur.
+
+L’onglet Epreuves conserve le nom du concours, sa structure organisatrice, les lieux en métropole et en outre-mer, avec la source et la date de vérification, pour chaque corps et versant. Une ville de formation ou une localisation d’emploi n’est pas un centre d’épreuves. Une information non publiée reste explicitement à confirmer dans l’avis. Les lieux renseignés pour 2026 ne valent pas confirmation pour une autre session.
+
+Une date affichée sur une fiche métier doit partager le corps, le versant et la catégorie du métier. Les concours externes sont affichés avant les autres voies, puis par date de clôture. Le rapprochement INSP ne reconnaît pas le début du mot « inspecteur ». Les conservateurs du patrimoine, les conservateurs des bibliothèques et la magistrature administrative ont des voies distinctes.
+
+Pour les métiers à catégorie variable, les petites pastilles montrent les catégories observées dont le nombre d’offres atteint au moins la moitié de la catégorie la plus représentée. Sans effectifs, les catégories observées sont conservées ; à défaut, les correspondances de corps validées sont utilisées, puis les pistes proposées, comme indications à confirmer. Les catégories marginales restent consultables dans les détails et disponibles dans les filtres. Cette présentation ne modifie ni la catégorie source, ni l’accès à la préparation générique, ni le statut contractuel.
 
 L’onglet Ouvrages permet d’actualiser les titres, auteur·rice·s, thématiques et notices. Les couvertures extraites du PDF sont conservées par identifiant ; une URL HTTPS peut les remplacer. L’import des anciens classeurs sans cet onglet conserve la bibliographie.
 

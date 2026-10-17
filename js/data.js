@@ -556,7 +556,7 @@
     /* budget : 0 = gratuit, 1 = moins de 1 000 €, 2 = plus */
     preps: [
       { id: 'talents', t: 'Prépas Talents', price: 'Gratuit', budget: 0, talents: true, d: '106 prépas en France et outre-mer. Sur dossier et entretien, sous conditions de ressources.' },
-      { id: 'ipag', t: 'IPAG et CPAG', price: 'Frais d’université', budget: 1, d: '27 instituts dédiés aux concours administratifs, licence et master d’administration publique.' },
+      { id: 'ipag', t: 'IPAG et CPAG', price: 'Frais d’inscription', budget: 1, d: '27 instituts dédiés aux concours administratifs, licence et master d’administration publique.' },
       { id: 'iep', t: 'IEP et masters d’administration publique', price: 'Frais d’inscription', budget: 1, d: 'Sciences Po et universités, en métropole et outre-mer.' },
       { id: 'privees', t: 'Préparations privées', price: 'Payant', budget: 2, d: 'À distance ou en présentiel. Tarifs très variables : comparez.' }
     ],

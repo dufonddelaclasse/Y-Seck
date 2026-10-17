@@ -48,6 +48,7 @@ def score_detail(url):
     entire=text(main)
     cat=re.search(r'Catégorie statutaire\s*:\s*Catégorie (A\+|A|B|C)',entire)
     voie=re.search(r"Voie d'accès\s*:\s*(.*?)\s*Employeur",entire)
+    employer=re.search(r'Employeur\s*:\s*(.*?)\s*Date de clôture',entire)
     rows={}
     for tr in main.xpath('.//tr'):
         cells=tr.xpath('./th|./td')
@@ -57,7 +58,7 @@ def score_detail(url):
     if not closing:
         m=re.search(r'Date de clôture des inscriptions\s*:\s*(.*?)(?:Calendrier|Modalités|$)',entire)
         closing=m[1] if m else ''
-    return {'id':'score-'+url.rsplit('/',1)[1],'name':inclusive(name),'rawName':name,'cat':cat[1] if cat else 'V','fp':'E','voie':voie[1] if voie else 'Voir l’avis','url':url,'source':'SCORE','checked':CHECKED,'open':iso(opening),'date':iso(closing),'openLabel':opening,'closeLabel':closing,'writtenLabel':written,'oralLabel':oral,'written':iso(written),'oral':iso(oral)}
+    return {'id':'score-'+url.rsplit('/',1)[1],'name':inclusive(name),'rawName':name,'cat':cat[1] if cat else 'V','fp':'E','voie':voie[1] if voie else 'Voir l’avis','url':url,'source':'SCORE','checked':CHECKED,'open':iso(opening),'date':iso(closing),'openLabel':opening,'closeLabel':closing,'writtenLabel':written,'oralLabel':oral,'written':iso(written),'oral':iso(oral),'employer':'Ministère / administration : '+employer[1] if employer else ''}
 
 def ars_page(i):
     p=get(ARS+'/home?page='+str(i)+'&size=10')
@@ -95,10 +96,10 @@ if __name__=='__main__':
     for c in new:
         previous=old.get(c['id'],{});rec=dict(previous);rec.update(c)
         # Conserver les rattachements manuels ; compléter les nouveaux avis par les règles des corps.
-        ids=list(previous.get('routeIds',[]))
+        ids=[rid for rid in previous.get('routeIds',[]) if rid in patterns and c['fp'] in patterns[rid]['fp'] and (c['cat']=='V' or patterns[rid]['cat']==c['cat'])]
         if not ids:
             for r in db['routes']:
-                if c['fp'] in r['fp'] and r.get('matchPattern') and re.search(r['matchPattern'],norm(c.get('rawName',c['name'])).replace('’',"'"),re.I):ids.append(r['id'])
+                if c['fp'] in r['fp'] and (c['cat']=='V' or r['cat']==c['cat']) and r.get('matchPattern') and re.search(r['matchPattern'],norm(c.get('rawName',c['name'])).replace('’',"'"),re.I):ids.append(r['id'])
         if not ids:
             name=norm(c.get('rawName',c['name'])).replace('’',"'")
             rid='corps-'+hashlib.sha1((c['fp']+'|'+name).encode()).hexdigest()[:12]

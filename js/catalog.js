@@ -6,6 +6,7 @@
   Object.assign(D, P.otherPreps || {});
   var byRoute = {};
   P.routes.forEach(function (r) { byRoute[r.id] = r; });
+  (P.examDetails || []).forEach(function(e){var r=byRoute[e.routeId];if(r)(r.examInfo||(r.examInfo={}))[e.fp]=e;});
   D.accessRoutes = byRoute;
   D.crosswalk = P.links;
   D.catalogChecked = P.checked;

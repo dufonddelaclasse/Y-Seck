@@ -744,6 +744,16 @@ html[data-contrast="true"] .details-toggle { background:#FFF; border-color:#000;
 .job-row.job-cat-B { --job-tint:#DFFBF2; }
 .job-row.job-cat-C { --job-tint:#FFF6D1; }
 .job-row > .cat { align-self:flex-start; }
+.job-categories { flex:none; display:flex; flex-wrap:wrap; align-items:flex-start; gap:2px; width:38px; }
+.job-categories .cat.sm { width:18px; height:18px; font-size:.5625rem; }
+.job-category-inline { flex:none; }
+.job-category-inline .job-categories { width:auto; flex-wrap:nowrap; }
+.job-category-inline .cat.sm { width:26px; height:26px; font-size:.75rem; }
+.exam-route + .exam-route { margin-top:20px; padding-top:16px; border-top:1px solid var(--line); }
+.exam-route h4 { margin:12px 0; font-size:.9375rem; line-height:1.4; }
+.exam-route dl { grid-template-columns:minmax(0,1fr); gap:4px; }
+.exam-route dt { color:var(--muted); font-size:.75rem; }
+.exam-route dd { margin:0 0 12px; line-height:1.5; }
 .job-row > .chev { align-self:center; }
 .job-row .main { gap:5px; }
 .job-row .fits { display:flex; flex-direction:column; align-items:stretch; gap:8px; margin-top:6px; }

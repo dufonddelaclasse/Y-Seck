@@ -25,9 +25,9 @@ vm.createContext(context);
 for (const file of ['js/data.js','js/catalog.js','js/ui.js']) vm.runInContext(fs.readFileSync(new URL(file,root),'utf8'),context);
 context.window.YSECK_UI.afterRender=()=>{};
 let source=fs.readFileSync(new URL('js/app.js',root),'utf8');
-source=source.replace('  UI.init();\n  render();\n  booted = true;', '  window.tests={screens,S,filteredJobs,jobFilters,jobCategories,isContractJob,prepHref,examsFor,tabbar,categoryBooks,bookList,studyResources};');
+source=source.replace('  UI.init();\n  render();\n  booted = true;', '  window.tests={screens,S,filteredJobs,jobFilters,jobCategories,isContractJob,prepHref,examsFor,calendarCategory,calendarRows,indicativeCategories,jobRow,tabbar,categoryBooks,bookList,studyResources};');
 vm.runInContext(source,context);
-const {screens,S,filteredJobs,jobFilters,isContractJob,prepHref,examsFor,tabbar,categoryBooks,bookList,studyResources}=context.window.tests;
+const {screens,S,filteredJobs,jobFilters,isContractJob,prepHref,examsFor,calendarCategory,calendarRows,indicativeCategories,jobRow,tabbar,categoryBooks,bookList,studyResources}=context.window.tests;
 const data=context.window.DATA;
 Object.assign(S,{profile:'etu',name:'Test',level:'Doctorat',domains:[],metDomains:[],traits:[],budget:'Plus de 1 000 €',prepBudget:'2',boursier:'Non'});
 const fixed=data.jobs.filter(j=>['A+','A','B','C'].includes(j.cat)&&!isContractJob(j));
@@ -46,10 +46,34 @@ for (const j of fixed) {
   assert(html.includes('href="#/handicap/'+j.id+'"'));
   assert(html.includes('role="group" aria-label="Budget"'));
   assert(!html.includes('href="#/prepa/talents'),'Talents masqués pour les non-boursiers : '+j.id);
+  for(const session of examsFor(j,true))assert.equal(calendarCategory(session,j),j.cat,'Date d’une autre catégorie dans '+j.id+' : '+session.name);
+  for(const rid of j.routeIds){const r=data.accessRoutes[rid];if(r.cat===j.cat)for(const fp of r.fp)if(j.fp.includes(fp)){
+    assert(r.examInfo[fp]?.name&&r.examInfo[fp]?.org&&r.examInfo[fp]?.metro&&r.examInfo[fp]?.om,'Organisation du concours : '+rid+' '+fp);
+    assert(html.includes(r.examInfo[fp].name.replace(/&/g,'&amp;')),'Nom du concours affiché : '+rid);
+  }}
   counts[j.cat]=(counts[j.cat]||0)+1;
 }
 assert(fixed.some(j=>examsFor(j).length>0),'Un cas avec dates doit être vérifié.');
 assert(fixed.some(j=>examsFor(j).length===0),'Un cas sans date doit être vérifié.');
+// Régression INSP / inspecteurs : une route partagée ne suffit jamais à changer la catégorie d’un avis.
+const administrator=data.jobs.find(j=>j.id==='admin-etat');
+const wrongSession={id:'regression-category',name:'Concours inspecteur B',cat:'B',fp:'E',voie:'Concours externe',date:'2099-01-01',routeIds:['admin-etat']};
+data.calendar.push(wrongSession);
+assert(!examsFor(administrator,true).some(c=>c.id===wrongSession.id));
+data.calendar.pop();
+for(const session of data.calendar)for(const rid of session.routeIds){const r=data.accessRoutes[rid];assert(r.fp.includes(session.fp));assert(session.cat==='V'||r.cat===session.cat,'Corps du calendrier incompatible : '+session.id+' '+rid);}
+const example=data.calendar.find(c=>c.cat==='A+'&&c.fp==='E');
+const externalFirst=calendarRows([{...example,name:'Interne avant',voie:'Concours interne',date:'2026-01-01'},{...example,name:'Externe après',voie:'Concours externe',date:'2027-01-01'}]);
+assert(externalFirst.indexOf('Externe après')<externalFirst.indexOf('Interne avant'),'Les concours externes précèdent les internes, même si leur date est ultérieure.');
+const communicator=data.jobs.find(j=>j.id==='fpcom018');
+assert.deepEqual(Array.from(indicativeCategories(communicator)),['A','B']);
+assert(jobRow(communicator).includes('job-categories')&&!jobRow(communicator).includes('Var.'));
+assert.equal(communicator.cat,'V');assert.equal(prepHref(communicator),'#/concours');
+const magistrate=data.jobs.find(j=>j.id==='fpjus016');assert(magistrate.routeIds.includes('magistrat-administratif')&&!magistrate.routeIds.includes('magistrat'));
+S.prepBudget='1';
+const fees=screens.preparer('aah');assert(fees.includes('Avec frais d’inscription')&&!fees.includes('Moins de 1 000')&&!fees.includes('Frais d’université'));
+assert(fees.includes('href="#/prepa/ipag/')&&!fees.includes('href="#/prepa/privees/'));
+S.prepBudget='2';
 const contracts=data.jobs.filter(isContractJob);
 assert.equal(contracts.length,db.legacyJobs.concat(db.rmfp).filter(j=>j.cat==='X'||j.cat==='CDD'||j.contractual===true).length,'Seuls les métiers contractuels identifiés sont reclassés.');
 for (const j of contracts) {

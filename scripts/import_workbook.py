@@ -94,6 +94,7 @@ def read_workbook(path, db):
         unique(seen,name);result[key]=list(records.values())
     unique(list(jobs.values()),'Metiers')
     route_ids={r['id'] for r in result['routes']}
+    routes={r['id']:r for r in result['routes']}
     for r in result['routes']:
         if r.get('matchPattern'):re.compile(r['matchPattern'])
     for l in result['links']:
@@ -106,6 +107,21 @@ def read_workbook(path, db):
         if c.get('open') and c.get('date') and c['open']>c['date']:raise ValueError('Ouverture après clôture : '+c['id'])
         source_url(c.get('url'))
         if c.get('cat') not in ['A+','A','B','C','V','X']:raise ValueError('Catégorie de concours invalide : '+c['id'])
+        for rid in c.get('routeIds',[]):
+            route=routes[rid]
+            if c['fp'] not in route['fp'] or c['cat'] in ['A+','A','B','C'] and route['cat'] not in [c['cat'],'V']:
+                raise ValueError('Catégorie ou versant incompatible entre le concours '+c['id']+' et le corps '+rid)
+    if 'Epreuves' in wb.sheetnames:
+        details={e['id']:e for e in result.get('examDetails',[])};seen=[]
+        for row in rows(wb,'Epreuves'):
+            id,rid,fp,name,org,metro,om,source,checked=(row+[None]*9)[:9]
+            id=string(id);rid=string(rid);fp=string(fp);seen.append({'id':id})
+            if rid not in routes or fp not in ['E','T','H'] or fp not in routes[rid]['fp']:raise ValueError('Corps ou versant d’épreuves invalide : '+id)
+            if not all([name,org,metro,om,source,checked]):raise ValueError('Information d’épreuves manquante : '+id)
+            source_url(source)
+            details[id]=dict(id=id,routeId=rid,fp=fp,name=string(name),org=string(org),metro=string(metro),om=string(om),source=string(source),checked=date(checked))
+        unique(seen,'Epreuves');result['examDetails']=list(details.values())
+        if len({(e['routeId'],e['fp']) for e in result['examDetails']})!=len(result['examDetails']):raise ValueError('Informations d’épreuves en double pour le même corps et versant')
     preps={t['id']:('talents',t) for t in result['talents']}
     for group,entries in result['otherPreps'].items():preps.update({t['id']:(group,t) for t in entries})
     for row in rows(wb,'Preparations'):
@@ -140,7 +156,7 @@ def read_workbook(path, db):
             books[id]=book
         unique(seen,'Ouvrages');result['books']=list(books.values())
     if 'Ressources' in wb.sheetnames:
-        resources=[];known_routes={r['id'] for r in result['routes']}
+        resources={r['id']:r for r in result.get('studyResources',[])};seen=[];known_routes={r['id'] for r in result['routes']}
         for row in rows(wb,'Ressources'):
             id,title,kind,cats,fps,concours,route_ids,year,url,source,name,scope,checked,note=(row+[None]*14)[:14]
             id=string(id);cats=parts(cats);fps=parts(fps);route_ids=parts(route_ids)
@@ -152,10 +168,10 @@ def read_workbook(path, db):
             if year is not None and (not str(year).isdigit() or not 1900<=int(year)<=2100):raise ValueError('Session invalide : '+id)
             resource=dict(id=id,title=string(title),kind=kind,categories=cats,fps=fps,concours=string(concours),routeIds=route_ids,year=string(year),url=string(url),sourceUrl=string(source),sourceName=string(name),scope=scope,checked=date(checked))
             if note:resource['note']=string(note)
-            resources.append(resource)
-        unique(resources,'Ressources')
-        if len({r['url'] for r in resources})!=len(resources):raise ValueError('URL de ressource en double')
-        result['studyResources']=resources
+            resources[id]=resource;seen.append({'id':id})
+        unique(seen,'Ressources')
+        if len({r['url'] for r in resources.values()})!=len(resources):raise ValueError('URL de ressource en double')
+        result['studyResources']=list(resources.values())
     result['sources']=[dict(zip(['id','name','url','checked','note'],row[:5])) for row in rows(wb,'Sources')]
     for source in result['sources']:source['checked']=date(source['checked']);source_url(source['url'])
     for path,type,value in [r[:3] for r in rows(wb,'Reglages')]:

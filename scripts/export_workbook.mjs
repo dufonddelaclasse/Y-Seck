@@ -11,6 +11,7 @@ const wb=Workbook.create();
 const sheets={};
 const safe=v=>v===undefined||v===null?'':typeof v==='string'&&v.startsWith('=')?"'"+v:v;
 const flat=v=>Array.isArray(v)?v.join(' | '):v;
+const dates=v=>v&&/^\d{4}-\d{2}-\d{2}$/.test(v)?new Date(v+'T00:00:00Z'):'';
 async function table(name,headers,rows,widths){
  const s=wb.worksheets.add(name);sheets[name]=s;s.showGridLines=false;
  const all=[headers,...rows.map(r=>r.map(safe))];
@@ -47,12 +48,16 @@ const content=[];for(const j of jobs)for(const k of contentFields)if(j[k])conten
 await table('Contenus',['Identifiant','Métier ID','Champ','Texte complet'],content,[35,24,20,125]);
 const routeFields=['id','name','cat','lvl','fp','access','cal','prep','source','matchPattern'];
 await table('CorpsGrades',['Identifiant','Corps ou cadre d’emplois','Catégorie','Niveau minimum','Versants','Mode d’accès','Clé calendrier','Prépa concours','Source URL','Règle de rapprochement (avancé)'],db.routes.map(r=>routeFields.map(k=>r[k])),[25,65,14,18,12,65,45,45,75,85]);
+const detailFields=['id','routeId','fp','name','org','metro','om','source','checked'];
+const epreuves=await table('Epreuves',['Identifiant','Corps ID','Versant','Nom du concours','Organisateur','Épreuves en métropole','Épreuves en outre-mer','Source URL','Vérifié le'],(db.examDetails||[]).map(e=>detailFields.map(k=>k==='checked'?dates(e[k]):e[k])),[36,25,12,42,45,55,55,75,18]);
+epreuves.getRange('I2:I1000').setNumberFormat('dd/mm/yyyy');
+epreuves.getRange('D2:G'+((db.examDetails||[]).length+1)).format.wrapText=true;
+epreuves.getRange('A2:I'+((db.examDetails||[]).length+1)).format.rowHeight=75;
 const linkFields=['id','jobId','routeId','status','source','note'];
 const liens=await table('Correspondances',['Identifiant','Métier ID','Corps ID','Statut','Source URL','Note de validation'],db.links.map(r=>linkFields.map(k=>r[k])),[48,24,26,18,75,110]);
 liens.getRange('D2:D5000').dataValidation={rule:{type:'list',values:['proposé','validé','rejeté']}};
 liens.getRange('D2:D5000').conditionalFormats.add('containsText',{text:'proposé',format:{fill:'#FFF6D1'}});
 const examFields=['id','name','cat','fp','voie','open','date','openLabel','closeLabel','writtenLabel','oralLabel','location','employer','url','source','checked','routeIds','provisional'];
-const dates=v=>v&&/^\d{4}-\d{2}-\d{2}$/.test(v)?new Date(v+'T00:00:00Z'):'';
 const concours=await table('Concours',['Identifiant','Concours ou examen','Catégorie','Versant','Voie d’accès','Ouverture','Clôture','Libellé ouverture','Libellé clôture','Écrits ou sélection','Oraux','Localisation','Établissement','Avis URL','Source','Vérifié le','Corps IDs','Prévisionnel'],db.calendar.map(r=>examFields.map(k=>['open','date','checked'].includes(k)?dates(r[k]):flat(r[k]))),[58,75,14,12,45,16,16,45,45,65,65,35,60,75,45,16,35,16]);
 concours.getRange('F2:G1000').setNumberFormat('dd/mm/yyyy');concours.getRange('P2:P1000').setNumberFormat('dd/mm/yyyy');
 const prepRows=db.talents.map(t=>[t.id,'talents',t.name,t.city,t.cp,t.concours.join(' | '),t.online,t.coords?.[0]??'',t.coords?.[1]??'','',db.settings.talentsMapUrl]);
@@ -75,8 +80,8 @@ metiers.getRange(`U2:W${jobs.length+1}`).formulas=jobs.map((j,i)=>{const n=i+2;r
 wb.recalculate();
 console.log((await wb.inspect({kind:'table',range:'Pilotage!A4:C13',tableMaxRows:9,tableMaxCols:3,maxChars:2500})).ndjson);
 const errors=await wb.inspect({kind:'match',searchTerm:'#REF!|#DIV/0!|#VALUE!|#NAME\\?|#N/A|#NUM!',options:{useRegex:true,maxResults:20},maxChars:1500});console.log(errors.ndjson);
-for(const name of ['Pilotage','Ouvrages','Ressources']){
- const range=name==='Pilotage'?'A2:C13':name==='Contenus'?'A1:D4':name==='Reglages'?'A1:C6':name==='Correspondances'?'A1:F5':name==='Metiers'?'A1:F5':name==='Concours'?'A1:G5':name==='Preparations'?'A1:E5':name==='Sources'?'A1:D5':name==='Ouvrages'?'A1:D5':name==='Ressources'?'A1:F5':'A1:E5';
+for(const name of ['Pilotage','Ouvrages','Ressources','Epreuves']){
+ const range=name==='Pilotage'?'A2:C13':name==='Contenus'?'A1:D4':name==='Reglages'?'A1:C6':name==='Correspondances'?'A1:F5':name==='Metiers'?'A1:F5':name==='Concours'?'A1:G5':name==='Preparations'?'A1:E5':name==='Sources'?'A1:D5':name==='Ouvrages'?'A1:D5':name==='Ressources'?'A1:F5':name==='Epreuves'?'D1:G4':'A1:E5';
  const preview=await wb.render({sheetName:name,range,scale:1.25,format:'png'});
  await fs.writeFile(new URL('preview-'+name+'.png',previewDir),new Uint8Array(await preview.arrayBuffer()));
 }
