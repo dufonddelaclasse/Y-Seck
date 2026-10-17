@@ -44,7 +44,7 @@
       (option.rmfpDomains||[]).indexOf(job.rmfpDomain)>-1||(option.families||[]).indexOf(job.family)>-1||
       (rule.namePattern&&rule.namePattern.test(name));}).map(function(rule){return rule.option.id;});
   });
-  D.calendar = P.calendar;
+  D.calendar = P.calendar.filter(function(c){return !c.duplicateOf;});
   D.books = P.books || []; D.bookSource = P.bookSource;
   D.studyResources = P.studyResources || [];
   D.examPortals = { E: D.calendarUrl, H: 'https://www.concours-fph.ars.sante.fr/', T: 'https://www.concours-territorial.fr/' };

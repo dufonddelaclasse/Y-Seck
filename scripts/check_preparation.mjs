@@ -27,7 +27,7 @@ context.window.YSECK_UI.afterRender=()=>{};
 let source=fs.readFileSync(new URL('js/app.js',root),'utf8');
 source=source.replace('  UI.init();\n  render();\n  booted = true;', '  window.tests={screens,S,filteredJobs,jobFilters,jobCategories,isContractJob,prepHref,examsFor,calendarCategory,calendarRows,indicativeCategories,jobRow,tabbar,categoryBooks,bookList,studyResources};');
 vm.runInContext(source,context);
-const {screens,S,filteredJobs,jobFilters,isContractJob,prepHref,examsFor,calendarCategory,calendarRows,indicativeCategories,jobRow,tabbar,categoryBooks,bookList,studyResources}=context.window.tests;
+const {screens,S,filteredJobs,jobFilters,jobCategories,isContractJob,prepHref,examsFor,calendarCategory,calendarRows,indicativeCategories,jobRow,tabbar,categoryBooks,bookList,studyResources}=context.window.tests;
 const data=context.window.DATA;
 Object.assign(S,{profile:'etu',name:'Test',level:'Doctorat',domains:[],metDomains:[],traits:[],budget:'Plus de 1 000 €',prepBudget:'2',boursier:'Non'});
 const fixed=data.jobs.filter(j=>['A+','A','B','C'].includes(j.cat)&&!isContractJob(j));
@@ -45,6 +45,7 @@ for (const j of fixed) {
   assert(html.includes('href="#/etudes/'+j.id+'"'));
   assert(html.includes('href="#/handicap/'+j.id+'"'));
   assert(html.includes('role="group" aria-label="Budget"'));
+  assert(html.includes('>Aides</h2>')&&html.includes('>Prépas</h2>')&&!html.includes('Prépas et aides'),'Aides et prépas séparées : '+j.id);
   assert(!html.includes('href="#/prepa/talents'),'Talents masqués pour les non-boursiers : '+j.id);
   for(const session of examsFor(j,true))assert.equal(calendarCategory(session,j),j.cat,'Date d’une autre catégorie dans '+j.id+' : '+session.name);
   for(const rid of j.routeIds){const r=data.accessRoutes[rid];if(r.cat===j.cat)for(const fp of r.fp)if(j.fp.includes(fp)){
@@ -68,7 +69,29 @@ assert(externalFirst.indexOf('Externe après')<externalFirst.indexOf('Interne av
 const communicator=data.jobs.find(j=>j.id==='fpcom018');
 assert.deepEqual(Array.from(indicativeCategories(communicator)),['A','B']);
 assert(jobRow(communicator).includes('job-categories')&&!jobRow(communicator).includes('Var.'));
-assert.equal(communicator.cat,'V');assert.equal(prepHref(communicator),'#/concours');
+assert.equal(communicator.cat,'V');assert.equal(prepHref(communicator),'#/preparer/'+communicator.id);
+const communicationPrep=screens.preparer(communicator.id);
+assert(communicationPrep.includes('<h1>Se préparer</h1>')&&communicationPrep.includes(communicator.name));
+assert(communicationPrep.includes('data-action="openPrepCat" data-v="A"')&&communicationPrep.includes('data-action="openPrepCat" data-v="B"'));
+assert(!communicationPrep.includes('data-action="openPrepCat" data-v="A+"')&&!communicationPrep.includes('data-action="openPrepCat" data-v="C"'));
+const singleVariable=data.jobs.find(j=>j.cat==='V'&&jobCategories(j).length===1);
+assert(singleVariable&&!jobRow(singleVariable).includes('job-categories')&&!jobRow(singleVariable).includes('cat sm'),'Une catégorie VAR unique garde la taille normale.');
+const purchaseJob=data.jobs.find(j=>j.id==='fpach001');
+assert(!screens.etudes(purchaseJob.id).includes('Rédacteur·rice territorial·e')&&!screens.etudes(purchaseJob.id).includes('Secrétaire administratif·ve'),'L’orientation conserve uniquement les routes de la catégorie attribuée.');
+const classified=data.jobs.filter(j=>j.cat==='V'&&jobCategories(j).length);
+Object.assign(S,{level:null,metDomains:[],metFp:'Tous'});
+for(const cat of ['A+','A','B','C']){S.metCat=cat;const selected=filteredJobs();for(const j of classified)assert.equal(selected.some(x=>x.id===j.id),jobCategories(j).includes(cat),'Tri des catégories attribuées : '+j.id+' '+cat);}
+Object.assign(S,{level:'Doctorat',metCat:'Toutes'});
+S.bookCategory='A+';assert(categoryBooks(communicator).every(b=>(b.categories||['A','A+']).includes('A')),'Une fiche A/B ne prend pas la bibliographie A+ sélectionnée sur une autre page.');
+const inspDates=examsFor(administrator);
+assert(inspDates.some(c=>c.id==='insp-2027-concours-externe'&&c.date<'2026-10-17'&&c.written>'2026-10-17'),'Une clôture passée ne masque pas les épreuves INSP2027 à venir.');
+assert(data.accessRoutes['admin-etat'].examInfo.E.officialLinks.some(l=>l.url==='https://www.insp.gouv.fr/'));
+assert(data.accessRoutes['admin-terr'].examInfo.T.officialLinks.some(l=>l.url==='https://inet.cnfpt.fr/'));
+assert.equal(data.accessRoutes.attache.examInfo.E.officialLinks.filter(l=>/IRA de/.test(l.label)).length,5,'Les cinq instituts IRA sont accessibles.');
+for(const r of Object.values(data.accessRoutes))for(const e of Object.values(r.examInfo||{})){
+  assert(e.officialLinks?.length,'Liens officiels absents : '+e.id);
+  assert(e.officialLinks.every(l=>l.url.startsWith('https://')&&!l.url.includes('calendrier-general-concours')),'Liens directs école ou organisateur : '+e.id);
+}
 const magistrate=data.jobs.find(j=>j.id==='fpjus016');assert(magistrate.routeIds.includes('magistrat-administratif')&&!magistrate.routeIds.includes('magistrat'));
 S.prepBudget='1';
 const fees=screens.preparer('aah');assert(fees.includes('Avec frais d’inscription')&&!fees.includes('Moins de 1 000')&&!fees.includes('Frais d’université'));
@@ -85,8 +108,8 @@ for (const j of contracts) {
   assert(screens['sans-concours'](j.id).includes('href="#/metier/'+j.id+'"'));
 }
 const variable=data.jobs.find(j=>j.cat==='V');
-assert.equal(prepHref(variable),'#/concours');
-assert(screens.preparer(variable.id).includes('<h1>Concours et prépas</h1>'));
+assert.equal(prepHref(variable),'#/preparer/'+variable.id);
+assert(screens.preparer(variable.id).includes('<h1>Se préparer</h1>'));
 assert.equal(variable.cat,'V');
 Object.assign(S,{metCat:'CDD',showContracts:true});
 assert.equal(filteredJobs().length,contracts.length);
@@ -169,6 +192,6 @@ assert(studyResources(null,false,true).length,'La recherche croisant concours, v
 assert.equal(categoryBooks(data.jobs.find(j=>j.id==='greffier')).length,0,'Ne pas proposer les manuels de rédacteur territorial aux greffiers.');
 assert(categoryBooks(data.jobs.find(j=>j.id==='redacteur')).length>0);
 assert(screens.annales('dev').includes('Entrer sans concours'));
-console.log('Contrôles réussis :',counts,';',contracts.length,'CDD ; VAR préservés, dates, versants, orientation, aides, filtres et navigation.');
+console.log('Contrôles réussis :',counts,';',contracts.length,'CDD ;',classified.length,'VAR classés ; dates2027, versants, liens officiels, préparation personnalisée, aides, filtres et navigation.');
 console.log('Bibliographie vérifiée : 29 références Vie-publique réservées à A, 6 doublons évités, 133 références A+ préservées.');
 console.log('Ressources vérifiées :',data.studyResources.length,'liens uniques, 12 combinaisons catégorie/versant, filtres et associations par concours.');

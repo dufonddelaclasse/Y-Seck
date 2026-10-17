@@ -119,7 +119,18 @@ def read_workbook(path, db):
             if rid not in routes or fp not in ['E','T','H'] or fp not in routes[rid]['fp']:raise ValueError('Corps ou versant d’épreuves invalide : '+id)
             if not all([name,org,metro,om,source,checked]):raise ValueError('Information d’épreuves manquante : '+id)
             source_url(source)
-            details[id]=dict(id=id,routeId=rid,fp=fp,name=string(name),org=string(org),metro=string(metro),om=string(om),source=string(source),checked=date(checked))
+            detail=dict(details.get(id,{}));detail.update(id=id,routeId=rid,fp=fp,name=string(name),org=string(org),metro=string(metro),om=string(om),source=string(source),checked=date(checked))
+            if len(row)>9:
+                card_title,official_links=(row[9:]+[None]*2)[:2];links=[]
+                for line in string(official_links).splitlines():
+                    if not line.strip():continue
+                    if '|' not in line:raise ValueError('Lien officiel attendu sous la forme libellé | URL : '+id)
+                    label,url=[p.strip() for p in line.rsplit('|',1)];source_url(url)
+                    if not label or not url:raise ValueError('Lien officiel incomplet : '+id)
+                    links.append(dict(label=label,url=url))
+                if card_title or 'cardTitle' in detail:detail['cardTitle']=string(card_title)
+                detail['officialLinks']=links
+            details[id]=detail
         unique(seen,'Epreuves');result['examDetails']=list(details.values())
         if len({(e['routeId'],e['fp']) for e in result['examDetails']})!=len(result['examDetails']):raise ValueError('Informations d’épreuves en double pour le même corps et versant')
     preps={t['id']:('talents',t) for t in result['talents']}

@@ -1,5 +1,6 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import vm from 'node:vm';
 import { Workbook, SpreadsheetFile } from '@oai/artifact-tool';
 const manifest=JSON.parse(await fs.readFile(new URL('../data/catalogue.json',import.meta.url),'utf8'));
 const db=manifest.parts?{}:manifest;
@@ -49,10 +50,12 @@ await table('Contenus',['Identifiant','Métier ID','Champ','Texte complet'],cont
 const routeFields=['id','name','cat','lvl','fp','access','cal','prep','source','matchPattern'];
 await table('CorpsGrades',['Identifiant','Corps ou cadre d’emplois','Catégorie','Niveau minimum','Versants','Mode d’accès','Clé calendrier','Prépa concours','Source URL','Règle de rapprochement (avancé)'],db.routes.map(r=>routeFields.map(k=>r[k])),[25,65,14,18,12,65,45,45,75,85]);
 const detailFields=['id','routeId','fp','name','org','metro','om','source','checked'];
-const epreuves=await table('Epreuves',['Identifiant','Corps ID','Versant','Nom du concours','Organisateur','Épreuves en métropole','Épreuves en outre-mer','Source URL','Vérifié le'],(db.examDetails||[]).map(e=>detailFields.map(k=>k==='checked'?dates(e[k]):e[k])),[36,25,12,42,45,55,55,75,18]);
+const epreuves=await table('Epreuves',['Identifiant','Corps ID','Versant','Nom du concours','Organisateur','Épreuves en métropole','Épreuves en outre-mer','Source URL','Vérifié le','Titre du bloc','Liens officiels (libellé | URL, un par ligne)'],(db.examDetails||[]).map(e=>[...detailFields.map(k=>k==='checked'?dates(e[k]):e[k]),e.cardTitle||'',(e.officialLinks||[]).map(l=>l.label+' | '+l.url).join('\n')]),[36,25,12,42,45,55,55,75,18,36,100]);
 epreuves.getRange('I2:I1000').setNumberFormat('dd/mm/yyyy');
 epreuves.getRange('D2:G'+((db.examDetails||[]).length+1)).format.wrapText=true;
 epreuves.getRange('A2:I'+((db.examDetails||[]).length+1)).format.rowHeight=75;
+epreuves.getRange('K2:K'+((db.examDetails||[]).length+1)).format.wrapText=true;
+(db.examDetails||[]).forEach((e,i)=>{const lines=(e.officialLinks||[]).reduce((n,l)=>n+Math.max(1,Math.ceil((l.label.length+l.url.length+3)/110)),0);if(lines>4)epreuves.getRange('A'+(i+2)+':K'+(i+2)).format.rowHeight=lines*15+12;});
 const linkFields=['id','jobId','routeId','status','source','note'];
 const liens=await table('Correspondances',['Identifiant','Métier ID','Corps ID','Statut','Source URL','Note de validation'],db.links.map(r=>linkFields.map(k=>r[k])),[48,24,26,18,75,110]);
 liens.getRange('D2:D5000').dataValidation={rule:{type:'list',values:['proposé','validé','rejeté']}};
@@ -87,3 +90,39 @@ for(const name of ['Pilotage','Ouvrages','Ressources','Epreuves']){
 }
 const file=await SpreadsheetFile.exportXlsx(wb);await file.save(outputPath);
 console.log('Classeur exporté',jobs.length,'métiers',db.calendar.length,'sessions',(db.studyResources||[]).length,'ressources');
+
+// Réutiliser les catégories de l’application pour isoler uniquement les métiers encore indéterminés.
+const appStub={addEventListener(){},querySelector(){return null;},querySelectorAll(){return [];},classList:{toggle(){}}};
+const sandbox={window:{PUBLIC_DATA:structuredClone(db),addEventListener(){},scrollTo(){}},location:{hash:'#/metiers'},document:{getElementById(id){return id==='app'?appStub:null;},addEventListener(){},documentElement:{dataset:{}},activeElement:null},localStorage:{getItem(){return null;},setItem(){}},matchMedia(){return {matches:false};},setTimeout(){return 0;},clearTimeout(){}};
+vm.createContext(sandbox);
+for(const name of ['js/data.js','js/catalog.js','js/ui.js'])vm.runInContext(await fs.readFile(new URL('../'+name,import.meta.url),'utf8'),sandbox);
+let appSource=await fs.readFile(new URL('../js/app.js',import.meta.url),'utf8');
+appSource=appSource.replace('  UI.init();\n  render();\n  booted = true;','  window.categoryReview=window.DATA.jobs.filter(function(j){return j.cat==="V"&&!isContractJob(j)&&!jobCategories(j).length;}).map(function(j){return {id:j.id,name:j.name,fps:fpNames(j.fp).join(", ")};});');
+vm.runInContext(appSource,sandbox);
+const unresolved=Array.from(sandbox.window.categoryReview).sort((a,b)=>a.name.localeCompare(b.name,'fr'));
+const review=Workbook.create(),reviewSheet=review.worksheets.add('Métiers à préciser');reviewSheet.showGridLines=false;reviewSheet.tabColor='#000091';
+const end=unresolved.length+6;
+reviewSheet.getRange('A2').values=[['Métiers dont la catégorie reste à préciser']];
+reviewSheet.getRange('A3').values=[['Renseignez les cellules jaunes : A+, A, B ou C. Pour plusieurs catégories, utilisez le séparateur |.']];
+reviewSheet.getRange('A4:B4').values=[['Métiers à compléter','']];reviewSheet.getRange('B4').formulas=[['=COUNTA(A7:A'+end+')']];
+reviewSheet.getRange('A5').values=[['Liste issue du catalogue Y-Seck. Les identifiants permettront de reprendre vos réponses.']];
+const reviewRows=[['Identifiant','Intitulé du métier','Fonction publique','Catégories à renseigner','Votre commentaire'],...unresolved.map(j=>[j.id,j.name,j.fps,'',''])];
+reviewSheet.getRange('A6:E'+end).values=reviewRows;
+reviewSheet.getRange('A1:E'+end).format.font={name:'Arial',size:10,color:'#161616'};
+reviewSheet.getRange('A2').format.font={name:'Arial',size:15,bold:true,color:'#000091'};
+reviewSheet.getRange('A3').format.font={name:'Arial',size:10,color:'#60606A'};reviewSheet.getRange('A5').format.font={name:'Arial',size:10,color:'#60606A'};
+[20,72,30,30,55].forEach((w,i)=>reviewSheet.getRangeByIndexes(0,i,end,1).format.columnWidth=w);
+reviewSheet.getRange('A1:E'+end).format.rowHeight=24;
+reviewSheet.tables.add(reviewSheet.getRange('A6:E'+end),true,'CategoriesAPreciser');
+reviewSheet.getRange('A6:E6').format={fill:'#000091',font:{name:'Arial',size:10,bold:true,color:'#FFFFFF'},rowHeight:36,horizontalAlignment:'center',verticalAlignment:'center',wrapText:true};
+reviewSheet.getRange('A7:E'+end).format.rowHeight=42;reviewSheet.getRange('A7:E'+end).format.verticalAlignment='center';
+reviewSheet.getRange('B7:C'+end).format.wrapText=true;reviewSheet.getRange('D7:E'+end).format.fill='#FFF6D1';
+const combos=[];for(let bits=1;bits<16;bits++)combos.push(['A+','A','B','C'].filter((_,i)=>bits&(1<<i)).join(' | '));
+reviewSheet.getRange('D7:D'+end).dataValidation={rule:{type:'list',values:combos}};
+reviewSheet.freezePanes.freezeRows(6);reviewSheet.freezePanes.freezeColumns(2);review.recalculate();
+console.log((await review.inspect({kind:'table',range:'Métiers à préciser!A4:B4',tableMaxRows:1,tableMaxCols:2,maxChars:500})).ndjson);
+const reviewPreview=await review.render({sheetName:'Métiers à préciser',range:'A2:E11',scale:1,format:'png'});
+await fs.writeFile(new URL('preview-Categories-a-preciser.png',previewDir),new Uint8Array(await reviewPreview.arrayBuffer()));
+const reviewPath=path.join(path.dirname(outputPath),'Y-Seck_metiers_categories_a_preciser_'+db.checked+'.xlsx');
+await (await SpreadsheetFile.exportXlsx(review)).save(reviewPath);
+console.log('Classeur de catégories exporté :',unresolved.length,'métiers.');

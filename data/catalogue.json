@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checked": "2026-10-16",
+  "checked": "2026-10-17",
   "parts": [
     "catalogue/metadata.json",
     "catalogue/rmfp-01.json",
@@ -96,6 +96,7 @@
     "catalogue/study-resources-23.json",
     "catalogue/study-resources-24.json",
     "catalogue/study-resources-25.json",
-    "catalogue/exam-details-01.json"
+    "catalogue/exam-details-01.json",
+    "catalogue/calendar-official-2027.json"
   ]
 }
