@@ -585,6 +585,7 @@ html.has-sheet { overflow:hidden; }
 .sheet-content { overflow:auto; padding:20px 24px max(24px,env(safe-area-inset-bottom,0px)); overscroll-behavior:contain; overflow-wrap:anywhere; }
 .sheet-content .row { gap:7px; }
 .sheet-content .chip { font-size:.875rem; padding:8px 12px; }
+.sheet-content .chip.category-choice[data-action="metCat"] { flex:0 0 44px; width:44px; height:44px; min-width:44px; min-height:44px; aspect-ratio:1; padding:0; border-radius:50%; justify-content:center; line-height:1; white-space:nowrap; }
 .sheet-actions { position:sticky; bottom:-24px; background:#FFF; border-top:1px solid var(--line); display:flex; flex-direction:column; gap:8px; margin:22px -24px -24px; padding:14px 24px max(24px,env(safe-area-inset-bottom,0px)); }
 .sheet-content .profile { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.6fr); gap:10px; margin:20px 0; font-size:.875rem; line-height:1.45; }
 .sheet-content .profile dt { color:var(--muted); }
