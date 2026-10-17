@@ -31,7 +31,7 @@ function start(saved) {
   const footer='  UI.init();\n  render();\n  booted = true;';
   let source=fs.readFileSync(new URL('js/app.js',root),'utf8');
   assert(source.includes(footer),'Le point d’entrée du test doit correspondre à celui de l’application.');
-  source=source.replace(footer,'  window.tests={screens,S,render,blankPerson,installLocationResults(value){locationResults=value;}};');
+  source=source.replace(footer,'  window.tests={screens,S,getState(){return S;},render,blankPerson,installLocationResults(value){locationResults=value;}};');
   vm.runInContext(source,context);
   const click=(action,value)=>{
     const element={getAttribute(key){return key==='data-action'?action:key==='data-v'?value:null;}};
@@ -146,6 +146,9 @@ assert(!switching.saved().children.find(c=>c.id==='a').pendingChanges);
 assert.equal(switching.saved().children.find(c=>c.id==='b').name,'Basile');
 assert(switching.screens.moi().includes('>Profils</a>'),'Deux enfants doivent pluraliser l’onglet Profils.');
 assert(!switching.screens.famille().includes('Y-Seck · Parents'));
+for(const screen of ['moi','famille','accueil']){
+  assert(!switching.screens[screen]().includes('data-action="wipe"'),'Une famille avec des enfants ne doit pas proposer l’effacement global sur '+screen+'.');
+}
 
 // Refuser l’effacement ne touche à aucun enfant ; accepter retire seulement l’actif.
 const deleting=start(family());
@@ -179,11 +182,43 @@ assert.equal(empty.S.children.length,0,'Recharger ne doit pas recréer le dernie
 assert.equal(empty.S.activeChild,null);
 same(empty.S.personalProfiles.rec,other);
 assert(!empty.screens.moi().includes('Effacer ce profil'));
-empty.click('addChild');
-assert.equal(empty.S.children.length,1);assert.equal(empty.S.name,'');assert.equal(empty.location.hash,'#/profil');
+for(const screen of ['moi','famille','accueil']){
+  const html=empty.screens[screen]();
+  assert(html.includes('data-action="wipe">Effacer mes données</button>'),'Un parent sans enfant doit pouvoir effacer ses données sur '+screen+'.');
+  assert(!html.includes('data-action="deleteChild"'),'Un espace parent vide ne doit pas proposer d’effacer un enfant inexistant sur '+screen+'.');
+}
+
+// Refuser l’effacement global préserve la famille vide, les préférences et les profils adultes.
+const emptySnapshot=JSON.parse(JSON.stringify(empty.getState()));
+const emptySaved=empty.saved();
+empty.confirmation.accept=false;
+empty.click('wipe');
+same(empty.getState(),emptySnapshot,'Annuler l’effacement doit préserver tout l’état parent.');
+same(empty.saved(),emptySaved,'Annuler l’effacement doit préserver les données enregistrées, y compris les profils adultes.');
+assert.equal(empty.location.hash,'#/moi');
+
+// Confirmer efface toutes les données locales et rend le choix initial de profil accessible.
+empty.confirmation.accept=true;
+empty.click('wipe');
+assert.equal(empty.saved(),null,'Confirmer l’effacement doit vider le stockage local.');
+assert.equal(empty.getState().profile,null);
+assert.equal(empty.getState().name,'');
+assert.equal(empty.getState().activeChild,null);
+assert.equal(empty.getState().contrast,false);
+same(empty.getState().children,[]);
+same(empty.getState().personalProfiles,{});
+same(empty.getState().favorites,[]);
+assert.equal(empty.location.hash,'#/profil');
+assert(empty.screens.profil().includes('profile-choice'),'Après effacement, la page Profil doit afficher le choix étudiant / parent / reconversion.');
+assert.equal(empty.confirmation.messages.length,2);
+
+// Sans effacement global, le parent peut toujours ajouter un nouvel enfant à sa famille vide.
+const adding=start(emptySaved);
+adding.click('addChild');
+assert.equal(adding.S.children.length,1);assert.equal(adding.S.name,'');assert.equal(adding.location.hash,'#/profil');
 
 // L’ancien stockage parent sans tableau d’enfants reste migré sans perte.
 const legacy=start({profile:'par',...person({name:'Ancien enfant'})});
 assert.equal(legacy.S.children.length,1);assert.equal(legacy.S.name,'Ancien enfant');
 
-console.log('Gestion des profils vérifiée : modifications et validation, inscription initiale, isolation des enfants, suppression ciblée et famille vide persistante.');
+console.log('Gestion des profils vérifiée : modifications et validation, inscription initiale, isolation des enfants, suppression ciblée, famille vide persistante et effacement global confirmé ou annulé.');

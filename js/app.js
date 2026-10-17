@@ -543,6 +543,7 @@
       '<h2 class="mt-m">Les parcours de votre famille</h2>'+(S.children.length?'':'<p class="body">Aucun profil enfant pour le moment. Ajoutez un profil pour commencer.</p>')+'<div class="stack">' + S.children.map(function (c) {
         return '<button type="button" class="prep family-card" data-action="openChild"' + attr('v', c.id) + '><span class="head"><b>' + esc(c.name || 'Votre enfant') + '</b>' + I.chev + '</span><span class="small">' + esc(c.level || 'Niveau à renseigner') + ' · ' + (c.done ? 'Profil complété' : 'Profil initial') + '</span><span class="row">' + c.domains.map(function (d) { return '<span class="tag">' + esc(domainLabel(d)) + '</span>'; }).join('') + '</span><span class="small">' + c.favorites.length + ' métier' + (c.favorites.length > 1 ? 's' : '') + ' favori' + (c.favorites.length > 1 ? 's' : '') + '</span></button>';
       }).join('') + '</div><button type="button" class="btn outline" data-action="addChild">Ajouter un profil</button>' +
+      (S.children.length?'':'<button type="button" class="btn danger" data-action="wipe">Effacer mes données</button>')+
       '<p class="small">Chaque enfant conserve ses choix, son lieu de vie et ses favoris. Les informations restent sur cet appareil.</p></main>' + tabbar('accueil');
   };
   function childSelector() {
@@ -1044,7 +1045,7 @@
   var PROFILE_LABEL = { etu: 'Étudiant·e', par: 'Parent', rec: 'En reconversion' };
 
   screens.moi = function () {
-    if(isParent()&&!activeChild())return '<main class="screen pt"><span class="eyebrow">Parents</span><h1>Vos profils</h1><p class="body">Aucun profil enfant pour le moment.</p><button type="button" class="btn" data-action="addChild">Ajouter un profil</button></main>'+tabbar('moi');
+    if(isParent()&&!activeChild())return '<main class="screen pt"><span class="eyebrow">Parents</span><h1>Vos profils</h1><p class="body">Aucun profil enfant pour le moment.</p><button type="button" class="btn" data-action="addChild">Ajouter un profil</button><button type="button" class="btn danger" data-action="wipe">Effacer mes données</button></main>'+tabbar('moi');
     var rows = [
       ['Profil', S.profile ? PROFILE_LABEL[S.profile] : 'Non renseigné'],
       [isParent() ? 'Niveau de votre enfant' : 'Niveau', S.level || 'Non renseigné'],
