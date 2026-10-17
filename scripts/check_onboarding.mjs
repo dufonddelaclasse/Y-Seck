@@ -65,6 +65,7 @@ for (const profile of ['etu','par','rec']) {
   const second=t.screens.niveau();
   assert(second.includes('Étape 2 / 5')&&second.includes('href="#/profil"'));
   assert(second.includes('data-action="level"')&&!second.includes('id="person-name"'));
+  assert(second.includes('data-action="level" data-v="Bac"'),'Le niveau Bac doit être proposé pour chaque type de profil.');
   assert.equal(second.includes('data-v="CAP / BEP"'),profile==='rec');
   t.submit('study-form');assert.equal(t.location.hash,'#/niveau','Un niveau doit être choisi avant de poursuivre.');
   t.location.hash='#/interets';t.render();

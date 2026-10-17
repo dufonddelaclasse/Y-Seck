@@ -10,7 +10,7 @@
 
   /* ---------- État ---------- */
   var defaults = {
-    profile: null, level: null, domains: [], traits: [], boursier: null, budget: null, done: false,
+    profile: null, level: null, domains: [], traits: [], boursier: null, budget: null, done: false, pendingChanges: false,
     metDomains: null, metCat: 'Toutes', metFp: 'Tous', q: '', calCat: 'Toutes', track: 'Administratif',
     showContracts: true, prepBudget: null, alert: false, openCat: null, region: 'Toutes', talentsAll: false,
     name: '', location: null, favorites: [], children: [], activeChild: null, personalProfiles: {},
@@ -18,8 +18,10 @@
     contrast: false, largeText: false, dysFont: false, bookQ: '', bookSubject: 'Toutes', bookCategory: 'A', bookFp: 'Tous',
     resQ: '', resCat: 'Toutes', resFp: 'Tous', resKind: 'Tous', resYear: 'Toutes', resLimit: 40
   };
-  var PERSON_FIELDS = ['name', 'level', 'domains', 'traits', 'boursier', 'budget', 'done', 'location', 'favorites'];
+  var PERSON_FIELDS = ['name', 'level', 'domains', 'traits', 'boursier', 'budget', 'done', 'location', 'favorites', 'pendingChanges'];
+  var EDITABLE_FIELDS = ['name', 'level', 'domains', 'traits', 'boursier', 'budget', 'location'];
   var S = load();
+  var profileSnapshot = profileSignature();
 
   function personData(st) {
     var out = {};
@@ -28,7 +30,17 @@
     return out;
   }
   function normalizeBudget(value) { return value === 'Moins de 1 000 €' ? 'Avec frais d’inscription' : value; }
-  function blankPerson(name) { return { name: name || '', level: null, domains: [], traits: [], boursier: null, budget: null, done: false, location: null, favorites: [] }; }
+  function blankPerson(name) { return { name: name || '', level: null, domains: [], traits: [], boursier: null, budget: null, done: false, location: null, favorites: [], pendingChanges: false }; }
+  function profileSignature() { return JSON.stringify(EDITABLE_FIELDS.map(function(k){return S[k];})); }
+  function profileNeedsValidation() { return !!(S.done && S.pendingChanges); }
+  function profileSubmitLabel(label) { return profileNeedsValidation() ? 'Valider les modifications' : label; }
+  function profileContinuation(href,label) {
+    return profileNeedsValidation()?'<button type="button" class="btn" data-action="validateProfile">Valider les modifications</button>':'<a class="btn" href="'+href+'">'+label+'</a>';
+  }
+  function validateProfile() {
+    if(!identityReady()){navigate(nameReady()?'#/niveau':'#/profil');announce(nameReady()?'Choisissez un niveau pour continuer.':'Renseignez un prénom pour continuer.');return;}
+    S.name=S.name.trim();S.pendingChanges=false;profileSnapshot=profileSignature();save();navigate('#/accueil');announce('Modifications enregistrées.');
+  }
   function activeChild() { return S.children.find(function (c) { return c.id === S.activeChild; }); }
   function syncPerson() {
     if (isParent()) {
@@ -38,6 +50,7 @@
   function usePerson(p) {
     Object.assign(S, blankPerson(), p);
     S.budget = normalizeBudget(S.budget);
+    profileSnapshot=profileSignature();
     S.metDomains = null; S.metMode = 'mine'; S.metCat = 'Toutes'; S.metFp = 'Tous'; S.q = ''; S.jobLimit = 60; S.region = 'Toutes';
     S.prepBudget = null; S.talentsAll = false; S.calCat = 'Toutes'; S.calFp = 'Tous'; S.calQ = ''; S.calLimit = 40;
     locationResults = []; locationStatus = ''; locationQuery = ''; locationSearchId++;
@@ -58,7 +71,7 @@
     if(!input||!input.value.trim())return;
     S.name=input.value.trim();input.value=S.name;save();
     input.blur();
-    if(advance){navigate('#/niveau');return;}
+    if(advance){if(profileNeedsValidation())validateProfile();else navigate('#/niveau');return;}
     var button=document.getElementById('name-confirm');if(button)button.focus({preventScroll:true});
     announce('Prénom enregistré.');
   }
@@ -66,12 +79,13 @@
   function load() {
     try {
       var raw = localStorage.getItem(KEY);
-      var st = Object.assign({}, defaults, raw ? JSON.parse(raw) : {});
+      var saved=raw?JSON.parse(raw):{};
+      var st = Object.assign({}, defaults, saved);
       st.budget = normalizeBudget(st.budget);
       ['traits', 'domains', 'favorites', 'children'].forEach(function (k) { if (!Array.isArray(st[k])) st[k] = []; });
       st.personalProfiles = st.personalProfiles || {};
       st.children = st.children.filter(function (c) { return c && c.id; }).map(function (c) { return Object.assign(blankPerson(), c); });
-      if (st.profile === 'par' && !st.children.length) {
+      if (st.profile === 'par' && !st.children.length && !Object.prototype.hasOwnProperty.call(saved,'children') && (st.name||st.level||st.done)) {
         st.children = [Object.assign(blankPerson('Enfant 1'), personData(st), { id: 'enfant-1' })];
         st.children[0].name = st.children[0].name || 'Enfant 1'; st.activeChild = 'enfant-1';
       }
@@ -79,6 +93,7 @@
         var child = st.children.find(function (c) { return c.id === st.activeChild; }) || st.children[0];
         st.activeChild = child.id; Object.assign(st, personData(child));
       }
+      if(st.profile==='par'&&!st.children.length){st.activeChild=null;Object.assign(st,blankPerson());}
       /* À chaque ouverture, l'onglet Métiers repart des domaines choisis */
       st.metDomains = null;
       st.metMode = 'mine'; st.jobLimit = 60;
@@ -87,8 +102,11 @@
     } catch (e) { return Object.assign({}, defaults, { domains: [], traits: [], favorites: [], children: [], personalProfiles: {} }); }
   }
   function save() {
+    var current=profileSignature();
+    if(S.done&&profileSnapshot!==undefined&&current!==profileSnapshot)S.pendingChanges=true;
     syncPerson();
     try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) { /* stockage indisponible */ }
+    profileSnapshot=current;
   }
   function set(patch) { Object.assign(S, patch); save(); render(); }
 
@@ -163,7 +181,7 @@
   }
   function tabbar(active) {
     if (active === 'prepas' || active === 'concours') active = 'accueil';
-    var tabs = [['accueil', isParent() ? 'Famille' : 'Accueil', I.home], ['metiers', 'Métiers', I.grid], ['favoris', 'Favoris', I.bookmark], ['moi', 'Profil', I.user]];
+    var tabs = [['accueil', isParent() ? 'Famille' : 'Accueil', I.home], ['metiers', 'Métiers', I.grid], ['favoris', 'Favoris', I.bookmark], ['moi', isParent()&&S.children.length>=2?'Profils':'Profil', I.user]];
     return '<nav class="tabbar" aria-label="Navigation principale">' + tabs.map(function (t) {
       var on = t[0] === active;
       return '<a href="#/' + t[0] + '" class="' + (on ? 'on' : '') + '"' + (on ? ' aria-current="page"' : '') + '>' + t[2] + t[1] + '</a>';
@@ -209,7 +227,7 @@
   function locationForm() {
     return '<section class="stack mt-m"><h2 class="h3">' + (isParent() ? 'Son lieu de vie' : 'Votre lieu de vie') + '</h2><p class="small m0">' + (S.location ? esc(S.location.label) : 'Ajoutez une commune pour classer les Prépas Talents par proximité.') + '</p>' +
       searchField('location-query','Commune ou code postal','Ex. : Lyon ou 69003',locationQuery) + '<button type="button" class="btn outline" data-action="searchLocation">Rechercher la commune</button>' +
-      '<p class="small m0" role="status">' + esc(locationStatus) + '</p><div class="stack">' + locationResults.map(function (c, i) { return '<button type="button" class="chip" data-action="selectLocation"' + attr('v', i) + '>' + esc(c.label) + '</button>'; }).join('') + '</div>' +
+      '<p class="small m0" role="status">' + esc(locationStatus) + '</p>'+(locationResults.length?'<ul class="location-results" aria-label="Communes proposées">'+locationResults.map(function(c,i){return '<li><button type="button" class="location-option" data-action="selectLocation"'+attr('v',i)+'><span class="location-name">'+esc(c.name||c.label)+'</span>'+(c.postalCodes?'<span class="location-postcodes">'+esc(c.postalCodes.join(', '))+'</span>':'')+'</button></li>';}).join('')+'</ul>':'')+
       (S.location ? '<button type="button" class="text-btn" data-action="clearLocation">Retirer la commune</button>' : '') +
       '<p class="small m0">La recherche et le calcul des distances se font sur cet appareil. La commune saisie n’est transmise à aucun service externe.</p></section>';
   }
@@ -233,7 +251,7 @@
       var q = norm(query);
       locationResults = communes.filter(function (c) { return /^\d{5}$/.test(query) ? c[2].indexOf(query) > -1 : norm(c[0]).indexOf(q) > -1; })
         .sort(function (a, b) { return (norm(a[0]) === q ? -1 : 0) - (norm(b[0]) === q ? -1 : 0) || a[0].localeCompare(b[0], 'fr'); }).slice(0, 12)
-        .map(function (c) { return { label: c[0] + ' (' + c[2].join(', ') + ')', code: c[1], lon: c[3], lat: c[4] }; });
+        .map(function (c) { return { name:c[0],postalCodes:c[2].slice(),label: c[0] + ' (' + c[2].join(', ') + ')', code: c[1], lon: c[3], lat: c[4] }; });
       locationStatus = locationResults.length ? 'Choisissez votre commune.' : 'Aucune commune trouvée. Essayez une autre orthographe.';
     } catch (err) { if(request !== locationSearchId)return; locationStatus = 'Le référentiel de communes est indisponible. Réessayez plus tard.'; }
     render();
@@ -425,12 +443,13 @@
   };
   screens.profil = function () {
     if(!S.profile)return screens['choix-profil']();
-    return '<form id="identity-form" class="profile-form"><main class="screen identity-screen"><div class="topbar">' + back(familyEstablished()?'#/accueil':'#/choix-profil','Retour') + '<span class="eyebrow">Étape 1 / '+STEPS+'</span></div>'+progress(1,STEPS)+
+    if(isParent()&&!activeChild())return screens.famille();
+    return '<form id="identity-form" class="profile-form"><main class="screen identity-screen"><div class="topbar">' + back(S.done?'#/moi':familyEstablished()?'#/accueil':'#/choix-profil','Retour') + '<span class="eyebrow">Étape 1 / '+STEPS+'</span></div>'+progress(1,STEPS)+
       '<h1 class="mt-l" id="identity-title">'+(isParent()?'Le prénom de votre enfant':'Votre prénom')+'</h1>'+
       '<div class="name-entry"><input class="name-line" id="person-name" name="first-name" aria-labelledby="identity-title" aria-describedby="name-hint" required maxlength="50" enterkeyhint="done" autocomplete="'+(isParent()?'off':'given-name')+'" placeholder="Prénom ou pseudo" value="'+esc(S.name)+'"><button type="button" class="name-confirm" id="name-confirm" data-action="confirmName" aria-label="Valider le prénom"'+(S.name.trim()?'':' disabled')+'>'+I.check+'</button></div>'+
       '<p class="small m0" id="name-hint">'+(isParent()?'Le prénom ou pseudo qui identifiera son parcours.':'Le prénom ou pseudo affiché dans votre espace.')+'</p>'+
       '<p class="notice mt-m">'+I.lock+'<span>Vos réponses restent sur cet appareil. Rien n’est envoyé, aucun compte, aucun traceur. <a href="#/confidentialite">Données personnelles</a></span></p>'+
-      '</main><div class="footer"><span class="small center" id="hint-continue"'+(nameReady()?' hidden':'')+'>Renseignez un prénom pour continuer.</span><button type="submit" class="btn" id="identity-continue"'+(nameReady()?'':' disabled')+'>Continuer</button></div></form>';
+      '</main><div class="footer"><span class="small center" id="hint-continue"'+(nameReady()?' hidden':'')+'>Renseignez un prénom pour continuer.</span><button type="submit" class="btn" id="identity-continue"'+(nameReady()?'':' disabled')+'>'+profileSubmitLabel('Continuer')+'</button></div></form>';
   };
 
   screens.niveau = function () {
@@ -440,7 +459,7 @@
     return '<form id="study-form" class="profile-form"><main class="screen"><div class="topbar">'+back('#/profil','Retour')+'<span class="eyebrow">Étape 2 / '+STEPS+'</span></div>'+progress(2,STEPS)+
       '<h1 class="mt-l">'+title+'</h1><p class="lead">'+(isParent()?'Choisissez son niveau actuel ou le dernier diplôme obtenu.':'Choisissez votre niveau actuel ou le dernier diplôme obtenu.')+'</p>'+
       '<div class="row mt-m" role="group" aria-label="'+title+'">'+list.map(function(l){return chip('level',l,l,S.level===l);}).join('')+'</div></main>'+
-      '<div class="footer"><span class="small center"'+(S.level?' hidden':'')+'>Choisissez un niveau pour continuer.</span><button type="submit" class="btn"'+(S.level?'':' disabled')+'>Continuer</button></div></form>';
+      '<div class="footer"><span class="small center"'+(S.level?' hidden':'')+'>Choisissez un niveau pour continuer.</span><button type="submit" class="btn"'+(S.level?'':' disabled')+'>'+profileSubmitLabel('Continuer')+'</button></div></form>';
   };
 
   screens.interets = function () {
@@ -455,7 +474,7 @@
         var on = S.domains.indexOf(d) > -1;
         return '<button type="button" class="interest-option' + (on ? ' on' : '') + '" aria-pressed="' + on + '"' + attr('action', 'domain') + attr('v', d) + '><span class="interest-name">' + esc(domainLabel(d)) + '</span><span class="interest-check" aria-hidden="true">' + (on ? I.check : '') + '</span></button>';
       }).join('') + '</div></main>' +
-      '<div class="footer"><div class="interest-footer"><span class="small">' + count + '</span><button type="button" class="text-btn" data-action="clearDomains"' + (n ? '' : ' disabled') + '>Effacer</button></div><a class="btn" href="#/traits">Continuer</a></div>';
+      '<div class="footer"><div class="interest-footer"><span class="small">' + count + '</span><button type="button" class="text-btn" data-action="clearDomains"' + (n ? '' : ' disabled') + '>Effacer</button></div>'+profileContinuation('#/traits','Continuer')+'</div>';
   };
 
   screens.traits = function () {
@@ -471,7 +490,7 @@
           g.items.map(function (t) { return chip('trait', t[0], t[1], S.traits.indexOf(t[0]) > -1); }).join('') + '</div></section>';
       }).join('') +
       '</main><div class="footer"><span class="small center">' + (n === 0 ? 'Vous pouvez passer cette étape.' : n + ' trait' + (n > 1 ? 's' : '') + ' choisi' + (n > 1 ? 's' : '')) + '</span>' +
-      '<a class="btn" href="#/situation">Continuer</a></div>';
+      profileContinuation('#/situation','Continuer')+'</div>';
   };
 
   screens.situation = function () {
@@ -494,7 +513,7 @@
       (S.boursier==='Oui'?talentsFeature('C’est quoi, une Prépa Talents ?',
       '<p>Une préparation <b>gratuite</b> aux concours de catégorie A, A+ et B, dans une université, un IEP ou une école du service public. Plus de 100 en France, outre-mer compris.</p>' +
       '<p>Au programme : cours, entraînements aux épreuves et un·e tuteur·rice qui vous suit toute l’année.</p>','h2',talentIntroAnimate?'talents-enter':''):'') +
-      '</main><div class="footer"><a class="btn" href="#/accueil" data-action="finish">Voir ' + (isParent() ? 'son parcours' : 'mon parcours') + '</a></div>';
+      '</main><div class="footer">'+(profileNeedsValidation()?profileContinuation('#/accueil',''):'<a class="btn" href="#/accueil" data-action="finish">Voir '+(isParent()?'son parcours':'mon parcours')+'</a>')+'</div>';
   };
 
   /* ---------- Tableau de bord ---------- */
@@ -516,19 +535,18 @@
   screens.accueil = function () { return isParent() ? screens.famille() : personalHome(); };
   screens.enfant = function () { return personalHome(); };
   screens.famille = function () {
-    ensureFamily();
     var completed = S.children.filter(function (c) { return c.done; }).length;
     var favorites = S.children.reduce(function (n, c) { return n + c.favorites.length; }, 0);
-    return '<main class="screen pt"><span class="eyebrow">Y-Seck · Parents</span><h1>Mon espace famille</h1>' +
+    return '<main class="screen pt"><span class="eyebrow">Parents</span><h1>Mon espace famille</h1>' +
       '<p class="lead">Accompagnez chaque enfant à son rythme, dans un seul espace.</p>' +
       '<div class="grid-2"><div class="prep"><b>' + S.children.length + '</b><span>Parcours accompagnés</span></div><div class="prep"><b>' + completed + '</b><span>Profils complétés</span></div></div>' +
-      '<h2 class="mt-m">Les parcours de votre famille</h2><div class="stack">' + S.children.map(function (c) {
+      '<h2 class="mt-m">Les parcours de votre famille</h2>'+(S.children.length?'':'<p class="body">Aucun profil enfant pour le moment. Ajoutez un profil pour commencer.</p>')+'<div class="stack">' + S.children.map(function (c) {
         return '<button type="button" class="prep family-card" data-action="openChild"' + attr('v', c.id) + '><span class="head"><b>' + esc(c.name || 'Votre enfant') + '</b>' + I.chev + '</span><span class="small">' + esc(c.level || 'Niveau à renseigner') + ' · ' + (c.done ? 'Profil complété' : 'Profil initial') + '</span><span class="row">' + c.domains.map(function (d) { return '<span class="tag">' + esc(domainLabel(d)) + '</span>'; }).join('') + '</span><span class="small">' + c.favorites.length + ' métier' + (c.favorites.length > 1 ? 's' : '') + ' favori' + (c.favorites.length > 1 ? 's' : '') + '</span></button>';
       }).join('') + '</div><button type="button" class="btn outline" data-action="addChild">Ajouter un profil</button>' +
       '<p class="small">Chaque enfant conserve ses choix, son lieu de vie et ses favoris. Les informations restent sur cet appareil.</p></main>' + tabbar('accueil');
   };
   function childSelector() {
-    if (!isParent()) return '';
+    if (!isParent()||!S.children.length) return '';
     return '<div class="row scroller" role="group" aria-label="Choisir un enfant">' + S.children.map(function (c) {
       return chip('selectChild', c.id, c.name || 'Votre enfant', c.id === S.activeChild, 'blue');
     }).join('') + '</div>';
@@ -1024,6 +1042,7 @@
   var PROFILE_LABEL = { etu: 'Étudiant·e', par: 'Parent', rec: 'En reconversion' };
 
   screens.moi = function () {
+    if(isParent()&&!activeChild())return '<main class="screen pt"><span class="eyebrow">Parents</span><h1>Vos profils</h1><p class="body">Aucun profil enfant pour le moment.</p><button type="button" class="btn" data-action="addChild">Ajouter un profil</button></main>'+tabbar('moi');
     var rows = [
       ['Profil', S.profile ? PROFILE_LABEL[S.profile] : 'Non renseigné'],
       [isParent() ? 'Niveau de votre enfant' : 'Niveau', S.level || 'Non renseigné'],
@@ -1037,8 +1056,8 @@
       '<dl class="list m0">' + rows.map(function (r) {
         return '<div class="list-row static col"><dt class="meta">' + esc(r[0]) + '</dt><dd class="name sm m0">' + esc(r[1]) + '</dd></div>';
       }).join('') + '</dl>' +
-      locationForm() + '<a class="btn mt-s" href="#/profil">Modifier ' + (isParent() ? 'ses' : 'mes') + ' choix</a>' +
-      '<button type="button" class="btn danger" data-action="wipe">Effacer mes données</button>' +
+      locationForm() + (profileNeedsValidation()?'<button type="button" class="btn mt-s" data-action="validateProfile">Valider les modifications</button>':'<a class="btn mt-s" href="#/profil">Modifier '+(isParent()?'ses':'mes')+' choix</a>') +
+      (isParent()?'<button type="button" class="btn danger" data-action="deleteChild">Effacer ce profil</button>':'<button type="button" class="btn danger" data-action="wipe">Effacer mes données</button>') +
       '<p class="notice">' + I.lock + '<span>Ces informations sont enregistrées uniquement dans ce navigateur. Elles ne sont envoyées à personne.</span></p>' +
       '<div class="list mt-m">' +
       '<a class="list-row" href="#/versants"><div class="main"><span class="name">Comprendre la fonction publique</span><span class="meta">Les 3 fonctions publiques et les 4 catégories</span></div>' + I.chev + '</a>' +
@@ -1228,6 +1247,7 @@
       case 'openFilters': UI.open('filters','Filtrer les métiers',jobFilters(),el); break;
       case 'jobDetails': UI.open('details','Plus de détails',jobDetails(v),el); break;
       case 'confirmName': confirmName(true); break;
+      case 'validateProfile': validateProfile(); break;
       case 'moreJobDates': expandedDatesJob=expandedDatesJob===v?null:v; render(); break;
       case 'profile':
         if (familyEstablished() && v !== 'par') break;
@@ -1236,6 +1256,7 @@
           if (v === 'par') { ensureFamily(); usePerson(activeChild()); }
           else usePerson(S.personalProfiles[v] || blankPerson());
         }
+        if(v==='par'&&!activeChild()){ensureFamily();usePerson(activeChild());}
         save(); navigate('#/profil'); break;
       case 'addChild': {
         syncPerson();
@@ -1269,7 +1290,7 @@
       case 'budget': set({ budget: v, prepBudget: null }); break;
       case 'go': location.hash = '#/' + v; break;
       case 'startProfile': S.introSeen = true; save(); navigate(familyEstablished()?'#/profil':'#/choix-profil'); break;
-      case 'finish': e.preventDefault(); if(!identityReady()){navigate(nameReady()?'#/niveau':'#/profil');announce(nameReady()?'Choisissez un niveau pour continuer.':'Renseignez un prénom pour continuer.');break;} S.done = true; save(); navigate('#/accueil'); break;
+      case 'finish': e.preventDefault(); if(!identityReady()){navigate(nameReady()?'#/niveau':'#/profil');announce(nameReady()?'Choisissez un niveau pour continuer.':'Renseignez un prénom pour continuer.');break;} S.done = true; S.pendingChanges=false;profileSnapshot=profileSignature();save(); navigate('#/accueil'); break;
       case 'clearSearch': {
         e.preventDefault(); clearTimeout(searchTimer);
         if(v==='q'){S.q='';S.jobLimit=60;}
@@ -1317,10 +1338,18 @@
       case 'talentsAll': set({ talentsAll: v === 'all' }); countAnnounce('#talents .list-row'); break;
       case 'toggleBoursier': set({ boursier: S.boursier === 'Oui' ? 'Non' : 'Oui' }); break;
       case 'alert': set({ alert: !S.alert }); announce(S.alert ? 'Alerte activée' : 'Alerte désactivée'); break;
+      case 'deleteChild': {
+        var removed=activeChild();
+        if(!isParent()||!removed||!window.confirm('Effacer le profil de '+(removed.name||'votre enfant')+' et ses choix enregistrés sur cet appareil ? Les autres profils seront conservés.'))break;
+        S.children=S.children.filter(function(child){return child.id!==removed.id;});
+        S.activeChild=S.children.length?S.children[0].id:null;
+        usePerson(activeChild()||blankPerson());save();navigate('#/accueil');announce('Le profil enfant a été effacé.');break;
+      }
       case 'wipe':
         if (window.confirm('Effacer toutes vos réponses de cet appareil ?')) {
           try { localStorage.removeItem(KEY); } catch (err) { /* rien à effacer */ }
           S = Object.assign({}, defaults, { domains: [], traits: [], favorites: [], children: [], personalProfiles: {} });
+          profileSnapshot=profileSignature();
           announce('Vos données ont été effacées');
           if (location.hash === '#/profil') render(); else location.hash = '#/profil';
         }
@@ -1351,7 +1380,7 @@
     if (e.target.id === 'person-name') {
       S.name = e.target.value; save();
       var continueButton=document.getElementById('identity-continue'),hint=document.getElementById('hint-continue'),confirmButton=document.getElementById('name-confirm');
-      if(continueButton)continueButton.disabled=!nameReady();if(hint)hint.hidden=nameReady();if(confirmButton)confirmButton.disabled=!S.name.trim();return;
+      if(continueButton){continueButton.disabled=!nameReady();continueButton.textContent=profileSubmitLabel('Continuer');}if(hint)hint.hidden=nameReady();if(confirmButton)confirmButton.disabled=!S.name.trim();return;
     }
     if (e.target.id !== 'q') return;
     S.q = e.target.value; S.jobLimit = 60; save();
@@ -1368,7 +1397,7 @@
     if(e.target.id==='identity-form'){e.preventDefault();confirmName(true);return;}
     if(e.target.id!=='study-form')return;
     e.preventDefault();if(!identityReady())return;
-    save();navigate('#/interets');
+    if(profileNeedsValidation()){validateProfile();return;}save();navigate('#/interets');
   });
 
   UI.init();

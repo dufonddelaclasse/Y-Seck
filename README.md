@@ -14,6 +14,7 @@ Ouvrir http://localhost:8000. Un serveur est nécessaire à la recherche locale 
 
 - Choix du profil, puis questionnaire en cinq étapes : prénom ou pseudo obligatoire, niveau d’études sur l’écran suivant, centres d’intérêt, préférences de travail, situation. Un retour permet de corriger le choix initial du profil ; l’ajout d’un enfant dans une famille existante commence directement par son prénom.
 - Accueil personnel étudiant ou espace famille avec plusieurs profils enfants indépendants.
+- Après modification d’un profil complété, « Valider les modifications » permet de revenir directement à l’accueil. Chaque enfant conserve sa validation en attente ; la suppression d’un enfant préserve les autres profils et laisse un espace famille vide si c’était le dernier.
 - 1 069 métiers RMFP et 65 fiches d’accès existantes. Les domaines renseignés sont présélectionnés ; le bouton « Pour vous » ou « Pour votre enfant » les rétablit.
 - Filtres par domaine, catégorie et versant ; à partir de Bac+5, seules les fiches associées à une catégorie B, A ou A+ sont affichées. Une catégorie variable ne constitue pas une condition de diplôme.
 - 23 centres d’intérêt, dont diplomatie, renseignement, mer, architecture et protection animale. Les thèmes transversaux s’appuient sur les domaines, familles et intitulés RMFP ; les domaines principaux et les correspondances statutaires sont conservés. `node scripts/check_interests.mjs` contrôle la couverture de chaque thème.

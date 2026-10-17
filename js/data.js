@@ -514,7 +514,7 @@
   window.DATA = {
     domains: ['Santé', 'Sécurité', 'Justice', 'Éducation', 'Environnement', 'Numérique', 'Administration', 'Culture', 'Social', 'Défense', 'Finances', 'Transports', 'Sport', 'Recherche'],
     levels: {
-      school: ['6e', '5e', '4e', '3e', 'Seconde', 'Première', 'Terminale', 'Bac+1 / +2', 'Bac+3', 'Bac+5'],
+      school: ['6e', '5e', '4e', '3e', 'Seconde', 'Première', 'Terminale', 'Bac', 'Bac+1 / +2', 'Bac+3', 'Bac+5'],
       adult: ['Sans diplôme', 'Brevet', 'CAP / BEP', 'Bac', 'Bac+2', 'Bac+3', 'Bac+5']
     },
     fps: { E: 'État', T: 'Territoriale', H: 'Hospitalière' },
