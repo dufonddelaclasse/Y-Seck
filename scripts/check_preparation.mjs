@@ -38,7 +38,7 @@ for (const j of fixed) {
   assert(html.includes('href="#/metier/'+j.id+'"'),j.id);
   assert(!html.includes('>Pour vos choix<'),j.id);
   assert(!html.includes('href="#/sans-concours'),j.id);
-  for(const f of ['E','T','H'])assert.equal(html.includes('<b>'+data.fps[f]+'</b>'),j.fp.includes(f),'Versant non pertinent : '+j.id+' '+f);
+  for(const f of ['E','T','H'])assert.equal(html.includes('data-fp="'+f+'"'),j.fp.includes(f),'Versant non pertinent : '+j.id+' '+f);
   assert(html.includes('Recommandations bibliographiques'),'Bibliographie : '+j.id);
   assert(html.includes('href="#/annales/'+j.id+'"'),'Annales : '+j.id);
   assert.equal(html.includes('href="#/calendrier/'+j.id+'"'),examsFor(j).length>0,'Dates : '+j.id);
