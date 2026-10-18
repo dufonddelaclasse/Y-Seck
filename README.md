@@ -1,6 +1,6 @@
 # Y-Seck — orientation dans le service public
 
-Application mobile en HTML, CSS et JavaScript : DM Sans, bleu #000091 pour la navigation, pastilles de catégories bleu vif, bleu, vert et jaune, et fonds en dégradé radial.
+Application mobile en HTML, CSS et JavaScript : police Geologica, indigo #2500BA pour la navigation, lilas #DAD1FF et jaune #FFE6A1 en accents, fond gris #DBDBD7. Catégories : A+ #714DFF / #D2C7FF, A #0004FF / #D1DBFF, B #28A1A1 / #E0FFF4, C #FF804A / #FFE8D9 ; contractuels en blanc cerclé de gris. La charte est regroupée dans le dernier bloc de `css/style.css`.
 
 ## Lancer la preview
 

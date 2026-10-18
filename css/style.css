@@ -869,3 +869,138 @@ html[data-contrast="true"] :is(.cat,.tag).cat-CDD { background:#000; color:#FFF;
 .update-notice-action { border:1px solid var(--blue); background:var(--blue); color:#FFF; }
 .update-notice-dismiss { border:1px solid #CFD5F1; background:#FFF; color:var(--blue); }
 html[data-contrast="true"] .update-notice { background:#FFF; color:#000; border-color:#000; }
+
+/* ==========================================================================
+   Charte Y-Seck (octobre 2026) : Geologica, indigo #2500BA, lilas #DAD1FF,
+   jaune #FFE6A1, fond gris #DBDBD7 et couleurs de catégorie.
+   Bloc autonome : le retirer suffit à revenir à la charte précédente.
+   ========================================================================== */
+@font-face { font-family:'Geologica'; font-style:normal; font-weight:100 900; font-display:swap; src:url(../fonts/geologica-latin-wght-normal.woff2) format('woff2-variations'), url(../fonts/geologica-latin-wght-normal.woff2) format('woff2'); }
+:root {
+  --font:'Geologica', 'DM Sans', system-ui, sans-serif;
+  --blue:#2500BA; --blue-hover:#3A16E0;
+  --accent:#2500BA; --accent-hover:#3A16E0; --accent-tint:#EEEAFF;
+  --lilac:#DAD1FF; --lilac-soft:#EEEAFF; --sun:#FFE6A1; --sun-soft:#FFF4D6;
+  --bg:#DBDBD7; --surface:#FFFFFF;
+  --ink:#141414; --ink-2:#36363C; --muted:#55555C; --line:#C9C9C4; --line-2:#B9B9B4; --soft:#EDEDEA;
+  --cat-ap:#714DFF; --cat-ap-tint:#D2C7FF; --cat-ap-deep:#4B26E0;
+  --cat-a:#0004FF; --cat-a-tint:#D1DBFF; --cat-a-deep:#0004FF;
+  --cat-b:#28A1A1; --cat-b-tint:#E0FFF4; --cat-b-deep:#156B6B;
+  --cat-c:#FF804A; --cat-c-tint:#FFE8D9; --cat-c-deep:#A8461B;
+  --cat-cdd:#FFFFFF; --cat-cdd-tint:#F1F1EE; --cat-cdd-deep:#36363C;
+  --fit-tint:#EEFFD9; --fit-ink:#3B5E12;
+  --mint:var(--cat-b); --mint-tint:var(--cat-b-tint); --cyan:var(--cat-a); --cyan-tint:var(--cat-a-tint); --yellow:var(--sun); --yellow-tint:var(--sun-soft);
+}
+body { background:var(--bg); font-weight:300; }
+.app { background:var(--bg); }
+@media (min-width:600px) { .app { box-shadow:0 0 0 1px #C4C4BF; } }
+.footer, .sheet-actions { background:var(--bg); }
+.sheet, .sheet-actions { background:#FFF; }
+
+/* Typographie : graisses calées sur les maquettes (titres 700, intertitres 500-600, textes 300-400). */
+h1 { font-weight:700; letter-spacing:-.025em; }
+h2 { font-weight:600; letter-spacing:-.015em; }
+h3, .h3, .h4 { font-weight:600; }
+.eyebrow { font-weight:600; letter-spacing:.06em; color:var(--blue); }
+.lead, .body, .prose, .callout, .explain p, .prep p, .notice, .small, .source-paragraphs p { font-weight:300; }
+.lead, .body { color:var(--ink-2); }
+b, strong, .list-row .name, .card .t, .catcard b { font-weight:600; }
+.btn, .link-action, .back, .link-plain, .chip, .opt, .tag, .tabbar a { font-weight:400; }
+.btn { font-weight:500; }
+.tabbar a.on { font-weight:600; }
+
+/* Surfaces blanches sur le fond gris. */
+.tabbar, .context-bar { background:rgba(255,255,255,.97); border-color:#CFCFCA; }
+:is(.card,.callout,.rung,.bourse,.talents-box,.explain,.tint-mint,.tint-cyan,.tint-yellow,.tint-blue) { background:var(--surface); }
+.prep, .home-shortcuts a, .family-card, .intro-employer, .exam, .location-option, .interest-option, .search, .field input, .select select, .opt, button.chip, .tag.link, .btn.outline, .btn.white { background:var(--surface); }
+.prep, .home-shortcuts a, .intro-employer { border-color:transparent; }
+.list { border-top-color:var(--line); }
+.list-row, .source-detail, .book-card.external-link, .study-card.external-link { border-bottom-color:var(--line) !important; }
+@media (hover:hover) and (pointer:fine) { :where(.app:not(.touch-input)) .list-row:hover { background:rgba(255,255,255,.45); } }
+.name-line, .name-entry { border-bottom-color:#8E8E88; }
+
+/* Boutons, puces et choix : indigo et lilas. */
+.btn { background:var(--blue); border-color:var(--blue); }
+.btn:hover { background:var(--blue-hover); border-color:var(--blue-hover); }
+.btn.outline, .btn.white { border-color:var(--lilac); color:var(--blue); }
+.btn.outline:hover, .btn.white:hover { background:var(--lilac-soft); border-color:var(--blue); }
+:is(button.chip,.opt,.tag.link) { color:var(--blue); border-color:var(--lilac); }
+:is(button.chip,.opt,.tag.link):hover { background:var(--lilac-soft); border-color:var(--blue); }
+:is(button.chip.on,.chip.blue.on,.opt.on) { background:var(--lilac); border-color:var(--blue); color:var(--blue); box-shadow:inset 0 0 0 1px var(--blue); }
+.interest-option { border-color:var(--lilac); color:var(--blue); }
+.interest-option.on { background:var(--lilac); border-color:var(--blue); }
+.icon-btn, .details-toggle, .home-go { border-color:var(--lilac); }
+.name-confirm, .pin-ico { background:var(--lilac); color:var(--blue); }
+.study-level, .home-interest { background:var(--sun); border-color:var(--sun); color:#3D3000; }
+.fit, .prep .price { background:var(--sun); color:#3D3000; }
+.fit.on { background:var(--fit-tint); color:var(--fit-ink); }
+.fit.like { background:var(--lilac); color:var(--blue); }
+.category-fit { background:var(--fit-tint); color:#3A3A3A; font-weight:400; }
+.category-fit svg, .job-fit-check { color:#1B9E3E; }
+.job-fit-check { background:#1B9E3E; color:#FFF; }
+.filter-hint, .update-notice { background:var(--sun-soft); border-color:var(--sun); color:#3D3000; }
+.update-notice-action { background:var(--blue); border-color:var(--blue); }
+.update-notice-dismiss { border-color:var(--sun); color:#3D3000; }
+.card .dot, .callout .pin, .bourse .dot { background:var(--blue) !important; }
+.card:hover { background:var(--lilac-soft); }
+.progress span { background:#C4C4BF; }
+.switch { background:#A9A9A3; }
+.num { border-color:var(--blue); color:var(--blue); background:#FFF; }
+
+/* Pastilles de catégorie : couleur pleine, lettre blanche, anneau dans la teinte claire. */
+.cat { color:#FFF; font-weight:700; }
+:is(.cat,.tag).cat-Ap { background:var(--cat-ap); color:#FFF; }
+:is(.cat,.tag).cat-A { background:var(--cat-a); color:#FFF; }
+:is(.cat,.tag).cat-B { background:var(--cat-b); color:#FFF; }
+:is(.cat,.tag).cat-C { background:var(--cat-c); color:#FFF; }
+:is(.cat,.tag).cat-CDD { background:#FFF; color:var(--ink); box-shadow:inset 0 0 0 1.5px #BDBDB8; }
+.cat.cat-Ap { box-shadow:0 0 0 4px var(--cat-ap-tint); }
+.cat.cat-A { box-shadow:0 0 0 4px var(--cat-a-tint); }
+.cat.cat-B { box-shadow:0 0 0 4px var(--cat-b-tint); }
+.cat.cat-C { box-shadow:0 0 0 4px var(--cat-c-tint); }
+.cat.cat-CDD { box-shadow:inset 0 0 0 1.5px #BDBDB8, 0 0 0 4px #ECECE9; }
+.cat.sm { box-shadow:none; }
+.cat.cat-CDD.sm { box-shadow:inset 0 0 0 1.5px #BDBDB8; }
+.job-categories .cat, .context-categories .cat, .category-heading .cat { box-shadow:none; }
+.job-row { --job-tint:#ECECE9; }
+.job-row.job-cat-Ap { --job-tint:var(--cat-ap-tint); }
+.job-row.job-cat-A { --job-tint:var(--cat-a-tint); }
+.job-row.job-cat-B { --job-tint:var(--cat-b-tint); }
+.job-row.job-cat-C { --job-tint:var(--cat-c-tint); }
+.job-row.job-cat-CDD { --job-tint:#F1F1EE; }
+.job-row .fit { color:#36363C; }
+button.category-choice.cat-Ap { --cat-fill:var(--cat-ap); --cat-ink:#FFF; }
+button.category-choice.cat-A { --cat-fill:var(--cat-a); --cat-ink:#FFF; }
+button.category-choice.cat-B { --cat-fill:var(--cat-b); --cat-ink:#FFF; }
+button.category-choice.cat-C { --cat-fill:var(--cat-c); --cat-ink:#FFF; }
+button.category-choice.cat-CDD { --cat-fill:#FFF; --cat-ink:var(--ink); box-shadow:inset 0 0 0 1.5px #BDBDB8; }
+.chip.category-choice.on { box-shadow:0 0 0 2px #FFF, 0 0 0 4px var(--blue); }
+.category-screen .explain.tint-blue,.catcard-wrap.tint-blue { background:var(--cat-ap-tint); }
+.category-screen .explain.tint-mint,.catcard-wrap.tint-mint { background:var(--cat-a-tint); }
+.category-screen .explain.tint-cyan,.catcard-wrap.tint-cyan { background:var(--cat-b-tint); }
+.category-screen .explain.tint-yellow,.catcard-wrap.tint-yellow { background:var(--cat-c-tint); }
+.welcome-deco .cat-Ap { background:var(--cat-ap); color:#FFF; }
+.welcome-deco :is(.cat-A,.cat-B,.cat-C) { color:#FFF; }
+
+/* Dégradés de l'accueil et des Prépas Talents dans la gamme indigo / lilas / jaune. */
+.welcome-hero { background:linear-gradient(120deg,#2500BA 0%,#4A2BE6 50%,#8F7BFF 100%); }
+.welcome, .welcome-foot { background:var(--blue); }
+.intro-footer .btn { background:var(--blue); border-color:var(--blue); }
+.intro-footer .btn:hover { background:var(--blue-hover); border-color:var(--blue-hover); }
+.welcome-checks svg { color:var(--blue); }
+.home-discover { background:linear-gradient(115deg,#2500BA 0%,#4A2BE6 55%,#8F7BFF 100%); }
+.home-access { background:linear-gradient(115deg,var(--lilac) 0%,var(--sun) 100%); }
+.home-go { color:var(--blue); }
+.talents-intro, .talents-feature { background:linear-gradient(135deg,#714DFF 0%,#3A16E0 55%,#2500BA 100%); }
+.talents-feature.talents-split { background:var(--lilac-soft); border-color:var(--lilac); }
+.talents-grant { background:linear-gradient(115deg,var(--sun-soft) 0%,var(--sun) 100%); }
+.prep.hi { background:var(--lilac-soft); border-color:var(--lilac); }
+.employer-icon { background:var(--lilac-soft); }
+.preparation-fp { background:#000; color:#FFF; border-radius:999px; padding:6px 14px 6px 8px; align-items:center; font-weight:400; }
+
+/* Contraste élevé : la nouvelle charte s'efface toujours devant le noir et blanc. */
+html[data-contrast="true"] { --bg:#FFF; --surface:#FFF; --lilac:#FFF; --lilac-soft:#FFF; --sun:#FFF; --sun-soft:#FFF; --fit-tint:#FFF; }
+html[data-contrast="true"] body, html[data-contrast="true"] .app, html[data-contrast="true"] .footer { background:#FFF; }
+html[data-contrast="true"] .cat { box-shadow:none; }
+html[data-contrast="true"] :is(.home-discover,.home-access,.welcome-hero,.talents-intro,.talents-grant) { background:#000; color:#FFF; }
+html[data-contrast="true"] :is(.study-level,.home-interest,.fit,.category-fit,.filter-hint,.update-notice) { background:#FFF; color:#000; border:1px solid #000; }
