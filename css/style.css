@@ -1422,3 +1422,5 @@ html[data-contrast="true"] :is(.ref-card,.ref-tip,.exam-sessions li) { backgroun
 /* Blocs sans bordure : la couleur de fond suffit à les détacher. */
 #jobs .job-row, .home-shortcuts a, .parcours-card, .ref-card, .preparation-card, .catcard-wrap, .prep, .prep-page .prep,
 .intro-fold, .intro-employer, .family-card, .talents-feature.talents-split, .home-feature, .callout, .rung, .exam, .study-level, .home-interest { border:0 !important; }
+/* Pictogramme des réglages : deux curseurs au trait épais. */
+.icon-btn[data-action="openFilters"] svg, .icon-btn[data-action="resourceFilters"] svg { stroke-width:2; }
