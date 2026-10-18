@@ -46,6 +46,16 @@ Les sources comprennent l’annuaire DGAFP et les ministères, l’INSP, l’ENM
 
 `node scripts/check_preparation.mjs` contrôle les parcours métiers, la séparation CDD/VAR, les catégories et versants des ressources, les filtres et la séparation des bibliographies A/A+.
 
+### Reprendre les catégories à préciser
+
+Le classeur « Métiers à préciser » complété par l’équipe se reprend avec :
+
+```sh
+python3 scripts/import_categories.py /chemin/Y-Seck_metiers_categories.xlsx --extra scripts/categories-complementaires.json
+```
+
+Les catégories sont enregistrées dans `categories` avec `categorySource` (`équipe` ou `complément`) et le commentaire éventuel dans `categoryNote`. Les catégories observées dans les offres ne sont jamais remplacées. Seuls les fichiers `rmfp-*.json` sont réécrits, dans leur découpage actuel.
+
 ### Importer un classeur
 
 Avec Python 3 et les dépendances de `scripts/requirements.txt` :
