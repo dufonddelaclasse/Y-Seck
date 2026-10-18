@@ -1016,24 +1016,10 @@ html[data-contrast="true"] :is(.study-level,.home-interest,.fit,.category-fit,.f
 .app.theme-CDD { --theme:#55555C; --theme-tint:#FFFFFF; --theme-deep:#36363C; }
 .app.themed main { --blue:var(--theme-deep); --blue-hover:var(--theme-deep); --accent:var(--theme-deep); --accent-hover:var(--theme-deep); --lilac:var(--theme-tint); --lilac-soft:var(--theme-tint); }
 .app.themed .context-bar { --blue:var(--theme-deep); }
-.app.themed main .btn:not(.outline):not(.danger):not(.white) { background:var(--theme-deep); border-color:var(--theme-deep); }
+.app.themed main .btn:not(.outline):not(.danger):not(.white):not(.black):not(.theme) { background:var(--theme-deep); border-color:var(--theme-deep); }
 .app.themed main :is(.rung,.callout,.card) { background:var(--theme-tint); }
 .app.themed main .tl .node { border-color:var(--theme); }
 .app.themed main .tl .bar { background:var(--theme); }
-
-/* En-tête de fiche métier : carte teintée, pastille, titre, versants et niveau. */
-.job-hero { display:flex; flex-direction:column; gap:10px; margin:4px -8px 6px; padding:18px 16px 16px; border-radius:32px; background:var(--theme-tint,#FFF); }
-.job-hero-head { display:flex; align-items:center; gap:14px; }
-.job-hero-head h1 { min-width:0; }
-.job-hero-cat { flex:none; display:flex; }
-.job-hero-cat > .cat { width:52px; height:52px; font-size:1.375rem; }
-.job-hero-cat .job-categories { width:auto; flex-wrap:nowrap; gap:4px; }
-.job-hero-cat .job-categories .cat.sm { width:30px; height:30px; font-size:.8125rem; }
-.job-hero-tags { display:flex; flex-direction:column; align-items:flex-start; gap:8px; padding-left:66px; }
-.job-hero-tags .preparation-fps { margin:0; }
-.job-hero-tags .category-fit, .preparation-card .category-fit { margin:0; font-size:.875rem; padding:7px 14px; }
-.job-hero .job-meta .tag { background:rgba(255,255,255,.7); border-color:transparent; font-weight:400; }
-@media (max-width:359px) { .job-hero-tags { padding-left:0; } }
 
 /* Se préparer : carte de catégorie avec bandeau « Concours » en couleur pleine. */
 .preparation-card.prep-cat-Ap { --card:var(--cat-ap); --card-tint:var(--cat-ap-tint); }
@@ -1049,54 +1035,149 @@ html[data-contrast="true"] :is(.study-level,.home-interest,.fit,.category-fit,.f
 .preparation-card .cat-panel > h3, .preparation-card .cat-panel > .small, .preparation-card .cat-panel > div.exam { margin-left:20px; margin-right:20px; }
 .preparation-card .exam.exam-route { background:transparent; border-radius:0; padding:0; }
 .preparation-card .exam-route h4 { margin:0 0 16px; padding:14px 24px; background:var(--card); color:#FFF; font-size:1.0625rem; font-weight:500; line-height:1.35; }
-.preparation-card .exam-route dl, .preparation-card .exam-route .official-exam-links { padding:0 24px; }
-.preparation-card .exam-route dt { font-size:1rem; font-weight:300; color:var(--ink); }
-.preparation-card .exam-route dt::after { content:' :'; }
-.preparation-card .exam-route dd { font-size:1rem; font-weight:600; color:var(--ink); margin-bottom:16px; }
 .preparation-card .preparation-collapse { color:var(--ink); }
 .preparation-card .chev.turn { color:var(--ink); }
-html[data-contrast="true"] .job-hero { background:#FFF; border:1px solid #000; }
 html[data-contrast="true"] .preparation-card .exam-route h4 { background:#000; color:#FFF; }
 
 /* Concours repliés : informations de base, détail à la demande. */
 .prep-count { margin-top:8px; font-size:.8125rem; font-weight:400; color:var(--ink-2); }
-.date-summary { display:flex; flex-direction:column; gap:6px; padding:16px 18px; border-radius:22px; background:var(--theme-tint,#FFF); }
-.date-summary > b { font-size:1.0625rem; }
-.date-summary-next { font-size:.9375rem; line-height:1.4; color:var(--ink-2); }
-html[data-contrast="true"] .date-summary { background:#FFF; border:1px solid #000; }
-
-/* ==========================================================================
-   Parcours conseillé : ligne de métro dans la couleur de la catégorie.
-   ========================================================================== */
-.parcours { display:flex; flex-direction:column; gap:10px; }
-.metro { --line-c:var(--theme,var(--blue)); position:relative; margin:6px 0 0; padding:0; list-style:none; }
-.metro > li { position:relative; padding-left:46px; }
-.metro > li::before { content:''; position:absolute; left:15px; top:0; bottom:0; width:8px; background:var(--line-c); }
-.metro > li:first-child::before { top:14px; border-radius:4px 4px 0 0; }
-.metro > li.terminus::before { bottom:auto; height:16px; }
-.metro-zone { padding-top:10px; padding-bottom:6px; }
-.metro-zone span { display:inline-block; padding:3px 10px; border-radius:6px; background:#141414; color:#FFF; font-size:.6875rem; font-weight:600; letter-spacing:.06em; text-transform:uppercase; }
-.metro-stop { min-height:52px; padding-bottom:14px; }
-.metro-dot { position:absolute; left:8px; top:2px; width:22px; height:22px; border-radius:50%; background:#FFF; border:5px solid var(--line-c); box-sizing:border-box; z-index:1; }
-.metro-txt { display:flex; flex-direction:column; gap:3px; padding-top:1px; min-width:0; }
-.metro-txt b { font-size:1rem; font-weight:600; line-height:1.3; }
-.metro-txt > span:not(.metro-links):not(.metro-here) { font-size:.875rem; font-weight:300; color:var(--ink-2); line-height:1.4; }
-.metro-stop.done .metro-dot { background:var(--line-c); }
-.metro-stop.done .metro-txt { opacity:.6; }
-.metro-stop.here .metro-dot { left:4px; top:-2px; width:30px; height:30px; background:var(--sun); border-color:#141414; border-width:4px; }
-.metro-here { align-self:flex-start; padding:3px 10px; border-radius:999px; background:var(--sun); color:#3D3000; font-size:.75rem; font-weight:600; }
-.metro-stop.terminus .metro-dot { left:2px; top:-4px; width:34px; height:34px; background:var(--line-c); border:6px solid #FFF; box-shadow:0 0 0 3px var(--line-c); }
-.metro-stop.terminus .metro-txt b { font-size:1.125rem; font-weight:700; }
-.metro-links { display:flex; flex-wrap:wrap; gap:6px; margin-top:4px; }
-.metro-link { position:relative; display:inline-flex; align-items:center; gap:6px; padding:5px 12px 5px 8px; border-radius:999px; background:#FFF; border:2px solid #141414; font-size:.8125rem; font-weight:500; line-height:1.3; }
-.metro-link::before { content:''; flex:none; width:10px; height:10px; border-radius:50%; background:#FFF; border:3px solid #141414; }
-.metro-link.stage { background:var(--sun); border-color:var(--sun); color:#3D3000; }
-.metro-link.stage::before { border-color:#3D3000; background:var(--sun); }
-html[data-contrast="true"] .metro { --line-c:#000; }
-html[data-contrast="true"] :is(.metro-link,.metro-link.stage,.metro-here) { background:#FFF; color:#000; border:2px solid #000; }
-
+html[data-contrast="true"] 
 /* Contractuels : icône de document au lieu du sigle CDD. */
 .cat.cat-CDD, .context-category.cat-CDD, .chip.category-choice.cat-CDD { color:#141414; }
 .cat.cat-CDD .contract-icon { width:58%; height:58%; }
 .chip.category-choice.cat-CDD .contract-icon { width:22px; height:22px; }
 .context-category .contract-icon { width:60%; height:60%; }
+
+/* ==========================================================================
+   Maquettes fiche métier, Se préparer et espace personnel (octobre 2026).
+   ========================================================================== */
+:root { --theme-btn:var(--blue); --panel:#ECECE9; }
+.app.theme-Ap { --theme-btn:var(--cat-ap); }
+.app.theme-A { --theme-btn:var(--cat-a); }
+.app.theme-B { --theme-btn:var(--cat-b-deep); }
+.app.theme-C { --theme-btn:var(--cat-c-deep); }
+.app.theme-CDD { --theme-btn:#141414; }
+.btn.black { background:#141414; border-color:#141414; color:#FFF; }
+.btn.black:hover { background:#000; border-color:#000; color:#FFF; }
+.btn.black[aria-pressed="true"] svg { fill:currentColor; }
+.btn.theme { background:var(--theme-btn); border-color:var(--theme-btn); color:#FFF; }
+.btn.theme:hover { background:var(--theme-btn); border-color:var(--theme-btn); color:#FFF; filter:brightness(1.08); }
+.btn.theme svg { width:22px; height:22px; }
+
+/* Fiche métier */
+.job-page h1 { font-size:2rem; line-height:1.08; }
+.job-page .job-meta { gap:8px; align-items:center; }
+.job-page .job-meta .tag { border:0; background:#E6E6E2; color:#4A4A50; font-weight:300; padding:6px 14px; }
+.job-page .job-hero-cat > .cat { width:38px; height:38px; font-size:.9375rem; box-shadow:none; }
+.job-page .job-hero-cat .job-categories { width:auto; flex-wrap:nowrap; gap:3px; }
+.job-section .section-heading { align-items:center; gap:10px; font-size:1.375rem; }
+.job-section .section-heading > svg { width:22px; height:22px; color:var(--ink); }
+.job-section .section-heading > svg.parcours-icon { width:12px; height:30px; }
+.job-page .callout { background:#FFF; }
+
+/* Quelles études choisir : frise pointillée (épingle, points, point d’arrivée). */
+.parcours-card { padding:20px 18px 16px 14px; border-radius:26px; background:var(--panel); }
+.parcours-line { margin:0; padding:0; list-style:none; }
+.parcours-step { position:relative; padding:0 0 22px 32px; }
+.parcours-step::before { content:''; position:absolute; left:9px; top:24px; bottom:0; border-left:2.5px dotted #141414; }
+.parcours-step.end { padding-bottom:4px; }
+.parcours-step.end::before { display:none; }
+.parcours-mark { position:absolute; left:4px; top:5px; width:12px; height:12px; border-radius:50%; background:#141414; }
+.parcours-step.start .parcours-mark { left:2px; top:1px; width:16px; height:20px; border-radius:0; background:transparent; color:#141414; }
+.parcours-step.start .parcours-mark svg { width:16px; height:18px; fill:#141414; }
+.parcours-step.end .parcours-mark { left:1px; top:2px; width:18px; height:18px; }
+.parcours-step.here .parcours-mark:not(:empty) svg { fill:var(--theme-btn); }
+.parcours-step.here:not(.start) .parcours-mark { background:var(--theme-btn); box-shadow:0 0 0 4px var(--sun); }
+.parcours-txt { display:flex; flex-direction:column; gap:4px; min-width:0; }
+.parcours-head { display:flex; flex-wrap:wrap; gap:6px; }
+.parcours-zone, .parcours-here { padding:2px 9px; border-radius:6px; font-size:.6875rem; font-weight:400; line-height:1.5; }
+.parcours-zone { background:var(--sun); color:#6B5300; }
+.parcours-here { background:#141414; color:#FFF; }
+.parcours-txt b { color:var(--theme-btn); font-size:1.0625rem; font-weight:500; line-height:1.3; }
+.parcours-txt p { margin:0; font-size:.9375rem; font-weight:300; line-height:1.45; color:var(--ink-2); }
+.parcours-links { display:flex; flex-wrap:wrap; gap:6px; margin-top:4px; }
+.parcours-link { display:inline-flex; padding:4px 10px; border-radius:999px; background:#FFF; font-size:.8125rem; font-weight:400; }
+.parcours-link.stage { background:var(--sun); color:#3D3000; }
+.parcours-note { margin:8px 0 0; font-size:.75rem; font-weight:300; color:var(--muted); }
+
+/* Concours et dates : fiche concours fusionnée avec le calendrier. */
+.job-page .catcard-wrap.preparation-card, .preparation-card { border-radius:28px; }
+.preparation-card .catcard { padding:16px 16px 14px; grid-template-columns:40px minmax(0,1fr); }
+.preparation-card .catcard .cat.lg { width:40px; height:40px; font-size:1rem; box-shadow:none; }
+.preparation-card .catcard .txt > b { font-size:1.25rem; line-height:1.25; }
+.preparation-card .preparation-fps { margin-top:6px; }
+.preparation-card .category-fit { margin-top:2px; }
+.category-fit.warn { background:var(--sun); color:#4D3B00; }
+.category-fit.warn svg { color:#8A6A00; }
+.preparation-card .cat-panel { padding:0 0 12px; gap:0; }
+.preparation-card .exam.exam-route { padding:0 0 18px; border-radius:0; background:transparent; }
+.preparation-card .exam-route + .exam-route { padding-top:6px; border-top:0; }
+.preparation-card .exam-route h4 { margin:0 0 14px; padding:12px 18px; background:var(--card); color:#FFF; font-size:1rem; font-weight:500; line-height:1.35; }
+.preparation-card .exam-route > :not(h4) { margin-left:18px; margin-right:18px; }
+.exam-org { margin:0 0 14px; display:flex; flex-direction:column; gap:2px; }
+.preparation-card .exam-org dt { font-size:.9375rem; font-weight:300; color:var(--ink); }
+.preparation-card .exam-org dd { margin:0; font-size:1rem; font-weight:600; color:var(--ink); }
+.exam-org dt::after { content:none; }
+.exam-cal, .exam-places { display:flex; flex-direction:column; gap:6px; margin-bottom:14px; }
+.exam-cal h5, .exam-places h5 { display:flex; align-items:center; gap:8px; margin:0; font-size:.9375rem; font-weight:600; }
+.exam-cal h5 svg, .exam-places h5 svg { width:18px; height:18px; color:var(--card); flex:none; }
+.exam-cal .exam-dates { display:grid; grid-template-columns:minmax(0,.8fr) minmax(0,1.5fr); gap:0; margin:0; font-size:.875rem; }
+.exam-cal .exam-dates :is(dt,dd) { padding:9px 0; border-top:1px solid rgba(20,20,20,.12); }
+.exam-cal .exam-dates dt { font-weight:600; padding-right:10px; }
+.exam-cal .exam-dates dd { margin:0; font-weight:300; }
+.exam-cal p, .exam-places p { margin:0; font-size:.875rem; font-weight:300; line-height:1.45; }
+.exam-places b { font-size:.9375rem; font-weight:600; margin-top:4px; }
+.exam-missing { margin:14px 18px; font-size:.875rem; font-weight:300; }
+.exam-source { margin-top:0; margin-bottom:4px; font-size:.75rem; font-weight:300; color:var(--muted); }
+.preparation-card .official-exam-links { gap:2px; margin-top:0; }
+.preparation-card .official-exam-links a { color:var(--muted); font-size:.8125rem; }
+.prep-count { margin-top:4px; }
+
+/* Évoluer */
+.job-page .rung { background:#FFF; border-radius:18px; padding:12px 14px 12px 18px; font-weight:400; }
+.job-page .ladder .via { color:var(--theme-btn); font-size:.8125rem; padding-left:4px; }
+
+/* Se préparer */
+.prep-page .back { display:block; max-width:100%; overflow:hidden; white-space:nowrap; text-overflow:ellipsis; color:var(--ink); font-size:1rem; }
+.prep-page .back svg { vertical-align:-3px; }
+.prep-page-cat { display:flex; margin-top:6px; }
+.prep-page-cat .cat.lg { width:46px; height:46px; font-size:1.125rem; box-shadow:none; }
+.prep-page #aides { margin-top:12px; }
+.prep-page .section-heading { align-items:center; gap:10px; color:var(--theme-btn); font-size:1.5rem; }
+.prep-page .section-heading > svg { width:24px; height:24px; color:var(--theme-btn); }
+.prep-page .btn.outline { background:#FFF; color:var(--ink); border:2px solid var(--theme-tint,var(--lilac)); font-weight:400; }
+.prep-page .btn.outline svg { display:none; }
+.prep-page .switch-row { margin:0 -24px; padding:0 24px; width:calc(100% + 48px); border:0; background:#FFF; }
+.prep-page .switch-row[aria-checked="true"] .switch { background:var(--blue-hover,#2500BA); background:#2500BA; }
+.prep-page :is(button.chip) { color:var(--ink); background:#FFF; border:2px solid var(--theme-tint,var(--lilac)); box-shadow:none; font-weight:400; }
+.prep-page :is(button.chip.on,.chip.blue.on) { color:#FFF; background:var(--theme-btn); border-color:var(--theme-btn); box-shadow:none; }
+.prep-page .prep { background:#E6E6E3; border:1px solid var(--theme-tint,var(--lilac)); border-radius:30px; padding:22px 22px; }
+.prep-page .prep.hi.talents-feature { background:#E6E6E3; color:var(--ink); }
+.prep-page .prep.hi.talents-feature :is(h2,p,.more) { color:var(--ink); }
+.prep-page .prep .more { color:var(--theme-btn); }
+
+/* Espace personnel */
+.personal-home .study-level { background:#F2F2EF; border:2px solid var(--sun); color:#55555C; font-weight:300; }
+.personal-home .study-level svg { color:#55555C; }
+.home-interest { background:transparent; border:2px solid #E8E1C6; color:#55555C; }
+.home-feature { grid-template-columns:auto minmax(0,1fr) 40px; gap:14px; padding:18px 16px; border-radius:26px; color:var(--ink); }
+.home-tile { display:grid; place-items:center; flex:none; width:64px; height:64px; border-radius:14px; background:var(--sun); color:#141414; }
+.home-tile.home-count { min-width:0; font-size:2.25rem; font-weight:700; letter-spacing:-.04em; }
+.home-tile svg { width:26px; height:26px; }
+.home-tile .parcours-icon { width:13px; height:44px; }
+.home-discover, .home-discover:hover { background:var(--lilac); color:var(--ink); }
+.home-access, .home-access:hover { background:#FFF; color:var(--ink); min-height:0; grid-template-columns:auto minmax(0,1fr) 40px; }
+.home-feature-copy { font-size:1rem; letter-spacing:-.01em; }
+.home-feature-copy b { font-size:1.1875rem; font-weight:700; line-height:1.2; }
+.home-feature-copy > span { font-weight:300; }
+.home-go { width:40px; height:40px; border:0; background:#FFF; color:var(--blue); box-shadow:0 1px 4px rgba(0,0,0,.08); }
+.home-shortcuts a { flex-direction:row; align-items:center; gap:10px; min-height:84px; padding:12px; overflow-wrap:normal; hyphens:auto; border:1px solid var(--lilac); border-radius:24px; background:#E6E6E3; }
+.home-shortcuts .home-tile { width:46px; height:46px; border-radius:12px; }
+.home-shortcuts .home-tile.home-count { font-size:1.875rem; }
+.home-shortcuts b { display:block; font-weight:600; font-size:.9375rem; line-height:1.2; }
+.home-shortcuts a > span:last-child { min-width:0; font-size:.875rem; line-height:1.25; font-weight:300; }
+@media (max-width:359px) { .home-tile { width:52px; height:52px; } .home-shortcuts .home-tile { width:44px; height:44px; } }
+html[data-contrast="true"] :is(.parcours-card,.home-tile,.prep-page .prep,.home-shortcuts a) { background:#FFF; border:1px solid #000; }
+html[data-contrast="true"] .preparation-card .exam-route h4 { background:#000; }
+html[data-contrast="true"] :is(.btn.theme,.btn.black) { background:#000; border-color:#000; color:#FFF; }
+.preparation-card .exam-route .exam-org { margin-top:0; margin-bottom:16px; }

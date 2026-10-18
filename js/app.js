@@ -367,14 +367,6 @@
     var cats=[];(session.routeIds||[]).forEach(function(id){var r=D.accessRoutes[id];if((job.routeIds||[]).indexOf(id)>-1&&r&&r.fp.indexOf(session.fp)>-1&&['A+','A','B','C'].indexOf(r.cat)>-1&&cats.indexOf(r.cat)===-1)cats.push(r.cat);});
     return cats.length===1?cats[0]:session.cat;
   }
-  /* Vue repliée : nombre de sessions, versants et prochaine clôture. */
-  function dateSummaries(list, job) {
-    var sorted=list.slice().sort(function(a,b){return String(a.date||'9999').localeCompare(String(b.date||'9999'));});
-    var today=todayISO(),next=sorted.find(function(c){return c.date&&c.date>=today;})||sorted[0];
-    var fps=[];list.forEach(function(c){if(D.fps[c.fp]&&fps.indexOf(D.fps[c.fp])===-1)fps.push(D.fps[c.fp]);});
-    return '<div class="date-summary"><b>' + list.length + ' sessions à venir</b><span class="small">' + esc(fps.join(', ')) + '</span>' +
-      (next ? '<span class="date-summary-next">Prochaine clôture : <b>' + esc(next.closeLabel || next.date || 'non publiée') + '</b> · ' + esc(next.name) + '</span>' : '') + '</div>';
-  }
   function calendarRows(list, limit, job) {
     if (!list.length) return '<p class="empty">Aucune session publiée pour cette sélection.</p>';
     return list.slice().sort(calendarOrder).slice(0, limit || 40).map(function (c) {
@@ -541,9 +533,9 @@
       S.domains.map(function(d){return '<span class="home-interest">' + esc(domainLabel(d)) + '</span>';}).join('') + '</div>' : '') +
       '<p class="lead">Découvrez les métiers publics qui correspondent à ' + (isParent() ? 'ses' : 'vos') + ' envies.</p>' +
       (isParent() ? '<a class="link-plain" href="#/accueil">Tous les parcours de la famille</a>' : '') +
-      '<div class="home-features mt-s"><a class="home-feature home-discover" href="#/metiers" data-action="discoverJobs"><span class="home-count">' + jobs.length + '</span><span class="home-feature-copy"><b>' + (isParent() ? 'Ses métiers à découvrir' : 'Vos métiers à découvrir') + '</b><span>sélectionnés pour ' + (isParent() ? 'votre enfant' : 'vous') + '.</span></span><span class="home-go">' + I.arrow + '</span></a>' +
-      '<a class="home-feature home-access" href="#/concours"><img class="home-signpost" src="assets/logo-panneaux.png" alt="" width="1000" height="1224"><span class="home-feature-copy"><b>Comment y accéder</b><span>' + esc(reachable()) + '</span></span><span class="home-go">' + I.arrow + '</span></a></div>' +
-      '<div class="grid-2 home-shortcuts"><a href="#/favoris"><b>' + S.favorites.length + '</b><span>' + (isParent() ? 'Ses métiers favoris' : 'Vos métiers favoris') + '</span></a><a href="#/interets"><b>' + (isParent() ? 'Son projet' : 'Votre projet') + '</b><span>Affiner les préférences</span></a></div>' +
+      '<div class="home-features mt-s"><a class="home-feature home-discover" href="#/metiers" data-action="discoverJobs"><span class="home-tile home-count">' + jobs.length + '</span><span class="home-feature-copy"><b>' + (isParent() ? 'Ses métiers à découvrir' : 'Vos métiers à découvrir') + '</b><span>sélectionnés pour ' + (isParent() ? 'votre enfant' : 'vous') + '.</span></span><span class="home-go">' + I.arrow + '</span></a>' +
+      '<a class="home-feature home-access" href="#/concours"><span class="home-tile home-tile-parcours">' + I.parcours + '</span><span class="home-feature-copy"><b>Comment y accéder</b><span>' + esc(reachable()) + '</span></span><span class="home-go">' + I.arrow + '</span></a></div>' +
+      '<div class="grid-2 home-shortcuts"><a href="#/favoris"><span class="home-tile home-count">' + S.favorites.length + '</span><span><b>' + (isParent() ? 'Ses métiers favoris' : 'Vos métiers favoris') + '</b></span></a><a href="#/interets"><span class="home-tile">' + I.pencil + '</span><span><b>' + (isParent() ? 'Son projet' : 'Votre projet') + '</b> <span>Affiner les préférences</span></span></a></div>' +
       '</main>' + tabbar('accueil');
   }
   screens.accueil = function () { return isParent() ? screens.famille() : personalHome(); };
@@ -705,7 +697,7 @@
       (after.length ? after : [{ text: 'Candidature sur une offre d’emploi' }]).forEach(function (s) { stop('Recrutement', s.text, '', null); });
     } else {
       stop('Concours', 'Préparer le concours', L >= 4 ? 'Prépa Talents, IPAG, CPAG ou préparation à distance' : 'Annales, préparation du CNED ou du CNFPT', null,
-        { links: others.length ? [{ kind: 'cat', label: 'Correspondance : catégorie ' + others.join(', ') }] : [] });
+        { links: others.length ? [{ kind: 'corresp', label: 'Correspondance : catégorie ' + others.join(', ') }] : [] });
       var exam = after.filter(function (s) { return s.exam; })[0];
       stop('Concours', exam ? exam.text : 'Concours de catégorie ' + cat, fpNames(j.fp).join(', '), null);
       after.filter(function (s) { return !s.exam && after.indexOf(s) > after.indexOf(exam); }).forEach(function (s) { stop('Concours', s.text, '', null); });
@@ -726,20 +718,32 @@
     }
     return { cat: cat, stops: stops };
   }
+  /* Une étape par niveau (collège, lycée, après le bac, concours), puis le métier. */
+  function parcoursSteps(j) {
+    var stops=buildParcours(j).stops, groups=[];
+    stops.forEach(function(st){var g=groups[groups.length-1];if(st.terminus){groups.push({zone:'Métier',stops:[st],terminus:true});return;}if(!g||g.zone!==st.zone)groups.push(g={zone:st.zone,stops:[]});g.stops.push(st);});
+    return groups.map(function(g){
+      var st=g.stops, links=[], here=st.some(function(x){return x.here;}), title, text=[];
+      st.forEach(function(x){(x.links||[]).forEach(function(l){links.push(l);});});
+      var real=st.filter(function(x){return !x.done;});
+      if(g.terminus){title=st[0].label;text.push(st[0].detail);}
+      else if(g.zone==='Collège'){title='Pour commencer';text.push((real[0]&&real[0].key!=='6e'?'De la '+real[0].label+' à la 3e':'De la 6e à la 3e')+', jusqu’au diplôme national du brevet.');}
+      else if(g.zone==='Lycée'){var pro=st.some(function(x){return x.key==='pro';}),bac=st.filter(function(x){return x.key==='Terminale'||x.key==='pro';})[0],mine=st.filter(function(x){return /^Votre niveau/.test(x.label);})[0];
+        title=mine?mine.label:pro?'En voie professionnelle':'En voie générale ou technologique';text.push(bac?bac.detail:'');if(!pro&&!mine)text.push('Spécialités choisies en première.');}
+      else{var first=st[0];title=first.label;text.push(first.detail&&!/[.!?]$/.test(first.detail)?first.detail+'.':first.detail);st.slice(1).forEach(function(x){text.push((g.zone==='Concours'||g.zone==='Recrutement'?'':'Puis ')+x.label+(x.detail?' : '+x.detail:'')+'.');});}
+      return {zone:g.zone==='Études supérieures'?'Après le bac':g.zone,title:title,text:text.filter(Boolean).join(' '),links:links,here:here,terminus:!!g.terminus};
+    });
+  }
   function parcoursSection(j) {
-    var p = buildParcours(j), zone = null;
-    return '<section class="parcours mt-m" aria-labelledby="parcours-title"><h2 id="parcours-title" class="section-heading">' + I.graduation + '<span>Quelles études ?</span></h2>' +
-      '<p class="small m0">Parcours conseillé ' + (isParent() ? 'pour ' + esc(childName()) : 'depuis votre niveau') + '. Filières indicatives : les conditions exactes figurent dans l’avis du concours.</p>' +
-      '<ol class="metro">' + p.stops.map(function (s) {
-        var head = s.zone !== zone ? '<li class="metro-zone"><span>' + esc(s.zone) + '</span></li>' : '';
-        zone = s.zone;
-        var cls = 'metro-stop' + (s.done ? ' done' : '') + (s.here ? ' here' : '') + (s.terminus ? ' terminus' : '');
-        return head + '<li class="' + cls + '"' + (s.here ? ' aria-current="step"' : '') + '><span class="metro-dot" aria-hidden="true"></span><div class="metro-txt">' +
-          (s.here ? '<span class="metro-here">' + (isParent() ? 'Ici aujourd’hui' : 'Vous êtes ici') + '</span>' : '') +
-          '<b>' + esc(s.label) + '</b>' + (s.detail ? '<span>' + esc(s.detail) + '</span>' : '') +
-          ((s.links || []).length ? '<span class="metro-links">' + s.links.map(function (l) { return '<span class="metro-link ' + l.kind + '">' + esc(l.label) + '</span>'; }).join('') + '</span>' : '') +
-          (s.done ? '<span class="sr-only"> (étape passée)</span>' : '') + '</div></li>';
-      }).join('') + '</ol></section>';
+    var steps=parcoursSteps(j);
+    return '<section class="parcours stack mt-m job-section" aria-labelledby="parcours-title"><h2 id="parcours-title" class="section-heading">' + I.parcours + '<span>Quelles études choisir</span></h2>' +
+      '<div class="parcours-card"><ol class="parcours-line">' + steps.map(function (s, i) {
+        var mark=i===0?'start':s.terminus?'end':'mid';
+        return '<li class="parcours-step '+mark+(s.here?' here':'')+'"'+(s.here?' aria-current="step"':'')+'><span class="parcours-mark" aria-hidden="true">'+(mark==='start'?'<svg viewBox="0 0 12 13"><path fill-rule="evenodd" d="M6 0a5 5 0 0 1 5 5c0 3.2-3.4 6.5-4.6 7.6a.6.6 0 0 1-.8 0C4.4 11.5 1 8.2 1 5a5 5 0 0 1 5-5zm0 3a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/></svg>':'')+'</span><div class="parcours-txt">' +
+          '<span class="parcours-head"><span class="parcours-zone">'+esc(s.zone)+'</span>'+(s.here?'<span class="parcours-here">'+(isParent()?'Ici aujourd’hui':'Vous êtes ici')+'</span>':'')+'</span>' +
+          '<b>' + esc(s.title) + '</b>' + (s.text ? '<p>' + esc(s.text) + '</p>' : '') +
+          (s.links.length ? '<span class="parcours-links">' + s.links.map(function (l) { return '<span class="parcours-link ' + l.kind + '">' + esc(l.label) + '</span>'; }).join('') + '</span>' : '') + '</div></li>';
+      }).join('') + '</ol><p class="parcours-note">Parcours conseillé ' + (isParent() ? 'pour ' + esc(childName()) : 'depuis votre niveau') + ', à titre indicatif : les conditions exactes figurent dans l’avis du concours.</p></div></section>';
   }
   screens.metier = function (id) {
     var j = D.jobs.filter(function (x) { return x.id === id; })[0];
@@ -756,32 +760,27 @@
     }
     var dates = isContractJob(j) ? [] : examsFor(j);
     var shared = sharedTraits(j);
-    return '<main class="screen top-tight">' + back('#/metiers', 'Métiers') +
-      '<section class="job-hero"><div class="job-hero-head"><span class="job-hero-cat">' + jobBadges(j) + '</span><h1 class="sm">' + esc(j.name) + '</h1></div>' +
-      '<div class="job-hero-tags"><span class="sr-only">' + esc(jobCategories(j).map(catLabel).join(', ')) + (j.cat==='V'?', selon le poste':'') + '. </span>' + fpTags(j.fp) +
-      (jobFits(j) ? '<span class="category-fit">' + I.check + '<span>Niveau d’étude compatible</span></span>' : '') + '</div>' +
-      '<div class="row job-meta" role="group" aria-label="Centres d’intérêt" tabindex="0">' + (j.interests || [j.domain]).map(function (d) { return '<span class="tag">' + esc(domainLabel(d)) + '</span>'; }).join('') + '</div></section>' +
+    var cats=D.categories.filter(function(c){return jobCategories(j).indexOf(c.id)>-1;});
+    var fav=S.favorites.indexOf(j.id) > -1;
+    return '<main class="screen top-tight job-page">' + back('#/metiers', 'Métiers') +
+      '<div class="row job-meta" role="group" aria-label="Catégorie et centres d’intérêt" tabindex="0"><span class="job-hero-cat">' + jobBadges(j) + '</span>' + (j.cat==='V'?'<span class="tag">Selon le poste</span>':'') +
+      (j.interests || [j.domain]).map(function (d) { return '<span class="tag">' + esc(domainLabel(d)) + '</span>'; }).join('') + '</div>' +
+      '<h1>' + esc(j.name) + '</h1>' +
       '<p class="body">' + esc(j.desc.length>300?j.desc.slice(0,297).replace(/\s+\S*$/,'')+'…':j.desc) + '</p>' +
-      '<button type="button" class="btn outline" data-action="favorite"' + attr('v', j.id) + ' aria-pressed="' + (S.favorites.indexOf(j.id) > -1) + '">' + I.bookmark + (S.favorites.indexOf(j.id) > -1 ? 'Retirer des favoris' : 'Ajouter aux favoris') + '</button>' +
-      '<button type="button" class="link-action" data-action="jobDetails"' + attr('v',j.id) + '>' + I.info + 'Plus de détails</button>' +
-      (shared.length ? '<div class="callout tint-mint"><span class="pin"></span><p>' + (isParent() ? 'Lui ressemble' : 'Vous ressemble') + ' : ' + esc(shared.map(traitLabel).join(', ').toLowerCase()) + '.</p></div>' : '') +
-      '<h2 class="eyebrow mt-m">Pour y accéder</h2>' +
-      '<div class="list steps">' + j.steps.map(function (s, i) {
-        var exam = s.charAt(0) === '*';
-        var txt = exam ? s.slice(1) : s;
-        return '<div class="list-row static"><span class="num">' + (i + 1) + '</span><span class="step-txt">' + esc(txt) + '</span></div>';
-      }).join('') + '</div>' +
-      (dates.length ? '<section class="stack mt-m"><h2>Dates des concours</h2>' + (dates.length===1||expandedDatesJob===j.id ? calendarRows(dates, dates.length, j) : dateSummaries(dates, j)) +
-      (dates.length > 1 ? '<button type="button" class="btn outline" data-action="moreJobDates"' + attr('v',j.id) + ' aria-expanded="' + (expandedDatesJob===j.id) + '">' + (expandedDatesJob===j.id?'Réduire les dates':'Afficher le détail des ' + dates.length + ' sessions') + '</button>' : '') + '</section>' : '') +
+      '<button type="button" class="btn black" data-action="favorite"' + attr('v', j.id) + ' aria-pressed="' + fav + '">' + I.bookmark + (fav ? 'Retirer des favoris' : 'Ajouter aux favoris') + '</button>' +
+      '<button type="button" class="btn theme" data-action="jobDetails"' + attr('v',j.id) + '>' + I.info + 'Plus de détails</button>' +
+      (shared.length ? '<div class="callout"><span class="pin"></span><p>' + (isParent() ? 'Lui ressemble' : 'Vous ressemble') + ' : ' + esc(shared.map(traitLabel).join(', ').toLowerCase()) + '.</p></div>' : '') +
       parcoursSection(j) +
-      '<h2 class="eyebrow mt-m">Évoluer</h2><div class="ladder">' + ladder.map(function (r) {
+      (isContractJob(j) ? '' : '<section class="stack mt-m job-section" aria-labelledby="concours-title"><h2 id="concours-title" class="section-heading">' + I.calendar + '<span>Concours et dates</span></h2>' +
+        (cats.length?'<div class="stack">' + cats.slice().reverse().sort(function(a,b){return ['A+','A','B','C'].indexOf(a.id)-['A+','A','B','C'].indexOf(b.id);}).map(function(c){return preparationCategoryCard(c,j);}).join('') + '</div>':'<p class="body">La catégorie et le corps d’accès à ce métier restent à préciser selon le poste. Consultez les conditions de l’offre de recrutement.</p>') +
+        (dates.length?'<a class="btn outline" href="#/calendrier/'+j.id+'">Toutes les dates des concours ('+dates.length+')</a>':'') + '</section>') +
+      '<section class="stack mt-m job-section"><h2 class="section-heading">' + I.growth + '<span>Évoluer</span></h2><div class="ladder">' + ladder.map(function (r) {
         if (r.length === 1) return '<div class="via">↓ ' + esc(r[0]) + '</div>';
-        var t = r[1] === 'A+' ? 'tint-blue' : (r[1] === 'A' ? 'tint-mint' : (r[1] === 'C' ? 'tint-yellow' : tint[j.cat]));
         var categories=String(r[1]).split(/\s*(?:,|\/|\bou\b)\s*/);
         var known=categories.length&&categories.every(function(c){return ['A+','A','B','C','CDD'].indexOf(c)>-1;});
-        return '<div class="rung ' + t + '"><span>' + esc(r[0]) + '</span>'+(known?'<span class="rung-categories">'+categories.map(function(c){return catBadge(c,'sm');}).join('<span class="sr-only">ou </span>')+'</span>':'<small>'+esc(r[1])+'</small>')+'</div>';
-      }).join('') + '</div>' +
-      '<a class="btn mt-m" href="' + prepHref(j) + '">' + (isContractJob(j) ? I.route + 'Entrer sans concours' : I.book + 'Se préparer') + '</a>' +
+        return '<div class="rung"><span>' + esc(r[0]) + '</span>'+(known?'<span class="rung-categories">'+categories.map(function(c){return catBadge(c,'sm');}).join('<span class="sr-only">ou </span>')+'</span>':'<small>'+esc(r[1])+'</small>')+'</div>';
+      }).join('') + '</div></section>' +
+      '<a class="btn theme mt-m" href="' + prepHref(j) + '">' + (isContractJob(j) ? I.route + 'Entrer sans concours' : I.book + 'Se préparer') + '</a>' +
       ext('https://www.fonction-publique.gouv.fr/toutes-les-publications/repertoire-commun-des-metiers-de-la-fonction-publique', 'Consulter la source métier sur fonction-publique.gouv.fr', 'link-plain') + '</main>' + tabbar('metiers');
   };
 
@@ -834,22 +833,34 @@
     var panelId = 'prep-' + job.id + '-' + catClass(c.id);
     var routes=jobRoutes(job).filter(function(r){return r.cat===c.id;});
     var fps = job.fp.split('').filter(function(f){return D.fps[f]&&(!routes.length||routes.some(function(r){return r.fp.indexOf(f)>-1;}));});
-    /* Un seul concours : la carte est dépliée. Plusieurs : seules les informations de base restent visibles. */
-    var count=fps.reduce(function(n,f){return n+Math.max(1,routes.filter(function(r){return r.fp.indexOf(f)>-1;}).length);},0);
+    var exams=[];
+    fps.forEach(function(f){var m=routes.filter(function(r){return r.fp.indexOf(f)>-1;});if(m.length)m.forEach(function(r){exams.push({r:r,f:f,e:(r.examInfo||{})[f]||{}});});else exams.push({f:f});});
+    /* Un seul concours : la fiche est dépliée. Plusieurs : seules les informations de base restent visibles. */
+    var count=exams.length;
     var state=expandedPrepCategories[job.id]||{};
     var open = Object.prototype.hasOwnProperty.call(state,c.id) ? state[c.id] : count===1;
-    var titles=[];routes.forEach(function(r){fps.forEach(function(f){var e=(r.examInfo||{})[f];if(e&&e.cardTitle&&titles.indexOf(e.cardTitle)===-1)titles.push(e.cardTitle);});});
+    var titles=[];exams.forEach(function(x){if(x.e&&x.e.cardTitle&&titles.indexOf(x.e.cardTitle)===-1)titles.push(x.e.cardTitle);});
     var title=titles.length===1?titles[0]:'Concours de catégorie '+c.id;
-    return '<div class="catcard-wrap preparation-card ' + c.tint + ' prep-' + catClass(c.id) + (open?' open':'') + '"><button type="button" class="catcard" aria-expanded="' + open + '" aria-controls="' + panelId + '" data-action="openPrepCat"' + attr('v',c.id) + attr('job',job.id) + '><span class="cat lg ' + catClass(c.id) + '" aria-hidden="true">' + c.id + '</span>' +
-      '<span class="txt"><b>'+esc(title)+'</b><span class="role">Catégorie ' + c.id + '</span>'+fpTags(fps.join(''))+preparationLevel(c,job,routes)+(count>1&&!open?'<span class="prep-count">'+count+' concours possibles · toucher pour afficher le détail</span>':'')+'</span>' + (open?'':I.down) + '</button>' +
-      (open?'<div class="cat-panel" id="' + panelId + '"><h3>Accès à ce métier</h3>' + fps.map(function(f){
-        var matching=routes.filter(function(r){return r.fp.indexOf(f)>-1;});
-        return matching.length?matching.map(function(r){
-          var e=(r.examInfo||{})[f]||{};
-          var links=e.officialLinks&&e.officialLinks.length?e.officialLinks:[{url:e.source||r.source,label:'Dates et lieux sur le site officiel'}];
-          return '<section class="exam exam-route" data-fp="'+f+'"><h4>'+esc((/^concours\b/i.test(e.name||r.name)?'':'Concours : ')+(e.name||r.name))+'</h4><dl><dt>Organisé par</dt><dd>'+esc(e.org||'Structure à confirmer dans l’avis du concours')+'</dd><dt>Épreuves en métropole</dt><dd>'+esc(e.metro||'Lieux non précisés : consulter l’avis du concours.')+'</dd><dt>Épreuves en outre-mer</dt><dd>'+esc(e.om||'Centre non confirmé : consulter l’avis du concours.')+'</dd></dl><div class="official-exam-links">'+links.map(function(l){return ext(l.url,l.label,'link-plain');}).join('')+'</div></section>';
-        }).join(''):'<div class="exam" data-fp="'+f+'"><p class="small">Le corps ou cadre d’emplois doit être précisé dans l’offre pour identifier le concours et son organisateur. Les dates et lieux ne sont pas encore associés à ce métier.</p></div>';
-      }).join('') + '<p class="small m0">Les lieux, les épreuves et les conditions sont précisés dans l’avis propre au concours.</p><button type="button" class="preparation-collapse" data-action="openPrepCat"'+attr('v',c.id)+attr('job',job.id)+' aria-expanded="true" aria-controls="'+panelId+'" aria-label="Réduire les informations du concours">'+I.down+'</button></div>':'') + '</div>';
+    return '<div class="catcard-wrap preparation-card prep-' + catClass(c.id) + (open?' open':'') + '"><button type="button" class="catcard" aria-expanded="' + open + '" aria-controls="' + panelId + '" data-action="openPrepCat"' + attr('v',c.id) + attr('job',job.id) + '>' + catBadge(c.id,'lg') +
+      '<span class="txt"><b>'+esc(title)+'</b><span class="sr-only">Catégorie ' + c.id + '</span>'+fpTags(fps.join(''))+preparationLevel(c,job,routes)+(count>1&&!open?'<span class="prep-count">'+count+' concours possibles · toucher pour afficher le détail</span>':'')+'</span>' + (open?'':I.down) + '</button>' +
+      (open?'<div class="cat-panel" id="' + panelId + '">' + exams.map(function(x){return examBlock(x,job);}).join('') +
+      '<button type="button" class="preparation-collapse" data-action="openPrepCat"'+attr('v',c.id)+attr('job',job.id)+' aria-expanded="true" aria-controls="'+panelId+'" aria-label="Réduire les informations du concours">'+I.down+'</button></div>':'') + '</div>';
+  }
+  /* Un concours : bandeau, organisateur, calendrier de la prochaine session, lieux et sources. */
+  function examBlock(x, job) {
+    if(!x.r)return '<div class="exam" data-fp="'+x.f+'"><p class="exam-missing">Le corps ou cadre d’emplois doit être précisé dans l’offre pour identifier le concours et son organisateur ('+esc(D.fps[x.f])+').</p></div>';
+    var r=x.r,e=x.e,f=x.f,name=e.name||r.name;
+    var sessions=upcoming().filter(function(c){return c.fp===f&&(c.routeIds||[]).indexOf(r.id)>-1&&(job.routeIds||[]).indexOf(r.id)>-1;}).sort(calendarOrder);
+    var next=sessions[0];
+    var links=e.officialLinks&&e.officialLinks.length?e.officialLinks:[{url:e.source||r.source,label:'Voir l’avis officiel'}];
+    return '<section class="exam exam-route" data-fp="'+f+'"><h4>'+esc((/^concours\b/i.test(name)?'':'Concours : ')+name)+'</h4>' +
+      '<dl class="exam-org"><dt>Organisé par :</dt><dd>'+esc(e.org||'Structure à confirmer dans l’avis du concours')+'</dd></dl>' +
+      (next?'<div class="exam-cal"><h5>'+I.calendar+'<span>'+(next.provisional?'Calendrier prévisionnel':'Calendrier')+' · '+esc(next.voie)+' :</span></h5><dl class="exam-dates"><dt>Ouverture</dt><dd>'+esc(next.openLabel||next.open||'Non publiée')+'</dd><dt>Clôture</dt><dd>'+esc(next.closeLabel||next.date||'Non publiée')+'</dd><dt>Écrits ou sélection</dt><dd>'+esc(next.writtenLabel||'Non publiés')+'</dd><dt>Oraux</dt><dd>'+esc(next.oralLabel||'Non publiés')+'</dd></dl>' +
+        (sessions.length>1?'<a class="link-plain" href="#/calendrier/'+job.id+'">Voir les '+sessions.length+' sessions de ce concours</a>':'')+'</div>'
+        :'<div class="exam-cal"><h5>'+I.calendar+'<span>Calendrier :</span></h5><p>Aucune session publiée pour le moment : consulter l’avis officiel.</p></div>') +
+      '<div class="exam-places"><h5>'+I.pin+'<span>Lieux des épreuves</span></h5><b>En métropole</b><p>'+esc(e.metro||'Lieux non précisés : consulter l’avis du concours.')+'</p><b>En outre-mer</b><p>'+esc(e.om||'Centre non confirmé : consulter l’avis du concours.')+'</p></div>' +
+      '<p class="exam-source">Source : '+esc(next?next.source+' · vérifiée le '+next.checked:(e.checked?'vérifiée le '+e.checked:'site officiel de l’organisateur'))+'</p>' +
+      '<div class="official-exam-links">'+(next&&next.url?ext(next.url,'Voir l’avis officiel','link-plain'):'')+links.map(function(l){return ext(l.url,l.label,'link-plain');}).join('')+'</div></section>';
   }
   function preparationLevel(category,job,routes) {
     var levels=[],complete=routes.length>0;
@@ -859,17 +870,15 @@
     var qualification=job.qualification||(qualifications.some(Boolean)?(qualifications.every(function(q){return q&&q===qualifications[0];})?qualifications[0]:'selon le concours'):null);
     var compatible=!qualification&&minimum!==null&&userRank()!==null&&userRank()>=minimum;
     var label=qualification?'Diplôme requis : '+qualification:compatible?'Niveau d’étude compatible':minimum===null?'Niveau requis selon le concours':minimum===0?'Aucun diplôme requis':'Niveau '+DIP[minimum]+' requis';
-    return '<span class="category-fit preparation-level">'+(compatible?I.check:'')+'<span>'+esc(label)+'</span></span>';
+    return '<span class="category-fit preparation-level'+(compatible?'':' warn')+'">'+(compatible?I.check:I.info)+'<span>'+esc(label)+'</span></span>';
   }
   screens.preparer = function(id) {
     var job=jobById(id);
     if(!job)return screens.metiers();
     if(isContractJob(job))return screens['sans-concours'](id);
-    var cats=D.categories.filter(function(c){return jobCategories(job).indexOf(c.id)>-1;});
-    var dates=examsFor(job);
-    return '<main class="screen top-tight">' + back('#/metier/'+job.id,'Métier') + '<h1>Se préparer</h1><p class="body">' + esc(job.name) + '</p><h2 class="mt-m">Concours</h2>' + (cats.length?'<div class="stack">' + cats.map(function(c){return preparationCategoryCard(c,job);}).join('') + '</div>':'<p class="body">La catégorie et le corps d’accès à ce métier restent à préciser selon le poste. Consultez les conditions de l’offre de recrutement.</p>') +
-      (dates.length?'<a class="btn outline" href="#/calendrier/'+job.id+'">'+I.calendar+'Dates des concours ('+dates.length+')</a>':'') +
-      '<a class="btn outline" href="#/handicap/'+job.id+'">Handicap : accès et aménagements</a>' + preparationContent(job) + '</main>' + tabbar('metiers');
+    var theme=themeCategory(job);
+    return '<main class="screen top-tight prep-page">' + back('#/metier/'+job.id,job.name) + (theme?'<span class="prep-page-cat">'+catBadge(theme,'lg')+'</span>':'') + '<h1>Se préparer</h1><p class="sr-only">' + esc(job.name) + '</p>' +
+      preparationContent(job) + '</main>' + tabbar('metiers');
   };
 
   screens.calendrier = function (jobId) {
@@ -967,8 +976,8 @@
     return '<section class="stack mt-l" id="aides"><h2 class="section-heading no-icon">'+I.book+'Aides</h2>' +
       '<a class="btn outline" href="#/annales'+(job?'/'+job.id:'')+'">'+I.book+'Annales et rapports de jury</a>' +
       '<a class="btn outline" href="#/bibliographie'+(job?'/'+job.id:'')+'">Recommandations bibliographiques</a></section><section class="stack mt-l" id="preparations"><h2 class="section-heading no-icon" id="prep-title" tabindex="-1">'+I.pin+'Prépas</h2>' +
-      '<div class="row" role="group" aria-label="Budget">' + opts.map(function (o) { return chip('prepBudget', o[0], o[1], b === o[0], 'blue'); }).join('') + '</div>' +
       '<button type="button" class="switch-row" role="switch" aria-checked="' + on + '" data-action="toggleBoursier"><span>' + (isParent() ? 'Mon enfant est boursier·e' : 'Je suis boursier·e') + '</span><span class="switch" aria-hidden="true"></span></button>' +
+      '<div class="row" role="group" aria-label="Budget">' + opts.map(function (o) { return chip('prepBudget', o[0], o[1], b === o[0], 'blue'); }).join('') + '</div>' +
       (list.length?'':'<p class="empty">Aucune préparation pour ce métier avec ce budget.</p>') + '<div class="stack">' + list.map(function (p) {
         var hi = p.talents && on;
         var extra = p.id === 'talents' && (job||S.domains.length) ? '<span class="fit on">' + nbT + (job?' pour ce métier':' pour '+(isParent()?'ses':'vos')+' choix') + '</span>' : '';

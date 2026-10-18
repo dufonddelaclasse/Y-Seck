@@ -20,6 +20,9 @@
     user: '<circle cx="12" cy="8" r="3.5"/><path d="M5 21c0-8 14-8 14 0"/>',
     close: '<path d="m6 6 12 12M6 18 18 6"/>'
   };
+  /* Parcours : épingle de départ, étapes en pointillés et point d’arrivée (pictogramme fourni). */
+  icons.parcours = '<svg class="parcours-icon" viewBox="0 0 12 48" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M6 0a5 5 0 0 1 5 5c0 3.2-3.4 6.5-4.6 7.6a.6.6 0 0 1-.8 0C4.4 11.5 1 8.2 1 5a5 5 0 0 1 5-5zm0 3a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/><circle cx="6" cy="16" r="1.1"/><circle cx="6" cy="21" r="1.1"/><circle cx="6" cy="26.5" r="1.9"/><circle cx="6" cy="32" r="1.1"/><circle cx="6" cy="37" r="1.1"/><circle cx="6" cy="44" r="4"/></svg>';
+  icons.pencil = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15.5 4.5a2.1 2.1 0 0 1 3 3L8 18l-4 1 1-4z"/><path d="M13.5 6.5l3 3"/></svg>';
   /* Contractuels : document plié, trait épais comme sur la maquette. */
   icons.contract = '<svg class="contract-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h9.5A1.5 1.5 0 0 1 20 4.5v15a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 19.5V8z"/><path d="M9 3v5H4"/><path d="M8 11.5h8M8 14.5h8M8 17.5h4"/></svg>';
   Object.keys(paths).forEach(function (k) { icons[k] = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + paths[k] + '</svg>'; });
