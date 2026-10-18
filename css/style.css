@@ -1429,3 +1429,9 @@ html[data-contrast="true"] :is(.ref-card,.ref-tip,.exam-sessions li) { backgroun
 .prep-page .btn.outline, .prep-page button.chip:not(.on) { border-color:var(--theme-btn,var(--blue)); }
 .prep-page .btn.outline:hover, .prep-page button.chip:not(.on):hover { background:var(--theme-tint,var(--lilac-soft)); border-color:var(--theme-btn,var(--blue)); }
 .recruitment-note .link-plain { color:var(--theme-btn,var(--blue)); }
+
+/* Espace personnel : bloc « Vos métiers à découvrir » dans la couleur générique, texte blanc. */
+.home-discover, .home-discover:hover { background:var(--brand); color:#FFF; }
+.home-discover .home-feature-copy b, .home-discover .home-feature-copy > span { color:#FFF; }
+.home-discover .home-go { background:#FFF; color:var(--brand); }
+html[data-contrast="true"] .home-discover { background:#000; color:#FFF; }
