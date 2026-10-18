@@ -152,7 +152,7 @@
   function prepHref(j) { return isContractJob(j) ? '#/sans-concours/' + j.id : '#/preparer/' + j.id; }
   function catClass(c) { return c === 'A+' ? 'cat-Ap' : (c === 'V' ? 'cat-X' : 'cat-' + c); }
   function catLabel(c) { return c === 'CDD' || c === 'X' ? 'CDD · emploi contractuel' : (c === 'V' ? 'Catégorie selon le poste' : 'Catégorie ' + c); }
-  function catShort(c) { return c === 'CDD' || c === 'X' ? 'CDD' : c === 'V' ? '<span style="font-size:0.6875rem">' + 'Var.' + '</span>' : c; }
+  function catShort(c) { return c === 'CDD' || c === 'X' ? I.contract : c === 'V' ? '<span style="font-size:0.6875rem">' + 'Var.' + '</span>' : c; }
   function catBadge(c, size) {
     return '<span class="cat ' + (size || '') + ' ' + catClass(c) + '" aria-hidden="true">' + catShort(c) + '</span><span class="sr-only">' + catLabel(c) + ', </span>';
   }
@@ -188,7 +188,7 @@
     }).join('') + '</nav>';
   }
   function chip(action, value, label, on, extraCls) {
-    return '<button type="button" class="chip' + (extraCls ? ' ' + extraCls : '') + ((action === 'metCat' || action === 'calCat') && value !== 'Toutes' ? ' category-choice ' + catClass(value) : '') + (on ? ' on' : '') + '" aria-pressed="' + on + '"' + attr('action', action) + attr('v', value) + '>' + esc(label) + '</button>';
+    return '<button type="button" class="chip' + (extraCls ? ' ' + extraCls : '') + ((action === 'metCat' || action === 'calCat') && value !== 'Toutes' ? ' category-choice ' + catClass(value) : '') + (on ? ' on' : '') + '" aria-pressed="' + on + '"' + attr('action', action) + attr('v', value) + '>' + (action === 'metCat' && value === 'CDD' ? I.contract + '<span class="sr-only">Contractuels</span>' : esc(label)) + '</button>';
   }
   function searchField(id, label, placeholder, value) {
     return '<div class="search">' + I.search + '<label class="sr-only" for="' + id + '">' + esc(label) + '</label>' +

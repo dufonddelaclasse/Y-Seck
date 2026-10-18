@@ -1094,3 +1094,9 @@ html[data-contrast="true"] .date-summary { background:#FFF; border:1px solid #00
 .metro-link.stage::before { border-color:#3D3000; background:var(--sun); }
 html[data-contrast="true"] .metro { --line-c:#000; }
 html[data-contrast="true"] :is(.metro-link,.metro-link.stage,.metro-here) { background:#FFF; color:#000; border:2px solid #000; }
+
+/* Contractuels : icône de document au lieu du sigle CDD. */
+.cat.cat-CDD, .context-category.cat-CDD, .chip.category-choice.cat-CDD { color:#141414; }
+.cat.cat-CDD .contract-icon { width:58%; height:58%; }
+.chip.category-choice.cat-CDD .contract-icon { width:22px; height:22px; }
+.context-category .contract-icon { width:60%; height:60%; }
