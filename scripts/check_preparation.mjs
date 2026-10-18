@@ -245,3 +245,30 @@ console.log('Ressources vérifiées :',data.studyResources.length,'liens uniques
   S.level='Doctorat';
   console.log('Parcours vérifiés : collège, lycée, supérieur, adultes et terminus.');
 }
+
+// Référentiel du 18 octobre 2026 : concours rattachés, fiche concours, Se préparer, Évoluer et recherche.
+{
+  const ref=data.concours;
+  assert.equal(ref.length,61,'Les 61 concours du référentiel sont chargés.');
+  for(const c of ref)assert(c.routeIds.every(id=>data.accessRoutes[id]),'Corps du concours '+c.id);
+  assert(!JSON.stringify(ref).includes('onglet'),'Aucun renvoi interne au classeur n’est affiché.');
+  assert(!JSON.stringify(ref).match(/\d+ ?%/),'Aucun taux de réussite n’est repris.');
+  const linked=data.jobs.filter(j=>j.rmfpCode&&!isContractJob(j)&&jobCategories(j).length).filter(j=>{
+    const cats=jobCategories(j);return j.routeIds.map(id=>data.accessRoutes[id]).some(r=>r&&cats.includes(r.cat)&&r.fp.split('').some(f=>j.fp.includes(f)));});
+  assert(linked.length>=1050,'Presque toutes les fiches ont un concours de leur catégorie : '+linked.length);
+  S.level='Bac+3';
+  const fiche=screens.metier('attache');
+  assert(fiche.includes('Voies d’accès')&&fiche.includes('Session 2027'),'La fiche concours reprend voies et sessions documentées.');
+  assert(fiche.includes('Attaché d&#39;administration de l&#39;État')||fiche.includes('Administrateur de l&#39;État'),'Évoluer suit les progressions du référentiel.');
+  const prep=screens.preparer('attache');
+  assert(prep.includes('id="concours-ref"')&&prep.includes('Annales officielles du concours'),'Se préparer présente le concours et ses annales.');
+  S.level='Seconde';
+  assert(screens.preparer('attache').includes('id="stages"'),'Les élèves de seconde reçoivent les conseils de stage.');
+  assert(screens.metier('attache').includes('Voie générale, spécialités conseillées'),'La frise reprend les spécialités conseillées.');
+  S.level='Doctorat';
+  Object.assign(S,{domains:['Numérique'],metDomains:['Numérique'],metCat:'Toutes',metFp:'Tous',q:'administrateur de l\'etat'});
+  assert(filteredJobs().some(j=>j.id==='admin-etat'),'La recherche trouve Administrateur·rice de l’État malgré les domaines choisis.');
+  S.q='administratrice';assert(filteredJobs().some(j=>j.id==='admin-etat'),'La forme féminine retrouve aussi le métier.');
+  S.q='';S.domains=[];S.metDomains=[];
+  console.log('Référentiel vérifié : 61 concours, '+linked.length+' fiches rattachées, fiche concours, Se préparer, Évoluer et recherche.');
+}

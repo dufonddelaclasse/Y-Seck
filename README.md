@@ -49,6 +49,25 @@ Les sources comprennent l’annuaire DGAFP et les ministères, l’INSP, l’ENM
 
 `node scripts/check_preparation.mjs` contrôle les parcours métiers, la séparation CDD/VAR, les catégories et versants des ressources, les filtres et la séparation des bibliographies A/A+.
 
+### Intégrer le référentiel des concours
+
+Le référentiel « concours · métiers · annales · études · progressions » (61 concours des trois versants) se reprend avec :
+
+```sh
+python3 scripts/import_referentiel.py /chemin/referentiel_fonction_publique_….xlsx --check
+python3 scripts/import_referentiel.py /chemin/referentiel_fonction_publique_….xlsx
+```
+
+Le script écrit uniquement des fichiers `data/catalogue/ref-*.json`, sans modifier la base existante :
+
+- les 61 concours, avec voies, conditions de diplôme, épreuves, sessions documentées, annales, conseils de collège et de lycée, options, études de la 1re à la 3e année, préparations, progressions et sources ;
+- les 21 corps absents de la base (inspecteur·rice des douanes, IASS, directeur·rice des services pénitentiaires, adjoints territoriaux…), avec leur fiche concours ;
+- des correspondances proposées par filière, pour chaque fiche sans concours de sa catégorie et de son versant (1 056 fiches rattachées sur 1 069 ; les fonctions médicales restent sans concours générique) ;
+- les collections officielles d’annales, affichées avant les documents à l’unité ;
+- le glossaire des sigles, les conseils de stage de 3e et de seconde, et les organismes de préparation, sans aucun taux de réussite.
+
+Incohérences rectifiées à l’import : annales du CNG pour DH, D3S et directeur·rice des soins, annales 2026 de l’inspection du travail et annales du ministère des Affaires étrangères, toutes citées dans d’autres onglets ; renvois internes « voir onglet … » retirés des textes publics ; progression du greffier rattachée aux directeur·rices des services de greffe.
+
 ### Reprendre les catégories à préciser
 
 Le classeur « Métiers à préciser » complété par l’équipe se reprend avec :
