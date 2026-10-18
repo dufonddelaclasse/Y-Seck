@@ -4,7 +4,7 @@
   var D = window.DATA;
   var root = document.getElementById('app');
   var UI = window.YSECK_UI;
-  var expandedDatesJob = null, jobSlideRequested = false, expandedPrepCategories = {};
+  var expandedDatesJob = null, jobSlideRequested = false, expandedPrepCategories = {}, visitedRoutes = [];
   var talentIntroAnimate = false, interestGesture = null;
   var KEY = 'ofp-state-v1';
 
@@ -571,15 +571,21 @@
   };
 
   /* ---------- Métiers ---------- */
+  /* « Administrateur·rice de l’État » se trouve aussi en tapant « administrateur de l'etat » ou « administratrice ». */
+  function searchNorm(s) { return norm(s).replace(/[·•.](?=[a-z])/g,'·').replace(/·[a-z]+(·[a-z]+)?/g,'').replace(/[^a-z0-9+]+/g,' ').trim(); }
+  function searchWords(q) { return searchNorm(q||'').split(' ').filter(function(w){return w.length>1&&['de','du','des','la','le','les','et','en','d','l'].indexOf(w)===-1;}); }
+  function searchText(j) { if(!j._search){var raw=j.name+' '+(j.sourceName||'')+' '+j.domain+' '+(j.rmfpDomain||'')+' '+(j.family||'')+' '+(j.aliases||[]).join(' ')+' '+(j.interests||[]).map(domainLabel).join(' ');j._search=' '+searchNorm(raw)+' '+norm(raw)+' ';} return j._search; }
+  function matchesWords(text, words) { return words.every(function(w){return text.indexOf(w)>-1;}); }
   function filteredJobs() {
-    var q = norm(S.q || '');
-    var doms = activeDomains();
+    var words = searchWords(S.q);
+    /* Une recherche porte sur tous les métiers : les domaines présélectionnés ne masquent aucun résultat. */
+    var doms = words.length ? [] : activeDomains();
     var list = D.jobs.filter(function (j) {
       if (!passesLevelCategory(j)) return false;
       if (doms.length && !matchesDomains(j,doms)) return false;
       if (S.metCat !== 'Toutes' && jobCategories(j).indexOf(S.metCat) === -1) return false;
       if (S.metFp !== 'Tous' && j.fp.indexOf(S.metFp) === -1) return false;
-      if (q && norm(j.name + ' ' + j.domain + ' ' + (j.rmfpDomain || '') + ' ' + (j.sourceName || '') + ' ' + (j.aliases || []).join(' ') + ' ' + (j.interests || []).map(domainLabel).join(' ')).indexOf(q) === -1) return false;
+      if (words.length && !matchesWords(searchText(j), words)) return false;
       return true;
     });
     return list.slice().sort(function (a, b) {
@@ -963,7 +969,8 @@
   function preparationContent(job) {
     var opts = [['0', 'Gratuit'], ['1', 'Avec frais d’inscription'], ['2', 'Tous budgets']];
     var b = S.prepBudget;
-    if (b === null) b = S.budget === 'Gratuit uniquement' ? '0' : (['Moins de 1 000 €','Avec frais d’inscription'].indexOf(S.budget)>-1 ? '1' : '2');
+    /* Un profil boursier part des préparations gratuites. */
+    if (b === null) b = S.boursier === 'Oui' || S.budget === 'Gratuit uniquement' ? '0' : (['Moins de 1 000 €','Avec frais d’inscription'].indexOf(S.budget)>-1 ? '1' : '2');
     var on = S.boursier === 'Oui';
     var keys = prepKeys(job?[job]:myJobs());
     var nbT = D.talents.filter(function (t) { return talentMatches(t, keys).length; }).length;
@@ -1282,7 +1289,14 @@
     }
     var key = r.name + '/' + (r.arg || '') + '/' + (r.arg2 || '');
     var changed = key !== lastRoute;
-    var animateJob=changed&&r.name==='metier'&&jobSlideRequested&&!matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var hash=location.hash||'#/', slide=null, SLIDES=['metier','preparer','bibliographie'];
+    if(changed){
+      var previous=visitedRoutes[visitedRoutes.length-1];
+      if(visitedRoutes.length>1&&visitedRoutes[visitedRoutes.length-2]===hash){visitedRoutes.pop();if(previous&&SLIDES.indexOf(previous.split('/')[1])>-1)slide='right';}
+      else{visitedRoutes.push(hash);if(visitedRoutes.length>40)visitedRoutes.shift();if(jobSlideRequested&&SLIDES.indexOf(r.name)>-1)slide='left';}
+    }
+    if(matchMedia('(prefers-reduced-motion: reduce)').matches)slide=null;
+    var animateJob=!!slide;
     jobSlideRequested=false;
     lastRoute = key;
     if(changed&&['annales','ressources-biblio'].indexOf(r.name)>-1){S.resQ='';S.resCat=r.name==='ressources-biblio'?bibliographyCategory(jobById(r.arg)):'Toutes';S.resFp='Tous';S.resKind='Tous';S.resYear='Toutes';S.resLimit=40;}
@@ -1305,17 +1319,18 @@
 
     var fn = screens[r.name] || screens[S.done ? 'accueil' : 'profil'];
     if(changed&&r.name==='situation'&&S.boursier==='Oui')talentIntroAnimate=true;
-    root.innerHTML = fn(r.arg, r.arg2);
+    root.innerHTML = UI.inclusive(fn(r.arg, r.arg2));
     talentIntroAnimate=false;
     var main = root.querySelector('main');
     root.classList.toggle('job-transition',animateJob);
     if (main) {
       main.id = 'contenu';
       if(animateJob){
-        main.classList.add('job-slide-in');
-        main.addEventListener('animationend',function(e){if(e.target===main){main.classList.remove('job-slide-in');root.classList.remove('job-transition');}});
+        var slideClass=slide==='right'?'slide-from-left':'job-slide-in';
+        main.classList.add(slideClass);
+        main.addEventListener('animationend',function(e){if(e.target===main){main.classList.remove(slideClass);root.classList.remove('job-transition');}});
       }
-      if (['accessibilite','accueil','enfant','bienvenue','versants','categories-intro'].indexOf(r.name) === -1) main.insertAdjacentHTML('beforeend', '<a class="link-plain mt-s" href="#/accessibilite">Confort de lecture et accessibilité</a>');
+      if (r.name !== 'accessibilite') main.insertAdjacentHTML('beforeend', '<a class="a11y-link" href="#/accessibilite">Confort de lecture et accessibilité</a>');
     }
     var themedJob=['metier','preparer','sans-concours','etudes','calendrier','annales','ressources-biblio','handicap'].indexOf(r.name)>-1&&r.arg&&jobById(r.arg);
     var theme=themedJob&&themeCategory(themedJob);
@@ -1374,7 +1389,7 @@
   window.addEventListener('scroll',function(){if(interestGesture&&interestGesture.down)interestGesture.moved=true;},{passive:true});
 
   document.addEventListener('click', function (e) {
-    var jobLink=e.target.closest('a[href^="#/metier/"]');
+    var jobLink=e.target.closest('a[href^="#/metier/"],a[href^="#/preparer/"],a[href^="#/bibliographie"]');
     if(jobLink&&!e.defaultPrevented&&e.button===0&&!e.metaKey&&!e.ctrlKey&&!e.shiftKey&&!e.altKey&&jobLink.getAttribute('href')!==location.hash)jobSlideRequested=true;
     var el = e.target.closest('[data-action]');
     if (!el) return;
@@ -1480,7 +1495,7 @@
       case 'moreResources': set({resLimit:S.resLimit+40}); break;
       case 'resetResources': set({resCat:'Toutes',resFp:'Tous',resKind:'Tous',resYear:'Toutes',resQ:'',resLimit:40}); break;
       case 'talentsAll': set({ talentsAll: v === 'all' }); countAnnounce('#talents .list-row'); break;
-      case 'toggleBoursier': set({ boursier: S.boursier === 'Oui' ? 'Non' : 'Oui' }); break;
+      case 'toggleBoursier': var becomesBoursier=S.boursier!=='Oui'; set(becomesBoursier?{ boursier: 'Oui', prepBudget: '0' }:{ boursier: 'Non' }); break;
       case 'alert': set({ alert: !S.alert }); announce(S.alert ? 'Alerte activée' : 'Alerte désactivée'); break;
       case 'deleteChild': {
         var removed=activeChild();

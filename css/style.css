@@ -1336,3 +1336,47 @@ body.page-white, body.page-white .app, body.page-white .context-bar { background
 @media (prefers-reduced-motion:no-preference) { .intro-fold[open] .intro-fold-body { animation:intro-open .2s ease-out; } }
 @keyframes intro-open { from { opacity:0; transform:translateY(-4px); } to { opacity:1; transform:none; } }
 html[data-contrast="true"] .intro-fold { background:#FFF; border:1px solid #000; }
+
+/* ==========================================================================
+   Série du 18 octobre (2) : marges de 10 px, fond #F5F5F1, titres du haut
+   uniformes, lien d’accessibilité, rayons concentriques et glissements.
+   ========================================================================== */
+:root { --bg:#F5F5F1; --card-bg:#EBEBE6; }
+.screen { padding-left:10px; padding-right:10px; }
+.footer { padding-left:10px; padding-right:10px; }
+.screen > :is(h1,.eyebrow,.lead,.body,.back,.small,.topbar,.title-row,.link-plain,p,.notice,.filter-summary,.study-level), .screen .section-heading, .screen .category-heading { padding-left:0; padding-right:0; }
+.scroller { margin-right:-10px; padding-right:10px; }
+.home-profile-meta { width:calc(100% + 20px); margin:0 -10px; padding:2px 10px; }
+.prep-page .switch-row { margin:0; width:100%; padding:0; background:transparent; border:0; }
+.context-bar { padding-left:15px; padding-right:15px; }
+
+/* Titres du haut d’écran : même hauteur, même police, avec ou sans flèche de retour. */
+.screen.pt { padding-top:14px; }
+.screen > .eyebrow, .screen > .back, .topbar > .back, .topbar > .eyebrow { display:flex; align-items:center; gap:4px; min-height:44px; margin:0; font-size:.9375rem; font-weight:500; letter-spacing:0; text-transform:none; line-height:1.2; color:var(--blue); }
+.screen > .back svg, .topbar > .back svg { width:18px; height:18px; }
+.prep-page .back { display:flex; color:var(--blue); font-size:.9375rem; }
+.prep-page .back { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.app.themed .screen > .back { color:var(--theme-btn); }
+.personal-home .eyebrow { font-size:.9375rem; font-weight:500; }
+
+/* Lien d’accessibilité : centré, souligné, toujours dans le bleu générique. */
+.a11y-link, .app.themed .a11y-link { display:block; align-self:center; margin:28px auto 8px; padding:10px 0; color:var(--brand) !important; font-size:.875rem; font-weight:400; text-align:center; text-decoration:underline; text-underline-offset:3px; }
+
+/* Rayons concentriques : rayon extérieur = rayon de la pastille + marge intérieure. */
+.preparation-card, .job-page .catcard-wrap.preparation-card { border-radius:36px; }
+#jobs .job-row { border-radius:32px; }
+.parcours-card { border-radius:30px; }
+.home-feature { border-radius:30px; }
+.home-tile { border-radius:14px; }
+.home-shortcuts a { border-radius:26px; }
+.intro-fold, .intro-fold summary:focus-visible { border-radius:30px; }
+.prep-page .prep { border-radius:32px; }
+.job-page .rung { border-radius:22px; }
+.callout { border-radius:24px; }
+.sheet { border-radius:32px 32px 0 0; }
+.date-summary, .preparation-card .exam { border-radius:24px; }
+
+/* Retour arrière : la page revient depuis la gauche. */
+.slide-from-left { animation:slide-from-left .28s cubic-bezier(.2,.8,.2,1) both; will-change:transform; }
+@keyframes slide-from-left { from { transform:translateX(-100%); } to { transform:translateX(0); } }
+@media (prefers-reduced-motion:reduce) { .slide-from-left { animation:none; } }
