@@ -50,7 +50,7 @@ for (const j of fixed) {
   assert(html.includes('Recommandations bibliographiques'),'Bibliographie : '+j.id);
   assert(html.includes('href="#/annales/'+j.id+'"'),'Annales : '+j.id);
   assert.equal(html.includes('href="#/calendrier/'+j.id+'"'),examsFor(j).length>0,'Dates : '+j.id);
-  assert(html.includes('href="#/etudes/'+j.id+'"'));
+  assert(!html.includes('href="#/etudes/'+j.id+'"'),'Le parcours d’études figure sur la fiche métier, pas dans Se préparer : '+j.id);;
   assert(html.includes('href="#/handicap/'+j.id+'"'));
   assert(html.includes('role="group" aria-label="Budget"'));
   assert(html.includes('>Aides</h2>')&&html.includes('>Prépas</h2>')&&!html.includes('Prépas et aides'),'Aides et prépas séparées : '+j.id);
@@ -224,3 +224,21 @@ assert(screens.annales('dev').includes('Entrer sans concours'));
 console.log('Contrôles réussis :',counts,';',contracts.length,'CDD ;',classified.length,'VAR classés ; dates2027, versants, liens officiels, préparation personnalisée, aides, filtres et navigation.');
 console.log('Bibliographie vérifiée : 29 références Vie-publique réservées à A, 6 doublons évités, 133 références A+ préservées.');
 console.log('Ressources vérifiées :',data.studyResources.length,'liens uniques, 12 combinaisons catégorie/versant, filtres et associations par concours.');
+
+// Parcours conseillé : point de départ selon le niveau, stages de 3e et de seconde, terminus sur le métier.
+{
+  const job=data.jobs.find(j=>j.id==='attache-terr');
+  const level=(l)=>{S.level=l;return screens.metier(job.id);};
+  const college=level('5e');
+  assert(college.includes('class="metro"')&&college.includes('Stage d’observation de 3e')&&college.includes('Stage de seconde')&&college.includes('aria-current="step"'),'Collégien : collège, lycée et supérieur.');
+  const lycee=level('Seconde');
+  assert(!lycee.includes('>Collège<')&&lycee.includes('Stage de seconde')&&!lycee.includes('Stage d’observation de 3e'),'Lycéen : le collège disparaît.');
+  const etudiant=level('Bac+1 / +2');
+  assert(!etudiant.includes('>Lycée<')&&etudiant.includes('Votre niveau : Bac+1 / +2'),'Étudiant : études supérieures seulement.');
+  const adulte=level('Sans diplôme');
+  assert(adulte.includes('>Collège<')&&adulte.includes('>Lycée<'),'Adulte sans diplôme : parcours complet.');
+  assert(adulte.includes('metro-stop terminus')&&adulte.includes(job.name),'Le terminus est le métier.');
+  assert(!screens.preparer(job.id).includes('class="metro"'),'La frise n’apparaît pas dans Se préparer.');
+  S.level='Doctorat';
+  console.log('Parcours vérifiés : collège, lycée, supérieur, adultes et terminus.');
+}

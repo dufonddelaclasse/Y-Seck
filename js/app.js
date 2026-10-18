@@ -643,6 +643,104 @@
       ['activities','conditions','knowledge','skills','qualities'].map(function(key){return j[key]?'<details class="source-detail"><summary><span>' + ({activities:'Les activités',conditions:'Conditions d’exercice et d’accès',knowledge:'Les connaissances',skills:'Les savoir-faire',qualities:'Les savoir-être'})[key] + '</span><span class="details-toggle" aria-hidden="true">'+I.down+'</span></summary><div class="source-paragraphs">' + j[key].split(/\r?\n+/).map(function(line){return line.trim();}).filter(Boolean).map(function(line){return '<p>'+esc(line)+'</p>';}).join('') + '</div></details>':'';}).join('') +
       (!j.rmfpCode && j.source ? ext(j.source,'Source des conditions d’accès','link-plain mt-s') : '');
   }
+  /* ---------- Parcours conseillé : frise façon plan de métro ---------- */
+  /* Filières indicatives par domaine : spécialités au lycée, diplômes Bac+2, Bac+3 et Bac+5, voie professionnelle. */
+  var STUDY = {
+    Administration: { lycee:'Bac général (SES, HGGSP) ou STMG', sup2:'BTS ou BUT (gestion, carrières juridiques)', lic:'Licence de droit, AES, économie ou science politique', master:'Master d’administration publique, IEP ou IPAG', pro:'CAP ou bac pro AGORA (gestion administrative)' },
+    Finances: { lycee:'Bac général (maths, SES) ou STMG', sup2:'BTS ou BUT (gestion, GEA)', lic:'Licence d’économie, de gestion ou de droit', master:'Master finances publiques, IEP ou IPAG', pro:'Bac pro AGORA' },
+    Justice: { lycee:'Bac général (HGGSP, SES, HLP)', sup2:'BUT carrières juridiques ou BTS', lic:'Licence de droit', master:'Master de droit, puis préparation en IEJ', pro:'CAP ou bac pro (accueil, sécurité)' },
+    Sécurité: { lycee:'Bac général, technologique ou professionnel', sup2:'BTS ou BUT', lic:'Licence de droit ou de sciences criminelles', master:'Master de droit ou de sécurité, ou IEP', pro:'CAP ou bac pro métiers de la sécurité' },
+    Défense: { lycee:'Bac général, technologique ou professionnel', sup2:'BTS ou BUT', lic:'Licence (droit, sciences, langues)', master:'Master ou école d’ingénieur·es', pro:'CAP ou bac pro' },
+    Santé: { lycee:'Bac général (SVT, physique-chimie) ou ST2S', sup2:'Diplôme d’État paramédical (aide-soignant·e, auxiliaire de puériculture)', lic:'Diplôme d’État en 3 ans (IFSI ou école paramédicale)', master:'Master de santé publique ou études de santé', pro:'CAP AEPE ou bac pro ASSP' },
+    Social: { lycee:'Bac général ou ST2S', sup2:'BTS ou diplôme d’État de moniteur·rice-éducateur·rice', lic:'Diplôme d’État du travail social en 3 ans', master:'Master d’intervention sociale ou CAFDES', pro:'CAP AEPE ou bac pro ASSP' },
+    Éducation: { lycee:'Bac général', sup2:'BUT carrières sociales', lic:'Licence dans la discipline enseignée', master:'Master MEEF (INSPÉ)', pro:'CAP AEPE' },
+    Environnement: { lycee:'Bac général (SVT, maths), STAV ou STI2D', sup2:'BTS ou BUT (gestion de l’eau, forêt, génie civil)', lic:'Licence ou licence pro en environnement', master:'Master en environnement ou école d’ingénieur·es', pro:'CAP ou bac pro aménagements paysagers' },
+    Transports: { lycee:'Bac général (maths, physique) ou STI2D', sup2:'BTS ou BUT (génie civil, logistique)', lic:'Licence pro ou licence de sciences', master:'École d’ingénieur·es ou master', pro:'CAP ou bac pro (conduite, logistique, maintenance)' },
+    Numérique: { lycee:'Bac général (NSI, maths) ou STI2D', sup2:'BTS SIO ou BUT informatique', lic:'Licence ou BUT informatique', master:'Master informatique ou école d’ingénieur·es', pro:'Bac pro CIEL' },
+    Culture: { lycee:'Bac général (HLP, HGGSP, arts)', sup2:'BTS ou BUT (métiers du livre, information-communication)', lic:'Licence d’histoire, d’histoire de l’art ou de lettres', master:'Master patrimoine, archives ou bibliothèques', pro:'CAP ou bac pro' },
+    Recherche: { lycee:'Bac général (spécialités scientifiques ou humanités)', sup2:'BTS ou BUT (analyses de laboratoire, mesures physiques)', lic:'Licence dans la discipline', master:'Master de recherche', pro:'Bac pro laboratoire' },
+    Sport: { lycee:'Bac général ou technologique', sup2:'BPJEPS ou BTS', lic:'Licence STAPS', master:'Master STAPS', pro:'CAP ou bac pro' }
+  };
+  var SCHOOL_CLASSES = ['6e', '5e', '4e', '3e', 'Seconde', 'Première', 'Terminale'];
+  function targetLevel(j, cat) {
+    if (typeof j.lvl === 'number') return j.lvl;
+    var levels = jobRoutes(j).filter(function (r) { return r.cat === cat && typeof r.lvl === 'number'; }).map(function (r) { return r.lvl; });
+    if (levels.length) return Math.min.apply(null, levels);
+    return { 'A+': 5, A: 4, B: 2, C: 1 }[cat] !== undefined ? { 'A+': 5, A: 4, B: 2, C: 1 }[cat] : 3;
+  }
+  function buildParcours(j) {
+    var cat = themeCategory(j) || 'B', contract = isContractJob(j), L = targetLevel(j, cat);
+    var f = STUDY[j.domain] || STUDY.Administration, stops = [];
+    function stop(zone, label, detail, rank, extra) { stops.push(Object.assign({ zone: zone, label: label, detail: detail || '', rank: rank }, extra || {})); }
+    var steps = (j.steps || []).map(function (s) { return { exam: s.charAt(0) === '*', text: s.replace(/^\*/, '') }; });
+    var specific = !j.rmfpCode && steps.length ? steps : null;
+    var first = specific && !specific[0].exam ? specific[0].text : '';
+    var generic = /^obtenir (le bac|une licence|un master|un doctorat)$/i.test(first);
+
+    stop('Collège', '6e', 'Découvrir les métiers avec le parcours Avenir', null, { key: '6e' });
+    stop('Collège', '5e', '', null, { key: '5e' });
+    stop('Collège', '4e', '', null, { key: '4e' });
+    stop('Collège', '3e', 'Diplôme national du brevet', 1, { key: '3e', links: [{ kind: 'stage', label: 'Stage d’observation de 3e · 1 semaine' }] });
+    if (L <= 1) {
+      stop('Lycée', 'Lycée professionnel', f.pro, 1, { key: 'pro', links: [{ kind: 'stage', label: 'Périodes de formation en entreprise' }] });
+    } else {
+      stop('Lycée', 'Seconde', 'Seconde générale et technologique', null, { key: 'Seconde', links: [{ kind: 'stage', label: 'Stage de seconde · 2 semaines en juin' }] });
+      stop('Lycée', 'Première', 'Choisir ses spécialités', null, { key: 'Première' });
+      stop('Lycée', 'Terminale', f.lycee, 2, { key: 'Terminale' });
+    }
+    var sup = [];
+    if (L === 2 && !contract && cat === 'B') sup.push([f.sup2, 'Conseillé : certains concours B demandent un Bac+2', 3]);
+    if (L === 3) sup.push([f.sup2, '2 à 3 ans après le bac', 3]);
+    if (L >= 4) sup.push([f.lic, '3 ans après le bac', 4]);
+    if (L >= 5) sup.push([f.master, '2 ans après la licence', 5]);
+    if (L >= 6) sup.push(['Doctorat', '3 ans de recherche après le master', 6]);
+    sup.forEach(function (s) { stop('Études supérieures', s[0], s[1], s[2]); });
+    if (first && !generic) {
+      var last = stops[stops.length - 1];
+      if (last.zone === 'Études supérieures') last.detail = first; else stop('Études supérieures', first, '', L);
+    }
+    var after = specific ? specific.slice(first ? 1 : 0) : [];
+    var others = jobCategories(j).filter(function (c) { return c !== cat && ['A+','A','B','C'].indexOf(c) > -1; });
+    if (contract) {
+      (after.length ? after : [{ text: 'Candidature sur une offre d’emploi' }]).forEach(function (s) { stop('Recrutement', s.text, '', null); });
+    } else {
+      stop('Concours', 'Préparer le concours', L >= 4 ? 'Prépa Talents, IPAG, CPAG ou préparation à distance' : 'Annales, préparation du CNED ou du CNFPT', null,
+        { links: others.length ? [{ kind: 'cat', label: 'Correspondance : catégorie ' + others.join(', ') }] : [] });
+      var exam = after.filter(function (s) { return s.exam; })[0];
+      stop('Concours', exam ? exam.text : 'Concours de catégorie ' + cat, fpNames(j.fp).join(', '), null);
+      after.filter(function (s) { return !s.exam && after.indexOf(s) > after.indexOf(exam); }).forEach(function (s) { stop('Concours', s.text, '', null); });
+    }
+    stop(contract ? 'Recrutement' : 'Concours', j.name, contract ? 'Emploi contractuel' : catLabel(cat), null, { terminus: true });
+
+    /* Point de départ selon le niveau : collège entier, lycée, ou études supérieures. */
+    var level = S.level, rank = userRank(), cls = SCHOOL_CLASSES.indexOf(level);
+    if (cls > -1) {
+      if (cls >= 4) stops = stops.filter(function (s) { return s.zone !== 'Collège'; });
+      var here = stops.findIndex(function (s) { return s.key === level; });
+      if (here < 0) here = stops.findIndex(function (s) { return s.zone === 'Lycée'; });
+      stops.forEach(function (s, i) { s.done = i < here; s.here = i === here; });
+    } else if (level && level !== 'Sans diplôme' && rank !== null) {
+      var keep = ['Brevet', 'CAP / BEP'].indexOf(level) > -1 ? ['Lycée'] : [];
+      stops = stops.filter(function (s) { return s.zone !== 'Collège' && (s.zone !== 'Lycée' || keep.length) && !(s.zone === 'Études supérieures' && s.rank !== null && s.rank <= rank); });
+      stops.unshift({ zone: keep.length ? 'Lycée' : 'Études supérieures', label: 'Votre niveau : ' + level, detail: rank >= L ? 'Niveau de diplôme suffisant pour ce métier' : '', here: true });
+    }
+    return { cat: cat, stops: stops };
+  }
+  function parcoursSection(j) {
+    var p = buildParcours(j), zone = null;
+    return '<section class="parcours mt-m" aria-labelledby="parcours-title"><h2 id="parcours-title" class="section-heading">' + I.graduation + '<span>Quelles études ?</span></h2>' +
+      '<p class="small m0">Parcours conseillé ' + (isParent() ? 'pour ' + esc(childName()) : 'depuis votre niveau') + '. Filières indicatives : les conditions exactes figurent dans l’avis du concours.</p>' +
+      '<ol class="metro">' + p.stops.map(function (s) {
+        var head = s.zone !== zone ? '<li class="metro-zone"><span>' + esc(s.zone) + '</span></li>' : '';
+        zone = s.zone;
+        var cls = 'metro-stop' + (s.done ? ' done' : '') + (s.here ? ' here' : '') + (s.terminus ? ' terminus' : '');
+        return head + '<li class="' + cls + '"' + (s.here ? ' aria-current="step"' : '') + '><span class="metro-dot" aria-hidden="true"></span><div class="metro-txt">' +
+          (s.here ? '<span class="metro-here">' + (isParent() ? 'Ici aujourd’hui' : 'Vous êtes ici') + '</span>' : '') +
+          '<b>' + esc(s.label) + '</b>' + (s.detail ? '<span>' + esc(s.detail) + '</span>' : '') +
+          ((s.links || []).length ? '<span class="metro-links">' + s.links.map(function (l) { return '<span class="metro-link ' + l.kind + '">' + esc(l.label) + '</span>'; }).join('') + '</span>' : '') +
+          (s.done ? '<span class="sr-only"> (étape passée)</span>' : '') + '</div></li>';
+      }).join('') + '</ol></section>';
+  }
   screens.metier = function (id) {
     var j = D.jobs.filter(function (x) { return x.id === id; })[0];
     if (!j) return screens.metiers();
@@ -675,6 +773,7 @@
       }).join('') + '</div>' +
       (dates.length ? '<section class="stack mt-m"><h2>Dates des concours</h2>' + (dates.length===1||expandedDatesJob===j.id ? calendarRows(dates, dates.length, j) : dateSummaries(dates, j)) +
       (dates.length > 1 ? '<button type="button" class="btn outline" data-action="moreJobDates"' + attr('v',j.id) + ' aria-expanded="' + (expandedDatesJob===j.id) + '">' + (expandedDatesJob===j.id?'Réduire les dates':'Afficher le détail des ' + dates.length + ' sessions') + '</button>' : '') + '</section>' : '') +
+      parcoursSection(j) +
       '<h2 class="eyebrow mt-m">Évoluer</h2><div class="ladder">' + ladder.map(function (r) {
         if (r.length === 1) return '<div class="via">↓ ' + esc(r[0]) + '</div>';
         var t = r[1] === 'A+' ? 'tint-blue' : (r[1] === 'A' ? 'tint-mint' : (r[1] === 'C' ? 'tint-yellow' : tint[j.cat]));
@@ -770,7 +869,7 @@
     var dates=examsFor(job);
     return '<main class="screen top-tight">' + back('#/metier/'+job.id,'Métier') + '<h1>Se préparer</h1><p class="body">' + esc(job.name) + '</p><h2 class="mt-m">Concours</h2>' + (cats.length?'<div class="stack">' + cats.map(function(c){return preparationCategoryCard(c,job);}).join('') + '</div>':'<p class="body">La catégorie et le corps d’accès à ce métier restent à préciser selon le poste. Consultez les conditions de l’offre de recrutement.</p>') +
       (dates.length?'<a class="btn outline" href="#/calendrier/'+job.id+'">'+I.calendar+'Dates des concours ('+dates.length+')</a>':'') +
-      '<a class="btn outline" href="#/etudes/'+job.id+'">'+I.graduation+'Quelles études choisir ?</a><a class="btn outline" href="#/handicap/'+job.id+'">Handicap : accès et aménagements</a>' + preparationContent(job) + '</main>' + tabbar('metiers');
+      '<a class="btn outline" href="#/handicap/'+job.id+'">Handicap : accès et aménagements</a>' + preparationContent(job) + '</main>' + tabbar('metiers');
   };
 
   screens.calendrier = function (jobId) {
