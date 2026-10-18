@@ -1057,3 +1057,10 @@ html[data-contrast="true"] :is(.study-level,.home-interest,.fit,.category-fit,.f
 .preparation-card .chev.turn { color:var(--ink); }
 html[data-contrast="true"] .job-hero { background:#FFF; border:1px solid #000; }
 html[data-contrast="true"] .preparation-card .exam-route h4 { background:#000; color:#FFF; }
+
+/* Concours repliés : informations de base, détail à la demande. */
+.prep-count { margin-top:8px; font-size:.8125rem; font-weight:400; color:var(--ink-2); }
+.date-summary { display:flex; flex-direction:column; gap:6px; padding:16px 18px; border-radius:22px; background:var(--theme-tint,#FFF); }
+.date-summary > b { font-size:1.0625rem; }
+.date-summary-next { font-size:.9375rem; line-height:1.4; color:var(--ink-2); }
+html[data-contrast="true"] .date-summary { background:#FFF; border:1px solid #000; }
