@@ -97,7 +97,6 @@
       /* À chaque ouverture, l'onglet Métiers repart des domaines choisis */
       st.metDomains = null;
       st.metMode = 'mine'; st.jobLimit = 60;
-      if (['Bac+5','Doctorat'].indexOf(st.level) > -1 && st.metCat === 'C') st.metCat = 'Toutes';
       return st;
     } catch (e) { return Object.assign({}, defaults, { domains: [], traits: [], favorites: [], children: [], personalProfiles: {} }); }
   }
@@ -280,6 +279,12 @@
   function isOpen(j) { var r = userRank(); return j.lvl !== null && r !== null && r >= j.lvl; }
   function jobCategories(j) { if(isContractJob(j))return ['CDD']; return j.cat==='V'?indicativeCategories(j):(j.categories&&j.categories.length?j.categories:[j.cat]); }
   function jobRoutes(j) { var cats=jobCategories(j);return (j.routeIds||[]).map(function(id){return D.accessRoutes[id];}).filter(function(r){return r&&cats.indexOf(r.cat)>-1&&r.fp.split('').some(function(f){return j.fp.indexOf(f)>-1;});}); }
+  function routeEvidence(job, route) {
+    var status = (job.routeStatuses || {})[route.id];
+    return status === 'validé'
+      ? 'Correspondance identifiée dans le catalogue. Vérifiez les conditions propres au concours.'
+      : 'Correspondance indicative avec ce métier : à confirmer auprès de l’organisateur ou de l’employeur.';
+  }
   function indicativeCategories(j) {
     if (j.cat !== 'V' || isContractJob(j)) return [displayCategory(j)];
     var order=['A+','A','B','C'], counts=j.categoryCounts || {};
@@ -299,7 +304,7 @@
     if(cats.length===1)return catBadge(cats[0]);
     return cats.length?'<span class="job-categories" role="img" aria-label="Catégories indicatives '+esc(cats.join(', '))+', selon le corps et le poste">'+cats.map(function(c){return '<span class="cat sm '+catClass(c)+'" aria-hidden="true">'+c+'</span>';}).join('')+'</span>':catBadge('V');
   }
-  function passesLevelCategory(j) { return isContractJob(j) ? S.showContracts !== false : !(userRank() >= 5) || jobCategories(j).some(function (c) { return ['B', 'A', 'A+'].indexOf(c) > -1; }); }
+  function passesLevelCategory(j) { return !isContractJob(j) || S.showContracts !== false; }
 
   function reachable() {
     var l = S.level;
@@ -411,15 +416,15 @@
 
   screens['categories-intro'] = function () {
     var cats = [
-      { id: 'A+', t: 'Les cadres supérieurs', d: 'Ils dirigent les grandes administrations et pilotent les politiques publiques.', dip: 'Bac+3 minimum, souvent Bac+5', ex: 'Directeur·rice d’hôpital, magistrat·e, commissaire', tint: 'tint-blue' },
+      { id: 'A+', t: 'L’encadrement supérieur (A+)', d: 'Un repère au sein de la catégorie A pour les fonctions supérieures de direction, d’expertise et de contrôle.', dip: 'Selon le concours, souvent Bac+3 ou plus', ex: 'Directeur·rice d’hôpital, magistrat·e, commissaire', tint: 'tint-blue' },
       { id: 'A', t: 'Concevoir, élaborer, manager', d: 'Ils imaginent les projets, préparent les décisions et encadrent des équipes.', dip: 'Bac+3 minimum', ex: 'Attaché·e, inspecteur·rice, professeur·e, infirmier·ère', tint: 'tint-mint' },
       { id: 'B', t: 'Appliquer, rédiger, gérer', d: 'Ils mettent en œuvre les décisions, suivent les dossiers et peuvent encadrer une petite équipe.', dip: 'Bac minimum', ex: 'Greffier·ère, technicien·ne, gardien·ne de la paix', tint: 'tint-cyan' },
       { id: 'C', t: 'Exécuter, accueillir, assurer', d: 'Ils font tourner le service au quotidien, sur le terrain et au contact du public.', dip: 'Brevet, CAP, BEP, ou sans diplôme', ex: 'Adjoint·e administratif·ve, agent·e technique, ATSEM', tint: 'tint-yellow' }
     ];
     return '<main class="screen category-screen">' +
       '<div class="topbar">' + back('#/versants', 'Retour') + '<span class="eyebrow">Comprendre 2 / 2</span></div>' +
-      '<div class="category-heading mt-m"><h1>4 catégories</h1><div class="row" aria-hidden="true">' + ['A+','A','B','C'].map(function(c){return '<span class="cat sm '+catClass(c)+'">'+c+'</span>';}).join('') + '</div></div>' +
-      '<p class="lead">Chaque poste appartient à une catégorie. Elle dépend du niveau de responsabilité et du diplôme demandé pour y entrer.</p>' +
+      '<div class="category-heading mt-m"><h1>3 catégories, 4 repères</h1><div class="row" aria-hidden="true">' + ['A+','A','B','C'].map(function(c){return '<span class="cat sm '+catClass(c)+'">'+c+'</span>';}).join('') + '</div></div>' +
+      '<p class="lead">Les trois catégories statutaires sont A, B et C. Pour découvrir les métiers, nous distinguons aussi A+ : un repère utilisé pour l’encadrement supérieur au sein de la catégorie A.</p>' +
       '<div class="stack mt-s">' + cats.map(function (c) {
         return '<section class="explain row-x ' + c.tint + '" aria-label="Catégorie ' + c.id + '">' +
           '<span class="cat lg ' + catClass(c.id) + '" aria-hidden="true">' + c.id + '</span>' +
@@ -597,7 +602,7 @@
 
   function filterSummary() {
     var doms = activeDomains();
-    var label = S.metCat === 'Toutes' ? (userRank() >= 5 ? 'A+, A, B' + (S.showContracts ? ' et CDD' : '') : 'Toutes catégories') : (S.metCat==='CDD'?'CDD':'Catégorie '+S.metCat);
+    var label = S.metCat === 'Toutes' ? 'Toutes catégories' : (S.metCat==='CDD'?'CDD':'Catégorie '+S.metCat);
     return '<span class="tag">' + (doms.length ? doms.length + ' domaine' + (doms.length > 1 ? 's' : '') : 'Tous les domaines') + '</span>' +
       '<span class="tag' + (S.metCat === 'Toutes' ? '' : ' fill ' + catClass(S.metCat)) + '">' + esc(label) + '</span><span class="tag">' + esc(S.metFp === 'Tous' ? '3 versants' : D.fps[S.metFp]) + '</span>' +
       (S.showContracts===false?'<span class="tag">Contractuels masqués</span>':'');
@@ -607,7 +612,7 @@
     var order = S.domains.concat(D.domains.filter(function (d) {return S.domains.indexOf(d) === -1;}));
     return '<section class="stack"><h3>Votre sélection</h3><div class="row">' +
       chip('forYou', '', isParent() ? 'Pour votre enfant' : 'Pour vous', S.metMode === 'mine') + chip('allDomains', '', 'Tous les domaines', S.metMode === 'all') + '</div></section>' +
-      '<section class="stack mt-m"><h3>Catégories</h3><div class="row" role="group" aria-label="Catégorie">' + (userRank()>=5 ? ['Toutes','A+','A','B','CDD'] : ['Toutes','A+','A','B','C','CDD']).map(function(c){return chip('metCat',c,c==='Toutes'?'Toutes':c,S.metCat===c);}).join('') + '</div></section>' +
+      '<section class="stack mt-m"><h3>Catégories</h3><div class="row" role="group" aria-label="Catégorie">' + ['Toutes','A+','A','B','C','CDD'].map(function(c){return chip('metCat',c,c==='Toutes'?'Toutes':c,S.metCat===c);}).join('') + '</div></section>' +
       '<section class="stack mt-m"><h3>Versants</h3><div class="row" role="group" aria-label="Versants">' + ['Tous','E','T','H'].map(function(f){return chip('metFp',f,f==='Tous'?'3 versants':D.fps[f],S.metFp===f);}).join('') + '</div></section>' +
       '<button type="button" class="switch-row mt-m" role="switch" aria-checked="' + (S.showContracts!==false) + '" data-action="showContracts"><span>Afficher les emplois contractuels</span><span class="switch" aria-hidden="true"></span></button>' +
       '<section class="stack mt-m"><h3>Domaines</h3><div class="row" role="group" aria-label="Domaines">' + order.map(function(d){return chip('metDomain',d,domainLabel(d),doms.indexOf(d)>-1);}).join('') + '</div></section>' +
@@ -726,7 +731,7 @@
         return matching.length?matching.map(function(r){
           var e=(r.examInfo||{})[f]||{};
           var links=e.officialLinks&&e.officialLinks.length?e.officialLinks:[{url:e.source||r.source,label:'Dates et lieux sur le site officiel'}];
-          return '<section class="exam exam-route" data-fp="'+f+'"><h4>'+esc(e.name||r.name)+'</h4><dl><dt>Organisé par</dt><dd>'+esc(e.org||'Structure à confirmer dans l’avis du concours')+'</dd><dt>Épreuves en métropole</dt><dd>'+esc(e.metro||'Lieux non précisés : consulter l’avis du concours.')+'</dd><dt>Épreuves en outre-mer</dt><dd>'+esc(e.om||'Centre non confirmé : consulter l’avis du concours.')+'</dd></dl><div class="official-exam-links">'+links.map(function(l){return ext(l.url,l.label,'link-plain');}).join('')+'</div></section>';
+          return '<section class="exam exam-route" data-fp="'+f+'"><h4>'+esc(e.name||r.name)+'</h4><p class="small">'+esc(routeEvidence(job,r))+'</p><dl><dt>Organisé par</dt><dd>'+esc(e.org||'Structure à confirmer dans l’avis du concours')+'</dd><dt>Épreuves en métropole</dt><dd>'+esc(e.metro||'Lieux non précisés : consulter l’avis du concours.')+'</dd><dt>Épreuves en outre-mer</dt><dd>'+esc(e.om||'Centre non confirmé : consulter l’avis du concours.')+'</dd></dl><div class="official-exam-links">'+links.map(function(l){return ext(l.url,l.label,'link-plain');}).join('')+'</div></section>';
         }).join(''):'<div class="exam" data-fp="'+f+'"><p class="small">Le corps ou cadre d’emplois doit être précisé dans l’offre pour identifier le concours et son organisateur. Les dates et lieux ne sont pas encore associés à ce métier.</p></div>';
       }).join('') + '<p class="small m0">Les lieux, les épreuves et les conditions sont précisés dans l’avis propre au concours.</p><button type="button" class="preparation-collapse" data-action="openPrepCat"'+attr('v',c.id)+attr('job',job.id)+' aria-label="Réduire les informations du concours">'+I.down+'</button></div>':'') + '</div>';
   }
@@ -777,7 +782,7 @@
       return '<main class="screen top-tight">'+back(prepHref(job),'Se préparer')+'<span class="eyebrow">Orientation</span><h1 class="sm">Quelles études choisir ?</h1><p class="body">'+esc(job.name)+'</p>' +
         '<h2 class="mt-m">Études et conditions d’accès</h2>'+
         '<div class="timeline">'+job.steps.map(function(step,i){return '<div class="tl"><div class="rail"><span class="node"></span>'+(i<job.steps.length-1?'<span class="bar"></span>':'')+'</div><div class="txt"><span>'+esc(step.replace(/^\*/,''))+'</span></div></div>';}).join('')+'</div>'+
-        (routes.length?'<h2>Les voies d’accès de ce métier</h2><div class="stack">'+routes.map(function(r){return '<article class="prep"><h3>'+esc(r.name)+'</h3><p>'+esc(r.access+' · '+fpNames(r.fp).join(', '))+'</p>'+ext(r.source,'Consulter les conditions officielles','link-plain')+'</article>';}).join('')+'</div>':'')+
+        (routes.length?'<h2>Les voies d’accès de ce métier</h2><div class="stack">'+routes.map(function(r){return '<article class="prep"><h3>'+esc(r.name)+'</h3><p>'+esc(r.access+' · '+fpNames(r.fp).join(', '))+'</p><p class="small">'+esc(routeEvidence(job,r))+'</p>'+ext(r.source,'Consulter les conditions officielles','link-plain')+'</article>';}).join('')+'</div>':'')+
         '<a class="btn mt-m" href="'+prepHref(job)+'">Voir les prépas et les aides</a></main>'+tabbar('metiers');
     }
 
@@ -1063,7 +1068,7 @@
       (isParent()?'<button type="button" class="btn danger" data-action="deleteChild">Effacer ce profil</button>':'<button type="button" class="btn danger" data-action="wipe">Effacer mes données</button>') +
       '<p class="notice">' + I.lock + '<span>Ces informations sont enregistrées uniquement dans ce navigateur. Elles ne sont envoyées à personne.</span></p>' +
       '<div class="list mt-m">' +
-      '<a class="list-row" href="#/versants"><div class="main"><span class="name">Comprendre la fonction publique</span><span class="meta">Les 3 fonctions publiques et les 4 catégories</span></div>' + I.chev + '</a>' +
+      '<a class="list-row" href="#/versants"><div class="main"><span class="name">Comprendre la fonction publique</span><span class="meta">Les 3 fonctions publiques, A, B et C, et le repère A+</span></div>' + I.chev + '</a>' +
       '<a class="list-row" href="#/confidentialite"><div class="main"><span class="name">Données personnelles</span></div>' + I.chev + '</a>' +
       '<a class="list-row" href="#/accessibilite"><div class="main"><span class="name">Accessibilité et confort de lecture</span></div>' + I.chev + '</a>' +
       '<a class="list-row" href="#/mentions"><div class="main"><span class="name">Mentions légales</span></div>' + I.chev + '</a>' +
