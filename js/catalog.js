@@ -4,6 +4,11 @@
   Object.assign(D, P.settings || {});
   D.jobs = (P.legacyJobs || D.jobs).filter(function (j) { return j.active !== false; });
   Object.assign(D, P.otherPreps || {});
+  /* Un rapprochement rejeté (base ou corrections d’audit) l’emporte toujours sur un rapprochement proposé. */
+  var rejectedLinks = {}, linksByJob = {};
+  P.links.forEach(function (l) { if (l.status === 'rejeté') rejectedLinks[l.jobId + '|' + l.routeId] = true; });
+  P.links.forEach(function (l) { if (l.status !== 'rejeté' && !rejectedLinks[l.jobId + '|' + l.routeId]) { var list = linksByJob[l.jobId] || (linksByJob[l.jobId] = []); if (list.indexOf(l.routeId) === -1) list.push(l.routeId); } });
+  function linkedRoutes(id) { return (linksByJob[id] || []).slice(); }
   var byRoute = {};
   P.routes.forEach(function (r) { byRoute[r.id] = r; });
   (P.examDetails || []).forEach(function(e){var r=byRoute[e.routeId];if(r)(r.examInfo||(r.examInfo={}))[e.fp]=e;});
@@ -19,11 +24,11 @@
   D.talents = P.talents.map(function (t) { return Object.assign({}, t, { coords: t.coords || P.talentsGeo[t.city] || null }); });
   D.jobs.forEach(function (j) {
     var r = byRoute[j.id];
-    j.routeIds = P.links.filter(function (l) { return l.jobId === j.id && l.status !== 'rejeté'; }).map(function (l) { return l.routeId; });
+    j.routeIds = linkedRoutes(j.id);
     j.source = j.source || (r ? r.source : D.jobsUrl);
   });
   P.rmfp.forEach(function (j) {
-    j.routeIds = P.links.filter(function (l) { return l.jobId === j.id && l.status !== 'rejeté'; }).map(function (l) { return l.routeId; });
+    j.routeIds = linkedRoutes(j.id);
     j.steps = j.steps && j.steps.length ? j.steps : ['Repérer les corps ou cadres d’emplois et les diplômes correspondant au poste', '*Consulter les concours et les recrutements de l’employeur', 'Vérifier les conditions et candidater auprès du service recruteur'];
     if (j.traits && j.traits.length) return;
     j.traits = [];
