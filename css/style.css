@@ -1004,3 +1004,56 @@ html[data-contrast="true"] body, html[data-contrast="true"] .app, html[data-cont
 html[data-contrast="true"] .cat { box-shadow:none; }
 html[data-contrast="true"] :is(.home-discover,.home-access,.welcome-hero,.talents-intro,.talents-grant) { background:#000; color:#FFF; }
 html[data-contrast="true"] :is(.study-level,.home-interest,.fit,.category-fit,.filter-hint,.update-notice) { background:#FFF; color:#000; border:1px solid #000; }
+
+/* ==========================================================================
+   Fiches colorées : la fiche métier et ses pages (Se préparer, études, dates,
+   aides) prennent la couleur de la catégorie la plus élevée du métier.
+   ========================================================================== */
+.app.theme-Ap { --theme:var(--cat-ap); --theme-tint:var(--cat-ap-tint); --theme-deep:var(--cat-ap-deep); }
+.app.theme-A { --theme:var(--cat-a); --theme-tint:var(--cat-a-tint); --theme-deep:var(--cat-a-deep); }
+.app.theme-B { --theme:var(--cat-b); --theme-tint:var(--cat-b-tint); --theme-deep:var(--cat-b-deep); }
+.app.theme-C { --theme:var(--cat-c); --theme-tint:var(--cat-c-tint); --theme-deep:var(--cat-c-deep); }
+.app.theme-CDD { --theme:#55555C; --theme-tint:#FFFFFF; --theme-deep:#36363C; }
+.app.themed main { --blue:var(--theme-deep); --blue-hover:var(--theme-deep); --accent:var(--theme-deep); --accent-hover:var(--theme-deep); --lilac:var(--theme-tint); --lilac-soft:var(--theme-tint); }
+.app.themed .context-bar { --blue:var(--theme-deep); }
+.app.themed main .btn:not(.outline):not(.danger):not(.white) { background:var(--theme-deep); border-color:var(--theme-deep); }
+.app.themed main :is(.rung,.callout,.card) { background:var(--theme-tint); }
+.app.themed main .tl .node { border-color:var(--theme); }
+.app.themed main .tl .bar { background:var(--theme); }
+
+/* En-tête de fiche métier : carte teintée, pastille, titre, versants et niveau. */
+.job-hero { display:flex; flex-direction:column; gap:10px; margin:4px -8px 6px; padding:18px 16px 16px; border-radius:32px; background:var(--theme-tint,#FFF); }
+.job-hero-head { display:flex; align-items:center; gap:14px; }
+.job-hero-head h1 { min-width:0; }
+.job-hero-cat { flex:none; display:flex; }
+.job-hero-cat > .cat { width:52px; height:52px; font-size:1.375rem; }
+.job-hero-cat .job-categories { width:auto; flex-wrap:nowrap; gap:4px; }
+.job-hero-cat .job-categories .cat.sm { width:30px; height:30px; font-size:.8125rem; }
+.job-hero-tags { display:flex; flex-direction:column; align-items:flex-start; gap:8px; padding-left:66px; }
+.job-hero-tags .preparation-fps { margin:0; }
+.job-hero-tags .category-fit, .preparation-card .category-fit { margin:0; font-size:.875rem; padding:7px 14px; }
+.job-hero .job-meta .tag { background:rgba(255,255,255,.7); border-color:transparent; font-weight:400; }
+@media (max-width:359px) { .job-hero-tags { padding-left:0; } }
+
+/* Se préparer : carte de catégorie avec bandeau « Concours » en couleur pleine. */
+.preparation-card.prep-cat-Ap { --card:var(--cat-ap); --card-tint:var(--cat-ap-tint); }
+.preparation-card.prep-cat-A { --card:var(--cat-a); --card-tint:var(--cat-a-tint); }
+.preparation-card.prep-cat-B { --card:var(--cat-b); --card-tint:var(--cat-b-tint); }
+.preparation-card.prep-cat-C { --card:var(--cat-c); --card-tint:var(--cat-c-tint); }
+.catcard-wrap.preparation-card { background:var(--card-tint); border-radius:32px; }
+.preparation-card .catcard .txt > b { font-size:1.375rem; font-weight:700; }
+.preparation-card .catcard .role { font-weight:300; }
+.preparation-card .catcard .cat.lg { width:48px; height:48px; font-size:1.25rem; }
+.preparation-card .catcard { grid-template-columns:48px minmax(0,1fr); }
+.preparation-card .cat-panel { padding:4px 0 18px; }
+.preparation-card .cat-panel > h3, .preparation-card .cat-panel > .small, .preparation-card .cat-panel > div.exam { margin-left:20px; margin-right:20px; }
+.preparation-card .exam.exam-route { background:transparent; border-radius:0; padding:0; }
+.preparation-card .exam-route h4 { margin:0 0 16px; padding:14px 24px; background:var(--card); color:#FFF; font-size:1.0625rem; font-weight:500; line-height:1.35; }
+.preparation-card .exam-route dl, .preparation-card .exam-route .official-exam-links { padding:0 24px; }
+.preparation-card .exam-route dt { font-size:1rem; font-weight:300; color:var(--ink); }
+.preparation-card .exam-route dt::after { content:' :'; }
+.preparation-card .exam-route dd { font-size:1rem; font-weight:600; color:var(--ink); margin-bottom:16px; }
+.preparation-card .preparation-collapse { color:var(--ink); }
+.preparation-card .chev.turn { color:var(--ink); }
+html[data-contrast="true"] .job-hero { background:#FFF; border:1px solid #000; }
+html[data-contrast="true"] .preparation-card .exam-route h4 { background:#000; color:#FFF; }

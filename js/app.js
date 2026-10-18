@@ -299,6 +299,12 @@
     if(cats.length===1)return catBadge(cats[0]);
     return cats.length?'<span class="job-categories" role="img" aria-label="Catégories indicatives '+esc(cats.join(', '))+', selon le corps et le poste">'+cats.map(function(c){return '<span class="cat sm '+catClass(c)+'" aria-hidden="true">'+c+'</span>';}).join('')+'</span>':catBadge('V');
   }
+  /* Couleur d’une fiche : la catégorie la plus élevée du métier, ou les contractuels. */
+  function themeCategory(j) {
+    var cats=jobCategories(j);
+    return ['A+','A','B','C','CDD'].filter(function(c){return cats.indexOf(c)>-1;})[0]||null;
+  }
+  function jobFits(j) { return isOpen(j)||jobCategories(j).some(function(c){return categoryFit(c)!=='';}); }
   function passesLevelCategory(j) { return isContractJob(j) ? S.showContracts !== false : !(userRank() >= 5) || jobCategories(j).some(function (c) { return ['B', 'A', 'A+'].indexOf(c) > -1; }); }
 
   function reachable() {
@@ -645,10 +651,11 @@
     var dates = isContractJob(j) ? [] : examsFor(j);
     var shared = sharedTraits(j);
     return '<main class="screen top-tight">' + back('#/metiers', 'Métiers') +
-      '<div class="row job-meta" role="group" aria-label="Catégorie, centres d’intérêt et versants" tabindex="0">' + (j.cat==='V'&&indicativeCategories(j).length?'<span class="job-category-inline">'+jobBadges(j)+'</span><span class="tag">Selon le poste</span>':'<span class="tag fill ' + catClass(displayCategory(j)) + '">' + catLabel(displayCategory(j)) + '</span>') +
-      (j.interests || [j.domain]).map(function (d) { return '<span class="tag">' + esc(domainLabel(d)) + '</span>'; }).join('') +
-      fpNames(j.fp).map(function (f) { return '<span class="tag">' + esc(f) + '</span>'; }).join('') + '</div>' +
-      '<h1 class="sm">' + esc(j.name) + '</h1><p class="body">' + esc(j.desc.length>300?j.desc.slice(0,297).replace(/\s+\S*$/,'')+'…':j.desc) + '</p>' +
+      '<section class="job-hero"><div class="job-hero-head"><span class="job-hero-cat">' + jobBadges(j) + '</span><h1 class="sm">' + esc(j.name) + '</h1></div>' +
+      '<div class="job-hero-tags"><span class="sr-only">' + esc(jobCategories(j).map(catLabel).join(', ')) + (j.cat==='V'?', selon le poste':'') + '. </span>' + fpTags(j.fp) +
+      (jobFits(j) ? '<span class="category-fit">' + I.check + '<span>Niveau d’étude compatible</span></span>' : '') + '</div>' +
+      '<div class="row job-meta" role="group" aria-label="Centres d’intérêt" tabindex="0">' + (j.interests || [j.domain]).map(function (d) { return '<span class="tag">' + esc(domainLabel(d)) + '</span>'; }).join('') + '</div></section>' +
+      '<p class="body">' + esc(j.desc.length>300?j.desc.slice(0,297).replace(/\s+\S*$/,'')+'…':j.desc) + '</p>' +
       '<button type="button" class="btn outline" data-action="favorite"' + attr('v', j.id) + ' aria-pressed="' + (S.favorites.indexOf(j.id) > -1) + '">' + I.bookmark + (S.favorites.indexOf(j.id) > -1 ? 'Retirer des favoris' : 'Ajouter aux favoris') + '</button>' +
       '<button type="button" class="link-action" data-action="jobDetails"' + attr('v',j.id) + '>' + I.info + 'Plus de détails</button>' +
       (shared.length ? '<div class="callout tint-mint"><span class="pin"></span><p>' + (isParent() ? 'Lui ressemble' : 'Vous ressemble') + ' : ' + esc(shared.map(traitLabel).join(', ').toLowerCase()) + '.</p></div>' : '') +
@@ -712,6 +719,10 @@
       '<a class="btn outline" href="#/handicap">Handicap : accès et aménagements</a>' + preparationContent() + '</main>' + tabbar('concours');
   };
 
+  function fpTags(fp) {
+    var labels={E:'Fonction publique de l’État',T:'Fonction publique territoriale',H:'Fonction publique hospitalière'},icons={E:I.government,T:I.city,H:I.hospital};
+    return '<span class="preparation-fps">'+fp.split('').filter(function(f){return labels[f];}).map(function(f){return '<span class="preparation-fp">'+icons[f]+'<span>'+labels[f]+'</span></span>';}).join('')+'</span>';
+  }
   function preparationCategoryCard(c, job) {
     var open = expandedPrepCategories[job.id] === c.id;
     var panelId = 'prep-' + job.id + '-' + catClass(c.id);
@@ -719,14 +730,14 @@
     var fps = job.fp.split('').filter(function(f){return D.fps[f]&&(!routes.length||routes.some(function(r){return r.fp.indexOf(f)>-1;}));});
     var titles=[];routes.forEach(function(r){fps.forEach(function(f){var e=(r.examInfo||{})[f];if(e&&e.cardTitle&&titles.indexOf(e.cardTitle)===-1)titles.push(e.cardTitle);});});
     var title=titles.length===1?titles[0]:'Concours de catégorie '+c.id;
-    return '<div class="catcard-wrap preparation-card ' + c.tint + (open?' open':'') + '"><button type="button" class="catcard" aria-expanded="' + open + '" aria-controls="' + panelId + '" data-action="openPrepCat"' + attr('v',c.id) + attr('job',job.id) + '><span class="cat lg ' + catClass(c.id) + '" aria-hidden="true">' + c.id + '</span>' +
-      '<span class="txt"><b>'+esc(title)+'</b><span class="role">Catégorie ' + c.id + '</span><span class="preparation-fps">'+fps.map(function(f){var labels={E:'Fonction publique de l’État',T:'Fonction publique territoriale',H:'Fonction publique hospitalière'},icons={E:I.government,T:I.city,H:I.hospital};return '<span class="preparation-fp">'+icons[f]+'<span>'+labels[f]+'</span></span>';}).join('')+'</span>'+preparationLevel(c,job,routes)+'</span>' + (open?'':I.down) + '</button>' +
+    return '<div class="catcard-wrap preparation-card ' + c.tint + ' prep-' + catClass(c.id) + (open?' open':'') + '"><button type="button" class="catcard" aria-expanded="' + open + '" aria-controls="' + panelId + '" data-action="openPrepCat"' + attr('v',c.id) + attr('job',job.id) + '><span class="cat lg ' + catClass(c.id) + '" aria-hidden="true">' + c.id + '</span>' +
+      '<span class="txt"><b>'+esc(title)+'</b><span class="role">Catégorie ' + c.id + '</span>'+fpTags(fps.join(''))+preparationLevel(c,job,routes)+'</span>' + (open?'':I.down) + '</button>' +
       (open?'<div class="cat-panel" id="' + panelId + '"><h3>Accès à ce métier</h3>' + fps.map(function(f){
         var matching=routes.filter(function(r){return r.fp.indexOf(f)>-1;});
         return matching.length?matching.map(function(r){
           var e=(r.examInfo||{})[f]||{};
           var links=e.officialLinks&&e.officialLinks.length?e.officialLinks:[{url:e.source||r.source,label:'Dates et lieux sur le site officiel'}];
-          return '<section class="exam exam-route" data-fp="'+f+'"><h4>'+esc(e.name||r.name)+'</h4><dl><dt>Organisé par</dt><dd>'+esc(e.org||'Structure à confirmer dans l’avis du concours')+'</dd><dt>Épreuves en métropole</dt><dd>'+esc(e.metro||'Lieux non précisés : consulter l’avis du concours.')+'</dd><dt>Épreuves en outre-mer</dt><dd>'+esc(e.om||'Centre non confirmé : consulter l’avis du concours.')+'</dd></dl><div class="official-exam-links">'+links.map(function(l){return ext(l.url,l.label,'link-plain');}).join('')+'</div></section>';
+          return '<section class="exam exam-route" data-fp="'+f+'"><h4>'+esc((/^concours\b/i.test(e.name||r.name)?'':'Concours : ')+(e.name||r.name))+'</h4><dl><dt>Organisé par</dt><dd>'+esc(e.org||'Structure à confirmer dans l’avis du concours')+'</dd><dt>Épreuves en métropole</dt><dd>'+esc(e.metro||'Lieux non précisés : consulter l’avis du concours.')+'</dd><dt>Épreuves en outre-mer</dt><dd>'+esc(e.om||'Centre non confirmé : consulter l’avis du concours.')+'</dd></dl><div class="official-exam-links">'+links.map(function(l){return ext(l.url,l.label,'link-plain');}).join('')+'</div></section>';
         }).join(''):'<div class="exam" data-fp="'+f+'"><p class="small">Le corps ou cadre d’emplois doit être précisé dans l’offre pour identifier le concours et son organisateur. Les dates et lieux ne sont pas encore associés à ce métier.</p></div>';
       }).join('') + '<p class="small m0">Les lieux, les épreuves et les conditions sont précisés dans l’avis propre au concours.</p><button type="button" class="preparation-collapse" data-action="openPrepCat"'+attr('v',c.id)+attr('job',job.id)+' aria-label="Réduire les informations du concours">'+I.down+'</button></div>':'') + '</div>';
   }
@@ -1184,6 +1195,11 @@
       }
       if (['accessibilite','accueil','enfant','bienvenue','versants','categories-intro'].indexOf(r.name) === -1) main.insertAdjacentHTML('beforeend', '<a class="link-plain mt-s" href="#/accessibilite">Confort de lecture et accessibilité</a>');
     }
+    var themedJob=['metier','preparer','sans-concours','etudes','calendrier','annales','ressources-biblio','handicap'].indexOf(r.name)>-1&&r.arg&&jobById(r.arg);
+    var theme=themedJob&&themeCategory(themedJob);
+    var themeKey=theme?catClass(theme).slice(4):null;
+    ['Ap','A','B','C','CDD'].forEach(function(k){root.classList.toggle('theme-'+k,k===themeKey);});
+    root.classList.toggle('themed',!!themeKey);
     var t = root.querySelector('h1');
     if (t) t.setAttribute('tabindex', '-1');
     document.title = (t ? t.textContent + ' · ' : '') + 'Y-Seck';
