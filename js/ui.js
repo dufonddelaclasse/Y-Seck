@@ -46,7 +46,7 @@
     var link=cfg&&cfg.root.querySelector('a.back[href]');
     location.hash=link?link.getAttribute('href'):(location.hash==='#/accueil'?'#/profil':'#/accueil');
   }
-  function esc(s) { return String(s).replace(/[&<>"']/g, function(c) { return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+  function esc(s) { return String(s).replace(/[&<>"']/g, function(c) { return { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
   function headingIcon(text) {
     if (/domaine|catégor/i.test(text)) return icons.compass;
     if (/sélection|préférence|façon|caractère/i.test(text)) return icons.settings;
@@ -75,7 +75,10 @@
       if (el) el.focus({preventScroll:true});
     }
   }
+  /* Écriture inclusive affichée avec une barre oblique : « Administrateur/rice ». */
+  function inclusive(text) { return String(text).replace(/([A-Za-zÀ-ÖØ-öø-ÿ])·(?=[a-zà-öø-ÿ])/g, '$1/'); }
   function open(type, title, html, trigger) {
+    title = inclusive(title); html = inclusive(html);
     if (!dialog) return;
     if (dialog.open) close();
     kind = type; returnTo = trigger || document.activeElement;
@@ -123,5 +126,5 @@
     if(kind==='filters')content('Filtrer les métiers',options.filters);
     if(kind==='resource-filters')content('Filtrer les ressources',options.resourceFilters);
   }
-  window.YSECK_UI = {icons:icons,init:init,afterRender:afterRender,open:open,close:close,current:function(){return kind;}};
+  window.YSECK_UI = {icons:icons,inclusive:inclusive,init:init,afterRender:afterRender,open:open,close:close,current:function(){return kind;}};
 })();

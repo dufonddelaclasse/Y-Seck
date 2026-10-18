@@ -4,7 +4,7 @@
   var D = window.DATA;
   var root = document.getElementById('app');
   var UI = window.YSECK_UI;
-  var expandedDatesJob = null, jobSlideRequested = false, expandedPrepCategories = {};
+  var expandedDatesJob = null, jobSlideRequested = false, expandedPrepCategories = {}, visitedRoutes = [];
   var talentIntroAnimate = false, interestGesture = null;
   var KEY = 'ofp-state-v1';
 
@@ -571,15 +571,31 @@
   };
 
   /* ---------- Métiers ---------- */
+  /* « Administrateur·rice de l’État » se trouve aussi en tapant « administrateur de l'etat » ou « administratrice ». */
+  function searchNorm(s) { return norm(s).replace(/[·•.](?=[a-z])/g,'·').replace(/·[a-z]+(·[a-z]+)?/g,'').replace(/[^a-z0-9+]+/g,' ').trim(); }
+  function searchWords(q) { return searchNorm(q||'').split(' ').filter(function(w){return w.length>1&&['de','du','des','la','le','les','et','en','d','l'].indexOf(w)===-1;}); }
+  function searchText(j) { if(!j._search){var raw=j.name+' '+(j.sourceName||'')+' '+j.domain+' '+(j.rmfpDomain||'')+' '+(j.family||'')+' '+(j.aliases||[]).join(' ')+' '+(j.interests||[]).map(domainLabel).join(' ');j._search=' '+searchNorm(raw)+' '+feminineForms(raw)+' ';} return j._search; }
+  /* Formes féminines reconstituées : administratrice, conseillère, administrative, contrôleuse, technicienne. */
+  function feminineForms(raw) {
+    return norm(raw).replace(/([a-z]+)·([a-z]+)(?:·[a-z]+)?/g,function(m,w,suf){
+      if(suf==='rice')return w.replace(/eur$/,'rice');
+      if(suf==='ere')return w.replace(/er$/,'ere');
+      if(suf==='ve')return w.replace(/f$/,'ve');
+      if(suf==='se')return w.replace(/r$/,'se');
+      return w+suf;
+    }).replace(/[^a-z0-9+]+/g,' ');
+  }
+  function matchesWords(text, words) { return words.every(function(w){return text.indexOf(w)>-1;}); }
   function filteredJobs() {
-    var q = norm(S.q || '');
-    var doms = activeDomains();
+    var words = searchWords(S.q);
+    /* Une recherche porte sur tous les métiers : les domaines présélectionnés ne masquent aucun résultat. */
+    var doms = words.length ? [] : activeDomains();
     var list = D.jobs.filter(function (j) {
       if (!passesLevelCategory(j)) return false;
       if (doms.length && !matchesDomains(j,doms)) return false;
       if (S.metCat !== 'Toutes' && jobCategories(j).indexOf(S.metCat) === -1) return false;
       if (S.metFp !== 'Tous' && j.fp.indexOf(S.metFp) === -1) return false;
-      if (q && norm(j.name + ' ' + j.domain + ' ' + (j.rmfpDomain || '') + ' ' + (j.sourceName || '') + ' ' + (j.aliases || []).join(' ') + ' ' + (j.interests || []).map(domainLabel).join(' ')).indexOf(q) === -1) return false;
+      if (words.length && !matchesWords(searchText(j), words)) return false;
       return true;
     });
     return list.slice().sort(function (a, b) {
@@ -723,9 +739,20 @@
     }
     return { cat: cat, stops: stops };
   }
+  /* Évoluer : suite des concours internes et promotions documentés, à partir du concours principal. */
+  function careerLadder(j) {
+    var c=jobRef(j);if(!c||!c.next||!c.next.length)return null;
+    var rungs=[[j.name,themeCategory(j)||c.cat]],seen={};
+    while(c&&c.next&&c.next.length&&!seen[c.id]&&rungs.length<7){
+      seen[c.id]=true;var p=c.next[0];
+      rungs.push([p.voie.split(/[,;]/)[0]]);rungs.push([p.toName,p.toCat]);
+      c=D.concoursById[p.to];
+    }
+    return rungs;
+  }
   /* Une étape par niveau (collège, lycée, après le bac, concours), puis le métier. */
   function parcoursSteps(j) {
-    var stops=buildParcours(j).stops, groups=[];
+    var stops=buildParcours(j).stops, groups=[], ref=jobRef(j);
     stops.forEach(function(st){var g=groups[groups.length-1];if(st.terminus){groups.push({zone:'Métier',stops:[st],terminus:true});return;}if(!g||g.zone!==st.zone)groups.push(g={zone:st.zone,stops:[]});g.stops.push(st);});
     return groups.map(function(g){
       var st=g.stops, links=[], here=st.some(function(x){return x.here;}), title, text=[];
@@ -736,8 +763,29 @@
       else if(g.zone==='Lycée'){var pro=st.some(function(x){return x.key==='pro';}),bac=st.filter(function(x){return x.key==='Terminale'||x.key==='pro';})[0],mine=st.filter(function(x){return /^Votre niveau/.test(x.label);})[0];
         title=mine?mine.label:pro?'En voie professionnelle':'En voie générale ou technologique';text.push(bac?bac.detail:'');if(!pro&&!mine)text.push('Spécialités choisies en première.');}
       else{var first=st[0];title=first.label;text.push(first.detail&&!/[.!?]$/.test(first.detail)?first.detail+'.':first.detail);st.slice(1).forEach(function(x){text.push((g.zone==='Concours'||g.zone==='Recrutement'?'':'Puis ')+x.label+(x.detail?' : '+x.detail:'')+'.');});}
-      return {zone:g.zone==='Études supérieures'?'Après le bac':g.zone,title:title,text:text.filter(Boolean).join(' '),links:links,here:here,terminus:!!g.terminus};
+      var step={zone:g.zone==='Études supérieures'?'Après le bac':g.zone,title:title,text:text.filter(Boolean).join(' '),links:links,here:here,terminus:!!g.terminus};
+      return ref?refineStep(step,g,ref):step;
     });
+  }
+  /* Le référentiel précise collège, lycée, études et concours ; les conseils restent facultatifs. */
+  function refineStep(step,g,c) {
+    var dot=function(t){return t&&!/[.!?]$/.test(t)?t+'.':t;};
+    var mine=g.stops.filter(function(x){return /^Votre niveau/.test(x.label);})[0];
+    if(g.zone==='Collège'){step.text=dot('Priorités : '+c.college.replace(/\.$/,''))+(c.collegeOption?' '+dot('Au choix : '+c.collegeOption):'');}
+    else if(g.zone==='Lycée'&&!mine){
+      var pro=g.stops.some(function(x){return x.key==='pro';});
+      step.title=pro?'En voie professionnelle':'Au lycée';
+      step.text=pro?dot(c.lyceePro):[c.lyceeGeneral&&dot('Voie générale, spécialités conseillées (jamais obligatoires) : '+c.lyceeGeneral),c.lyceeTechno&&dot('Voie technologique : '+c.lyceeTechno),c.lyceePro&&dot('Voie professionnelle : '+c.lyceePro),c.optionSeconde&&dot('Option en seconde : '+c.optionSeconde)].filter(Boolean).join(' ');
+    }
+    else if(g.zone==='Études supérieures'&&!mine&&c.studies){
+      step.title=c.studies;
+      step.text=[c.l1&&dot('1re année : '+c.l1),c.l2&&dot('2e année : '+c.l2),c.l3&&dot('3e année : '+c.l3),c.master&&dot('Ensuite : '+c.master)].filter(Boolean).join(' ');
+    }
+    else if(g.zone==='Concours'){
+      step.title=c.name;
+      step.text=[c.voies&&dot('Voies : '+c.voies),c.condition&&dot('Condition : '+c.condition),c.prepa&&dot('Préparation : '+c.prepa)].filter(Boolean).join(' ');
+    }
+    return step;
   }
   function parcoursSection(j) {
     var steps=parcoursSteps(j);
@@ -745,7 +793,7 @@
       '<div class="parcours-card"><ol class="parcours-line">' + steps.map(function (s, i) {
         var mark=i===0?'start':s.terminus?'end':'mid';
         return '<li class="parcours-step '+mark+(s.here?' here':'')+'"'+(s.here?' aria-current="step"':'')+'><span class="parcours-mark" aria-hidden="true">'+(mark==='start'?'<svg viewBox="0 0 12 13"><path fill-rule="evenodd" d="M6 0a5 5 0 0 1 5 5c0 3.2-3.4 6.5-4.6 7.6a.6.6 0 0 1-.8 0C4.4 11.5 1 8.2 1 5a5 5 0 0 1 5-5zm0 3a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/></svg>':'')+'</span><div class="parcours-txt">' +
-          '<span class="parcours-head"><span class="parcours-zone">'+esc(s.zone)+'</span><b>' + esc(s.title) + '</b>'+(s.here?'<span class="parcours-here">'+(isParent()?'Ici aujourd’hui':'Vous êtes ici')+'</span>':'')+'</span>' + (s.text ? '<p>' + esc(s.text) + '</p>' : '') +
+          '<span class="parcours-head"><span class="parcours-zone">'+esc(s.zone)+'</span><b>' + sig(s.title) + '</b>'+(s.here?'<span class="parcours-here">'+(isParent()?'Ici aujourd’hui':'Vous êtes ici')+'</span>':'')+'</span>' + (s.text ? '<p>' + sig(s.text) + '</p>' : '') +
           (s.links.length ? '<span class="parcours-links">' + s.links.map(function (l) { return '<span class="parcours-link ' + l.kind + '">' + esc(l.label) + '</span>'; }).join('') + '</span>' : '') + '</div></li>';
       }).join('') + '</ol><p class="parcours-note">Parcours conseillé ' + (isParent() ? 'pour ' + esc(childName()) : 'depuis votre niveau') + ', à titre indicatif : les conditions exactes figurent dans l’avis du concours.</p></div></section>';
   }
@@ -753,7 +801,7 @@
     var j = D.jobs.filter(function (x) { return x.id === id; })[0];
     if (!j) return screens.metiers();
     var tint = { 'A+': 'tint-blue', A: 'tint-mint', B: 'tint-cyan', C: 'tint-yellow', X: 'tint-cyan', V: 'tint-cyan' };
-    var ladder = j.ladder;
+    var ladder = careerLadder(j) || j.ladder;
     if (!ladder) {
       if (j.cat === 'C') ladder = [[j.name, 'C'], ['concours interne ou promotion'], ['Poste de catégorie B', 'B']];
       else if (j.cat === 'B') ladder = [[j.name, 'B'], ['concours interne ou promotion'], ['Poste de catégorie A', 'A']];
@@ -829,6 +877,22 @@
       '<a class="btn outline" href="#/handicap">Handicap : accès et aménagements</a>' + preparationContent() + '</main>' + tabbar('concours');
   };
 
+  /* ---------- Référentiel des concours ---------- */
+  function routeRef(r, f) { var refs=(r&&r.refs)||[]; return refs.filter(function(c){return !f||c.fp===f;})[0]||(f?null:refs[0])||null; }
+  /* Concours principal d’un métier : celui de la catégorie la plus élevée, dans un versant du métier. */
+  function jobRefs(j) {
+    var order=['A+','A','B','C'],out=[];
+    jobRoutes(j).slice().sort(function(a,b){return order.indexOf(a.cat)-order.indexOf(b.cat);}).forEach(function(r){j.fp.split('').forEach(function(f){var c=routeRef(r,f);if(c&&out.indexOf(c)===-1)out.push(c);});});
+    return out;
+  }
+  function jobRef(j) { var cat=themeCategory(j); var refs=jobRefs(j); return refs.filter(function(c){return c.cat===cat;})[0]||refs[0]||null; }
+  var SIGLE_RE=null;
+  /* Les sigles restent lisibles : leur intitulé complet s’affiche au survol et aux lecteurs d’écran. */
+  function sig(text) {
+    if(!SIGLE_RE&&D.sigles.length)SIGLE_RE=new RegExp('\\b('+D.sigles.map(function(x){return x.id.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');}).join('|')+')\\b','g');
+    var labels={};D.sigles.forEach(function(x){labels[x.id]=x.label;});
+    return SIGLE_RE?esc(text).replace(SIGLE_RE,function(m){return '<abbr title="'+esc(labels[m])+'">'+m+'</abbr>';}):esc(text);
+  }
   function fpTags(fp) {
     var labels={E:'Fonction publique de l’État',T:'Fonction publique territoriale',H:'Fonction publique hospitalière'},icons={E:I.government,T:I.city,H:I.hospital};
     return '<span class="preparation-fps">'+fp.split('').filter(function(f){return labels[f];}).map(function(f){return '<span class="preparation-fp">'+icons[f]+'<span>'+labels[f]+'</span></span>';}).join('')+'</span>';
@@ -850,6 +914,13 @@
       (open?'<div class="cat-panel" id="' + panelId + '">' + exams.map(function(x){return examBlock(x,job);}).join('') +
       '<button type="button" class="preparation-collapse" data-action="openPrepCat"'+attr('v',c.id)+attr('job',job.id)+' aria-expanded="true" aria-controls="'+panelId+'" aria-label="Réduire les informations du concours">'+I.down+'</button></div>':'') + '</div>';
   }
+  function examRef(c) {
+    if(!c)return '';
+    return '<div class="exam-ref"><dl>'+(c.voies?'<dt>Voies d’accès</dt><dd>'+sig(c.voies)+'</dd>':'')+(c.condition?'<dt>Conditions de diplôme</dt><dd>'+sig(c.condition)+'</dd>':'')+
+      (c.epreuves?'<dt>Épreuves</dt><dd>'+sig(c.epreuves)+'</dd>':'')+'</dl>'+
+      (c.sessions.length?'<ul class="exam-sessions">'+c.sessions.map(function(x){return '<li><b>Session '+esc(x.session)+'</b> '+sig(x.text)+(x.caution?'<span class="small"> '+sig(x.caution)+'</span>':'')+'</li>';}).join('')+'</ul>':'')+
+      (c.vigilance?'<p class="exam-vigilance">'+I.info+'<span>'+sig(c.vigilance)+'</span></p>':'')+'</div>';
+  }
   /* Un concours : bandeau, organisateur, calendrier de la prochaine session, lieux et sources. */
   function examBlock(x, job) {
     if(!x.r)return '<div class="exam" data-fp="'+x.f+'"><p class="exam-missing">Le corps ou cadre d’emplois doit être précisé dans l’offre pour identifier le concours et son organisateur ('+esc(D.fps[x.f])+').</p></div>';
@@ -858,7 +929,7 @@
     var next=sessions[0];
     var links=e.officialLinks&&e.officialLinks.length?e.officialLinks:[{url:e.source||r.source,label:'Voir l’avis officiel'}];
     return '<section class="exam exam-route" data-fp="'+f+'"><h4>'+esc((/^concours\b/i.test(name)?'':'Concours : ')+name)+'</h4>' +
-      '<dl class="exam-org"><dt>Organisé par :</dt><dd>'+esc(e.org||'Structure à confirmer dans l’avis du concours')+'</dd></dl>' +
+      '<dl class="exam-org"><dt>Organisé par :</dt><dd>'+esc(e.org||'Structure à confirmer dans l’avis du concours')+'</dd></dl>' + examRef(routeRef(r,f)) +
       (next?'<div class="exam-cal"><h5>'+I.calendar+'<span>'+(next.provisional?'Calendrier prévisionnel':'Calendrier')+' · '+esc(next.voie)+' :</span></h5><dl class="exam-dates"><dt>Ouverture</dt><dd>'+esc(next.openLabel||next.open||'Non publiée')+'</dd><dt>Clôture</dt><dd>'+esc(next.closeLabel||next.date||'Non publiée')+'</dd><dt>Écrits ou sélection</dt><dd>'+esc(next.writtenLabel||'Non publiés')+'</dd><dt>Oraux</dt><dd>'+esc(next.oralLabel||'Non publiés')+'</dd></dl>' +
         (sessions.length>1?'<a class="link-plain" href="#/calendrier/'+job.id+'">Voir les '+sessions.length+' sessions de ce concours</a>':'')+'</div>'
         :'<div class="exam-cal"><h5>'+I.calendar+'<span>Calendrier :</span></h5><p>Aucune session publiée pour le moment : consulter l’avis officiel.</p></div>') +
@@ -876,13 +947,47 @@
     var label=qualification?'Diplôme requis : '+qualification:compatible?'Niveau d’étude compatible':minimum===null?'Niveau requis selon le concours':minimum===0?'Aucun diplôme requis':'Niveau '+DIP[minimum]+' requis';
     return '<span class="category-fit preparation-level'+(compatible?'':' warn')+'">'+(compatible?I.check:I.info)+'<span>'+esc(label)+'</span></span>';
   }
+  /* Se préparer : chaque concours du métier, avec épreuves, annales, préparations et études conseillées. */
+  function concoursPrep(job) {
+    var refs=jobRefs(job);
+    if(!refs.length)return '';
+    var docs=studyResources(job,false,false).filter(function(r){return r.scope==='document'&&r.kind!=='annales';}).length;
+    return '<section class="stack mt-m" id="concours-ref"><h2 class="section-heading">'+I.calendar+'<span>Le concours</span></h2>'+refs.slice(0,6).map(function(c,i){
+      var ann=c.annales;
+      return '<details class="ref-card"'+(refs.length===1||i===0?' open':'')+'><summary>'+catBadge(c.cat,'sm')+'<span class="ref-name"><b>'+sig(c.name)+'</b><span>'+esc(D.fps[c.fp])+(c.voies?' · '+sig(c.voies):'')+'</span></span><span class="details-toggle" aria-hidden="true">'+I.down+'</span></summary><div class="ref-body">'+
+        (c.epreuves?'<h3 class="no-icon">Épreuves</h3><p>'+sig(c.epreuves)+'</p>':'')+
+        (c.sessions.length?'<ul class="exam-sessions">'+c.sessions.map(function(x){return '<li><b>Session '+esc(x.session)+'</b> '+sig(x.text)+'</li>';}).join('')+'</ul>':'')+
+        '<h3 class="no-icon">Annales</h3>'+(ann?'<p>'+esc(ann.kind)+(ann.years?' · '+esc(ann.years):'')+'</p>'+ext(ann.url,'Annales officielles du concours','link-plain'):'<p>Pas encore de page officielle d’annales identifiée pour ce concours : consulter les documents ci-dessous et le site de l’organisateur.</p>')+
+        (docs?'<a class="link-plain" href="#/annales/'+job.id+'">'+docs+' sujets, copies et rapports à consulter</a>':'')+
+        (c.prepa?'<h3 class="no-icon">Préparations conseillées</h3><p>'+sig(c.prepa)+'</p>':'')+
+        (c.studies?'<h3 class="no-icon">Études utiles</h3><p>'+sig(c.studies)+(c.l1?'. 1re année : '+sig(c.l1):'')+(c.l2?'. 2e année : '+sig(c.l2):'')+(c.l3?'. 3e année : '+sig(c.l3):'')+'.</p>':'')+
+        (c.afterBac?'<p class="small">Dès le bac ? '+sig(c.afterBac)+'</p>':'')+
+        (c.variations?'<p class="exam-vigilance">'+I.info+'<span>'+sig(c.variations)+'</span></p>':'')+
+        ext(c.source,'Page officielle du concours','link-plain')+'</div></details>';
+    }).join('')+'<p class="small m0">Informations indicatives, vérifiées le 18 octobre 2026 : l’avis de chaque session fait référence.</p></section>';
+  }
+  /* Stages de 3e et de seconde : conseils pour les élèves, sans promettre d’accueil. */
+  function stagesPrep(job) {
+    var cls=SCHOOL_CLASSES.indexOf(S.level);
+    if(cls<0||cls>4||!D.stagesAdvice.length)return '';
+    var level=cls<=3?'Troisième':'Seconde';
+    var DOMAINS={Justice:'Justice',Sécurité:'Sécurité',Renseignement:'Sécurité',Défense:'Sécurité',Santé:'Santé',Environnement:'Environnement',Architecture:'Environnement',Numérique:'Numérique',Diplomatie:'Diplomatie'};
+    var keys=(job.interests||[job.domain]).map(function(d){return DOMAINS[d];}).filter(Boolean);
+    var general=D.stagesAdvice.filter(function(a){return norm(a.level).indexOf(norm(level))===0&&/tous metiers/.test(norm(a.domain));})[0];
+    var themed=D.stagesAdvice.filter(function(a){return keys.some(function(k){return norm(a.domain).indexOf(norm(k))>-1;});})[0];
+    var search=D.stagesAdvice.filter(function(a){return /rechercher/.test(norm(a.domain));})[0];
+    var noNetwork=D.stagesAdvice.filter(function(a){return /sans reseau/.test(norm(a.domain));})[0];
+    return '<section class="stack mt-m" id="stages"><h2 class="section-heading">'+I.route+'<span>Stage de '+(level==='Troisième'?'3e':'seconde')+'</span></h2>'+
+      [general,themed].filter(Boolean).map(function(a){return '<div class="ref-tip"><b>'+esc(a.device)+'</b><p>'+esc(a.advice)+'</p><p class="small">'+esc(a.tip)+'</p><p class="small">Où : '+esc(a.places)+'</p></div>';}).join('')+
+      (noNetwork?'<p class="small">'+esc(noNetwork.advice)+'</p>':'')+(search?ext(search.source,'Chercher un stage sur 1 élève 1 stage','link-plain'):'')+'</section>';
+  }
   screens.preparer = function(id) {
     var job=jobById(id);
     if(!job)return screens.metiers();
     if(isContractJob(job))return screens['sans-concours'](id);
     var theme=themeCategory(job);
     return '<main class="screen top-tight prep-page">' + back('#/metier/'+job.id,job.name) + (theme?'<span class="prep-page-cat">'+catBadge(theme,'lg')+'</span>':'') + '<h1>Se préparer</h1><p class="sr-only">' + esc(job.name) + '</p>' +
-      preparationContent(job) + '</main>' + tabbar('metiers');
+      concoursPrep(job) + stagesPrep(job) + preparationContent(job) + '</main>' + tabbar('metiers');
   };
 
   screens.calendrier = function (jobId) {
@@ -960,10 +1065,17 @@
   };
 
   /* ---------- Prépas ---------- */
+  /* Organismes de préparation cités par le référentiel : périmètre et source, jamais de classement. */
+  function prepaOrganisms(cats) {
+    var list=D.prepaOrganisms.filter(function(o){return cats.some(function(c){return new RegExp('(^|[^A-Z+])'+c.replace('+','\\+')+'([^+]|$)').test(o.categories);});});
+    if(!list.length)return '';
+    return '<div class="ref-orgs"><h3 class="no-icon">Organismes de préparation</h3>'+list.map(function(o){return ext(o.url,o.name+' · '+o.scope,'link-plain');}).join('')+'<p class="small">Liste indicative, sans classement : les résultats publiés par chaque organisme ne sont pas comparables entre eux.</p></div>';
+  }
   function preparationContent(job) {
     var opts = [['0', 'Gratuit'], ['1', 'Avec frais d’inscription'], ['2', 'Tous budgets']];
     var b = S.prepBudget;
-    if (b === null) b = S.budget === 'Gratuit uniquement' ? '0' : (['Moins de 1 000 €','Avec frais d’inscription'].indexOf(S.budget)>-1 ? '1' : '2');
+    /* Un profil boursier part des préparations gratuites. */
+    if (b === null) b = S.boursier === 'Oui' || S.budget === 'Gratuit uniquement' ? '0' : (['Moins de 1 000 €','Avec frais d’inscription'].indexOf(S.budget)>-1 ? '1' : '2');
     var on = S.boursier === 'Oui';
     var keys = prepKeys(job?[job]:myJobs());
     var nbT = D.talents.filter(function (t) { return talentMatches(t, keys).length; }).length;
@@ -989,6 +1101,7 @@
           '<p>' + esc(p.d) + '</p><span class="prep-foot">' + extra + '<span class="more">Voir le détail' + I.chev + '</span></span></a>';
       }).join('') + '</div>' +
       (on && list.some(function(p){return p.talents;}) ? '<div class="bourse"><div><b>' + esc(D.talentsGrantLabel || '5 000 €') + ' / an</b><span>Bourse Talents ' + esc(D.talentsGrantYear || '2026-2027') + ', pour les élèves des Prépas Talents.</span></div><span class="dot big" aria-hidden="true"></span></div>' : '') +
+      prepaOrganisms(cats) +
       '<a class="link-plain" href="#/handicap'+(job?'/'+job.id:'')+'">Handicap : prévoir les aménagements</a></section>';
    }
   screens.prepas = function () { return screens.concours(); };
@@ -1077,12 +1190,13 @@
       '<p class="small m0">Liste non exhaustive, sans classement ni partenariat.</p>' + foot;
   };
 
-  var RESOURCE_KINDS = {sujet:'Sujet',rapport:'Rapport de jury',copie:'Meilleure copie',entrainement:'Entraînement',annuaire:'Annuaire officiel',bibliographie:'Bibliographie'};
+  var RESOURCE_KINDS = {annales:'Annales officielles',sujet:'Sujet',rapport:'Rapport de jury',copie:'Meilleure copie',entrainement:'Entraînement',annuaire:'Collection d’annales',bibliographie:'Bibliographie'};
   function studyMatches(r, job) {
     if(!job)return true;
     if(!r.categories.some(function(c){return jobCategories(job).indexOf(c)>-1;})||!r.fps.some(function(f){return job.fp.indexOf(f)>-1;}))return false;
     var routes=[job.id].concat(jobRoutes(job).map(function(r){return r.id;}));
-    return r.routeIds.length?r.routeIds.some(function(id){return routes.indexOf(id)>-1;}):r.scope==='directory';
+    /* Une collection d’un ministère sans concours rattaché n’est pas une annale de ce métier ; les portails nationaux restent. */
+    return r.routeIds.length?r.routeIds.some(function(id){return routes.indexOf(id)>-1;}):r.scope==='directory'&&r.sourceName!=='Annuaire DGAFP';
   }
   function studyResources(job, bibliography, applyFilters) {
     var q=norm(S.resQ);
@@ -1100,7 +1214,15 @@
     return list.map(function(r){return '<a class="study-card external-link" href="'+esc(r.url)+'" target="_blank" rel="noopener"><div class="study-meta"><span class="tag">'+esc(RESOURCE_KINDS[r.kind])+'</span>'+(r.year?'<span class="tag">'+esc(r.year)+'</span>':'')+'</div><h3 class="no-icon">'+esc(r.title)+'</h3>'+(r.concours?'<p>'+esc(r.concours)+'</p>':'')+'<p class="small">'+esc(r.sourceName+' · '+r.fps.map(function(f){return D.fps[f];}).join(', '))+'</p>'+(r.note?'<p class="small">'+esc(r.note)+'</p>':'')+'<span class="study-open">'+(directories?'Consulter la source':'Consulter le document')+I.chev+'</span></a>';}).join('');
   }
   function studyResults(job, bibliography) {
-    var all=studyResources(job,bibliography,true),docs=all.filter(function(r){return r.scope!=='directory';}),directories=all.filter(function(r){return r.scope==='directory';});
+    var all=studyResources(job,bibliography,true),docs=all.filter(function(r){return r.scope!=='directory'&&r.kind!=='annales';}),directories=all.filter(function(r){return r.scope==='directory'||r.kind==='annales';});
+    /* Annales : les collections officielles du concours d’abord, puis les documents à l’unité. */
+    if(!bibliography){
+      directories.sort(function(a,b){return (b.kind==='annales')-(a.kind==='annales');});
+      return '<p class="small" role="status">'+directories.length+' collection'+(directories.length>1?'s':'')+' officielle'+(directories.length>1?'s':'')+' · '+docs.length+' document'+(docs.length>1?'s':'')+'</p>'+
+        (directories.length?'<h2 class="mt-s">Annales officielles du concours</h2><div class="study-list">'+resourceRows(directories,true)+'</div>':'')+
+        '<h2 class="mt-m">Sujets, copies et rapports de jury</h2>'+
+        (docs.length?'<div class="study-list">'+resourceRows(docs.slice(0,S.resLimit),false)+'</div>'+(docs.length>S.resLimit?'<button type="button" class="btn outline" data-action="moreResources">Afficher 40 documents de plus</button>':''):'<p class="empty">Aucun document à l’unité avec ces critères.</p>');
+    }
     return '<p class="small" role="status">'+docs.length+' document'+(docs.length>1?'s':'')+' · '+directories.length+' source'+(directories.length>1?'s':'')+' documentaire'+(directories.length>1?'s':'')+'</p>'+
       (docs.length?'<div class="study-list">'+resourceRows(docs.slice(0,S.resLimit),false)+'</div>'+(docs.length>S.resLimit?'<button type="button" class="btn outline" data-action="moreResources">Afficher 40 documents de plus</button>':''):'<p class="empty">Aucun document indexé avec ces critères.</p><button type="button" class="text-btn" data-action="resetResources">Réinitialiser les filtres</button>')+
       (directories.length?'<h2 class="mt-m">Consulter les collections complètes</h2><div class="study-list">'+resourceRows(directories,true)+'</div>':'');
@@ -1282,7 +1404,14 @@
     }
     var key = r.name + '/' + (r.arg || '') + '/' + (r.arg2 || '');
     var changed = key !== lastRoute;
-    var animateJob=changed&&r.name==='metier'&&jobSlideRequested&&!matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var hash=location.hash||'#/', slide=null, SLIDES=['metier','preparer','bibliographie'];
+    if(changed){
+      var previous=visitedRoutes[visitedRoutes.length-1];
+      if(visitedRoutes.length>1&&visitedRoutes[visitedRoutes.length-2]===hash){visitedRoutes.pop();if(previous&&SLIDES.indexOf(previous.split('/')[1])>-1)slide='right';}
+      else{visitedRoutes.push(hash);if(visitedRoutes.length>40)visitedRoutes.shift();if(jobSlideRequested&&SLIDES.indexOf(r.name)>-1)slide='left';}
+    }
+    if(matchMedia('(prefers-reduced-motion: reduce)').matches)slide=null;
+    var animateJob=!!slide;
     jobSlideRequested=false;
     lastRoute = key;
     if(changed&&['annales','ressources-biblio'].indexOf(r.name)>-1){S.resQ='';S.resCat=r.name==='ressources-biblio'?bibliographyCategory(jobById(r.arg)):'Toutes';S.resFp='Tous';S.resKind='Tous';S.resYear='Toutes';S.resLimit=40;}
@@ -1305,17 +1434,18 @@
 
     var fn = screens[r.name] || screens[S.done ? 'accueil' : 'profil'];
     if(changed&&r.name==='situation'&&S.boursier==='Oui')talentIntroAnimate=true;
-    root.innerHTML = fn(r.arg, r.arg2);
+    root.innerHTML = UI.inclusive(fn(r.arg, r.arg2));
     talentIntroAnimate=false;
     var main = root.querySelector('main');
     root.classList.toggle('job-transition',animateJob);
     if (main) {
       main.id = 'contenu';
       if(animateJob){
-        main.classList.add('job-slide-in');
-        main.addEventListener('animationend',function(e){if(e.target===main){main.classList.remove('job-slide-in');root.classList.remove('job-transition');}});
+        var slideClass=slide==='right'?'slide-from-left':'job-slide-in';
+        main.classList.add(slideClass);
+        main.addEventListener('animationend',function(e){if(e.target===main){main.classList.remove(slideClass);root.classList.remove('job-transition');}});
       }
-      if (['accessibilite','accueil','enfant','bienvenue','versants','categories-intro'].indexOf(r.name) === -1) main.insertAdjacentHTML('beforeend', '<a class="link-plain mt-s" href="#/accessibilite">Confort de lecture et accessibilité</a>');
+      if (r.name !== 'accessibilite') main.insertAdjacentHTML('beforeend', '<a class="a11y-link" href="#/accessibilite">Confort de lecture et accessibilité</a>');
     }
     var themedJob=['metier','preparer','sans-concours','etudes','calendrier','annales','ressources-biblio','handicap'].indexOf(r.name)>-1&&r.arg&&jobById(r.arg);
     var theme=themedJob&&themeCategory(themedJob);
@@ -1374,7 +1504,7 @@
   window.addEventListener('scroll',function(){if(interestGesture&&interestGesture.down)interestGesture.moved=true;},{passive:true});
 
   document.addEventListener('click', function (e) {
-    var jobLink=e.target.closest('a[href^="#/metier/"]');
+    var jobLink=e.target.closest('a[href^="#/metier/"],a[href^="#/preparer/"],a[href^="#/bibliographie"]');
     if(jobLink&&!e.defaultPrevented&&e.button===0&&!e.metaKey&&!e.ctrlKey&&!e.shiftKey&&!e.altKey&&jobLink.getAttribute('href')!==location.hash)jobSlideRequested=true;
     var el = e.target.closest('[data-action]');
     if (!el) return;
@@ -1480,7 +1610,7 @@
       case 'moreResources': set({resLimit:S.resLimit+40}); break;
       case 'resetResources': set({resCat:'Toutes',resFp:'Tous',resKind:'Tous',resYear:'Toutes',resQ:'',resLimit:40}); break;
       case 'talentsAll': set({ talentsAll: v === 'all' }); countAnnounce('#talents .list-row'); break;
-      case 'toggleBoursier': set({ boursier: S.boursier === 'Oui' ? 'Non' : 'Oui' }); break;
+      case 'toggleBoursier': var becomesBoursier=S.boursier!=='Oui'; set(becomesBoursier?{ boursier: 'Oui', prepBudget: '0' }:{ boursier: 'Non' }); break;
       case 'alert': set({ alert: !S.alert }); announce(S.alert ? 'Alerte activée' : 'Alerte désactivée'); break;
       case 'deleteChild': {
         var removed=activeChild();

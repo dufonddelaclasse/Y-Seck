@@ -8,6 +8,10 @@
   P.routes.forEach(function (r) { byRoute[r.id] = r; });
   (P.examDetails || []).forEach(function(e){var r=byRoute[e.routeId];if(r)(r.examInfo||(r.examInfo={}))[e.fp]=e;});
   D.accessRoutes = byRoute;
+  /* Référentiel des concours : chaque corps reçoit les concours qui y mènent, par versant. */
+  D.concours = P.concours || []; D.sigles = P.sigles || []; D.stagesAdvice = P.stagesAdvice || []; D.prepaOrganisms = P.prepaOrganisms || [];
+  D.concoursById = {};
+  D.concours.forEach(function (c) { D.concoursById[c.id] = c; c.routeIds.forEach(function (id) { var r = byRoute[id]; if (r) (r.refs || (r.refs = [])).push(c); }); });
   D.crosswalk = P.links;
   D.catalogChecked = P.checked;
   D.catalogSources = P.sources;
