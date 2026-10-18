@@ -1308,3 +1308,31 @@ body.page-white, body.page-white .app, body.page-white .context-bar { background
 .home-shortcuts a { padding:12px; gap:10px; }
 .home-shortcuts .home-tile { width:48px; height:48px; }
 .home-shortcuts .home-tile.home-count { font-size:1.75rem; }
+
+/* Onboarding : fonctions publiques et catégories en blocs repliés, dépliés au toucher. */
+.intro-fold { border-radius:24px; background:#FFF; }
+.intro-fold summary { display:flex; align-items:center; gap:14px; min-height:64px; padding:12px 14px; list-style:none; cursor:pointer; }
+.intro-fold summary::-webkit-details-marker { display:none; }
+.intro-fold summary::marker { content:''; }
+.intro-fold summary > h2, .intro-fold-name { flex:1; min-width:0; margin:0; }
+.intro-fold .employer-title { margin:0; font-size:1.0625rem; font-weight:600; }
+.intro-fold .explain-t { font-size:1.0625rem; font-weight:600; }
+.intro-fold-name { display:flex; flex-direction:column; gap:2px; }
+.intro-fold-sub { font-size:.8125rem; font-weight:300; color:var(--ink-2); }
+.intro-fold .details-toggle { color:var(--brand); border-color:rgba(43,4,204,.25); background:rgba(255,255,255,.6); }
+.intro-fold[open] .details-toggle { transform:rotate(180deg); }
+.intro-fold summary:focus-visible { outline:2px solid var(--brand); outline-offset:2px; border-radius:24px; }
+.intro-fold-body { display:flex; flex-direction:column; gap:8px; padding:0 18px 18px 64px; }
+.intro-fold-body p { margin:0; font-size:.9375rem; font-weight:300; line-height:1.45; color:var(--ink-2); }
+.intro-fold-body p.ex { font-size:.875rem; }
+.intro-fold-body p.ex b { font-weight:600; color:var(--ink); }
+.intro-category-fold .cat.lg { width:40px; height:40px; font-size:1rem; }
+.intro-category-fold.tint-blue { background:var(--cat-ap-tint); }
+.intro-category-fold.tint-mint { background:var(--cat-a-tint); }
+.intro-category-fold.tint-cyan { background:var(--cat-b-tint); }
+.intro-category-fold.tint-yellow { background:var(--cat-c-tint); }
+.employer-list { gap:10px; margin-top:20px; }
+.intro-employer-fold .employer-icon { color:var(--brand); }
+@media (prefers-reduced-motion:no-preference) { .intro-fold[open] .intro-fold-body { animation:intro-open .2s ease-out; } }
+@keyframes intro-open { from { opacity:0; transform:translateY(-4px); } to { opacity:1; transform:none; } }
+html[data-contrast="true"] .intro-fold { background:#FFF; border:1px solid #000; }
