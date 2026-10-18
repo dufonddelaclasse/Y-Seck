@@ -95,6 +95,15 @@ for(const [label,change] of changes){
   assert(!t.saved().personalProfiles.etu.pendingChanges);
 }
 
+// Le choix boursier·e fait depuis Se préparer s’enregistre sans demander de validation du profil.
+{
+  const t=start(personal());
+  t.location.hash='#/preparer/attache';
+  t.click('toggleBoursier');
+  t.location.hash='#/moi';
+  assert(!t.S.pendingChanges&&!hasValidation(t),'Un réglage hors questionnaire ne bloque pas le profil en attente de validation.');
+}
+
 // Un nom vide ne devient pas valide grâce au raccourci de validation.
 const required=start(personal());
 required.input('person-name','   ');
