@@ -869,3 +869,470 @@ html[data-contrast="true"] :is(.cat,.tag).cat-CDD { background:#000; color:#FFF;
 .update-notice-action { border:1px solid var(--blue); background:var(--blue); color:#FFF; }
 .update-notice-dismiss { border:1px solid #CFD5F1; background:#FFF; color:var(--blue); }
 html[data-contrast="true"] .update-notice { background:#FFF; color:#000; border-color:#000; }
+
+/* ==========================================================================
+   Charte Y-Seck (octobre 2026) : Geologica, indigo #2500BA, lilas #DAD1FF,
+   jaune #FFE6A1, fond gris #DBDBD7 et couleurs de catégorie.
+   Bloc autonome : le retirer suffit à revenir à la charte précédente.
+   ========================================================================== */
+@font-face { font-family:'Geologica'; font-style:normal; font-weight:100 900; font-display:swap; src:url(../fonts/geologica-latin-wght-normal.woff2) format('woff2-variations'), url(../fonts/geologica-latin-wght-normal.woff2) format('woff2'); }
+:root {
+  --font:'Geologica', 'DM Sans', system-ui, sans-serif;
+  --blue:#2500BA; --blue-hover:#3A16E0;
+  --accent:#2500BA; --accent-hover:#3A16E0; --accent-tint:#EEEAFF;
+  --lilac:#DAD1FF; --lilac-soft:#EEEAFF; --sun:#FFE6A1; --sun-soft:#FFF4D6;
+  --bg:#DBDBD7; --surface:#FFFFFF;
+  --ink:#141414; --ink-2:#36363C; --muted:#55555C; --line:#C9C9C4; --line-2:#B9B9B4; --soft:#EDEDEA;
+  --cat-ap:#714DFF; --cat-ap-tint:#D2C7FF; --cat-ap-deep:#4B26E0;
+  --cat-a:#0004FF; --cat-a-tint:#D1DBFF; --cat-a-deep:#0004FF;
+  --cat-b:#28A1A1; --cat-b-tint:#E0FFF4; --cat-b-deep:#156B6B;
+  --cat-c:#FF804A; --cat-c-tint:#FFE8D9; --cat-c-deep:#A8461B;
+  --cat-cdd:#FFFFFF; --cat-cdd-tint:#F1F1EE; --cat-cdd-deep:#36363C;
+  --fit-tint:#EEFFD9; --fit-ink:#3B5E12;
+  --mint:var(--cat-b); --mint-tint:var(--cat-b-tint); --cyan:var(--cat-a); --cyan-tint:var(--cat-a-tint); --yellow:var(--sun); --yellow-tint:var(--sun-soft);
+}
+body { background:var(--bg); font-weight:300; }
+.app { background:var(--bg); }
+@media (min-width:600px) { .app { box-shadow:0 0 0 1px #C4C4BF; } }
+.footer, .sheet-actions { background:var(--bg); }
+.sheet, .sheet-actions { background:#FFF; }
+
+/* Typographie : graisses calées sur les maquettes (titres 700, intertitres 500-600, textes 300-400). */
+h1 { font-weight:700; letter-spacing:-.025em; }
+h2 { font-weight:600; letter-spacing:-.015em; }
+h3, .h3, .h4 { font-weight:600; }
+.eyebrow { font-weight:600; letter-spacing:.06em; color:var(--blue); }
+.lead, .body, .prose, .callout, .explain p, .prep p, .notice, .small, .source-paragraphs p { font-weight:300; }
+.lead, .body { color:var(--ink-2); }
+b, strong, .list-row .name, .card .t, .catcard b { font-weight:600; }
+.btn, .link-action, .back, .link-plain, .chip, .opt, .tag, .tabbar a { font-weight:400; }
+.btn { font-weight:500; }
+.tabbar a.on { font-weight:600; }
+
+/* Surfaces blanches sur le fond gris. */
+.tabbar, .context-bar { background:rgba(255,255,255,.97); border-color:#CFCFCA; }
+:is(.card,.callout,.rung,.bourse,.talents-box,.explain,.tint-mint,.tint-cyan,.tint-yellow,.tint-blue) { background:var(--surface); }
+.prep, .home-shortcuts a, .family-card, .intro-employer, .exam, .location-option, .interest-option, .search, .field input, .select select, .opt, button.chip, .tag.link, .btn.outline, .btn.white { background:var(--surface); }
+.prep, .home-shortcuts a, .intro-employer { border-color:transparent; }
+.list { border-top-color:var(--line); }
+.list-row, .source-detail, .book-card.external-link, .study-card.external-link { border-bottom-color:var(--line) !important; }
+@media (hover:hover) and (pointer:fine) { :where(.app:not(.touch-input)) .list-row:hover { background:rgba(255,255,255,.45); } }
+.name-line, .name-entry { border-bottom-color:#8E8E88; }
+
+/* Boutons, puces et choix : indigo et lilas. */
+.btn { background:var(--blue); border-color:var(--blue); }
+.btn:hover { background:var(--blue-hover); border-color:var(--blue-hover); }
+.btn.outline, .btn.white { border-color:var(--lilac); color:var(--blue); }
+.btn.outline:hover, .btn.white:hover { background:var(--lilac-soft); border-color:var(--blue); }
+:is(button.chip,.opt,.tag.link) { color:var(--blue); border-color:var(--lilac); }
+:is(button.chip,.opt,.tag.link):hover { background:var(--lilac-soft); border-color:var(--blue); }
+:is(button.chip.on,.chip.blue.on,.opt.on) { background:var(--lilac); border-color:var(--blue); color:var(--blue); box-shadow:inset 0 0 0 1px var(--blue); }
+.interest-option { border-color:var(--lilac); color:var(--blue); }
+.interest-option.on { background:var(--lilac); border-color:var(--blue); }
+.icon-btn, .details-toggle, .home-go { border-color:var(--lilac); }
+.name-confirm, .pin-ico { background:var(--lilac); color:var(--blue); }
+.study-level, .home-interest { background:var(--sun); border-color:var(--sun); color:#3D3000; }
+.fit, .prep .price { background:var(--sun); color:#3D3000; }
+.fit.on { background:var(--fit-tint); color:var(--fit-ink); }
+.fit.like { background:var(--lilac); color:var(--blue); }
+.category-fit { background:var(--fit-tint); color:#3A3A3A; font-weight:400; }
+.category-fit svg, .job-fit-check { color:#1B9E3E; }
+.job-fit-check { background:#1B9E3E; color:#FFF; }
+.filter-hint, .update-notice { background:var(--sun-soft); border-color:var(--sun); color:#3D3000; }
+.update-notice-action { background:var(--blue); border-color:var(--blue); }
+.update-notice-dismiss { border-color:var(--sun); color:#3D3000; }
+.card .dot, .callout .pin, .bourse .dot { background:var(--blue) !important; }
+.card:hover { background:var(--lilac-soft); }
+.progress span { background:#C4C4BF; }
+.switch { background:#A9A9A3; }
+.num { border-color:var(--blue); color:var(--blue); background:#FFF; }
+
+/* Pastilles de catégorie : couleur pleine, lettre blanche, anneau dans la teinte claire. */
+.cat { color:#FFF; font-weight:700; }
+:is(.cat,.tag).cat-Ap { background:var(--cat-ap); color:#FFF; }
+:is(.cat,.tag).cat-A { background:var(--cat-a); color:#FFF; }
+:is(.cat,.tag).cat-B { background:var(--cat-b); color:#FFF; }
+:is(.cat,.tag).cat-C { background:var(--cat-c); color:#FFF; }
+:is(.cat,.tag).cat-CDD { background:#FFF; color:var(--ink); box-shadow:inset 0 0 0 1.5px #BDBDB8; }
+.cat.cat-Ap { box-shadow:0 0 0 4px var(--cat-ap-tint); }
+.cat.cat-A { box-shadow:0 0 0 4px var(--cat-a-tint); }
+.cat.cat-B { box-shadow:0 0 0 4px var(--cat-b-tint); }
+.cat.cat-C { box-shadow:0 0 0 4px var(--cat-c-tint); }
+.cat.cat-CDD { box-shadow:inset 0 0 0 1.5px #BDBDB8, 0 0 0 4px #ECECE9; }
+.cat.sm { box-shadow:none; }
+.cat.cat-CDD.sm { box-shadow:inset 0 0 0 1.5px #BDBDB8; }
+.job-categories .cat, .context-categories .cat, .category-heading .cat { box-shadow:none; }
+.job-row { --job-tint:#ECECE9; }
+.job-row.job-cat-Ap { --job-tint:var(--cat-ap-tint); }
+.job-row.job-cat-A { --job-tint:var(--cat-a-tint); }
+.job-row.job-cat-B { --job-tint:var(--cat-b-tint); }
+.job-row.job-cat-C { --job-tint:var(--cat-c-tint); }
+.job-row.job-cat-CDD { --job-tint:#F1F1EE; }
+.job-row .fit { color:#36363C; }
+button.category-choice.cat-Ap { --cat-fill:var(--cat-ap); --cat-ink:#FFF; }
+button.category-choice.cat-A { --cat-fill:var(--cat-a); --cat-ink:#FFF; }
+button.category-choice.cat-B { --cat-fill:var(--cat-b); --cat-ink:#FFF; }
+button.category-choice.cat-C { --cat-fill:var(--cat-c); --cat-ink:#FFF; }
+button.category-choice.cat-CDD { --cat-fill:#FFF; --cat-ink:var(--ink); box-shadow:inset 0 0 0 1.5px #BDBDB8; }
+.chip.category-choice.on { box-shadow:0 0 0 2px #FFF, 0 0 0 4px var(--blue); }
+.category-screen .explain.tint-blue,.catcard-wrap.tint-blue { background:var(--cat-ap-tint); }
+.category-screen .explain.tint-mint,.catcard-wrap.tint-mint { background:var(--cat-a-tint); }
+.category-screen .explain.tint-cyan,.catcard-wrap.tint-cyan { background:var(--cat-b-tint); }
+.category-screen .explain.tint-yellow,.catcard-wrap.tint-yellow { background:var(--cat-c-tint); }
+.welcome-deco .cat-Ap { background:var(--cat-ap); color:#FFF; }
+.welcome-deco :is(.cat-A,.cat-B,.cat-C) { color:#FFF; }
+
+/* Dégradés de l'accueil et des Prépas Talents dans la gamme indigo / lilas / jaune. */
+.welcome-hero { background:linear-gradient(120deg,#2500BA 0%,#4A2BE6 50%,#8F7BFF 100%); }
+.welcome, .welcome-foot { background:var(--blue); }
+.intro-footer .btn { background:var(--blue); border-color:var(--blue); }
+.intro-footer .btn:hover { background:var(--blue-hover); border-color:var(--blue-hover); }
+.welcome-checks svg { color:var(--blue); }
+.home-discover { background:linear-gradient(115deg,#2500BA 0%,#4A2BE6 55%,#8F7BFF 100%); }
+.home-access { background:linear-gradient(115deg,var(--lilac) 0%,var(--sun) 100%); }
+.home-go { color:var(--blue); }
+.talents-intro, .talents-feature { background:linear-gradient(135deg,#714DFF 0%,#3A16E0 55%,#2500BA 100%); }
+.talents-feature.talents-split { background:var(--lilac-soft); border-color:var(--lilac); }
+.talents-grant { background:linear-gradient(115deg,var(--sun-soft) 0%,var(--sun) 100%); }
+.prep.hi { background:var(--lilac-soft); border-color:var(--lilac); }
+.employer-icon { background:var(--lilac-soft); }
+.preparation-fp { background:#000; color:#FFF; border-radius:999px; padding:6px 14px 6px 8px; align-items:center; font-weight:400; }
+
+/* Contraste élevé : la nouvelle charte s'efface toujours devant le noir et blanc. */
+html[data-contrast="true"] { --bg:#FFF; --surface:#FFF; --lilac:#FFF; --lilac-soft:#FFF; --sun:#FFF; --sun-soft:#FFF; --fit-tint:#FFF; }
+html[data-contrast="true"] body, html[data-contrast="true"] .app, html[data-contrast="true"] .footer { background:#FFF; }
+html[data-contrast="true"] .cat { box-shadow:none; }
+html[data-contrast="true"] :is(.home-discover,.home-access,.welcome-hero,.talents-intro,.talents-grant) { background:#000; color:#FFF; }
+html[data-contrast="true"] :is(.study-level,.home-interest,.fit,.category-fit,.filter-hint,.update-notice) { background:#FFF; color:#000; border:1px solid #000; }
+
+/* ==========================================================================
+   Fiches colorées : la fiche métier et ses pages (Se préparer, études, dates,
+   aides) prennent la couleur de la catégorie la plus élevée du métier.
+   ========================================================================== */
+.app.theme-Ap { --theme:var(--cat-ap); --theme-tint:var(--cat-ap-tint); --theme-deep:var(--cat-ap-deep); }
+.app.theme-A { --theme:var(--cat-a); --theme-tint:var(--cat-a-tint); --theme-deep:var(--cat-a-deep); }
+.app.theme-B { --theme:var(--cat-b); --theme-tint:var(--cat-b-tint); --theme-deep:var(--cat-b-deep); }
+.app.theme-C { --theme:var(--cat-c); --theme-tint:var(--cat-c-tint); --theme-deep:var(--cat-c-deep); }
+.app.theme-CDD { --theme:#55555C; --theme-tint:#FFFFFF; --theme-deep:#36363C; }
+.app.themed main { --blue:var(--theme-deep); --blue-hover:var(--theme-deep); --accent:var(--theme-deep); --accent-hover:var(--theme-deep); --lilac:var(--theme-tint); --lilac-soft:var(--theme-tint); }
+.app.themed .context-bar { --blue:var(--theme-deep); }
+.app.themed main .btn:not(.outline):not(.danger):not(.white):not(.black):not(.theme):not(.fav) { background:var(--theme-deep); border-color:var(--theme-deep); }
+.app.themed main :is(.rung,.callout,.card) { background:var(--theme-tint); }
+.app.themed main .tl .node { border-color:var(--theme); }
+.app.themed main .tl .bar { background:var(--theme); }
+
+/* Se préparer : carte de catégorie avec bandeau « Concours » en couleur pleine. */
+.preparation-card.prep-cat-Ap { --card:var(--cat-ap); --card-tint:var(--cat-ap-tint); }
+.preparation-card.prep-cat-A { --card:var(--cat-a); --card-tint:var(--cat-a-tint); }
+.preparation-card.prep-cat-B { --card:var(--cat-b); --card-tint:var(--cat-b-tint); }
+.preparation-card.prep-cat-C { --card:var(--cat-c); --card-tint:var(--cat-c-tint); }
+.catcard-wrap.preparation-card { background:var(--card-tint); border-radius:32px; }
+.preparation-card .catcard .txt > b { font-size:1.375rem; font-weight:700; }
+.preparation-card .catcard .role { font-weight:300; }
+.preparation-card .catcard .cat.lg { width:48px; height:48px; font-size:1.25rem; }
+.preparation-card .catcard { grid-template-columns:48px minmax(0,1fr); }
+.preparation-card .cat-panel { padding:4px 0 18px; }
+.preparation-card .cat-panel > h3, .preparation-card .cat-panel > .small, .preparation-card .cat-panel > div.exam { margin-left:20px; margin-right:20px; }
+.preparation-card .exam.exam-route { background:transparent; border-radius:0; padding:0; }
+.preparation-card .exam-route h4 { margin:0 0 16px; padding:14px 24px; background:var(--card); color:#FFF; font-size:1.0625rem; font-weight:500; line-height:1.35; }
+.preparation-card .preparation-collapse { color:var(--ink); }
+.preparation-card .chev.turn { color:var(--ink); }
+html[data-contrast="true"] .preparation-card .exam-route h4 { background:#000; color:#FFF; }
+
+/* Concours repliés : informations de base, détail à la demande. */
+.prep-count { margin-top:8px; font-size:.8125rem; font-weight:400; color:var(--ink-2); }
+html[data-contrast="true"] 
+/* Contractuels : icône de document au lieu du sigle CDD. */
+.cat.cat-CDD, .context-category.cat-CDD, .chip.category-choice.cat-CDD { color:#141414; }
+.cat.cat-CDD .contract-icon { width:58%; height:58%; }
+.chip.category-choice.cat-CDD .contract-icon { width:22px; height:22px; }
+.context-category .contract-icon { width:60%; height:60%; }
+
+/* ==========================================================================
+   Maquettes fiche métier, Se préparer et espace personnel (octobre 2026).
+   ========================================================================== */
+:root { --theme-btn:var(--blue); --panel:#ECECE9; }
+.app.theme-Ap { --theme-btn:var(--cat-ap); }
+.app.theme-A { --theme-btn:var(--cat-a); }
+.app.theme-B { --theme-btn:var(--cat-b-deep); }
+.app.theme-C { --theme-btn:var(--cat-c-deep); }
+.app.theme-CDD { --theme-btn:#141414; }
+.btn.black { background:#141414; border-color:#141414; color:#FFF; }
+.btn.black:hover { background:#000; border-color:#000; color:#FFF; }
+.btn.black[aria-pressed="true"] svg { fill:currentColor; }
+.btn.theme { background:var(--theme-btn); border-color:var(--theme-btn); color:#FFF; }
+.btn.theme:hover { background:var(--theme-btn); border-color:var(--theme-btn); color:#FFF; filter:brightness(1.08); }
+.btn.theme svg { width:22px; height:22px; }
+
+/* Fiche métier */
+.job-page h1 { font-size:2rem; line-height:1.08; }
+.job-page .job-meta { gap:8px; align-items:center; }
+.job-page .job-meta .tag { border:0; background:#E6E6E2; color:#4A4A50; font-weight:300; padding:6px 14px; }
+.job-page .job-hero-cat > .cat { width:38px; height:38px; font-size:.9375rem; box-shadow:none; }
+.job-page .job-hero-cat .job-categories { width:auto; flex-wrap:nowrap; gap:3px; }
+.job-section .section-heading { align-items:center; gap:10px; font-size:1.375rem; }
+.job-section .section-heading > svg { width:22px; height:22px; color:var(--ink); }
+.job-section .section-heading > svg.parcours-icon { width:12px; height:30px; }
+.job-page .callout { background:#FFF; }
+
+/* Quelles études choisir : frise pointillée (épingle, points, point d’arrivée). */
+.parcours-card { padding:20px 18px 16px 14px; border-radius:26px; background:var(--panel); }
+.parcours-line { margin:0; padding:0; list-style:none; }
+.parcours-step { position:relative; padding:0 0 22px 32px; }
+.parcours-step::before { content:''; position:absolute; left:9px; top:24px; bottom:0; border-left:2.5px dotted #141414; }
+.parcours-step.end { padding-bottom:4px; }
+.parcours-step.end::before { display:none; }
+.parcours-mark { position:absolute; left:4px; top:5px; width:12px; height:12px; border-radius:50%; background:#141414; }
+.parcours-step.start .parcours-mark { left:2px; top:1px; width:16px; height:20px; border-radius:0; background:transparent; color:#141414; }
+.parcours-step.start .parcours-mark svg { width:16px; height:18px; fill:#141414; }
+.parcours-step.end .parcours-mark { left:1px; top:2px; width:18px; height:18px; }
+.parcours-step.here .parcours-mark:not(:empty) svg { fill:var(--theme-btn); }
+.parcours-step.here:not(.start) .parcours-mark { background:var(--theme-btn); box-shadow:0 0 0 4px var(--sun); }
+.parcours-txt { display:flex; flex-direction:column; gap:4px; min-width:0; }
+.parcours-head { display:flex; flex-wrap:wrap; gap:6px; }
+.parcours-zone, .parcours-here { padding:2px 9px; border-radius:6px; font-size:.6875rem; font-weight:400; line-height:1.5; }
+.parcours-zone { background:var(--sun); color:#6B5300; }
+.parcours-here { background:#141414; color:#FFF; }
+.parcours-txt b { color:var(--theme-btn); font-size:1.0625rem; font-weight:500; line-height:1.3; }
+.parcours-txt p { margin:0; font-size:.9375rem; font-weight:300; line-height:1.45; color:var(--ink-2); }
+.parcours-links { display:flex; flex-wrap:wrap; gap:6px; margin-top:4px; }
+.parcours-link { display:inline-flex; padding:4px 10px; border-radius:999px; background:#FFF; font-size:.8125rem; font-weight:400; }
+.parcours-link.stage { background:var(--sun); color:#3D3000; }
+.parcours-note { margin:8px 0 0; font-size:.75rem; font-weight:300; color:var(--muted); }
+
+/* Concours et dates : fiche concours fusionnée avec le calendrier. */
+.job-page .catcard-wrap.preparation-card, .preparation-card { border-radius:28px; }
+.preparation-card .catcard { padding:16px 16px 14px; grid-template-columns:40px minmax(0,1fr); }
+.preparation-card .catcard .cat.lg { width:40px; height:40px; font-size:1rem; box-shadow:none; }
+.preparation-card .catcard .txt > b { font-size:1.25rem; line-height:1.25; }
+.preparation-card .preparation-fps { margin-top:6px; }
+.preparation-card .category-fit { margin-top:2px; }
+.category-fit.warn { background:var(--sun); color:#4D3B00; }
+.category-fit.warn svg { color:#8A6A00; }
+.preparation-card .cat-panel { padding:0 0 12px; gap:0; }
+.preparation-card .exam.exam-route { padding:0 0 18px; border-radius:0; background:transparent; }
+.preparation-card .exam-route + .exam-route { padding-top:6px; border-top:0; }
+.preparation-card .exam-route h4 { margin:0 0 14px; padding:12px 18px; background:var(--card); color:#FFF; font-size:1rem; font-weight:500; line-height:1.35; }
+.preparation-card .exam-route > :not(h4) { margin-left:18px; margin-right:18px; }
+.exam-org { margin:0 0 14px; display:flex; flex-direction:column; gap:2px; }
+.preparation-card .exam-org dt { font-size:.9375rem; font-weight:300; color:var(--ink); }
+.preparation-card .exam-org dd { margin:0; font-size:1rem; font-weight:600; color:var(--ink); }
+.exam-org dt::after { content:none; }
+.exam-cal, .exam-places { display:flex; flex-direction:column; gap:6px; margin-bottom:14px; }
+.exam-cal h5, .exam-places h5 { display:flex; align-items:center; gap:8px; margin:0; font-size:.9375rem; font-weight:600; }
+.exam-cal h5 svg, .exam-places h5 svg { width:18px; height:18px; color:var(--card); flex:none; }
+.exam-cal .exam-dates { display:grid; grid-template-columns:minmax(0,.8fr) minmax(0,1.5fr); gap:0; margin:0; font-size:.875rem; }
+.exam-cal .exam-dates :is(dt,dd) { padding:9px 0; border-top:1px solid rgba(20,20,20,.12); }
+.exam-cal .exam-dates dt { font-weight:600; padding-right:10px; }
+.exam-cal .exam-dates dd { margin:0; font-weight:300; }
+.exam-cal p, .exam-places p { margin:0; font-size:.875rem; font-weight:300; line-height:1.45; }
+.exam-places b { font-size:.9375rem; font-weight:600; margin-top:4px; }
+.exam-missing { margin:14px 18px; font-size:.875rem; font-weight:300; }
+.exam-source { margin-top:0; margin-bottom:4px; font-size:.75rem; font-weight:300; color:var(--muted); }
+.preparation-card .official-exam-links { gap:2px; margin-top:0; }
+.preparation-card .official-exam-links a { color:var(--muted); font-size:.8125rem; }
+.prep-count { margin-top:4px; }
+
+/* Évoluer */
+.job-page .rung { background:#FFF; border-radius:18px; padding:12px 14px 12px 18px; font-weight:400; }
+.job-page .ladder .via { color:var(--theme-btn); font-size:.8125rem; padding-left:4px; }
+
+/* Se préparer */
+.prep-page .back { display:block; max-width:100%; overflow:hidden; white-space:nowrap; text-overflow:ellipsis; color:var(--ink); font-size:1rem; }
+.prep-page .back svg { vertical-align:-3px; }
+.prep-page-cat { display:flex; margin-top:6px; }
+.prep-page-cat .cat.lg { width:46px; height:46px; font-size:1.125rem; box-shadow:none; }
+.prep-page #aides { margin-top:12px; }
+.prep-page .section-heading { align-items:center; gap:10px; color:var(--theme-btn); font-size:1.5rem; }
+.prep-page .section-heading > svg { width:24px; height:24px; color:var(--theme-btn); }
+.prep-page .btn.outline { background:#FFF; color:var(--ink); border:2px solid var(--theme-tint,var(--lilac)); font-weight:400; }
+.prep-page .btn.outline svg { display:none; }
+.prep-page .switch-row { margin:0 -24px; padding:0 24px; width:calc(100% + 48px); border:0; background:#FFF; }
+.prep-page .switch-row[aria-checked="true"] .switch { background:var(--blue-hover,#2500BA); background:#2500BA; }
+.prep-page :is(button.chip) { color:var(--ink); background:#FFF; border:2px solid var(--theme-tint,var(--lilac)); box-shadow:none; font-weight:400; }
+.prep-page :is(button.chip.on,.chip.blue.on) { color:#FFF; background:var(--theme-btn); border-color:var(--theme-btn); box-shadow:none; }
+.prep-page .prep { background:#E6E6E3; border:1px solid var(--theme-tint,var(--lilac)); border-radius:30px; padding:22px 22px; }
+.prep-page .prep.hi.talents-feature { background:#E6E6E3; color:var(--ink); }
+.prep-page .prep.hi.talents-feature :is(h2,p,.more) { color:var(--ink); }
+.prep-page .prep .more { color:var(--theme-btn); }
+
+/* Espace personnel */
+.personal-home .study-level { background:#F2F2EF; border:2px solid var(--sun); color:#55555C; font-weight:300; }
+.personal-home .study-level svg { color:#55555C; }
+.home-interest { background:transparent; border:2px solid #E8E1C6; color:#55555C; }
+.home-feature { grid-template-columns:auto minmax(0,1fr) 40px; gap:14px; padding:18px 16px; border-radius:26px; color:var(--ink); }
+.home-tile { display:grid; place-items:center; flex:none; width:64px; height:64px; border-radius:14px; background:var(--sun); color:#141414; }
+.home-tile.home-count { min-width:0; font-size:2.25rem; font-weight:700; letter-spacing:-.04em; }
+.home-tile svg { width:26px; height:26px; }
+.home-tile .parcours-icon { width:13px; height:44px; }
+.home-discover, .home-discover:hover { background:var(--lilac); color:var(--ink); }
+.home-access, .home-access:hover { background:#FFF; color:var(--ink); min-height:0; grid-template-columns:auto minmax(0,1fr) 40px; }
+.home-feature-copy { font-size:1rem; letter-spacing:-.01em; }
+.home-feature-copy b { font-size:1.1875rem; font-weight:700; line-height:1.2; }
+.home-feature-copy > span { font-weight:300; }
+.home-go { width:40px; height:40px; border:0; background:#FFF; color:var(--blue); box-shadow:0 1px 4px rgba(0,0,0,.08); }
+.home-shortcuts a { flex-direction:row; align-items:center; gap:10px; min-height:84px; padding:12px; overflow-wrap:normal; hyphens:auto; border:1px solid var(--lilac); border-radius:24px; background:#E6E6E3; }
+.home-shortcuts .home-tile { width:46px; height:46px; border-radius:12px; }
+.home-shortcuts .home-tile.home-count { font-size:1.875rem; }
+.home-shortcuts b { display:block; font-weight:600; font-size:.9375rem; line-height:1.2; }
+.home-shortcuts a > span:last-child { min-width:0; font-size:.875rem; line-height:1.25; font-weight:300; }
+@media (max-width:359px) { .home-tile { width:52px; height:52px; } .home-shortcuts .home-tile { width:44px; height:44px; } }
+html[data-contrast="true"] :is(.parcours-card,.home-tile,.prep-page .prep,.home-shortcuts a) { background:#FFF; border:1px solid #000; }
+html[data-contrast="true"] .preparation-card .exam-route h4 { background:#000; }
+html[data-contrast="true"] :is(.btn.theme,.btn.black) { background:#000; border-color:#000; color:#FFF; }
+.preparation-card .exam-route .exam-org { margin-top:0; margin-bottom:16px; }
+
+/* ==========================================================================
+   Retouches d’octobre 2026 : marges de 5 px, tailles des maquettes, cartes,
+   barre du haut, onboarding #2B04CC et couleurs exactes des catégories.
+   ========================================================================== */
+:root { --brand:#2B04CC; --card-bg:#EAEAE6; --card-line:#D8D2F2; }
+
+/* Marges latérales de 5 px partout ; les textes gardent un léger retrait. */
+.screen { padding-left:5px; padding-right:5px; }
+.footer { padding-left:5px; padding-right:5px; }
+.screen > :is(h1,.eyebrow,.lead,.body,.back,.small,.topbar,.title-row,.link-plain,p,.notice,.filter-summary,.study-level), .screen .section-heading, .screen .category-heading { padding-left:6px; padding-right:6px; }
+.scroller { margin-right:-5px; padding-right:5px; }
+.home-profile-meta { width:calc(100% + 10px); margin:0 -5px; padding:2px 11px; }
+.prep-page .switch-row { margin:0 -5px; width:calc(100% + 10px); padding:0 11px; }
+.context-bar { padding-left:5px; padding-right:5px; }
+
+/* Barre du haut au défilement : gris sans bordure, ou couleur de la catégorie et texte blanc. */
+.context-bar { background:var(--bg); border-bottom:0; backdrop-filter:none; }
+.context-bar .context-title, .context-bar .icon-btn { color:var(--ink); background:transparent; }
+body.themed .context-bar { background:var(--theme); }
+body.themed .context-bar :is(.context-title,.icon-btn) { color:#FFF; }
+body.themed .context-bar .cat { box-shadow:0 0 0 2px #FFF; }
+body.theme-Ap { --theme:var(--cat-ap); } body.theme-A { --theme:var(--cat-a); } body.theme-B { --theme:var(--cat-b); } body.theme-C { --theme:var(--cat-c); } body.theme-CDD { --theme:#141414; }
+
+/* Couleurs exactes des catégories pour les boutons, liens et pictogrammes des pages métier. */
+.app.theme-Ap { --theme-deep:var(--cat-ap); --theme-btn:var(--cat-ap); }
+.app.theme-A { --theme-deep:var(--cat-a); --theme-btn:var(--cat-a); }
+.app.theme-B { --theme-deep:var(--cat-b); --theme-btn:var(--cat-b); }
+.app.theme-C { --theme-deep:var(--cat-c); --theme-btn:var(--cat-c); }
+.app.theme-CDD { --theme-deep:#141414; --theme-btn:#141414; }
+.btn.fav { background:#FFF; border-color:#FFF; color:var(--ink); font-weight:400; }
+.btn.fav:hover { background:#FFF; border-color:var(--theme-btn); color:var(--ink); }
+.btn.fav svg { color:var(--theme-btn); }
+.btn.fav[aria-pressed="true"] svg { fill:currentColor; }
+.btn.theme, .btn.fav { min-height:55px; font-size:1.0625rem; }
+.btn.theme { font-weight:400; }
+
+/* Onboarding et pictogrammes du menu : #2B04CC. */
+.app.onboarding { --blue:var(--brand); --blue-hover:#3A16E0; --accent:var(--brand); --accent-hover:#3A16E0; }
+.app.onboarding .eyebrow, .app.onboarding .back { color:var(--brand); }
+.welcome-hero { background:var(--brand); min-height:auto; justify-content:center; padding-top:clamp(110px,20svh,170px); padding-bottom:56px; }
+.intro-welcome .welcome-checks svg { color:var(--brand); }
+.intro-footer .btn, .app.onboarding .btn:not(.outline) { background:var(--brand); border-color:var(--brand); }
+.tabbar a { color:#5A5A86; }
+.tabbar a svg { color:var(--brand); }
+.tabbar a.on { color:var(--brand); }
+.tabbar a.on::before { background:var(--brand); }
+
+/* Barres de recherche sans fond blanc. */
+.search { background:transparent; border-color:#B9B9B4; }
+
+/* Espace personnel, au plus près de la maquette. */
+.personal-home .eyebrow { font-size:.6875rem; font-weight:400; letter-spacing:0; }
+.personal-home h1 { font-size:1.75rem; font-weight:600; letter-spacing:-.02em; }
+.personal-home .study-level, .home-interest { background:#E6E6E2; border:0; color:#55555C; font-size:.9375rem; font-weight:300; padding:6px 14px; }
+.personal-home .lead { font-size:.9375rem; font-weight:300; color:var(--ink); }
+.home-features { gap:10px; }
+.home-feature { grid-template-columns:62px minmax(0,1fr) 38px; gap:12px; padding:22px 17px; border-radius:25px; }
+.home-tile { width:62px; height:62px; border-radius:12px; }
+.home-tile.home-count { font-size:2.25rem; font-weight:700; line-height:1; }
+.home-tile.home-count.digits-3 { font-size:1.625rem; letter-spacing:-.05em; }
+.home-tile.home-count.digits-4 { font-size:1.25rem; letter-spacing:-.05em; }
+.home-feature-copy { gap:2px; }
+.home-feature-copy b { font-size:1.125rem; font-weight:700; letter-spacing:-.01em; }
+.home-feature-copy > span { font-size:.9375rem; font-weight:300; line-height:1.35; }
+.home-go { width:38px; height:38px; }
+.home-access { align-items:stretch; }
+.home-access .home-tile { height:auto; min-height:62px; align-self:stretch; }
+.home-access .home-go { align-self:center; border:1px solid #EFEFEF; box-shadow:none; }
+.home-shortcuts { gap:11px; }
+.home-shortcuts a { min-height:82px; padding:14px; gap:12px; border:1px solid var(--card-line); background:var(--card-bg); border-radius:22px; }
+.home-shortcuts .home-tile { width:54px; height:54px; }
+.home-shortcuts .home-tile.home-count { font-size:2rem; }
+.home-shortcuts .home-tile.home-count.digits-3 { font-size:1.375rem; }
+.home-shortcuts .home-tile svg { width:28px; height:28px; }
+.home-shortcuts b { font-size:.9375rem; font-weight:600; }
+.home-shortcuts a > span:last-child { font-size:.9375rem; }
+
+/* Fiche métier, au plus près de la maquette. */
+.job-page h1 { font-size:2rem; font-weight:700; letter-spacing:-.025em; }
+.job-page > .body { font-size:.9375rem; font-weight:300; color:var(--ink); }
+.job-page .job-meta .tag { font-size:.8125rem; }
+.job-section .section-heading { font-size:1.375rem; font-weight:600; }
+.job-section .section-heading > svg { color:var(--theme-btn,var(--ink)); }
+
+/* Quelles études choisir : carte claire, points serrés entre les étapes. */
+.parcours-card { padding:22px 16px 18px 12px; border:1px solid var(--card-line); border-radius:24px; background:var(--card-bg); }
+.parcours-step { padding:0 0 20px 34px; }
+.parcours-step::before { left:8px; width:4px; top:22px; bottom:-2px; border:0; background:radial-gradient(circle,#141414 0 1.05px,transparent 1.35px) center top / 4px 5px repeat-y; }
+.parcours-mark { left:6.5px; top:7px; width:7px; height:7px; }
+.parcours-step.start .parcours-mark { left:2px; top:0; width:15px; height:18px; }
+.parcours-step.start .parcours-mark svg { width:15px; height:18px; }
+.parcours-step.end .parcours-mark { left:2px; top:2px; width:16px; height:16px; }
+.parcours-step.here:not(.start) .parcours-mark { box-shadow:none; background:#141414; }
+.parcours-head { align-items:center; gap:8px; }
+.parcours-zone { background:var(--sun); color:var(--theme-btn,var(--blue)); font-size:.6875rem; padding:2px 10px; border-radius:999px; }
+.parcours-head b { color:var(--theme-btn,var(--blue)); font-size:.9375rem; font-weight:500; }
+.parcours-txt p { font-size:.9375rem; font-weight:300; color:#333338; }
+
+/* Liste des métiers : cartes cliquables, sans flèche. */
+#jobs.list { border-top:0; display:flex; flex-direction:column; gap:8px; }
+#jobs .job-row { min-height:0; padding:14px 14px 14px 12px; border:1px solid var(--card-line) !important; border-radius:24px; background:var(--card-bg); }
+@media (hover:hover) and (pointer:fine) { :where(.app:not(.touch-input)) #jobs .job-row:hover { background:#F1F1EE; } }
+
+/* Se préparer : boutons sans fond blanc. */
+.prep-page .btn.outline, .prep-page button.chip:not(.on) { background:transparent; }
+
+/* Filtres : pastilles comme dans la liste (anneau clair, lettre blanche) ; Contractuels en toutes lettres. */
+.sheet-content .chip.category-choice { box-shadow:0 0 0 4px #FFF, 0 0 0 5px transparent; font-weight:700; color:#FFF; }
+.sheet-content .chip.category-choice.cat-Ap { box-shadow:0 0 0 4px var(--cat-ap-tint); }
+.sheet-content .chip.category-choice.cat-A { box-shadow:0 0 0 4px var(--cat-a-tint); }
+.sheet-content .chip.category-choice.cat-B { box-shadow:0 0 0 4px var(--cat-b-tint); }
+.sheet-content .chip.category-choice.cat-C { box-shadow:0 0 0 4px var(--cat-c-tint); }
+.sheet-content .chip.category-choice.on { box-shadow:0 0 0 4px var(--cat-fill), 0 0 0 6px #FFF, 0 0 0 8px var(--blue); }
+.sheet-content .chip.category-choice.cat-CDD[data-action="metCat"] { flex:0 0 auto; width:auto; aspect-ratio:auto; gap:8px; padding:0 14px 0 16px; border-radius:999px; color:var(--ink); background:#FFF; box-shadow:inset 0 0 0 1.5px #BDBDB8, 0 0 0 4px #ECECE9; font-weight:400; }
+.sheet-content .chip.category-choice.cat-CDD.on { box-shadow:inset 0 0 0 1.5px #BDBDB8, 0 0 0 4px #ECECE9, 0 0 0 6px #FFF, 0 0 0 8px var(--blue); }
+.sheet-content .row:has(.category-choice) { gap:14px; padding:6px 4px; }
+
+/* Bibliographie sur fond blanc. */
+body.page-white, body.page-white .app, body.page-white .context-bar { background:#FFF; }
+.book-card img { display:block; flex:none; }
+.prep-page .prep .section-heading { padding:0; font-size:1.125rem; color:var(--ink); }
+.prep-page .prep .section-heading > svg { width:20px; height:20px; color:var(--ink); }
+.home-feature-copy b { font-size:1.0625rem; }
+.home-shortcuts a { padding:12px; gap:10px; }
+.home-shortcuts .home-tile { width:48px; height:48px; }
+.home-shortcuts .home-tile.home-count { font-size:1.75rem; }
+
+/* Onboarding : fonctions publiques et catégories en blocs repliés, dépliés au toucher. */
+.intro-fold { border-radius:24px; background:#FFF; }
+.intro-fold summary { display:flex; align-items:center; gap:14px; min-height:64px; padding:12px 14px; list-style:none; cursor:pointer; }
+.intro-fold summary::-webkit-details-marker { display:none; }
+.intro-fold summary::marker { content:''; }
+.intro-fold summary > h2, .intro-fold-name { flex:1; min-width:0; margin:0; }
+.intro-fold .employer-title { margin:0; font-size:1.0625rem; font-weight:600; }
+.intro-fold .explain-t { font-size:1.0625rem; font-weight:600; }
+.intro-fold-name { display:flex; flex-direction:column; gap:2px; }
+.intro-fold-sub { font-size:.8125rem; font-weight:300; color:var(--ink-2); }
+.intro-fold .details-toggle { color:var(--brand); border-color:rgba(43,4,204,.25); background:rgba(255,255,255,.6); }
+.intro-fold[open] .details-toggle { transform:rotate(180deg); }
+.intro-fold summary:focus-visible { outline:2px solid var(--brand); outline-offset:2px; border-radius:24px; }
+.intro-fold-body { display:flex; flex-direction:column; gap:8px; padding:0 18px 18px 64px; }
+.intro-fold-body p { margin:0; font-size:.9375rem; font-weight:300; line-height:1.45; color:var(--ink-2); }
+.intro-fold-body p.ex { font-size:.875rem; }
+.intro-fold-body p.ex b { font-weight:600; color:var(--ink); }
+.intro-category-fold .cat.lg { width:40px; height:40px; font-size:1rem; }
+.intro-category-fold.tint-blue { background:var(--cat-ap-tint); }
+.intro-category-fold.tint-mint { background:var(--cat-a-tint); }
+.intro-category-fold.tint-cyan { background:var(--cat-b-tint); }
+.intro-category-fold.tint-yellow { background:var(--cat-c-tint); }
+.employer-list { gap:10px; margin-top:20px; }
+.intro-employer-fold .employer-icon { color:var(--brand); }
+@media (prefers-reduced-motion:no-preference) { .intro-fold[open] .intro-fold-body { animation:intro-open .2s ease-out; } }
+@keyframes intro-open { from { opacity:0; transform:translateY(-4px); } to { opacity:1; transform:none; } }
+html[data-contrast="true"] .intro-fold { background:#FFF; border:1px solid #000; }

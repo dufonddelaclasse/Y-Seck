@@ -25,41 +25,49 @@ vm.createContext(context);
 for (const file of ['js/data.js','js/catalog.js','js/ui.js']) vm.runInContext(fs.readFileSync(new URL(file,root),'utf8'),context);
 context.window.YSECK_UI.afterRender=()=>{};
 let source=fs.readFileSync(new URL('js/app.js',root),'utf8');
-source=source.replace('  UI.init();\n  render();\n  booted = true;', '  window.tests={screens,S,filteredJobs,jobFilters,jobCategories,isContractJob,prepHref,examsFor,calendarCategory,calendarRows,indicativeCategories,jobRow,tabbar,categoryBooks,bookList,studyResources};');
+source=source.replace('  UI.init();\n  render();\n  booted = true;', '  window.tests={screens,S,filteredJobs,jobFilters,jobCategories,isContractJob,prepHref,examsFor,calendarCategory,calendarRows,indicativeCategories,jobRow,tabbar,categoryBooks,bookList,studyResources,expandedPrepCategories};');
 vm.runInContext(source,context);
-const {screens,S,filteredJobs,jobFilters,jobCategories,isContractJob,prepHref,examsFor,calendarCategory,calendarRows,indicativeCategories,jobRow,tabbar,categoryBooks,bookList,studyResources}=context.window.tests;
+const {screens,S,filteredJobs,jobFilters,jobCategories,isContractJob,prepHref,examsFor,calendarCategory,calendarRows,indicativeCategories,jobRow,tabbar,categoryBooks,bookList,studyResources,expandedPrepCategories}=context.window.tests;
 const data=context.window.DATA;
 Object.assign(S,{profile:'etu',name:'Test',level:'Doctorat',domains:[],metDomains:[],traits:[],budget:'Plus de 1 000 €',prepBudget:'2',boursier:'Non'});
 const fixed=data.jobs.filter(j=>['A+','A','B','C'].includes(j.cat)&&!isContractJob(j));
 let counts={};
 for (const j of fixed) {
+  // Carte repliée par défaut quand plusieurs concours existent : elle n’affiche que les informations de base.
+  const folded=screens.metier(j.id);
+  const multiple=(folded.match(/class="prep-count"/g)||[]).length>0;
+  assert.equal(folded.includes('class="cat-panel"'),!multiple||(folded.match(/class="cat-panel"/g)||[]).length>0,'Pliage : '+j.id);
+  expandedPrepCategories[j.id]={[j.cat]:true};
+  // La fiche concours (versants, niveau, organisateur, dates) est sur la fiche métier ; Se préparer garde les aides et les prépas.
+  const card=screens.metier(j.id);
   const html=screens.preparer(j.id);
   assert(html.includes('<h1>Se préparer</h1>'),j.id);
   assert(html.includes('href="#/metier/'+j.id+'"'),j.id);
   assert(!html.includes('>Pour vos choix<'),j.id);
   assert(!html.includes('href="#/sans-concours'),j.id);
   const routes=j.routeIds.map(id=>data.accessRoutes[id]).filter(r=>r.cat===j.cat&&r.fp.split('').some(fp=>j.fp.includes(fp)));
-  for(const f of ['E','T','H'])assert.equal(html.includes('data-fp="'+f+'"'),j.fp.includes(f)&&(!routes.length||routes.some(r=>r.fp.includes(f))),'Versant non pertinent : '+j.id+' '+f);
-  assert(html.indexOf('preparation-fps')<html.indexOf('preparation-level'),'Le niveau vient après le versant : '+j.id);
+  assert(!html.includes('data-fp="'),'Pas de fiche concours dans Se préparer : '+j.id);
+  for(const f of ['E','T','H'])assert.equal(card.includes('data-fp="'+f+'"'),j.fp.includes(f)&&(!routes.length||routes.some(r=>r.fp.includes(f))),'Versant non pertinent : '+j.id+' '+f);
+  assert(card.indexOf('preparation-fps')<card.indexOf('preparation-level'),'Le niveau vient après le versant : '+j.id);
   assert(!screens.etudes(j.id).includes('<dl class="profile">'),'Les lignes Diplôme / Accès sont retirées de l’orientation : '+j.id);
   assert(html.includes('Recommandations bibliographiques'),'Bibliographie : '+j.id);
   assert(html.includes('href="#/annales/'+j.id+'"'),'Annales : '+j.id);
-  assert.equal(html.includes('href="#/calendrier/'+j.id+'"'),examsFor(j).length>0,'Dates : '+j.id);
-  assert(html.includes('href="#/etudes/'+j.id+'"'));
+  assert.equal(card.includes('href="#/calendrier/'+j.id+'"'),examsFor(j).length>0,'Dates : '+j.id);
+  assert(!html.includes('href="#/etudes/'+j.id+'"'),'Le parcours d’études figure sur la fiche métier, pas dans Se préparer : '+j.id);;
   assert(html.includes('href="#/handicap/'+j.id+'"'));
   assert(html.includes('role="group" aria-label="Budget"'));
   assert(html.includes('>Aides</h2>')&&html.includes('>Prépas</h2>')&&!html.includes('Prépas et aides'),'Aides et prépas séparées : '+j.id);
-  for(const match of html.matchAll(/<section class="exam exam-route"[^>]*>([\s\S]*?)<\/section>/g)){
+  for(const match of card.matchAll(/<section class="exam exam-route"[^>]*>([\s\S]*?)<\/section>/g)){
     const exam=match[1];
     assert.equal((exam.match(/<h4>/g)||[]).length,1,'Un concours par encart blanc : '+j.id);
-    const fields=['<h4>','Organisé par','Épreuves en métropole','Épreuves en outre-mer','official-exam-links'];
+    const fields=['<h4>','Organisé par','exam-cal','En métropole','En outre-mer','official-exam-links'];
     for(let i=1;i<fields.length;i++)assert(exam.indexOf(fields[i])>exam.indexOf(fields[i-1]),'Organisation de l’encart concours : '+j.id+' '+fields[i]);
   }
   assert(!html.includes('href="#/prepa/talents'),'Talents masqués pour les non-boursiers : '+j.id);
   for(const session of examsFor(j,true))assert.equal(calendarCategory(session,j),j.cat,'Date d’une autre catégorie dans '+j.id+' : '+session.name);
   for(const rid of j.routeIds){const r=data.accessRoutes[rid];if(r.cat===j.cat)for(const fp of r.fp)if(j.fp.includes(fp)){
     assert(r.examInfo[fp]?.name&&r.examInfo[fp]?.org&&r.examInfo[fp]?.metro&&r.examInfo[fp]?.om,'Organisation du concours : '+rid+' '+fp);
-    assert(html.includes(r.examInfo[fp].name.replace(/&/g,'&amp;')),'Nom du concours affiché : '+rid);
+    assert(card.includes(r.examInfo[fp].name.replace(/&/g,'&amp;')),'Nom du concours affiché : '+rid);
   }}
   counts[j.cat]=(counts[j.cat]||0)+1;
 }
@@ -67,15 +75,15 @@ assert(fixed.some(j=>examsFor(j).length>0),'Un cas avec dates doit être vérifi
 assert(fixed.some(j=>examsFor(j).length===0),'Un cas sans date doit être vérifié.');
 // Régression INSP / inspecteurs : une route partagée ne suffit jamais à changer la catégorie d’un avis.
 const administrator=data.jobs.find(j=>j.id==='admin-etat');
-assert(screens.preparer('admin-terr').includes('Fonction publique territoriale')&&!screens.preparer('admin-terr').includes('Fonction publique de l’État'));
-assert(screens.preparer('admin-etat').includes('Fonction publique de l’État'));
+assert(screens.metier('admin-terr').includes('Fonction publique territoriale')&&!screens.metier('admin-terr').includes('Fonction publique de l’État'));
+assert(screens.metier('admin-etat').includes('Fonction publique de l’État'));
 S.level='Bac+3';
-assert(screens.preparer('admin-terr').includes('Niveau d’étude compatible'));
-assert(screens.preparer('ingenieur-terr').includes('Niveau Bac+5 requis')&&!screens.preparer('ingenieur-terr').includes('Niveau d’étude compatible'),'Le niveau du concours prime sur le minimum de la catégorie.');
-assert(!screens.preparer('atsem').includes('Niveau d’étude compatible'),'Un niveau compatible ne prouve pas le diplôme spécifique requis.');
-assert(screens.preparer('fpsan014').includes('Diplôme requis')&&!screens.preparer('fpsan014').includes('Niveau d’étude compatible'),'La qualification du concours est conservée pour les métiers RMFP réglementés.');
+assert(screens.metier('admin-terr').includes('Niveau d’étude compatible'));
+assert(screens.metier('ingenieur-terr').includes('Niveau Bac+5 requis')&&!screens.metier('ingenieur-terr').includes('Niveau d’étude compatible'),'Le niveau du concours prime sur le minimum de la catégorie.');
+assert(!screens.metier('atsem').includes('Niveau d’étude compatible'),'Un niveau compatible ne prouve pas le diplôme spécifique requis.');
+assert(screens.metier('fpsan014').includes('Diplôme requis')&&!screens.metier('fpsan014').includes('Niveau d’étude compatible'),'La qualification du concours est conservée pour les métiers RMFP réglementés.');
 S.level=null;
-assert(screens.preparer('admin-terr').includes('Niveau Bac+3 requis'));
+assert(screens.metier('admin-terr').includes('Niveau Bac+3 requis'));
 S.level='Doctorat';
 const wrongSession={id:'regression-category',name:'Concours inspecteur B',cat:'B',fp:'E',voie:'Concours externe',date:'2099-01-01',routeIds:['admin-etat']};
 data.calendar.push(wrongSession);
@@ -89,10 +97,15 @@ const communicator=data.jobs.find(j=>j.id==='fpcom018');
 assert.deepEqual(Array.from(indicativeCategories(communicator)),['A','B']);
 assert(jobRow(communicator).includes('job-categories')&&!jobRow(communicator).includes('Var.'));
 assert.equal(communicator.cat,'V');assert.equal(prepHref(communicator),'#/preparer/'+communicator.id);
-const communicationPrep=screens.preparer(communicator.id);
-assert(communicationPrep.includes('<h1>Se préparer</h1>')&&communicationPrep.includes(communicator.name));
+assert(screens.preparer(communicator.id).includes('<h1>Se préparer</h1>')&&screens.preparer(communicator.id).includes(communicator.name));
+const communicationPrep=screens.metier(communicator.id);
 assert(communicationPrep.includes('data-action="openPrepCat" data-v="A"')&&communicationPrep.includes('data-action="openPrepCat" data-v="B"'));
 assert(!communicationPrep.includes('data-action="openPrepCat" data-v="A+"')&&!communicationPrep.includes('data-action="openPrepCat" data-v="C"'));
+const openState=(jobId,cat)=>screens.metier(jobId).includes('id="prep-'+jobId+'-'+(cat==='A+'?'cat-Ap':'cat-'+cat)+'"');
+const singleRoute=fixed.find(j=>j.fp.length===1&&j.routeIds.length===1),manyRoutes=fixed.find(j=>j.id==='adjoint-adm');
+delete expandedPrepCategories[singleRoute.id];delete expandedPrepCategories[manyRoutes.id];
+assert(openState(singleRoute.id,singleRoute.cat),'Un seul concours : la carte est dépliée.');
+assert(!openState(manyRoutes.id,manyRoutes.cat)&&screens.metier(manyRoutes.id).includes('3 concours possibles'),'Plusieurs concours : la carte est repliée.');
 const singleVariable=data.jobs.find(j=>j.cat==='V'&&jobCategories(j).length===1);
 assert(singleVariable&&!jobRow(singleVariable).includes('job-categories')&&!jobRow(singleVariable).includes('cat sm'),'Une catégorie VAR unique garde la taille normale.');
 const purchaseJob=data.jobs.find(j=>j.id==='fpach001');
@@ -214,3 +227,21 @@ assert(screens.annales('dev').includes('Entrer sans concours'));
 console.log('Contrôles réussis :',counts,';',contracts.length,'CDD ;',classified.length,'VAR classés ; dates2027, versants, liens officiels, préparation personnalisée, aides, filtres et navigation.');
 console.log('Bibliographie vérifiée : 29 références Vie-publique réservées à A, 6 doublons évités, 133 références A+ préservées.');
 console.log('Ressources vérifiées :',data.studyResources.length,'liens uniques, 12 combinaisons catégorie/versant, filtres et associations par concours.');
+
+// Parcours conseillé : point de départ selon le niveau, stages de 3e et de seconde, terminus sur le métier.
+{
+  const job=data.jobs.find(j=>j.id==='attache-terr');
+  const level=(l)=>{S.level=l;return screens.metier(job.id);};
+  const college=level('5e');
+  assert(college.includes('class="parcours-line"')&&college.includes('Stage d’observation de 3e')&&college.includes('Stage de seconde')&&college.includes('aria-current="step"'),'Collégien : collège, lycée et supérieur.');
+  const lycee=level('Seconde');
+  assert(!lycee.includes('>Collège<')&&lycee.includes('Stage de seconde')&&!lycee.includes('Stage d’observation de 3e'),'Lycéen : le collège disparaît.');
+  const etudiant=level('Bac+1 / +2');
+  assert(!etudiant.includes('>Lycée<')&&etudiant.includes('Votre niveau : Bac+1 / +2'),'Étudiant : études supérieures seulement.');
+  const adulte=level('Sans diplôme');
+  assert(adulte.includes('>Collège<')&&adulte.includes('>Lycée<'),'Adulte sans diplôme : parcours complet.');
+  assert(adulte.includes('parcours-step end')&&adulte.includes(job.name),'Le terminus est le métier.');
+  assert(!screens.preparer(job.id).includes('parcours-line'),'La frise n’apparaît pas dans Se préparer.');
+  S.level='Doctorat';
+  console.log('Parcours vérifiés : collège, lycée, supérieur, adultes et terminus.');
+}

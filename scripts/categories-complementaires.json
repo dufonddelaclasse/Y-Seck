@@ -1,0 +1,16 @@
+{
+  "note": "Proposition complémentaire, même logique que le classeur équipe du 2026-10-17 : à vérifier selon le corps ou cadre d’emplois.",
+  "categories": {
+    "fpasp022": "B", "fpctl006": "A+", "fpctl033": "A", "fpctl042": "B | C",
+    "fpcul020": "A+ | A", "fpcul021": "A", "fpdoc018": "A+", "fpdoc022": "A | B",
+    "fpenv003": "A", "fpenv004": "A | B", "fpenv007": "A", "fpenv041": "B | C",
+    "fpjus017": "A", "fplog014": "C", "fplog017": "B | C", "fplog024": "C",
+    "fplog027": "C", "fplog028": "B | C", "fplog076": "C", "fplog077": "B | C",
+    "fplog078": "C", "fplog079": "C", "fpmed017": "A | B", "fpmed032": "A",
+    "fprch038": "A", "fprch039": "A", "fprch040": "B", "fprch089": "A",
+    "fprch091": "A", "fprch101": "A", "fprch105": "A", "fprch109": "A",
+    "fprch110": "A", "fprch111": "A", "fpsan013": "A", "fpsan020": "A",
+    "fpsan043": "B", "fpsec003": "A | B", "fpsec033": "A | B", "fptra015": "A+ | A",
+    "fptra033": "A | B", "fpusa034": "A | B", "fpusa039": "A | B"
+  }
+}

@@ -1,6 +1,6 @@
 # Y-Seck — orientation dans le service public
 
-Application mobile en HTML, CSS et JavaScript : DM Sans, bleu #000091 pour la navigation, pastilles de catégories bleu vif, bleu, vert et jaune, et fonds en dégradé radial.
+Application mobile en HTML, CSS et JavaScript : police Geologica, indigo #2500BA pour la navigation, lilas #DAD1FF et jaune #FFE6A1 en accents, fond gris #DBDBD7. Catégories : A+ #714DFF / #D2C7FF, A #0004FF / #D1DBFF, B #28A1A1 / #E0FFF4, C #FF804A / #FFE8D9 ; contractuels en blanc cerclé de gris. La charte est regroupée dans le dernier bloc de `css/style.css`.
 
 ## Lancer la preview
 
@@ -20,6 +20,9 @@ Ouvrir http://localhost:8000. Un serveur est nécessaire à la recherche locale 
 - 23 centres d’intérêt, dont diplomatie, renseignement, mer, architecture et protection animale. Les thèmes transversaux s’appuient sur les domaines, familles et intitulés RMFP ; les domaines principaux et les correspondances statutaires sont conservés. `node scripts/check_interests.mjs` contrôle la couverture de chaque thème.
 - Fiches métiers, activités et compétences du répertoire, voies d’accès sourcées, dates de concours et favoris par profil.
 - Pages « Se préparer » adaptées au métier : catégories retenues, versants, dates disponibles, études, aides documentaires et prépas. Les métiers à catégorie variable ont aussi leur page personnelle ; les catégories encore indéterminées restent explicitement à préciser. Les emplois contractuels identifiés portent la pastille CDD et leur propre parcours sans concours. La navigation principale comporte Accueil, Métiers, Favoris et Profil.
+- Fiche métier : catégorie et centres d’intérêt, titre, description, favoris (bouton noir) et détails (bouton de la couleur du métier). Le bloc « Quelles études choisir » présente le parcours conseillé en frise pointillée (épingle de départ, étapes, point d’arrivée), par étape : collège avec le stage d’observation de 3e dès la 6e pour un·e collégien·ne, lycée avec le stage de seconde, après le bac, concours, puis le métier. Un·e lycéen·ne part du lycée, à partir du bac le parcours part du niveau atteint, un adulte sans diplôme voit tout le parcours ; pour un parent, l’enfant sélectionné sert de référence.
+- Le bloc « Concours et dates » de la fiche réunit, par catégorie, la fiche concours : versants, niveau requis, bandeau du concours, organisateur, calendrier de la prochaine session, lieux en métropole et en outre-mer, source et avis officiels. Une fiche avec un seul concours est dépliée ; avec plusieurs, seules les informations de base restent visibles.
+- « Se préparer » regroupe les aides (annales, bibliographie) et les prépas (boursier·e, budget, Prépas Talents). Fiche et pages liées prennent la couleur de la catégorie la plus élevée du métier.
 - Prépas Talents triées par distance à la commune renseignée, parmi les résultats du filtre choisi. Distances indicatives à vol d’oiseau entre centres de communes ; formations à distance en dernier.
 - Les mises à jour sont signalées au retour dans un ancien onglet. Le bouton « Actualiser » renouvelle le document et conserve la fiche consultée et les réponses enregistrées ; aucune actualisation automatique pendant le parcours ou la saisie.
 - Contraste renforcé, texte agrandi et police OpenDyslexic facultatifs. La conformité RGAA reste à évaluer par un audit complet.
@@ -45,6 +48,16 @@ L’onglet Ressources contient les sujets, rapports, meilleures copies, entraîn
 Les sources comprennent l’annuaire DGAFP et les ministères, l’INSP, l’ENM, la gendarmerie, les CDG Auvergne-Rhône-Alpes, le CNFPT/INET, le CNG, l’EHESP et l’AP-HP. L’index couvre les catégories A+, A, B, C et les trois versants ; il ne constitue pas une copie exhaustive des archives de tous les organisateurs. Les annuaires restent accessibles pour les autres sessions et spécialités. Une absence de sujet indexé ne signifie pas qu’aucun concours ou document n’existe ; certains recrutements sur titres ne comportent pas de sujet écrit. Les bibliographies sont indicatives et leur édition doit être rapprochée du programme en vigueur.
 
 `node scripts/check_preparation.mjs` contrôle les parcours métiers, la séparation CDD/VAR, les catégories et versants des ressources, les filtres et la séparation des bibliographies A/A+.
+
+### Reprendre les catégories à préciser
+
+Le classeur « Métiers à préciser » complété par l’équipe se reprend avec :
+
+```sh
+python3 scripts/import_categories.py /chemin/Y-Seck_metiers_categories.xlsx --extra scripts/categories-complementaires.json
+```
+
+Les catégories sont enregistrées dans `categories` avec `categorySource` (`équipe` ou `complément`) et le commentaire éventuel dans `categoryNote`. Les catégories observées dans les offres ne sont jamais remplacées. Seuls les fichiers `rmfp-*.json` sont réécrits, dans leur découpage actuel.
 
 ### Importer un classeur
 
