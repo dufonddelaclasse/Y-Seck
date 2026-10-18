@@ -1412,3 +1412,13 @@ abbr[title] { text-decoration:underline dotted; text-underline-offset:2px; curso
 .ref-orgs { display:flex; flex-direction:column; gap:2px; margin-top:6px; }
 .ref-orgs h3 { margin:0 0 4px; font-size:1rem; font-weight:600; }
 html[data-contrast="true"] :is(.ref-card,.ref-tip,.exam-sessions li) { background:#FFF; border:1px solid #000; }
+
+/* Pastilles de filtres cliquables : elles ouvrent les réglages. */
+.tag.tag-btn { font:inherit; font-size:.8125rem; cursor:pointer; background:#E6E6E2; border:0; color:var(--ink-2); }
+.tag.tag-btn:hover { background:var(--lilac); color:var(--blue); }
+.tag.tag-btn:focus-visible { outline:2px solid var(--blue); outline-offset:2px; }
+.context-summary .tag.tag-btn { padding:4px 8px; font-size:.6875rem; }
+
+/* Blocs sans bordure : la couleur de fond suffit à les détacher. */
+#jobs .job-row, .home-shortcuts a, .parcours-card, .ref-card, .preparation-card, .catcard-wrap, .prep, .prep-page .prep,
+.intro-fold, .intro-employer, .family-card, .talents-feature.talents-split, .home-feature, .callout, .rung, .exam, .study-level, .home-interest { border:0 !important; }

@@ -622,12 +622,14 @@
       (S.jobLimit < list.length ? '<button type="button" class="btn outline mt-s" data-action="moreJobs">Afficher 60 métiers de plus</button>' : '');
   }
 
+  /* Chaque pastille de filtre ouvre la fenêtre des réglages. */
   function filterSummary() {
     var doms = activeDomains();
     var label = S.metCat === 'Toutes' ? (userRank() >= 5 ? 'A+, A, B' + (S.showContracts ? ' et CDD' : '') : 'Toutes catégories') : (S.metCat==='CDD'?'CDD':'Catégorie '+S.metCat);
-    return '<span class="tag">' + (doms.length ? doms.length + ' domaine' + (doms.length > 1 ? 's' : '') : 'Tous les domaines') + '</span>' +
-      '<span class="tag' + (S.metCat === 'Toutes' ? '' : ' fill ' + catClass(S.metCat)) + '">' + esc(label) + '</span><span class="tag">' + esc(S.metFp === 'Tous' ? '3 versants' : D.fps[S.metFp]) + '</span>' +
-      (S.showContracts===false?'<span class="tag">Contractuels masqués</span>':'');
+    function pill(text, cls) { return '<button type="button" class="tag tag-btn' + (cls || '') + '" data-action="openFilters" aria-haspopup="dialog" aria-label="' + esc(text) + ' : modifier les filtres">' + esc(text) + '</button>'; }
+    return pill(doms.length ? doms.length + ' domaine' + (doms.length > 1 ? 's' : '') : 'Tous les domaines') +
+      pill(label, S.metCat === 'Toutes' ? '' : ' fill ' + catClass(S.metCat)) + pill(S.metFp === 'Tous' ? '3 versants' : D.fps[S.metFp]) +
+      (S.showContracts===false?pill('Contractuels masqués'):'');
   }
   function jobFilters() {
     var doms = activeDomains();
