@@ -1424,3 +1424,8 @@ html[data-contrast="true"] :is(.ref-card,.ref-tip,.exam-sessions li) { backgroun
 .intro-fold, .intro-employer, .family-card, .talents-feature.talents-split, .home-feature, .callout, .rung, .exam, .study-level, .home-interest { border:0 !important; }
 /* Pictogramme des réglages : deux curseurs au trait épais. */
 .icon-btn[data-action="openFilters"] svg, .icon-btn[data-action="resourceFilters"] svg { stroke-width:2; }
+
+/* Se préparer : contours des boutons dans la couleur pleine de la catégorie du concours. */
+.prep-page .btn.outline, .prep-page button.chip:not(.on) { border-color:var(--theme-btn,var(--blue)); }
+.prep-page .btn.outline:hover, .prep-page button.chip:not(.on):hover { background:var(--theme-tint,var(--lilac-soft)); border-color:var(--theme-btn,var(--blue)); }
+.recruitment-note .link-plain { color:var(--theme-btn,var(--blue)); }

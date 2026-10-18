@@ -68,6 +68,25 @@ Le script écrit uniquement des fichiers `data/catalogue/ref-*.json`, sans modif
 
 Incohérences rectifiées à l’import : annales du CNG pour DH, D3S et directeur·rice des soins, annales 2026 de l’inspection du travail et annales du ministère des Affaires étrangères, toutes citées dans d’autres onglets ; renvois internes « voir onglet … » retirés des textes publics ; progression du greffier rattachée aux directeur·rices des services de greffe.
 
+### Audit des correspondances métier / concours
+
+Les 2 755 correspondances affichées ont été relues une à une le 19 octobre 2026. Les décisions motivées sont dans `scripts/audit-concours-2026-10.json` et s’appliquent avec :
+
+```sh
+python3 scripts/audit_concours.py --check
+python3 scripts/audit_concours.py
+```
+
+Le script écrit `data/catalogue/audit-01.json` (à relancer après `import_referentiel.py`, qui le conserve) :
+
+- 554 rapprochements rejetés, qui l’emportent sur tout rapprochement proposé (exemples : juridictions financières ≠ ENM, douanes ≠ finances publiques, métiers militaires ≠ gendarmerie, paramédicaux ≠ concours infirmier) ;
+- 413 rapprochements corrigés, vers le bon corps ;
+- 6 corps ajoutés : ingénieurs de recherche, assistants ingénieurs, inspecteurs de santé publique vétérinaire, ingénieurs de l’agriculture et de l’environnement, techniciens supérieurs du ministère de l’Agriculture, magistrats des chambres régionales des comptes ;
+- catégories et versants rectifiés pour 71 fiches, et catégorie statutaire des 18 corps hospitaliers qui n’en avaient pas ;
+- pour les métiers sans concours de la fonction publique (militaires, médecins et pharmaciens, professions paramédicales sur diplôme, emplois sur contrat, enseignants-chercheurs, sécurité civile), la vraie modalité de recrutement, avec une source officielle.
+
+Les 154 cas jugés douteux restent affichés comme correspondances indicatives.
+
 ### Reprendre les catégories à préciser
 
 Le classeur « Métiers à préciser » complété par l’équipe se reprend avec :

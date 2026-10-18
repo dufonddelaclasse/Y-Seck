@@ -30,7 +30,7 @@ vm.runInContext(source,context);
 const {screens,S,filteredJobs,jobFilters,jobCategories,isContractJob,prepHref,examsFor,calendarCategory,calendarRows,indicativeCategories,jobRow,tabbar,categoryBooks,bookList,studyResources,expandedPrepCategories}=context.window.tests;
 const data=context.window.DATA;
 Object.assign(S,{profile:'etu',name:'Test',level:'Doctorat',domains:[],metDomains:[],traits:[],budget:'Plus de 1 000 €',prepBudget:'2',boursier:'Non'});
-const fixed=data.jobs.filter(j=>['A+','A','B','C'].includes(j.cat)&&!isContractJob(j));
+const fixed=data.jobs.filter(j=>['A+','A','B','C'].includes(j.cat)&&!isContractJob(j)&&!j.recruitment);
 let counts={};
 for (const j of fixed) {
   // Carte repliée par défaut quand plusieurs concours existent : elle n’affiche que les informations de base.
@@ -67,7 +67,7 @@ for (const j of fixed) {
   for(const session of examsFor(j,true))assert.equal(calendarCategory(session,j),j.cat,'Date d’une autre catégorie dans '+j.id+' : '+session.name);
   for(const rid of j.routeIds){const r=data.accessRoutes[rid];if(r.cat===j.cat)for(const fp of r.fp)if(j.fp.includes(fp)){
     assert(r.examInfo[fp]?.name&&r.examInfo[fp]?.org&&r.examInfo[fp]?.metro&&r.examInfo[fp]?.om,'Organisation du concours : '+rid+' '+fp);
-    assert(card.includes(r.examInfo[fp].name.replace(/&/g,'&amp;')),'Nom du concours affiché : '+rid);
+    assert(card.includes(r.examInfo[fp].name.replace(/&/g,'&amp;').replace(/'/g,'&#39;')),'Nom du concours affiché : '+rid);
   }}
   counts[j.cat]=(counts[j.cat]||0)+1;
 }
@@ -255,7 +255,9 @@ console.log('Ressources vérifiées :',data.studyResources.length,'liens uniques
   assert(!JSON.stringify(ref).match(/\d+ ?%/),'Aucun taux de réussite n’est repris.');
   const linked=data.jobs.filter(j=>j.rmfpCode&&!isContractJob(j)&&jobCategories(j).length).filter(j=>{
     const cats=jobCategories(j);return j.routeIds.map(id=>data.accessRoutes[id]).some(r=>r&&cats.includes(r.cat)&&r.fp.split('').some(f=>j.fp.includes(f)));});
-  assert(linked.length>=1050,'Presque toutes les fiches ont un concours de leur catégorie : '+linked.length);
+  const classified=data.jobs.filter(j=>j.rmfpCode&&!isContractJob(j)&&jobCategories(j).length);
+  const unexplained=classified.filter(j=>!linked.includes(j)&&!j.recruitment);
+  assert(unexplained.length<=5,'Chaque fiche a un concours de sa catégorie ou une explication du recrutement : '+unexplained.map(j=>j.id).join(', '));
   S.level='Bac+3';
   const fiche=screens.metier('attache');
   assert(fiche.includes('Voies d’accès')&&fiche.includes('Session 2027'),'La fiche concours reprend voies et sessions documentées.');
@@ -271,4 +273,18 @@ console.log('Ressources vérifiées :',data.studyResources.length,'liens uniques
   S.q='administratrice';assert(filteredJobs().some(j=>j.id==='admin-etat'),'La forme féminine retrouve aussi le métier.');
   S.q='';S.domains=[];S.metDomains=[];
   console.log('Référentiel vérifié : 61 concours, '+linked.length+' fiches rattachées, fiche concours, Se préparer, Évoluer et recherche.');
+}
+
+// Audit des correspondances (19 octobre 2026) : corrections appliquées et métiers sans concours expliqués.
+{
+  const shown=id=>data.jobs.find(j=>j.id===id).routeIds;
+  assert(!shown('fpctl006').includes('magistrat')&&shown('fpctl006').includes('magistrat-crc'),'Les juridictions financières ne passent pas par l’ENM.');
+  assert(!shown('fpjus017').includes('magistrat'),'Un juriste assistant n’est pas un magistrat.');
+  assert(data.jobs.find(j=>j.id==='fpjus015').categories.includes('A+'),'Le magistrat judiciaire est en A+.');
+  assert(!shown('fpfip011').includes('insp-fip')&&shown('fpfip011').includes('insp-douane'),'Les métiers de la douane relèvent des concours de la douane.');
+  assert(data.accessRoutes['corps-59d7c76139ef'].cat==='A','Les sages-femmes hospitalières sont en catégorie A.');
+  const soldier=screens.metier('fpdef019');
+  assert(soldier.includes('recruitment-note')&&soldier.includes('sengager.fr'),'Un métier militaire explique le recrutement par les armées.');
+  assert(!screens.metier('fpdef019').includes('data-fp="E"'),'Aucun concours civil n’est proposé à un métier militaire.');
+  console.log('Audit vérifié : corrections appliquées, métiers sans concours expliqués.');
 }

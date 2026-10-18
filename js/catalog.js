@@ -9,6 +9,16 @@
   P.links.forEach(function (l) { if (l.status === 'rejeté') rejectedLinks[l.jobId + '|' + l.routeId] = true; });
   P.links.forEach(function (l) { if (l.status !== 'rejeté' && !rejectedLinks[l.jobId + '|' + l.routeId]) { var list = linksByJob[l.jobId] || (linksByJob[l.jobId] = []); if (list.indexOf(l.routeId) === -1) list.push(l.routeId); } });
   function linkedRoutes(id) { return (linksByJob[id] || []).slice(); }
+  /* Audit : catégories et versants rectifiés des métiers, catégories statutaires des corps. */
+  var jobFix = {}; (P.jobCorrections || []).forEach(function (f) { jobFix[f.id] = f; });
+  (P.rmfp || []).concat(P.legacyJobs || []).forEach(function (j) {
+    var f = jobFix[j.id]; if (!f) return;
+    if (f.categories) { j.categories = f.categories.slice(); delete j.categoryCounts; j.cat = f.categories.length === 1 ? f.categories[0] : 'V'; j.categorySource = 'audit'; }
+    if (f.fp) j.fp = f.fp;
+    if (f.recruitment) j.recruitment = f.recruitment;
+  });
+  var routeFix = {}; (P.routeCorrections || []).forEach(function (f) { routeFix[f.id] = f; });
+  P.routes.forEach(function (r) { if (routeFix[r.id]) r.cat = routeFix[r.id].cat; });
   var byRoute = {};
   P.routes.forEach(function (r) { byRoute[r.id] = r; });
   (P.examDetails || []).forEach(function(e){var r=byRoute[e.routeId];if(r)(r.examInfo||(r.examInfo={}))[e.fp]=e;});
@@ -56,6 +66,16 @@
   D.calendar = P.calendar.filter(function(c){return !c.duplicateOf;});
   D.books = P.books || []; D.bookSource = P.bookSource;
   D.studyResources = P.studyResources || [];
+  /* Une collection d’annales citée par plusieurs concours du référentiel est rattachée à chacun. */
+  D.concours.forEach(function (c) {
+    if (!c.annales) return;
+    D.studyResources.forEach(function (r) {
+      if (r.url !== c.annales.url) return;
+      c.routeIds.forEach(function (id) { if (r.routeIds.indexOf(id) === -1) r.routeIds.push(id); });
+      if (r.categories.indexOf(c.cat) === -1) r.categories.push(c.cat);
+      if (r.fps.indexOf(c.fp) === -1) r.fps.push(c.fp);
+    });
+  });
   D.examPortals = { E: D.calendarUrl, H: 'https://www.concours-fph.ars.sante.fr/', T: 'https://www.concours-territorial.fr/' };
   D.teacherResources = D.teacherResources || 'https://www.devenirenseignant.gouv.fr/ressources';
 })();

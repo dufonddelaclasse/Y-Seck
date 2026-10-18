@@ -826,7 +826,7 @@
       (shared.length ? '<div class="callout"><span class="pin"></span><p>' + (isParent() ? 'Lui ressemble' : 'Vous ressemble') + ' : ' + esc(shared.map(traitLabel).join(', ').toLowerCase()) + '.</p></div>' : '') +
       parcoursSection(j) +
       (isContractJob(j) ? '' : '<section class="stack mt-m job-section" aria-labelledby="concours-title"><h2 id="concours-title" class="section-heading">' + I.calendar + '<span>Concours et dates</span></h2>' +
-        (cats.length?'<div class="stack">' + cats.slice().reverse().sort(function(a,b){return ['A+','A','B','C'].indexOf(a.id)-['A+','A','B','C'].indexOf(b.id);}).map(function(c){return preparationCategoryCard(c,j);}).join('') + '</div>':'<p class="body">La catégorie et le corps d’accès à ce métier restent à préciser selon le poste. Consultez les conditions de l’offre de recrutement.</p>') +
+        (recruitmentNote(j) || (cats.length?'<div class="stack">' + cats.slice().reverse().sort(function(a,b){return ['A+','A','B','C'].indexOf(a.id)-['A+','A','B','C'].indexOf(b.id);}).map(function(c){return preparationCategoryCard(c,j);}).join('') + '</div>':'<p class="body">La catégorie et le corps d’accès à ce métier restent à préciser selon le poste. Consultez les conditions de l’offre de recrutement.</p>')) +
         (dates.length?'<a class="btn outline" href="#/calendrier/'+j.id+'">Toutes les dates des concours ('+dates.length+')</a>':'') + '</section>') +
       '<section class="stack mt-m job-section"><h2 class="section-heading">' + I.growth + '<span>Évoluer</span></h2><div class="ladder">' + ladder.map(function (r) {
         if (r.length === 1) return '<div class="via">↓ ' + esc(r[0]) + '</div>';
@@ -950,9 +950,14 @@
     return '<span class="category-fit preparation-level'+(compatible?'':' warn')+'">'+(compatible?I.check:I.info)+'<span>'+esc(label)+'</span></span>';
   }
   /* Se préparer : chaque concours du métier, avec épreuves, annales, préparations et études conseillées. */
+  /* Métiers sans concours de la fonction publique : la vraie modalité de recrutement, sourcée. */
+  function recruitmentNote(j) {
+    if(!j.recruitment||jobRoutes(j).length)return '';
+    return '<div class="ref-tip recruitment-note"><b>Comment on est recruté</b><p>'+sig(j.recruitment.text)+'</p>'+ext(j.recruitment.url,j.recruitment.label,'link-plain')+'</div>';
+  }
   function concoursPrep(job) {
     var refs=jobRefs(job);
-    if(!refs.length)return '';
+    if(!refs.length)return recruitmentNote(job)?'<section class="stack mt-m" id="concours-ref"><h2 class="section-heading">'+I.calendar+'<span>Le recrutement</span></h2>'+recruitmentNote(job)+'</section>':'';
     var docs=studyResources(job,false,false).filter(function(r){return r.scope==='document'&&r.kind!=='annales';}).length;
     return '<section class="stack mt-m" id="concours-ref"><h2 class="section-heading">'+I.calendar+'<span>Le concours</span></h2>'+refs.slice(0,6).map(function(c,i){
       var ann=c.annales;
