@@ -15,11 +15,17 @@
   D.talents = P.talents.map(function (t) { return Object.assign({}, t, { coords: t.coords || P.talentsGeo[t.city] || null }); });
   D.jobs.forEach(function (j) {
     var r = byRoute[j.id];
-    j.routeIds = P.links.filter(function (l) { return l.jobId === j.id && l.status !== 'rejeté'; }).map(function (l) { return l.routeId; });
+    var associations = P.links.filter(function (l) { return l.jobId === j.id && l.status !== 'rejeté'; });
+    j.routeIds = associations.map(function (l) { return l.routeId; });
+    j.routeStatuses = {};
+    associations.forEach(function (l) { j.routeStatuses[l.routeId] = l.status; });
     j.source = j.source || (r ? r.source : D.jobsUrl);
   });
   P.rmfp.forEach(function (j) {
-    j.routeIds = P.links.filter(function (l) { return l.jobId === j.id && l.status !== 'rejeté'; }).map(function (l) { return l.routeId; });
+    var associations = P.links.filter(function (l) { return l.jobId === j.id && l.status !== 'rejeté'; });
+    j.routeIds = associations.map(function (l) { return l.routeId; });
+    j.routeStatuses = {};
+    associations.forEach(function (l) { j.routeStatuses[l.routeId] = l.status; });
     j.steps = j.steps && j.steps.length ? j.steps : ['Repérer les corps ou cadres d’emplois et les diplômes correspondant au poste', '*Consulter les concours et les recrutements de l’employeur', 'Vérifier les conditions et candidater auprès du service recruteur'];
     if (j.traits && j.traits.length) return;
     j.traits = [];
