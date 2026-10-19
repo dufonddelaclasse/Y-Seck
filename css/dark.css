@@ -578,6 +578,7 @@ html:where(.dark).dark .btn[disabled], html:where(.dark).dark .app.onboarding .b
 :where(html.dark) .tag.tag-btn, :where(html.dark) .job-page .job-meta .tag, :where(html.dark) .personal-home .study-level, :where(html.dark) .home-interest { background:#3B3B3B; }
 :where(html.dark) .top-notice { box-shadow:none; }
 :where(html.dark) #filters-open { border:0; }
+:where(html.dark) .personal-home .study-level, :where(html.dark) .home-interest { color:var(--ink-2); }
 
 /* Retouches */
 html.dark { --brand:#8F7BFF; --blue:#A493FF; --accent:#7C66FF; --accent-hover:#9785FF; --theme-btn:var(--brand); --red:#FF6B6B; --surface:#1E1E22; }

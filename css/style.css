@@ -1576,3 +1576,9 @@ html.dark .btn[disabled], html.dark .app.onboarding .btn[disabled] { background:
 /* Pas de gras dans l’app : titres et mises en avant en Geologica Medium. */
 h1, h2, h3, h4, h5, h6, b, strong, th, legend, summary { font-weight:500; }
 
+/* Accueil : plus d’air sous le prénom, pastilles à la taille de celles des métiers. */
+.personal-home > h1 { margin-bottom:8px; }
+.home-profile-meta { gap:5px; }
+.personal-home .study-level, .home-interest { font-size:.8125rem; line-height:normal; padding:5px 9px; font-weight:400; color:var(--ink-2); }
+.personal-home .study-level svg { width:14px; height:14px; }
+
