@@ -896,6 +896,7 @@
         title=mine?mine.label:pro?'En voie professionnelle':'En voie générale ou technologique';text.push(bac?bac.detail:'');if(!pro&&!mine)text.push('Spécialités choisies en première.');}
       else{var first=st[0];title=first.label;text.push(first.detail&&!/[.!?]$/.test(first.detail)?first.detail+'.':first.detail);st.slice(1).forEach(function(x){text.push((g.zone==='Concours'||g.zone==='Recrutement'?'':'Puis ')+x.label+(x.detail?' : '+x.detail:'')+'.');});}
       var step={zone:g.zone==='Études supérieures'?'Après le bac':g.zone,title:title,text:text.filter(Boolean).join(' '),links:links,here:here,terminus:!!g.terminus};
+      if(ref&&g.zone==='Concours')step.also=jobRefs(j).filter(function(c){return c!==ref&&c.cat===ref.cat;});
       return ref?refineStep(step,g,ref):step;
     });
   }
@@ -929,7 +930,8 @@
         var mark=i===0?'start':s.terminus?'end':'mid';
         return '<li class="parcours-step '+mark+(s.here?' here':'')+'"'+(s.here?' aria-current="step"':'')+'><span class="parcours-mark" aria-hidden="true">'+(mark==='start'?'<svg viewBox="0 0 12 13"><path fill-rule="evenodd" d="M6 0a5 5 0 0 1 5 5c0 3.2-3.4 6.5-4.6 7.6a.6.6 0 0 1-.8 0C4.4 11.5 1 8.2 1 5a5 5 0 0 1 5-5zm0 3a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/></svg>':'')+'</span><div class="parcours-txt">' +
           (s.here?'<span class="parcours-here">'+(isParent()?'Ici aujourd’hui':'Vous êtes ici')+'</span>':'')+'<span class="parcours-head"><span class="parcours-zone">'+esc(s.zone)+'</span><b>' + sig(s.title) + '</b></span>' + (s.text ? '<p>' + sig(s.text) + '</p>' : '') +
-          (s.links.length ? '<span class="parcours-links">' + s.links.map(function (l) { return '<span class="parcours-link ' + l.kind + '">' + esc(l.label) + '</span>'; }).join('') + '</span>' : '') + '</div></li>';
+          (s.links.length ? '<span class="parcours-links">' + s.links.map(function (l) { return '<span class="parcours-link ' + l.kind + '">' + esc(l.label) + '</span>'; }).join('') + '</span>' : '') +
+          (s.also && s.also.length ? '<div class="parcours-also"><span>Aussi possible :</span>' + s.also.map(function (c) { return '<a href="#/concours-fiche/' + concoursKey(c) + '">' + sig(c.name) + '</a>'; }).join('') + '</div>' : '') + '</div></li>';
       }).join('') + '</ol><p class="parcours-note">Parcours conseillé ' + (sharedView ? 'du collège au métier' : isParent() ? 'pour ' + esc(childName()) : 'depuis votre niveau') + ', à titre indicatif : les conditions exactes figurent dans l’avis du concours.</p></div></section>';
   }
   screens.metier = function (id) {
@@ -1056,10 +1058,12 @@
   /* ---------- Référentiel des concours ---------- */
   function routeRef(r, f) { var refs=(r&&r.refs)||[]; return refs.filter(function(c){return !f||c.fp===f;})[0]||(f?null:refs[0])||null; }
   /* Concours principal d’un métier : celui de la catégorie la plus élevée, dans un versant du métier. */
+  /* Concours d’un métier : par catégorie, puis le versant filtré s’il est seul, sinon État, territoriale, hospitalière. */
   function jobRefs(j) {
-    var order=['A+','A','B','C'],out=[];
-    jobRoutes(j).slice().sort(function(a,b){return order.indexOf(a.cat)-order.indexOf(b.cat);}).forEach(function(r){j.fp.split('').forEach(function(f){var c=routeRef(r,f);if(c&&out.indexOf(c)===-1)out.push(c);});});
-    return out;
+    var order=['A+','A','B','C'],fps=selFps(),pref=fps.length===1?fps[0]:null,out=[];
+    jobRoutes(j).forEach(function(r){j.fp.split('').forEach(function(f){var c=routeRef(r,f);if(c&&out.indexOf(c)===-1)out.push(c);});});
+    function versant(c){return c.fp===pref?-1:['E','T','H'].indexOf(c.fp);}
+    return out.sort(function(a,b){return order.indexOf(a.cat)-order.indexOf(b.cat)||versant(a)-versant(b);});
   }
   function jobRef(j) { var cat=themeCategory(j); var refs=jobRefs(j); return refs.filter(function(c){return c.cat===cat;})[0]||refs[0]||null; }
   var SIGLE_RE=null;

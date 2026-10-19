@@ -73,6 +73,17 @@ const personal=(extra={})=>({profile:'etu',name:'Camille',level:'Bac',domains:['
   assert(home.includes('home-concours')&&home.includes('Vos concours'),'L’accueil propose les concours sélectionnés.');
 }
 
+// Métier présent dans les trois versants : concours de l’État d’abord, ou du versant filtré, et les autres en « Aussi possible ».
+{
+  const t=start(personal());
+  t.location.hash='#/metier/fpach005';
+  const page=t.screens.metier('fpach005');
+  assert(page.includes('Aussi possible')&&page.includes('Administrateur - Administratrice de l’État'),'Sans préférence, la fiche suit le concours de l’État et propose les autres versants.');
+  t.S.metFps=['H'];
+  assert(t.screens.metier('fpach005').includes('Directeur - Directrice d’hôpital'),'Un seul versant filtré : la fiche suit son concours.');
+  t.S.metFps=null;
+}
+
 // Bandeau d’aide des filtres : une seule fois.
 {
   const t=start(personal({filterHintSeen:false}));
