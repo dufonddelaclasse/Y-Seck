@@ -884,9 +884,9 @@
     var dates = isContractJob(j) ? [] : examsFor(j);
     var shared = sharedTraits(j);
     var fav=S.favorites.indexOf(j.id) > -1;
-    return '<main class="screen top-tight job-page">' + back('#/metiers', 'Métiers') + jobIntro(j) +
-      (shared.length ? '<div class="job-match"><span class="job-match-dot" aria-hidden="true"></span><p><span>' + (isParent() ? 'Lui ressemble' : 'Vous ressemble') + ' :</span> ' + esc(shared.map(traitLabel).join(', ').toLowerCase()) + '</p></div>' : '') +
-      '<div class="job-actions' + (shared.length ? '' : ' alone') + '">' +
+    return '<main class="screen top-tight job-page">' + back('#/metiers', 'Métiers') +
+      jobIntro(j, shared.length ? '<p class="job-match"><span class="job-match-dot" aria-hidden="true"></span><span><span class="job-match-label">' + (isParent() ? 'Lui ressemble' : 'Vous ressemble') + ' :</span> ' + esc(shared.map(traitLabel).join(', ').toLowerCase()) + '</span></p>' : '') +
+      '<div class="job-actions">' +
         '<button type="button" class="job-action" data-action="jobDetails"' + attr('v',j.id) + ' aria-label="En savoir plus">' + I.info + '<span aria-hidden="true">En savoir +</span></button>' +
         '<button type="button" class="job-action" data-action="favorite"' + attr('v', j.id) + ' aria-pressed="' + fav + '" aria-label="' + (fav ? 'Retirer des favoris' : 'Ajouter aux favoris') + '">' + I.bookmark + '<span aria-hidden="true">Favori</span></button>' +
         '<button type="button" class="job-action" data-action="share"' + attr('v', j.id) + '>' + I.send + '<span>Partager</span></button>' +
@@ -896,10 +896,10 @@
       ext('https://www.fonction-publique.gouv.fr/toutes-les-publications/repertoire-commun-des-metiers-de-la-fonction-publique', 'Consulter la source métier sur fonction-publique.gouv.fr', 'link-plain') + '</main>' + tabbar('metiers');
   };
   /* Blocs communs à la fiche complète et à la fiche partagée. */
-  function jobIntro(j) {
+  function jobIntro(j, match) {
     return '<div class="row job-meta" role="group" aria-label="Catégorie et centres d’intérêt" tabindex="0"><span class="job-hero-cat">' + jobBadges(j) + '</span>' + (j.cat==='V'?'<span class="tag">Selon le poste</span>':'') +
       (j.interests || [j.domain]).map(function (d) { return '<span class="tag">' + esc(domainLabel(d)) + '</span>'; }).join('') + '</div>' +
-      '<h1>' + esc(j.name) + '</h1>' +
+      '<h1>' + esc(j.name) + '</h1>' + (match || '') +
       '<p class="body">' + esc(j.desc.length>300?j.desc.slice(0,297).replace(/\s+\S*$/,'')+'…':j.desc) + '</p>';
   }
   function jobConcours(j, dates) {

@@ -1676,3 +1676,10 @@ html[data-contrast="true"] .personal-home .home-discover { animation:none; backg
 /* Lien d’accessibilité : remonté, à égale distance des derniers blocs et du menu. */
 /* Les marges automatiques partagent l’espace libre de part et d’autre ; sans espace libre, le lien suit les blocs de près. */
 .a11y-link, .app.themed .a11y-link { margin:auto; position:relative; top:10px; }
+
+/* « Vous ressemble » : pastille sous le titre du métier, dans la teinte de la catégorie. */
+.job-page .job-match { display:inline-flex; align-self:flex-start; align-items:center; gap:8px; max-width:100%; margin:0; padding:6px 12px; border-radius:999px; background:var(--theme-tint,var(--lilac)); color:var(--ink); font-size:.8125rem; line-height:1.3; font-weight:300; text-align:left; }
+.job-page .job-match .job-match-label { font-weight:400; }
+.job-match-dot { width:6px; height:6px; }
+.job-page .job-actions { margin-top:6px; }
+html[data-contrast="true"] .job-page .job-match { background:#FFF; border:1px solid #000; }

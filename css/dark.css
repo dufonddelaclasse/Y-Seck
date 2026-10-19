@@ -612,6 +612,7 @@ html:where(.dark).dark .sheet-content button.chip.category-choice[data-action="m
 @media (prefers-reduced-motion:reduce) {
   :where(html.dark) .personal-home .home-discover, html:where(.dark).dark body .personal-home .home-discover { background:var(--brand); }
 }
+:where(html.dark) .job-page .job-match { background:var(--theme-tint,var(--lilac)); color:var(--ink); }
 
 /* Retouches */
 html.dark { --brand:#8F7BFF; --blue:#A493FF; --accent:#7C66FF; --accent-hover:#9785FF; --theme-btn:var(--brand); --red:#FF6B6B; --surface:#1E1E22; }
