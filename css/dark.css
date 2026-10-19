@@ -623,6 +623,13 @@ html:where(.dark).dark #jobs :is(.job-row,.concours-row) { background:var(--surf
 :where(html.dark) .prep.hi.talents-feature, :where(html.dark) .prep-page .prep.hi.talents-feature { background:#161616; color:var(--ink); border:1.5px solid #345D23 !important; }
 :where(html.dark) .prep.hi.talents-feature :is(h2,h3,p,.more) { color:var(--ink); }
 html:where(.dark).dark .prep.hi.talents-feature { background:var(--surface); }
+:where(html.dark) .talents-feature.talents-split { background:#161616 !important; border:1.5px solid #345D23 !important; color:var(--ink); }
+:where(html.dark) .talents-split .talents-intro { background:transparent !important; color:var(--ink); }
+:where(html.dark) .talents-split .talents-intro :is(h1,h2,h3,p,b,span,li) { color:var(--ink) !important; }
+:where(html.dark) .talents-split .talents-grant { background:transparent !important; color:var(--ink); border-top:1.5px solid #345D23; }
+:where(html.dark) .talents-split .talents-grant :is(p,b) { color:var(--ink) !important; }
+:where(html.dark) .bourse { border:1.5px solid #345D23 !important; }
+html:where(.dark).dark :is(.talents-feature.talents-split,.prep.hi.talents-feature) { background:var(--surface) !important; }
 
 /* Retouches */
 html.dark { --brand:#8F7BFF; --blue:#A493FF; --accent:#7C66FF; --accent-hover:#9785FF; --theme-btn:var(--brand); --red:#FF6B6B; --surface:#1E1E22; }

@@ -1701,3 +1701,14 @@ html.dark #jobs :is(.job-row,.concours-row) { background:var(--surface); }
 .prep.hi.talents-feature :is(h2,h3,p,.more) { color:var(--ink); }
 html.dark .prep.hi.talents-feature { background:var(--surface); }
 html[data-contrast="true"] .prep.hi.talents-feature { background:#FFF; border:1px solid #000 !important; }
+
+/* Prépa Talents, partout où le bloc s’affiche : gris clair et contour #C8FFB2, comme la case de la liste. */
+.talents-feature.talents-split { background:#F2F2F2 !important; border:1.5px solid #C8FFB2 !important; color:var(--ink); }
+.talents-split .talents-intro { background:transparent !important; color:var(--ink); padding-bottom:20px; }
+.talents-split .talents-intro :is(h1,h2,h3,p,b,span,li) { color:var(--ink) !important; }
+.talents-split .talents-grant { background:transparent !important; color:var(--ink); border-top:1.5px solid #C8FFB2; padding-top:22px; }
+.talents-split .talents-grant :is(p,b) { color:var(--ink) !important; }
+/* Case du montant de la bourse : même contour. */
+.bourse { border:1.5px solid #C8FFB2 !important; }
+html.dark :is(.talents-feature.talents-split,.prep.hi.talents-feature) { background:var(--surface) !important; }
+html[data-contrast="true"] :is(.talents-feature.talents-split,.bourse) { background:#FFF !important; border:1px solid #000 !important; }
