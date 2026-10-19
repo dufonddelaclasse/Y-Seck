@@ -1665,3 +1665,9 @@ html.dark .sheet-content button.chip.category-choice[data-action="metCat"]:not(.
 .tabbar a.on, .tabbar a.on svg { color:var(--brand); }
 html[data-contrast="true"] .tabbar a, html[data-contrast="true"] .tabbar a svg { color:#555; }
 html[data-contrast="true"] .tabbar a.on, html[data-contrast="true"] .tabbar a.on svg { color:#000; }
+
+/* Espace personnel : « Vos métiers à découvrir » parcouru en continu par un dégradé doux, de gauche à droite. */
+@keyframes discover-flow { from { background-position:0 0; } to { background-position:-200% 0; } }
+.personal-home .home-discover, .personal-home .home-discover:hover, html.dark body .personal-home .home-discover { background:linear-gradient(90deg,var(--brand) 0%,#C0B8FF 50%,var(--brand) 100%) 0 0 / 200% 100% repeat-x; animation:discover-flow 7s linear infinite; }
+@media (prefers-reduced-motion:reduce) { .personal-home .home-discover, html.dark body .personal-home .home-discover { animation:none; background:var(--brand); } }
+html[data-contrast="true"] .personal-home .home-discover { animation:none; background:#000; }

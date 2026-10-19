@@ -608,6 +608,10 @@ html:where(.dark).dark body .update-notice .update-notice-action { background:va
 html:where(.dark).dark .sheet-content button.chip.category-choice[data-action="metCat"]:not(.on) { background:var(--surface); }
 :where(html.dark) .tabbar a, :where(html.dark) .tabbar a svg { color:#A3A3A9; }
 :where(html.dark) .tabbar a.on, :where(html.dark) .tabbar a.on svg { color:var(--brand); }
+:where(html.dark) .personal-home .home-discover, :where(html.dark) .personal-home .home-discover:hover, html:where(.dark).dark body .personal-home .home-discover { background:linear-gradient(90deg,var(--brand) 0%,#29235C 50%,var(--brand) 100%) 0 0 / 200% 100% repeat-x; }
+@media (prefers-reduced-motion:reduce) {
+  :where(html.dark) .personal-home .home-discover, html:where(.dark).dark body .personal-home .home-discover { background:var(--brand); }
+}
 
 /* Retouches */
 html.dark { --brand:#8F7BFF; --blue:#A493FF; --accent:#7C66FF; --accent-hover:#9785FF; --theme-btn:var(--brand); --red:#FF6B6B; --surface:#1E1E22; }
