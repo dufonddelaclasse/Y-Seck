@@ -1755,12 +1755,12 @@ html[data-contrast="true"] :is(.parcours-card, .concours-page .job-section .ref-
 
 /* ==========================================================================
    Essai « respiration » sur les fiches métier (inspiré des pages produit Apple) :
-   marges de 24 px, grands titres serrés, sections très espacées, cartes à 24 px
+   marges latérales de 15 px, grands titres serrés, sections très espacées, cartes à 24 px
    de marge intérieure. Bloc autonome : le retirer suffit à revenir à l’état précédent.
    ========================================================================== */
-.screen.job-page:not(.concours-page):not(.shared-job), .screen.job-page.shared-job { padding-left:24px; padding-right:24px; padding-bottom:56px; }
-.job-page:not(.concours-page) .job-hero { margin:0 -24px; padding:8px 24px 28px; gap:14px; }
-.job-page:not(.concours-page) .job-actions { margin-left:-24px; margin-right:-24px; padding:0 18px; }
+.screen.job-page:not(.concours-page):not(.shared-job), .screen.job-page.shared-job { padding-bottom:56px; }
+.job-page:not(.concours-page) .job-hero { margin:0 -15px; padding:8px 15px 28px; gap:14px; }
+.job-page:not(.concours-page) .job-actions { margin-left:-15px; margin-right:-15px; padding:0 12px; }
 .job-page:not(.concours-page) h1 { font-size:1.875rem; line-height:1.1; letter-spacing:-.02em; }
 .job-page:not(.concours-page) .job-hero .body { font-size:1.0625rem; line-height:1.47; color:var(--ink-2); }
 .job-page:not(.concours-page) .job-meta .tag { font-size:.875rem; padding:6px 14px; }
