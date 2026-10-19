@@ -670,6 +670,12 @@ html.dark :is(.exam-cal,.exam-places) h5 svg { color:currentColor; }
 html.dark .tabbar a.on::before { background:var(--sun); }
 html.dark .job-row .fits .fit, html.dark .job-row .fit { background:#2E2E33 !important; border:0 !important; box-shadow:none !important; color:#E2E2E6 !important; }
 html.dark .job-row .fit * { color:#E2E2E6 !important; }
+html.dark :is(.catcard-wrap.tint-blue,.preparation-card.prep-cat-Ap) { --cc:var(--cat-ap); }
+html.dark :is(.catcard-wrap.tint-mint,.preparation-card.prep-cat-A) { --cc:var(--cat-a); }
+html.dark :is(.catcard-wrap.tint-cyan,.preparation-card.prep-cat-B) { --cc:var(--cat-b); }
+html.dark :is(.catcard-wrap.tint-yellow,.preparation-card.prep-cat-C) { --cc:var(--cat-c); }
+html.dark .catcard-wrap { background:transparent !important; border:1.5px solid var(--cc,#5A5A60) !important; box-shadow:none !important; }
+html.dark .catcard-wrap :is(.catcard,.catcard-panel,.explain) { background:transparent !important; }
 html.dark .job-row .fit.like { background:transparent !important; box-shadow:inset 0 0 0 1px #5A5A60 !important; }
 html.dark :is(.personal-home .study-level,.home-interest,.tag.tag-btn,.job-page .job-meta .tag) { background:#45454A !important; border:0 !important; color:#E2E2E6 !important; }
 html.dark :is(.personal-home .study-level,.home-interest) svg { color:#D4D4D8 !important; }
