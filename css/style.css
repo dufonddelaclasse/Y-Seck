@@ -1741,3 +1741,6 @@ html.dark .job-page .job-hero + .job-actions { border-top-color:#3A3A3A; }
 .parcours-card, .concours-page .job-section .ref-panel { background:#F1F1F0 !important; border:0 !important; box-shadow:none; }
 html.dark :is(.parcours-card, .concours-page .job-section .ref-panel) { background:var(--card-bg) !important; }
 html[data-contrast="true"] :is(.parcours-card, .concours-page .job-section .ref-panel) { background:#FFF !important; border:1px solid #000 !important; }
+
+/* Pastilles de niveau (« Diplôme requis… ») : coins arrondis mais pas en demi-cercle quand le texte passe sur plusieurs lignes. */
+.category-fit { border-radius:14px; }
