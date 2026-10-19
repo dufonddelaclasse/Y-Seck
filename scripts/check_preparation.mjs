@@ -168,7 +168,7 @@ const filters=jobFilters();
 const labels=['Votre sélection','Catégories','Versants','Domaines'];
 for(let i=1;i<labels.length;i++)assert(filters.indexOf(labels[i-1])<filters.indexOf(labels[i]));
 assert(filters.includes('data-v="CDD"'));
-assert.equal((tabbar('accueil').match(/<a /g)||[]).length,4);
+assert.equal((tabbar('accueil').match(/<a /g)||[]).length,5,'Menu : Accueil, Métiers, Concours, Favoris et Profil.');
 assert(!tabbar('accueil').includes('href="#/concours"'));
 assert(screens.accueil().includes('href="#/concours"'),'Le tableau de bord conserve l’accès concours.');
 assert(screens.etudes('greffier').includes('École nationale des greffes'));
@@ -266,7 +266,7 @@ console.log('Ressources vérifiées :',data.studyResources.length,'liens uniques
   S.level='Bac+3';
   const fiche=screens.metier('attache');
   assert(fiche.includes('Voies d’accès')&&fiche.includes('Session 2027'),'La fiche concours reprend voies et sessions documentées.');
-  assert(fiche.includes('Attaché d&#39;administration de l&#39;État')||fiche.includes('Administrateur de l&#39;État'),'Évoluer suit les progressions du référentiel.');
+  assert(fiche.includes('Administrateur - Administratrice de l’État'),'Évoluer suit les progressions du référentiel, avec les intitulés au masculin et au féminin.');
   const prep=screens.preparer('attache');
   assert(prep.includes('id="concours-ref"')&&prep.includes('Préparation conseillée')&&prep.includes('Page officielle du concours')&&!prep.includes('Études utiles'),'Se préparer présente la préparation conseillée et la page officielle du concours.');
   S.level='Seconde';

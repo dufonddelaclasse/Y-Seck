@@ -643,10 +643,16 @@ html:where(.dark).dark :is(.parcours-card, .concours-page .job-section .ref-pane
 html:where(.dark).dark .exam .exam-source { border-top-color:rgba(41,41,41,0.16); }
 :where(html.dark) .suggest { background:#292929; box-shadow:0 10px 30px rgba(20,20,40,.14); }
 :where(html.dark) .suggest-item { color:var(--ink); }
-:where(html.dark) .suggest-item:hover, :where(html.dark) .suggest-item:focus-visible { background:var(--soft); outline:none; }
+:where(html.dark) .suggest-item:focus-visible { background:var(--soft); outline:none; }
+@media (hover:hover) and (pointer:fine) {
+  :where(html.dark) .suggest-item:hover { background:var(--soft); }
+}
 :where(html.dark) .suggest-kind { color:var(--muted); }
 html:where(.dark).dark .suggest { background:#4C4C4C; box-shadow:0 10px 30px rgba(76,76,76,0.5); }
-html:where(.dark).dark .suggest-item:hover, html:where(.dark).dark .suggest-item:focus-visible { background:#494950; }
+html:where(.dark).dark .suggest-item:focus-visible { background:#494950; }
+@media (hover:hover) and (pointer:fine) {
+  html:where(.dark).dark .suggest-item:hover { background:#494950; }
+}
 :where(html.dark) .trip-modes > svg { color:var(--ink); }
 :where(html.dark) .trip-modes .cat { box-shadow:none; }
 :where(html.dark) .trip-sep { background:#636363; }
@@ -669,15 +675,15 @@ html:where(.dark).dark .suggest-item:hover, html:where(.dark).dark .suggest-item
 :where(html.dark) .trip-dir svg { color:var(--theme-ink, var(--ink)); }
 :where(html.dark) .trip-sessions li { color:var(--ink); }
 :where(html.dark) .trip-sessions li span:last-child { color:var(--muted); }
-:where(html.dark) .trip-qa b { color:var(--ink); }
-:where(html.dark) .trip-qa span { color:var(--trip-ink, var(--brand)); }
-:where(html.dark) .trip-qa.long span { color:var(--ink); }
+:where(html.dark) .trip-qa { color:var(--ink); }
 :where(html.dark) .trip-note { color:var(--muted); }
 :where(html.dark) .trip-more summary { color:var(--ink); }
 html:where(.dark).dark .trip-sep { background:#6B6B6B; }
-html:where(.dark).dark .trip-qa:not(.long) span { color:var(--lt, var(--theme-ink)); }
 :where(html.dark) .concours-trip .trip-head { box-shadow:0 -120px 0 120px #292929; }
 html:where(.dark).dark .concours-trip .trip-head { box-shadow:0 -120px 0 120px var(--surface); }
+:where(html.dark) .personal-home .home-concours, :where(html.dark) .personal-home .home-concours:hover { background:#2B2055; color:#E9E9E9; }
+:where(html.dark) .personal-home .home-concours .home-feature-copy b, :where(html.dark) .personal-home .home-concours .home-feature-copy > span, :where(html.dark) .personal-home .home-concours .home-count { color:#E9E9E9; }
+:where(html.dark) .personal-home .home-concours .home-go { background:#292929; color:#E9E9E9; border:0; box-shadow:none; }
 
 /* Retouches */
 html.dark { --brand:#8F7BFF; --blue:#A493FF; --accent:#7C66FF; --accent-hover:#9785FF; --theme-btn:var(--brand); --red:#FF6B6B; --surface:#1E1E22; }
@@ -734,3 +740,6 @@ html.dark .app.theme-C, html.dark body.theme-C { --theme-ink:#FFA982; } html.dar
 html.dark .app.theme-Ap { --theme-deep:#B9A8FF; } html.dark .app.theme-A { --theme-deep:#9BA6FF; } html.dark .app.theme-B { --theme-deep:#6FD6D6; }
 html.dark .app.theme-C { --theme-deep:#FFA982; } html.dark .app.theme-CDD { --theme-deep:#E2E2E6; }
 html.dark .app.themed .eyebrow, html.dark .app.themed .section-heading { color:var(--theme-deep); }
+html.dark .personal-home .home-concours, html.dark .personal-home .home-concours:hover { background:#DCD3FF; color:#161616; }
+html.dark .personal-home .home-concours :is(.home-feature-copy b, .home-feature-copy > span, .home-count) { color:#161616; }
+html.dark .personal-home .home-concours .home-go { background:#FFF; color:#161616; }

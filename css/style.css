@@ -1821,12 +1821,17 @@ html.dark .exam .exam-source { border-top-color:rgba(255,255,255,.16); }
 .suggest { position:absolute; z-index:6; top:calc(100% + 6px); left:0; right:0; margin:0; padding:6px; list-style:none; border-radius:22px; background:#FFF; box-shadow:0 10px 30px rgba(20,20,40,.14); }
 .suggest[hidden] { display:none; }
 .suggest-item { display:flex; align-items:center; gap:10px; min-height:44px; padding:8px 12px; border-radius:16px; color:var(--ink); text-decoration:none; }
-.suggest-item:hover, .suggest-item:focus-visible { background:var(--soft); outline:none; }
+.suggest-item { -webkit-tap-highlight-color:transparent; }
+.suggest-item:focus-visible { background:var(--soft); outline:none; }
+/* Au doigt, faire défiler la liste ne surligne aucune suggestion : survol réservé à la souris. */
+@media (hover:hover) and (pointer:fine) { .suggest-item:hover { background:var(--soft); } }
 .suggest-item .cat { flex:none; }
+.suggest-cats { display:flex; flex:none; gap:3px; }
 .suggest-label { flex:1; min-width:0; font-size:.9375rem; line-height:1.25; }
 .suggest-kind { flex:none; color:var(--muted); font-size:.75rem; }
 html.dark .suggest { background:#161616; box-shadow:0 10px 30px rgba(0,0,0,.5); }
-html.dark .suggest-item:hover, html.dark .suggest-item:focus-visible { background:#2E2E33; }
+html.dark .suggest-item:focus-visible { background:#2E2E33; }
+@media (hover:hover) and (pointer:fine) { html.dark .suggest-item:hover { background:#2E2E33; } }
 
 /* Page test : fiche concours en frise, comme un itinéraire de transport. */
 .concours-trip .trip-head { gap:14px; padding-top:6px; }
@@ -1844,17 +1849,19 @@ html.dark .suggest-item:hover, html.dark .suggest-item:focus-visible { backgroun
 .trip-rail > .cat { flex:none; width:34px; height:34px; font-size:.9375rem; box-shadow:none; }
 .trip-walk { display:flex; flex:none; padding:2px 0 4px; }
 .trip-walk svg { width:26px; height:26px; color:var(--ink); }
-.trip-dot { flex:none; width:22px; height:22px; margin-top:3px; border-radius:999px; }
+.trip-rail > :not(.trip-track) { position:relative; z-index:1; }
+.trip-dot { flex:none; width:14px; height:14px; margin-top:6px; border-radius:999px; }
 .trip-pill { flex:none; width:22px; height:40px; border-radius:999px; background:var(--ink); }
-.trip-track { flex:1; min-height:12px; }
+/* Chaque trait descend sous le point suivant : la ligne reste continue d’une étape à l’autre. */
+.trip-track { position:relative; z-index:0; flex:1; min-height:12px; margin-bottom:-16px; }
 .trip-track.line { width:6px; background:var(--theme, var(--ink)); }
-.trip-dot + .trip-track { margin-top:-2px; }
+.trip-track:is(.c-college, .c-lycee, .c-pro, .c-sup, .c-none) { width:3px; }
+.trip-dot + .trip-track { margin-top:-7px; }
 :is(.trip-dot, .trip-track).c-college { background:var(--trip-college); }
 :is(.trip-dot, .trip-track).c-lycee, :is(.trip-dot, .trip-track).c-pro { background:var(--trip-lycee); }
 :is(.trip-dot, .trip-track).c-sup { background:var(--trip-sup); }
 .trip-track.c-none { background:var(--line-2); }
-.trip-item.trip-exam .trip-track.line { margin-top:-2px; }
-.trip-item.trip-exam + .trip-item.end .trip-pill { margin-top:-1px; }
+.trip-item.trip-exam .trip-track.line { margin-top:-4px; }
 .trip-body { min-width:0; padding:0 15px 34px 0; }
 .trip-item.start .trip-body { padding-bottom:26px; }
 .trip-item.end .trip-body { padding-bottom:4px; }
@@ -1871,15 +1878,7 @@ html.dark .suggest-item:hover, html.dark .suggest-item:focus-visible { backgroun
 .trip-sessions { margin:10px 0 0; padding:0; list-style:none; }
 .trip-sessions li { display:flex; justify-content:space-between; gap:12px; padding:8px 0; font-size:1rem; color:var(--ink); }
 .trip-sessions li span:last-child { flex:none; color:var(--muted); }
-.trip-qa { margin:26px 0 0; font-size:1rem; line-height:1.45; }
-.trip-qa b { font-weight:500; color:var(--ink); }
-.trip-qa span { font-weight:500; color:var(--trip-ink, var(--brand)); }
-/* Réponses courtes : teinte foncée de la catégorie, lisible sur le fond gris. */
-.app.theme-Ap .concours-trip { --trip-ink:#3C05FF; }
-.app.theme-A .concours-trip { --trip-ink:#0051FF; }
-.app.theme-B .concours-trip { --trip-ink:#00707F; }
-.app.theme-C .concours-trip { --trip-ink:#A8461B; }
-.trip-qa.long span { font-weight:400; color:var(--ink); }
+.trip-qa { margin:26px 0 0; font-size:1rem; line-height:1.4; font-weight:500; color:var(--ink); }
 .trip-note { display:flex; gap:8px; margin:22px 0 0; font-size:.875rem; line-height:1.45; color:var(--muted); }
 .trip-note svg { flex:none; width:18px; height:18px; margin-top:1px; }
 .trip-more { margin-top:26px; }
@@ -1892,7 +1891,12 @@ html.dark .suggest-item:hover, html.dark .suggest-item:focus-visible { backgroun
 .trip-body > .link-plain { display:inline-block; margin-top:4px; }
 .trip-body > .external-link { display:inline-block; margin-top:10px; }
 html.dark .trip-sep { background:#5A5A5A; }
-html.dark .trip-qa:not(.long) span { color:var(--lt, var(--theme)); }
 /* Fond blanc continu jusqu’à la barre, même quand l’en-tête est court. */
 .concours-trip .trip-head { box-shadow:0 -120px 0 120px #FFF; }
 html.dark .concours-trip .trip-head { box-shadow:0 -120px 0 120px var(--surface); }
+
+/* Accueil : bloc « Vos concours », fond violet clair, sans animation. */
+.personal-home .home-concours, .personal-home .home-concours:hover { background:#DCD3FF; color:#161616; }
+.personal-home .home-concours .home-feature-copy b, .personal-home .home-concours .home-feature-copy > span, .personal-home .home-concours .home-count { color:#161616; }
+.personal-home .home-concours .home-go { background:#FFF; color:#161616; border:0; box-shadow:none; }
+html[data-contrast="true"] .personal-home .home-concours { background:#FFF; border:1px solid #000; }

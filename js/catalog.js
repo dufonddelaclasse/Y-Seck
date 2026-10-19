@@ -2,6 +2,67 @@
   'use strict';
   var D = window.DATA, P = window.PUBLIC_DATA;
   Object.assign(D, P.settings || {});
+  /* Titres au masculin puis au féminin : « Administrateur - Administratrice ». */
+  var GENDER_PLAIN = {
+    'Commandant d\'unité de combat': 'Commandant - Commandante d’unité de combat', 'Démineur': 'Démineur - Démineuse', 'Sapeur-Sauveteur': 'Sapeur-sauveteur - Sapeuse-sauveteuse', 'Maçon': 'Maçon - Maçonne',
+    'Comptable public': 'Comptable public - Comptable publique', 'Interprète - traductrice / traducteur': 'Interprète-traducteur - Interprète-traductrice',
+    'Médecin - Cheffe / Chef de SDIS': 'Médecin-chef - Médecin-cheffe de SDIS',
+    'Secrétaire Générale / Général de Région Académique - Secrétaire Générale / Général d’Académie': 'Secrétaire général - Secrétaire générale de région académique ou d’académie'
+  };
+  function femWord(w, suf) {
+    if (suf === 'rice') return w.replace(/eur$/, 'rice');
+    if (suf === 'trice') return w.replace(/teur$/, 'trice');
+    if (suf === 'ère' || suf === 'ere') return w.replace(/er$/, 'ère');
+    if (suf === 'ière') return w.replace(/ier$/, 'ière');
+    if (suf === 've') return w.replace(/f$/, 've');
+    if (suf === 'se') return w.replace(/r$/, 'se');
+    if (suf === 'euse') return w.replace(/eur$/, 'euse');
+    return w + suf;
+  }
+  var DOTTED = /([A-Za-zÀ-ÖØ-öø-ÿ]+)·([a-zà-öø-ÿ]+)(?:·[a-zà-öø-ÿ]+)?/g;
+  function mascOf(t) { return t.replace(DOTTED, '$1'); }
+  function femOf(t) { return t.replace(DOTTED, function (m, w, suf) { return femWord(w, suf); }); }
+  function stem(w) { return String(w || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().slice(0, 3); }
+  function isLink(t) { return /^(de|du|des|d[’']\S*|en|à|au|aux|pour|et|ou|sur|dans|chez|par|avec|-|–|—|:|\(.*)$/i.test(t); }
+  function genderedTitle(name) {
+    var raw = String(name || '').replace(/\s+$/, '').replace(/police municipal·e/g, 'police municipale'), prefix = '';
+    if (GENDER_PLAIN[raw]) return GENDER_PLAIN[raw];
+    var pm = raw.match(/^(Concours\s*:\s*)(.+)$/); if (pm) { prefix = pm[1]; raw = pm[2]; }
+    var out = raw;
+    var sl = raw.match(/^(.+?) \/ (.+)$/), left = sl ? sl[1].split(' ') : [], right = sl ? sl[2].split(' ') : [];
+    /* « Féminin / Masculin complément », avec parfois un mot commun devant (« Cadre commerciale / commercial »). */
+    var k = left.findIndex(function (w) { return stem(w) === stem(right[0]); });
+    if (sl && k > -1 && left.slice(0, k).join(' ').indexOf('-') === -1) {
+      var lead = left.slice(0, k).join(' '), fem = left.slice(k), n = fem.length, masc = right.slice(0, n).join(' '), comp = right.slice(n).join(' ');
+      lead = lead ? lead + ' ' : '';
+      out = masc === fem.join(' ') ? sl[2] : lead + masc + ' - ' + lead + fem.join(' ') + (comp ? ' ' + comp : '');
+    } else if (/^Ingénieur(?![e·]| - )/.test(raw)) {
+      out = raw.replace(/^Ingénieur/, 'Ingénieur - Ingénieure');
+    } else if (/[A-Za-zÀ-ÖØ-öø-ÿ]·[a-zà-öø-ÿ]/.test(raw)) {
+      var tokens = raw.split(' '), i = 1;
+      while (i < tokens.length && !isLink(tokens[i])) i++;
+      var head = tokens.slice(0, i).join(' '), rest = tokens.slice(i).join(' ');
+      if (mascOf(head) !== head && mascOf(rest) === rest) out = mascOf(head) + ' - ' + femOf(head) + (rest ? ' ' + rest : '');
+      else out = mascOf(raw) + ' - ' + femOf(raw);
+    } else {
+      var inl = raw.match(/^(.*?)(\S+)\/(\S+)(.*)$/);
+      if (inl && stem(inl[2]) === stem(inl[3]) && inl[2] !== inl[3]) {
+        var restWords = inl[4];
+        var cut = restWords.search(/ (de|du|des|d[’']|en|à|au|aux|pour)\b/);
+        var tail = cut > -1 ? restWords.slice(cut) : '', mid = cut > -1 ? restWords.slice(0, cut) : restWords;
+        out = inl[1] + inl[3] + mid + ' - ' + inl[1] + inl[2] + mid + tail;
+      }
+    }
+    return prefix + out;
+  }
+  /* Métiers, corps et sessions : intitulé masculin puis féminin, sans point médian. */
+  (P.legacyJobs || []).concat(P.rmfp || []).forEach(function (j) {
+    j.name = genderedTitle(j.name);
+    (j.ladder || []).forEach(function (r) { if (r.length > 1) r[0] = genderedTitle(r[0]); });
+  });
+  (P.routes || []).forEach(function (r) { r.name = genderedTitle(r.name); });
+  (P.examDetails || []).forEach(function (e) { if (e.name) e.name = genderedTitle(e.name); });
+  (P.calendar || []).forEach(function (c) { if (c.name) c.name = genderedTitle(c.name); });
   D.jobs = (P.legacyJobs || D.jobs).filter(function (j) { return j.active !== false; });
   Object.assign(D, P.otherPreps || {});
   /* Un rapprochement rejeté (base ou corrections d’audit) l’emporte toujours sur un rapprochement proposé. */

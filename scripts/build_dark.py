@@ -198,6 +198,9 @@ html.dark .app.theme-C, html.dark body.theme-C { --theme-ink:#FFA982; } html.dar
 html.dark .app.theme-Ap { --theme-deep:#B9A8FF; } html.dark .app.theme-A { --theme-deep:#9BA6FF; } html.dark .app.theme-B { --theme-deep:#6FD6D6; }
 html.dark .app.theme-C { --theme-deep:#FFA982; } html.dark .app.theme-CDD { --theme-deep:#E2E2E6; }
 html.dark .app.themed .eyebrow, html.dark .app.themed .section-heading { color:var(--theme-deep); }
+html.dark .personal-home .home-concours, html.dark .personal-home .home-concours:hover { background:#DCD3FF; color:#161616; }
+html.dark .personal-home .home-concours :is(.home-feature-copy b, .home-feature-copy > span, .home-count) { color:#161616; }
+html.dark .personal-home .home-concours .home-go { background:#FFF; color:#161616; }
 """
 
 if __name__ == '__main__':

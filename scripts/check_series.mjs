@@ -55,21 +55,22 @@ function start(saved) {
 
 const personal=(extra={})=>({profile:'etu',name:'Camille',level:'Bac',domains:['Justice'],traits:['equipe'],boursier:'Non',budget:'Gratuit uniquement',done:true,location:null,favorites:['attache','magistrat'],filterHintSeen:true,...extra});
 
-// Explorer : titre « Vos métiers et concours », affichage métiers / concours / tous (tous par défaut).
+// Onglets Métiers et Concours : chaque page liste un seul type, sans filtre « Affichage ».
 {
   const t=start(personal());
-  assert.equal(t.S.metShow,'tous');
   t.location.hash='#/metiers';
   const page=t.screens.metiers();
-  assert(page.includes('Vos métiers et concours'));
-  t.click('metShow','concours');
-  const onlyConcours=t.screens.metiers();
-  assert(onlyConcours.includes('concours-row')&&!onlyConcours.includes('href="#/metier/'),'L’affichage « concours » ne liste que des concours.');
-  t.click('metShow','metiers');
-  assert(!t.screens.metiers().includes('concours-row'),'L’affichage « métiers » ne liste aucun concours.');
-  const key=onlyConcours.match(/#\/concours-fiche\/([^"]+)/)[1];
+  assert(page.includes('Vos métiers')&&!page.includes('concours-row'),'La page Métiers ne liste que des métiers.');
+  assert(page.includes('href="#/concours-liste"')&&page.includes('>Métiers</a>')&&page.includes('>Concours</a>'),'Le menu propose Métiers et Concours.');
+  assert(!t.screens.metiers().includes('Explorer'),'L’onglet Explorer devient Métiers.');
+  t.location.hash='#/concours-liste';
+  const concours=t.screens['concours-liste']();
+  assert(concours.includes('Vos concours')&&concours.includes('concours-row')&&!concours.includes('href="#/metier/'),'La page Concours ne liste que des concours.');
+  const key=concours.match(/#\/concours-fiche\/([^"]+)/)[1];
   const fiche=t.screens['concours-fiche'](key);
-  assert(fiche.includes('<h1>')&&fiche.includes('job-cards'),'La fiche concours présente les métiers liés en cartes.');
+  assert(fiche.includes('<h1>')&&fiche.includes('job-cards')&&fiche.includes('class="trip"'),'La fiche concours suit la frise et présente les métiers liés en cartes.');
+  const home=(t.location.hash='#/accueil',t.screens.accueil());
+  assert(home.includes('home-concours')&&home.includes('Vos concours'),'L’accueil propose les concours sélectionnés.');
 }
 
 // Bandeau d’aide des filtres : une seule fois.
