@@ -613,6 +613,11 @@ html:where(.dark).dark .sheet-content button.chip.category-choice[data-action="m
   :where(html.dark) .personal-home .home-discover, html:where(.dark).dark body .personal-home .home-discover { background:var(--brand); }
 }
 :where(html.dark) .job-page .job-match { background:var(--theme-tint,var(--lilac)); color:var(--ink); }
+:where(html.dark) #jobs .job-row, :where(html.dark) #jobs .concours-row { background:#292929; }
+@media (hover:hover) and (pointer:fine) {
+  :where(html.dark) :where(.app:not(.touch-input)) #jobs .job-row:hover { background:#161616; }
+}
+html:where(.dark).dark #jobs :is(.job-row,.concours-row) { background:var(--surface); }
 
 /* Retouches */
 html.dark { --brand:#8F7BFF; --blue:#A493FF; --accent:#7C66FF; --accent-hover:#9785FF; --theme-btn:var(--brand); --red:#FF6B6B; --surface:#1E1E22; }

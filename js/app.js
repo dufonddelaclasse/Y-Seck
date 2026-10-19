@@ -954,7 +954,7 @@
   screens.concours = function () {
     var mine = myJobs();
     return '<main class="screen pt">' +
-      '<span class="eyebrow">Concours</span><h1>Concours et prépas</h1><p class="lead sm">Les conditions de diplôme varient selon le concours. Touchez une catégorie pour savoir où passer les épreuves.</p>' +
+      '<h1>Concours et prépas</h1><p class="lead sm">Les conditions de diplôme varient selon le concours. Touchez une catégorie pour savoir où passer les épreuves.</p>' +
       '<div class="stack mt-s">' + D.categories.map(function (c) {
         var open = S.openCat === c.id;
         var jobs = mine.filter(function (j) { return jobCategories(j).indexOf(c.id)>-1; });

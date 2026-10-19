@@ -1683,3 +1683,8 @@ html[data-contrast="true"] .personal-home .home-discover { animation:none; backg
 .job-match-dot { width:6px; height:6px; }
 .job-page .job-actions { margin-top:6px; }
 html[data-contrast="true"] .job-page .job-match { background:#FFF; border:1px solid #000; }
+
+/* Explorer : cartes des métiers et des concours sur fond blanc. */
+#jobs .job-row, #jobs .concours-row { background:#FFF; }
+@media (hover:hover) and (pointer:fine) { :where(.app:not(.touch-input)) #jobs .job-row:hover { background:#FAFAFA; } }
+html.dark #jobs :is(.job-row,.concours-row) { background:var(--surface); }
