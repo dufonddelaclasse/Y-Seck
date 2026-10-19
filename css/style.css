@@ -1725,3 +1725,7 @@ html[data-contrast="true"] :is(.talents-feature.talents-split,.bourse) { backgro
 .app.onboarding .a11y-link { margin:4px auto 0; top:0; }
 .intro-screen .callout, .category-screen .callout { padding-top:10px; padding-bottom:10px; }
 .app.onboarding .footer { padding-bottom:calc(16px + env(safe-area-inset-bottom,0px)); }
+
+/* Titre « Vos métiers et concours » : calé en haut comme les autres titres, que le titre tienne sur une ou deux lignes. */
+.screen > .title-row { align-items:flex-start; }
+.screen > .title-row > .icon-btn { margin-top:calc((1.15em * 1.625 - 44px) / 2); }
