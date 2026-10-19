@@ -1752,3 +1752,30 @@ html[data-contrast="true"] :is(.parcours-card, .concours-page .job-section .ref-
 
 /* « Quelles études choisir » : phrase d’introduction avant le parcours. */
 .parcours-intro { margin:-4px 0 0; color:var(--muted); font-size:.875rem; line-height:1.4; }
+
+/* ==========================================================================
+   Essai « respiration » sur les fiches métier (inspiré des pages produit Apple) :
+   marges de 24 px, grands titres serrés, sections très espacées, cartes à 24 px
+   de marge intérieure. Bloc autonome : le retirer suffit à revenir à l’état précédent.
+   ========================================================================== */
+.screen.job-page:not(.concours-page):not(.shared-job), .screen.job-page.shared-job { padding-left:24px; padding-right:24px; padding-bottom:56px; }
+.job-page:not(.concours-page) .job-hero { margin:0 -24px; padding:8px 24px 28px; gap:14px; }
+.job-page:not(.concours-page) .job-actions { margin-left:-24px; margin-right:-24px; padding:0 18px; }
+.job-page:not(.concours-page) h1 { font-size:1.875rem; line-height:1.1; letter-spacing:-.02em; }
+.job-page:not(.concours-page) .job-hero .body { font-size:1.0625rem; line-height:1.47; color:var(--ink-2); }
+.job-page:not(.concours-page) .job-meta .tag { font-size:.875rem; padding:6px 14px; }
+.job-page:not(.concours-page) .job-match { font-size:.875rem; padding:8px 14px; }
+/* Sections : beaucoup d’air entre elles, titre puis contenu. */
+.job-page:not(.concours-page) .job-section { margin-top:56px; gap:18px; }
+.job-page:not(.concours-page) .job-section .section-heading { font-size:1.5rem; line-height:1.15; letter-spacing:-.015em; }
+.job-page:not(.concours-page) .parcours-intro { margin-top:-8px; font-size:.9375rem; line-height:1.45; }
+/* Cartes : marge intérieure de 24 px, coins plus doux, texte courant plus confortable. */
+.job-page:not(.concours-page) .parcours-card { padding:26px 22px 22px 18px; border-radius:28px; }
+.job-page:not(.concours-page) .parcours-txt p { font-size:1rem; line-height:1.5; }
+.job-page:not(.concours-page) .parcours-step + .parcours-step { margin-top:6px; }
+.job-page:not(.concours-page) .preparation-card { border-radius:28px; }
+.job-page:not(.concours-page) .ladder { gap:12px; }
+.job-page:not(.concours-page) .rung { padding:20px 22px; border-radius:24px; font-size:1rem; line-height:1.35; }
+.job-page:not(.concours-page) .ladder .via { padding:2px 6px; font-size:.875rem; }
+.job-page:not(.concours-page) > .btn.theme { margin-top:48px; }
+.job-page:not(.concours-page) > .external-link { margin-top:8px; }
