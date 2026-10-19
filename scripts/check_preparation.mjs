@@ -268,7 +268,7 @@ console.log('Ressources vérifiées :',data.studyResources.length,'liens uniques
   assert(fiche.includes('Voies d’accès')&&fiche.includes('Session 2027'),'La fiche concours reprend voies et sessions documentées.');
   assert(fiche.includes('Attaché d&#39;administration de l&#39;État')||fiche.includes('Administrateur de l&#39;État'),'Évoluer suit les progressions du référentiel.');
   const prep=screens.preparer('attache');
-  assert(prep.includes('id="concours-ref"')&&prep.includes('Annales officielles du concours'),'Se préparer présente le concours et ses annales.');
+  assert(prep.includes('id="concours-ref"')&&prep.includes('Préparation conseillée')&&prep.includes('Page officielle du concours')&&!prep.includes('Études utiles'),'Se préparer présente la préparation conseillée et la page officielle du concours.');
   S.level='Seconde';
   assert(screens.preparer('attache').includes('id="stages"'),'Les élèves de seconde reçoivent les conseils de stage.');
   assert(screens.metier('attache').includes('Voie générale, spécialités conseillées'),'La frise reprend les spécialités conseillées.');

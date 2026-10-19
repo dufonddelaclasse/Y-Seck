@@ -1100,18 +1100,10 @@
   function concoursPrep(job) {
     var refs=jobRefs(job);
     if(!refs.length)return recruitmentNote(job)?'<section class="stack mt-m" id="concours-ref"><h2 class="section-heading">'+I.calendar+'<span>Le recrutement</span></h2>'+recruitmentNote(job)+'</section>':'';
-    var docs=studyResources(job,false,false).filter(function(r){return r.scope==='document'&&r.kind!=='annales';}).length;
+    /* Se préparer : pour chaque concours, seulement la préparation conseillée et la page officielle. */
     return '<section class="stack mt-m" id="concours-ref"><h2 class="section-heading">'+I.calendar+'<span>Le concours</span></h2>'+refs.slice(0,6).map(function(c,i){
-      var ann=c.annales;
       return '<details class="ref-card"'+(refs.length===1||i===0?' open':'')+'><summary>'+catBadge(c.cat,'sm')+'<span class="ref-name"><b>'+sig(c.name)+'</b><span>'+esc(D.fps[c.fp])+(c.voies?' · '+sig(c.voies):'')+'</span></span><span class="details-toggle" aria-hidden="true">'+I.down+'</span></summary><div class="ref-body">'+
-        (c.epreuves?'<h3 class="no-icon">Épreuves</h3><p>'+sig(c.epreuves)+'</p>':'')+
-        (c.sessions.length?'<ul class="exam-sessions">'+c.sessions.map(function(x){return '<li><b>Session '+esc(x.session)+'</b> '+sig(x.text)+'</li>';}).join('')+'</ul>':'')+
-        '<h3 class="no-icon">Annales</h3>'+(ann?'<p>'+esc(ann.kind)+(ann.years?' · '+esc(ann.years):'')+'</p>'+ext(ann.url,'Annales officielles du concours','link-plain'):'<p>Pas encore de page officielle d’annales identifiée pour ce concours : consulter les documents ci-dessous et le site de l’organisateur.</p>')+
-        (docs?'<a class="link-plain" href="#/annales/'+job.id+'">'+docs+' sujets, copies et rapports à consulter</a>':'')+
-        (c.prepa?'<h3 class="no-icon">Préparations conseillées</h3><p>'+sig(c.prepa)+'</p>':'')+
-        (c.studies?'<h3 class="no-icon">Études utiles</h3><p>'+sig(c.studies)+(c.l1?'. 1re année : '+sig(c.l1):'')+(c.l2?'. 2e année : '+sig(c.l2):'')+(c.l3?'. 3e année : '+sig(c.l3):'')+'.</p>':'')+
-        (c.afterBac?'<p class="small">Dès le bac ? '+sig(c.afterBac)+'</p>':'')+
-        (c.variations?'<p class="exam-vigilance">'+I.info+'<span>'+sig(c.variations)+'</span></p>':'')+
+        '<h3 class="no-icon">Préparation conseillée</h3><p>'+(c.prepa?sig(c.prepa):'Pas de préparation particulière identifiée : consulter la page officielle du concours.')+'</p>'+
         ext(c.source,'Page officielle du concours','link-plain')+'</div></details>';
     }).join('')+'<p class="small m0">Informations indicatives, vérifiées le 18 octobre 2026 : l’avis de chaque session fait référence.</p></section>';
   }
