@@ -618,6 +618,8 @@ html:where(.dark).dark .sheet-content button.chip.category-choice[data-action="m
   :where(html.dark) :where(.app:not(.touch-input)) #jobs .job-row:hover { background:#161616; }
 }
 html:where(.dark).dark #jobs :is(.job-row,.concours-row) { background:var(--surface); }
+:where(html.dark) .btn.btn-bare, :where(html.dark) .btn.btn-bare:hover { background:transparent !important; border:0 !important; box-shadow:none; color:var(--theme-ink,var(--brand)); }
+:where(html.dark) .btn.btn-bare svg { color:currentColor; }
 
 /* Retouches */
 html.dark { --brand:#8F7BFF; --blue:#A493FF; --accent:#7C66FF; --accent-hover:#9785FF; --theme-btn:var(--brand); --red:#FF6B6B; --surface:#1E1E22; }

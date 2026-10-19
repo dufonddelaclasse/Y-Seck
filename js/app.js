@@ -613,12 +613,17 @@
       return chip('selectChild', c.id, c.name || 'Votre enfant', c.id === S.activeChild, 'blue');
     }).join('') + '</div>';
   }
+  /* Un concours se met en favori sous la forme « concours:<clé> », à côté des identifiants de métiers. */
+  function favItem(id) {
+    if (String(id).indexOf('concours:') === 0) { var c = concoursByKey(id.slice(9)); return c ? { id: id, name: c.name, row: concoursRow(c) } : null; }
+    var j = jobById(id); return j ? { id: id, name: j.name, row: jobRow(j) } : null;
+  }
   screens.favoris = function () {
-    var list = D.jobs.filter(function (j) { return S.favorites.indexOf(j.id) > -1; });
+    var list = S.favorites.map(favItem).filter(Boolean);
     return '<main class="screen pt"><h1>' + (isParent() ? 'Ses favoris' : 'Vos favoris') + '</h1>' + childSelector() +
       (isParent() ? '<p class="small">La sélection de ' + esc(childName()) + '</p>' : '') +
       (list.length ? '<p class="small">Faites glisser une carte vers la gauche pour la retirer.</p>' : '') +
-      '<div class="list job-cards fav-list">' + (list.length ? list.map(function (j) { return '<div class="swipe-item"><button type="button" class="swipe-delete" data-action="askUnfavorite"' + attr('v', j.id) + ' aria-label="Retirer ' + esc(j.name) + ' des favoris">' + I.trash + '<span>Retirer</span></button>' + jobRow(j) + '</div>'; }).join('') : '<p class="empty">Aucun métier enregistré. Ouvrez une fiche métier puis choisissez « Ajouter aux favoris ».</p>') + '</div><a class="btn outline" href="#/metiers">Explorer les métiers</a></main>' + tabbar('favoris');
+      '<div class="list job-cards fav-list">' + (list.length ? list.map(function (f) { return '<div class="swipe-item"><button type="button" class="swipe-delete" data-action="askUnfavorite"' + attr('v', f.id) + ' aria-label="Retirer ' + esc(f.name) + ' des favoris">' + I.trash + '<span>Retirer</span></button>' + f.row + '</div>'; }).join('') : '<p class="empty">Aucun métier enregistré. Ouvrez une fiche métier puis choisissez « Ajouter aux favoris ».</p>') + '</div><a class="btn outline" href="#/metiers">Explorer les métiers</a></main>' + tabbar('favoris');
   };
 
   /* ---------- Métiers ---------- */
@@ -907,7 +912,7 @@
     var cats=D.categories.filter(function(c){return jobCategories(j).indexOf(c.id)>-1;});
     return '<section class="stack mt-m job-section" aria-labelledby="concours-title"><h2 id="concours-title" class="section-heading">' + I.calendar + '<span>Concours et dates</span></h2>' +
       (recruitmentNote(j) || (cats.length?'<div class="stack">' + cats.slice().reverse().sort(function(a,b){return ['A+','A','B','C'].indexOf(a.id)-['A+','A','B','C'].indexOf(b.id);}).map(function(c){return preparationCategoryCard(c,j);}).join('') + '</div>':'<p class="body">La catégorie et le corps d’accès à ce métier restent à préciser selon le poste. Consultez les conditions de l’offre de recrutement.</p>')) +
-      (dates.length?'<a class="link-underline" href="#/calendrier/'+j.id+'">Toutes les dates des concours ('+dates.length+')</a>':'') + '</section>';
+      (dates.length?'<a class="btn btn-bare" href="#/calendrier/'+j.id+'">'+I.calendar+'<span>Toutes les dates des concours ('+dates.length+')</span></a>':'') + '</section>';
   }
   function jobLadder(j) {
     var ladder = careerLadder(j) || j.ladder;
@@ -928,17 +933,24 @@
   }
 
   /* ---------- Fiche partagée : version courte, lisible sans profil ---------- */
-  function shareUrl(id) { return location.href.split('#')[0] + '#/fiche/' + id; }
+  /* Partage d’un métier (fiche courte lisible sans profil) ou d’un concours (« concours:<clé> »). */
+  function shareTarget(id) {
+    if (String(id).indexOf('concours:') === 0) {
+      var c = concoursByKey(id.slice(9)); if (!c) return null;
+      return { name: c.name, url: location.href.split('#')[0] + '#/concours-fiche/' + concoursKey(c), message: 'Je pense que ce concours de la fonction publique peut t’intéresser : ' + c.name + '. Dates, épreuves et études, tout est sur la fiche Y-Seck :' };
+    }
+    var j = jobById(id); if (!j) return null;
+    return { name: j.name, url: location.href.split('#')[0] + '#/fiche/' + j.id, message: 'Je pense que ce métier de la fonction publique peut t’intéresser : ' + j.name + '. Études, concours et évolution, tout est sur la fiche Y-Seck :' };
+  }
   /* Le message accompagne toujours le lien : certaines applications ignorent le champ « url » seul. */
-  function shareMessage(j) { return 'Je pense que ce métier de la fonction publique peut t’intéresser : ' + j.name + '. Études, concours et évolution, tout est sur la fiche Y-Seck :'; }
   function shareJob(id, trigger) {
-    var j = jobById(id); if (!j) return;
-    var url = shareUrl(id), full = shareMessage(j) + '\n' + url;
-    if (navigator.share) { navigator.share({ title: j.name + ' · Y-Seck', text: full }).catch(function () { /* partage annulé */ }); return; }
-    UI.open('share', 'Partager ce métier', '<p class="body">Le message et le lien s’ouvrent sur n’importe quel smartphone, sans profil.</p>' +
+    var t = shareTarget(id); if (!t) return;
+    var full = t.message + '\n' + t.url;
+    if (navigator.share) { navigator.share({ title: t.name + ' · Y-Seck', text: full }).catch(function () { /* partage annulé */ }); return; }
+    UI.open('share', 'Partager', '<p class="body">Le message et le lien s’ouvrent sur n’importe quel smartphone.</p>' +
       '<textarea class="share-url" rows="4" readonly aria-label="Message à envoyer">' + esc(full) + '</textarea>' +
       '<div class="sheet-actions"><button type="button" class="btn" data-action="copyShare"' + attr('v', full) + '>Copier le message</button>' +
-      '<a class="btn outline" href="mailto:?subject=' + encodeURIComponent(j.name + ' · Y-Seck') + '&body=' + encodeURIComponent(full) + '">Envoyer par e-mail</a></div>', trigger);
+      '<a class="btn outline" href="mailto:?subject=' + encodeURIComponent(t.name + ' · Y-Seck') + '&body=' + encodeURIComponent(full) + '">Envoyer par e-mail</a></div>', trigger);
   }
   screens.fiche = function (id) {
     var j = jobById(id);
@@ -1127,6 +1139,7 @@
     var dot = function (t) { return t && !/[.!?]$/.test(t) ? t + '.' : t; };
     var category = D.categories.filter(function (x) { return x.id === c.cat; })[0];
     var routes = c.routeIds.slice(); routes.fp = c.fp;
+    var favKey = 'concours:' + concoursKey(c), fav = S.favorites.indexOf(favKey) > -1;
     var studies = '<section class="stack mt-m job-section"><h2 class="section-heading">' + I.studyMap + '<span>Quelles études choisir</span></h2><div class="ref-panel">' +
         (c.college ? '<h3 class="no-icon">Au collège</h3><p>' + sig(dot(c.college)) + '</p>' : '') +
         (c.lyceeGeneral ? '<h3 class="no-icon">Au lycée (spécialités conseillées, jamais obligatoires)</h3><p>' + sig(dot(c.lyceeGeneral)) + (c.lyceeTechno ? ' Voie technologique : ' + sig(dot(c.lyceeTechno)) : '') + (c.lyceePro ? ' Voie professionnelle : ' + sig(dot(c.lyceePro)) : '') + '</p>' : '') +
@@ -1134,6 +1147,10 @@
     return '<main class="screen top-tight job-page concours-page">' + back('#/metiers', 'Métiers') +
       '<div class="row job-meta"><span class="job-hero-cat">' + catBadge(c.cat) + '</span><span class="tag">Concours</span><span class="tag">' + esc(D.fps[c.fp]) + '</span></div>' +
       '<h1>' + sig(c.name) + '</h1>' + (c.domain ? '<p class="body">' + sig(dot(c.domain)) + '</p>' : '') +
+      '<div class="job-actions">' +
+        '<button type="button" class="job-action" data-action="favorite"' + attr('v', favKey) + ' aria-pressed="' + fav + '" aria-label="' + (fav ? 'Retirer des favoris' : 'Ajouter aux favoris') + '">' + I.bookmark + '<span aria-hidden="true">Favori</span></button>' +
+        '<button type="button" class="job-action" data-action="share"' + attr('v', favKey) + '>' + I.send + '<span>Partager</span></button>' +
+      '</div>' +
       '<section class="stack mt-m job-section"><h2 class="section-heading">' + I.calendar + '<span>Concours et dates</span></h2>' +
         (lead && category ? preparationCategoryCard(category, lead, routes) : '<div class="ref-panel">' + examRef(c) + '</div>') +
         (c.annales ? ext(c.annales.url, 'Annales officielles du concours', 'link-plain') : '') + ext(c.source, 'Page officielle du concours', 'link-plain') + '</section>' +
@@ -1775,8 +1792,8 @@
         break;
       }
       case 'editField': editingField = v; UI.open('profile-field', PROFILE_FIELDS[v], profileFieldContent(v), el); break;
-      case 'askUnfavorite': { var fj = jobById(v); UI.open('confirm', 'Retirer des favoris ?', '<p class="body">' + esc(fj ? fj.name : 'Ce métier') + ' ne fera plus partie de ' + (isParent() ? 'ses' : 'vos') + ' favoris.</p><div class="sheet-actions"><button type="button" class="btn danger-solid" data-action="unfavorite"' + attr('v', v) + '>Retirer des favoris</button><button type="button" class="btn outline" data-ui="close">Annuler</button></div>', el); break; }
-      case 'unfavorite': { UI.close(); set({ favorites: S.favorites.filter(function (id) { return id !== v; }) }); announce('Métier retiré des favoris'); break; }
+      case 'askUnfavorite': { var fj = favItem(v); UI.open('confirm', 'Retirer des favoris ?', '<p class="body">' + esc(fj ? fj.name : 'Ce métier') + ' ne fera plus partie de ' + (isParent() ? 'ses' : 'vos') + ' favoris.</p><div class="sheet-actions"><button type="button" class="btn danger-solid" data-action="unfavorite"' + attr('v', v) + '>Retirer des favoris</button><button type="button" class="btn outline" data-ui="close">Annuler</button></div>', el); break; }
+      case 'unfavorite': { UI.close(); set({ favorites: S.favorites.filter(function (id) { return id !== v; }) }); announce((String(v).indexOf('concours:') === 0 ? 'Concours' : 'Métier') + ' retiré des favoris'); break; }
       case 'share': e.preventDefault(); shareJob(v, el); break;
       case 'copyShare': {
         var input = document.querySelector('.share-url');
@@ -1789,7 +1806,8 @@
       case 'favorite': {
         next = S.favorites.slice(); i = next.indexOf(v);
         if (i > -1) next.splice(i, 1); else next.push(v);
-        set({ favorites: next }); announce(i > -1 ? 'Métier retiré des favoris' : 'Métier ajouté aux favoris'); break;
+        var what = String(v).indexOf('concours:') === 0 ? 'Concours' : 'Métier';
+        set({ favorites: next }); announce(what + (i > -1 ? ' retiré des favoris' : ' ajouté aux favoris')); break;
       }
       case 'metShow': set({ metShow: v, jobLimit: 60 }); countAnnounce(); break;
       case 'colorMode': set({ colorMode: v }); announce(v==='dark'?'Mode sombre activé':v==='light'?'Mode clair activé':'L’apparence suit celle de l’appareil'); break;
