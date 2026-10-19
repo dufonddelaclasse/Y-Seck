@@ -137,7 +137,7 @@
   };
 
   Object.assign(I, UI.icons);
-  I.send = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 3 10 14"/><path d="M21 3 14.5 21l-4.5-7-7-4.5z"/></svg>';
+  I.send = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l6 6-6 6"/><path d="M21 11h-9a8 8 0 0 0-8 8v1"/></svg>';
   I.plus = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>';
   I.grid = UI.icons.compass;
   I.layers = UI.icons.book;
@@ -847,8 +847,8 @@
     return '<main class="screen top-tight job-page">' + back('#/metiers', 'Métiers') + jobIntro(j) +
       (shared.length ? '<div class="job-match"><span class="job-match-dot" aria-hidden="true"></span><p><span>' + (isParent() ? 'Lui ressemble' : 'Vous ressemble') + ' :</span> ' + esc(shared.map(traitLabel).join(', ').toLowerCase()) + '</p></div>' : '') +
       '<div class="job-actions' + (shared.length ? '' : ' alone') + '">' +
-        '<button type="button" class="job-action" data-action="jobDetails"' + attr('v',j.id) + '>' + I.info + '<span>Plus de détails</span></button>' +
-        '<button type="button" class="job-action" data-action="favorite"' + attr('v', j.id) + ' aria-pressed="' + fav + '">' + I.bookmark + '<span>' + (fav ? 'Retirer des favoris' : 'Ajouter en favoris') + '</span></button>' +
+        '<button type="button" class="job-action" data-action="jobDetails"' + attr('v',j.id) + ' aria-label="En savoir plus">' + I.info + '<span aria-hidden="true">En savoir +</span></button>' +
+        '<button type="button" class="job-action" data-action="favorite"' + attr('v', j.id) + ' aria-pressed="' + fav + '" aria-label="' + (fav ? 'Retirer des favoris' : 'Ajouter aux favoris') + '">' + I.bookmark + '<span aria-hidden="true">Favori</span></button>' +
         '<button type="button" class="job-action" data-action="share"' + attr('v', j.id) + '>' + I.send + '<span>Partager</span></button>' +
       '</div>' +
       parcoursSection(j) + jobConcours(j, dates) + jobLadder(j) +
