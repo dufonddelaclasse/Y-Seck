@@ -639,6 +639,8 @@ html:where(.dark).dark .job-page .job-hero + .job-actions { border-top-color:#4C
 html:where(.dark).dark :is(.parcours-card, .concours-page .job-section .ref-panel) { background:var(--card-bg) !important; }
 :where(html.dark) .parcours-intro { color:var(--muted); }
 :where(html.dark) .job-page:not(.concours-page) .job-hero .body { color:var(--ink-2); }
+:where(html.dark) .exam .exam-source { border-top:1px solid rgba(76,76,76,0.14); }
+html:where(.dark).dark .exam .exam-source { border-top-color:rgba(41,41,41,0.16); }
 
 /* Retouches */
 html.dark { --brand:#8F7BFF; --blue:#A493FF; --accent:#7C66FF; --accent-hover:#9785FF; --theme-btn:var(--brand); --red:#FF6B6B; --surface:#1E1E22; }

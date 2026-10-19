@@ -1805,3 +1805,11 @@ html[data-contrast="true"] :is(.parcours-card, .concours-page .job-section .ref-
 .app:not(.onboarding) .home-feature { padding:24px 20px; }
 .app:not(.onboarding) .list.job-cards, .app:not(.onboarding) #jobs { gap:12px; }
 .app:not(.onboarding) .screen > .btn.theme, .app:not(.onboarding) .screen > .btn:not(.outline):last-of-type { margin-top:40px; }
+
+/* Liens à la suite : empilés serrés, sans grands sauts de ligne. */
+.official-exam-links, .preparation-card .official-exam-links { gap:0; }
+.official-exam-links a.link-plain, a.link-plain:has(+ a.link-plain), a.link-plain + a.link-plain { min-height:0; padding-top:5px; padding-bottom:5px; margin-top:0; }
+/* Carte concours : air au-dessus du calendrier, trait de séparation au-dessus de la source. */
+.exam .exam-cal { margin-top:22px; }
+.exam .exam-source { margin-top:8px; padding-top:14px; border-top:1px solid rgba(20,20,20,.14); }
+html.dark .exam .exam-source { border-top-color:rgba(255,255,255,.16); }
