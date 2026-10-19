@@ -664,6 +664,8 @@ html.dark .category-fit.warn svg, html.dark :is(.fit,.parcours-zone,.parcours-li
 html.dark .prep-page button.chip:not(.category-choice) { --choice-ink:var(--theme-ink); }
 html.dark :is(.exam-cal,.exam-places) h5 svg { color:currentColor; }
 html.dark .tabbar a.on::before { background:var(--sun); }
+html.dark .job-row .fits .fit, html.dark .job-row .fit { background:#2E2E33 !important; border:0 !important; box-shadow:none !important; color:#E2E2E6 !important; }
+html.dark .job-row .fit * { color:#E2E2E6 !important; }
 html.dark :is(.personal-home .study-level,.home-interest,.tag.tag-btn,.job-page .job-meta .tag) { background:#45454A !important; border:0 !important; color:#E2E2E6 !important; }
 html.dark :is(.personal-home .study-level,.home-interest) svg { color:#D4D4D8 !important; }
 html.dark :is(#jobs .job-row,.job-cards .job-row,.home-access,.home-shortcuts a,.profile-row,.prep,.study-card,.book-card,.family-card,.ref-card,.parcours-card,.talents-feature.talents-split,.concours-page .job-section .ref-panel) { background:#161616 !important; }
