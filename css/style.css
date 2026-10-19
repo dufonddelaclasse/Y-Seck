@@ -1900,3 +1900,15 @@ html.dark .concours-trip .trip-head { box-shadow:0 -120px 0 120px var(--surface)
 .personal-home .home-concours .home-feature-copy b, .personal-home .home-concours .home-feature-copy > span, .personal-home .home-concours .home-count { color:#161616; }
 .personal-home .home-concours .home-go { background:#FFF; color:#161616; border:0; box-shadow:none; }
 html[data-contrast="true"] .personal-home .home-concours { background:#FFF; border:1px solid #000; }
+
+/* Fiche concours : dates de la prochaine session et lien vers toutes les dates, à la couleur du concours. */
+.trip-dates { display:grid; grid-template-columns:auto minmax(0,1fr); gap:8px 16px; margin:10px 0 0; font-size:1rem; line-height:1.4; }
+.trip-dates dt { color:var(--muted); }
+.trip-dates dd { margin:0; color:var(--ink); }
+.app.theme-Ap .concours-trip { --trip-ink:#3C05FF; }
+.app.theme-A .concours-trip { --trip-ink:#0051FF; }
+.app.theme-B .concours-trip { --trip-ink:#00707F; }
+.app.theme-C .concours-trip { --trip-ink:#A8461B; }
+.trip-all-dates { display:inline-block; margin-top:16px; font-size:1rem; font-weight:500; color:var(--trip-ink, var(--brand)); text-decoration:underline; text-underline-offset:3px; }
+.trip-all-dates:hover { color:var(--trip-ink, var(--brand)); }
+html.dark .trip-all-dates, html.dark .trip-all-dates:hover { color:var(--lt, var(--theme)); }

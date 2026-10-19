@@ -1115,7 +1115,7 @@
     if(!c)return '';
     return '<div class="exam-ref"><dl>'+(c.voies?'<dt>Voies d’accès</dt><dd>'+sig(c.voies)+'</dd>':'')+(c.condition?'<dt>Conditions de diplôme</dt><dd>'+sig(c.condition)+'</dd>':'')+
       (c.epreuves?'<dt>Épreuves</dt><dd>'+sig(c.epreuves)+'</dd>':'')+'</dl>'+
-      (c.sessions.length?'<ul class="exam-sessions">'+c.sessions.map(function(x){return '<li><b>Session '+esc(x.session)+'</b> '+sig(x.text)+(x.caution?'<span class="small"> '+sig(x.caution)+'</span>':'')+'</li>';}).join('')+'</ul>':'')+
+      (c.sessions.length?'<ul class="exam-sessions">'+c.sessions.map(function(x){return '<li><b>Session '+esc(x.session)+'</b> '+sig(x.text)+'</li>';}).join('')+'</ul>':'')+
       (c.vigilance?'<p class="exam-vigilance">'+I.info+'<span>'+sig(c.vigilance)+'</span></p>':'')+'</div>';
   }
   /* Un concours : bandeau, organisateur, calendrier de la prochaine session, lieux et sources. */
@@ -1197,6 +1197,10 @@
     if (!c._jobs) c._jobs = D.jobs.filter(function (j) { return (j.routeIds || []).some(function (id) { return c.routeIds.indexOf(id) > -1; }) && jobCategories(j).indexOf(c.cat) > -1 && j.fp.indexOf(c.fp) > -1; });
     return c._jobs;
   }
+  /* Sessions d’un concours au calendrier : à venir, ou toutes. */
+  function concoursSessions(c, all) {
+    return (all ? D.calendar : upcoming()).filter(function (x) { return x.fp === c.fp && (x.routeIds || []).some(function (id) { return c.routeIds.indexOf(id) > -1; }); }).sort(calendarOrder);
+  }
   function concoursLevel(c) {
     var levels = c.routeIds.map(function (id) { var r = D.accessRoutes[id]; return r && typeof r.lvl === 'number' ? r.lvl : null; }).filter(function (l) { return l !== null; });
     return levels.length ? Math.min.apply(null, levels) : { 'A+': 5, A: 4, B: 2, C: 1 }[c.cat];
@@ -1256,7 +1260,8 @@
     var lead = jobs.filter(function (j) { return jobRef(j) === c; })[0] || jobs[0] || null;
     var dot = function (t) { return t && !/[.!?]$/.test(t) ? t + '.' : t; };
     var route = c.routeIds.map(function (id) { return D.accessRoutes[id]; }).filter(Boolean)[0], e = route && (route.examInfo || {})[c.fp] || {};
-    var sessions = upcoming().filter(function (x) { return x.fp === c.fp && (x.routeIds || []).some(function (id) { return c.routeIds.indexOf(id) > -1; }); }).sort(calendarOrder);
+    var sessions = concoursSessions(c), allSessions = sessions.length ? sessions : concoursSessions(c, true), next = sessions[0];
+    var datesHref = '#/calendrier/concours/' + concoursKey(c);
     var favKey = 'concours:' + concoursKey(c), fav = S.favorites.indexOf(favKey) > -1, visitor = !S.done;
     var who = level ? (isParent() && !testLevel ? 'Position de ' + childName() : 'Ma position') + ' · ' + level : 'Entrée en 6e';
     function stop(cls, node, name, body, track) {
@@ -1274,13 +1279,20 @@
         '<p class="trip-dir">' + I.arrow + '<span>' + esc({ E: 'Fonction publique de l’État', T: 'Fonction publique territoriale', H: 'Fonction publique hospitalière' }[c.fp] || D.fps[c.fp]) + '</span></p>' +
         '<h2 class="trip-h no-icon">Prochaines sessions</h2>' + (sessions.length ? '<ul class="trip-sessions">' + sessions.slice(0, 3).map(function (x) {
           return '<li><span>' + esc(x.voie || 'Session') + (x.provisional ? ' · prévisionnel' : '') + '</span><span>' + (x.date ? 'clôture ' + esc(short(x.date)) : esc(x.closeLabel || 'date à venir')) + '</span></li>';
-        }).join('') + '</ul>' + (sessions.length > 3 && lead ? '<a class="link-plain" href="#/calendrier/' + lead.id + '">Voir les ' + sessions.length + ' sessions</a>' : '') : '<p class="trip-meta">Aucune session publiée pour le moment : consulter l’avis officiel.</p>') +
+        }).join('') + '</ul>' + (sessions.length > 3 ? '<a class="link-plain" href="' + datesHref + '">Voir les ' + sessions.length + ' sessions</a>' : '') : '<p class="trip-meta">Aucune session publiée pour le moment : consulter l’avis officiel.</p>') +
         qa('Quelles voies ?', c.voies) + qa('Quels diplômes ?', c.condition) + qa('Quelles épreuves ?', c.epreuves) + qa('Qui organise ?', e.org) + (prepaInStudies ? '' : qa('Comment se préparer ?', prepaText(c))) +
         (c.vigilance ? '<p class="trip-note">' + I.info + '<span>' + sig(dot(c.vigilance)) + '</span></p>' : '') +
         '<details class="trip-more"><summary><span>Lieux et sources</span>' + I.down + '</summary>' +
           '<p class="trip-q">En métropole</p><p class="trip-a">' + esc(e.metro || 'Lieux non précisés : consulter l’avis du concours.') + '</p>' +
           '<p class="trip-q">En outre-mer</p><p class="trip-a">' + esc(e.om || 'Centre non confirmé : consulter l’avis du concours.') + '</p>' +
-          (c.annales ? ext(c.annales.url, 'Annales officielles du concours', 'link-plain') : '') + ext(c.source, 'Page officielle du concours', 'link-plain') + '</details>', 'line') +
+          (c.annales ? ext(c.annales.url, 'Annales officielles du concours', 'link-plain') : '') + ext(c.source, 'Page officielle du concours', 'link-plain') + '</details>' +
+        /* Dates de la prochaine session, puis toutes les sessions du concours. */
+        '<details class="trip-more"><summary><span>Dates des épreuves</span>' + I.down + '</summary>' +
+          (next ? '<p class="trip-q">' + esc((next.provisional ? 'Calendrier prévisionnel' : 'Calendrier') + ' · ' + (next.voie || 'Session')) + '</p>' +
+            '<dl class="trip-dates"><dt>Ouverture</dt><dd>' + esc(next.openLabel || next.open || 'Non publiée') + '</dd><dt>Clôture</dt><dd>' + esc(next.closeLabel || next.date || 'Non publiée') + '</dd>' +
+            '<dt>Écrits ou sélection</dt><dd>' + esc(next.writtenLabel || 'Non publiés') + '</dd><dt>Oraux</dt><dd>' + esc(next.oralLabel || 'Non publiés') + '</dd></dl>'
+            : '<p class="trip-a">Aucune session publiée pour le moment : consulter l’avis officiel.</p>') +
+          (allSessions.length ? '<a class="trip-all-dates" href="' + datesHref + '">Voir toutes les dates du concours</a>' : '') + '</details>', 'line') +
       stop('end', '<span class="trip-pill"></span>', 'Arrivée', c.metiers ? '<p class="trip-meta">' + sig(dot(c.metiers)) + '</p>' : '', '');
     return '<main class="screen top-tight job-page concours-page concours-trip">' + back('#/concours-liste', 'Concours') +
       '<div class="job-hero trip-head"><div class="trip-summary"><span class="trip-modes">' + I.walk + '<span class="trip-sep" aria-hidden="true"></span>' + catBadge(c.cat) + '</span></div>' +
@@ -1306,7 +1318,15 @@
       concoursPrep(job) + stagesPrep(job) + preparationContent(job) + '</main>' + tabbar('metiers');
   };
 
-  screens.calendrier = function (jobId) {
+  screens.calendrier = function (jobId, key) {
+    var concours = jobId === 'concours' && concoursByKey(key);
+    if (concours) {
+      var all = concoursSessions(concours).length ? concoursSessions(concours) : concoursSessions(concours, true);
+      return '<main class="screen top-tight">' + back('#/concours-fiche/' + concoursKey(concours), 'Concours') +
+        '<span class="eyebrow">Calendrier</span><h1 class="sm">Dates des concours</h1><p class="body">' + sig(concours.name) + '</p>' +
+        '<p class="small m0">' + all.length + ' session' + (all.length > 1 ? 's' : '') + ' · sources vérifiées le ' + esc(D.catalogChecked) + '. Certaines dates sont prévisionnelles ; l’avis de l’organisateur fait référence.</p>' +
+        '<div class="stack calendar-list">' + calendarRows(all, 200, null) + '</div></main>' + tabbar('concours-liste');
+    }
     var job = D.jobs.find(function (j) { return j.id === jobId; });
     /* Sur la page d’un métier, on arrive déjà filtré : ni recherche ni filtres, toutes ses sessions à venir (ou passées à défaut). */
     var base = job ? (examsFor(job, false).length ? examsFor(job, false) : examsFor(job, true)) : (S.calView === 'all' ? D.calendar : upcoming());
@@ -1799,6 +1819,7 @@
     var themedJob=['metier','fiche','preparer','sans-concours','etudes','calendrier','annales','ressources-biblio','handicap'].indexOf(r.name)>-1&&r.arg&&jobById(r.arg);
     var theme=themedJob&&themeCategory(themedJob);
     if((r.name==='concours-fiche'||r.name==='concours-test')&&r.arg){var shownConcours=concoursByKey(r.arg);if(shownConcours)theme=shownConcours.cat;}
+    if(r.name==='calendrier'&&r.arg==='concours'&&r.arg2){var datedConcours=concoursByKey(r.arg2);if(datedConcours)theme=datedConcours.cat;}
     var themeKey=theme?catClass(theme).slice(4):null;
     ['Ap','A','B','C','CDD'].forEach(function(k){root.classList.toggle('theme-'+k,k===themeKey);if(document.body&&document.body.classList)document.body.classList.toggle('theme-'+k,k===themeKey);});
     var onboarding=['bienvenue','versants','categories-intro','choix-profil','profil','niveau','interets','traits','situation'].indexOf(r.name)>-1;

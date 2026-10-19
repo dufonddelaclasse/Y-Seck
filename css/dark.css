@@ -684,6 +684,11 @@ html:where(.dark).dark .concours-trip .trip-head { box-shadow:0 -120px 0 120px v
 :where(html.dark) .personal-home .home-concours, :where(html.dark) .personal-home .home-concours:hover { background:#2B2055; color:#E9E9E9; }
 :where(html.dark) .personal-home .home-concours .home-feature-copy b, :where(html.dark) .personal-home .home-concours .home-feature-copy > span, :where(html.dark) .personal-home .home-concours .home-count { color:#E9E9E9; }
 :where(html.dark) .personal-home .home-concours .home-go { background:#292929; color:#E9E9E9; border:0; box-shadow:none; }
+:where(html.dark) .trip-dates dt { color:var(--muted); }
+:where(html.dark) .trip-dates dd { color:var(--ink); }
+:where(html.dark) .trip-all-dates { color:var(--trip-ink, var(--brand)); }
+:where(html.dark) .trip-all-dates:hover { color:var(--trip-ink, var(--brand)); }
+html:where(.dark).dark .trip-all-dates, html:where(.dark).dark .trip-all-dates:hover { color:var(--lt, var(--theme-ink)); }
 
 /* Retouches */
 html.dark { --brand:#8F7BFF; --blue:#A493FF; --accent:#7C66FF; --accent-hover:#9785FF; --theme-btn:var(--brand); --red:#FF6B6B; --surface:#1E1E22; }
