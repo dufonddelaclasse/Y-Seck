@@ -28,7 +28,7 @@
       data[key] = Array.isArray(p[key]) ? (data[key] || []).concat(p[key]) : p[key];
     }); });
     window.PUBLIC_DATA = data;
-    return script('js/catalog.js?v=20261019-54').then(function () { return script('js/app.js?v=20261019-54'); });
+    return script('js/catalog.js?v=20261019-55').then(function () { return script('js/app.js?v=20261019-55'); });
   }).catch(function (error) {
     console.error('Chargement du catalogue :', error);
     root.innerHTML = '<main class="screen"><h1>Chargement interrompu</h1><p>Les données n’ont pas pu être chargées. Vérifiez votre connexion puis réessayez.</p><button class="btn" id="retry-data">Réessayer</button></main>';

@@ -875,7 +875,7 @@
   }
   function parcoursSection(j, refOverride, sharedView) {
     var steps=parcoursSteps(j, refOverride);
-    return '<section class="parcours stack mt-m job-section" aria-labelledby="parcours-title"><h2 id="parcours-title" class="section-heading">' + I.studyMap + '<span>Quelles études choisir</span></h2>' + '<p class="parcours-intro">Voici un parcours conseillé : d’autres parcours sont également possibles pour arriver au même métier.</p>' +
+    return '<section class="parcours stack mt-m job-section" aria-labelledby="parcours-title"><h2 id="parcours-title" class="section-heading">' + I.studyMap + '<span>Quelles études choisir</span></h2>' + '<p class="parcours-intro">Voici un parcours conseillé, d’autres parcours sont également possibles pour arriver au même métier.</p>' +
       '<div class="parcours-card"><ol class="parcours-line">' + steps.map(function (s, i) {
         var mark=i===0?'start':s.terminus?'end':'mid';
         return '<li class="parcours-step '+mark+(s.here?' here':'')+'"'+(s.here?' aria-current="step"':'')+'><span class="parcours-mark" aria-hidden="true">'+(mark==='start'?'<svg viewBox="0 0 12 13"><path fill-rule="evenodd" d="M6 0a5 5 0 0 1 5 5c0 3.2-3.4 6.5-4.6 7.6a.6.6 0 0 1-.8 0C4.4 11.5 1 8.2 1 5a5 5 0 0 1 5-5zm0 3a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/></svg>':'')+'</span><div class="parcours-txt">' +
@@ -1148,7 +1148,7 @@
     var favKey = 'concours:' + concoursKey(c), fav = S.favorites.indexOf(favKey) > -1;
     /* Lien partagé ouvert sans profil : même fiche, sans menu ni favori, avec « Créer mon profil » en bas. */
     var visitor = !S.done;
-    var studies = '<section class="stack mt-m job-section"><h2 class="section-heading">' + I.studyMap + '<span>Quelles études choisir</span></h2>' + '<p class="parcours-intro">Voici un parcours conseillé : d’autres parcours sont également possibles pour arriver au même métier.</p>' + '<div class="ref-panel">' +
+    var studies = '<section class="stack mt-m job-section"><h2 class="section-heading">' + I.studyMap + '<span>Quelles études choisir</span></h2>' + '<p class="parcours-intro">Voici un parcours conseillé, d’autres parcours sont également possibles pour arriver au même métier.</p>' + '<div class="ref-panel">' +
         (c.college ? '<h3 class="no-icon">Au collège</h3><p>' + sig(dot(c.college)) + '</p>' : '') +
         (c.lyceeGeneral ? '<h3 class="no-icon">Au lycée (spécialités conseillées, jamais obligatoires)</h3><p>' + sig(dot(c.lyceeGeneral)) + (c.lyceeTechno ? ' Voie technologique : ' + sig(dot(c.lyceeTechno)) : '') + (c.lyceePro ? ' Voie professionnelle : ' + sig(dot(c.lyceePro)) : '') + '</p>' : '') +
         (c.studies ? '<h3 class="no-icon">Après le bac</h3><p>' + sig(dot(c.studies)) + (c.l1 ? ' 1re année : ' + sig(dot(c.l1)) : '') + (c.l2 ? ' 2e année : ' + sig(dot(c.l2)) : '') + (c.l3 ? ' 3e année : ' + sig(dot(c.l3)) : '') + (c.master ? ' Ensuite : ' + sig(dot(c.master)) : '') + '</p>' : '') + '</div></section>';
