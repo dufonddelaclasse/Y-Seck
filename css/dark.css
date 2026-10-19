@@ -295,7 +295,7 @@ html.dark { color-scheme:dark; }
 :where(html.dark) .update-notice { border:1px solid #222C5A; background:#141417; color:var(--blue); box-shadow:0 4px 20px #00009114; }
 :where(html.dark) .update-notice-action { border:1px solid var(--blue); background:var(--blue); color:#FFF; }
 :where(html.dark) .update-notice-dismiss { border:1px solid #222C5A; background:#292929; color:var(--blue); }
-:root:where(.dark) { --blue:#957AFF; --blue-hover:#9A86F3; --accent:#957AFF; --accent-hover:#9A86F3; --accent-tint:#271E4F; --lilac:#2B2056; --lilac-soft:#271E4F; --sun:#542D20; --sun-soft:#542D20; --bg:#3E3E38; --surface:#292929; --ink:#EAEAEA; --ink-2:#D3D3D8; --muted:#C2C2C6; --line:#53534C; --line-2:#65655E; --soft:#2A2A24; --cat-ap-tint:#372158; --cat-a-tint:#22505B; --cat-b-tint:#215744; --cat-c-tint:#543420; --cat-cdd-tint:#171714; --fit-tint:#3C5420; --fit-ink:#CAEDA1; }
+:root:where(.dark) { --blue:#957AFF; --blue-hover:#9A86F3; --accent:#957AFF; --accent-hover:#9A86F3; --accent-tint:#271E4F; --lilac:#2B2056; --lilac-soft:#271E4F; --sun:#FFCF7A; --sun-soft:#FFCF7A; --bg:#3E3E38; --surface:#292929; --ink:#EAEAEA; --ink-2:#D3D3D8; --muted:#C2C2C6; --line:#53534C; --line-2:#65655E; --soft:#2A2A24; --cat-ap-tint:#372158; --cat-a-tint:#22505B; --cat-b-tint:#215744; --cat-c-tint:#543420; --cat-cdd-tint:#171714; --fit-tint:#3C5420; --fit-ink:#CAEDA1; }
 :where(html.dark) body { background:var(--bg); }
 :where(html.dark) .app { background:var(--bg); }
 @media (min-width:600px) {
@@ -326,16 +326,16 @@ html.dark { color-scheme:dark; }
 :where(html.dark) .interest-option.on { background:var(--lilac); border-color:var(--blue); }
 :where(html.dark) .icon-btn, :where(html.dark) .details-toggle, :where(html.dark) .home-go { border-color:var(--lilac); }
 :where(html.dark) .name-confirm, :where(html.dark) .pin-ico { background:var(--lilac); color:var(--blue); }
-:where(html.dark) .study-level, :where(html.dark) .home-interest { background:var(--sun); border-color:var(--sun); color:#EBC3B5; }
-:where(html.dark) .fit, :where(html.dark) .prep .price { background:var(--sun); color:#EBC3B5; }
+:where(html.dark) .study-level, :where(html.dark) .home-interest { background:var(--sun); border-color:var(--sun); color:#FFE3B5; }
+:where(html.dark) .fit, :where(html.dark) .prep .price { background:var(--sun); color:#FFE3B5; }
 :where(html.dark) .fit.on { background:var(--fit-tint); color:var(--fit-ink); }
 :where(html.dark) .fit.like { background:var(--lilac); color:var(--blue); }
 :where(html.dark) .category-fit { background:var(--fit-tint); color:#D5D5D5; }
 :where(html.dark) .category-fit svg, :where(html.dark) .job-fit-check { color:#8EECA7; }
 :where(html.dark) .job-fit-check { background:#1B9E3E; color:#FFF; }
-:where(html.dark) .filter-hint, :where(html.dark) .update-notice { background:var(--sun-soft); border-color:var(--sun); color:#EBC3B5; }
+:where(html.dark) .filter-hint, :where(html.dark) .update-notice { background:var(--sun-soft); border-color:var(--sun); color:#FFE3B5; }
 :where(html.dark) .update-notice-action { background:var(--blue); border-color:var(--blue); }
-:where(html.dark) .update-notice-dismiss { border-color:var(--sun); color:#EBC3B5; }
+:where(html.dark) .update-notice-dismiss { border-color:var(--sun); color:#FFE3B5; }
 :where(html.dark) .card .dot, :where(html.dark) .callout .pin, :where(html.dark) .bourse .dot { background:var(--blue) !important; }
 :where(html.dark) .card:hover { background:var(--lilac-soft); }
 :where(html.dark) .progress span { background:#595952; }
@@ -408,15 +408,15 @@ html.dark { color-scheme:dark; }
 :where(html.dark) .parcours-step.start .parcours-mark svg { fill:#4C4C4C; }
 :where(html.dark) .parcours-step.here .parcours-mark:not(:empty) svg { fill:var(--theme-ink); }
 :where(html.dark) .parcours-step.here:not(.start) .parcours-mark { background:var(--theme-btn); box-shadow:0 0 0 4px var(--sun); }
-:where(html.dark) .parcours-zone { background:var(--sun); color:#E2AC97; }
+:where(html.dark) .parcours-zone { background:var(--sun); color:#FFCF85; }
 :where(html.dark) .parcours-here { background:#4C4C4C; color:#FFF; }
 :where(html.dark) .parcours-txt b { color:var(--theme-ink); }
 :where(html.dark) .parcours-txt p { color:var(--ink-2); }
 :where(html.dark) .parcours-link { background:#292929; }
-:where(html.dark) .parcours-link.stage { background:var(--sun); color:#EBC3B5; }
+:where(html.dark) .parcours-link.stage { background:var(--sun); color:#FFE3B5; }
 :where(html.dark) .parcours-note { color:var(--muted); }
 :where(html.dark) .preparation-card .catcard .cat.lg { box-shadow:none; }
-:where(html.dark) .category-fit.warn { background:var(--sun); color:#E7B7A5; }
+:where(html.dark) .category-fit.warn { background:var(--sun); color:#FFDDA5; }
 :where(html.dark) .category-fit.warn svg { color:#FFE07A; }
 :where(html.dark) .preparation-card .exam.exam-route { background:transparent; }
 :where(html.dark) .preparation-card .exam-route + .exam-route { border-top:0; }
@@ -617,18 +617,18 @@ html.dark .home-discover .home-go { background:#FFF; color:#3B21C9; }
 html.dark img:not([src$=".svg"]) { filter:brightness(.92); }
 html.dark .book-card img { background:#2A2A2F; }
 html.dark ::placeholder { color:#8A8A92; }
-html.dark { --choice:#6347FF; --choice-ink:#B3A6FF; --sun:#FFE0D6; --sun-soft:#FFE0D6; --yellow:#FFE0D6; --yellow-tint:#FFE0D6; }
-html.dark :is(.study-level,.home-interest,.fit,.prep .price,.filter-hint,.update-notice,.parcours-zone,.parcours-link.stage,.category-fit.warn,.home-tile,.ref-tip,.todo,.bourse,.talents-grant,.tint-yellow) { background:var(--sun) !important; color:#3A160A !important; }
-html.dark :is(.update-notice,.ref-tip,.bourse,.talents-grant,.tint-yellow) * { color:#3A160A; }
-html.dark .update-notice .update-notice-action { background:#3A160A !important; border-color:#3A160A !important; color:#FFE0D6 !important; }
-html.dark .update-notice .update-notice-dismiss { background:transparent; border-color:#3A160A; color:#3A160A; }
-html.dark .personal-home .study-level { background:transparent !important; border-color:var(--sun); color:#FFE0D6 !important; }
+html.dark { --choice:#6347FF; --choice-ink:#B3A6FF; --sun:#FFCF7A; --sun-soft:#FFCF7A; --yellow:#FFCF7A; --yellow-tint:#FFCF7A; }
+html.dark :is(.study-level,.home-interest,.fit,.prep .price,.filter-hint,.update-notice,.parcours-zone,.parcours-link.stage,.category-fit.warn,.home-tile,.ref-tip,.todo,.bourse,.talents-grant,.tint-yellow) { background:var(--sun) !important; color:#3A2600 !important; }
+html.dark :is(.update-notice,.ref-tip,.bourse,.talents-grant,.tint-yellow) * { color:#3A2600; }
+html.dark .update-notice .update-notice-action { background:#3A2600 !important; border-color:#3A2600 !important; color:#FFCF7A !important; }
+html.dark .update-notice .update-notice-dismiss { background:transparent; border-color:#3A2600; color:#3A2600; }
+html.dark .personal-home .study-level { background:transparent !important; border-color:var(--sun); color:#FFCF7A !important; }
 html.dark .home-tile svg, html.dark .home-tile b, html.dark .home-tile span { color:#141414; }
 html.dark .tabbar a, html.dark .tabbar a.on, html.dark .tabbar a svg { color:#FFF; }
-html.dark .category-fit.warn svg, html.dark :is(.study-level,.home-interest,.fit,.parcours-zone,.parcours-link.stage,.ref-tip) svg { color:#3A160A !important; }
+html.dark .category-fit.warn svg, html.dark :is(.study-level,.home-interest,.fit,.parcours-zone,.parcours-link.stage,.ref-tip) svg { color:#3A2600 !important; }
 html.dark .prep-page button.chip:not(.category-choice) { --choice-ink:var(--theme-ink); }
 html.dark :is(.exam-cal,.exam-places) h5 svg { color:currentColor; }
-html.dark .personal-home .study-level svg { color:#FFE0D6 !important; }
+html.dark .personal-home .study-level svg { color:#FFCF7A !important; }
 html.dark .tabbar a.on::before { background:var(--sun); }
 html.dark { --theme-ink:#B3A6FF; --cat-ap-ink:#B9A8FF; --cat-a-ink:#9BA6FF; --cat-b-ink:#6FD6D6; --cat-c-ink:#FFA982; }
 html.dark .app.theme-Ap, html.dark body.theme-Ap { --theme-ink:#B9A8FF; } html.dark .app.theme-A, html.dark body.theme-A { --theme-ink:#9BA6FF; } html.dark .app.theme-B, html.dark body.theme-B { --theme-ink:#6FD6D6; }
