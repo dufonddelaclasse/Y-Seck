@@ -1502,3 +1502,22 @@ a.book-card.external-link, a.book-card.external-link:hover { text-decoration:non
 .app.theme-CDD .parcours-txt > .parcours-here { background:#141414; }
 .parcours-step.here:not(.start) .parcours-mark { background:var(--theme-btn,#141414); }
 html[data-contrast="true"] .parcours-txt > .parcours-here { background:#000; color:#FFF; }
+
+/* ---------- Choix et préférences : un seul trait coloré, sans fond ; choisi : pastille pleine dans la couleur générique, texte blanc ---------- */
+:root { --choice:var(--brand); --choice-ink:var(--brand); }
+:is(button.chip,.opt,.interest-option):not(.category-choice) { background:transparent !important; border:1.5px solid var(--choice-ink) !important; box-shadow:none !important; color:var(--choice-ink) !important; }
+:is(button.chip,.opt,.interest-option):not(.category-choice):hover { background:transparent !important; border-color:var(--choice-ink) !important; }
+:is(button.chip,.opt,.interest-option).on:not(.category-choice), :is(button.chip,.opt,.interest-option).on:not(.category-choice):hover { background:var(--choice) !important; border-color:var(--choice) !important; color:#FFF !important; }
+:is(button.chip,.opt,.interest-option).on:not(.category-choice) :is(span,b,small,svg,.name,.meta,.check,.interest-check) { color:#FFF !important; }
+.prep-page button.chip:not(.category-choice) { --choice:var(--theme-btn,var(--brand)); --choice-ink:var(--theme-btn,var(--brand)); }
+html[data-contrast="true"] :is(button.chip,.opt,.interest-option):not(.category-choice) { --choice:#000; --choice-ink:#000; }
+
+/* ---------- Titres de page : même taille et même graisse que « Bonjour … » de l’espace personnel ---------- */
+.screen:not(.intro-welcome) h1, .screen:not(.intro-welcome) h1.sm, .screen:not(.intro-welcome) .category-heading h1 { font-size:2.125rem; font-weight:700; line-height:1.1; letter-spacing:-.01em; }
+
+/* ---------- Geologica partout, y compris dans les champs et les panneaux ---------- */
+body, input, select, textarea, button, dialog, .sheet { font-family:var(--font); }
+
+/* ---------- Bibliographie : cartes fixes, seul le titre est un lien ---------- */
+.book-card { display:grid; grid-template-columns:66px minmax(0,1fr); align-items:center; gap:16px; padding:14px 16px !important; border:0 !important; border-radius:24px; background:#FFF !important; color:var(--ink); }
+.book-card .book-title a { color:inherit; text-decoration:underline; text-underline-offset:3px; }

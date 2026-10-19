@@ -146,6 +146,15 @@ html.dark .home-discover .home-go { background:#FFF; color:#3B21C9; }
 html.dark img:not([src$=".svg"]) { filter:brightness(.92); }
 html.dark .book-card img { background:#2A2A2F; }
 html.dark ::placeholder { color:#8A8A92; }
+html.dark { --choice:#6347FF; --choice-ink:#B3A6FF; --sun:#FFE6A1; --sun-soft:#FFE6A1; --yellow:#FFE6A1; --yellow-tint:#FFE6A1; }
+html.dark :is(.study-level,.home-interest,.fit,.prep .price,.filter-hint,.update-notice,.parcours-zone,.parcours-link.stage,.category-fit.warn,.home-tile,.ref-tip,.todo,.bourse,.talents-grant,.tint-yellow) { background:var(--sun) !important; color:#2B2200 !important; }
+html.dark :is(.update-notice,.ref-tip,.bourse,.talents-grant,.tint-yellow) * { color:#2B2200; }
+html.dark .update-notice .update-notice-action { background:#2B2200 !important; border-color:#2B2200 !important; color:#FFE6A1 !important; }
+html.dark .update-notice .update-notice-dismiss { background:transparent; border-color:#2B2200; color:#2B2200; }
+html.dark .personal-home .study-level { background:transparent !important; border-color:var(--sun); color:#FFE6A1 !important; }
+html.dark .home-tile svg, html.dark .home-tile b, html.dark .home-tile span { color:#141414; }
+html.dark .tabbar a, html.dark .tabbar a.on, html.dark .tabbar a svg { color:#FFF; }
+html.dark .tabbar a.on::before { background:var(--sun); }
 html.dark .app.theme-Ap { --theme-deep:#B9A8FF; } html.dark .app.theme-A { --theme-deep:#93A0FF; } html.dark .app.theme-B { --theme-deep:#6FD6D6; }
 html.dark .app.theme-C { --theme-deep:#FFA982; } html.dark .app.theme-CDD { --theme-deep:#E2E2E6; }
 html.dark .app.themed .eyebrow, html.dark .app.themed .section-heading { color:var(--theme-deep); }
