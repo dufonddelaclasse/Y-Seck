@@ -114,6 +114,7 @@
 
   /* ---------- Icônes ---------- */
   var I = {
+    studyMap: '<svg class="study-map-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4 3 6.2v13.6L9 18l6 2 6-2.2V4.2L15 6 9 4z"/><path d="M9 4v14M15 6v14"/></svg>',
     trash: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></svg>',
     bookmark: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4z"/></svg>',
     back: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>',
@@ -822,7 +823,7 @@
   }
   function parcoursSection(j, refOverride) {
     var steps=parcoursSteps(j, refOverride);
-    return '<section class="parcours stack mt-m job-section" aria-labelledby="parcours-title"><h2 id="parcours-title" class="section-heading">' + I.parcours + '<span>Quelles études choisir</span></h2>' +
+    return '<section class="parcours stack mt-m job-section" aria-labelledby="parcours-title"><h2 id="parcours-title" class="section-heading">' + I.studyMap + '<span>Quelles études choisir</span></h2>' +
       '<div class="parcours-card"><ol class="parcours-line">' + steps.map(function (s, i) {
         var mark=i===0?'start':s.terminus?'end':'mid';
         return '<li class="parcours-step '+mark+(s.here?' here':'')+'"'+(s.here?' aria-current="step"':'')+'><span class="parcours-mark" aria-hidden="true">'+(mark==='start'?'<svg viewBox="0 0 12 13"><path fill-rule="evenodd" d="M6 0a5 5 0 0 1 5 5c0 3.2-3.4 6.5-4.6 7.6a.6.6 0 0 1-.8 0C4.4 11.5 1 8.2 1 5a5 5 0 0 1 5-5zm0 3a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/></svg>':'')+'</span><div class="parcours-txt">' +
@@ -1037,7 +1038,7 @@
       [general,themed].filter(Boolean).map(function(a){return '<div class="ref-tip"><b>'+esc(a.device)+'</b><p>'+esc(a.advice)+'</p><p class="small">'+esc(a.tip)+'</p><p class="small">Où : '+esc(a.places)+'</p></div>';}).join('')+
       (noNetwork?'<p class="small">'+esc(noNetwork.advice)+'</p>':'')+(search?ext(search.source,'Chercher un stage sur 1 élève 1 stage','link-plain'):'')+'</section>';
   }
-  /* Fiche concours : même gabarit qu’une fiche métier. Études pour y parvenir, carte du concours avec ses dates, métiers liés, puis « Se préparer ». */
+  /* Fiche concours : même gabarit qu’une fiche métier. Carte du concours avec ses dates, études pour y parvenir, métiers liés, puis « Se préparer ». */
   screens['concours-fiche'] = function (key) {
     var c = concoursByKey(key);
     if (!c) return screens.metiers();
@@ -1046,17 +1047,17 @@
     var dot = function (t) { return t && !/[.!?]$/.test(t) ? t + '.' : t; };
     var category = D.categories.filter(function (x) { return x.id === c.cat; })[0];
     var routes = c.routeIds.slice(); routes.fp = c.fp;
-    var studies = '<section class="stack mt-m job-section"><h2 class="section-heading">' + I.parcours + '<span>Quelles études choisir</span></h2><div class="ref-panel">' +
+    var studies = '<section class="stack mt-m job-section"><h2 class="section-heading">' + I.studyMap + '<span>Quelles études choisir</span></h2><div class="ref-panel">' +
         (c.college ? '<h3 class="no-icon">Au collège</h3><p>' + sig(dot(c.college)) + '</p>' : '') +
         (c.lyceeGeneral ? '<h3 class="no-icon">Au lycée (spécialités conseillées, jamais obligatoires)</h3><p>' + sig(dot(c.lyceeGeneral)) + (c.lyceeTechno ? ' Voie technologique : ' + sig(dot(c.lyceeTechno)) : '') + (c.lyceePro ? ' Voie professionnelle : ' + sig(dot(c.lyceePro)) : '') + '</p>' : '') +
         (c.studies ? '<h3 class="no-icon">Après le bac</h3><p>' + sig(dot(c.studies)) + (c.l1 ? ' 1re année : ' + sig(dot(c.l1)) : '') + (c.l2 ? ' 2e année : ' + sig(dot(c.l2)) : '') + (c.l3 ? ' 3e année : ' + sig(dot(c.l3)) : '') + (c.master ? ' Ensuite : ' + sig(dot(c.master)) : '') + '</p>' : '') + '</div></section>';
     return '<main class="screen top-tight job-page concours-page">' + back('#/metiers', 'Métiers') +
       '<div class="row job-meta"><span class="job-hero-cat">' + catBadge(c.cat) + '</span><span class="tag">Concours</span><span class="tag">' + esc(D.fps[c.fp]) + '</span></div>' +
       '<h1>' + sig(c.name) + '</h1>' + (c.domain ? '<p class="body">' + sig(dot(c.domain)) + '</p>' : '') +
-      (lead ? parcoursSection(lead, c) : studies) +
       '<section class="stack mt-m job-section"><h2 class="section-heading">' + I.calendar + '<span>Concours et dates</span></h2>' +
         (lead && category ? preparationCategoryCard(category, lead, routes) : '<div class="ref-panel">' + examRef(c) + '</div>') +
         (c.annales ? ext(c.annales.url, 'Annales officielles du concours', 'link-plain') : '') + ext(c.source, 'Page officielle du concours', 'link-plain') + '</section>' +
+      (lead ? parcoursSection(lead, c) : studies) +
       '<section class="stack mt-m job-section"><h2 class="section-heading">' + I.compass + '<span>Métiers liés</span></h2>' + (jobs.length ? '<div class="list job-cards">' + jobs.slice(0, 40).map(jobRow).join('') + '</div>' : '<p class="body">Les métiers associés figurent dans l’avis du concours.</p>') + '</section>' +
       (lead ? '<a class="btn theme mt-m" href="' + prepHref(lead) + '">' + I.book + 'Se préparer</a>' : '') +
       '<p class="small">Informations indicatives : l’avis de chaque session fait référence.</p></main>' + tabbar('metiers');
