@@ -1435,3 +1435,64 @@ html[data-contrast="true"] :is(.ref-card,.ref-tip,.exam-sessions li) { backgroun
 .home-discover .home-feature-copy b, .home-discover .home-feature-copy > span { color:#FFF; }
 .home-discover .home-go { background:#FFF; color:var(--brand); }
 html[data-contrast="true"] .home-discover { background:#000; color:#FFF; }
+
+/* ---------- Série du 19/10 ---------- */
+/* Barres du haut : même hauteur et même typographie partout ; sur les pages de premier niveau, titre seul dans la couleur générique. */
+.context-bar { min-height:calc(60px + env(safe-area-inset-top,0px)); }
+.context-title { min-height:44px; font:600 .9375rem/1.2 var(--font); }
+.context-bar .context-category { width:32px; height:32px; font-size:.75rem; }
+.context-bar.top-level { grid-template-columns:minmax(0,1fr) auto; padding-left:21px; }
+.context-bar.top-level .context-title { color:var(--brand); }
+body.has-bar .screen > a.back, body.has-bar .topbar > a.back { visibility:hidden; }
+
+/* Filtres : la pastille choisie est seulement entourée, sans changement de fond. */
+.sheet-content button.chip.category-choice.on, .sheet-content button.chip.category-choice.on:hover { background:var(--cat-fill); color:var(--cat-ink); border-color:transparent; box-shadow:0 0 0 3px var(--surface,#FFF), 0 0 0 5px var(--blue); }
+.sheet-content button.chip.category-choice.cat-CDD.on { background:#FFF; color:var(--ink); box-shadow:inset 0 0 0 1.5px #BDBDB8, 0 0 0 3px var(--surface,#FFF), 0 0 0 5px var(--blue); }
+
+/* Explorer : bandeau d’aide affiché une seule fois, bouton des réglages mis en avant. */
+.top-notice { position:fixed; top:0; left:50%; z-index:20; width:calc(100% - 20px); max-width:410px; padding:calc(14px + env(safe-area-inset-top,0px)) 18px 14px; border-radius:0 0 20px 20px; background:var(--brand); color:#FFF; font-size:.9375rem; line-height:1.35; box-shadow:0 8px 24px rgba(20,20,40,.18); transform:translate(-50%,-110%); animation:notice-in .45s cubic-bezier(.2,.8,.2,1) .3s forwards; }
+.top-notice.leave { animation:notice-out .35s ease-in forwards; }
+@keyframes notice-in { to { transform:translate(-50%,8px); } }
+@keyframes notice-out { from { transform:translate(-50%,8px); } to { transform:translate(-50%,-110%); } }
+#filters-open.pulse { animation:pulse-grow 1.1s ease-in-out .5s 4; }
+@keyframes pulse-grow { 0%,100% { transform:scale(1); } 50% { transform:scale(1.22); } }
+@media (prefers-reduced-motion:reduce) { .top-notice { animation:none; transform:translate(-50%,8px); } .top-notice.leave { display:none; } #filters-open.pulse { animation:none; outline:2px solid var(--brand); outline-offset:2px; border-radius:50%; } }
+
+/* Listes en cartes : favoris, métiers liés à un concours, concours de l’explorer. */
+.job-cards.list { border-top:0; display:flex; flex-direction:column; gap:8px; }
+.job-cards .job-row, #jobs .concours-row { min-height:0; padding:14px 14px 14px 12px; border:0 !important; border-radius:32px; background:var(--card-bg); }
+@media (hover:hover) and (pointer:fine) { :where(.app:not(.touch-input)) .job-cards .job-row:hover { background:#F1F1EE; } }
+.list-section { margin:18px 0 2px; font-size:1rem; font-weight:600; }
+.list-section .small { font-weight:400; color:var(--muted); }
+.concours-label { font-size:.75rem; font-weight:600; letter-spacing:.02em; text-transform:uppercase; color:var(--muted); }
+.ref-panel { display:flex; flex-direction:column; gap:10px; padding:16px; border-radius:24px; background:#FFF; }
+.ref-panel > :first-child { margin-top:0; } .ref-panel > :last-child { margin-bottom:0; }
+
+/* Favoris : glisser vers la gauche pour retirer. */
+.swipe-item { position:relative; border-radius:32px; }
+.swipe-item > .job-row { -webkit-user-drag:none; position:relative; z-index:1; width:100%; touch-action:pan-y; transition:transform .25s cubic-bezier(.2,.8,.2,1); user-select:none; -webkit-user-select:none; }
+.swipe-item.swiping > .job-row { transition:none; }
+.swipe-item.open > .job-row, .swipe-item:has(.swipe-delete:focus-visible) > .job-row { transform:translateX(-96px); }
+.swipe-delete { position:absolute; top:0; right:0; bottom:0; width:128px; display:flex; flex-direction:column; align-items:flex-end; justify-content:center; gap:4px; padding:0 20px 0 0; border:0; border-radius:32px; background:var(--red,#E1000F); color:#FFF; font:600 .8125rem var(--font); cursor:pointer; opacity:0; transition:opacity .15s; }
+.swipe-delete span { width:58px; text-align:center; }
+.swipe-delete svg { width:22px; height:22px; margin-right:18px; }
+.swipe-item.open .swipe-delete, .swipe-item.swiping .swipe-delete, .swipe-delete:focus-visible { opacity:1; }
+.fav-list + .btn { margin-top:16px; }
+.btn.danger-solid { background:var(--red,#E1000F); border-color:var(--red,#E1000F); color:#FFF; }
+
+/* Profil : chaque ligne ouvre un choix par le bas ; suppression en simple lien rouge souligné. */
+.profile-rows { display:flex; flex-direction:column; gap:8px; border-top:0; }
+.profile-row { width:100%; display:flex; align-items:center; gap:12px; padding:14px 16px 14px 18px; border:0 !important; border-radius:24px; background:#FFF; color:var(--ink); text-align:left; font:inherit; cursor:pointer; }
+.profile-row .main { display:flex; flex-direction:column; gap:3px; flex:1; min-width:0; }
+.profile-row .meta { font-size:.8125rem; color:var(--muted); }
+.profile-row > svg { flex:none; width:20px; height:20px; color:var(--muted); }
+.danger-link { display:block; margin:14px auto 0; padding:10px 6px; border:0; background:none; color:var(--red,#E1000F); font:500 .9375rem var(--font); text-decoration:underline; text-underline-offset:3px; cursor:pointer; }
+.danger-link:hover { background:none; color:#B0000B; }
+
+/* Bibliographie : cartes blanches sans bordure sur le fond général. */
+.book-list { gap:10px; }
+.book-card, .book-card.external-link { padding:14px 16px !important; border:0 !important; border-radius:24px; background:#FFF !important; }
+a.book-card.external-link, a.book-card.external-link:hover { text-decoration:none !important; color:var(--ink) !important; }
+
+/* Accessibilité : choix de l’apparence. */
+.color-mode .row { flex-wrap:wrap; gap:8px; }

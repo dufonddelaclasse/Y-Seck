@@ -85,7 +85,7 @@ for(const [label,change] of changes){
   assert(t.S.pendingChanges&&hasValidation(t),'Une modification de '+label+' doit proposer la validation.');
   assert(t.saved().pendingChanges&&t.saved().personalProfiles.etu.pendingChanges,'La modification de '+label+' doit être conservée après fermeture.');
   for(const screen of ['profil','niveau','interets','traits','situation']){
-    assert(t.screens[screen]().includes('Valider les modifications'),'Le parcours modifié doit pouvoir être validé sur '+screen+'.');
+    assert(t.screens[screen]().includes('Terminer les modifications'),'Le parcours modifié doit pouvoir être validé sur '+screen+'.');
   }
   const reopened=start(t.saved());
   assert(hasValidation(reopened),'La validation doit rester disponible après réouverture : '+label);
@@ -115,8 +115,8 @@ assert(required.S.pendingChanges);
 const initial=start(personal({done:false}));
 initial.click('level','Bac+3');initial.input('person-name','Nouvel inscrit');
 assert(!initial.S.pendingChanges);
-assert(!initial.screens.profil().includes('Valider les modifications'));
-assert(!initial.screens.niveau().includes('Valider les modifications'));
+assert(!initial.screens.profil().includes('Terminer les modifications'));
+assert(!initial.screens.niveau().includes('Terminer les modifications'));
 
 const siblingA=person({id:'a',name:'Ariane',favorites:['admin-terr']});
 const siblingB=person({id:'b',name:'Basile',level:'Terminale',domains:['Santé'],traits:['aider'],favorites:['gpx']});

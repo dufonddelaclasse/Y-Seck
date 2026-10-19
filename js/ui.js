@@ -26,9 +26,9 @@
   /* Contractuels : document plié, trait épais comme sur la maquette. */
   icons.contract = '<svg class="contract-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h9.5A1.5 1.5 0 0 1 20 4.5v15a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 19.5V8z"/><path d="M9 3v5H4"/><path d="M8 11.5h8M8 14.5h8M8 17.5h4"/></svg>';
   Object.keys(paths).forEach(function (k) { icons[k] = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + paths[k] + '</svg>'; });
-  var dialog, toolbar, cfg, kind = null, returnTo, pendingUrl = '', contextHeading, scrollFrame;
+  var dialog, toolbar, cfg, kind = null, alwaysBar = false, returnTo, pendingUrl = '', contextHeading, scrollFrame;
   function updateContext(){
-    toolbar.hidden=!contextHeading||window.scrollY<=0||contextHeading.getBoundingClientRect().top>=0;
+    toolbar.hidden=!alwaysBar&&(!contextHeading||window.scrollY<=0||contextHeading.getBoundingClientRect().top>=0);
   }
   function scheduleContext(){
     if(scrollFrame)return;
@@ -120,10 +120,16 @@
   function afterRender(options) {
     cfg=options; if(options.changed){syncHistory();if(kind)close();} decorate(options.root);
     options.root.querySelectorAll('a[href]').forEach(function(a){try{var u=new URL(a.href,location.href);if(/^https?:$/.test(u.protocol)&&u.origin!==location.origin){a.classList.add('external-link');if(/(^|\.)gouv\.fr$/.test(u.hostname)||u.hostname==='service-public.fr')a.classList.add('government-link');}}catch(err){/* lien local */}});
-    toolbar.innerHTML = '<button class="icon-btn context-back" type="button" data-ui="back" aria-label="Retour à l’écran précédent">'+icons.back+'</button><button class="context-title" type="button" data-ui="top" aria-label="Revenir au début : ' + esc(options.title) + '">' + esc(options.title) + '</button>' + (options.category ? '<span class="cat context-category '+esc(options.category.className)+'" aria-label="'+(options.category.label==='CDD'?'Emploi contractuel':'Catégorie '+esc(options.category.label))+'">'+(options.category.label==='CDD'?icons.contract:esc(options.category.label))+'</span>' : (options.categories||[]).length?'<span class="context-categories" aria-label="Catégories selon le poste">'+options.categories.map(function(c){return '<span class="cat sm '+esc(c.className)+'">'+esc(c.label)+'</span>';}).join('')+'</span>':'') + (options.isJobs ? '<button class="icon-btn" type="button" data-action="openFilters" aria-label="Régler les filtres métiers">' + icons.settings + '</button><div class="context-summary">' + options.summary + '</div>' : '');
+    /* Pages de premier niveau : titre seul, sans flèche de retour. */
+    toolbar.classList.toggle('top-level', !!options.topLevel);
+    toolbar.innerHTML = (options.topLevel ? '' : '<button class="icon-btn context-back" type="button" data-ui="back" aria-label="Retour à l’écran précédent">'+icons.back+'</button>') + '<button class="context-title" type="button" data-ui="top" aria-label="Revenir au début : ' + esc(options.title) + '">' + esc(options.title) + '</button>' + (options.category ? '<span class="cat context-category '+esc(options.category.className)+'" aria-label="'+(options.category.label==='CDD'?'Emploi contractuel':'Catégorie '+esc(options.category.label))+'">'+(options.category.label==='CDD'?icons.contract:esc(options.category.label))+'</span>' : (options.categories||[]).length?'<span class="context-categories" aria-label="Catégories selon le poste">'+options.categories.map(function(c){return '<span class="cat sm '+esc(c.className)+'">'+esc(c.label)+'</span>';}).join('')+'</span>':'') + (options.isJobs ? '<button class="icon-btn" type="button" data-action="openFilters" aria-label="Régler les filtres métiers">' + icons.settings + '</button><div class="context-summary">' + options.summary + '</div>' : '');
     contextHeading=options.root.querySelector('h1');
+    /* Sous-pages : la barre reste affichée avec le titre de la page actuelle et remplace le lien de retour. */
+    alwaysBar=!options.topLevel&&!options.root.classList.contains('onboarding')&&!!options.root.querySelector('.screen > a.back, .topbar > a.back');
+    if(document.body&&document.body.classList)document.body.classList.toggle('has-bar',alwaysBar);
     updateContext();
     if(kind==='filters')content('Filtrer les métiers',options.filters);
+    if(kind==='profile-field'&&options.profileField)content(options.profileFieldTitle,options.profileField);
     if(kind==='resource-filters')content('Filtrer les ressources',options.resourceFilters);
   }
   window.YSECK_UI = {icons:icons,inclusive:inclusive,init:init,afterRender:afterRender,open:open,close:close,current:function(){return kind;}};
