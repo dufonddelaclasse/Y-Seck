@@ -1965,3 +1965,4 @@ html.dark .ladder-alt-row, html.dark .ladder-alt-row:hover { background:#161616;
 .trip-missing b { font-weight:500; }
 a.trip-official { display:inline; color:var(--ink); text-decoration:underline; text-underline-offset:3px; }
 .trip-missing a.external-link.trip-official, .trip-a a.external-link.trip-official { min-height:0; padding:0; font-size:inherit; color:var(--ink); }
+.trip-expected { margin:8px 0 0; font-size:.9375rem; line-height:1.45; color:var(--muted); }

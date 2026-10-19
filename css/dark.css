@@ -711,6 +711,7 @@ html:where(.dark).dark .ladder-alt-row, html:where(.dark).dark .ladder-alt-row:h
 :where(html.dark) .trip-missing { color:var(--ink); }
 :where(html.dark) a.trip-official { color:var(--ink); }
 :where(html.dark) .trip-missing a.external-link.trip-official, :where(html.dark) .trip-a a.external-link.trip-official { color:var(--ink); }
+:where(html.dark) .trip-expected { color:var(--muted); }
 
 /* Retouches */
 html.dark { --brand:#8F7BFF; --blue:#A493FF; --accent:#7C66FF; --accent-hover:#9785FF; --theme-btn:var(--brand); --red:#FF6B6B; --surface:#1E1E22; }

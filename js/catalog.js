@@ -125,6 +125,8 @@
       (rule.namePattern&&rule.namePattern.test(name));}).map(function(rule){return rule.option.id;});
   });
   D.calendar = P.calendar.filter(function(c){return !c.duplicateOf;});
+  /* Prochaines sessions attendues, quand les dates ne sont pas encore publiées (recherche du 19 octobre 2026). */
+  D.calendarExpected = P.calendarExpected || [];
   D.books = P.books || []; D.bookSource = P.bookSource;
   D.studyResources = P.studyResources || [];
   /* Une collection d’annales citée par plusieurs concours du référentiel est rattachée à chacun. */
