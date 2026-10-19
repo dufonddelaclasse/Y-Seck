@@ -35,9 +35,12 @@
   function profileSignature() { return JSON.stringify(EDITABLE_FIELDS.map(function(k){return S[k];})); }
   function profileNeedsValidation() { return !!(S.done && S.pendingChanges); }
   function profileSubmitLabel(label) { return profileNeedsValidation() ? 'Terminer les modifications' : label; }
-  function profileContinuation(href,label) {
-    return profileNeedsValidation()?'<button type="button" class="btn" data-action="validateProfile">Terminer les modifications</button>':'<a class="btn" href="'+href+'">'+label+'</a>';
+  function profileContinuation(href,label,ready) {
+    if(profileNeedsValidation())return '<button type="button" class="btn" data-action="validateProfile">Terminer les modifications</button>';
+    return ready===false?'<button type="button" class="btn" disabled>'+label+'</button>':'<a class="btn" href="'+href+'">'+label+'</a>';
   }
+  /* Étape facultative : le bouton reste grisé sans choix, un lien discret permet de passer. */
+  function skipStep(href) { return profileNeedsValidation()?'':'<a class="skip-step" href="'+href+'">Passer cette étape</a>'; }
   function validateProfile() {
     if(!identityReady()){navigate(nameReady()?'#/niveau':'#/profil');announce(nameReady()?'Choisissez un niveau pour continuer.':'Renseignez un prénom pour continuer.');return;}
     S.name=S.name.trim();S.pendingChanges=false;profileSnapshot=profileSignature();save();navigate('#/accueil');announce('Modifications enregistrées.');
@@ -134,6 +137,7 @@
   };
 
   Object.assign(I, UI.icons);
+  I.plus = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>';
   I.grid = UI.icons.compass;
   I.layers = UI.icons.book;
 
@@ -475,17 +479,17 @@
 
   screens.interets = function () {
     var n = S.domains.length;
-    var count = n === 0 ? 'Aucun choix : on vous montre tout.' : (n === 1 ? '1 domaine choisi' : n + ' domaines choisis');
+    var count = n === 0 ? 'Aucun domaine choisi' : (n === 1 ? '1 domaine choisi' : n + ' domaines choisis');
     return '<main class="screen">' +
       '<div class="topbar">' + back('#/niveau', 'Retour') + '<span class="eyebrow">Étape 3 / ' + STEPS + '</span></div>' +
       progress(3, STEPS) +
       '<h1 class="mt-l">' + (isParent() ? 'Ce qui attire votre enfant' : 'Ce qui vous attire') + '</h1>' +
-      '<p class="lead">Choisissez autant de domaines que vous voulez.</p>' +
+      '<p class="lead">Choisissez au moins un domaine pour continuer.</p>' +
       '<div class="grid-2 interest-grid mt-s">' + D.domains.map(function (d) {
         var on = S.domains.indexOf(d) > -1;
         return '<button type="button" class="interest-option' + (on ? ' on' : '') + '" aria-pressed="' + on + '"' + attr('action', 'domain') + attr('v', d) + '><span class="interest-name">' + esc(domainLabel(d)) + '</span><span class="interest-check" aria-hidden="true">' + (on ? I.check : '') + '</span></button>';
       }).join('') + '</div></main>' +
-      '<div class="footer"><div class="interest-footer"><span class="small">' + count + '</span><button type="button" class="text-btn" data-action="clearDomains"' + (n ? '' : ' disabled') + '>Effacer</button></div>'+profileContinuation('#/traits','Continuer')+'</div>';
+      '<div class="footer"><div class="interest-footer"><span class="small">' + count + '</span><button type="button" class="text-btn" data-action="clearDomains"' + (n ? '' : ' disabled') + '>Effacer</button></div>'+profileContinuation('#/traits','Continuer',n>0)+(n?'':skipStep('#/traits'))+'</div>';
   };
 
   screens.traits = function () {
@@ -500,8 +504,8 @@
         return '<section class="stack mt-s" aria-label="' + esc(title) + '"><h2 class="h3">' + esc(title) + '</h2><div class="row">' +
           g.items.map(function (t) { return chip('trait', t[0], t[1], S.traits.indexOf(t[0]) > -1); }).join('') + '</div></section>';
       }).join('') +
-      '</main><div class="footer"><span class="small center">' + (n === 0 ? 'Vous pouvez passer cette étape.' : n + ' trait' + (n > 1 ? 's' : '') + ' choisi' + (n > 1 ? 's' : '')) + '</span>' +
-      profileContinuation('#/situation','Continuer')+'</div>';
+      '</main><div class="footer"><span class="small center">' + (n === 0 ? 'Choisissez au moins un trait pour continuer.' : n + ' trait' + (n > 1 ? 's' : '') + ' choisi' + (n > 1 ? 's' : '')) + '</span>' +
+      profileContinuation('#/situation','Continuer',n>0)+(n?'':skipStep('#/situation'))+'</div>';
   };
 
   screens.situation = function () {
@@ -524,7 +528,7 @@
       (S.boursier==='Oui'?talentsFeature('C’est quoi, une Prépa Talents ?',
       '<p>Une préparation <b>gratuite</b> aux concours de catégorie A, A+ et B, dans une université, un IEP ou une école du service public. Plus de 100 en France, outre-mer compris.</p>' +
       '<p>Au programme : cours, entraînements aux épreuves et un·e tuteur·rice qui vous suit toute l’année.</p>','h2',talentIntroAnimate?'talents-enter':''):'') +
-      '</main><div class="footer">'+(profileNeedsValidation()?profileContinuation('#/accueil',''):'<a class="btn" href="#/accueil" data-action="finish">Voir '+(isParent()?'son parcours':'mon parcours')+'</a>')+'</div>';
+      '</main><div class="footer">'+(profileNeedsValidation()?profileContinuation('#/accueil',''):(S.boursier&&S.budget?'<a class="btn" href="#/accueil" data-action="finish">':'<span class="small center">Répondez aux deux questions pour continuer.</span><button type="button" class="btn" disabled>')+'Voir '+(isParent()?'son parcours':'mon parcours')+(S.boursier&&S.budget?'</a>':'</button>'))+'</div>';
   };
 
   /* ---------- Tableau de bord ---------- */
@@ -533,7 +537,6 @@
   function personalHome() {
     var jobs = myJobs();
     return '<main class="screen pt personal-home">' +
-      '<span class="eyebrow">' + (isParent() ? 'Parcours de votre enfant' : 'Votre espace personnel') + '</span>' +
       '<h1>' + (isParent() ? esc(childName()) : (S.name ? 'Bonjour ' + esc(S.name) : 'Votre avenir, à votre rythme')) + '</h1>' +
       (S.level || S.domains.length ? '<div class="home-profile-meta" role="group" aria-label="Niveau d’études et centres d’intérêt" tabindex="0">' +
       (S.level ? '<span class="study-level">' + I.graduation + '<span>' + esc(S.level) + '</span></span>' : '') +
@@ -549,13 +552,16 @@
   screens.enfant = function () { return personalHome(); };
   screens.famille = function () {
     var completed = S.children.filter(function (c) { return c.done; }).length;
-    var favorites = S.children.reduce(function (n, c) { return n + c.favorites.length; }, 0);
-    return '<main class="screen pt"><span class="eyebrow">Parents</span><h1>Mon espace famille</h1>' +
+    /* Même charte que le tableau de bord : une carte par enfant, raccourcis en tuiles. */
+    return '<main class="screen pt personal-home family-home"><h1>Mon espace famille</h1>' +
       '<p class="lead">Accompagnez chaque enfant à son rythme, dans un seul espace.</p>' +
-      '<div class="grid-2"><div class="prep"><b>' + S.children.length + '</b><span>Parcours accompagnés</span></div><div class="prep"><b>' + completed + '</b><span>Profils complétés</span></div></div>' +
-      '<h2 class="mt-m">Les parcours de votre famille</h2>'+(S.children.length?'':'<p class="body">Aucun profil enfant pour le moment. Ajoutez un profil pour commencer.</p>')+'<div class="stack">' + S.children.map(function (c) {
-        return '<button type="button" class="prep family-card" data-action="openChild"' + attr('v', c.id) + '><span class="head"><b>' + esc(c.name || 'Votre enfant') + '</b>' + I.chev + '</span><span class="small">' + esc(c.level || 'Niveau à renseigner') + ' · ' + (c.done ? 'Profil complété' : 'Profil initial') + '</span><span class="row">' + c.domains.map(function (d) { return '<span class="tag">' + esc(domainLabel(d)) + '</span>'; }).join('') + '</span><span class="small">' + c.favorites.length + ' métier' + (c.favorites.length > 1 ? 's' : '') + ' favori' + (c.favorites.length > 1 ? 's' : '') + '</span></button>';
-      }).join('') + '</div><button type="button" class="btn outline" data-action="addChild">Ajouter un profil</button>' +
+      (S.children.length ? '' : '<p class="body">Aucun profil enfant pour le moment. Ajoutez un profil pour commencer.</p>') +
+      '<div class="home-features mt-s">' + S.children.map(function (c) {
+        var name = c.name || 'Votre enfant';
+        return '<button type="button" class="home-feature home-discover family-child" data-action="openChild"' + attr('v', c.id) + '><span class="home-tile home-count">' + esc(name.trim().charAt(0).toUpperCase() || '?') + '</span><span class="home-feature-copy"><b>' + esc(name) + '</b><span>' + esc(c.level || 'Niveau à renseigner') + ' · ' + (c.done ? 'Profil complété' : 'À compléter') + '</span></span><span class="home-go">' + I.arrow + '</span></button>';
+      }).join('') + '</div>' +
+      '<div class="grid-2 home-shortcuts"><a href="#/moi"><span class="home-tile home-count' + countSize(completed) + '">' + completed + '</span><span><b>Complété' + (completed > 1 ? 's' : '') + '</b> <span>sur ' + S.children.length + ' profil' + (S.children.length > 1 ? 's' : '') + '</span></span></a>' +
+      '<a href="#/profil" data-action="addChild"><span class="home-tile">' + I.plus + '</span><span><b>Ajouter</b> <span>un enfant</span></span></a></div>' +
       (S.children.length?'':'<button type="button" class="btn danger" data-action="wipe">Effacer mes données</button>')+
       '<p class="small">Chaque enfant conserve ses choix, son lieu de vie et ses favoris. Les informations restent sur cet appareil.</p></main>' + tabbar('accueil');
   };
@@ -567,7 +573,7 @@
   }
   screens.favoris = function () {
     var list = D.jobs.filter(function (j) { return S.favorites.indexOf(j.id) > -1; });
-    return '<main class="screen pt"><span class="eyebrow">Garder pour plus tard</span><h1>' + (isParent() ? 'Ses favoris' : 'Vos favoris') + '</h1>' + childSelector() +
+    return '<main class="screen pt"><h1>' + (isParent() ? 'Ses favoris' : 'Vos favoris') + '</h1>' + childSelector() +
       (isParent() ? '<p class="small">La sélection de ' + esc(childName()) + '</p>' : '') +
       (list.length ? '<p class="small">Faites glisser une carte vers la gauche pour la retirer.</p>' : '') +
       '<div class="list job-cards fav-list">' + (list.length ? list.map(function (j) { return '<div class="swipe-item"><button type="button" class="swipe-delete" data-action="askUnfavorite"' + attr('v', j.id) + ' aria-label="Retirer ' + esc(j.name) + ' des favoris">' + I.trash + '<span>Retirer</span></button>' + jobRow(j) + '</div>'; }).join('') : '<p class="empty">Aucun métier enregistré. Ouvrez une fiche métier puis choisissez « Ajouter aux favoris ».</p>') + '</div><a class="btn outline" href="#/metiers">Explorer les métiers</a></main>' + tabbar('favoris');
@@ -673,7 +679,7 @@
   }
   screens.metiers = function () {
     return '<main class="screen pt">' +
-      '<span class="eyebrow">Explorer</span><div class="title-row"><h1>' + (isParent() ? 'Ses métiers et concours' : 'Vos métiers et concours') + '</h1><button id="filters-open" type="button" class="icon-btn' + (showFilterNotice ? ' pulse' : '') + '" data-action="openFilters" aria-label="Régler les filtres métiers">' + I.settings + '</button></div>' + childSelector() +
+      '<div class="title-row"><h1>' + (isParent() ? 'Ses métiers et concours' : 'Vos métiers et concours') + '</h1><button id="filters-open" type="button" class="icon-btn' + (showFilterNotice ? ' pulse' : '') + '" data-action="openFilters" aria-label="Régler les filtres métiers">' + I.settings + '</button></div>' + childSelector() +
       (showFilterNotice ? '<div class="top-notice" role="status"><span>Utilisez les réglages pour filtrer les métiers par catégorie.</span></div>' : '') +
       '<div class="row filter-summary" aria-label="Filtres actifs">' + filterSummary() + '</div>' +
       searchField('q','Rechercher un métier','Rechercher un métier',S.q) +
@@ -1396,7 +1402,7 @@
     return body + '<div class="sheet-actions"><button type="button" class="btn" data-ui="close">Fermer</button></div>';
   }
   screens.moi = function () {
-    if(isParent()&&!activeChild())return '<main class="screen pt"><span class="eyebrow">Parents</span><h1>Vos profils</h1><p class="body">Aucun profil enfant pour le moment.</p><button type="button" class="btn" data-action="addChild">Ajouter un profil</button><button type="button" class="danger-link" data-action="wipe">Effacer mes données</button></main>'+tabbar('moi');
+    if(isParent()&&!activeChild())return '<main class="screen pt"><h1>Vos profils</h1><p class="body">Aucun profil enfant pour le moment.</p><button type="button" class="btn" data-action="addChild">Ajouter un profil</button><button type="button" class="danger-link" data-action="wipe">Effacer mes données</button></main>'+tabbar('moi');
     var rows = [
       ['Profil', S.profile ? PROFILE_LABEL[S.profile] : 'Non renseigné'],
       [isParent() ? 'Niveau de votre enfant' : 'Niveau', S.level || 'Non renseigné'],
@@ -1406,7 +1412,7 @@
       ['Budget', S.budget || 'Non renseigné']
     ];
     return '<main class="screen pt">' +
-      '<span class="eyebrow">Profil</span><h1>' + (isParent() ? 'Le profil de ' + esc(childName()) : 'Votre profil') + '</h1>' + childSelector() +
+      '<h1>' + (isParent() ? 'Le profil de ' + esc(childName()) : 'Votre profil') + '</h1>' + childSelector() +
       '<p class="small m0">Touchez une ligne pour modifier votre réponse.</p>' +
       '<div class="list m0 profile-rows">' + rows.map(function (r, i) {
         return '<button type="button" class="list-row profile-row" data-action="editField"' + attr('v', ['profile','level','domains','traits','boursier','budget'][i]) + ' aria-haspopup="dialog"><span class="main"><span class="meta">' + esc(r[0]) + '</span><span class="name sm">' + esc(r[1]) + '</span></span>' + I.chev + '</button>';
@@ -1816,6 +1822,16 @@
     searchTimer = setTimeout(function () { countAnnounce('#jobs .list-row'); }, 600);
   });
 
+  /* Saisie du prénom : l’écran se resserre pour que titre et champ restent au-dessus du clavier. */
+  root.addEventListener('focusin',function(e){
+    if(e.target.id!=='person-name')return;
+    var screen=e.target.closest('.identity-screen');if(screen)screen.classList.add('typing');
+    setTimeout(function(){window.scrollTo(0,0);var sc=document.scrollingElement;if(sc)sc.scrollTop=0;},60);
+  });
+  root.addEventListener('focusout',function(e){
+    if(e.target.id!=='person-name')return;
+    var screen=e.target.closest('.identity-screen');if(screen)screen.classList.remove('typing');
+  });
   root.addEventListener('keydown',function(e){
     if(e.target.id==='person-name'&&e.key==='Enter'&&!e.isComposing&&e.keyCode!==229){e.preventDefault();confirmName();}
   });

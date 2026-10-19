@@ -295,7 +295,7 @@ html.dark { color-scheme:dark; }
 :where(html.dark) .update-notice { border:1px solid #222C5A; background:#141417; color:var(--blue); box-shadow:0 4px 20px #00009114; }
 :where(html.dark) .update-notice-action { border:1px solid var(--blue); background:var(--blue); color:#FFF; }
 :where(html.dark) .update-notice-dismiss { border:1px solid #222C5A; background:#292929; color:var(--blue); }
-:root:where(.dark) { --blue:#957AFF; --blue-hover:#9A86F3; --accent:#957AFF; --accent-hover:#9A86F3; --accent-tint:#271E4F; --lilac:#2B2056; --lilac-soft:#271E4F; --sun:#625225; --sun-soft:#544620; --bg:#3E3E38; --surface:#292929; --ink:#EAEAEA; --ink-2:#D3D3D8; --muted:#C2C2C6; --line:#53534C; --line-2:#65655E; --soft:#2A2A24; --cat-ap-tint:#2C2158; --cat-a-tint:#202C56; --cat-b-tint:#1F5240; --cat-c-tint:#543420; --cat-cdd-tint:#171714; --fit-tint:#3C5420; --fit-ink:#CAEDA1; }
+:root:where(.dark) { --blue:#957AFF; --blue-hover:#9A86F3; --accent:#957AFF; --accent-hover:#9A86F3; --accent-tint:#271E4F; --lilac:#2B2056; --lilac-soft:#271E4F; --sun:#625225; --sun-soft:#544620; --bg:#3E3E38; --surface:#292929; --ink:#EAEAEA; --ink-2:#D3D3D8; --muted:#C2C2C6; --line:#53534C; --line-2:#65655E; --soft:#2A2A24; --cat-ap-tint:#372158; --cat-a-tint:#22505B; --cat-b-tint:#215744; --cat-c-tint:#543420; --cat-cdd-tint:#171714; --fit-tint:#3C5420; --fit-ink:#CAEDA1; }
 :where(html.dark) body { background:var(--bg); }
 :where(html.dark) .app { background:var(--bg); }
 @media (min-width:600px) {
@@ -511,7 +511,7 @@ html.dark { color-scheme:dark; }
 :where(html.dark) .intro-category-fold.tint-cyan { background:var(--cat-b-tint); }
 :where(html.dark) .intro-category-fold.tint-yellow { background:var(--cat-c-tint); }
 :where(html.dark) .intro-employer-fold .employer-icon { color:var(--brand); }
-:root:where(.dark) { --bg:#171714; --card-bg:#2E2E27; }
+:root:where(.dark) { --bg:#2C2C2C; --card-bg:#161616; }
 :where(html.dark) .prep-page .switch-row { background:transparent; border:0; }
 :where(html.dark) .screen > .eyebrow, :where(html.dark) .screen > .back, :where(html.dark) .topbar > .back, :where(html.dark) .topbar > .eyebrow { color:var(--blue); }
 :where(html.dark) .prep-page .back { color:var(--blue); }
@@ -571,6 +571,10 @@ html.dark { color-scheme:dark; }
 :where(html.dark) :is(button.chip,.opt,.interest-option).on:not(.category-choice) :is(span,b,small,svg,.name,.meta,.check,.interest-check) { color:#FFF !important; }
 :where(html.dark) .book-card { border:0 !important; background:#292929 !important; color:var(--ink); }
 :where(html.dark) .book-card .book-title a { color:inherit; }
+:where(html.dark) .btn[disabled], :where(html.dark) .app.onboarding .btn[disabled], :where(html.dark) .intro-footer .btn[disabled] { background:#414141; border-color:#414141; color:#B2B2B2; }
+html:where(.dark).dark .btn[disabled], html:where(.dark).dark .app.onboarding .btn[disabled] { background:#4C4C4C; border-color:#4C4C4C; color:#A7A7A7; }
+:where(html.dark) .skip-step { color:var(--brand); }
+:where(html.dark) .family-child { border:0; }
 
 /* Retouches */
 html.dark { --brand:#8F7BFF; --blue:#A493FF; --accent:#7C66FF; --accent-hover:#9785FF; --theme-btn:var(--brand); --red:#FF6B6B; --surface:#1E1E22; }

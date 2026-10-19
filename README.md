@@ -1,6 +1,6 @@
 # Y-Seck — orientation dans le service public
 
-Application mobile en HTML, CSS et JavaScript : police Geologica, indigo #2500BA pour la navigation, lilas #DAD1FF et jaune #FFE6A1 en accents, fond gris #DBDBD7. Catégories : A+ #714DFF / #D2C7FF, A #0004FF / #D1DBFF, B #28A1A1 / #E0FFF4, C #FF804A / #FFE8D9 ; contractuels en blanc cerclé de gris. La charte est regroupée dans le dernier bloc de `css/style.css`.
+Application mobile en HTML, CSS et JavaScript : police Geologica, indigo #2500BA pour la navigation, lilas #DAD1FF et jaune #FFE6A1 en accents, fond gris #E7E7E7. Catégories : A+ #3C05FF / #DDC7FF, A #0051FF / #BEF1FD, B #0096AD / #CCFFED, C #FF804A / #FFE8D9 ; contractuels en blanc cerclé de gris. La charte est regroupée dans le dernier bloc de `css/style.css`.
 
 ## Lancer la preview
 

@@ -872,7 +872,7 @@ html[data-contrast="true"] .update-notice { background:#FFF; color:#000; border-
 
 /* ==========================================================================
    Charte Y-Seck (octobre 2026) : Geologica, indigo #2500BA, lilas #DAD1FF,
-   jaune #FFE6A1, fond gris #DBDBD7 et couleurs de catégorie.
+   jaune #FFE6A1, fond gris #E7E7E7 et couleurs de catégorie.
    Bloc autonome : le retirer suffit à revenir à la charte précédente.
    ========================================================================== */
 @font-face { font-family:'Geologica'; font-style:normal; font-weight:100 900; font-display:swap; src:url(../fonts/geologica-latin-wght-normal.woff2) format('woff2-variations'), url(../fonts/geologica-latin-wght-normal.woff2) format('woff2'); }
@@ -883,9 +883,9 @@ html[data-contrast="true"] .update-notice { background:#FFF; color:#000; border-
   --lilac:#DAD1FF; --lilac-soft:#EEEAFF; --sun:#FFE6A1; --sun-soft:#FFF4D6;
   --bg:#DBDBD7; --surface:#FFFFFF;
   --ink:#141414; --ink-2:#36363C; --muted:#55555C; --line:#C9C9C4; --line-2:#B9B9B4; --soft:#EDEDEA;
-  --cat-ap:#714DFF; --cat-ap-tint:#D2C7FF; --cat-ap-deep:#4B26E0;
-  --cat-a:#0004FF; --cat-a-tint:#D1DBFF; --cat-a-deep:#0004FF;
-  --cat-b:#28A1A1; --cat-b-tint:#E0FFF4; --cat-b-deep:#156B6B;
+  --cat-ap:#3C05FF; --cat-ap-tint:#DDC7FF; --cat-ap-deep:#3C05FF;
+  --cat-a:#0051FF; --cat-a-tint:#BEF1FD; --cat-a-deep:#0051FF;
+  --cat-b:#0096AD; --cat-b-tint:#CCFFED; --cat-b-deep:#00707F;
   --cat-c:#FF804A; --cat-c-tint:#FFE8D9; --cat-c-deep:#A8461B;
   --cat-cdd:#FFFFFF; --cat-cdd-tint:#F1F1EE; --cat-cdd-deep:#36363C;
   --fit-tint:#EEFFD9; --fit-ink:#3B5E12;
@@ -1341,7 +1341,7 @@ html[data-contrast="true"] .intro-fold { background:#FFF; border:1px solid #000;
    Série du 18 octobre (2) : marges de 10 px, fond #F5F5F1, titres du haut
    uniformes, lien d’accessibilité, rayons concentriques et glissements.
    ========================================================================== */
-:root { --bg:#F5F5F1; --card-bg:#EBEBE6; }
+:root { --bg:#E7E7E7; --card-bg:#F2F2F2; }
 .screen { padding-left:10px; padding-right:10px; }
 .footer { padding-left:10px; padding-right:10px; }
 .screen > :is(h1,.eyebrow,.lead,.body,.back,.small,.topbar,.title-row,.link-plain,p,.notice,.filter-summary,.study-level), .screen .section-heading, .screen .category-heading { padding-left:0; padding-right:0; }
@@ -1521,3 +1521,32 @@ body, input, select, textarea, button, dialog, .sheet { font-family:var(--font);
 /* ---------- Bibliographie : cartes fixes, seul le titre est un lien ---------- */
 .book-card { display:grid; grid-template-columns:66px minmax(0,1fr); align-items:center; gap:16px; padding:14px 16px !important; border:0 !important; border-radius:24px; background:#FFF !important; color:var(--ink); }
 .book-card .book-title a { color:inherit; text-decoration:underline; text-underline-offset:3px; }
+
+/* ==========================================================================
+   Série du 19 octobre : fond #E7E7E7, titres resserrés, onboarding plus
+   léger, boutons grisés tant que rien n’est renseigné, espace famille.
+   ========================================================================== */
+/* Titres : une seule taille pour l’onboarding et les écrans principaux. */
+.screen:not(.intro-welcome) h1, .screen:not(.intro-welcome) h1.sm, .screen:not(.intro-welcome) .category-heading h1 { font-size:1.625rem; line-height:1.15; }
+.app.onboarding .screen > h1.mt-l { margin-top:10px; }
+
+/* Bandes de progression plus fines. */
+.progress { gap:5px; }
+.progress span { height:2px; border-radius:2px; }
+
+/* Bouton indisponible : toujours gris, y compris dans l’onboarding. */
+.btn[disabled], .app.onboarding .btn[disabled], .intro-footer .btn[disabled] { background:#D4D4D4; border-color:#D4D4D4; color:#7A7A7A; cursor:not-allowed; }
+html.dark .btn[disabled], html.dark .app.onboarding .btn[disabled] { background:#2E2E2E; border-color:#2E2E2E; color:#8E8E8E; }
+.skip-step { align-self:center; padding:6px 12px; color:var(--brand); font-size:.875rem; text-decoration:underline; text-underline-offset:3px; }
+
+/* Prénom : clavier ouvert, l’écran se resserre pour garder le titre et le champ visibles. */
+.identity-screen.typing { gap:8px; }
+.identity-screen.typing .notice, .identity-screen.typing .a11y-link { display:none; }
+.identity-screen.typing h1.mt-l { margin-top:4px; }
+.identity-screen.typing .name-entry { margin-top:6px; }
+
+/* Espace famille : cartes et tuiles du tableau de bord. */
+.family-child { width:100%; border:0; font:inherit; text-align:left; cursor:pointer; }
+.family-child .home-tile.home-count { font-size:2rem; }
+.family-home .home-shortcuts { margin-top:2px; }
+
