@@ -1659,3 +1659,9 @@ html.dark .sheet-content button.chip.category-choice[data-action="metCat"]:not(.
 
 /* Profil : « Terminer les modifications » collé au-dessus du menu du bas. */
 .profile-footer { bottom:calc(76px + env(safe-area-inset-bottom,0px)); z-index:4; padding-top:12px; padding-bottom:12px; }
+
+/* Menu du bas : seul l’onglet actif est en couleur, les autres restent gris. */
+.tabbar a, .tabbar a svg { color:#8C8C93; }
+.tabbar a.on, .tabbar a.on svg { color:var(--brand); }
+html[data-contrast="true"] .tabbar a, html[data-contrast="true"] .tabbar a svg { color:#555; }
+html[data-contrast="true"] .tabbar a.on, html[data-contrast="true"] .tabbar a.on svg { color:#000; }

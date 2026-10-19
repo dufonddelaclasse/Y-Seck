@@ -160,7 +160,8 @@ html.dark .update-notice .update-notice-action { background:#3A2600 !important; 
 html.dark .update-notice .update-notice-dismiss { background:transparent; border-color:#3A2600; color:#3A2600; }
 html.dark .personal-home .study-level { background:transparent !important; border-color:var(--sun); color:#FFCF7A !important; }
 html.dark .home-tile svg, html.dark .home-tile b, html.dark .home-tile span { color:#141414; }
-html.dark .tabbar a, html.dark .tabbar a.on, html.dark .tabbar a svg { color:#FFF; }
+html.dark .tabbar a, html.dark .tabbar a svg { color:#8C8C93; }
+html.dark .tabbar a.on, html.dark .tabbar a.on svg { color:#FFF; }
 html.dark .category-fit.warn svg, html.dark :is(.study-level,.home-interest,.fit,.parcours-zone,.parcours-link.stage,.ref-tip) svg { color:#3A2600 !important; }
 html.dark .prep-page button.chip:not(.category-choice) { --choice-ink:var(--theme-ink); }
 html.dark :is(.exam-cal,.exam-places) h5 svg { color:currentColor; }

@@ -606,6 +606,8 @@ html:where(.dark).dark body .update-notice .update-notice-action { background:va
 :where(html.dark) .sheet-content button.chip.category-choice.cat-CDD[data-action="metCat"].on, :where(html.dark) .sheet-content button.chip.category-choice.cat-CDD[data-action="metCat"].on:hover { background:#4C4C4C; color:#FFF; box-shadow:0 0 0 3px var(--surface,#292929), 0 0 0 5px var(--blue); }
 :where(html.dark) .sheet-content button.chip.category-choice.cat-CDD[data-action="metCat"].on svg { color:#FFF; }
 html:where(.dark).dark .sheet-content button.chip.category-choice[data-action="metCat"]:not(.on) { background:var(--surface); }
+:where(html.dark) .tabbar a, :where(html.dark) .tabbar a svg { color:#A3A3A9; }
+:where(html.dark) .tabbar a.on, :where(html.dark) .tabbar a.on svg { color:var(--brand); }
 
 /* Retouches */
 html.dark { --brand:#8F7BFF; --blue:#A493FF; --accent:#7C66FF; --accent-hover:#9785FF; --theme-btn:var(--brand); --red:#FF6B6B; --surface:#1E1E22; }
@@ -624,7 +626,8 @@ html.dark .update-notice .update-notice-action { background:#3A2600 !important; 
 html.dark .update-notice .update-notice-dismiss { background:transparent; border-color:#3A2600; color:#3A2600; }
 html.dark .personal-home .study-level { background:transparent !important; border-color:var(--sun); color:#FFCF7A !important; }
 html.dark .home-tile svg, html.dark .home-tile b, html.dark .home-tile span { color:#141414; }
-html.dark .tabbar a, html.dark .tabbar a.on, html.dark .tabbar a svg { color:#FFF; }
+html.dark .tabbar a, html.dark .tabbar a svg { color:#8C8C93; }
+html.dark .tabbar a.on, html.dark .tabbar a.on svg { color:#FFF; }
 html.dark .category-fit.warn svg, html.dark :is(.study-level,.home-interest,.fit,.parcours-zone,.parcours-link.stage,.ref-tip) svg { color:#3A2600 !important; }
 html.dark .prep-page button.chip:not(.category-choice) { --choice-ink:var(--theme-ink); }
 html.dark :is(.exam-cal,.exam-places) h5 svg { color:currentColor; }
