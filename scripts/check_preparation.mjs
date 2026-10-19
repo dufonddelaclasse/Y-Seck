@@ -111,9 +111,9 @@ assert(singleVariable&&!jobRow(singleVariable).includes('job-categories')&&!jobR
 const purchaseJob=data.jobs.find(j=>j.id==='fpach001');
 assert(!screens.etudes(purchaseJob.id).includes('Rédacteur·rice territorial·e')&&!screens.etudes(purchaseJob.id).includes('Secrétaire administratif·ve'),'L’orientation conserve uniquement les routes de la catégorie attribuée.');
 const classified=data.jobs.filter(j=>j.cat==='V'&&jobCategories(j).length);
-Object.assign(S,{level:null,metDomains:[],metFp:'Tous'});
-for(const cat of ['A+','A','B','C']){S.metCat=cat;const selected=filteredJobs();for(const j of classified)assert.equal(selected.some(x=>x.id===j.id),jobCategories(j).includes(cat),'Tri des catégories attribuées : '+j.id+' '+cat);}
-Object.assign(S,{level:'Doctorat',metCat:'Toutes'});
+Object.assign(S,{level:null,metDomains:[],metFps:null});
+for(const cat of ['A+','A','B','C']){S.metCats=[cat];const selected=filteredJobs();for(const j of classified)assert.equal(selected.some(x=>x.id===j.id),jobCategories(j).includes(cat),'Tri des catégories attribuées : '+j.id+' '+cat);}
+Object.assign(S,{level:'Doctorat',metCats:null});
 S.bookCategory='A+';assert(categoryBooks(communicator).every(b=>(b.categories||['A','A+']).includes('A')),'Une fiche A/B ne prend pas la bibliographie A+ sélectionnée sur une autre page.');
 const inspDates=examsFor(administrator);
 assert(inspDates.some(c=>c.id==='insp-2027-concours-externe'&&c.date<'2026-10-17'&&c.written>'2026-10-17'),'Une clôture passée ne masque pas les épreuves INSP2027 à venir.');
@@ -143,24 +143,29 @@ const variable=data.jobs.find(j=>j.cat==='V');
 assert.equal(prepHref(variable),'#/preparer/'+variable.id);
 assert(screens.preparer(variable.id).includes('<h1>Se préparer</h1>'));
 assert.equal(variable.cat,'V');
-Object.assign(S,{metCat:'CDD',showContracts:true});
+Object.assign(S,{metCats:['CDD']});
 assert.equal(filteredJobs().length,contracts.length);
-S.showContracts=false;
-assert.equal(filteredJobs().length,0);
-S.metCat='Toutes';
+S.metCats=['A+','A','B','C'];
 assert(!filteredJobs().some(isContractJob));
 function click(action,value=null){
   const el={getAttribute(name){return name==='data-action'?action:name==='data-v'?value:null;}};
   listeners.click({target:{closest(selector){return selector==='[data-action]'?el:null;}},detail:0,preventDefault(){}});
 }
 click('metCat','CDD');
-assert.equal(S.showContracts,true);
-assert.equal(filteredJobs().length,contracts.length);
-click('showContracts');
-assert.equal(S.showContracts,false);
-assert.equal(S.metCat,'Toutes');
+assert(S.metCats.includes('CDD')&&filteredJobs().some(isContractJob),'Les contractuels s’ajoutent aux catégories choisies.');
+click('metCat','CDD');
+assert(!S.metCats.includes('CDD')&&!filteredJobs().some(isContractJob));
+S.metCats=['B'];click('metCat','B');
+assert.deepEqual(S.metCats,['B'],'Au moins une catégorie reste choisie.');
+S.level='Doctorat';S.metCats=null;
+assert(!filteredJobs().some(isContractJob)&&!filteredJobs().some(j=>jobCategories(j).length&&jobCategories(j).every(c=>c==='C')),'Au-delà de Bac+3, C et contractuels ne sont pas affichés par défaut.');
+click('metCat','C');
+assert(filteredJobs().some(j=>jobCategories(j).includes('C')),'La catégorie C reste disponible au-delà de Bac+3.');
+S.metCats=null;S.metFps=['E','T'];
+assert(filteredJobs().every(j=>/[ET]/.test(j.fp)),'Plusieurs versants peuvent être choisis.');
+S.metFps=null;
 const filters=jobFilters();
-const labels=['Votre sélection','Catégories','Versants','Afficher les emplois contractuels','Domaines'];
+const labels=['Votre sélection','Catégories','Versants','Domaines'];
 for(let i=1;i<labels.length;i++)assert(filters.indexOf(labels[i-1])<filters.indexOf(labels[i]));
 assert(filters.includes('data-v="CDD"'));
 assert.equal((tabbar('accueil').match(/<a /g)||[]).length,4);
@@ -268,7 +273,7 @@ console.log('Ressources vérifiées :',data.studyResources.length,'liens uniques
   assert(screens.preparer('attache').includes('id="stages"'),'Les élèves de seconde reçoivent les conseils de stage.');
   assert(screens.metier('attache').includes('Voie générale, spécialités conseillées'),'La frise reprend les spécialités conseillées.');
   S.level='Doctorat';
-  Object.assign(S,{domains:['Numérique'],metDomains:['Numérique'],metCat:'Toutes',metFp:'Tous',q:'administrateur de l\'etat'});
+  Object.assign(S,{domains:['Numérique'],metDomains:['Numérique'],metCats:null,metFps:null,q:'administrateur de l\'etat'});
   assert(filteredJobs().some(j=>j.id==='admin-etat'),'La recherche trouve Administrateur·rice de l’État malgré les domaines choisis.');
   S.q='administratrice';assert(filteredJobs().some(j=>j.id==='admin-etat'),'La forme féminine retrouve aussi le métier.');
   S.q='';S.domains=[];S.metDomains=[];

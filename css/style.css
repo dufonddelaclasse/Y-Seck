@@ -1639,3 +1639,23 @@ html { -webkit-tap-highlight-color:transparent; }
 /* Barre d’actions plus basse, collée sous la barre du haut au défilement. */
 .job-page .job-actions { position:sticky; top:var(--context-h,calc(60px + env(safe-area-inset-top,0px))); z-index:7; padding:0 12px; }
 .job-action { min-height:44px; padding:4px 2px; }
+
+/* Recherche : flèche de validation en bout de champ (ferme aussi le clavier). */
+.search { padding-right:6px; }
+.search-go { display:inline-flex; justify-content:center; align-items:center; flex:none; width:38px; height:38px; padding:0; border:0; border-radius:50%; background:var(--brand); color:#FFF; cursor:pointer; -webkit-tap-highlight-color:transparent; }
+.search-go svg { width:18px; height:18px; color:#FFF; }
+.search-go:focus-visible { outline:2px solid var(--brand); outline-offset:2px; }
+html[data-contrast="true"] .search-go { background:#000; }
+
+/* Menu du bas : « Métiers & Concours » tient sur la largeur de l’onglet. */
+.tabbar a { text-align:center; line-height:1.15; }
+
+/* Filtres à choix multiple : catégorie non cochée = contour seul, cochée = pastille pleine. */
+.sheet-content button.chip.category-choice[data-action="metCat"]:not(.on), .sheet-content button.chip.category-choice[data-action="metCat"]:not(.on):hover { background:#FFF; color:var(--cat-fill); box-shadow:inset 0 0 0 2px var(--cat-fill); }
+.sheet-content button.chip.category-choice.cat-CDD[data-action="metCat"]:not(.on) { color:var(--ink); box-shadow:inset 0 0 0 1.5px #BDBDB8; }
+.sheet-content button.chip.category-choice.cat-CDD[data-action="metCat"].on, .sheet-content button.chip.category-choice.cat-CDD[data-action="metCat"].on:hover { background:#141414; color:#FFF; box-shadow:0 0 0 3px var(--surface,#FFF), 0 0 0 5px var(--blue); }
+.sheet-content button.chip.category-choice.cat-CDD[data-action="metCat"].on svg { color:#FFF; }
+html.dark .sheet-content button.chip.category-choice[data-action="metCat"]:not(.on) { background:var(--surface); }
+
+/* Profil : « Terminer les modifications » collé au-dessus du menu du bas. */
+.profile-footer { bottom:calc(76px + env(safe-area-inset-bottom,0px)); z-index:4; padding-top:12px; padding-bottom:12px; }

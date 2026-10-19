@@ -11,8 +11,8 @@
   /* ---------- État ---------- */
   var defaults = {
     profile: null, level: null, domains: [], traits: [], boursier: null, budget: null, done: false, pendingChanges: false,
-    metDomains: null, metCat: 'Toutes', metFp: 'Tous', q: '', calCat: 'Toutes', track: 'Administratif',
-    showContracts: null, contractsV: 2, prepBudget: null, alert: false, openCat: null, region: 'Toutes', talentsAll: false,
+    metDomains: null, metCats: null, metFps: null, q: '', calCat: 'Toutes', track: 'Administratif',
+    prepBudget: null, alert: false, openCat: null, region: 'Toutes', talentsAll: false,
     name: '', location: null, favorites: [], children: [], activeChild: null, personalProfiles: {},
     metMode: 'mine', jobLimit: 60, calFp: 'Tous', calView: 'upcoming', calLimit: 40, calQ: '',
     contrast: false, largeText: false, dysFont: false, colorMode: 'auto', metShow: 'tous', filterHintSeen: false, bookQ: '', bookSubject: 'Toutes', bookCategory: 'A', bookFp: 'Tous',
@@ -55,7 +55,7 @@
     Object.assign(S, blankPerson(), p);
     S.budget = normalizeBudget(S.budget);
     profileSnapshot=profileSignature();
-    S.metDomains = null; S.metMode = 'mine'; S.metCat = 'Toutes'; S.metFp = 'Tous'; S.q = ''; S.jobLimit = 60; S.region = 'Toutes';
+    S.metDomains = null; S.metMode = 'mine'; S.metCats = null; S.metFps = null; S.q = ''; S.jobLimit = 60; S.region = 'Toutes';
     S.prepBudget = null; S.talentsAll = false; S.calCat = 'Toutes'; S.calFp = 'Tous'; S.calQ = ''; S.calLimit = 40;
     locationResults = []; locationStatus = ''; locationQuery = ''; locationSearchId++;
   }
@@ -86,8 +86,6 @@
       var saved=raw?JSON.parse(raw):{};
       var st = Object.assign({}, defaults, saved);
       st.budget = normalizeBudget(st.budget);
-      /* Octobre 2026 : l’affichage des contractuels dépend désormais du niveau tant qu’il n’a pas été choisi. */
-      if (saved.contractsV !== 2) { st.showContracts = null; st.contractsV = 2; }
       ['traits', 'domains', 'favorites', 'children'].forEach(function (k) { if (!Array.isArray(st[k])) st[k] = []; });
       st.personalProfiles = st.personalProfiles || {};
       st.children = st.children.filter(function (c) { return c && c.id; }).map(function (c) { return Object.assign(blankPerson(), c); });
@@ -103,7 +101,10 @@
       /* À chaque ouverture, l'onglet Métiers repart des domaines choisis */
       st.metDomains = null;
       st.metMode = 'mine'; st.jobLimit = 60;
-      if (['Bac+5','Doctorat'].indexOf(st.level) > -1 && st.metCat === 'C') st.metCat = 'Toutes';
+      /* Filtres à choix multiple : les anciens réglages uniques reviennent aux choix par défaut. */
+      ['metCat', 'metFp', 'showContracts', 'contractsV'].forEach(function (k) { delete st[k]; });
+      if (!Array.isArray(st.metCats)) st.metCats = null;
+      if (!Array.isArray(st.metFps)) st.metFps = null;
       return st;
     } catch (e) { return Object.assign({}, defaults, { domains: [], traits: [], favorites: [], children: [], personalProfiles: {} }); }
   }
@@ -193,19 +194,28 @@
   }
   function tabbar(active) {
     if (active === 'prepas' || active === 'concours') active = 'accueil';
-    var tabs = [['accueil', isParent() ? 'Famille' : 'Accueil', I.home], ['metiers', 'Métiers', I.grid], ['favoris', 'Favoris', I.bookmark], ['moi', isParent()&&S.children.length>=2?'Profils':'Profil', I.user]];
+    var tabs = [['accueil', isParent() ? 'Famille' : 'Accueil', I.home], ['metiers', 'Métiers & Concours', I.grid], ['favoris', 'Favoris', I.bookmark], ['moi', isParent()&&S.children.length>=2?'Profils':'Profil', I.user]];
     return '<nav class="tabbar" aria-label="Navigation principale">' + tabs.map(function (t) {
       var on = t[0] === active;
-      return '<a href="#/' + t[0] + '" class="' + (on ? 'on' : '') + '"' + (on ? ' aria-current="page"' : '') + '>' + t[2] + t[1] + '</a>';
+      return '<a href="#/' + t[0] + '" class="' + (on ? 'on' : '') + '"' + (on ? ' aria-current="page"' : '') + '>' + t[2] + esc(t[1]) + '</a>';
     }).join('') + '</nav>';
   }
   function chip(action, value, label, on, extraCls) {
     return '<button type="button" class="chip' + (extraCls ? ' ' + extraCls : '') + ((action === 'metCat' || action === 'calCat') && value !== 'Toutes' ? ' category-choice ' + catClass(value) : '') + (on ? ' on' : '') + '" aria-pressed="' + on + '"' + attr('action', action) + attr('v', value) + '>' + (action === 'metCat' && value === 'CDD' ? '<span>Contractuels</span>' + I.contract : esc(label)) + '</button>';
   }
+  /* Valider une recherche ferme le clavier ; les résultats se mettent déjà à jour pendant la saisie. */
+  function submitSearch(id) {
+    var input = document.getElementById(id); if (!input) return;
+    if (id === 'location-query') { var go = root.querySelector('[data-action="searchLocation"]'); if (go) go.click(); }
+    input.blur();
+    var results = root.querySelector('#jobs, #study-results, #books, .calendar-list');
+    if (results && id !== 'location-query') { var n = results.querySelectorAll('.list-row, .study-card, .book-card').length; announce(n ? n + ' résultat' + (n > 1 ? 's' : '') : 'Aucun résultat'); }
+  }
   function searchField(id, label, placeholder, value) {
     return '<div class="search">' + I.search + '<label class="sr-only" for="' + id + '">' + esc(label) + '</label>' +
-      '<input type="search" id="' + id + '" placeholder="' + esc(placeholder) + '" value="' + esc(value || '') + '" autocomplete="off">' +
-      '<button type="button" class="search-clear" data-action="clearSearch"' + attr('v',id) + ' aria-label="Effacer la recherche"' + (value ? '' : ' hidden') + '>' + I.close + '</button></div>';
+      '<input type="search" id="' + id + '" placeholder="' + esc(placeholder) + '" value="' + esc(value || '') + '" autocomplete="off" enterkeyhint="search">' +
+      '<button type="button" class="search-clear" data-action="clearSearch"' + attr('v',id) + ' aria-label="Effacer la recherche"' + (value ? '' : ' hidden') + '>' + I.close + '</button>' +
+      '<button type="button" class="search-go" data-action="submitSearch"' + attr('v',id) + ' aria-label="Valider la recherche">' + I.arrow + '</button></div>';
   }
 
   /* ---------- Régions (code postal) ---------- */
@@ -317,9 +327,20 @@
     return ['A+','A','B','C','CDD'].filter(function(c){return cats.indexOf(c)>-1;})[0]||null;
   }
   function jobFits(j) { return isOpen(j)||jobCategories(j).some(function(c){return categoryFit(c)!=='';}); }
-  /* Au-delà de Bac+3, contractuels et catégorie C sont masqués par défaut ; les filtres permettent de les afficher. */
-  function contractsShown() { return S.showContracts === null || S.showContracts === undefined ? !(userRank() >= 5) : S.showContracts; }
-  function passesLevelCategory(j, cat) { return isContractJob(j) ? contractsShown() : cat === 'C' || !(userRank() >= 5) || jobCategories(j).some(function (c) { return ['B', 'A', 'A+'].indexOf(c) > -1; }); }
+  /* Filtres à choix multiple. Au-delà de Bac+3, catégorie C et contractuels restent proposés mais ne sont pas cochés par défaut. */
+  var ALL_CATS = ['A+', 'A', 'B', 'C', 'CDD'], ALL_FPS = ['E', 'T', 'H'];
+  function defaultCats() { return userRank() >= 5 ? ['A+', 'A', 'B'] : ALL_CATS.slice(); }
+  function selCats() { return S.metCats || defaultCats(); }
+  function selFps() { return S.metFps || ALL_FPS.slice(); }
+  function passesCats(j, cats) {
+    if (isContractJob(j)) return cats.indexOf('CDD') > -1;
+    var own = jobCategories(j).filter(function (c) { return ['A+', 'A', 'B', 'C'].indexOf(c) > -1; });
+    /* Catégorie encore indéterminée : visible tant qu’aucune catégorie n’est écartée. */
+    if (!own.length) return ['A+', 'A', 'B', 'C'].every(function (c) { return cats.indexOf(c) > -1; });
+    return own.some(function (c) { return cats.indexOf(c) > -1; });
+  }
+  function passesLevelCategory(j) { return passesCats(j, defaultCats()); }
+  function toggled(list, v, all) { var next = list.indexOf(v) > -1 ? list.filter(function (x) { return x !== v; }) : list.concat(v); return all.filter(function (x) { return next.indexOf(x) > -1; }); }
 
   function reachable() {
     var l = S.level;
@@ -603,12 +624,11 @@
   function filteredJobs() {
     var words = searchWords(S.q);
     /* Une recherche porte sur tous les métiers : les domaines présélectionnés ne masquent aucun résultat. */
-    var doms = words.length ? [] : activeDomains();
+    var doms = words.length ? [] : activeDomains(), cats = selCats(), fps = selFps();
     var list = D.jobs.filter(function (j) {
-      if (!passesLevelCategory(j, S.metCat)) return false;
+      if (!passesCats(j, cats)) return false;
       if (doms.length && !matchesDomains(j,doms)) return false;
-      if (S.metCat !== 'Toutes' && jobCategories(j).indexOf(S.metCat) === -1) return false;
-      if (S.metFp !== 'Tous' && j.fp.indexOf(S.metFp) === -1) return false;
+      if (!j.fp.split('').some(function (f) { return fps.indexOf(f) > -1; })) return false;
       if (words.length && !matchesWords(searchText(j), words)) return false;
       return true;
     });
@@ -635,8 +655,8 @@
   function filteredConcours() {
     var words = searchWords(S.q);
     return D.concours.filter(function (c) {
-      if (S.metCat !== 'Toutes' && c.cat !== S.metCat) return false;
-      if (S.metFp !== 'Tous' && c.fp !== S.metFp) return false;
+      if (selCats().indexOf(c.cat) === -1) return false;
+      if (selFps().indexOf(c.fp) === -1) return false;
       if (words.length) { if (!c._search) { var raw = c.name + ' ' + c.metiers + ' ' + c.domain; c._search = ' ' + searchNorm(raw) + ' ' + feminineForms(raw) + ' '; } if (!matchesWords(c._search, words)) return false; }
       return true;
     }).sort(function (a, b) { return ['A+','A','B','C'].indexOf(a.cat) - ['A+','A','B','C'].indexOf(b.cat) || a.name.localeCompare(b.name, 'fr'); });
@@ -660,11 +680,12 @@
   /* Chaque pastille de filtre ouvre la fenêtre des réglages. */
   function filterSummary() {
     var doms = activeDomains();
-    var label = S.metCat === 'Toutes' ? (userRank() >= 5 ? 'A+, A, B' + (contractsShown() ? ' et CDD' : '') : 'Toutes catégories') : (S.metCat==='CDD'?'CDD':'Catégorie '+S.metCat);
+    var cats = selCats(), fps = selFps();
+    var names = cats.map(function (c) { return c === 'CDD' ? 'contractuels' : c; });
+    var label = cats.length === ALL_CATS.length ? 'Toutes catégories' : names.length === 1 ? (cats[0] === 'CDD' ? 'Contractuels' : 'Catégorie ' + cats[0]) : names.slice(0, -1).join(', ') + ' et ' + names[names.length - 1];
     function pill(text, cls) { return '<button type="button" class="tag tag-btn' + (cls || '') + '" data-action="openFilters" aria-haspopup="dialog" aria-label="' + esc(text) + ' : modifier les filtres">' + esc(text) + '</button>'; }
     return pill(doms.length ? doms.length + ' domaine' + (doms.length > 1 ? 's' : '') : 'Tous les domaines') +
-      pill(label, S.metCat === 'Toutes' ? '' : ' fill ' + catClass(S.metCat)) + pill(S.metFp === 'Tous' ? '3 versants' : D.fps[S.metFp]) +
-      (contractsShown()?'':pill('Contractuels masqués'));
+      pill(label, cats.length === 1 ? ' fill ' + catClass(cats[0]) : '') + pill(fps.length === 3 ? '3 versants' : fps.map(function (f) { return D.fps[f]; }).join(', '));
   }
   function resultsLabel() {
     var show = S.metShow || 'tous', n = show === 'concours' ? 0 : filteredJobs().length, c = show === 'metiers' ? 0 : filteredConcours().length;
@@ -676,9 +697,8 @@
     return '<section class="stack"><h3>Votre sélection</h3><div class="row">' +
       chip('forYou', '', isParent() ? 'Pour votre enfant' : 'Pour vous', S.metMode === 'mine') + chip('allDomains', '', 'Tous les domaines', S.metMode === 'all') + '</div></section>' +
       '<section class="stack mt-m"><h3>Affichage</h3><div class="row" role="group" aria-label="Affichage">' + [['tous','Tous'],['metiers','Métiers'],['concours','Concours']].map(function(o){return chip('metShow',o[0],o[1],(S.metShow||'tous')===o[0]);}).join('') + '</div></section>' +
-      '<section class="stack mt-m"><h3>Catégories</h3><div class="row" role="group" aria-label="Catégorie">' + ['Toutes','A+','A','B','C','CDD'].map(function(c){return chip('metCat',c,c==='Toutes'?'Toutes':c,S.metCat===c);}).join('') + '</div></section>' +
-      '<section class="stack mt-m"><h3>Versants</h3><div class="row" role="group" aria-label="Versants">' + ['Tous','E','T','H'].map(function(f){return chip('metFp',f,f==='Tous'?'3 versants':D.fps[f],S.metFp===f);}).join('') + '</div></section>' +
-      '<button type="button" class="switch-row mt-m" role="switch" aria-checked="' + contractsShown() + '" data-action="showContracts"><span>Afficher les emplois contractuels</span><span class="switch" aria-hidden="true"></span></button>' +
+      '<section class="stack mt-m"><h3>Catégories</h3><p class="small m0">Choisissez une ou plusieurs catégories.</p><div class="row" role="group" aria-label="Catégories">' + ALL_CATS.map(function(c){return chip('metCat',c,c,selCats().indexOf(c)>-1);}).join('') + '</div></section>' +
+      '<section class="stack mt-m"><h3>Versants</h3><div class="row" role="group" aria-label="Versants">' + ALL_FPS.map(function(f){return chip('metFp',f,D.fps[f],selFps().indexOf(f)>-1);}).join('') + '</div></section>' +
       '<section class="stack mt-m"><h3>Domaines</h3><div class="row" role="group" aria-label="Domaines">' + order.map(function(d){return chip('metDomain',d,domainLabel(d),doms.indexOf(d)>-1);}).join('') + '</div></section>' +
       '<div class="sheet-actions"><button type="button" class="btn" data-ui="close">Afficher ' + resultsLabel() + '</button></div>';
   }
@@ -1455,7 +1475,6 @@
       '<div class="list m0 profile-rows">' + rows.map(function (r, i) {
         return '<button type="button" class="list-row profile-row" data-action="editField"' + attr('v', ['profile','level','domains','traits','boursier','budget'][i]) + ' aria-haspopup="dialog"><span class="main"><span class="meta">' + esc(r[0]) + '</span><span class="name sm">' + esc(r[1]) + '</span></span>' + I.chev + '</button>';
       }).join('') + '</div>' +
-      (profileNeedsValidation()?'<button type="button" class="btn mt-s" data-action="validateProfile">Terminer les modifications</button>':'') +
       locationForm() +
       (isParent()?'<button type="button" class="danger-link" data-action="deleteChild">Effacer ce profil</button>':'<button type="button" class="danger-link" data-action="wipe">Effacer mes données</button>') +
       '<p class="notice">' + I.lock + '<span>Ces informations sont enregistrées uniquement dans ce navigateur. Elles ne sont envoyées à personne.</span></p>' +
@@ -1464,7 +1483,9 @@
       '<a class="list-row" href="#/confidentialite"><div class="main"><span class="name">Données personnelles</span></div>' + I.chev + '</a>' +
       '<a class="list-row" href="#/accessibilite"><div class="main"><span class="name">Accessibilité et confort de lecture</span></div>' + I.chev + '</a>' +
       '<a class="list-row" href="#/mentions"><div class="main"><span class="name">Mentions légales</span></div>' + I.chev + '</a>' +
-      '</div></main>' + tabbar('moi');
+      '</div></main>' +
+      /* Modifications en attente : bouton fixe au-dessus du menu, comme dans l’onboarding. */
+      (profileNeedsValidation()?'<div class="footer profile-footer"><button type="button" class="btn" data-action="validateProfile">Terminer les modifications</button></div>':'') + tabbar('moi');
   };
 
   screens.confidentialite = function () {
@@ -1707,7 +1728,6 @@
     var v = el.getAttribute('data-v');
     var i, next;
     switch (a) {
-      case 'showContracts': set({showContracts:!contractsShown(),metCat:S.metCat==='CDD'?'Toutes':S.metCat,jobLimit:60}); countAnnounce(); break;
       case 'openPrepCat': var prepJob=el.getAttribute('data-job'); (expandedPrepCategories[prepJob]||(expandedPrepCategories[prepJob]={}))[v]=el.getAttribute('aria-expanded')!=='true'; render(); break;
       case 'openFilters': UI.open('filters','Filtrer les métiers',jobFilters(),el); break;
       case 'jobDetails': UI.open('details','Plus de détails',jobDetails(v),el); break;
@@ -1749,6 +1769,7 @@
         else if (input) { input.select(); document.execCommand('copy'); done(); }
         break;
       }
+      case 'submitSearch': submitSearch(v); break;
       case 'favorite': {
         next = S.favorites.slice(); i = next.indexOf(v);
         if (i > -1) next.splice(i, 1); else next.push(v);
@@ -1787,12 +1808,12 @@
         next = activeDomains().slice(); i = next.indexOf(v);
         if (i > -1) next.splice(i, 1); else next.push(v);
         set({ metDomains: next, metMode: 'custom', jobLimit: 60 }); countAnnounce(); break;
-      case 'discoverJobs': e.preventDefault(); clearTimeout(searchTimer); Object.assign(S,{metDomains:null,metMode:'mine',metCat:'Toutes',metFp:'Tous',q:'',jobLimit:60}); save(); navigate('#/metiers'); break;
-      case 'forYou': set({ metDomains: null, metMode: 'mine', metCat: 'Toutes', metFp: 'Tous', q: '', jobLimit: 60 }); countAnnounce(); break;
+      case 'discoverJobs': e.preventDefault(); clearTimeout(searchTimer); Object.assign(S,{metDomains:null,metMode:'mine',metCats:null,metFps:null,q:'',jobLimit:60}); save(); navigate('#/metiers'); break;
+      case 'forYou': set({ metDomains: null, metMode: 'mine', metCats: null, metFps: null, q: '', jobLimit: 60 }); countAnnounce(); break;
       case 'allDomains': set({ metDomains: [], metMode: 'all', jobLimit: 60 }); countAnnounce(); break;
       case 'moreJobs': set({ jobLimit: S.jobLimit + 60 }); break;
-      case 'metCat': set({ metCat: v, showContracts:v==='CDD'?true:S.showContracts, jobLimit: 60 }); countAnnounce(); break;
-      case 'metFp': set({ metFp: v, jobLimit: 60 }); countAnnounce(); break;
+      case 'metCat': { var nc = toggled(selCats(), v, ALL_CATS); if (!nc.length) { announce('Gardez au moins une catégorie.'); break; } set({ metCats: nc, jobLimit: 60 }); countAnnounce(); break; }
+      case 'metFp': { var nf = toggled(selFps(), v, ALL_FPS); if (!nf.length) { announce('Gardez au moins un versant.'); break; } set({ metFps: nf, jobLimit: 60 }); countAnnounce(); break; }
       case 'calCat': set({ calCat: v }); countAnnounce(); break;
       case 'calFp': set({ calFp: v, calLimit: 40 }); break;
       case 'calView': set({ calView: v, calLimit: 40 }); break;
@@ -1882,6 +1903,7 @@
   });
   root.addEventListener('keydown',function(e){
     if(e.target.id==='person-name'&&e.key==='Enter'&&!e.isComposing&&e.keyCode!==229){e.preventDefault();confirmName();}
+    if(e.target.type==='search'&&e.key==='Enter'&&!e.isComposing&&e.keyCode!==229){e.preventDefault();submitSearch(e.target.id);}
   });
   root.addEventListener('submit',function(e){
     if(e.target.id==='identity-form'){e.preventDefault();confirmName(true);return;}
