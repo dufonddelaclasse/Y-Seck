@@ -206,8 +206,9 @@
   /* Valider une recherche ferme le clavier ; les résultats se mettent déjà à jour pendant la saisie. */
   function submitSearch(id) {
     var input = document.getElementById(id); if (!input) return;
-    if (id === 'location-query') { var go = root.querySelector('[data-action="searchLocation"]'); if (go) go.click(); }
     input.blur();
+    /* Commune : Entrée ou la flèche lancent la même recherche que « Rechercher la commune ». */
+    if (id === 'location-query') { searchLocation(); return; }
     var results = root.querySelector('#jobs, #study-results, #books, .calendar-list');
     if (results && id !== 'location-query') { var n = results.querySelectorAll('.list-row, .study-card, .book-card').length; announce(n ? n + ' résultat' + (n > 1 ? 's' : '') : 'Aucun résultat'); }
   }
@@ -248,7 +249,7 @@
   var locationResults = [], locationStatus = '', locationQuery = '', locationSearchId = 0, communes = null;
   function locationForm() {
     return '<section class="stack mt-m"><h2 class="h3">' + (isParent() ? 'Son lieu de vie' : 'Votre lieu de vie') + '</h2><p class="small m0">' + (S.location ? esc(S.location.label) : 'Ajoutez une commune pour classer les Prépas Talents par proximité.') + '</p>' +
-      searchField('location-query','Commune ou code postal','Ex. : Lyon ou 69003',locationQuery) + '<button type="button" class="btn outline" data-action="searchLocation">Rechercher la commune</button>' +
+      searchField('location-query','Commune ou code postal','Ex. : Lyon ou 69003',locationQuery) + (S.location ? '' : '<button type="button" class="btn outline" data-action="searchLocation">Rechercher la commune</button>') +
       '<p class="small m0" role="status">' + esc(locationStatus) + '</p>'+(locationResults.length?'<ul class="location-results" aria-label="Communes proposées">'+locationResults.map(function(c,i){return '<li><button type="button" class="location-option" data-action="selectLocation"'+attr('v',i)+'><span class="location-name">'+esc(c.name||c.label)+'</span>'+(c.postalCodes?'<span class="location-postcodes">'+esc(c.postalCodes.join(', '))+'</span>':'')+'</button></li>';}).join('')+'</ul>':'')+
       (S.location ? '<button type="button" class="text-btn" data-action="clearLocation">Retirer la commune</button>' : '') +
       '<p class="small m0">La recherche et le calcul des distances se font sur cet appareil. La commune saisie n’est transmise à aucun service externe.</p></section>';
