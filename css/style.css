@@ -1718,3 +1718,10 @@ html[data-contrast="true"] :is(.talents-feature.talents-split,.bourse) { backgro
 .app.onboarding .screen > h1.mt-l, .app.onboarding .screen > .topbar + h1, .app.onboarding .screen > .progress + h1 { margin-top:0; }
 .app.onboarding .screen > .progress { margin-top:-4px; }
 .app.onboarding .screen > .category-heading { margin-top:0; }
+
+/* Comprendre 1/2 et 2/2 : « Bon à savoir » plus petit, sans encadré blanc ; lien d’accessibilité juste en dessous, visible. */
+.intro-screen .callout, .category-screen .callout { font-size:.8125rem; line-height:1.4; }
+.category-screen .callout.tint-blue { background:transparent !important; border:0 !important; padding-left:6px; padding-right:6px; }
+.app.onboarding .a11y-link { margin:4px auto 0; top:0; }
+.intro-screen .callout, .category-screen .callout { padding-top:10px; padding-bottom:10px; }
+.app.onboarding .footer { padding-bottom:calc(16px + env(safe-area-inset-bottom,0px)); }

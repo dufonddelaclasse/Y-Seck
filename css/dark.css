@@ -630,6 +630,7 @@ html:where(.dark).dark .prep.hi.talents-feature { background:var(--surface); }
 :where(html.dark) .talents-split .talents-grant :is(p,b) { color:var(--ink) !important; }
 :where(html.dark) .bourse { border:1.5px solid #345D23 !important; }
 html:where(.dark).dark :is(.talents-feature.talents-split,.prep.hi.talents-feature) { background:var(--surface) !important; }
+:where(html.dark) .category-screen .callout.tint-blue { background:transparent !important; border:0 !important; }
 
 /* Retouches */
 html.dark { --brand:#8F7BFF; --blue:#A493FF; --accent:#7C66FF; --accent-hover:#9785FF; --theme-btn:var(--brand); --red:#FF6B6B; --surface:#1E1E22; }
