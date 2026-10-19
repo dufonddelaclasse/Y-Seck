@@ -1695,3 +1695,9 @@ html.dark #jobs :is(.job-row,.concours-row) { background:var(--surface); }
 .btn.btn-bare svg { width:20px; height:20px; color:currentColor; }
 /* Fiche concours : même barre d’actions que la fiche métier. */
 .concours-page .job-actions { justify-content:space-evenly; }
+
+/* Case Prépa Talents : gris plus clair que le fond, contour vert tendre. */
+.prep.hi.talents-feature, .prep-page .prep.hi.talents-feature { background:#F2F2F2; color:var(--ink); border:1.5px solid #C8FFB2 !important; }
+.prep.hi.talents-feature :is(h2,h3,p,.more) { color:var(--ink); }
+html.dark .prep.hi.talents-feature { background:var(--surface); }
+html[data-contrast="true"] .prep.hi.talents-feature { background:#FFF; border:1px solid #000 !important; }

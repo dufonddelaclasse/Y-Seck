@@ -620,6 +620,9 @@ html:where(.dark).dark .sheet-content button.chip.category-choice[data-action="m
 html:where(.dark).dark #jobs :is(.job-row,.concours-row) { background:var(--surface); }
 :where(html.dark) .btn.btn-bare, :where(html.dark) .btn.btn-bare:hover { background:transparent !important; border:0 !important; box-shadow:none; color:var(--theme-ink,var(--brand)); }
 :where(html.dark) .btn.btn-bare svg { color:currentColor; }
+:where(html.dark) .prep.hi.talents-feature, :where(html.dark) .prep-page .prep.hi.talents-feature { background:#161616; color:var(--ink); border:1.5px solid #345D23 !important; }
+:where(html.dark) .prep.hi.talents-feature :is(h2,h3,p,.more) { color:var(--ink); }
+html:where(.dark).dark .prep.hi.talents-feature { background:var(--surface); }
 
 /* Retouches */
 html.dark { --brand:#8F7BFF; --blue:#A493FF; --accent:#7C66FF; --accent-hover:#9785FF; --theme-btn:var(--brand); --red:#FF6B6B; --surface:#1E1E22; }
