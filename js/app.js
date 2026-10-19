@@ -137,6 +137,7 @@
   };
 
   Object.assign(I, UI.icons);
+  I.send = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 3 10 14"/><path d="M21 3 14.5 21l-4.5-7-7-4.5z"/></svg>';
   I.plus = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>';
   I.grid = UI.icons.compass;
   I.layers = UI.icons.book;
@@ -827,7 +828,7 @@
     }
     return step;
   }
-  function parcoursSection(j, refOverride) {
+  function parcoursSection(j, refOverride, sharedView) {
     var steps=parcoursSteps(j, refOverride);
     return '<section class="parcours stack mt-m job-section" aria-labelledby="parcours-title"><h2 id="parcours-title" class="section-heading">' + I.studyMap + '<span>Quelles études choisir</span></h2>' +
       '<div class="parcours-card"><ol class="parcours-line">' + steps.map(function (s, i) {
@@ -835,12 +836,40 @@
         return '<li class="parcours-step '+mark+(s.here?' here':'')+'"'+(s.here?' aria-current="step"':'')+'><span class="parcours-mark" aria-hidden="true">'+(mark==='start'?'<svg viewBox="0 0 12 13"><path fill-rule="evenodd" d="M6 0a5 5 0 0 1 5 5c0 3.2-3.4 6.5-4.6 7.6a.6.6 0 0 1-.8 0C4.4 11.5 1 8.2 1 5a5 5 0 0 1 5-5zm0 3a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/></svg>':'')+'</span><div class="parcours-txt">' +
           (s.here?'<span class="parcours-here">'+(isParent()?'Ici aujourd’hui':'Vous êtes ici')+'</span>':'')+'<span class="parcours-head"><span class="parcours-zone">'+esc(s.zone)+'</span><b>' + sig(s.title) + '</b></span>' + (s.text ? '<p>' + sig(s.text) + '</p>' : '') +
           (s.links.length ? '<span class="parcours-links">' + s.links.map(function (l) { return '<span class="parcours-link ' + l.kind + '">' + esc(l.label) + '</span>'; }).join('') + '</span>' : '') + '</div></li>';
-      }).join('') + '</ol><p class="parcours-note">Parcours conseillé ' + (isParent() ? 'pour ' + esc(childName()) : 'depuis votre niveau') + ', à titre indicatif : les conditions exactes figurent dans l’avis du concours.</p></div></section>';
+      }).join('') + '</ol><p class="parcours-note">Parcours conseillé ' + (sharedView ? 'du collège au métier' : isParent() ? 'pour ' + esc(childName()) : 'depuis votre niveau') + ', à titre indicatif : les conditions exactes figurent dans l’avis du concours.</p></div></section>';
   }
   screens.metier = function (id) {
     var j = D.jobs.filter(function (x) { return x.id === id; })[0];
     if (!j) return screens.metiers();
-    var tint = { 'A+': 'tint-blue', A: 'tint-mint', B: 'tint-cyan', C: 'tint-yellow', X: 'tint-cyan', V: 'tint-cyan' };
+    var dates = isContractJob(j) ? [] : examsFor(j);
+    var shared = sharedTraits(j);
+    var fav=S.favorites.indexOf(j.id) > -1;
+    return '<main class="screen top-tight job-page">' + back('#/metiers', 'Métiers') + jobIntro(j) +
+      (shared.length ? '<div class="job-match"><span class="job-match-dot" aria-hidden="true"></span><p><span>' + (isParent() ? 'Lui ressemble' : 'Vous ressemble') + ' :</span> ' + esc(shared.map(traitLabel).join(', ').toLowerCase()) + '</p></div>' : '') +
+      '<div class="job-actions' + (shared.length ? '' : ' alone') + '">' +
+        '<button type="button" class="job-action" data-action="jobDetails"' + attr('v',j.id) + '>' + I.info + '<span>Plus de détails</span></button>' +
+        '<button type="button" class="job-action" data-action="favorite"' + attr('v', j.id) + ' aria-pressed="' + fav + '">' + I.bookmark + '<span>' + (fav ? 'Retirer des favoris' : 'Ajouter en favoris') + '</span></button>' +
+        '<button type="button" class="job-action" data-action="share"' + attr('v', j.id) + '>' + I.send + '<span>Partager</span></button>' +
+      '</div>' +
+      parcoursSection(j) + jobConcours(j, dates) + jobLadder(j) +
+      '<a class="btn theme mt-m" href="' + prepHref(j) + '">' + (isContractJob(j) ? I.route + 'Entrer sans concours' : I.book + 'Se préparer') + '</a>' +
+      ext('https://www.fonction-publique.gouv.fr/toutes-les-publications/repertoire-commun-des-metiers-de-la-fonction-publique', 'Consulter la source métier sur fonction-publique.gouv.fr', 'link-plain') + '</main>' + tabbar('metiers');
+  };
+  /* Blocs communs à la fiche complète et à la fiche partagée. */
+  function jobIntro(j) {
+    return '<div class="row job-meta" role="group" aria-label="Catégorie et centres d’intérêt" tabindex="0"><span class="job-hero-cat">' + jobBadges(j) + '</span>' + (j.cat==='V'?'<span class="tag">Selon le poste</span>':'') +
+      (j.interests || [j.domain]).map(function (d) { return '<span class="tag">' + esc(domainLabel(d)) + '</span>'; }).join('') + '</div>' +
+      '<h1>' + esc(j.name) + '</h1>' +
+      '<p class="body">' + esc(j.desc.length>300?j.desc.slice(0,297).replace(/\s+\S*$/,'')+'…':j.desc) + '</p>';
+  }
+  function jobConcours(j, dates) {
+    if (isContractJob(j)) return '';
+    var cats=D.categories.filter(function(c){return jobCategories(j).indexOf(c.id)>-1;});
+    return '<section class="stack mt-m job-section" aria-labelledby="concours-title"><h2 id="concours-title" class="section-heading">' + I.calendar + '<span>Concours et dates</span></h2>' +
+      (recruitmentNote(j) || (cats.length?'<div class="stack">' + cats.slice().reverse().sort(function(a,b){return ['A+','A','B','C'].indexOf(a.id)-['A+','A','B','C'].indexOf(b.id);}).map(function(c){return preparationCategoryCard(c,j);}).join('') + '</div>':'<p class="body">La catégorie et le corps d’accès à ce métier restent à préciser selon le poste. Consultez les conditions de l’offre de recrutement.</p>')) +
+      (dates.length?'<a class="link-underline" href="#/calendrier/'+j.id+'">Toutes les dates des concours ('+dates.length+')</a>':'') + '</section>';
+  }
+  function jobLadder(j) {
     var ladder = careerLadder(j) || j.ladder;
     if (!ladder) {
       if (j.cat === 'C') ladder = [[j.name, 'C'], ['concours interne ou promotion'], ['Poste de catégorie B', 'B']];
@@ -850,30 +879,35 @@
       else if (j.rmfpCode) ladder = [[j.name, 'Métier'], ['formation, expérience et mobilité'], ['Évolution selon le corps et l’employeur', 'Selon le poste']];
       else ladder = [[j.name, 'Contrat'], ['concours interne selon les conditions'], ['Fonctionnaire titulaire', 'A, B ou C']];
     }
-    var dates = isContractJob(j) ? [] : examsFor(j);
-    var shared = sharedTraits(j);
-    var cats=D.categories.filter(function(c){return jobCategories(j).indexOf(c.id)>-1;});
-    var fav=S.favorites.indexOf(j.id) > -1;
-    return '<main class="screen top-tight job-page">' + back('#/metiers', 'Métiers') +
-      '<div class="row job-meta" role="group" aria-label="Catégorie et centres d’intérêt" tabindex="0"><span class="job-hero-cat">' + jobBadges(j) + '</span>' + (j.cat==='V'?'<span class="tag">Selon le poste</span>':'') +
-      (j.interests || [j.domain]).map(function (d) { return '<span class="tag">' + esc(domainLabel(d)) + '</span>'; }).join('') + '</div>' +
-      '<h1>' + esc(j.name) + '</h1>' +
-      '<p class="body">' + esc(j.desc.length>300?j.desc.slice(0,297).replace(/\s+\S*$/,'')+'…':j.desc) + '</p>' +
-      '<button type="button" class="btn fav" data-action="favorite"' + attr('v', j.id) + ' aria-pressed="' + fav + '">' + I.bookmark + (fav ? 'Retirer des favoris' : 'Ajouter aux favoris') + '</button>' +
-      '<button type="button" class="btn theme" data-action="jobDetails"' + attr('v',j.id) + '>' + I.info + 'Plus de détails</button>' +
-      (shared.length ? '<div class="callout"><span class="pin"></span><p>' + (isParent() ? 'Lui ressemble' : 'Vous ressemble') + ' : ' + esc(shared.map(traitLabel).join(', ').toLowerCase()) + '.</p></div>' : '') +
-      parcoursSection(j) +
-      (isContractJob(j) ? '' : '<section class="stack mt-m job-section" aria-labelledby="concours-title"><h2 id="concours-title" class="section-heading">' + I.calendar + '<span>Concours et dates</span></h2>' +
-        (recruitmentNote(j) || (cats.length?'<div class="stack">' + cats.slice().reverse().sort(function(a,b){return ['A+','A','B','C'].indexOf(a.id)-['A+','A','B','C'].indexOf(b.id);}).map(function(c){return preparationCategoryCard(c,j);}).join('') + '</div>':'<p class="body">La catégorie et le corps d’accès à ce métier restent à préciser selon le poste. Consultez les conditions de l’offre de recrutement.</p>')) +
-        (dates.length?'<a class="btn outline" href="#/calendrier/'+j.id+'">Toutes les dates des concours ('+dates.length+')</a>':'') + '</section>') +
-      '<section class="stack mt-m job-section"><h2 class="section-heading">' + I.growth + '<span>Évoluer</span></h2><div class="ladder">' + ladder.map(function (r) {
+    return '<section class="stack mt-m job-section"><h2 class="section-heading">' + I.growth + '<span>Évoluer</span></h2><div class="ladder">' + ladder.map(function (r) {
         if (r.length === 1) return '<div class="via">↓ ' + esc(r[0]) + '</div>';
         var categories=String(r[1]).split(/\s*(?:,|\/|\bou\b)\s*/);
         var known=categories.length&&categories.every(function(c){return ['A+','A','B','C','CDD'].indexOf(c)>-1;});
         return '<div class="rung"><span>' + esc(r[0]) + '</span>'+(known?'<span class="rung-categories">'+categories.map(function(c){return catBadge(c,'sm');}).join('<span class="sr-only">ou </span>')+'</span>':'<small>'+esc(r[1])+'</small>')+'</div>';
-      }).join('') + '</div></section>' +
-      '<a class="btn theme mt-m" href="' + prepHref(j) + '">' + (isContractJob(j) ? I.route + 'Entrer sans concours' : I.book + 'Se préparer') + '</a>' +
-      ext('https://www.fonction-publique.gouv.fr/toutes-les-publications/repertoire-commun-des-metiers-de-la-fonction-publique', 'Consulter la source métier sur fonction-publique.gouv.fr', 'link-plain') + '</main>' + tabbar('metiers');
+      }).join('') + '</div></section>';
+  }
+
+  /* ---------- Fiche partagée : version courte, lisible sans profil ---------- */
+  function shareUrl(id) { return location.href.split('#')[0] + '#/fiche/' + id; }
+  /* Le message accompagne toujours le lien : certaines applications ignorent le champ « url » seul. */
+  function shareMessage(j) { return 'Je pense que ce métier de la fonction publique peut t’intéresser : ' + j.name + '. Études, concours et évolution, tout est sur la fiche Y-Seck :'; }
+  function shareJob(id, trigger) {
+    var j = jobById(id); if (!j) return;
+    var url = shareUrl(id), full = shareMessage(j) + '\n' + url;
+    if (navigator.share) { navigator.share({ title: j.name + ' · Y-Seck', text: full }).catch(function () { /* partage annulé */ }); return; }
+    UI.open('share', 'Partager ce métier', '<p class="body">Le message et le lien s’ouvrent sur n’importe quel smartphone, sans profil.</p>' +
+      '<textarea class="share-url" rows="4" readonly aria-label="Message à envoyer">' + esc(full) + '</textarea>' +
+      '<div class="sheet-actions"><button type="button" class="btn" data-action="copyShare"' + attr('v', full) + '>Copier le message</button>' +
+      '<a class="btn outline" href="mailto:?subject=' + encodeURIComponent(j.name + ' · Y-Seck') + '&body=' + encodeURIComponent(full) + '">Envoyer par e-mail</a></div>', trigger);
+  }
+  screens.fiche = function (id) {
+    var j = jobById(id);
+    if (!j) return screens[S.done ? 'accueil' : 'bienvenue']();
+    var exam = !isContractJob(j) && (jobRoutes(j).length || D.categories.some(function (c) { return jobCategories(j).indexOf(c.id) > -1; }));
+    return '<main class="screen job-page shared-job">' + jobIntro(j) +
+      parcoursSection(j, null, true) + jobConcours(j, isContractJob(j) ? [] : examsFor(j)) + jobLadder(j) +
+      '<a class="btn theme mt-m" href="#/bienvenue">' + (exam ? 'Créer un compte pour préparer le concours' : 'Créer un compte pour continuer') + '</a>' +
+      '</main><div class="footer share-footer"><a class="btn" href="#/bienvenue">Créer mon profil</a></div>';
   };
 
   /* ---------- Concours : catégories dépliables ---------- */
@@ -1515,6 +1549,8 @@
     document.documentElement.dataset.largeText = String(!!S.largeText);
     document.documentElement.dataset.dysFont = String(!!S.dysFont);
     var r = route();
+    /* Une fiche partagée s’ouvre en version complète pour qui a déjà un profil. */
+    if(r.name==='fiche'&&S.done&&jobById(r.arg)){r={name:'metier',arg:r.arg};history.replaceState(null,'','#/metier/'+r.arg);}
     if(['niveau','interets','traits','situation'].indexOf(r.name)>-1){
       var required=!S.profile?'choix-profil':!nameReady()?'profil':(!S.level&&r.name!=='niveau'?'niveau':null);
       if(required){r={name:required};history.replaceState(null,'','#/'+required);}
@@ -1566,7 +1602,7 @@
       }
       if (r.name !== 'accessibilite') main.insertAdjacentHTML('beforeend', '<a class="a11y-link" href="#/accessibilite">Confort de lecture et accessibilité</a>');
     }
-    var themedJob=['metier','preparer','sans-concours','etudes','calendrier','annales','ressources-biblio','handicap'].indexOf(r.name)>-1&&r.arg&&jobById(r.arg);
+    var themedJob=['metier','fiche','preparer','sans-concours','etudes','calendrier','annales','ressources-biblio','handicap'].indexOf(r.name)>-1&&r.arg&&jobById(r.arg);
     var theme=themedJob&&themeCategory(themedJob);
     if(r.name==='concours-fiche'){var shownConcours=concoursByKey(r.arg);if(shownConcours)theme=shownConcours.cat;}
     var themeKey=theme?catClass(theme).slice(4):null;
@@ -1580,7 +1616,7 @@
     document.title = (t ? t.textContent + ' · ' : '') + 'Y-Seck';
     var contextJob=r.name==='metier'&&D.jobs.find(function(j){return j.id===r.arg;});
     var contextCategories=contextJob?jobCategories(contextJob).filter(function(c){return ['A+','A','B','C','CDD'].indexOf(c)>-1;}):[];
-    UI.afterRender({root:root,title:t?t.textContent:'Y-Seck',topLevel:['accueil','enfant','famille','metiers','favoris','moi'].indexOf(r.name)>-1,profileField:r.name==='moi'&&editingField?profileFieldContent(editingField):'',profileFieldTitle:editingField?PROFILE_FIELDS[editingField]:'',isJobs:r.name==='metiers',category:contextCategories.length===1?{label:contextCategories[0],className:catClass(contextCategories[0])}:null,categories:contextCategories.length>1?contextCategories.map(function(c){return {label:c,className:catClass(c)};}):[],summary:r.name==='metiers'?filterSummary():'',filters:r.name==='metiers'?jobFilters():'',resourceFilters:['annales','ressources-biblio'].indexOf(r.name)>-1?studyFilters(jobById(r.arg),r.name==='ressources-biblio'):'',changed:changed});
+    UI.afterRender({root:root,noBar:r.name==='fiche',title:t?t.textContent:'Y-Seck',topLevel:['accueil','enfant','famille','metiers','favoris','moi'].indexOf(r.name)>-1,profileField:r.name==='moi'&&editingField?profileFieldContent(editingField):'',profileFieldTitle:editingField?PROFILE_FIELDS[editingField]:'',isJobs:r.name==='metiers',category:contextCategories.length===1?{label:contextCategories[0],className:catClass(contextCategories[0])}:null,categories:contextCategories.length>1?contextCategories.map(function(c){return {label:c,className:catClass(c)};}):[],summary:r.name==='metiers'?filterSummary():'',filters:r.name==='metiers'?jobFilters():'',resourceFilters:['annales','ressources-biblio'].indexOf(r.name)>-1?studyFilters(jobById(r.arg),r.name==='ressources-biblio'):'',changed:changed});
 
     if (changed) {
       if (t && booted) t.focus({ preventScroll: true });
@@ -1701,6 +1737,14 @@
       case 'editField': editingField = v; UI.open('profile-field', PROFILE_FIELDS[v], profileFieldContent(v), el); break;
       case 'askUnfavorite': { var fj = jobById(v); UI.open('confirm', 'Retirer des favoris ?', '<p class="body">' + esc(fj ? fj.name : 'Ce métier') + ' ne fera plus partie de ' + (isParent() ? 'ses' : 'vos') + ' favoris.</p><div class="sheet-actions"><button type="button" class="btn danger-solid" data-action="unfavorite"' + attr('v', v) + '>Retirer des favoris</button><button type="button" class="btn outline" data-ui="close">Annuler</button></div>', el); break; }
       case 'unfavorite': { UI.close(); set({ favorites: S.favorites.filter(function (id) { return id !== v; }) }); announce('Métier retiré des favoris'); break; }
+      case 'share': e.preventDefault(); shareJob(v, el); break;
+      case 'copyShare': {
+        var input = document.querySelector('.share-url');
+        var done = function () { announce('Message copié'); el.textContent = 'Message copié'; };
+        if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(v).then(done, function () { if (input) { input.select(); document.execCommand('copy'); done(); } });
+        else if (input) { input.select(); document.execCommand('copy'); done(); }
+        break;
+      }
       case 'favorite': {
         next = S.favorites.slice(); i = next.indexOf(v);
         if (i > -1) next.splice(i, 1); else next.push(v);

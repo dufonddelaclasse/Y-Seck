@@ -123,9 +123,9 @@
     /* Pages de premier niveau : titre seul, sans flèche de retour. */
     toolbar.classList.toggle('top-level', !!options.topLevel);
     toolbar.innerHTML = (options.topLevel ? '' : '<button class="icon-btn context-back" type="button" data-ui="back" aria-label="Retour à l’écran précédent">'+icons.back+'</button>') + '<button class="context-title" type="button" data-ui="top" aria-label="Revenir au début : ' + esc(options.title) + '">' + esc(options.title) + '</button>' + (options.category ? '<span class="cat context-category '+esc(options.category.className)+'" aria-label="'+(options.category.label==='CDD'?'Emploi contractuel':'Catégorie '+esc(options.category.label))+'">'+(options.category.label==='CDD'?icons.contract:esc(options.category.label))+'</span>' : (options.categories||[]).length?'<span class="context-categories" aria-label="Catégories selon le poste">'+options.categories.map(function(c){return '<span class="cat sm '+esc(c.className)+'">'+esc(c.label)+'</span>';}).join('')+'</span>':'') + (options.isJobs ? '<button class="icon-btn" type="button" data-action="openFilters" aria-label="Régler les filtres métiers">' + icons.settings + '</button><div class="context-summary">' + options.summary + '</div>' : '');
-    contextHeading=options.root.querySelector('h1');
+    contextHeading=options.noBar?null:options.root.querySelector('h1');
     /* Sous-pages : la barre reste affichée avec le titre de la page actuelle et remplace le lien de retour. */
-    alwaysBar=!options.topLevel&&!options.root.classList.contains('onboarding')&&!!options.root.querySelector('.screen > a.back, .topbar > a.back');
+    alwaysBar=!options.noBar&&!options.topLevel&&!options.root.classList.contains('onboarding')&&!!options.root.querySelector('.screen > a.back, .topbar > a.back');
     if(document.body&&document.body.classList)document.body.classList.toggle('has-bar',alwaysBar);
     updateContext();
     if(kind==='filters')content('Filtrer les métiers',options.filters);

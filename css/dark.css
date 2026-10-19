@@ -579,6 +579,24 @@ html:where(.dark).dark .btn[disabled], html:where(.dark).dark .app.onboarding .b
 :where(html.dark) .top-notice { box-shadow:none; }
 :where(html.dark) #filters-open { border:0; }
 :where(html.dark) .personal-home .study-level, :where(html.dark) .home-interest { color:var(--ink-2); }
+:where(html.dark) .job-page .job-match { background:var(--theme-tint,var(--lilac)); color:var(--ink); }
+:where(html.dark) .job-match-dot { background:var(--theme-btn,var(--brand)); }
+:where(html.dark) .job-page .job-actions { background:#292929; }
+:where(html.dark) .job-action { border:0; background:transparent; color:var(--ink); }
+:where(html.dark) .job-action svg { color:var(--theme-ink,var(--brand)); }
+:where(html.dark) .job-action[aria-pressed="true"] svg { fill:currentColor; }
+:where(html.dark) .job-action:focus-visible { outline:2px solid var(--theme-btn,var(--brand)); }
+html:where(.dark).dark .job-page .job-actions { background:var(--surface); }
+html:where(.dark).dark .job-action { color:var(--ink); }
+:where(html.dark) .link-underline { color:var(--theme-ink,var(--brand)); }
+:where(html.dark) .share-url { border:1px solid var(--line); background:var(--soft); color:var(--ink); }
+:where(html.dark) .update-notice { background:#292929; border:0; color:var(--ink); box-shadow:0 6px 24px rgba(20,20,40,.12); }
+:where(html.dark) .update-notice-dismiss { border:0; background:#161616; color:var(--ink); }
+:where(html.dark) .update-notice-action { border:0; }
+html:where(.dark).dark body .update-notice { background:var(--surface) !important; color:var(--ink) !important; }
+html:where(.dark).dark body .update-notice :is(.update-notice-copy,.update-notice-copy *) { color:var(--ink) !important; }
+html:where(.dark).dark body .update-notice .update-notice-dismiss { border:0 !important; background:#4C4C4C !important; color:var(--ink) !important; }
+html:where(.dark).dark body .update-notice .update-notice-action { background:var(--blue) !important; color:#FFF !important; }
 
 /* Retouches */
 html.dark { --brand:#8F7BFF; --blue:#A493FF; --accent:#7C66FF; --accent-hover:#9785FF; --theme-btn:var(--brand); --red:#FF6B6B; --surface:#1E1E22; }
