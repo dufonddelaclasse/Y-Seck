@@ -1737,7 +1737,7 @@ html[data-contrast="true"] :is(.talents-feature.talents-split,.bourse) { backgro
 html.dark .job-page .job-hero { background:var(--surface); box-shadow:0 -120px 0 var(--surface); }
 html.dark .job-page .job-hero + .job-actions { border-top-color:#3A3A3A; }
 
-/* « Quelles études choisir » : fond gris très clair et contour blanc, le contenu paraît plus lumineux. */
-.parcours-card, .concours-page .job-section .ref-panel { background:#F1F1F0 !important; border:2px solid #FFF !important; box-shadow:0 1px 3px rgba(20,20,20,.04); }
-html.dark :is(.parcours-card, .concours-page .job-section .ref-panel) { background:var(--card-bg) !important; border-color:#3A3A3A !important; box-shadow:none; }
+/* « Quelles études choisir » : fond gris très clair, sans contour. */
+.parcours-card, .concours-page .job-section .ref-panel { background:#F1F1F0 !important; border:0 !important; box-shadow:none; }
+html.dark :is(.parcours-card, .concours-page .job-section .ref-panel) { background:var(--card-bg) !important; }
 html[data-contrast="true"] :is(.parcours-card, .concours-page .job-section .ref-panel) { background:#FFF !important; border:1px solid #000 !important; }

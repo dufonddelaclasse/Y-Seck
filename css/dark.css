@@ -635,8 +635,8 @@ html:where(.dark).dark :is(.talents-feature.talents-split,.prep.hi.talents-featu
 :where(html.dark) .job-page .job-hero + .job-actions { border-top:1px solid #3B3B3B; }
 html:where(.dark).dark .job-page .job-hero { background:var(--surface); box-shadow:0 -120px 0 var(--surface); }
 html:where(.dark).dark .job-page .job-hero + .job-actions { border-top-color:#4C4C4C; }
-:where(html.dark) .parcours-card, :where(html.dark) .concours-page .job-section .ref-panel { background:#161615 !important; border:2px solid #292929 !important; box-shadow:0 1px 3px rgba(76,76,76,0.04); }
-html:where(.dark).dark :is(.parcours-card, .concours-page .job-section .ref-panel) { background:var(--card-bg) !important; border-color:#4C4C4C !important; box-shadow:none; }
+:where(html.dark) .parcours-card, :where(html.dark) .concours-page .job-section .ref-panel { background:#161615 !important; border:0 !important; box-shadow:none; }
+html:where(.dark).dark :is(.parcours-card, .concours-page .job-section .ref-panel) { background:var(--card-bg) !important; }
 
 /* Retouches */
 html.dark { --brand:#8F7BFF; --blue:#A493FF; --accent:#7C66FF; --accent-hover:#9785FF; --theme-btn:var(--brand); --red:#FF6B6B; --surface:#1E1E22; }
