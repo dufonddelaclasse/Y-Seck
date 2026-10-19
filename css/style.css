@@ -1938,12 +1938,15 @@ html.dark .trip-tab[aria-selected="true"] { background:#F2F2F2; color:#161616; }
 html.dark .trip-cat { background:transparent; color:#F2F2F2; box-shadow:inset 0 0 0 1px #4A4A4A; }
 html.dark .trip-cat[aria-pressed="true"] { box-shadow:inset 0 0 0 2px #F2F2F2; }
 /* Évoluer : progressions possibles avec les autres concours du métier. */
-.ladder-alt { display:flex; flex-direction:column; gap:10px; margin-top:22px; }
-.ladder-alt-title { margin:0; font-size:1rem; font-weight:500; color:var(--ink); }
-.ladder-alt-row { display:flex; align-items:flex-start; gap:12px; color:var(--ink); text-decoration:none; }
-.ladder-alt-row .cat { flex:none; margin-top:1px; }
-.ladder-alt-row b { display:block; font-weight:500; text-decoration:underline; text-underline-offset:3px; }
-.ladder-alt-row small { display:block; margin-top:2px; font-size:.875rem; color:var(--muted); }
+.ladder-alt { display:flex; flex-direction:column; gap:12px; margin-top:36px; }
+.ladder-alt-title { margin:0 0 4px; font-size:1rem; font-weight:500; color:var(--ink); }
+/* Autres métiers accessibles par les autres concours : une carte blanche chacun. */
+.ladder-alt-row { display:flex; align-items:center; gap:14px; padding:16px 18px; border-radius:22px; background:#FFF; color:var(--ink); text-decoration:none; }
+.ladder-alt-row:hover { color:var(--ink); }
+.ladder-alt-row .cat { flex:none; }
+.ladder-alt-row b { display:block; font-weight:500; line-height:1.3; }
+.ladder-alt-row small { display:block; margin-top:4px; font-size:.875rem; color:var(--muted); }
+html.dark .ladder-alt-row, html.dark .ladder-alt-row:hover { background:#161616; color:#F2F2F2; }
 
 /* Frise : rubriques repliables, titres resserrés et contenu juste sous le titre. */
 .trip-meta + .trip-more, .trip-dir + .trip-more { margin-top:22px; }
@@ -1956,3 +1959,9 @@ html.dark .trip-cat[aria-pressed="true"] { box-shadow:inset 0 0 0 2px #F2F2F2; }
 .trip-voies dt { margin-top:12px; font-size:.9375rem; font-weight:500; color:var(--ink); }
 .trip-voies dd { margin:2px 0 0; font-size:.9375rem; line-height:1.45; color:var(--ink-2); }
 .trip-note { margin-top:20px; }
+
+/* Voies sans date au calendrier : message et lien vers la page officielle. */
+.trip-missing { margin:12px 0 0; font-size:1rem; line-height:1.45; color:var(--ink); }
+.trip-missing b { font-weight:500; }
+a.trip-official { display:inline; color:var(--ink); text-decoration:underline; text-underline-offset:3px; }
+.trip-missing a.external-link.trip-official, .trip-a a.external-link.trip-official { min-height:0; padding:0; font-size:inherit; color:var(--ink); }

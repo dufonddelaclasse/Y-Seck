@@ -934,23 +934,6 @@
           (s.also && s.also.length ? '<div class="parcours-also"><span>Aussi possible :</span>' + s.also.map(function (c) { return '<a href="#/concours-fiche/' + concoursKey(c) + '">' + sig(c.name) + '</a>'; }).join('') + '</div>' : '') + '</div></li>';
       }).join('') + '</ol><p class="parcours-note">Parcours conseillé ' + (sharedView ? 'du collège au métier' : isParent() ? 'pour ' + esc(childName()) : 'depuis votre niveau') + ', à titre indicatif : les conditions exactes figurent dans l’avis du concours.</p></div></section>';
   }
-  screens.metier = function (id) {
-    var j = D.jobs.filter(function (x) { return x.id === id; })[0];
-    if (!j) return screens.metiers();
-    var dates = isContractJob(j) ? [] : examsFor(j);
-    var shared = sharedTraits(j);
-    var fav=S.favorites.indexOf(j.id) > -1;
-    return '<main class="screen top-tight job-page">' + back('#/metiers', 'Métiers') +
-      '<div class="job-hero">' + jobIntro(j, shared.length ? '<p class="job-match"><span class="job-match-dot" aria-hidden="true"></span><span><span class="job-match-label">' + (isParent() ? 'Lui ressemble' : 'Vous ressemble') + ' :</span> ' + esc(shared.map(traitLabel).join(', ').toLowerCase()) + '</span></p>' : '') + '</div>' +
-      '<div class="job-actions">' +
-        '<button type="button" class="job-action" data-action="jobDetails"' + attr('v',j.id) + ' aria-label="En savoir plus">' + I.info + '<span aria-hidden="true">En savoir +</span></button>' +
-        '<button type="button" class="job-action" data-action="favorite"' + attr('v', j.id) + ' aria-pressed="' + fav + '" aria-label="' + (fav ? 'Retirer des favoris' : 'Ajouter aux favoris') + '">' + I.bookmark + '<span aria-hidden="true">Favori</span></button>' +
-        '<button type="button" class="job-action" data-action="share"' + attr('v', j.id) + '>' + I.send + '<span>Partager</span></button>' +
-      '</div>' +
-      parcoursSection(j) + jobConcours(j, dates) + jobLadder(j) +
-      '<a class="btn theme mt-m" href="' + prepHref(j) + '">' + (isContractJob(j) ? I.route + 'Entrer sans concours' : I.book + 'Se préparer') + '</a>' +
-      ext('https://www.fonction-publique.gouv.fr/toutes-les-publications/repertoire-commun-des-metiers-de-la-fonction-publique', 'Consulter la source métier sur fonction-publique.gouv.fr', 'link-plain') + '</main>' + tabbar('metiers');
-  };
   /* Blocs communs à la fiche complète et à la fiche partagée. */
   function jobIntro(j, match) {
     return '<div class="row job-meta" role="group" aria-label="Catégorie et centres d’intérêt" tabindex="0"><span class="job-hero-cat">' + jobBadges(j) + '</span>' + (j.cat==='V'?'<span class="tag">Selon le poste</span>':'') +
@@ -1206,6 +1189,7 @@
     return (all ? D.calendar : upcoming()).filter(function (x) { return x.fp === c.fp && (x.routeIds || []).some(function (id) { return c.routeIds.indexOf(id) > -1; }); }).sort(calendarOrder);
   }
   function concoursLevel(c) {
+    if (typeof c.lvl === 'number') return c.lvl;
     var levels = c.routeIds.map(function (id) { var r = D.accessRoutes[id]; return r && typeof r.lvl === 'number' ? r.lvl : null; }).filter(function (l) { return l !== null; });
     return levels.length ? Math.min.apply(null, levels) : { 'A+': 5, A: 4, B: 2, C: 1 }[c.cat];
   }
@@ -1261,6 +1245,14 @@
     [/docteur/i, 'Voie des docteurs', 'Réservée aux titulaires d’un doctorat.'],
     [/sur titres?/i, 'Concours sur titres', 'Sélection sur dossier avec le diplôme ou la qualification demandés, souvent complétée par un entretien.']
   ];
+  /* Voies citées par le concours qui n’ont aucune session à venir au calendrier. */
+  var VOIE_KEYS = [[/extern/i, 'Concours externe'], [/intern/i, 'Concours interne'], [/(^|[^\w+])3e\b|troisi[eè]me/i, '3e concours']];
+  function missingVoies(c, sessions) {
+    var listed = VOIE_KEYS.filter(function (k) { return k[0].test(c.voies || ''); });
+    /* Une session sans voie identifiable peut les couvrir toutes : on ne conclut rien. */
+    if (!listed.length || sessions.some(function (x) { return !VOIE_KEYS.some(function (k) { return k[0].test(x.voie || ''); }); })) return [];
+    return listed.filter(function (k) { return !sessions.some(function (x) { return k[0].test(x.voie || ''); }); }).map(function (k) { return k[1]; });
+  }
   function voiesExplained(text) {
     var found = VOIES.filter(function (v) { return v[0].test(text || ''); });
     return found.length ? '<dl class="trip-voies">' + found.map(function (v) { return '<dt>' + esc(v[1]) + '</dt><dd>' + esc(v[2]) + '</dd>'; }).join('') + '</dl>' : '';
@@ -1279,20 +1271,26 @@
     var dot = function (t) { return t && !/[.!?]$/.test(t) ? t + '.' : t; };
     var route = c.routeIds.map(function (id) { return D.accessRoutes[id]; }).filter(Boolean)[0], e = route && (route.examInfo || {})[c.fp] || {};
     var sessions = concoursSessions(c), allSessions = sessions.length ? sessions : concoursSessions(c, true), next = sessions[0];
-    var datesHref = '#/calendrier/concours/' + concoursKey(c);
+    var datesHref = c.datesHref || '#/calendrier/concours/' + concoursKey(c);
+    var unpublished = 'Dates non encore publiées. ' + ext(c.source, 'Consulter la page officielle.', 'trip-official');
+    var missing = sessions.length ? missingVoies(c, sessions) : [];
+    var missingNote = missing.length ? '<p class="trip-missing"><b>' + esc(missing.join(' et ')) + '</b><br>' + unpublished + '</p>' : '';
     var stop = tripStop, catVar = CAT_VARS[c.cat], catStyle = catVar ? '--theme:var(' + catVar[0] + ');--trip-ink:' + catVar[1] : '';
     /* Question en gras, réponse à la ligne en noir. */
     var qa = function (q, a, more) { return a ? tripFold(q, '<p class="trip-a">' + sig(dot(a)) + '</p>' + (more || '')) : ''; };
     var short = function (iso) { var d = fmtDate(iso); return d.day + ' ' + d.month + ' ' + d.year; };
-    return stop('start', I.pin, 'Départ', '<p class="trip-sub">' + esc(who) + '</p>', '') +
+    var head = stop('start', I.pin, 'Départ', '<p class="trip-sub">' + esc(who) + '</p>', '') +
       (first ? stop('leg', '<span class="trip-walk">' + I.walk + '</span>', '', '<p class="trip-lead">' + esc(TRIP_TITLES[first.kind]) + '</p>' + tripPhase(c, first, trip.lvl, prepaText(c)), 'line c-' + first.kind)
         : stop('leg', '<span class="trip-walk">' + I.walk + '</span>', '', '<p class="trip-meta">Votre niveau suffit<span aria-hidden="true"> | </span><span class="sr-only">, </span>concours accessible dès maintenant</p>', 'line c-none')) +
-      trip.phases.slice(1).map(function (p) { return stop('mid', '<span class="trip-dot c-' + p.kind + '"></span>', esc(TRIP_TITLES[p.kind]), tripPhase(c, p, trip.lvl, prepaText(c)), 'line c-' + p.kind); }).join('') +
+      trip.phases.slice(1).map(function (p) { return stop('mid', '<span class="trip-dot c-' + p.kind + '"></span>', esc(TRIP_TITLES[p.kind]), tripPhase(c, p, trip.lvl, prepaText(c)), 'line c-' + p.kind); }).join('');
+    /* Métier recruté sans concours : l’étape du recrutement remplace celle du concours. */
+    if (c.recruit) return head + stop('trip-exam', catBadge(c.cat), esc(c.recruit.title), c.recruit.body, 'line', catStyle) + stop('end', '<span class="trip-pill"></span>', end.name, end.body, '');
+    return head +
       stop('trip-exam', catBadge(c.cat), esc(c.name),
         '<p class="trip-dir">' + I.arrow + '<span>' + esc({ E: 'Fonction publique de l’État', T: 'Fonction publique territoriale', H: 'Fonction publique hospitalière' }[c.fp] || D.fps[c.fp]) + '</span></p>' +
         tripFold('Prochaines sessions', sessions.length ? '<ul class="trip-sessions">' + sessions.slice(0, 3).map(function (x) {
           return '<li><span>' + esc(x.voie || 'Session') + (x.provisional ? ' · prévisionnel' : '') + '</span><span>' + (x.date ? 'clôture ' + esc(short(x.date)) : esc(x.closeLabel || 'date à venir')) + '</span></li>';
-        }).join('') + '</ul>' + (sessions.length > 3 ? '<a class="link-plain" href="' + datesHref + '">Voir les ' + sessions.length + ' sessions</a>' : '') : '<p class="trip-a">Aucune session publiée pour le moment : consulter l’avis officiel.</p>') +
+        }).join('') + '</ul>' + (sessions.length > 3 ? '<a class="link-plain" href="' + datesHref + '">Voir les ' + sessions.length + ' sessions</a>' : '') + missingNote : '<p class="trip-a">' + unpublished + '</p>') +
         qa('Quelles voies ?', c.voies, voiesExplained(c.voies)) + qa('Quels diplômes ?', c.condition) + qa('Quelles épreuves ?', c.epreuves) + qa('Qui organise ?', e.org) + (prepaInStudies ? '' : qa('Comment se préparer ?', prepaText(c))) +
         (c.vigilance ? '<p class="trip-note">' + I.info + '<span>' + sig(dot(c.vigilance)) + '</span></p>' : '') +
         tripFold('Lieux et sources',
@@ -1304,7 +1302,7 @@
           (next ? '<p class="trip-q">' + esc((next.provisional ? 'Calendrier prévisionnel' : 'Calendrier') + ' · ' + (next.voie || 'Session')) + '</p>' +
             '<dl class="trip-dates"><dt>Ouverture</dt><dd>' + esc(next.openLabel || next.open || 'Non publiée') + '</dd><dt>Clôture</dt><dd>' + esc(next.closeLabel || next.date || 'Non publiée') + '</dd>' +
             '<dt>Écrits ou sélection</dt><dd>' + esc(next.writtenLabel || 'Non publiés') + '</dd><dt>Oraux</dt><dd>' + esc(next.oralLabel || 'Non publiés') + '</dd></dl>'
-            : '<p class="trip-a">Aucune session publiée pour le moment : consulter l’avis officiel.</p>') +
+            : '<p class="trip-a">' + unpublished + '</p>') + (next ? missingNote : '') +
           (allSessions.length ? '<a class="trip-all-dates" href="' + datesHref + '">Voir toutes les dates du concours</a>' : '')), 'line', catStyle) +
       stop('end', '<span class="trip-pill"></span>', end.name, end.body, '');
   }
@@ -1333,19 +1331,48 @@
   };
   /* Ancienne adresse de la page test : même fiche. */
   screens['concours-test'] = function (key, level) { return screens['concours-fiche'](key, level); };
+  /* Corps d’accès sans fiche au référentiel : un concours par versant, avec les études conseillées du domaine. */
+  var COLLEGE_OPTION = 'Langues anciennes, théâtre, club scientifique, projet associatif ou débat si proposé : au choix ; jamais un prérequis général.';
+  function studyFields(j, lvl) {
+    var f = STUDY[j.domain] || STUDY.Administration, general = /Bac général \(([^)]*)\)/.exec(f.lycee);
+    return { collegeOption: COLLEGE_OPTION, lyceeGeneral: general ? general[1] : f.lycee, lyceePro: f.pro, studies: lvl >= 5 ? f.master : lvl >= 4 ? f.lic : f.sup2 };
+  }
+  function routeConcours(j) {
+    var out = [], fps = selFps(), pref = fps.length === 1 ? fps[0] : null;
+    jobRoutes(j).forEach(function (r) {
+      r.fp.split('').filter(function (f) { return j.fp.indexOf(f) > -1; }).forEach(function (f) {
+        var e = (r.examInfo || {})[f] || {}, lvl = typeof r.lvl === 'number' ? r.lvl : targetLevel(j, r.cat), q = j.qualification || r.qualification;
+        out.push(Object.assign({ id: 'route-' + r.id + '-' + f, routeIds: [r.id], cat: r.cat, fp: f, lvl: lvl, name: e.name || 'Concours : ' + r.name,
+          voies: r.access && r.access !== 'Concours' ? r.access : '', condition: q ? 'Diplôme requis : ' + q : lvl === 0 ? 'Aucun diplôme requis' : 'Niveau ' + DIP[lvl] + ' requis',
+          source: e.source || r.source, datesHref: '#/calendrier/' + j.id }, studyFields(j, lvl)));
+      });
+    });
+    function versant(c) { return c.fp === pref ? -1 : ['E', 'T', 'H'].indexOf(c.fp); }
+    return out.sort(function (a, b) { return ['A+', 'A', 'B', 'C'].indexOf(a.cat) - ['A+', 'A', 'B', 'C'].indexOf(b.cat) || versant(a) - versant(b); });
+  }
+  function recruitConcours(j) {
+    var contract = isContractJob(j), cat = contract ? 'CDD' : themeCategory(j) || 'CDD', lvl = typeof j.lvl === 'number' ? j.lvl : 2;
+    var body = contract ? '<p class="trip-a">' + esc('Recruté·e sur CV et entretien, en CDD. Un CDI est possible après 6 ans.') + '</p>'
+      : '<p class="trip-a">' + sig(j.recruitment ? j.recruitment.text : 'Recrutement selon l’employeur : consulter les offres.') + '</p>' + (j.recruitment ? ext(j.recruitment.url, j.recruitment.label, 'link-plain') : '');
+    return Object.assign({ id: 'recruit-' + j.id, routeIds: [], cat: cat, fp: j.fp.charAt(0), lvl: lvl, recruit: { title: contract ? 'Recrutement sans concours' : 'Recrutement', body: body } }, studyFields(j, lvl));
+  }
+  /* Ancienne adresse de la page test : même fiche. */
+  screens['metier-test'] = function (id, level) { return screens.metier(id, level); };
   /* Onglet de concours : sa frise et son « Évoluer » s’affichent, les autres se masquent. */
   function selectTripTab(scope, v) {
     scope.querySelectorAll('[data-tab]').forEach(function (panel) { panel.hidden = panel.getAttribute('data-tab') !== v; });
     scope.querySelectorAll('.trip-tab').forEach(function (tab) { tab.setAttribute('aria-selected', String(tab.getAttribute('data-v') === v)); });
   }
-  /* Page test : fiche métier en frise, un onglet par concours possible ; Évoluer suit l’onglet choisi. */
-  screens['metier-test'] = function (id, testLevel) {
+  /* Fiche métier en frise : un onglet par concours possible ; Évoluer suit l’onglet choisi.
+     Un niveau dans l’adresse (#/metier/<id>/<niveau>) permet de vérifier la frise sans modifier le profil. */
+  screens.metier = function (id, testLevel) {
     var j = jobById(id);
     if (!j) return screens.metiers();
     var refs = isContractJob(j) ? [] : jobRefs(j);
-    if (!refs.length) return screens.metier(id);
+    if (!refs.length && !isContractJob(j)) refs = routeConcours(j);
+    if (!refs.length) refs = [recruitConcours(j)];
     var main = jobRef(j), sel = Math.max(0, refs.indexOf(main));
-    var level = testLevel ? decodeURIComponent(testLevel) : (S.done ? S.level : null), who = tripWho(level, testLevel);
+    var level = testLevel ? decodeURIComponent(testLevel) : S.level || null, who = tripWho(level, testLevel);
     var fpLabel = { E: 'Fonction publique de l’État', T: 'Fonction publique territoriale', H: 'Fonction publique hospitalière' };
     var shared = sharedTraits(j), fav = S.favorites.indexOf(j.id) > -1;
     var label = function (c) { var twin = refs.some(function (o) { return o !== c && o.cat === c.cat && o.fp === c.fp; }); return twin ? c.name : D.fps[c.fp]; };
@@ -1360,7 +1387,7 @@
     }).join('') + '</div></div>' : '';
     var panels = refs.map(function (c, i) {
       return '<div class="trip-panel" id="trip-panel-' + i + '" role="tabpanel" aria-labelledby="trip-tab-' + i + '" data-tab="' + i + '"' + (i === sel ? '' : ' hidden') + '><ol class="trip">' +
-        tripLine(c, level, who, { name: esc(j.name), body: '<p class="trip-meta">' + esc(catLabel(c.cat) + ' · ' + fpLabel[c.fp]) + '</p>' }) + '</ol></div>';
+        tripLine(c, level, who, { name: esc(j.name), body: '<p class="trip-meta">' + esc(catLabel(c.cat) + ' · ' + (c.recruit ? j.fp.split('').map(function (f) { return fpLabel[f]; }).join(', ') : fpLabel[c.fp])) + '</p>' }) + '</ol></div>';
     }).join('');
     /* Évoluer : progression du concours choisi, puis celles des autres concours possibles. */
     var ladders = refs.map(function (c, i) {
@@ -1381,7 +1408,7 @@
         '<button type="button" class="job-action" data-action="share"' + attr('v', j.id) + '>' + I.send + '<span>Partager</span></button>' +
       '</div>' +
       tabs + '<section class="trip-wrap" aria-label="Parcours jusqu’au métier">' + panels + '</section>' + ladders +
-      '<a class="btn theme mt-m" href="' + prepHref(j) + '">' + I.book + 'Se préparer</a>' +
+      '<a class="btn theme mt-m" href="' + prepHref(j) + '">' + (isContractJob(j) ? I.route + 'Entrer sans concours' : I.book + 'Se préparer') + '</a>' +
       ext('https://www.fonction-publique.gouv.fr/toutes-les-publications/repertoire-commun-des-metiers-de-la-fonction-publique', 'Consulter la source métier sur fonction-publique.gouv.fr', 'link-plain') + '</main>' + tabbar('metiers');
   };
   screens.preparer = function(id) {
