@@ -171,6 +171,7 @@
     }
     return id;
   }
+  function mail(addr) { return '<a href="mailto:' + esc(addr) + '">' + esc(addr) + '</a>'; }
   function ext(href, label, cls) {
     return '<a class="external-link ' + (cls === undefined ? 'link-plain mt-s' : cls) + '" href="' + esc(href) + '" target="_blank" rel="noopener" title="' + esc(label) + ' (nouvelle fenêtre)">' +
       esc(label) + '<span class="sr-only"> (nouvelle fenêtre)</span></a>';
@@ -1434,7 +1435,7 @@
       '<span class="eyebrow">RGPD</span><h1 class="sm">Données personnelles</h1>' +
       '<div class="prose">' +
       '<p><strong>En bref : vos réponses restent sur votre appareil.</strong> Pas de compte, pas de cookie, pas de mesure d’audience, pas de publicité.</p>' +
-      '<h2>Responsable du traitement</h2><p><span class="todo">' + esc(L.publisher) + '</span>, <span class="todo">' + esc(L.address) + '</span>. Contact : <span class="todo">' + esc(L.contact) + '</span>.</p>' +
+      '<h2>Responsable du traitement</h2><p>' + esc(L.publisher) + '. Contact : ' + mail(L.contact) + '.</p>' +
       '<h2>Ce qui est enregistré</h2><ul>' +
       '<li>Le profil (étudiant·e, parent, reconversion) et le niveau d’étude.</li>' +
       '<li>Les domaines et les traits choisis (« Ce qui vous ressemble »), la situation de bourse et le budget indiqués.</li>' +
@@ -1445,7 +1446,7 @@
       '<h2>Pourquoi</h2><p>Uniquement pour adapter les contenus à votre situation. Ce stockage est nécessaire au service demandé : il ne demande pas de consentement.</p>' +
       '<h2>Hébergement</h2><p>L’application est hébergée par ' + esc(L.host) + '. Comme tout hébergeur, il peut enregistrer l’adresse IP des visiteur·ses dans ses journaux techniques, pour la sécurité du service.</p>' +
       '<h2>Liens externes</h2><p>Les liens vers des sites publics (calendrier des concours, offres d’emploi, cartes des prépas) ouvrent ces sites, qui ont leur propre politique de confidentialité.</p>' +
-      '<h2>Vos droits</h2><p>Vous pouvez à tout moment consulter, modifier ou effacer vos données depuis l’onglet Profil. Pour toute question, écrivez à <span class="todo">' + esc(L.contact) + '</span>. Vous pouvez aussi saisir la CNIL : ' + ext('https://www.cnil.fr/fr/plaintes', 'cnil.fr', '') + '.</p>' +
+      '<h2>Vos droits</h2><p>Vous pouvez à tout moment consulter, modifier ou effacer vos données depuis l’onglet Profil. Pour toute question, écrivez à ' + mail(L.contact) + '. Vous pouvez aussi saisir la CNIL : ' + ext('https://www.cnil.fr/fr/plaintes', 'cnil.fr', '') + '.</p>' +
       '<p class="small">Mise à jour : ' + esc(L.updated) + '</p>' +
       '</div></main>' + tabbar('moi');
   };
@@ -1458,7 +1459,7 @@
       '<div class="stack color-mode"><h3 class="no-icon">Apparence</h3><div class="row" role="group" aria-label="Apparence">' + [['auto','Comme l’appareil'],['light','Clair'],['dark','Sombre']].map(function(m){return chip('colorMode',m[0],m[1],(S.colorMode||'auto')===m[0]);}).join('') + '</div><p class="small m0">« Comme l’appareil » suit le mode clair ou sombre choisi dans les réglages du téléphone ou de l’ordinateur.</p></div>' +
       ['contrast', 'largeText', 'dysFont'].map(function (key, i) { return '<button type="button" class="switch-row" role="switch" aria-checked="' + !!S[key] + '" data-action="' + key + '"><span>' + ['Contraste renforcé', 'Texte agrandi', 'Police de lecture DYS'][i] + '</span><span class="switch" aria-hidden="true"></span></button>'; }).join('') + '</section>' +
       '<div class="prose">' +
-      '<p><span class="todo">' + esc(L.publisher) + '</span> s’engage à rendre cette application accessible, conformément à l’article 47 de la loi n° 2005-102 du 11 février 2005.</p>' +
+      '<p>' + esc(L.publisher) + ' s’engage à rendre cette application accessible, conformément à l’article 47 de la loi n° 2005-102 du 11 février 2005.</p>' +
       '<h2>État de conformité</h2><p>La conformité RGAA reste à évaluer par un audit complet. Les vérifications réalisées ne permettent pas d’annoncer un taux de conformité.</p>' +
       '<h2>Ce qui est déjà pris en compte</h2><ul>' +
       '<li>Lien d’évitement, titres hiérarchisés et titre de page à chaque écran.</li>' +
@@ -1468,7 +1469,7 @@
       '<li>Informations jamais portées par la couleur seule, liens externes signalés.</li>' +
       '<li>Zoom et agrandissement du texte autorisés, animations réduites si demandé.</li></ul>' +
       '<h2>Établissement de cette déclaration</h2><p>Déclaration établie le ' + esc(L.updated) + ', sur la base d’une auto-évaluation. Technologies : HTML, CSS, JavaScript.</p>' +
-      '<h2>Retour d’information et contact</h2><p>Si vous n’arrivez pas à accéder à un contenu ou à un service, écrivez à <span class="todo">' + esc(L.contact) + '</span> pour être orienté·e vers une alternative accessible.</p>' +
+      '<h2>Retour d’information et contact</h2><p>Si vous n’arrivez pas à accéder à un contenu ou à un service, écrivez à ' + mail(L.contact) + ' pour être orienté·e vers une alternative accessible.</p>' +
       '<h2>Voies de recours</h2><p>Si vous n’obtenez pas de réponse satisfaisante, vous pouvez saisir le Défenseur des droits : ' + ext('https://formulaire.defenseurdesdroits.fr/', 'formulaire en ligne', '') + ', ou par courrier gratuit, sans affranchissement : Défenseur des droits, Libre réponse 71120, 75342 Paris CEDEX 07.</p>' +
       '</div></main>' + tabbar('moi');
   };
@@ -1478,12 +1479,12 @@
     return '<main class="screen top-tight">' + back('#/moi', 'Profil') +
       '<span class="eyebrow">Informations</span><h1 class="sm">Mentions légales</h1>' +
       '<div class="prose">' +
-      '<h2>Éditeur</h2><p><span class="todo">' + esc(L.publisher) + '</span><br><span class="todo">' + esc(L.address) + '</span><br>Contact : <span class="todo">' + esc(L.contact) + '</span></p>' +
-      '<h2>Directeur·rice de la publication</h2><p><span class="todo">' + esc(L.director) + '</span></p>' +
+      '<h2>Éditeur</h2><p>' + esc(L.publisher) + '<br>' + mail(L.contact) + '</p>' +
+      '<h2>Directrice de la publication</h2><p>' + esc(L.director) + '</p>' +
       '<h2>Conception</h2><p>' + esc(L.design) + '</p>' +
       '<h2>Hébergement</h2><p>' + esc(L.host) + ', ' + esc(L.hostAddress) + '</p>' +
       '<h2>Sources</h2><p>Chaque session renvoie à son avis officiel. Les catégories observées dans les offres ne constituent pas une condition de diplôme.</p>' + D.catalogSources.map(function (s) { return '<p>' + ext(s.url, s.name, 'link-plain') + '<span class="small">Vérifié le ' + esc(s.checked) + ' · ' + esc(s.note) + '</span></p>'; }).join('') +
-      '<h2>Polices de caractères</h2><p>DM Sans et OpenDyslexic, sous licence SIL Open Font License, sont hébergées avec l’application.</p>' +
+      '<h2>Polices de caractères</h2><p>Geologica et OpenDyslexic, sous licence SIL Open Font License, sont hébergées avec l’application.</p>' +
       '</div></main>' + tabbar('moi');
   };
 
