@@ -631,6 +631,10 @@ html:where(.dark).dark .prep.hi.talents-feature { background:var(--surface); }
 :where(html.dark) .bourse { border:1.5px solid #345D23 !important; }
 html:where(.dark).dark :is(.talents-feature.talents-split,.prep.hi.talents-feature) { background:var(--surface) !important; }
 :where(html.dark) .category-screen .callout.tint-blue { background:transparent !important; border:0 !important; }
+:where(html.dark) .job-page .job-hero { background:#292929; box-shadow:0 -120px 0 #292929; }
+:where(html.dark) .job-page .job-hero + .job-actions { border-top:1px solid #3B3B3B; }
+html:where(.dark).dark .job-page .job-hero { background:var(--surface); box-shadow:0 -120px 0 var(--surface); }
+html:where(.dark).dark .job-page .job-hero + .job-actions { border-top-color:#4C4C4C; }
 
 /* Retouches */
 html.dark { --brand:#8F7BFF; --blue:#A493FF; --accent:#7C66FF; --accent-hover:#9785FF; --theme-btn:var(--brand); --red:#FF6B6B; --surface:#1E1E22; }

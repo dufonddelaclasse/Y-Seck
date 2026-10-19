@@ -890,7 +890,7 @@
     var shared = sharedTraits(j);
     var fav=S.favorites.indexOf(j.id) > -1;
     return '<main class="screen top-tight job-page">' + back('#/metiers', 'Métiers') +
-      jobIntro(j, shared.length ? '<p class="job-match"><span class="job-match-dot" aria-hidden="true"></span><span><span class="job-match-label">' + (isParent() ? 'Lui ressemble' : 'Vous ressemble') + ' :</span> ' + esc(shared.map(traitLabel).join(', ').toLowerCase()) + '</span></p>' : '') +
+      '<div class="job-hero">' + jobIntro(j, shared.length ? '<p class="job-match"><span class="job-match-dot" aria-hidden="true"></span><span><span class="job-match-label">' + (isParent() ? 'Lui ressemble' : 'Vous ressemble') + ' :</span> ' + esc(shared.map(traitLabel).join(', ').toLowerCase()) + '</span></p>' : '') + '</div>' +
       '<div class="job-actions">' +
         '<button type="button" class="job-action" data-action="jobDetails"' + attr('v',j.id) + ' aria-label="En savoir plus">' + I.info + '<span aria-hidden="true">En savoir +</span></button>' +
         '<button type="button" class="job-action" data-action="favorite"' + attr('v', j.id) + ' aria-pressed="' + fav + '" aria-label="' + (fav ? 'Retirer des favoris' : 'Ajouter aux favoris') + '">' + I.bookmark + '<span aria-hidden="true">Favori</span></button>' +
