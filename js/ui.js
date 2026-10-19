@@ -29,6 +29,8 @@
   var dialog, toolbar, cfg, kind = null, alwaysBar = false, returnTo, pendingUrl = '', contextHeading, scrollFrame;
   function updateContext(){
     toolbar.hidden=!alwaysBar&&(!contextHeading||window.scrollY<=0||contextHeading.getBoundingClientRect().top>=0);
+    /* Hauteur réelle de la barre : les blocs collants de la page se placent juste en dessous. */
+    if(!toolbar.hidden&&toolbar.offsetHeight)document.documentElement.style.setProperty('--context-h',toolbar.offsetHeight+'px');
   }
   function scheduleContext(){
     if(scrollFrame)return;

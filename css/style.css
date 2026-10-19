@@ -1635,3 +1635,7 @@ html.dark body .update-notice .update-notice-action { background:var(--blue) !im
 /* Pas de voile gris au toucher (iOS, Android) : les boutons de la fiche restent nets. */
 html { -webkit-tap-highlight-color:transparent; }
 .job-action, .job-action:hover, .job-action:active { background:transparent; -webkit-tap-highlight-color:transparent; }
+
+/* Barre d’actions plus basse, collée sous la barre du haut au défilement. */
+.job-page .job-actions { position:sticky; top:var(--context-h,calc(60px + env(safe-area-inset-top,0px))); z-index:7; padding:0 12px; }
+.job-action { min-height:44px; padding:4px 2px; }
