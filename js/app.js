@@ -1878,7 +1878,10 @@
         if(!isParent()||!removed||!window.confirm('Effacer le profil de '+(removed.name||'votre enfant')+' et ses choix enregistrés sur cet appareil ? Les autres profils seront conservés.'))break;
         S.children=S.children.filter(function(child){return child.id!==removed.id;});
         S.activeChild=S.children.length?S.children[0].id:null;
-        usePerson(activeChild()||blankPerson());save();navigate('#/accueil');announce('Le profil enfant a été effacé.');break;
+        usePerson(activeChild()||blankPerson());
+        /* Dernier enfant effacé : retour au tout premier écran pour choisir à nouveau étudiant·e, parent ou reconversion. */
+        if(!S.children.length){S.profile=null;S.introSeen=false;save();navigate('#/bienvenue');announce('Le profil enfant a été effacé.');break;}
+        save();navigate('#/accueil');announce('Le profil enfant a été effacé.');break;
       }
       case 'wipe':
         if (window.confirm('Effacer toutes vos réponses de cet appareil ?')) {
@@ -1886,7 +1889,7 @@
           S = Object.assign({}, defaults, { domains: [], traits: [], favorites: [], children: [], personalProfiles: {} });
           profileSnapshot=profileSignature();
           announce('Vos données ont été effacées');
-          if (location.hash === '#/profil') render(); else location.hash = '#/profil';
+          navigate('#/bienvenue');
         }
         break;
     }

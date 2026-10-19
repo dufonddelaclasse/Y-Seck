@@ -188,16 +188,18 @@ assert(!deleting.screens.moi().includes('Effacer mes données'));
 assert(deleting.screens.moi().includes('>Profil</a>')&&!deleting.screens.moi().includes('>Profils</a>'));
 assert.equal(deleting.confirmation.messages.length,2);
 
-// Le dernier effacement conserve un espace parent vide, y compris après rechargement.
-deleting.click('deleteChild');
-assert.equal(deleting.S.children.length,0);
-assert.equal(deleting.S.activeChild,null);
-assert.equal(deleting.S.profile,'par');
-assert.equal(deleting.S.name,'');
-assert(!deleting.S.done);
-deleting.screens.famille();
-assert.equal(deleting.S.children.length,0,'Afficher la famille ne doit pas recréer le profil supprimé.');
-const empty=start(deleting.saved());
+// Le dernier effacement ramène au tout premier écran, sans toucher aux profils adultes.
+const lastOne=start(family({children:[siblingA]}));
+lastOne.click('deleteChild');
+assert.equal(lastOne.S.children.length,0);
+assert.equal(lastOne.S.profile,null);
+assert.equal(lastOne.location.hash,'#/bienvenue','Effacer le dernier enfant ramène au tout premier écran.');
+same(lastOne.saved().personalProfiles.rec,other);
+assert.equal(start(lastOne.saved()).S.children.length,0,'Recharger ne doit pas recréer le dernier enfant supprimé.');
+
+// Un espace parent vide (ancienne sauvegarde) reste utilisable.
+deleting.S.children=[];deleting.S.activeChild=null;
+const empty=start({...deleting.saved(),children:[],activeChild:null,name:'',done:false});
 assert.equal(empty.S.children.length,0,'Recharger ne doit pas recréer le dernier enfant supprimé.');
 assert.equal(empty.S.activeChild,null);
 same(empty.S.personalProfiles.rec,other);
@@ -228,7 +230,7 @@ assert.equal(empty.getState().contrast,false);
 same(empty.getState().children,[]);
 same(empty.getState().personalProfiles,{});
 same(empty.getState().favorites,[]);
-assert.equal(empty.location.hash,'#/profil');
+assert.equal(empty.location.hash,'#/bienvenue','Après effacement, on revient au tout premier écran.');
 assert(empty.screens.profil().includes('profile-choice'),'Après effacement, la page Profil doit afficher le choix étudiant / parent / reconversion.');
 assert.equal(empty.confirmation.messages.length,2);
 
