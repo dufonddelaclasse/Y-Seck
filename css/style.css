@@ -1671,3 +1671,7 @@ html[data-contrast="true"] .tabbar a.on, html[data-contrast="true"] .tabbar a.on
 .personal-home .home-discover, .personal-home .home-discover:hover, html.dark body .personal-home .home-discover { background:linear-gradient(90deg,var(--brand) 0%,#C0B8FF 50%,var(--brand) 100%) 0 0 / 200% 100% repeat-x; animation:discover-flow 7s linear infinite; }
 @media (prefers-reduced-motion:reduce) { .personal-home .home-discover, html.dark body .personal-home .home-discover { animation:none; background:var(--brand); } }
 html[data-contrast="true"] .personal-home .home-discover { animation:none; background:#000; }
+
+/* Lien d’accessibilité : remonté, à égale distance des derniers blocs et du menu. */
+/* Les marges automatiques partagent l’espace libre de part et d’autre ; sans espace libre, le lien suit les blocs de près. */
+.a11y-link, .app.themed .a11y-link { margin:auto; position:relative; top:10px; }
