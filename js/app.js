@@ -479,7 +479,6 @@
 
   screens.interets = function () {
     var n = S.domains.length;
-    var count = n === 0 ? 'Aucun domaine choisi' : (n === 1 ? '1 domaine choisi' : n + ' domaines choisis');
     return '<main class="screen">' +
       '<div class="topbar">' + back('#/niveau', 'Retour') + '<span class="eyebrow">Étape 3 / ' + STEPS + '</span></div>' +
       progress(3, STEPS) +
@@ -489,7 +488,7 @@
         var on = S.domains.indexOf(d) > -1;
         return '<button type="button" class="interest-option' + (on ? ' on' : '') + '" aria-pressed="' + on + '"' + attr('action', 'domain') + attr('v', d) + '><span class="interest-name">' + esc(domainLabel(d)) + '</span><span class="interest-check" aria-hidden="true">' + (on ? I.check : '') + '</span></button>';
       }).join('') + '</div></main>' +
-      '<div class="footer"><div class="interest-footer"><span class="small">' + count + '</span><button type="button" class="text-btn" data-action="clearDomains"' + (n ? '' : ' disabled') + '>Effacer</button></div>'+profileContinuation('#/traits','Continuer',n>0)+(n?'':skipStep('#/traits'))+'</div>';
+      '<div class="footer">'+profileContinuation('#/traits','Continuer',n>0)+'</div>';
   };
 
   screens.traits = function () {
@@ -504,7 +503,7 @@
         return '<section class="stack mt-s" aria-label="' + esc(title) + '"><h2 class="h3">' + esc(title) + '</h2><div class="row">' +
           g.items.map(function (t) { return chip('trait', t[0], t[1], S.traits.indexOf(t[0]) > -1); }).join('') + '</div></section>';
       }).join('') +
-      '</main><div class="footer"><span class="small center">' + (n === 0 ? 'Choisissez au moins un trait pour continuer.' : n + ' trait' + (n > 1 ? 's' : '') + ' choisi' + (n > 1 ? 's' : '')) + '</span>' +
+      '</main><div class="footer">' + (n ? '<span class="small center">' + n + ' trait' + (n > 1 ? 's' : '') + ' choisi' + (n > 1 ? 's' : '') + '</span>' : '') +
       profileContinuation('#/situation','Continuer',n>0)+(n?'':skipStep('#/situation'))+'</div>';
   };
 
