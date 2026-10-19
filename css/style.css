@@ -1668,8 +1668,10 @@ html[data-contrast="true"] .tabbar a.on, html[data-contrast="true"] .tabbar a.on
 
 /* Espace personnel : « Vos métiers à découvrir » parcouru en continu par un dégradé doux, de gauche à droite.
    Teintes calculées sur une courbe en cosinus (24 paliers) : aucune cassure de pente, donc aucune ligne visible. */
+/* Dégradé dans une variable : le générateur du mode sombre ne l’assombrit pas. */
+:root { --discover-flow:linear-gradient(90deg,#2B04CC 0%,#2E07CD 4.17%,#3510CF 8.33%,#411ED3 12.5%,#5031D9 16.67%,#6247DF 20.83%,#755EE6 25%,#8975EC 29.17%,#9B8BF2 33.33%,#AA9EF8 37.5%,#B6ACFC 41.67%,#BDB5FE 45.83%,#C0B8FF 50%,#BDB5FE 54.17%,#B6ACFC 58.33%,#AA9EF8 62.5%,#9B8BF2 66.67%,#8975EC 70.83%,#765EE6 75%,#6247DF 79.17%,#5031D9 83.33%,#411ED3 87.5%,#3510CF 91.67%,#2E07CD 95.83%,#2B04CC 100%); }
 @keyframes discover-flow { from { background-position:0 0; } to { background-position:-200% 0; } }
-.personal-home .home-discover, .personal-home .home-discover:hover, html.dark body .personal-home .home-discover { background:linear-gradient(90deg,#2B04CC 0%,#2E07CD 4.17%,#3510CF 8.33%,#411ED3 12.5%,#5031D9 16.67%,#6247DF 20.83%,#755EE6 25%,#8975EC 29.17%,#9B8BF2 33.33%,#AA9EF8 37.5%,#B6ACFC 41.67%,#BDB5FE 45.83%,#C0B8FF 50%,#BDB5FE 54.17%,#B6ACFC 58.33%,#AA9EF8 62.5%,#9B8BF2 66.67%,#8975EC 70.83%,#765EE6 75%,#6247DF 79.17%,#5031D9 83.33%,#411ED3 87.5%,#3510CF 91.67%,#2E07CD 95.83%,#2B04CC 100%) 0 0 / 200% 100% repeat-x; animation:discover-flow 7s linear infinite; }
+.personal-home .home-discover, .personal-home .home-discover:hover, html.dark body .personal-home .home-discover { background:var(--discover-flow) 0 0 / 200% 100% repeat-x; animation:discover-flow 7s linear infinite; }
 @media (prefers-reduced-motion:reduce) { .personal-home .home-discover, html.dark body .personal-home .home-discover { animation:none; background:var(--brand); } }
 html[data-contrast="true"] .personal-home .home-discover { animation:none; background:#000; }
 
