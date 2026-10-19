@@ -647,6 +647,37 @@ html:where(.dark).dark .exam .exam-source { border-top-color:rgba(41,41,41,0.16)
 :where(html.dark) .suggest-kind { color:var(--muted); }
 html:where(.dark).dark .suggest { background:#4C4C4C; box-shadow:0 10px 30px rgba(76,76,76,0.5); }
 html:where(.dark).dark .suggest-item:hover, html:where(.dark).dark .suggest-item:focus-visible { background:#494950; }
+:where(html.dark) .trip-modes > svg { color:var(--ink); }
+:where(html.dark) .trip-modes .cat { box-shadow:none; }
+:where(html.dark) .trip-sep { background:#636363; }
+:where(html.dark) .trip-total { color:var(--ink); }
+:where(html.dark) .trip-rail > svg { color:var(--ink); }
+:where(html.dark) .trip-rail > .cat { box-shadow:none; }
+:where(html.dark) .trip-walk svg { color:var(--ink); }
+:where(html.dark) .trip-ring { border:3px solid var(--ink); background:var(--bg); }
+:where(html.dark) .trip-pill { border:4px solid var(--ink); background:var(--bg); }
+:where(html.dark) .trip-track.dots { background:radial-gradient(circle, var(--ink) 1.9px, transparent 2.4px) center 3px / 6px 10px repeat-y; }
+:where(html.dark) .trip-track.line { background:var(--theme, var(--ink)); }
+:where(html.dark) .trip-name { color:var(--ink); }
+:where(html.dark) .trip-time { color:var(--ink); }
+:where(html.dark) .trip-sub { color:var(--ink); }
+:where(html.dark) .trip-lead { color:var(--ink); }
+:where(html.dark) .trip-meta { color:var(--muted); }
+:where(html.dark) .trip-q { color:var(--muted); }
+:where(html.dark) .trip-a { color:var(--ink); }
+:where(html.dark) .trip-dir { color:var(--muted); }
+:where(html.dark) .trip-dir svg { color:var(--theme-ink, var(--ink)); }
+:where(html.dark) .trip-sessions li { color:var(--ink); }
+:where(html.dark) .trip-sessions li span:last-child { color:var(--muted); }
+:where(html.dark) .trip-qa b { color:var(--ink); }
+:where(html.dark) .trip-qa span { color:var(--theme-ink, var(--brand)); }
+:where(html.dark) .trip-qa.long span { color:var(--ink); }
+:where(html.dark) .trip-note { color:var(--muted); }
+:where(html.dark) .trip-more summary { color:var(--ink); }
+html:where(.dark).dark .trip-sep { background:#6B6B6B; }
+html:where(.dark).dark .trip-qa:not(.long) span { color:var(--lt, var(--theme-ink)); }
+:where(html.dark) .concours-trip .trip-head { box-shadow:0 -120px 0 120px #292929; }
+html:where(.dark).dark .concours-trip .trip-head { box-shadow:0 -120px 0 120px var(--surface); }
 
 /* Retouches */
 html.dark { --brand:#8F7BFF; --blue:#A493FF; --accent:#7C66FF; --accent-hover:#9785FF; --theme-btn:var(--brand); --red:#FF6B6B; --surface:#1E1E22; }

@@ -1827,3 +1827,67 @@ html.dark .exam .exam-source { border-top-color:rgba(255,255,255,.16); }
 .suggest-kind { flex:none; color:var(--muted); font-size:.75rem; }
 html.dark .suggest { background:#161616; box-shadow:0 10px 30px rgba(0,0,0,.5); }
 html.dark .suggest-item:hover, html.dark .suggest-item:focus-visible { background:#2E2E33; }
+
+/* Page test : fiche concours en frise, comme un itinéraire de transport. */
+.concours-trip .trip-head { gap:14px; padding-top:6px; }
+.trip-summary { display:flex; align-items:center; justify-content:space-between; gap:12px; }
+.trip-modes { display:flex; align-items:center; gap:10px; }
+.trip-modes > svg { width:30px; height:30px; color:var(--ink); }
+.trip-modes .cat { width:34px; height:34px; font-size:.9375rem; box-shadow:none; }
+.trip-sep { width:6px; height:6px; border-radius:999px; background:#B5B5B5; }
+.trip-total { color:var(--ink); font-size:1.0625rem; font-weight:500; white-space:nowrap; }
+.trip-total b { font-size:2.25rem; font-weight:500; letter-spacing:-.02em; }
+.trip-total b.now { font-size:1.25rem; }
+.concours-trip .trip-head h1 { font-size:1.375rem; line-height:1.2; letter-spacing:-.01em; }
+.trip-wrap { margin-top:36px; }
+.trip { margin:0; padding:0; list-style:none; }
+.trip-item { display:grid; grid-template-columns:34px minmax(0,1fr); column-gap:14px; }
+.trip-rail { display:flex; flex-direction:column; align-items:center; }
+.trip-rail > svg { flex:none; width:28px; height:28px; color:var(--ink); }
+.trip-rail > .cat { flex:none; width:34px; height:34px; font-size:.9375rem; box-shadow:none; }
+.trip-walk { display:flex; flex:none; padding:2px 0 4px; }
+.trip-walk svg { width:26px; height:26px; color:var(--ink); }
+.trip-ring { flex:none; width:18px; height:18px; margin-top:5px; border:3px solid var(--ink); border-radius:999px; background:var(--bg); }
+.trip-pill { flex:none; width:22px; height:40px; border:4px solid var(--ink); border-radius:999px; background:var(--bg); }
+.trip-track { flex:1; min-height:12px; }
+.trip-track.dots { width:6px; background:radial-gradient(circle, var(--ink) 1.9px, transparent 2.4px) center 3px / 6px 10px repeat-y; }
+.trip-track.line { width:6px; background:var(--theme, var(--ink)); }
+.trip-item.trip-exam .trip-track.line { margin-top:-2px; }
+.trip-item.trip-exam + .trip-item.end .trip-pill { margin-top:-1px; }
+.trip-body { min-width:0; padding-bottom:34px; }
+.trip-item.start .trip-body { padding-bottom:26px; }
+.trip-item.end .trip-body { padding-bottom:4px; }
+.trip-row { display:flex; align-items:baseline; justify-content:space-between; gap:12px; }
+.trip-name { font-size:1.375rem; line-height:1.2; font-weight:500; color:var(--ink); }
+.trip-item.trip-exam .trip-name { padding-top:2px; }
+.trip-time { flex:none; font-size:1.0625rem; font-weight:500; color:var(--ink); }
+.trip-sub { margin:2px 0 0; font-size:1rem; color:var(--ink); }
+.trip-lead { margin:2px 0 0; font-size:1.0625rem; font-weight:500; color:var(--ink); }
+.trip-meta { margin:4px 0 0; font-size:1rem; line-height:1.4; color:var(--muted); }
+.trip-q { margin:20px 0 0; font-size:.9375rem; color:var(--muted); }
+.trip-a { margin:4px 0 0; font-size:1rem; line-height:1.45; color:var(--ink); }
+.trip-dir { display:flex; align-items:center; gap:8px; margin:8px 0 0; font-size:1rem; color:var(--muted); }
+.trip-dir svg { flex:none; width:20px; height:20px; color:var(--theme, var(--ink)); }
+.trip-h { margin:28px 0 0; font-size:1.0625rem; line-height:1.3; font-weight:500; }
+.trip-sessions { margin:10px 0 0; padding:0; list-style:none; }
+.trip-sessions li { display:flex; justify-content:space-between; gap:12px; padding:8px 0; font-size:1rem; color:var(--ink); }
+.trip-sessions li span:last-child { flex:none; color:var(--muted); }
+.trip-qa { margin:26px 0 0; font-size:1rem; line-height:1.45; }
+.trip-qa b { font-weight:500; color:var(--ink); }
+.trip-qa span { font-weight:500; color:var(--theme-deep, var(--brand)); }
+.trip-qa.long span { font-weight:400; color:var(--ink); }
+.trip-note { display:flex; gap:8px; margin:22px 0 0; font-size:.875rem; line-height:1.45; color:var(--muted); }
+.trip-note svg { flex:none; width:18px; height:18px; margin-top:1px; }
+.trip-more { margin-top:26px; }
+.trip-more summary { display:inline-flex; align-items:center; gap:10px; list-style:none; cursor:pointer; font-size:1.0625rem; font-weight:500; color:var(--ink); }
+.trip-more summary::-webkit-details-marker { display:none; }
+.trip-more summary svg { width:22px; height:22px; transition:transform .2s; }
+.trip-more[open] summary svg { transform:rotate(180deg); }
+.trip-more .trip-q:first-of-type { margin-top:14px; }
+.trip-more .external-link { margin-top:10px; }
+.trip-body > .link-plain { display:inline-block; margin-top:4px; }
+html.dark .trip-sep { background:#5A5A5A; }
+html.dark .trip-qa:not(.long) span { color:var(--lt, var(--theme)); }
+/* Fond blanc continu jusqu’à la barre, même quand l’en-tête est court. */
+.concours-trip .trip-head { box-shadow:0 -120px 0 120px #FFF; }
+html.dark .concours-trip .trip-head { box-shadow:0 -120px 0 120px var(--surface); }
