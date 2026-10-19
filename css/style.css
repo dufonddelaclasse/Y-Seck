@@ -1917,3 +1917,22 @@ html.dark .trip-all-dates, html.dark .trip-all-dates:hover { color:var(--lt, var
 .parcours-also { display:flex; flex-direction:column; align-items:flex-start; gap:6px; margin-top:12px; font-size:.9375rem; line-height:1.4; }
 .parcours-also span { color:var(--muted); }
 .parcours-also a { color:var(--ink); text-decoration:underline; text-underline-offset:3px; }
+
+/* Fiche métier en frise : un onglet par concours possible. */
+.trip-tabs-wrap { margin-top:32px; }
+.trip-tabs-label { margin:0 0 10px; font-size:.9375rem; color:var(--muted); }
+.trip-tabs { display:flex; flex-wrap:wrap; gap:8px; }
+.trip-tabs::-webkit-scrollbar { display:none; }
+.trip-tab { display:inline-flex; flex:none; align-items:center; gap:8px; min-height:44px; padding:6px 16px 6px 7px; border:0; border-radius:999px; background:#FFF; color:var(--ink); font:inherit; font-size:.9375rem; font-weight:500; cursor:pointer; -webkit-tap-highlight-color:transparent; }
+.trip-tab .cat { width:30px; height:30px; font-size:.8125rem; box-shadow:none; }
+.trip-tab[aria-selected="true"] { background:var(--ink); color:#FFF; }
+.trip-tabs-wrap + .trip-wrap { margin-top:28px; }
+html.dark .trip-tab { background:#161616; color:#F2F2F2; }
+html.dark .trip-tab[aria-selected="true"] { background:#F2F2F2; color:#161616; }
+/* Évoluer : progressions possibles avec les autres concours du métier. */
+.ladder-alt { display:flex; flex-direction:column; gap:10px; margin-top:22px; }
+.ladder-alt-title { margin:0; font-size:1rem; font-weight:500; color:var(--ink); }
+.ladder-alt-row { display:flex; align-items:flex-start; gap:12px; color:var(--ink); text-decoration:none; }
+.ladder-alt-row .cat { flex:none; margin-top:1px; }
+.ladder-alt-row b { display:block; font-weight:500; text-decoration:underline; text-underline-offset:3px; }
+.ladder-alt-row small { display:block; margin-top:2px; font-size:.875rem; color:var(--muted); }

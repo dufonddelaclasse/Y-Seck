@@ -691,6 +691,15 @@ html:where(.dark).dark .concours-trip .trip-head { box-shadow:0 -120px 0 120px v
 html:where(.dark).dark .trip-all-dates, html:where(.dark).dark .trip-all-dates:hover { color:var(--lt, var(--theme-ink)); }
 :where(html.dark) .parcours-also span { color:var(--muted); }
 :where(html.dark) .parcours-also a { color:var(--ink); }
+:where(html.dark) .trip-tabs-label { color:var(--muted); }
+:where(html.dark) .trip-tab { border:0; background:#292929; color:var(--ink); }
+:where(html.dark) .trip-tab .cat { box-shadow:none; }
+:where(html.dark) .trip-tab[aria-selected="true"] { background:var(--ink); color:#FFF; }
+html:where(.dark).dark .trip-tab { background:#4C4C4C; color:#F2F2F2; }
+html:where(.dark).dark .trip-tab[aria-selected="true"] { background:#161616; color:#E9E9E9; }
+:where(html.dark) .ladder-alt-title { color:var(--ink); }
+:where(html.dark) .ladder-alt-row { color:var(--ink); }
+:where(html.dark) .ladder-alt-row small { color:var(--muted); }
 
 /* Retouches */
 html.dark { --brand:#8F7BFF; --blue:#A493FF; --accent:#7C66FF; --accent-hover:#9785FF; --theme-btn:var(--brand); --red:#FF6B6B; --surface:#1E1E22; }
