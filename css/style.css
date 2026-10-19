@@ -1631,3 +1631,7 @@ html.dark body .update-notice .update-notice-action { background:var(--blue) !im
 .job-page .job-actions { justify-content:space-around; }
 .job-action { gap:6px; font-size:.6875rem; }
 
+
+/* Pas de voile gris au toucher (iOS, Android) : les boutons de la fiche restent nets. */
+html { -webkit-tap-highlight-color:transparent; }
+.job-action, .job-action:hover, .job-action:active { background:transparent; -webkit-tap-highlight-color:transparent; }
