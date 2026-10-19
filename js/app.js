@@ -937,10 +937,10 @@
   function shareTarget(id) {
     if (String(id).indexOf('concours:') === 0) {
       var c = concoursByKey(id.slice(9)); if (!c) return null;
-      return { name: c.name, url: location.href.split('#')[0] + '#/concours-fiche/' + concoursKey(c), message: 'Je pense que ce concours de la fonction publique peut t’intéresser : ' + c.name + '. Dates, épreuves et études, tout est sur la fiche Y-Seck :' };
+      return { name: c.name, url: location.origin + location.pathname + '#/concours-fiche/' + concoursKey(c), message: 'Je pense que ce concours de la fonction publique peut t’intéresser : ' + c.name + '. Dates, épreuves et études, tout est sur la fiche Y-Seck :' };
     }
     var j = jobById(id); if (!j) return null;
-    return { name: j.name, url: location.href.split('#')[0] + '#/fiche/' + j.id, message: 'Je pense que ce métier de la fonction publique peut t’intéresser : ' + j.name + '. Études, concours et évolution, tout est sur la fiche Y-Seck :' };
+    return { name: j.name, url: location.origin + location.pathname + '#/fiche/' + j.id, message: 'Je pense que ce métier de la fonction publique peut t’intéresser : ' + j.name + '. Études, concours et évolution, tout est sur la fiche Y-Seck :' };
   }
   /* Le message accompagne toujours le lien : certaines applications ignorent le champ « url » seul. */
   function shareJob(id, trigger) {
@@ -958,8 +958,9 @@
     var exam = !isContractJob(j) && (jobRoutes(j).length || D.categories.some(function (c) { return jobCategories(j).indexOf(c.id) > -1; }));
     return '<main class="screen job-page shared-job">' + jobIntro(j) +
       parcoursSection(j, null, true) + jobConcours(j, isContractJob(j) ? [] : examsFor(j)) + jobLadder(j) +
-      '<a class="btn theme mt-m" href="#/bienvenue">' + (exam ? 'Créer un compte pour préparer le concours' : 'Créer un compte pour continuer') + '</a>' +
-      '</main><div class="footer share-footer"><a class="btn" href="#/bienvenue">Créer mon profil</a></div>';
+      /* Qui a déjà un profil sur cet appareil voit aussi la fiche partagée, avec un accès à la fiche complète. */
+      (S.done ? '' : '<a class="btn theme mt-m" href="#/bienvenue">' + (exam ? 'Créer un compte pour préparer le concours' : 'Créer un compte pour continuer') + '</a>') +
+      '</main><div class="footer share-footer">' + (S.done ? '<a class="btn" href="#/metier/' + j.id + '">Voir la fiche complète</a>' : '<a class="btn" href="#/bienvenue">Créer mon profil</a>') + '</div>';
   };
 
   /* ---------- Concours : catégories dépliables ---------- */
@@ -1599,8 +1600,6 @@
     document.documentElement.dataset.largeText = String(!!S.largeText);
     document.documentElement.dataset.dysFont = String(!!S.dysFont);
     var r = route();
-    /* Une fiche partagée s’ouvre en version complète pour qui a déjà un profil. */
-    if(r.name==='fiche'&&S.done&&jobById(r.arg)){r={name:'metier',arg:r.arg};history.replaceState(null,'','#/metier/'+r.arg);}
     if(['niveau','interets','traits','situation'].indexOf(r.name)>-1){
       var required=!S.profile?'choix-profil':!nameReady()?'profil':(!S.level&&r.name!=='niveau'?'niveau':null);
       if(required){r={name:required};history.replaceState(null,'','#/'+required);}
