@@ -503,7 +503,7 @@
         return '<section class="stack mt-s" aria-label="' + esc(title) + '"><h2 class="h3">' + esc(title) + '</h2><div class="row">' +
           g.items.map(function (t) { return chip('trait', t[0], t[1], S.traits.indexOf(t[0]) > -1); }).join('') + '</div></section>';
       }).join('') +
-      '</main><div class="footer">' + (n ? '<span class="small center">' + n + ' trait' + (n > 1 ? 's' : '') + ' choisi' + (n > 1 ? 's' : '') + '</span>' : '') +
+      '</main><div class="footer">' +
       profileContinuation('#/situation','Continuer',n>0)+(n?'':skipStep('#/situation'))+'</div>';
   };
 
