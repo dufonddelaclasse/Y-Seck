@@ -20,6 +20,11 @@ BG_PROPS = {'background', 'background-color', 'border', 'border-color', 'border-
 INK_PROPS = {'color', 'text-decoration-color', 'caret-color'}
 VAR_BG = re.compile(r'tint|bg|surface|soft|line|lilac|sun|panel|card|deep-bg|fit-tint')
 VAR_INK = re.compile(r'^--(ink|ink-2|muted|fit-ink|blue|accent|accent-hover|blue-hover)$')
+# Texte dans la couleur pleine d’une catégorie : remplacé par sa version claire, lisible sur fond sombre.
+INK_VARS = {'--theme-btn': '--theme-ink', '--theme': '--theme-ink', '--theme-deep': '--theme-ink', '--cat-ap': '--cat-ap-ink', '--cat-a': '--cat-a-ink',
+            '--cat-b': '--cat-b-ink', '--cat-c': '--cat-c-ink', '--cat-ap-deep': '--cat-ap-ink', '--cat-a-deep': '--cat-a-ink', '--cat-b-deep': '--cat-b-ink',
+            '--cat-c-deep': '--cat-c-ink', '--accent': '--blue', '--accent-hover': '--blue'}
+THEME_INK = re.compile(r'var\((' + '|'.join(sorted(map(re.escape, INK_VARS), key=len, reverse=True)) + r')(?![\w-])')
 COLOR = re.compile(r'#[0-9a-fA-F]{3,8}\b|rgba?\([^)]*\)')
 
 def parse_color(tok):
@@ -45,7 +50,7 @@ def dark_bg(tok):
     h, l, s = colorsys.rgb_to_hls(r, g, b)
     if l < .5 and s >= .15: return tok
     if max(r, g, b) - min(r, g, b) < .06 or l > .97:
-        if l < .35: nl = 1 - l * .9           # encre utilisée en fond : s’éclaircit
+        if l < .35: nl = .3                   # pastille noire : gris foncé, son texte blanc reste lisible
         elif l >= .985: nl = .16              # surface blanche
         elif l >= .935: nl = .085             # fond général
         else: nl = min(.42, .14 + (.935 - l) * 1.1)  # gris de cartes et traits
@@ -115,6 +120,8 @@ def convert(head, body):
         elif p in BG_PROPS: fn = dark_bg
         else: continue
         nv = COLOR.sub(lambda m: fn(m.group(0)), v)
+        if p in INK_PROPS or p in ('fill', 'stroke', 'text-decoration-color'):
+            nv = THEME_INK.sub(lambda m: 'var(' + INK_VARS[m.group(1)], nv)
         changed |= nv != v
         decls.append(p + ':' + nv)
     if not decls or not changed and not any(d.split(':')[0] in BG_PROPS | INK_PROPS for d in decls): return None
@@ -154,8 +161,15 @@ html.dark .update-notice .update-notice-dismiss { background:transparent; border
 html.dark .personal-home .study-level { background:transparent !important; border-color:var(--sun); color:#FFE6A1 !important; }
 html.dark .home-tile svg, html.dark .home-tile b, html.dark .home-tile span { color:#141414; }
 html.dark .tabbar a, html.dark .tabbar a.on, html.dark .tabbar a svg { color:#FFF; }
+html.dark .category-fit.warn svg, html.dark :is(.study-level,.home-interest,.fit,.parcours-zone,.parcours-link.stage,.ref-tip) svg { color:#2B2200 !important; }
+html.dark .prep-page button.chip:not(.category-choice) { --choice-ink:var(--theme-ink); }
+html.dark :is(.exam-cal,.exam-places) h5 svg { color:currentColor; }
+html.dark .personal-home .study-level svg { color:#FFE6A1 !important; }
 html.dark .tabbar a.on::before { background:var(--sun); }
-html.dark .app.theme-Ap { --theme-deep:#B9A8FF; } html.dark .app.theme-A { --theme-deep:#93A0FF; } html.dark .app.theme-B { --theme-deep:#6FD6D6; }
+html.dark { --theme-ink:#B3A6FF; --cat-ap-ink:#B9A8FF; --cat-a-ink:#9BA6FF; --cat-b-ink:#6FD6D6; --cat-c-ink:#FFA982; }
+html.dark .app.theme-Ap, html.dark body.theme-Ap { --theme-ink:#B9A8FF; } html.dark .app.theme-A, html.dark body.theme-A { --theme-ink:#9BA6FF; } html.dark .app.theme-B, html.dark body.theme-B { --theme-ink:#6FD6D6; }
+html.dark .app.theme-C, html.dark body.theme-C { --theme-ink:#FFA982; } html.dark .app.theme-CDD, html.dark body.theme-CDD { --theme-ink:#E2E2E6; }
+html.dark .app.theme-Ap { --theme-deep:#B9A8FF; } html.dark .app.theme-A { --theme-deep:#9BA6FF; } html.dark .app.theme-B { --theme-deep:#6FD6D6; }
 html.dark .app.theme-C { --theme-deep:#FFA982; } html.dark .app.theme-CDD { --theme-deep:#E2E2E6; }
 html.dark .app.themed .eyebrow, html.dark .app.themed .section-heading { color:var(--theme-deep); }
 """

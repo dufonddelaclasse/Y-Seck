@@ -153,17 +153,17 @@ html.dark { color-scheme:dark; }
 :where(html.dark) :is(.tint-mint,.tint-cyan,.tint-yellow,.tint-blue,.card,.callout,.rung,.bourse,.talents-box,.explain) { background:#141517; }
 :where(html.dark) :is(.tag,.tag.fill,.fit,.fit.on,.fit.like,.prep .price,.cat,.cat-Ap,.cat-A,.cat-B,.cat-C,.cat-X,.num) { background:#161615; color:#BEBEC2; border-color:#363633; }
 :where(html.dark) .card .dot, :where(html.dark) .callout .pin, :where(html.dark) .bourse .dot { background:#263565 !important; }
-:where(html.dark) .card .go { color:var(--accent); }
+:where(html.dark) .card .go { color:var(--blue); }
 :where(html.dark) .card:hover { background:#1E2A4F; }
 :where(html.dark) .card .d { color:var(--muted); }
 :where(html.dark) .btn { background:var(--accent); border-color:var(--accent); color:#FFF; }
 :where(html.dark) .btn:hover { background:var(--accent-hover); border-color:var(--accent-hover); color:#FFF; }
-:where(html.dark) .btn.outline, :where(html.dark) .btn.white { background:#292929; border-color:#232B5C; color:var(--accent); }
-:where(html.dark) .btn.outline:hover, :where(html.dark) .btn.white:hover { background:var(--accent-tint); color:var(--accent-hover); }
+:where(html.dark) .btn.outline, :where(html.dark) .btn.white { background:#292929; border-color:#232B5C; color:var(--blue); }
+:where(html.dark) .btn.outline:hover, :where(html.dark) .btn.white:hover { background:var(--accent-tint); color:var(--blue); }
 :where(html.dark) .btn[disabled] { background:#171714; color:#B0B0B4; border-color:#3B3B36; }
-:where(html.dark) :is(button.chip,.opt,.tag.link) { color:var(--accent); border-color:#232B5C; background:#292929; }
+:where(html.dark) :is(button.chip,.opt,.tag.link) { color:var(--blue); border-color:#232B5C; background:#292929; }
 :where(html.dark) :is(button.chip,.opt,.tag.link):hover { background:var(--accent-tint); border-color:var(--accent); }
-:where(html.dark) :is(button.chip.on,.chip.blue.on,.opt.on) { color:var(--accent); border-color:var(--accent); background:var(--accent-tint); box-shadow:inset 0 0 0 1px var(--accent); }
+:where(html.dark) :is(button.chip.on,.chip.blue.on,.opt.on) { color:var(--blue); border-color:var(--accent); background:var(--accent-tint); box-shadow:inset 0 0 0 1px var(--accent); }
 :where(html.dark) :is(.opt,.chip) .check { color:currentColor; }
 :where(html.dark) .chip.category-choice { color:var(--cat-ink); border-color:transparent; background:var(--cat-fill); }
 :where(html.dark) .chip.category-choice.on { background:var(--cat-fill); color:var(--cat-ink); border-color:#292929; box-shadow:0 0 0 2px var(--blue); }
@@ -175,11 +175,11 @@ html.dark { color-scheme:dark; }
 :where(html.dark) :is(.cat,.tag).cat-A { background:var(--cat-a); color:#FFF; border-color:transparent; }
 :where(html.dark) :is(.cat,.tag).cat-B { background:var(--cat-b); color:#FFF; border-color:transparent; }
 :where(html.dark) :is(.cat,.tag).cat-C { background:var(--cat-c); color:#E9E9E9; border-color:transparent; }
-:where(html.dark) .catcard-wrap .tag.link { background:#292929; color:var(--accent); }
+:where(html.dark) .catcard-wrap .tag.link { background:#292929; color:var(--blue); }
 :where(html.dark) .prep.hi { background:var(--accent-tint); border-color:#24315F; }
 :where(html.dark) .prep.hi .price { background:#171714; color:#BEBEC2; }
 :where(html.dark) .tabbar a { color:#ADB1CD; }
-:where(html.dark) .tabbar a.on { color:var(--accent); }
+:where(html.dark) .tabbar a.on { color:var(--blue); }
 :where(html.dark) .tabbar a.on::before { background:var(--accent); }
 :where(html.dark) .switch-row[aria-checked="true"] .switch { background:var(--accent); }
 :where(html.dark) .list-row .ok { color:var(--ink-2); }
@@ -192,12 +192,12 @@ html.dark { color-scheme:dark; }
 :where(html.dark) .welcome-deco .cat-C { background:var(--cat-c); color:var(--ink); }
 :where(html.dark) .section-heading > svg { color:var(--blue); }
 :where(html.dark) .icon-btn { border:1px solid #212B57; background:#292929; color:var(--blue); }
-:where(html.dark) .icon-btn:hover { border-color:var(--accent); color:var(--accent); }
+:where(html.dark) .icon-btn:hover { border-color:var(--accent); color:var(--blue); }
 :where(html.dark) .filter-hint { background:var(--accent-tint); color:var(--blue); }
-:where(html.dark) .link-action { color:var(--accent); border:0; background:transparent; }
+:where(html.dark) .link-action { color:var(--blue); border:0; background:transparent; }
 :where(html.dark) a.external-link, :where(html.dark) a.external-link:hover { background:transparent !important; color:#BBBBBF !important; border:0 !important; box-shadow:none !important; }
-:where(html.dark) .sheet { border:0; background:#292929; color:var(--ink); box-shadow:0 -12px 50px rgba(255,255,255,0.13); }
-:where(html.dark) .sheet::backdrop { background:rgba(234,234,237,0.43); }
+:where(html.dark) .sheet { border:0; background:#292929; color:var(--ink); box-shadow:0 -12px 50px rgba(76,76,76,0.13); }
+:where(html.dark) .sheet::backdrop { background:rgba(70,70,83,0.43); }
 :where(html.dark) .sheet-handle { background:#42423E; }
 :where(html.dark) .sheet-head { border-bottom:1px solid var(--line); }
 :where(html.dark) .sheet-actions { background:#292929; border-top:1px solid var(--line); }
@@ -379,7 +379,7 @@ html.dark { color-scheme:dark; }
 :where(html.dark) .talents-grant { background:linear-gradient(115deg,var(--sun-soft) 0%,var(--sun) 100%); }
 :where(html.dark) .prep.hi { background:var(--lilac-soft); border-color:var(--lilac); }
 :where(html.dark) .employer-icon { background:var(--lilac-soft); }
-:where(html.dark) .preparation-fp { background:#FFFFFF; color:#FFF; }
+:where(html.dark) .preparation-fp { background:#4C4C4C; color:#FFF; }
 :where(html.dark) .app.theme-CDD { --theme-tint:#292929; }
 :where(html.dark) .app.themed main .btn:not(.outline):not(.danger):not(.white):not(.black):not(.theme):not(.fav) { background:var(--theme-deep); border-color:var(--theme-deep); }
 :where(html.dark) .app.themed main :is(.rung,.callout,.card) { background:var(--theme-tint); }
@@ -392,8 +392,8 @@ html.dark { color-scheme:dark; }
 :where(html.dark) .preparation-card .chev.turn { color:var(--ink); }
 :where(html.dark) .prep-count { color:var(--ink-2); }
 :root:where(.dark) { --panel:#2B2B25; }
-:where(html.dark) .btn.black { background:#EDEDED; border-color:#EDEDED; color:#FFF; }
-:where(html.dark) .btn.black:hover { background:#FFFFFF; border-color:#FFFFFF; color:#FFF; }
+:where(html.dark) .btn.black { background:#4C4C4C; border-color:#4C4C4C; color:#FFF; }
+:where(html.dark) .btn.black:hover { background:#4C4C4C; border-color:#4C4C4C; color:#FFF; }
 :where(html.dark) .btn.black[aria-pressed="true"] svg { fill:currentColor; }
 :where(html.dark) .btn.theme { background:var(--theme-btn); border-color:var(--theme-btn); color:#FFF; }
 :where(html.dark) .btn.theme:hover { background:var(--theme-btn); border-color:var(--theme-btn); color:#FFF; }
@@ -402,15 +402,15 @@ html.dark { color-scheme:dark; }
 :where(html.dark) .job-section .section-heading > svg { color:var(--ink); }
 :where(html.dark) .job-page .callout { background:#292929; }
 :where(html.dark) .parcours-card { background:var(--panel); }
-:where(html.dark) .parcours-step::before { border-left:2.5px dotted #EDEDED; }
-:where(html.dark) .parcours-mark { background:#EDEDED; }
+:where(html.dark) .parcours-step::before { border-left:2.5px dotted #4C4C4C; }
+:where(html.dark) .parcours-mark { background:#4C4C4C; }
 :where(html.dark) .parcours-step.start .parcours-mark { background:transparent; color:#EAEAEA; }
-:where(html.dark) .parcours-step.start .parcours-mark svg { fill:#EDEDED; }
-:where(html.dark) .parcours-step.here .parcours-mark:not(:empty) svg { fill:var(--theme-btn); }
+:where(html.dark) .parcours-step.start .parcours-mark svg { fill:#4C4C4C; }
+:where(html.dark) .parcours-step.here .parcours-mark:not(:empty) svg { fill:var(--theme-ink); }
 :where(html.dark) .parcours-step.here:not(.start) .parcours-mark { background:var(--theme-btn); box-shadow:0 0 0 4px var(--sun); }
 :where(html.dark) .parcours-zone { background:var(--sun); color:#FFE794; }
-:where(html.dark) .parcours-here { background:#EDEDED; color:#FFF; }
-:where(html.dark) .parcours-txt b { color:var(--theme-btn); }
+:where(html.dark) .parcours-here { background:#4C4C4C; color:#FFF; }
+:where(html.dark) .parcours-txt b { color:var(--theme-ink); }
 :where(html.dark) .parcours-txt p { color:var(--ink-2); }
 :where(html.dark) .parcours-link { background:#292929; }
 :where(html.dark) .parcours-link.stage { background:var(--sun); color:#FFF2C2; }
@@ -424,15 +424,15 @@ html.dark { color-scheme:dark; }
 :where(html.dark) .preparation-card .exam-org dt { color:var(--ink); }
 :where(html.dark) .preparation-card .exam-org dd { color:var(--ink); }
 :where(html.dark) .exam-cal h5 svg, :where(html.dark) .exam-places h5 svg { color:var(--card); }
-:where(html.dark) .exam-cal .exam-dates :is(dt,dd) { border-top:1px solid rgba(237,237,237,0.12); }
+:where(html.dark) .exam-cal .exam-dates :is(dt,dd) { border-top:1px solid rgba(76,76,76,0.12); }
 :where(html.dark) .exam-source { color:var(--muted); }
 :where(html.dark) .preparation-card .official-exam-links a { color:var(--muted); }
 :where(html.dark) .job-page .rung { background:#292929; }
-:where(html.dark) .job-page .ladder .via { color:var(--theme-btn); }
+:where(html.dark) .job-page .ladder .via { color:var(--theme-ink); }
 :where(html.dark) .prep-page .back { color:var(--ink); }
 :where(html.dark) .prep-page-cat .cat.lg { box-shadow:none; }
-:where(html.dark) .prep-page .section-heading { color:var(--theme-btn); }
-:where(html.dark) .prep-page .section-heading > svg { color:var(--theme-btn); }
+:where(html.dark) .prep-page .section-heading { color:var(--theme-ink); }
+:where(html.dark) .prep-page .section-heading > svg { color:var(--theme-ink); }
 :where(html.dark) .prep-page .btn.outline { background:#292929; color:var(--ink); border:2px solid var(--theme-tint,var(--lilac)); }
 :where(html.dark) .prep-page .switch-row { border:0; background:#292929; }
 :where(html.dark) .prep-page .switch-row[aria-checked="true"] .switch { background:var(--blue-hover,#2500BA); background:#2500BA; }
@@ -441,7 +441,7 @@ html.dark { color-scheme:dark; }
 :where(html.dark) .prep-page .prep { background:#31312C; border:1px solid var(--theme-tint,var(--lilac)); }
 :where(html.dark) .prep-page .prep.hi.talents-feature { background:#31312C; color:var(--ink); }
 :where(html.dark) .prep-page .prep.hi.talents-feature :is(h2,p,.more) { color:var(--ink); }
-:where(html.dark) .prep-page .prep .more { color:var(--theme-btn); }
+:where(html.dark) .prep-page .prep .more { color:var(--theme-ink); }
 :where(html.dark) .personal-home .study-level { background:#171714; border:2px solid var(--sun); color:#C2C2C6; }
 :where(html.dark) .personal-home .study-level svg { color:#C2C2C6; }
 :where(html.dark) .home-interest { background:transparent; border:2px solid #5D5125; color:#C2C2C6; }
@@ -449,7 +449,7 @@ html.dark { color-scheme:dark; }
 :where(html.dark) .home-tile { background:var(--sun); color:#EAEAEA; }
 :where(html.dark) .home-discover, :where(html.dark) .home-discover:hover { background:var(--lilac); color:var(--ink); }
 :where(html.dark) .home-access, :where(html.dark) .home-access:hover { background:#292929; color:var(--ink); }
-:where(html.dark) .home-go { border:0; background:#292929; color:var(--blue); box-shadow:0 1px 4px rgba(255,255,255,0.08); }
+:where(html.dark) .home-go { border:0; background:#292929; color:var(--blue); box-shadow:0 1px 4px rgba(76,76,76,0.08); }
 :where(html.dark) .home-shortcuts a { border:1px solid var(--lilac); background:#31312C; }
 :root:where(.dark) { --card-bg:#2E2E27; --card-line:#2C2259; }
 :where(html.dark) .context-bar { background:var(--bg); border-bottom:0; }
@@ -459,7 +459,7 @@ html.dark { color-scheme:dark; }
 :where(html.dark) body.themed .context-bar .cat { box-shadow:0 0 0 2px #292929; }
 :where(html.dark) .btn.fav { background:#292929; border-color:#292929; color:var(--ink); }
 :where(html.dark) .btn.fav:hover { background:#292929; border-color:var(--theme-btn); color:var(--ink); }
-:where(html.dark) .btn.fav svg { color:var(--theme-btn); }
+:where(html.dark) .btn.fav svg { color:var(--theme-ink); }
 :where(html.dark) .btn.fav[aria-pressed="true"] svg { fill:currentColor; }
 :where(html.dark) .app.onboarding { --blue-hover:#9A86F3; --accent-hover:#9A86F3; }
 :where(html.dark) .app.onboarding .eyebrow, :where(html.dark) .app.onboarding .back { color:var(--brand); }
@@ -476,12 +476,12 @@ html.dark { color-scheme:dark; }
 :where(html.dark) .home-access .home-go { border:1px solid #161616; box-shadow:none; }
 :where(html.dark) .home-shortcuts a { border:1px solid var(--card-line); background:var(--card-bg); }
 :where(html.dark) .job-page > .body { color:var(--ink); }
-:where(html.dark) .job-section .section-heading > svg { color:var(--theme-btn,var(--ink)); }
+:where(html.dark) .job-section .section-heading > svg { color:var(--theme-ink,var(--ink)); }
 :where(html.dark) .parcours-card { border:1px solid var(--card-line); background:var(--card-bg); }
-:where(html.dark) .parcours-step::before { border:0; background:radial-gradient(circle,#EDEDED 0 1.05px,transparent 1.35px) center top / 4px 5px repeat-y; }
-:where(html.dark) .parcours-step.here:not(.start) .parcours-mark { box-shadow:none; background:#EDEDED; }
-:where(html.dark) .parcours-zone { background:var(--sun); color:var(--theme-btn,var(--blue)); }
-:where(html.dark) .parcours-head b { color:var(--theme-btn,var(--blue)); }
+:where(html.dark) .parcours-step::before { border:0; background:radial-gradient(circle,#4C4C4C 0 1.05px,transparent 1.35px) center top / 4px 5px repeat-y; }
+:where(html.dark) .parcours-step.here:not(.start) .parcours-mark { box-shadow:none; background:#4C4C4C; }
+:where(html.dark) .parcours-zone { background:var(--sun); color:var(--theme-ink,var(--blue)); }
+:where(html.dark) .parcours-head b { color:var(--theme-ink,var(--blue)); }
 :where(html.dark) .parcours-txt p { color:#D6D6D9; }
 :where(html.dark) #jobs.list { border-top:0; }
 :where(html.dark) #jobs .job-row { border:1px solid var(--card-line) !important; background:var(--card-bg); }
@@ -515,17 +515,17 @@ html.dark { color-scheme:dark; }
 :where(html.dark) .prep-page .switch-row { background:transparent; border:0; }
 :where(html.dark) .screen > .eyebrow, :where(html.dark) .screen > .back, :where(html.dark) .topbar > .back, :where(html.dark) .topbar > .eyebrow { color:var(--blue); }
 :where(html.dark) .prep-page .back { color:var(--blue); }
-:where(html.dark) .app.themed .screen > .back { color:var(--theme-btn); }
+:where(html.dark) .app.themed .screen > .back { color:var(--theme-ink); }
 :where(html.dark) .a11y-link, :where(html.dark) .app.themed .a11y-link { color:var(--brand) !important; }
 :where(html.dark) .exam-ref dt { color:var(--ink); }
 :where(html.dark) .exam-ref dd { color:var(--ink-2); }
 :where(html.dark) .exam-sessions li { background:rgba(41,41,41,0.65); }
 :where(html.dark) .exam-vigilance { color:var(--ink-2); }
-:where(html.dark) .exam-vigilance svg { color:var(--theme-btn,var(--blue)); }
+:where(html.dark) .exam-vigilance svg { color:var(--theme-ink,var(--blue)); }
 :where(html.dark) .ref-card { border:1px solid var(--card-line); background:var(--card-bg); }
 :where(html.dark) .ref-name > span { color:var(--ink-2); }
 :where(html.dark) .ref-body p { color:var(--ink-2); }
-:where(html.dark) .ref-body .link-plain { color:var(--theme-btn,var(--blue)); }
+:where(html.dark) .ref-body .link-plain { color:var(--theme-ink,var(--blue)); }
 :where(html.dark) .ref-tip { background:var(--sun-soft); }
 :where(html.dark) .tag.tag-btn { background:#33332C; border:0; color:var(--ink-2); }
 :where(html.dark) .tag.tag-btn:hover { background:var(--lilac); color:var(--blue); }
@@ -533,7 +533,7 @@ html.dark { color-scheme:dark; }
 :where(html.dark) #jobs .job-row, :where(html.dark) .home-shortcuts a, :where(html.dark) .parcours-card, :where(html.dark) .ref-card, :where(html.dark) .preparation-card, :where(html.dark) .catcard-wrap, :where(html.dark) .prep, :where(html.dark) .prep-page .prep, :where(html.dark) .intro-fold, :where(html.dark) .intro-employer, :where(html.dark) .family-card, :where(html.dark) .talents-feature.talents-split, :where(html.dark) .home-feature, :where(html.dark) .callout, :where(html.dark) .rung, :where(html.dark) .exam, :where(html.dark) .study-level, :where(html.dark) .home-interest { border:0 !important; }
 :where(html.dark) .prep-page .btn.outline, :where(html.dark) .prep-page button.chip:not(.on) { border-color:var(--theme-btn,var(--blue)); }
 :where(html.dark) .prep-page .btn.outline:hover, :where(html.dark) .prep-page button.chip:not(.on):hover { background:var(--theme-tint,var(--lilac-soft)); border-color:var(--theme-btn,var(--blue)); }
-:where(html.dark) .recruitment-note .link-plain { color:var(--theme-btn,var(--blue)); }
+:where(html.dark) .recruitment-note .link-plain { color:var(--theme-ink,var(--blue)); }
 :where(html.dark) .home-discover, :where(html.dark) .home-discover:hover { background:var(--brand); color:#FFF; }
 :where(html.dark) .home-discover .home-feature-copy b, :where(html.dark) .home-discover .home-feature-copy > span { color:#FFF; }
 :where(html.dark) .home-discover .home-go { background:#292929; color:var(--brand); }
@@ -563,8 +563,8 @@ html.dark { color-scheme:dark; }
 :where(html.dark) .book-card, :where(html.dark) .book-card.external-link { border:0 !important; background:#292929 !important; }
 :where(html.dark) a.book-card.external-link, :where(html.dark) a.book-card.external-link:hover { color:var(--ink) !important; }
 :where(html.dark) .parcours-txt > .parcours-here { background:var(--theme-btn,var(--brand)); color:#FFF; }
-:where(html.dark) .app.theme-CDD .parcours-txt > .parcours-here { background:#EDEDED; }
-:where(html.dark) .parcours-step.here:not(.start) .parcours-mark { background:var(--theme-btn,#EDEDED); }
+:where(html.dark) .app.theme-CDD .parcours-txt > .parcours-here { background:#4C4C4C; }
+:where(html.dark) .parcours-step.here:not(.start) .parcours-mark { background:var(--theme-btn,#4C4C4C); }
 :where(html.dark) :is(button.chip,.opt,.interest-option):not(.category-choice) { background:transparent !important; border:1.5px solid var(--choice-ink) !important; box-shadow:none !important; color:var(--choice-ink) !important; }
 :where(html.dark) :is(button.chip,.opt,.interest-option):not(.category-choice):hover { background:transparent !important; border-color:var(--choice-ink) !important; }
 :where(html.dark) :is(button.chip,.opt,.interest-option).on:not(.category-choice), :where(html.dark) :is(button.chip,.opt,.interest-option).on:not(.category-choice):hover { background:var(--choice) !important; border-color:var(--choice) !important; color:#FFF !important; }
@@ -590,7 +590,14 @@ html.dark .update-notice .update-notice-dismiss { background:transparent; border
 html.dark .personal-home .study-level { background:transparent !important; border-color:var(--sun); color:#FFE6A1 !important; }
 html.dark .home-tile svg, html.dark .home-tile b, html.dark .home-tile span { color:#141414; }
 html.dark .tabbar a, html.dark .tabbar a.on, html.dark .tabbar a svg { color:#FFF; }
+html.dark .category-fit.warn svg, html.dark :is(.study-level,.home-interest,.fit,.parcours-zone,.parcours-link.stage,.ref-tip) svg { color:#2B2200 !important; }
+html.dark .prep-page button.chip:not(.category-choice) { --choice-ink:var(--theme-ink); }
+html.dark :is(.exam-cal,.exam-places) h5 svg { color:currentColor; }
+html.dark .personal-home .study-level svg { color:#FFE6A1 !important; }
 html.dark .tabbar a.on::before { background:var(--sun); }
-html.dark .app.theme-Ap { --theme-deep:#B9A8FF; } html.dark .app.theme-A { --theme-deep:#93A0FF; } html.dark .app.theme-B { --theme-deep:#6FD6D6; }
+html.dark { --theme-ink:#B3A6FF; --cat-ap-ink:#B9A8FF; --cat-a-ink:#9BA6FF; --cat-b-ink:#6FD6D6; --cat-c-ink:#FFA982; }
+html.dark .app.theme-Ap, html.dark body.theme-Ap { --theme-ink:#B9A8FF; } html.dark .app.theme-A, html.dark body.theme-A { --theme-ink:#9BA6FF; } html.dark .app.theme-B, html.dark body.theme-B { --theme-ink:#6FD6D6; }
+html.dark .app.theme-C, html.dark body.theme-C { --theme-ink:#FFA982; } html.dark .app.theme-CDD, html.dark body.theme-CDD { --theme-ink:#E2E2E6; }
+html.dark .app.theme-Ap { --theme-deep:#B9A8FF; } html.dark .app.theme-A { --theme-deep:#9BA6FF; } html.dark .app.theme-B { --theme-deep:#6FD6D6; }
 html.dark .app.theme-C { --theme-deep:#FFA982; } html.dark .app.theme-CDD { --theme-deep:#E2E2E6; }
 html.dark .app.themed .eyebrow, html.dark .app.themed .section-heading { color:var(--theme-deep); }
