@@ -641,6 +641,12 @@ html:where(.dark).dark :is(.parcours-card, .concours-page .job-section .ref-pane
 :where(html.dark) .job-page:not(.concours-page) .job-hero .body { color:var(--ink-2); }
 :where(html.dark) .exam .exam-source { border-top:1px solid rgba(76,76,76,0.14); }
 html:where(.dark).dark .exam .exam-source { border-top-color:rgba(41,41,41,0.16); }
+:where(html.dark) .suggest { background:#292929; box-shadow:0 10px 30px rgba(20,20,40,.14); }
+:where(html.dark) .suggest-item { color:var(--ink); }
+:where(html.dark) .suggest-item:hover, :where(html.dark) .suggest-item:focus-visible { background:var(--soft); outline:none; }
+:where(html.dark) .suggest-kind { color:var(--muted); }
+html:where(.dark).dark .suggest { background:#4C4C4C; box-shadow:0 10px 30px rgba(76,76,76,0.5); }
+html:where(.dark).dark .suggest-item:hover, html:where(.dark).dark .suggest-item:focus-visible { background:#494950; }
 
 /* Retouches */
 html.dark { --brand:#8F7BFF; --blue:#A493FF; --accent:#7C66FF; --accent-hover:#9785FF; --theme-btn:var(--brand); --red:#FF6B6B; --surface:#1E1E22; }

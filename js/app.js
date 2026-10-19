@@ -221,7 +221,7 @@
   /* Valider une recherche ferme le clavier ; les résultats se mettent déjà à jour pendant la saisie. */
   function submitSearch(id) {
     var input = document.getElementById(id); if (!input) return;
-    input.blur();
+    input.blur(); if (id === 'q') updateSuggest(false);
     /* Commune : Entrée ou la flèche lancent la même recherche que « Rechercher la commune ». */
     if (id === 'location-query') { searchLocation(); return; }
     var results = root.querySelector('#jobs, #study-results, #books, .calendar-list');
@@ -682,6 +682,29 @@
       return true;
     }).sort(function (a, b) { return ['A+','A','B','C'].indexOf(a.cat) - ['A+','A','B','C'].indexOf(b.cat) || a.name.localeCompare(b.name, 'fr'); });
   }
+  /* Auto-complétion : métiers et concours dont le nom commence par la saisie d’abord, puis ceux qui la contiennent. */
+  function concoursSearchText(c) { if (!c._search) { var raw = c.name + ' ' + c.metiers + ' ' + c.domain; c._search = ' ' + searchNorm(raw) + ' ' + feminineForms(raw) + ' '; } return c._search; }
+  function suggestions(q) {
+    var words = searchWords(q), nq = searchNorm(q);
+    if (!words.length || nq.length < 2) return [];
+    function rank(name) { var n = searchNorm(name); return n.indexOf(nq) === 0 ? 0 : (' ' + n).indexOf(' ' + words[0]) > -1 ? 1 : 2; }
+    var items = [];
+    D.jobs.forEach(function (j) { if (matchesWords(searchText(j), words)) items.push({ r: rank(j.name), label: j.name, href: '#/metier/' + j.id, kind: 'Métier', cat: displayCategory(j) }); });
+    D.concours.forEach(function (c) { if (matchesWords(concoursSearchText(c), words)) items.push({ r: rank(c.name), label: c.name, href: '#/concours-fiche/' + concoursKey(c), kind: 'Concours', cat: c.cat }); });
+    return items.sort(function (a, b) { return a.r - b.r || a.label.length - b.label.length || a.label.localeCompare(b.label, 'fr'); }).slice(0, 6);
+  }
+  function suggestHtml(q) {
+    return suggestions(q).map(function (it) {
+      return '<li><a class="suggest-item" href="' + it.href + '">' + catBadge(it.cat, 'sm') + '<span class="suggest-label">' + esc(it.label) + '</span><span class="suggest-kind">' + it.kind + '</span></a></li>';
+    }).join('');
+  }
+  function updateSuggest(show) {
+    var box = document.getElementById('q-suggest'), input = document.getElementById('q');
+    if (!box || !input) return;
+    var html = show ? suggestHtml(input.value) : '';
+    box.innerHTML = html; box.hidden = !html;
+    input.setAttribute('aria-expanded', String(!!html));
+  }
   function concoursRow(c) {
     return '<a class="list-row job-row concours-row job-' + catClass(c.cat) + '" href="#/concours-fiche/' + concoursKey(c) + '">' + catBadge(c.cat) + '<div class="main"><span class="concours-label">Concours</span><span class="name">' + sig(c.name) + '</span><span class="meta">' + esc(D.fps[c.fp] + (c.voies ? ' · ' + c.voies : '')) + '</span></div></a>';
   }
@@ -728,7 +751,8 @@
       '<div class="title-row"><h1>' + (isParent() ? 'Ses métiers et concours' : 'Vos métiers et concours') + '</h1><button id="filters-open" type="button" class="icon-btn' + (showFilterNotice ? ' pulse' : '') + '" data-action="openFilters" aria-label="Régler les filtres métiers">' + I.settings + '</button></div>' + childSelector() +
       (showFilterNotice ? '<div class="top-notice" role="status"><span>Utilisez les réglages pour filtrer les métiers par catégorie.</span></div>' : '') +
       '<div class="row filter-summary" aria-label="Filtres actifs">' + filterSummary() + '</div>' +
-      searchField('q','Rechercher un métier','Rechercher un métier',S.q) +
+      '<div class="search-wrap">' + searchField('q','Rechercher un métier ou un concours','Rechercher un métier ou un concours',S.q) +
+      '<ul class="suggest" id="q-suggest" aria-label="Suggestions" hidden></ul></div>' +
       '<div class="list" id="jobs">' + jobRows() + '</div></main>' + tabbar('metiers');
   };
   function jobDetails(id) {
@@ -1929,6 +1953,7 @@
     }
     if (e.target.id !== 'q') return;
     S.q = e.target.value; S.jobLimit = 60; save();
+    updateSuggest(true);
     var box = document.getElementById('jobs');
     if (box) box.innerHTML = jobRows();
     clearTimeout(searchTimer);
@@ -1944,6 +1969,13 @@
   root.addEventListener('focusout',function(e){
     if(e.target.id!=='person-name')return;
     var screen=e.target.closest('.identity-screen');if(screen)screen.classList.remove('typing');
+  });
+  root.addEventListener('focusin',function(e){ if(e.target.id==='q'&&e.target.value)updateSuggest(true); });
+  root.addEventListener('focusout',function(e){ if(e.target.id==='q')setTimeout(function(){var a=document.activeElement;if(!a||!a.closest||!a.closest('#q-suggest'))updateSuggest(false);},180); });
+  root.addEventListener('keydown',function(e){
+    if(e.target.id==='q'&&e.key==='Escape'){updateSuggest(false);return;}
+    if(e.target.id==='q'&&e.key==='ArrowDown'){var first=document.querySelector('#q-suggest a');if(first){e.preventDefault();first.focus();}return;}
+    if(e.target.closest&&e.target.closest('#q-suggest')&&(e.key==='ArrowDown'||e.key==='ArrowUp')){var items=[].slice.call(document.querySelectorAll('#q-suggest a')),i=items.indexOf(e.target);e.preventDefault();if(e.key==='ArrowDown'&&items[i+1])items[i+1].focus();else if(e.key==='ArrowUp')(items[i-1]||document.getElementById('q')).focus();return;}
   });
   root.addEventListener('keydown',function(e){
     if(e.target.id==='person-name'&&e.key==='Enter'&&!e.isComposing&&e.keyCode!==229){e.preventDefault();confirmName();}

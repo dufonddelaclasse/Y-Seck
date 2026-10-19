@@ -1815,3 +1815,15 @@ html[data-contrast="true"] :is(.parcours-card, .concours-page .job-section .ref-
 .exam .exam-cal { margin-top:22px; }
 .exam .exam-source { margin-top:8px; padding-top:14px; border-top:1px solid rgba(20,20,20,.14); }
 html.dark .exam .exam-source { border-top-color:rgba(255,255,255,.16); }
+
+/* Recherche Explorer : suggestions sous la barre (métiers et concours). */
+.search-wrap { position:relative; }
+.suggest { position:absolute; z-index:6; top:calc(100% + 6px); left:0; right:0; margin:0; padding:6px; list-style:none; border-radius:22px; background:#FFF; box-shadow:0 10px 30px rgba(20,20,40,.14); }
+.suggest[hidden] { display:none; }
+.suggest-item { display:flex; align-items:center; gap:10px; min-height:44px; padding:8px 12px; border-radius:16px; color:var(--ink); text-decoration:none; }
+.suggest-item:hover, .suggest-item:focus-visible { background:var(--soft); outline:none; }
+.suggest-item .cat { flex:none; }
+.suggest-label { flex:1; min-width:0; font-size:.9375rem; line-height:1.25; }
+.suggest-kind { flex:none; color:var(--muted); font-size:.75rem; }
+html.dark .suggest { background:#161616; box-shadow:0 10px 30px rgba(0,0,0,.5); }
+html.dark .suggest-item:hover, html.dark .suggest-item:focus-visible { background:#2E2E33; }
