@@ -18,10 +18,13 @@
     contrast: false, largeText: false, dysFont: false, colorMode: 'auto', metShow: 'tous', filterHintSeen: false, bookQ: '', bookSubject: 'Toutes', bookCategory: 'A', bookFp: 'Tous',
     resQ: '', resCat: 'Toutes', resFp: 'Tous', resKind: 'Tous', resYear: 'Toutes', resLimit: 40
   };
-  var PERSON_FIELDS = ['name', 'level', 'domains', 'traits', 'boursier', 'budget', 'done', 'location', 'favorites', 'pendingChanges'];
+  var PERSON_FIELDS = ['name', 'level', 'domains', 'traits', 'boursier', 'budget', 'done', 'location', 'favorites', 'pendingChanges', 'validated'];
   var PROFILE_SCREENS = ['moi', 'profil', 'niveau', 'interets', 'traits', 'situation'];
   var EDITABLE_FIELDS = ['name', 'level', 'domains', 'traits', 'boursier', 'budget', 'location'];
   var S = load();
+  /* Profil enregistré avant octobre 2026 : sans version validée, aucune modification n’est considérée en attente. */
+  if (S.done && !S.validated) S.pendingChanges = false;
+  syncPending();
   var profileSnapshot = profileSignature();
 
   function personData(st) {
@@ -31,9 +34,16 @@
     return out;
   }
   function normalizeBudget(value) { return value === 'Moins de 1 000 €' ? 'Avec frais d’inscription' : value; }
-  function blankPerson(name) { return { name: name || '', level: null, domains: [], traits: [], boursier: null, budget: null, done: false, location: null, favorites: [], pendingChanges: false }; }
+  function blankPerson(name) { return { name: name || '', level: null, domains: [], traits: [], boursier: null, budget: null, done: false, location: null, favorites: [], pendingChanges: false, validated: null }; }
   function profileSignature() { return JSON.stringify(EDITABLE_FIELDS.map(function(k){return S[k];})); }
   function profileNeedsValidation() { return !!(S.done && S.pendingChanges); }
+  /* Les réponses sont comparées à la dernière version validée : revenir en arrière retire le bouton « Terminer les modifications ». */
+  function markValidated() { S.validated = profileSignature(); S.pendingChanges = false; }
+  function syncPending() {
+    if (!S.done) { S.pendingChanges = false; return; }
+    if (!S.validated) S.validated = profileSignature();
+    S.pendingChanges = profileSignature() !== S.validated;
+  }
   function profileSubmitLabel(label) { return profileNeedsValidation() ? 'Terminer les modifications' : label; }
   function profileContinuation(href,label,ready) {
     if(profileNeedsValidation())return '<button type="button" class="btn" data-action="validateProfile">Terminer les modifications</button>';
@@ -43,7 +53,7 @@
   function skipStep(href) { return profileNeedsValidation()?'':'<a class="skip-step" href="'+href+'">Passer cette étape</a>'; }
   function validateProfile() {
     if(!identityReady()){navigate(nameReady()?'#/niveau':'#/profil');announce(nameReady()?'Choisissez un niveau pour continuer.':'Renseignez un prénom pour continuer.');return;}
-    S.name=S.name.trim();S.pendingChanges=false;profileSnapshot=profileSignature();save();navigate('#/accueil');announce('Modifications enregistrées.');
+    S.name=S.name.trim();markValidated();profileSnapshot=profileSignature();save();navigate('#/accueil');announce('Modifications enregistrées.');
   }
   function activeChild() { return S.children.find(function (c) { return c.id === S.activeChild; }); }
   function syncPerson() {
@@ -54,6 +64,8 @@
   function usePerson(p) {
     Object.assign(S, blankPerson(), p);
     S.budget = normalizeBudget(S.budget);
+    if (S.done && !S.validated) S.pendingChanges = false;
+    syncPending();
     profileSnapshot=profileSignature();
     S.metDomains = null; S.metMode = 'mine'; S.metCats = null; S.metFps = null; S.q = ''; S.jobLimit = 60; S.region = 'Toutes';
     S.prepBudget = null; S.talentsAll = false; S.calCat = 'Toutes'; S.calFp = 'Tous'; S.calQ = ''; S.calLimit = 40;
@@ -111,7 +123,10 @@
   function save() {
     var current=profileSignature();
     /* Le choix boursier·e ou la commune saisis ailleurs s’enregistrent directement : seul le questionnaire demande une validation. */
-    if(S.done&&profileSnapshot!==undefined&&current!==profileSnapshot&&PROFILE_SCREENS.indexOf(route().name)>-1)S.pendingChanges=true;
+    if(S.done&&profileSnapshot!==undefined&&current!==profileSnapshot){
+      if(PROFILE_SCREENS.indexOf(route().name)>-1)syncPending();
+      else if(!S.pendingChanges)S.validated=current;
+    }
     syncPerson();
     try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) { /* stockage indisponible */ }
     profileSnapshot=current;
@@ -194,7 +209,7 @@
   }
   function tabbar(active) {
     if (active === 'prepas' || active === 'concours') active = 'accueil';
-    var tabs = [['accueil', isParent() ? 'Famille' : 'Accueil', I.home], ['metiers', 'Métiers & Concours', I.grid], ['favoris', 'Favoris', I.bookmark], ['moi', isParent()&&S.children.length>=2?'Profils':'Profil', I.user]];
+    var tabs = [['accueil', isParent() ? 'Famille' : 'Accueil', I.home], ['metiers', 'Explorer', I.grid], ['favoris', 'Favoris', I.bookmark], ['moi', isParent()&&S.children.length>=2?'Profils':'Profil', I.user]];
     return '<nav class="tabbar" aria-label="Navigation principale">' + tabs.map(function (t) {
       var on = t[0] === active;
       return '<a href="#/' + t[0] + '" class="' + (on ? 'on' : '') + '"' + (on ? ' aria-current="page"' : '') + '>' + t[2] + esc(t[1]) + '</a>';
@@ -1792,7 +1807,7 @@
       case 'budget': set({ budget: v, prepBudget: null }); break;
       case 'go': location.hash = '#/' + v; break;
       case 'startProfile': S.introSeen = true; save(); navigate(familyEstablished()?'#/profil':'#/choix-profil'); break;
-      case 'finish': e.preventDefault(); if(!identityReady()){navigate(nameReady()?'#/niveau':'#/profil');announce(nameReady()?'Choisissez un niveau pour continuer.':'Renseignez un prénom pour continuer.');break;} S.done = true; S.pendingChanges=false;profileSnapshot=profileSignature();save(); navigate('#/accueil'); break;
+      case 'finish': e.preventDefault(); if(!identityReady()){navigate(nameReady()?'#/niveau':'#/profil');announce(nameReady()?'Choisissez un niveau pour continuer.':'Renseignez un prénom pour continuer.');break;} S.done = true; markValidated();profileSnapshot=profileSignature();save(); navigate('#/accueil'); break;
       case 'clearSearch': {
         e.preventDefault(); clearTimeout(searchTimer);
         if(v==='q'){S.q='';S.jobLimit=60;}

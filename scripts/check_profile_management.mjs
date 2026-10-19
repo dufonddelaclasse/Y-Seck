@@ -95,6 +95,17 @@ for(const [label,change] of changes){
   assert(!t.saved().personalProfiles.etu.pendingChanges);
 }
 
+// Revenir à la réponse validée retire le bouton ; un ancien indicateur sans version validée ne l’affiche pas.
+{
+  const t=start(personal());
+  t.click('level','Bac+3');
+  assert(hasValidation(t),'Une modification affiche le bouton.');
+  t.click('level','Bac');
+  assert(!t.S.pendingChanges&&!hasValidation(t),'Revenir à la réponse validée retire le bouton.');
+  const stale=start(personal({pendingChanges:true}));
+  assert(!hasValidation(stale),'Un ancien indicateur sans modification réelle n’affiche pas le bouton.');
+}
+
 // Le choix boursier·e fait depuis Se préparer s’enregistre sans demander de validation du profil.
 {
   const t=start(personal());
