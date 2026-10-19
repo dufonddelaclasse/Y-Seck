@@ -1230,27 +1230,40 @@
   }
   /* Une zone de la frise : seulement ce qui est conseillé pour ce concours (options, spécialités, stages, prépa). */
   function tripPhase(c, p, lvl, prepa) {
-    var dot = function (t) { return t && !/[.!?]$/.test(t) ? t + '.' : t; }, qa = [], meta = '', link = '';
+    var dot = function (t) { return t && !/[.!?]$/.test(t) ? t + '.' : t; }, qa = [], meta = '';
     var search = D.stagesAdvice.filter(function (a) { return /rechercher/.test(norm(a.domain)); })[0];
+    var link = search ? ext(search.source, 'Chercher un stage sur 1 élève 1 stage', 'link-plain') : '';
     if (p.kind === 'college') {
       meta = 'jusqu’au brevet';
-      qa = [['Options conseillées ?', c.collegeOption], ['Stage de 3e ?', tripStage(c, 'Troisième')]];
-      if (search) link = ext(search.source, 'Chercher un stage sur 1 élève 1 stage', 'link-plain');
+      qa = [['Options conseillées ?', c.collegeOption], ['Stage de 3e ?', tripStage(c, 'Troisième'), link]];
     }
     if (p.kind === 'pro') { meta = 'CAP en 2 ans ou bac pro en 3 ans'; qa = [['Quelle formation ?', c.lyceePro]]; }
     if (p.kind === 'lycee') {
       meta = 'jusqu’au bac';
       qa = [['Quelles spécialités ?', c.lyceeGeneral && c.lyceeGeneral + ' (conseillées, jamais obligatoires)']];
-      if (p.from === 4) qa.push(['Option en seconde ?', c.optionSeconde], ['Stage de seconde ?', tripStage(c, 'Seconde')]);
+      if (p.from === 4) qa.push(['Option en seconde ?', c.optionSeconde], ['Stage de seconde ?', tripStage(c, 'Seconde'), link]);
       qa.push(['Option en terminale ?', c.optionTerminale]);
-      if (p.from === 4 && search) link = ext(search.source, 'Chercher un stage sur 1 élève 1 stage', 'link-plain');
     }
     if (p.kind === 'sup') { meta = 'jusqu’à un ' + DIP[lvl]; qa = [['Quelles études ?', c.studies], ['Comment se préparer ?', prepa]]; }
     /* Catégories A et A+ : niveau minimum et niveau recommandé, à la place de la durée. */
     var levelNote = p.kind === 'sup' && (c.cat === 'A' || c.cat === 'A+') ? (lvl >= 5 ? ['Bac+5 minimum'] : ['Bac+3 minimum', 'Bac+5 recommandé']) : null;
     var sep = '<span aria-hidden="true"> | </span><span class="sr-only">, </span>';
     return '<p class="trip-meta">' + (levelNote ? levelNote.map(esc).join(sep) : yearsLabel(p.years) + sep + esc(meta)) + '</p>' +
-      qa.filter(function (x) { return x[1]; }).map(function (x) { return '<p class="trip-q">' + esc(x[0]) + '</p><p class="trip-a">' + sig(dot(x[1])) + '</p>'; }).join('') + link;
+      qa.filter(function (x) { return x[1]; }).map(function (x) { return tripFold(x[0], '<p class="trip-a">' + sig(dot(x[1])) + '</p>' + (x[2] || '')); }).join('');
+  }
+  /* Chaque rubrique de la frise se déplie depuis son titre, comme « Lieux et sources ». */
+  function tripFold(title, body) { return '<details class="trip-more"><summary><span>' + esc(title) + '</span>' + I.down + '</summary><div class="trip-fold">' + body + '</div></details>'; }
+  /* Ce que recouvre chaque voie d’accès citée par le concours. */
+  var VOIES = [
+    [/extern/i, 'Concours externe', 'Ouvert à toute personne qui a le diplôme demandé, ou un niveau équivalent, sans expérience exigée dans la fonction publique.'],
+    [/intern/i, 'Concours interne', 'Réservé aux personnes qui travaillent déjà dans la fonction publique, fonctionnaires ou contractuels, après quelques années de service.'],
+    [/(^|[^\w+])3e\b|troisi[eè]me/i, '3e concours', 'Pour les personnes qui ont une expérience professionnelle dans le privé, un mandat d’élu local ou une responsabilité associative, pendant une durée fixée par le concours. Aucun diplôme n’est demandé.'],
+    [/docteur/i, 'Voie des docteurs', 'Réservée aux titulaires d’un doctorat.'],
+    [/sur titres?/i, 'Concours sur titres', 'Sélection sur dossier avec le diplôme ou la qualification demandés, souvent complétée par un entretien.']
+  ];
+  function voiesExplained(text) {
+    var found = VOIES.filter(function (v) { return v[0].test(text || ''); });
+    return found.length ? '<dl class="trip-voies">' + found.map(function (v) { return '<dt>' + esc(v[1]) + '</dt><dd>' + esc(v[2]) + '</dd>'; }).join('') + '</dl>' : '';
   }
   var TRIP_TITLES = { college: 'Collège', lycee: 'Lycée', pro: 'Lycée professionnel', sup: 'Études supérieures' };
   function tripWho(level, testLevel) { return level ? (isParent() && !testLevel ? 'Position de ' + childName() : 'Ma position') + ' · ' + level : 'Entrée en 6e'; }
@@ -1269,7 +1282,7 @@
     var datesHref = '#/calendrier/concours/' + concoursKey(c);
     var stop = tripStop, catVar = CAT_VARS[c.cat], catStyle = catVar ? '--theme:var(' + catVar[0] + ');--trip-ink:' + catVar[1] : '';
     /* Question en gras, réponse à la ligne en noir. */
-    var qa = function (q, a) { return a ? '<p class="trip-qa">' + esc(q) + '</p><p class="trip-a">' + sig(dot(a)) + '</p>' : ''; };
+    var qa = function (q, a, more) { return a ? tripFold(q, '<p class="trip-a">' + sig(dot(a)) + '</p>' + (more || '')) : ''; };
     var short = function (iso) { var d = fmtDate(iso); return d.day + ' ' + d.month + ' ' + d.year; };
     return stop('start', I.pin, 'Départ', '<p class="trip-sub">' + esc(who) + '</p>', '') +
       (first ? stop('leg', '<span class="trip-walk">' + I.walk + '</span>', '', '<p class="trip-lead">' + esc(TRIP_TITLES[first.kind]) + '</p>' + tripPhase(c, first, trip.lvl, prepaText(c)), 'line c-' + first.kind)
@@ -1277,22 +1290,22 @@
       trip.phases.slice(1).map(function (p) { return stop('mid', '<span class="trip-dot c-' + p.kind + '"></span>', esc(TRIP_TITLES[p.kind]), tripPhase(c, p, trip.lvl, prepaText(c)), 'line c-' + p.kind); }).join('') +
       stop('trip-exam', catBadge(c.cat), esc(c.name),
         '<p class="trip-dir">' + I.arrow + '<span>' + esc({ E: 'Fonction publique de l’État', T: 'Fonction publique territoriale', H: 'Fonction publique hospitalière' }[c.fp] || D.fps[c.fp]) + '</span></p>' +
-        '<h2 class="trip-h no-icon">Prochaines sessions</h2>' + (sessions.length ? '<ul class="trip-sessions">' + sessions.slice(0, 3).map(function (x) {
+        tripFold('Prochaines sessions', sessions.length ? '<ul class="trip-sessions">' + sessions.slice(0, 3).map(function (x) {
           return '<li><span>' + esc(x.voie || 'Session') + (x.provisional ? ' · prévisionnel' : '') + '</span><span>' + (x.date ? 'clôture ' + esc(short(x.date)) : esc(x.closeLabel || 'date à venir')) + '</span></li>';
-        }).join('') + '</ul>' + (sessions.length > 3 ? '<a class="link-plain" href="' + datesHref + '">Voir les ' + sessions.length + ' sessions</a>' : '') : '<p class="trip-meta">Aucune session publiée pour le moment : consulter l’avis officiel.</p>') +
-        qa('Quelles voies ?', c.voies) + qa('Quels diplômes ?', c.condition) + qa('Quelles épreuves ?', c.epreuves) + qa('Qui organise ?', e.org) + (prepaInStudies ? '' : qa('Comment se préparer ?', prepaText(c))) +
+        }).join('') + '</ul>' + (sessions.length > 3 ? '<a class="link-plain" href="' + datesHref + '">Voir les ' + sessions.length + ' sessions</a>' : '') : '<p class="trip-a">Aucune session publiée pour le moment : consulter l’avis officiel.</p>') +
+        qa('Quelles voies ?', c.voies, voiesExplained(c.voies)) + qa('Quels diplômes ?', c.condition) + qa('Quelles épreuves ?', c.epreuves) + qa('Qui organise ?', e.org) + (prepaInStudies ? '' : qa('Comment se préparer ?', prepaText(c))) +
         (c.vigilance ? '<p class="trip-note">' + I.info + '<span>' + sig(dot(c.vigilance)) + '</span></p>' : '') +
-        '<details class="trip-more"><summary><span>Lieux et sources</span>' + I.down + '</summary>' +
+        tripFold('Lieux et sources',
           '<p class="trip-q">En métropole</p><p class="trip-a">' + esc(e.metro || 'Lieux non précisés : consulter l’avis du concours.') + '</p>' +
           '<p class="trip-q">En outre-mer</p><p class="trip-a">' + esc(e.om || 'Centre non confirmé : consulter l’avis du concours.') + '</p>' +
-          (c.annales ? ext(c.annales.url, 'Annales officielles du concours', 'link-plain') : '') + ext(c.source, 'Page officielle du concours', 'link-plain') + '</details>' +
+          (c.annales ? ext(c.annales.url, 'Annales officielles du concours', 'link-plain') : '') + ext(c.source, 'Page officielle du concours', 'link-plain')) +
         /* Dates de la prochaine session, puis toutes les sessions du concours. */
-        '<details class="trip-more"><summary><span>Dates des épreuves</span>' + I.down + '</summary>' +
+        tripFold('Dates des épreuves',
           (next ? '<p class="trip-q">' + esc((next.provisional ? 'Calendrier prévisionnel' : 'Calendrier') + ' · ' + (next.voie || 'Session')) + '</p>' +
             '<dl class="trip-dates"><dt>Ouverture</dt><dd>' + esc(next.openLabel || next.open || 'Non publiée') + '</dd><dt>Clôture</dt><dd>' + esc(next.closeLabel || next.date || 'Non publiée') + '</dd>' +
             '<dt>Écrits ou sélection</dt><dd>' + esc(next.writtenLabel || 'Non publiés') + '</dd><dt>Oraux</dt><dd>' + esc(next.oralLabel || 'Non publiés') + '</dd></dl>'
             : '<p class="trip-a">Aucune session publiée pour le moment : consulter l’avis officiel.</p>') +
-          (allSessions.length ? '<a class="trip-all-dates" href="' + datesHref + '">Voir toutes les dates du concours</a>' : '') + '</details>', 'line', catStyle) +
+          (allSessions.length ? '<a class="trip-all-dates" href="' + datesHref + '">Voir toutes les dates du concours</a>' : '')), 'line', catStyle) +
       stop('end', '<span class="trip-pill"></span>', end.name, end.body, '');
   }
   /* Un niveau dans l’adresse (#/concours-fiche/<clé>/<niveau>) permet de vérifier la frise sans modifier le profil. */
@@ -1320,6 +1333,11 @@
   };
   /* Ancienne adresse de la page test : même fiche. */
   screens['concours-test'] = function (key, level) { return screens['concours-fiche'](key, level); };
+  /* Onglet de concours : sa frise et son « Évoluer » s’affichent, les autres se masquent. */
+  function selectTripTab(scope, v) {
+    scope.querySelectorAll('[data-tab]').forEach(function (panel) { panel.hidden = panel.getAttribute('data-tab') !== v; });
+    scope.querySelectorAll('.trip-tab').forEach(function (tab) { tab.setAttribute('aria-selected', String(tab.getAttribute('data-v') === v)); });
+  }
   /* Page test : fiche métier en frise, un onglet par concours possible ; Évoluer suit l’onglet choisi. */
   screens['metier-test'] = function (id, testLevel) {
     var j = jobById(id);
@@ -1331,8 +1349,14 @@
     var fpLabel = { E: 'Fonction publique de l’État', T: 'Fonction publique territoriale', H: 'Fonction publique hospitalière' };
     var shared = sharedTraits(j), fav = S.favorites.indexOf(j.id) > -1;
     var label = function (c) { var twin = refs.some(function (o) { return o !== c && o.cat === c.cat && o.fp === c.fp; }); return twin ? c.name : D.fps[c.fp]; };
-    var tabs = refs.length > 1 ? '<div class="trip-tabs-wrap"><p class="trip-tabs-label">' + refs.length + ' concours possibles pour ce métier</p><div class="trip-tabs" role="tablist" aria-label="Concours possibles">' + refs.map(function (c, i) {
-      return '<button type="button" class="trip-tab" role="tab" id="trip-tab-' + i + '" aria-controls="trip-panel-' + i + '" aria-selected="' + (i === sel) + '" data-action="tripTab"' + attr('v', i) + '>' + catBadge(c.cat, 'sm') + '<span>' + esc(label(c)) + '</span></button>';
+    /* Métier sur plusieurs catégories : on choisit d’abord la catégorie, puis le versant. */
+    var cats = []; refs.forEach(function (c) { if (cats.indexOf(c.cat) === -1) cats.push(c.cat); });
+    var selCat = refs[sel].cat, multi = cats.length > 1;
+    var catRow = multi ? '<div class="trip-cats" role="group" aria-label="Catégorie du concours">' + cats.map(function (k) {
+      return '<button type="button" class="trip-cat" data-action="tripCat"' + attr('v', k) + ' aria-pressed="' + (k === selCat) + '">' + catBadge(k, 'sm') + '<span>Catégorie ' + esc(k) + '</span></button>';
+    }).join('') + '</div>' : '';
+    var tabs = refs.length > 1 ? '<div class="trip-tabs-wrap"><p class="trip-tabs-label">' + refs.length + ' concours possibles pour ce métier</p>' + catRow + '<div class="trip-tabs" role="tablist" aria-label="Concours possibles">' + refs.map(function (c, i) {
+      return '<button type="button" class="trip-tab" role="tab" id="trip-tab-' + i + '" aria-controls="trip-panel-' + i + '" aria-selected="' + (i === sel) + '" data-action="tripTab"' + attr('v', i) + attr('cat', c.cat) + (multi && c.cat !== selCat ? ' hidden' : '') + '>' + (multi ? '' : catBadge(c.cat, 'sm')) + '<span>' + esc(label(c)) + '</span></button>';
     }).join('') + '</div></div>' : '';
     var panels = refs.map(function (c, i) {
       return '<div class="trip-panel" id="trip-panel-' + i + '" role="tabpanel" aria-labelledby="trip-tab-' + i + '" data-tab="' + i + '"' + (i === sel ? '' : ' hidden') + '><ol class="trip">' +
@@ -1969,7 +1993,11 @@
     var v = el.getAttribute('data-v');
     var i, next;
     switch (a) {
-      case 'tripTab': var tripMain = el.closest('main') || document; tripMain.querySelectorAll('[data-tab]').forEach(function (panel) { panel.hidden = panel.getAttribute('data-tab') !== v; }); tripMain.querySelectorAll('.trip-tab').forEach(function (tab) { tab.setAttribute('aria-selected', String(tab.getAttribute('data-v') === v)); }); break;
+      case 'tripTab': selectTripTab(el.closest('main') || document, v); break;
+      case 'tripCat': var catMain = el.closest('main') || document, firstTab = null;
+        catMain.querySelectorAll('.trip-cat').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-v') === v)); });
+        catMain.querySelectorAll('.trip-tab').forEach(function (t) { var on = t.getAttribute('data-cat') === v; t.hidden = !on; if (on && !firstTab) firstTab = t; });
+        if (firstTab) selectTripTab(catMain, firstTab.getAttribute('data-v')); break;
       case 'openPrepCat': var prepJob=el.getAttribute('data-job'); (expandedPrepCategories[prepJob]||(expandedPrepCategories[prepJob]={}))[v]=el.getAttribute('aria-expanded')!=='true'; render(); break;
       case 'openFilters': UI.open('filters',onConcoursPage()?'Filtrer les concours':'Filtrer les métiers',jobFilters(),el); break;
       case 'jobDetails': UI.open('details','Plus de détails',jobDetails(v),el); break;

@@ -1923,12 +1923,20 @@ html.dark .trip-all-dates, html.dark .trip-all-dates:hover { color:var(--lt, var
 .trip-tabs-label { margin:0 0 10px; font-size:.9375rem; color:var(--muted); }
 .trip-tabs { display:flex; flex-wrap:wrap; gap:8px; }
 .trip-tabs::-webkit-scrollbar { display:none; }
-.trip-tab { display:inline-flex; flex:none; align-items:center; gap:8px; min-height:44px; padding:6px 16px 6px 7px; border:0; border-radius:999px; background:#FFF; color:var(--ink); font:inherit; font-size:.9375rem; font-weight:500; cursor:pointer; -webkit-tap-highlight-color:transparent; }
-.trip-tab .cat { width:30px; height:30px; font-size:.8125rem; box-shadow:none; }
+.trip-tab, .trip-cat { display:inline-flex; flex:none; align-items:center; gap:6px; min-height:34px; padding:4px 12px; border:0; border-radius:999px; background:#FFF; color:var(--ink); font:inherit; font-size:.875rem; font-weight:500; cursor:pointer; -webkit-tap-highlight-color:transparent; }
+.trip-tab:has(.cat), .trip-cat { padding-left:4px; }
+.trip-tab[hidden] { display:none; }
+.trip-tab .cat, .trip-cat .cat { width:26px; height:26px; font-size:.75rem; box-shadow:none; }
 .trip-tab[aria-selected="true"] { background:var(--ink); color:#FFF; }
+/* Catégories : contour seul, la catégorie choisie est cerclée de noir. */
+.trip-cats { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:10px; }
+.trip-cat { background:transparent; box-shadow:inset 0 0 0 1px #C9C9C9; }
+.trip-cat[aria-pressed="true"] { box-shadow:inset 0 0 0 2px var(--ink); }
 .trip-tabs-wrap + .trip-wrap { margin-top:28px; }
 html.dark .trip-tab { background:#161616; color:#F2F2F2; }
 html.dark .trip-tab[aria-selected="true"] { background:#F2F2F2; color:#161616; }
+html.dark .trip-cat { background:transparent; color:#F2F2F2; box-shadow:inset 0 0 0 1px #4A4A4A; }
+html.dark .trip-cat[aria-pressed="true"] { box-shadow:inset 0 0 0 2px #F2F2F2; }
 /* Évoluer : progressions possibles avec les autres concours du métier. */
 .ladder-alt { display:flex; flex-direction:column; gap:10px; margin-top:22px; }
 .ladder-alt-title { margin:0; font-size:1rem; font-weight:500; color:var(--ink); }
@@ -1936,3 +1944,15 @@ html.dark .trip-tab[aria-selected="true"] { background:#F2F2F2; color:#161616; }
 .ladder-alt-row .cat { flex:none; margin-top:1px; }
 .ladder-alt-row b { display:block; font-weight:500; text-decoration:underline; text-underline-offset:3px; }
 .ladder-alt-row small { display:block; margin-top:2px; font-size:.875rem; color:var(--muted); }
+
+/* Frise : rubriques repliables, titres resserrés et contenu juste sous le titre. */
+.trip-meta + .trip-more, .trip-dir + .trip-more { margin-top:22px; }
+.trip-more + .trip-more, .trip-note + .trip-more { margin-top:18px; }
+.trip-fold { padding:2px 0 6px; }
+.trip-fold > .trip-a:first-child { margin-top:8px; }
+.trip-fold > .trip-sessions { margin-top:6px; }
+.trip-fold > .external-link { display:inline-block; margin-top:10px; }
+.trip-voies { margin:4px 0 0; padding:0; }
+.trip-voies dt { margin-top:12px; font-size:.9375rem; font-weight:500; color:var(--ink); }
+.trip-voies dd { margin:2px 0 0; font-size:.9375rem; line-height:1.45; color:var(--ink-2); }
+.trip-note { margin-top:20px; }

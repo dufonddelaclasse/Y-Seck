@@ -692,14 +692,20 @@ html:where(.dark).dark .trip-all-dates, html:where(.dark).dark .trip-all-dates:h
 :where(html.dark) .parcours-also span { color:var(--muted); }
 :where(html.dark) .parcours-also a { color:var(--ink); }
 :where(html.dark) .trip-tabs-label { color:var(--muted); }
-:where(html.dark) .trip-tab { border:0; background:#292929; color:var(--ink); }
-:where(html.dark) .trip-tab .cat { box-shadow:none; }
+:where(html.dark) .trip-tab, :where(html.dark) .trip-cat { border:0; background:#292929; color:var(--ink); }
+:where(html.dark) .trip-tab .cat, :where(html.dark) .trip-cat .cat { box-shadow:none; }
 :where(html.dark) .trip-tab[aria-selected="true"] { background:var(--ink); color:#FFF; }
+:where(html.dark) .trip-cat { background:transparent; box-shadow:inset 0 0 0 1px #4D4D4D; }
+:where(html.dark) .trip-cat[aria-pressed="true"] { box-shadow:inset 0 0 0 2px var(--ink); }
 html:where(.dark).dark .trip-tab { background:#4C4C4C; color:#F2F2F2; }
 html:where(.dark).dark .trip-tab[aria-selected="true"] { background:#161616; color:#E9E9E9; }
+html:where(.dark).dark .trip-cat { background:transparent; color:#F2F2F2; box-shadow:inset 0 0 0 1px #4C4C4C; }
+html:where(.dark).dark .trip-cat[aria-pressed="true"] { box-shadow:inset 0 0 0 2px #161616; }
 :where(html.dark) .ladder-alt-title { color:var(--ink); }
 :where(html.dark) .ladder-alt-row { color:var(--ink); }
 :where(html.dark) .ladder-alt-row small { color:var(--muted); }
+:where(html.dark) .trip-voies dt { color:var(--ink); }
+:where(html.dark) .trip-voies dd { color:var(--ink-2); }
 
 /* Retouches */
 html.dark { --brand:#8F7BFF; --blue:#A493FF; --accent:#7C66FF; --accent-hover:#9785FF; --theme-btn:var(--brand); --red:#FF6B6B; --surface:#1E1E22; }
