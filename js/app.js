@@ -12,7 +12,7 @@
   var defaults = {
     profile: null, level: null, domains: [], traits: [], boursier: null, budget: null, done: false, pendingChanges: false,
     metDomains: null, metCat: 'Toutes', metFp: 'Tous', q: '', calCat: 'Toutes', track: 'Administratif',
-    showContracts: true, prepBudget: null, alert: false, openCat: null, region: 'Toutes', talentsAll: false,
+    showContracts: null, contractsV: 2, prepBudget: null, alert: false, openCat: null, region: 'Toutes', talentsAll: false,
     name: '', location: null, favorites: [], children: [], activeChild: null, personalProfiles: {},
     metMode: 'mine', jobLimit: 60, calFp: 'Tous', calView: 'upcoming', calLimit: 40, calQ: '',
     contrast: false, largeText: false, dysFont: false, colorMode: 'auto', metShow: 'tous', filterHintSeen: false, bookQ: '', bookSubject: 'Toutes', bookCategory: 'A', bookFp: 'Tous',
@@ -86,6 +86,8 @@
       var saved=raw?JSON.parse(raw):{};
       var st = Object.assign({}, defaults, saved);
       st.budget = normalizeBudget(st.budget);
+      /* Octobre 2026 : l’affichage des contractuels dépend désormais du niveau tant qu’il n’a pas été choisi. */
+      if (saved.contractsV !== 2) { st.showContracts = null; st.contractsV = 2; }
       ['traits', 'domains', 'favorites', 'children'].forEach(function (k) { if (!Array.isArray(st[k])) st[k] = []; });
       st.personalProfiles = st.personalProfiles || {};
       st.children = st.children.filter(function (c) { return c && c.id; }).map(function (c) { return Object.assign(blankPerson(), c); });
@@ -315,7 +317,9 @@
     return ['A+','A','B','C','CDD'].filter(function(c){return cats.indexOf(c)>-1;})[0]||null;
   }
   function jobFits(j) { return isOpen(j)||jobCategories(j).some(function(c){return categoryFit(c)!=='';}); }
-  function passesLevelCategory(j) { return isContractJob(j) ? S.showContracts !== false : !(userRank() >= 5) || jobCategories(j).some(function (c) { return ['B', 'A', 'A+'].indexOf(c) > -1; }); }
+  /* Au-delà de Bac+3, contractuels et catégorie C sont masqués par défaut ; les filtres permettent de les afficher. */
+  function contractsShown() { return S.showContracts === null || S.showContracts === undefined ? !(userRank() >= 5) : S.showContracts; }
+  function passesLevelCategory(j, cat) { return isContractJob(j) ? contractsShown() : cat === 'C' || !(userRank() >= 5) || jobCategories(j).some(function (c) { return ['B', 'A', 'A+'].indexOf(c) > -1; }); }
 
   function reachable() {
     var l = S.level;
@@ -601,7 +605,7 @@
     /* Une recherche porte sur tous les métiers : les domaines présélectionnés ne masquent aucun résultat. */
     var doms = words.length ? [] : activeDomains();
     var list = D.jobs.filter(function (j) {
-      if (!passesLevelCategory(j)) return false;
+      if (!passesLevelCategory(j, S.metCat)) return false;
       if (doms.length && !matchesDomains(j,doms)) return false;
       if (S.metCat !== 'Toutes' && jobCategories(j).indexOf(S.metCat) === -1) return false;
       if (S.metFp !== 'Tous' && j.fp.indexOf(S.metFp) === -1) return false;
@@ -656,11 +660,11 @@
   /* Chaque pastille de filtre ouvre la fenêtre des réglages. */
   function filterSummary() {
     var doms = activeDomains();
-    var label = S.metCat === 'Toutes' ? (userRank() >= 5 ? 'A+, A, B' + (S.showContracts ? ' et CDD' : '') : 'Toutes catégories') : (S.metCat==='CDD'?'CDD':'Catégorie '+S.metCat);
+    var label = S.metCat === 'Toutes' ? (userRank() >= 5 ? 'A+, A, B' + (contractsShown() ? ' et CDD' : '') : 'Toutes catégories') : (S.metCat==='CDD'?'CDD':'Catégorie '+S.metCat);
     function pill(text, cls) { return '<button type="button" class="tag tag-btn' + (cls || '') + '" data-action="openFilters" aria-haspopup="dialog" aria-label="' + esc(text) + ' : modifier les filtres">' + esc(text) + '</button>'; }
     return pill(doms.length ? doms.length + ' domaine' + (doms.length > 1 ? 's' : '') : 'Tous les domaines') +
       pill(label, S.metCat === 'Toutes' ? '' : ' fill ' + catClass(S.metCat)) + pill(S.metFp === 'Tous' ? '3 versants' : D.fps[S.metFp]) +
-      (S.showContracts===false?pill('Contractuels masqués'):'');
+      (contractsShown()?'':pill('Contractuels masqués'));
   }
   function resultsLabel() {
     var show = S.metShow || 'tous', n = show === 'concours' ? 0 : filteredJobs().length, c = show === 'metiers' ? 0 : filteredConcours().length;
@@ -672,9 +676,9 @@
     return '<section class="stack"><h3>Votre sélection</h3><div class="row">' +
       chip('forYou', '', isParent() ? 'Pour votre enfant' : 'Pour vous', S.metMode === 'mine') + chip('allDomains', '', 'Tous les domaines', S.metMode === 'all') + '</div></section>' +
       '<section class="stack mt-m"><h3>Affichage</h3><div class="row" role="group" aria-label="Affichage">' + [['tous','Tous'],['metiers','Métiers'],['concours','Concours']].map(function(o){return chip('metShow',o[0],o[1],(S.metShow||'tous')===o[0]);}).join('') + '</div></section>' +
-      '<section class="stack mt-m"><h3>Catégories</h3><div class="row" role="group" aria-label="Catégorie">' + (userRank()>=5 ? ['Toutes','A+','A','B','CDD'] : ['Toutes','A+','A','B','C','CDD']).map(function(c){return chip('metCat',c,c==='Toutes'?'Toutes':c,S.metCat===c);}).join('') + '</div></section>' +
+      '<section class="stack mt-m"><h3>Catégories</h3><div class="row" role="group" aria-label="Catégorie">' + ['Toutes','A+','A','B','C','CDD'].map(function(c){return chip('metCat',c,c==='Toutes'?'Toutes':c,S.metCat===c);}).join('') + '</div></section>' +
       '<section class="stack mt-m"><h3>Versants</h3><div class="row" role="group" aria-label="Versants">' + ['Tous','E','T','H'].map(function(f){return chip('metFp',f,f==='Tous'?'3 versants':D.fps[f],S.metFp===f);}).join('') + '</div></section>' +
-      '<button type="button" class="switch-row mt-m" role="switch" aria-checked="' + (S.showContracts!==false) + '" data-action="showContracts"><span>Afficher les emplois contractuels</span><span class="switch" aria-hidden="true"></span></button>' +
+      '<button type="button" class="switch-row mt-m" role="switch" aria-checked="' + contractsShown() + '" data-action="showContracts"><span>Afficher les emplois contractuels</span><span class="switch" aria-hidden="true"></span></button>' +
       '<section class="stack mt-m"><h3>Domaines</h3><div class="row" role="group" aria-label="Domaines">' + order.map(function(d){return chip('metDomain',d,domainLabel(d),doms.indexOf(d)>-1);}).join('') + '</div></section>' +
       '<div class="sheet-actions"><button type="button" class="btn" data-ui="close">Afficher ' + resultsLabel() + '</button></div>';
   }
@@ -1703,7 +1707,7 @@
     var v = el.getAttribute('data-v');
     var i, next;
     switch (a) {
-      case 'showContracts': set({showContracts:S.showContracts===false,metCat:S.metCat==='CDD'?'Toutes':S.metCat,jobLimit:60}); countAnnounce(); break;
+      case 'showContracts': set({showContracts:!contractsShown(),metCat:S.metCat==='CDD'?'Toutes':S.metCat,jobLimit:60}); countAnnounce(); break;
       case 'openPrepCat': var prepJob=el.getAttribute('data-job'); (expandedPrepCategories[prepJob]||(expandedPrepCategories[prepJob]={}))[v]=el.getAttribute('aria-expanded')!=='true'; render(); break;
       case 'openFilters': UI.open('filters','Filtrer les métiers',jobFilters(),el); break;
       case 'jobDetails': UI.open('details','Plus de détails',jobDetails(v),el); break;
