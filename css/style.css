@@ -1712,3 +1712,9 @@ html[data-contrast="true"] .prep.hi.talents-feature { background:#FFF; border:1p
 .bourse { border:1.5px solid #C8FFB2 !important; }
 html.dark :is(.talents-feature.talents-split,.prep.hi.talents-feature) { background:var(--surface) !important; }
 html[data-contrast="true"] :is(.talents-feature.talents-split,.bourse) { background:#FFF !important; border:1px solid #000 !important; }
+
+/* Onboarding : « Retour », l’étape et les titres remontés. */
+.app.onboarding .screen:not(.intro-welcome) { margin-top:0; padding-top:calc(4px + env(safe-area-inset-top,0px)); }
+.app.onboarding .screen > h1.mt-l, .app.onboarding .screen > .topbar + h1, .app.onboarding .screen > .progress + h1 { margin-top:0; }
+.app.onboarding .screen > .progress { margin-top:-4px; }
+.app.onboarding .screen > .category-heading { margin-top:0; }
