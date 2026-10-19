@@ -1666,16 +1666,12 @@ html.dark .sheet-content button.chip.category-choice[data-action="metCat"]:not(.
 html[data-contrast="true"] .tabbar a, html[data-contrast="true"] .tabbar a svg { color:#555; }
 html[data-contrast="true"] .tabbar a.on, html[data-contrast="true"] .tabbar a.on svg { color:#000; }
 
-/* Espace personnel : « Vos métiers à découvrir » en dégradé circulaire centré sur le compteur.
-   Teinte générique > #DDC7FF > #BEF1FD > #CCFFED > #FFCBA8 > teinte générique, en anneaux qui s’élargissent en boucle.
-   Chaque passage entre deux teintes suit une courbe douce : aucune cassure, donc aucune ligne visible. */
-@property --ring { syntax:'<length>'; inherits:false; initial-value:0px; }
-@keyframes discover-rings { from { --ring:0px; } to { --ring:300px; } }
-.personal-home .home-discover, .personal-home .home-discover:hover, html.dark body .personal-home .home-discover { background:repeating-radial-gradient(circle at 48px 50%,#2B04CC calc(var(--ring) + 0px),#3812D0 calc(var(--ring) + 10px),#5937D9 calc(var(--ring) + 20px),#8466E6 calc(var(--ring) + 30px),#AF94F2 calc(var(--ring) + 40px),#D0B9FB calc(var(--ring) + 50px),#DDC7FF calc(var(--ring) + 60px),#DBCAFF calc(var(--ring) + 70px),#D5D2FE calc(var(--ring) + 80px),#CEDCFE calc(var(--ring) + 90px),#C6E6FE calc(var(--ring) + 100px),#C0EEFD calc(var(--ring) + 110px),#BEF1FD calc(var(--ring) + 120px),#BFF2FC calc(var(--ring) + 130px),#C2F5F9 calc(var(--ring) + 140px),#C5F8F5 calc(var(--ring) + 150px),#C8FBF1 calc(var(--ring) + 160px),#CBFEEE calc(var(--ring) + 170px),#CCFFED calc(var(--ring) + 180px),#D0FBE8 calc(var(--ring) + 190px),#D9F2DB calc(var(--ring) + 200px),#E6E5CA calc(var(--ring) + 210px),#F2D8BA calc(var(--ring) + 220px),#FBCFAD calc(var(--ring) + 230px),#FFCBA8 calc(var(--ring) + 240px),#EFBCAB calc(var(--ring) + 250px),#C897B1 calc(var(--ring) + 260px),#9568BA calc(var(--ring) + 270px),#6238C3 calc(var(--ring) + 280px),#3B13C9 calc(var(--ring) + 290px),#2B04CC calc(var(--ring) + 300px)); animation:discover-rings 8s linear infinite; color:var(--ink); }
-.personal-home .home-discover .home-feature-copy b, .personal-home .home-discover .home-feature-copy > span, html.dark body .personal-home .home-discover .home-feature-copy :is(b,span) { color:#141414; text-shadow:0 0 6px rgba(255,255,255,.9), 0 0 2px rgba(255,255,255,.9); }
-@media (prefers-reduced-motion:reduce) { .personal-home .home-discover, html.dark body .personal-home .home-discover { animation:none; } }
+/* Espace personnel : « Vos métiers à découvrir » parcouru en continu par un dégradé doux, de gauche à droite.
+   Teintes calculées sur une courbe en cosinus (24 paliers) : aucune cassure de pente, donc aucune ligne visible. */
+@keyframes discover-flow { from { background-position:0 0; } to { background-position:-200% 0; } }
+.personal-home .home-discover, .personal-home .home-discover:hover, html.dark body .personal-home .home-discover { background:linear-gradient(90deg,#2B04CC 0%,#2E07CD 4.17%,#3510CF 8.33%,#411ED3 12.5%,#5031D9 16.67%,#6247DF 20.83%,#755EE6 25%,#8975EC 29.17%,#9B8BF2 33.33%,#AA9EF8 37.5%,#B6ACFC 41.67%,#BDB5FE 45.83%,#C0B8FF 50%,#BDB5FE 54.17%,#B6ACFC 58.33%,#AA9EF8 62.5%,#9B8BF2 66.67%,#8975EC 70.83%,#765EE6 75%,#6247DF 79.17%,#5031D9 83.33%,#411ED3 87.5%,#3510CF 91.67%,#2E07CD 95.83%,#2B04CC 100%) 0 0 / 200% 100% repeat-x; animation:discover-flow 7s linear infinite; }
+@media (prefers-reduced-motion:reduce) { .personal-home .home-discover, html.dark body .personal-home .home-discover { animation:none; background:var(--brand); } }
 html[data-contrast="true"] .personal-home .home-discover { animation:none; background:#000; }
-html[data-contrast="true"] .personal-home .home-discover .home-feature-copy :is(b,span) { color:#FFF; }
 
 /* Lien d’accessibilité : remonté, à égale distance des derniers blocs et du menu. */
 /* Les marges automatiques partagent l’espace libre de part et d’autre ; sans espace libre, le lien suit les blocs de près. */
