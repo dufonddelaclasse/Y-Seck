@@ -1749,3 +1749,6 @@ html[data-contrast="true"] :is(.parcours-card, .concours-page .job-section .ref-
 .ref-card summary { align-items:flex-start; }
 .ref-card summary .cat { margin-top:2px; }
 .ref-card summary .details-toggle { align-self:center; }
+
+/* « Quelles études choisir » : phrase d’introduction avant le parcours. */
+.parcours-intro { margin:-4px 0 0; color:var(--muted); font-size:.875rem; line-height:1.4; }
