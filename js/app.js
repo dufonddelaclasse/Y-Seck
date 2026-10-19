@@ -910,11 +910,11 @@
       step.text=pro?dot(c.lyceePro):[c.lyceeGeneral&&dot('Voie générale, spécialités conseillées (jamais obligatoires) : '+c.lyceeGeneral),c.lyceeTechno&&dot('Voie technologique : '+c.lyceeTechno),c.lyceePro&&dot('Voie professionnelle : '+c.lyceePro),c.optionSeconde&&dot('Option en seconde : '+c.optionSeconde)].filter(Boolean).join(' ');
     }
     else if(g.zone==='Études supérieures'&&mine&&c.studies){
-      step.text=[dot('Études conseillées : '+c.studies),c.l3&&dot('3e année : '+c.l3),c.master&&dot('Ensuite : '+c.master)].filter(Boolean).join(' ');
+      step.text=[dot('Études conseillées : '+c.studies),c.l3&&dot('3e année : '+c.l3)].filter(Boolean).join(' ');
     }
     else if(g.zone==='Études supérieures'&&!mine&&c.studies){
       step.title=c.studies;
-      step.text=[c.l1&&dot('1re année : '+c.l1),c.l2&&dot('2e année : '+c.l2),c.l3&&dot('3e année : '+c.l3),c.master&&dot('Ensuite : '+c.master)].filter(Boolean).join(' ');
+      step.text=[c.l1&&dot('1re année : '+c.l1),c.l2&&dot('2e année : '+c.l2),c.l3&&dot('3e année : '+c.l3)].filter(Boolean).join(' ');
     }
     else if(g.zone==='Concours'){
       step.title=c.name;
