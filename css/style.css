@@ -1771,7 +1771,8 @@ html[data-contrast="true"] :is(.parcours-card, .concours-page .job-section .ref-
 .job-page:not(.concours-page) .parcours-intro { margin-top:-8px; font-size:.9375rem; line-height:1.45; }
 /* Cartes : marge intérieure de 24 px, coins plus doux, texte courant plus confortable. */
 .job-page:not(.concours-page) .parcours-card { padding:26px 22px 22px 18px; border-radius:28px; }
-.job-page:not(.concours-page) .parcours-txt p { font-size:1rem; line-height:1.5; }
+/* Textes du parcours (collège, lycée…) à la taille des textes des épreuves dans les cartes de catégorie. */
+.job-page .parcours-txt p { font-size:.875rem; line-height:1.45; }
 .job-page:not(.concours-page) .parcours-step + .parcours-step { margin-top:6px; }
 .job-page:not(.concours-page) .preparation-card { border-radius:28px; }
 .job-page:not(.concours-page) .ladder { gap:12px; }
