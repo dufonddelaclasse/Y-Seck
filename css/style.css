@@ -1780,3 +1780,28 @@ html[data-contrast="true"] :is(.parcours-card, .concours-page .job-section .ref-
 .job-page:not(.concours-page) .ladder .via { padding:2px 6px; font-size:.875rem; }
 .job-page:not(.concours-page) > .btn.theme { margin-top:48px; }
 .job-page:not(.concours-page) > .external-link { margin-top:8px; }
+
+/* ==========================================================================
+   Aération étendue à toute l’app (validée sur la fiche métier) : grands titres
+   serrés, texte d’introduction plus confortable, sections espacées, cartes plus
+   généreuses. L’onboarding garde ses espacements compacts (tout doit tenir à l’écran),
+   seul son titre suit la nouvelle taille.
+   ========================================================================== */
+.screen:not(.intro-welcome) h1, .screen:not(.intro-welcome) h1.sm, .screen:not(.intro-welcome) .category-heading h1 { font-size:1.875rem; line-height:1.1; letter-spacing:-.02em; }
+.app:not(.onboarding) .screen:not(.intro-welcome) { padding-bottom:56px; }
+.app:not(.onboarding) .screen .lead { font-size:1.0625rem; line-height:1.47; }
+.app:not(.onboarding) .screen > .body, .app:not(.onboarding) .prose p { line-height:1.5; }
+/* Sections : beaucoup d’air entre elles, titre puis contenu. */
+.app:not(.onboarding) .screen > :is(section, h2).mt-m, .app:not(.onboarding) .screen > section.mt-l, .app:not(.onboarding) .prose h2 { margin-top:44px; }
+.app:not(.onboarding) .screen > section.stack { gap:16px; }
+/* Seuls les titres de section grandissent ; les titres de cartes gardent leur taille. */
+.app:not(.onboarding) .screen > .section-heading, .app:not(.onboarding) .screen > section > .section-heading, .app:not(.onboarding) .screen > section > h2:first-child { font-size:1.5rem; line-height:1.15; letter-spacing:-.015em; }
+.app:not(.onboarding) .prose h2 { font-size:1.25rem; line-height:1.2; }
+/* Cartes : marge intérieure plus généreuse et coins plus doux. */
+.app:not(.onboarding) :is(.prep, .preparation-card, .family-card, .ref-card, .book-card, .study-card) { border-radius:28px; }
+.app:not(.onboarding) .prep { padding:22px 22px; }
+.app:not(.onboarding) .ref-card summary { padding:20px 18px 20px 20px; }
+.app:not(.onboarding) .home-features, .app:not(.onboarding) .home-shortcuts { gap:14px; }
+.app:not(.onboarding) .home-feature { padding:24px 20px; }
+.app:not(.onboarding) .list.job-cards, .app:not(.onboarding) #jobs { gap:12px; }
+.app:not(.onboarding) .screen > .btn.theme, .app:not(.onboarding) .screen > .btn:not(.outline):last-of-type { margin-top:40px; }
