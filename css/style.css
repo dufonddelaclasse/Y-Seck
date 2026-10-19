@@ -1582,3 +1582,6 @@ h1, h2, h3, h4, h5, h6, b, strong, th, legend, summary { font-weight:500; }
 .personal-home .study-level, .home-interest { font-size:.8125rem; line-height:normal; padding:5px 9px; font-weight:400; color:var(--ink-2); }
 .personal-home .study-level svg { width:14px; height:14px; }
 
+
+/* Liens de source et d’organismes en bas d’écran : plus petits, interlignage resserré. */
+a.link-plain { min-height:36px; font-size:.8125rem; line-height:1.3; }
