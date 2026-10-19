@@ -1882,9 +1882,9 @@ html.dark .suggest-item:focus-visible { background:#2E2E33; }
 .trip-note { display:flex; gap:8px; margin:22px 0 0; font-size:.875rem; line-height:1.45; color:var(--muted); }
 .trip-note svg { flex:none; width:18px; height:18px; margin-top:1px; }
 .trip-more { margin-top:26px; }
-.trip-more summary { display:inline-flex; align-items:center; gap:10px; list-style:none; cursor:pointer; font-size:1.0625rem; font-weight:500; color:var(--ink); }
+.trip-more summary { display:inline-flex; align-items:center; gap:8px; list-style:none; cursor:pointer; font-size:.9375rem; line-height:1.35; font-weight:500; color:var(--ink); }
 .trip-more summary::-webkit-details-marker { display:none; }
-.trip-more summary svg { width:22px; height:22px; transition:transform .2s; }
+.trip-more summary svg { flex:none; width:18px; height:18px; transition:transform .2s; }
 .trip-more[open] summary svg { transform:rotate(180deg); }
 .trip-more .trip-q:first-of-type { margin-top:14px; }
 .trip-more .external-link { margin-top:10px; }
@@ -1947,7 +1947,7 @@ html.dark .trip-cat[aria-pressed="true"] { box-shadow:inset 0 0 0 2px #F2F2F2; }
 
 /* Frise : rubriques repliables, titres resserrés et contenu juste sous le titre. */
 .trip-meta + .trip-more, .trip-dir + .trip-more { margin-top:22px; }
-.trip-more + .trip-more, .trip-note + .trip-more { margin-top:18px; }
+.trip-more + .trip-more, .trip-note + .trip-more { margin-top:14px; }
 .trip-fold { padding:2px 0 6px; }
 .trip-fold > .trip-a:first-child { margin-top:8px; }
 .trip-fold > .trip-sessions { margin-top:6px; }
