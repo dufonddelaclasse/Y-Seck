@@ -1290,7 +1290,7 @@
       stop('trip-exam', catBadge(c.cat), esc(c.name),
         '<p class="trip-dir">' + I.arrow + '<span>' + esc({ E: 'Fonction publique de l’État', T: 'Fonction publique territoriale', H: 'Fonction publique hospitalière' }[c.fp] || D.fps[c.fp]) + '</span></p>' +
         tripFold('Prochaines sessions', sessions.length ? '<ul class="trip-sessions">' + sessions.slice(0, 3).map(function (x) {
-          return '<li><span>' + esc(x.voie || 'Session') + (x.provisional ? ' · prévisionnel' : '') + '</span><span>' + (x.date ? 'clôture ' + esc(short(x.date)) : esc(x.closeLabel || 'date à venir')) + '</span></li>';
+          return '<li><span>' + esc(x.voie || 'Session') + (x.provisional ? ' · prévisionnel' : '') + '</span><span>' + (x.date ? (x.date < todayISO() ? 'inscriptions closes' : 'clôture ' + esc(short(x.date))) : esc(x.closeLabel || 'date à venir')) + '</span></li>';
         }).join('') + '</ul>' + (sessions.length > 3 ? '<a class="link-plain" href="' + datesHref + '">Voir les ' + sessions.length + ' sessions</a>' : '') + missingNote : '<p class="trip-a">' + unpublished + '</p>' + expected) +
         qa('Quelles voies ?', c.voies, voiesExplained(c.voies)) + qa('Quels diplômes ?', c.condition) + qa('Quelles épreuves ?', c.epreuves) + qa('Qui organise ?', e.org) + (prepaInStudies ? '' : qa('Comment se préparer ?', prepaText(c))) +
         (c.vigilance ? '<p class="trip-note">' + I.info + '<span>' + sig(dot(c.vigilance)) + '</span></p>' : '') +
