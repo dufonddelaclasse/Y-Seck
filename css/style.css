@@ -1744,3 +1744,8 @@ html[data-contrast="true"] :is(.parcours-card, .concours-page .job-section .ref-
 
 /* Pastilles de niveau (« Diplôme requis… ») : coins arrondis mais pas en demi-cercle quand le texte passe sur plusieurs lignes. */
 .category-fit { border-radius:14px; }
+
+/* Se préparer : pastille du concours en haut à gauche, comme sur les autres cartes. */
+.ref-card summary { align-items:flex-start; }
+.ref-card summary .cat { margin-top:2px; }
+.ref-card summary .details-toggle { align-self:center; }
