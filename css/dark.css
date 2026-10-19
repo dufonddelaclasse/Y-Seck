@@ -562,6 +562,9 @@ html.dark { color-scheme:dark; }
 :where(html.dark) .danger-link:hover { background:none; color:#FF7A83; }
 :where(html.dark) .book-card, :where(html.dark) .book-card.external-link { border:0 !important; background:#292929 !important; }
 :where(html.dark) a.book-card.external-link, :where(html.dark) a.book-card.external-link:hover { color:var(--ink) !important; }
+:where(html.dark) .parcours-txt > .parcours-here { background:var(--theme-btn,var(--brand)); color:#FFF; }
+:where(html.dark) .app.theme-CDD .parcours-txt > .parcours-here { background:#EDEDED; }
+:where(html.dark) .parcours-step.here:not(.start) .parcours-mark { background:var(--theme-btn,#EDEDED); }
 
 /* Retouches */
 html.dark { --brand:#8F7BFF; --blue:#A493FF; --accent:#7C66FF; --accent-hover:#9785FF; --theme-btn:var(--brand); --red:#FF6B6B; --surface:#1E1E22; }

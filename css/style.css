@@ -1496,3 +1496,9 @@ a.book-card.external-link, a.book-card.external-link:hover { text-decoration:non
 
 /* Accessibilité : choix de l’apparence. */
 .color-mode .row { flex-wrap:wrap; gap:8px; }
+
+/* Parcours : « Vous êtes ici » en tête de l’étape, dans la couleur de la catégorie, au-dessus de l’étiquette d’étape. */
+.parcours-txt > .parcours-here { align-self:flex-start; margin-bottom:2px; padding:3px 10px; border-radius:999px; background:var(--theme-btn,var(--brand)); color:#FFF; font-size:.6875rem; font-weight:600; line-height:1.4; }
+.app.theme-CDD .parcours-txt > .parcours-here { background:#141414; }
+.parcours-step.here:not(.start) .parcours-mark { background:var(--theme-btn,#141414); }
+html[data-contrast="true"] .parcours-txt > .parcours-here { background:#000; color:#FFF; }

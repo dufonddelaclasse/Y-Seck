@@ -826,7 +826,7 @@
       '<div class="parcours-card"><ol class="parcours-line">' + steps.map(function (s, i) {
         var mark=i===0?'start':s.terminus?'end':'mid';
         return '<li class="parcours-step '+mark+(s.here?' here':'')+'"'+(s.here?' aria-current="step"':'')+'><span class="parcours-mark" aria-hidden="true">'+(mark==='start'?'<svg viewBox="0 0 12 13"><path fill-rule="evenodd" d="M6 0a5 5 0 0 1 5 5c0 3.2-3.4 6.5-4.6 7.6a.6.6 0 0 1-.8 0C4.4 11.5 1 8.2 1 5a5 5 0 0 1 5-5zm0 3a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/></svg>':'')+'</span><div class="parcours-txt">' +
-          '<span class="parcours-head"><span class="parcours-zone">'+esc(s.zone)+'</span><b>' + sig(s.title) + '</b>'+(s.here?'<span class="parcours-here">'+(isParent()?'Ici aujourd’hui':'Vous êtes ici')+'</span>':'')+'</span>' + (s.text ? '<p>' + sig(s.text) + '</p>' : '') +
+          (s.here?'<span class="parcours-here">'+(isParent()?'Ici aujourd’hui':'Vous êtes ici')+'</span>':'')+'<span class="parcours-head"><span class="parcours-zone">'+esc(s.zone)+'</span><b>' + sig(s.title) + '</b></span>' + (s.text ? '<p>' + sig(s.text) + '</p>' : '') +
           (s.links.length ? '<span class="parcours-links">' + s.links.map(function (l) { return '<span class="parcours-link ' + l.kind + '">' + esc(l.label) + '</span>'; }).join('') + '</span>' : '') + '</div></li>';
       }).join('') + '</ol><p class="parcours-note">Parcours conseillé ' + (isParent() ? 'pour ' + esc(childName()) : 'depuis votre niveau') + ', à titre indicatif : les conditions exactes figurent dans l’avis du concours.</p></div></section>';
   }
