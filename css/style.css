@@ -2044,3 +2044,11 @@ html[data-contrast="true"] .job-page .job-match { background:none; border:0; col
 a.rung.rung-link { color:var(--ink); text-decoration:none; }
 a.rung.rung-link:hover { color:var(--ink); }
 a.rung.rung-link > .chev { flex:none; width:18px; height:18px; margin-right:-4px; color:var(--muted); }
+/* Fond des écrans : dégradé vertical, #F2F2F2 en haut de l’écran et #E6E6E6 en bas. Il est posé sur un calque fixe
+   (et non en « background-attachment: fixed », ignoré par Safari sur iPhone) : il ne bouge pas quand on fait défiler.
+   Les zones blanches (en-tête des fiches métier et concours, pages blanches) restent blanches. */
+html { background:#E6E6E6; }
+body, .app { background:transparent; }
+body::before { content:''; position:fixed; inset:0; z-index:-1; background:linear-gradient(180deg, #F2F2F2 0%, #E6E6E6 100%); pointer-events:none; }
+.footer { background:#E6E6E6; }
+.context-bar { background:#F2F2F2; }

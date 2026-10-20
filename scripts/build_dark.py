@@ -146,6 +146,8 @@ def build():
 MANUAL = """
 html.dark { --brand:#8F7BFF; --blue:#A493FF; --accent:#7C66FF; --accent-hover:#9785FF; --theme-btn:var(--brand); --red:#FF6B6B; --surface:#1E1E22; }
 html.dark, html.dark body { background:var(--bg); color:var(--ink); }
+html.dark body::before { display:none; }
+html.dark .app, html.dark .footer { background:var(--bg); }
 html.dark .btn:not(.outline):not(.danger):not(.fav) { background:#5B3DF5; border-color:#5B3DF5; color:#FFF; }
 html.dark .btn.danger-solid { background:#D0202E; border-color:#D0202E; }
 html.dark .home-discover, html.dark .home-discover:hover, html.dark .top-notice { background:#3B21C9; }
