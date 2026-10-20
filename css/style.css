@@ -2017,7 +2017,11 @@ html[data-contrast="true"] .job-page .job-match { background:none; border:0; col
 .app .prep.hi.talents-card .talents-body { gap:10px; padding:26px var(--talents-pad) 40px; }
 .app .prep.hi.talents-card .talents-perf { margin:12px calc(10px - var(--talents-pad)) 4px; }
 .app .prep.hi.talents-card .more, .app .prep.hi.talents-card:hover { color:#161616; }
-/* Espace personnel : à l’arrivée, le prénom apparaît puis passe une fois par les couleurs du bloc « Vos métiers à découvrir », avant de revenir à sa couleur. */
-@keyframes home-name-glow { 0% { opacity:.35; color:var(--ink); } 15% { opacity:1; color:#2B04CC; } 40% { color:#8975EC; } 60% { color:#C0B8FF; } 80% { color:#6247DF; } 100% { opacity:1; color:var(--ink); } }
-.personal-home .home-name-enter { animation:home-name-glow 1.6s ease-in-out .15s both; }
-@media (prefers-reduced-motion:reduce) { .personal-home .home-name-enter { animation:none; } }
+/* Espace personnel : à l’arrivée, une vague aux couleurs du bloc « Vos métiers à découvrir » traverse le prénom
+   de gauche à droite, puis le prénom reprend sa couleur. Le dégradé est découpé dans le texte. */
+@keyframes home-name-sweep { from { background-position:100% 0; } to { background-position:0 0; } }
+/* Dégradé dans une variable : le générateur du mode sombre ne le transforme pas. */
+:root { --name-sweep:linear-gradient(90deg, var(--ink) 0%, var(--ink) 34%, #2B04CC 40%, #8975EC 46%, #C0B8FF 50%, #8975EC 54%, #2B04CC 60%, var(--ink) 66%, var(--ink) 100%); }
+.personal-home .home-name-enter { background:var(--name-sweep) 100% 0 / 300% 100% no-repeat;
+  -webkit-background-clip:text; background-clip:text; color:transparent; -webkit-text-fill-color:transparent; animation:home-name-sweep .9s ease-in-out .1s both; }
+@media (prefers-reduced-motion:reduce) { .personal-home .home-name-enter { animation:none; background:none; color:inherit; -webkit-text-fill-color:currentColor; } }

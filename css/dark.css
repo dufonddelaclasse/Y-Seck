@@ -723,6 +723,10 @@ html:where(.dark).dark .ladder-alt-row, html:where(.dark).dark .ladder-alt-row:h
 :where(html.dark) .talents-card :is(h1,h2) { color:#E9E9E9; }
 :where(html.dark) .talents-card p, :where(html.dark) .app .prep.hi.talents-card p { color:#E9E9E9; }
 :where(html.dark) .app .prep.hi.talents-card .more, :where(html.dark) .app .prep.hi.talents-card:hover { color:#E9E9E9; }
+:where(html.dark) .personal-home .home-name-enter { background:var(--name-sweep) 100% 0 / 300% 100% no-repeat; color:transparent; }
+@media (prefers-reduced-motion:reduce) {
+  :where(html.dark) .personal-home .home-name-enter { background:none; color:inherit; }
+}
 
 /* Retouches */
 html.dark { --brand:#8F7BFF; --blue:#A493FF; --accent:#7C66FF; --accent-hover:#9785FF; --theme-btn:var(--brand); --red:#FF6B6B; --surface:#1E1E22; }
