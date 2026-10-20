@@ -1975,3 +1975,7 @@ a.trip-official { display:inline; color:var(--ink); text-decoration:underline; t
 .trip-pill svg { width:18px; height:18px; color:#FFF; }
 /* Se préparer : la première rubrique suit de près le titre principal. */
 .app:not(.onboarding) .prep-page > h1 + .sr-only + section { margin-top:12px; }
+/* Fiche métier : du concours obtenu au poste, pointillés à la couleur du concours et encadré gris. */
+.trip-track.dots { width:6px; margin-top:6px; background:repeating-linear-gradient(to bottom, var(--theme, var(--ink)) 0 6px, transparent 6px 12px); }
+.trip-access { margin:14px 0 0; padding:14px 16px; border-radius:14px; background:#D9D9D9; font-size:.9375rem; line-height:1.45; color:var(--ink); }
+.trip-access b { font-weight:500; }

@@ -707,6 +707,8 @@ html:where(.dark).dark .ladder-alt-row, html:where(.dark).dark .ladder-alt-row:h
 :where(html.dark) .sheet-content button.chip.category-choice[data-action="metCat"], :where(html.dark) .sheet-content button.chip.category-choice[data-action="metCat"]:hover { border-color:transparent; }
 :where(html.dark) .app.themed main.job-page .rung, :where(html.dark) .job-page .rung { background:#292929; }
 :where(html.dark) .trip-pill svg { color:#FFF; }
+:where(html.dark) .trip-track.dots { background:repeating-linear-gradient(to bottom, var(--theme, var(--ink)) 0 6px, transparent 6px 12px); }
+:where(html.dark) .trip-access { background:#3B3B3B; color:var(--ink); }
 
 /* Retouches */
 html.dark { --brand:#8F7BFF; --blue:#A493FF; --accent:#7C66FF; --accent-hover:#9785FF; --theme-btn:var(--brand); --red:#FF6B6B; --surface:#1E1E22; }
