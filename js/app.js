@@ -5,7 +5,7 @@
   var root = document.getElementById('app');
   var UI = window.YSECK_UI;
   var expandedDatesJob = null, jobSlideRequested = false, expandedPrepCategories = {}, visitedRoutes = [];
-  var talentIntroAnimate = false, interestGesture = null;
+  var talentIntroAnimate = false, nameAnimate = false, interestGesture = null;
   var KEY = 'ofp-state-v1';
 
   /* ---------- État ---------- */
@@ -585,10 +585,12 @@
   /* ---------- Tableau de bord ---------- */
   /* Le chiffre reste dans sa case : la taille diminue avec le nombre de chiffres. */
   function countSize(n) { var d=String(n).length; return d>=4?' digits-4':d===3?' digits-3':''; }
+  /* Prénom de l’accueil : il s’anime une seule fois, à l’arrivée sur l’espace personnel. */
+  function homeName(name) { return '<span class="home-name' + (nameAnimate ? ' home-name-enter' : '') + '">' + esc(name) + '</span>'; }
   function personalHome() {
     var jobs = myJobs(), concours = myConcours();
     return '<main class="screen pt personal-home">' +
-      '<h1>' + (isParent() ? esc(childName()) : (S.name ? 'Bonjour ' + esc(S.name) : 'Votre avenir, à votre rythme')) + '</h1>' +
+      '<h1>' + (isParent() ? homeName(childName()) : (S.name ? 'Bonjour ' + homeName(S.name) : 'Votre avenir, à votre rythme')) + '</h1>' +
       (S.level || S.domains.length ? '<div class="home-profile-meta" role="group" aria-label="Niveau d’études et centres d’intérêt" tabindex="0">' +
       (S.level ? '<span class="study-level">' + I.graduation + '<span>' + esc(S.level) + '</span></span>' : '') +
       S.domains.map(function(d){return '<span class="home-interest">' + esc(domainLabel(d)) + '</span>';}).join('') + '</div>' : '') +
@@ -1924,8 +1926,9 @@
 
     var fn = screens[r.name] || screens[S.done ? 'accueil' : 'profil'];
     if(changed&&r.name==='situation'&&S.boursier==='Oui')talentIntroAnimate=true;
+    if(changed&&(r.name==='accueil'||r.name==='enfant'))nameAnimate=true;
     root.innerHTML = UI.inclusive(fn(r.arg, r.arg2));
-    talentIntroAnimate=false;
+    talentIntroAnimate=false; nameAnimate=false;
     var main = root.querySelector('main');
     root.classList.toggle('job-transition',animateJob);
     if (main) {

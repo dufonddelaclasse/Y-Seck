@@ -2017,3 +2017,7 @@ html[data-contrast="true"] .job-page .job-match { background:none; border:0; col
 .app .prep.hi.talents-card .talents-body { gap:10px; padding:26px var(--talents-pad) 40px; }
 .app .prep.hi.talents-card .talents-perf { margin:12px calc(10px - var(--talents-pad)) 4px; }
 .app .prep.hi.talents-card .more, .app .prep.hi.talents-card:hover { color:#161616; }
+/* Espace personnel : à l’arrivée, le prénom apparaît puis passe une fois par les couleurs du bloc « Vos métiers à découvrir », avant de revenir à sa couleur. */
+@keyframes home-name-glow { 0% { opacity:.35; color:var(--ink); } 15% { opacity:1; color:#2B04CC; } 40% { color:#8975EC; } 60% { color:#C0B8FF; } 80% { color:#6247DF; } 100% { opacity:1; color:var(--ink); } }
+.personal-home .home-name-enter { animation:home-name-glow 1.6s ease-in-out .15s both; }
+@media (prefers-reduced-motion:reduce) { .personal-home .home-name-enter { animation:none; } }
