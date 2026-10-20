@@ -503,7 +503,7 @@
         return '<button type="button" class="fp-tab" role="tab" id="fp-tab-' + f.k + '" aria-controls="fp-panel-' + f.k + '" aria-selected="' + (i === 0) + '"' + attr('action', 'fpTab') + attr('v', f.k) + '><span class="fp-tab-icon" aria-hidden="true">' + I[FP_ICONS[f.k]] + '</span><span>' + esc(f.short) + '</span></button>';
       }).join('') + '</div>' +
       FPS_INTRO.map(function (f, i) {
-        return '<section class="fp-panel" role="tabpanel" id="fp-panel-' + f.k + '" aria-labelledby="fp-tab-' + f.k + '"' + (i ? ' hidden' : '') + '><span class="fp-panel-icon" aria-hidden="true">' + I[FP_ICONS[f.k]] + '</span>' +
+        return '<section class="fp-panel" role="tabpanel" id="fp-panel-' + f.k + '" aria-labelledby="fp-tab-' + f.k + '"' + (i ? ' hidden' : '') + '>' +
           '<h2 class="no-icon">' + esc(f.t) + '</h2><p>' + esc(f.d) + '</p><p><b>Par exemple :</b> ' + esc(f.ex) + '</p></section>';
       }).join('') +
       '<p class="fp-note">' + I.arrow + '<span>Bon à savoir : un même métier existe souvent dans les trois. Et au cours d’une carrière, on peut passer de l’une à l’autre.</span></p>' +

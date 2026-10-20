@@ -747,7 +747,6 @@ html:where(.dark) { background:#2D2D2D; }
 :where(html.dark) .fp-tab[aria-selected="true"]::after { background:var(--brand); }
 :where(html.dark) .fp-tab[aria-selected="true"] .fp-tab-icon { background:#261F51; color:var(--brand); }
 :where(html.dark) .fp-tab:focus-visible { outline:2px solid var(--brand); }
-:where(html.dark) .fp-panel-icon { background:#261F51; color:var(--brand); }
 :where(html.dark) .screen .fp-panel h2 { color:var(--ink); }
 :where(html.dark) .fp-panel p { color:var(--ink); }
 :where(html.dark) .fp-note { color:var(--ink); }
