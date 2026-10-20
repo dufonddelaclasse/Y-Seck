@@ -7,7 +7,7 @@
   var expandedDatesJob = null, jobSlideRequested = false, expandedPrepCategories = {}, visitedRoutes = [];
   var talentIntroAnimate = false, nameAnimate = false, interestGesture = null;
   /* Premier passage : seul l’onboarding est chargé ; le catalogue complet arrive à la fin de la création du profil. */
-  var catalogReady = !window.YSECK_CATALOG || window.YSECK_CATALOG.full, catalogLoading = false, dashboardEnter = false;
+  var catalogReady = !window.YSECK_CATALOG || window.YSECK_CATALOG.full, catalogLoading = false, dashboardEnter = false, profileFinished = false;
   var LIGHT_ROUTES = ['bienvenue', 'versants', 'categories-intro', 'choix-profil', 'profil', 'niveau', 'interets', 'traits', 'situation', 'confidentialite', 'accessibilite', 'mentions'];
   var KEY = 'ofp-state-v1';
 
@@ -1957,7 +1957,8 @@
       var required=!S.profile?'choix-profil':!nameReady()?'profil':(!S.level&&r.name!=='niveau'?'niveau':null);
       if(required){r={name:required};history.replaceState(null,'','#/'+required);}
     }
-    if (!catalogReady && LIGHT_ROUTES.indexOf(r.name) < 0) { loadCatalog(); return; }
+    /* Fin de la création du profil : l’écran de chargement s’affiche toujours, même si le catalogue est déjà là. */
+    if ((!catalogReady || profileFinished) && LIGHT_ROUTES.indexOf(r.name) < 0) { profileFinished = false; loadCatalog(); return; }
     var key = r.name + '/' + (r.arg || '') + '/' + (r.arg2 || '');
     var changed = key !== lastRoute;
     var hash=location.hash||'#/', slide=null, SLIDES=['metier','preparer','bibliographie'];
@@ -2041,7 +2042,7 @@
     }
   }
 
-  /* Chargement du catalogue complet, une seule fois : écran d’attente animé, puis fondu vers l’écran demandé. */
+  /* Chargement du catalogue complet : écran d’attente animé, affiché au moins 2 secondes pour être lu, puis fondu vers l’écran demandé. */
   function loadCatalog() {
     if (catalogLoading) return;
     catalogLoading = true; lastRoute = null;
@@ -2050,13 +2051,13 @@
     document.title = 'Chargement · Y-Seck';
     UI.afterRender({ root: root, noBar: true, title: 'Y-Seck', topLevel: true });
     var started = Date.now();
-    window.YSECK_CATALOG.loadAll().then(function () {
+    (window.YSECK_CATALOG ? window.YSECK_CATALOG.loadAll() : Promise.resolve()).then(function () {
       jobsByName = null; SIGLE_RE = null;
       catalogReady = true;
       setTimeout(function () {
         var screen = root.querySelector('.loading-screen'); if (screen) screen.classList.add('leaving');
         setTimeout(function () { catalogLoading = false; dashboardEnter = LIGHT_ROUTES.indexOf(route().name) < 0; render(); }, 350);
-      }, Math.max(0, 1800 - (Date.now() - started)));
+      }, Math.max(0, 2000 - (Date.now() - started)));
     }).catch(function () {
       catalogLoading = false;
       root.innerHTML = '<main class="screen" id="contenu"><h1>Chargement interrompu</h1><p>Les métiers n’ont pas pu être chargés. Vérifiez votre connexion puis réessayez.</p><button type="button" class="btn" data-action="retryCatalog">Réessayer</button></main>';
@@ -2207,7 +2208,7 @@
       case 'budget': set({ budget: v, prepBudget: null }); break;
       case 'go': location.hash = '#/' + v; break;
       case 'startProfile': S.introSeen = true; save(); navigate(familyEstablished()?'#/profil':'#/choix-profil'); break;
-      case 'finish': e.preventDefault(); if(!identityReady()){navigate(nameReady()?'#/niveau':'#/profil');announce(nameReady()?'Choisissez un niveau pour continuer.':'Renseignez un prénom pour continuer.');break;} S.done = true; markValidated();profileSnapshot=profileSignature();save(); navigate('#/accueil'); break;
+      case 'finish': e.preventDefault(); if(!identityReady()){navigate(nameReady()?'#/niveau':'#/profil');announce(nameReady()?'Choisissez un niveau pour continuer.':'Renseignez un prénom pour continuer.');break;} S.done = true; markValidated();profileSnapshot=profileSignature();save(); profileFinished = true; navigate('#/accueil'); break;
       case 'clearSearch': {
         e.preventDefault(); clearTimeout(searchTimer);
         if(v==='q'){if(onConcoursPage())S.cq='';else{S.q='';S.jobLimit=60;}}
