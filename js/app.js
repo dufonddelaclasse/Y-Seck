@@ -458,12 +458,13 @@
 
   /* Comprendre la fonction publique : les 3 versants puis les 4 catégories. Contenus partagés par l’onboarding
      (un écran chacun, titre h1) et par la page du profil (une seule page, titres h2). */
+  var FPS_INTRO = [
+    { k: 'E', short: 'État', t: 'La fonction publique d’État', d: 'Elle fait tourner les services de l’État, partout en France.', ex: 'Ministères, préfectures, écoles et lycées, tribunaux, impôts, police, armées.', tint: 'tint-blue', dot: 'var(--blue)' },
+    { k: 'T', short: 'Territoriale', t: 'La fonction publique territoriale', d: 'Elle travaille au plus près des habitant·es, dans leur ville, leur département, leur région.', ex: 'Mairies, intercommunalités, conseils départementaux et régionaux.', tint: 'tint-mint', dot: 'var(--mint)' },
+    { k: 'H', short: 'Hospitalière', t: 'La fonction publique hospitalière', d: 'Elle soigne et accompagne, dans les établissements publics de santé.', ex: 'Hôpitaux publics, EHPAD publics, établissements sociaux et médico-sociaux.', tint: 'tint-cyan', dot: '#22C7E0' }
+  ];
   function versantsBlocks(h, fold) {
-    var fps = [
-      { k: 'E', t: 'La fonction publique d’État', d: 'Elle fait tourner les services de l’État, partout en France.', ex: 'Ministères, préfectures, écoles et lycées, tribunaux, impôts, police, armées.', tint: 'tint-blue', dot: 'var(--blue)' },
-      { k: 'T', t: 'La fonction publique territoriale', d: 'Elle travaille au plus près des habitant·es, dans leur ville, leur département, leur région.', ex: 'Mairies, intercommunalités, conseils départementaux et régionaux.', tint: 'tint-mint', dot: 'var(--mint)' },
-      { k: 'H', t: 'La fonction publique hospitalière', d: 'Elle soigne et accompagne, dans les établissements publics de santé.', ex: 'Hôpitaux publics, EHPAD publics, établissements sociaux et médico-sociaux.', tint: 'tint-cyan', dot: '#22C7E0' }
-    ];
+    var fps = FPS_INTRO;
     return '<' + h + ' class="mt-m understand-title no-icon">3 fonctions publiques</' + h + '>' +
       '<p class="lead">Travailler dans le service public, c’est travailler pour l’un de ces trois employeurs.</p>' +
       '<div class="stack employer-list">' + fps.map(function (f) {
@@ -492,11 +493,26 @@
       '<div class="callout tint-blue"><span class="pin"></span><p>Rien n’est figé : on peut monter de catégorie au cours de sa carrière, par concours interne ou par promotion.</p></div>';
   }
 
+  /* Onboarding : bandeau photo teinté de bleu, puis un onglet par fonction publique. */
+  var FP_ICONS = { E: 'government', T: 'city', H: 'hospital' };
   screens.versants = function () {
-    return '<main class="screen intro-screen">' +
-      '<div class="topbar">' + back('#/bienvenue', 'Retour') + '<span class="eyebrow">Comprendre 1 / 2</span></div>' + versantsBlocks('h1', 'h2') +
+    return '<main class="screen intro-screen versants-screen">' +
+      '<section class="versants-hero"><div class="topbar">' + back('#/bienvenue', 'Retour') + '<span class="eyebrow">Comprendre 1 / 2</span></div>' +
+        '<div class="versants-hero-text"><h1>3 fonctions publiques</h1><p class="lead">Travailler dans le service public, c’est travailler pour l’un de ces trois employeurs.</p></div></section>' +
+      '<div class="fp-tabs" role="tablist" aria-label="Les trois fonctions publiques">' + FPS_INTRO.map(function (f, i) {
+        return '<button type="button" class="fp-tab" role="tab" id="fp-tab-' + f.k + '" aria-controls="fp-panel-' + f.k + '" aria-selected="' + (i === 0) + '"' + attr('action', 'fpTab') + attr('v', f.k) + '><span class="fp-tab-icon" aria-hidden="true">' + I[FP_ICONS[f.k]] + '</span><span>' + esc(f.short) + '</span></button>';
+      }).join('') + '</div>' +
+      FPS_INTRO.map(function (f, i) {
+        return '<section class="fp-panel" role="tabpanel" id="fp-panel-' + f.k + '" aria-labelledby="fp-tab-' + f.k + '"' + (i ? ' hidden' : '') + '><span class="fp-panel-icon" aria-hidden="true">' + I[FP_ICONS[f.k]] + '</span>' +
+          '<h2 class="no-icon">' + esc(f.t) + '</h2><p>' + esc(f.d) + '</p><p><b>Par exemple :</b> ' + esc(f.ex) + '</p></section>';
+      }).join('') +
+      '<p class="fp-note">' + I.arrow + '<span>Bon à savoir : un même métier existe souvent dans les trois. Et au cours d’une carrière, on peut passer de l’une à l’autre.</span></p>' +
       '</main><div class="footer"><a class="btn" href="#/categories-intro">J’ai compris</a></div>';
   };
+  function selectFpTab(scope, k) {
+    scope.querySelectorAll('.fp-tab').forEach(function (t) { t.setAttribute('aria-selected', String(t.getAttribute('data-v') === k)); });
+    scope.querySelectorAll('.fp-panel').forEach(function (p) { p.hidden = p.id !== 'fp-panel-' + k; });
+  }
 
   screens['categories-intro'] = function () {
     return '<main class="screen category-screen">' +
@@ -2074,6 +2090,7 @@
     var i, next;
     switch (a) {
       case 'tripTab': selectTripTab(el.closest('main') || document, v); break;
+      case 'fpTab': selectFpTab(el.closest('main') || document, v); break;
       case 'tripCat': var catMain = el.closest('main') || document, firstTab = null;
         catMain.querySelectorAll('.trip-cat').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-v') === v)); });
         catMain.querySelectorAll('.trip-tab').forEach(function (t) { var on = t.getAttribute('data-cat') === v; t.hidden = !on; if (on && !firstTab) firstTab = t; });

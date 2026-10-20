@@ -2062,3 +2062,34 @@ body::before { content:''; position:fixed; inset:0; z-index:-1; background:linea
 .source-desc { margin-top:8px; }
 .source-desc p { margin:0; overflow-wrap:anywhere; }
 .source-desc p + p { margin-top:12px; }
+/* Onboarding « 3 fonctions publiques » : bandeau photo pleine largeur teinté de bleu, titre en blanc,
+   puis un onglet par fonction publique (État, territoriale, hospitalière). */
+.versants-screen .versants-hero { position:relative; display:flex; flex-direction:column; justify-content:space-between; min-height:318px; margin:-4px -15px 0; padding:calc(4px + env(safe-area-inset-top,0px)) 15px 26px;
+  background:linear-gradient(180deg, rgba(24,44,178,.38) 0%, rgba(24,44,178,.30) 45%, rgba(14,26,120,.55) 100%), url(../assets/fonctions-publiques-pantheon.jpg) 70% 30% / cover no-repeat #23379E; color:#FFF; }
+.screen.versants-screen .versants-hero .topbar > :is(.back, .eyebrow) { color:#FFF; }
+.screen.versants-screen .versants-hero .topbar .back svg { color:#FFF; }
+.versants-hero-text { display:flex; flex-direction:column; gap:10px; }
+.screen.versants-screen .versants-hero h1 { margin:0; color:#FFF; font-size:2.125rem; line-height:1.05; letter-spacing:-.02em; text-shadow:0 1px 12px rgba(0,0,30,.25); }
+.screen.versants-screen .versants-hero .lead { margin:0; padding:0; color:#FFF; font-size:.9375rem; line-height:1.35; font-weight:400; text-shadow:0 1px 8px rgba(0,0,30,.3); }
+.fp-tabs { display:flex; margin:0 -15px; padding:0 15px; border-bottom:2px solid #D6D6D6; }
+.fp-tab { position:relative; flex:1 1 auto; min-width:0; display:inline-flex; align-items:center; justify-content:center; gap:6px; min-height:52px; padding:8px 4px; border:0; background:none; color:#9A9A9F; font:400 1rem var(--font); white-space:nowrap; overflow-wrap:normal; word-break:normal; cursor:pointer; }
+.fp-tab > span:last-child { min-width:0; overflow:hidden; text-overflow:ellipsis; }
+.fp-tab[aria-selected="true"] { color:var(--ink); }
+.fp-tab[aria-selected="true"]::after { content:''; position:absolute; left:0; right:0; bottom:-2px; height:3px; border-radius:3px 3px 0 0; background:var(--brand); }
+.fp-tab-icon { display:inline-grid; place-items:center; width:28px; height:28px; border-radius:7px; }
+.fp-tab-icon svg { width:20px; height:20px; }
+.fp-tab[aria-selected="true"] .fp-tab-icon { background:#E9E5FF; color:var(--brand); }
+.fp-tab:focus-visible { outline:2px solid var(--brand); outline-offset:-2px; border-radius:8px; }
+.fp-panel { display:flex; flex-direction:column; gap:12px; padding:26px 6px 0; }
+.fp-panel[hidden] { display:none; }
+.fp-panel-icon { display:inline-grid; place-items:center; width:40px; height:40px; border-radius:10px; background:#E9E5FF; color:var(--brand); }
+.fp-panel-icon svg { width:26px; height:26px; }
+.screen .fp-panel h2 { margin:6px 0 0; font-size:1.0625rem; line-height:1.3; font-weight:500; color:var(--ink); }
+.fp-panel p { margin:0; font-size:1.0625rem; line-height:1.4; font-weight:300; color:var(--ink); }
+.fp-panel p b { font-weight:500; }
+.fp-note { display:flex; gap:10px; align-items:flex-start; margin:30px 0 0; padding:0 6px; font-size:.8125rem; line-height:1.4; color:var(--ink); }
+.fp-note svg { flex:none; width:18px; height:18px; color:var(--brand); }
+@media (prefers-reduced-motion:no-preference) { .fp-panel:not([hidden]) { animation:intro-open .2s ease-out; } }
+html[data-contrast="true"] .versants-screen .versants-hero { background:#000; }
+@media (max-width:389px) { .fp-tab { font-size:.9375rem; gap:4px; padding:8px 2px; } .fp-tab-icon { width:24px; height:24px; } .fp-tab-icon svg { width:18px; height:18px; } }
+@media (max-width:349px) { .fp-tab { font-size:.875rem; } .fp-tab:not([aria-selected="true"]) .fp-tab-icon { display:none; } }
