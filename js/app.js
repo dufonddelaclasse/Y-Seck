@@ -1925,7 +1925,7 @@
       '<h2>Directrice de la publication</h2><p>' + esc(L.director) + '</p>' +
       '<h2>Conception</h2><p>' + esc(L.design) + '</p>' +
       '<h2>Hébergement</h2><p>' + esc(L.host) + ', ' + esc(L.hostAddress) + '</p>' +
-      '<h2>Sources</h2><p>Chaque session renvoie à son avis officiel. Les catégories observées dans les offres ne constituent pas une condition de diplôme.</p>' + D.catalogSources.map(function (s) { return '<p>' + ext(s.url, s.name, 'link-plain') + '<span class="small">Vérifié le ' + esc(s.checked) + ' · ' + esc(s.note) + '</span></p>'; }).join('') +
+      '<h2>Sources</h2><p>Chaque session renvoie à son avis officiel. Les catégories observées dans les offres ne constituent pas une condition de diplôme.</p>' + (D.catalogSources || []).map(function (s) { return '<p>' + ext(s.url, s.name, 'link-plain') + '<span class="small">Vérifié le ' + esc(s.checked) + ' · ' + esc(s.note) + '</span></p>'; }).join('') +
       '<h2>Polices de caractères</h2><p>Geologica et OpenDyslexic, sous licence SIL Open Font License, sont hébergées avec l’application.</p>' +
       '</div></main>' + tabbar('moi');
   };
