@@ -2037,3 +2037,6 @@ html[data-contrast="true"] .job-page .job-match { background:none; border:0; col
 .concours-page .job-section.trip-next { margin-top:6px; }
 .concours-page .trip-next > .section-heading { display:grid; grid-template-columns:34px minmax(0,1fr); column-gap:14px; align-items:center; }
 .concours-page .trip-next > .section-heading > svg { justify-self:center; }
+/* Fiche concours : légende qui sépare les métiers relevant aussi d’autres catégories. */
+.concours-page .related-note { margin:26px 0 2px; font-size:.9375rem; line-height:1.45; font-weight:400; color:var(--ink-2); }
+.concours-page .job-cards + .related-note { margin-top:30px; }

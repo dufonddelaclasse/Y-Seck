@@ -1340,6 +1340,15 @@
       arrival();
   }
   /* Un niveau dans l’adresse (#/concours-fiche/<clé>/<niveau>) permet de vérifier la frise sans modifier le profil. */
+  /* Métiers liés : d’abord ceux de la seule catégorie du concours, puis, sous une légende, ceux qui relèvent aussi d’autres catégories. */
+  function relatedJobs(c, jobs) {
+    var only = jobs.filter(function (j) { var k = jobCategories(j); return k.length === 1 && k[0] === c.cat; });
+    var others = jobs.filter(function (j) { return only.indexOf(j) < 0; });
+    only = only.slice(0, 40); others = others.slice(0, Math.max(0, 40 - only.length));
+    return (only.length ? '<div class="list job-cards">' + only.map(jobRow).join('') + '</div>' : '') +
+      (others.length ? '<p class="related-note">Ces métiers sont aussi accessibles par d’autres concours, d’une autre catégorie ou d’un autre versant de la fonction publique.</p>' +
+        '<div class="list job-cards">' + others.map(jobRow).join('') + '</div>' : '');
+  }
   screens['concours-fiche'] = function (key, testLevel) {
     var c = key && concoursByKey(key);
     if (!c) return screens['concours-liste']();
@@ -1357,7 +1366,7 @@
       '</div>') +
       '<section class="trip-wrap" aria-label="Parcours jusqu’au concours"><ol class="trip">' + line + '</ol></section>' +
       /* Les pointillés de l’obtention du concours mènent jusqu’à la boussole des métiers liés. */
-      '<section class="stack job-section trip-next"><h2 class="section-heading">' + I.compass + '<span>Métiers liés</span></h2>' + (jobs.length ? '<div class="list job-cards">' + jobs.slice(0, 40).map(jobRow).join('') + '</div>' : '<p class="body">Les métiers associés figurent dans l’avis du concours.</p>') + '</section>' +
+      '<section class="stack job-section trip-next"><h2 class="section-heading">' + I.compass + '<span>Métiers liés</span></h2>' + (jobs.length ? relatedJobs(c, jobs) : '<p class="body">Les métiers associés figurent dans l’avis du concours.</p>') + '</section>' +
       (visitor ? '<a class="btn theme mt-m" href="#/bienvenue">Créer un compte pour préparer le concours</a>' : lead ? '<a class="btn theme mt-m" href="' + prepHref(lead) + '">' + I.book + 'Se préparer</a>' : '') +
       '<p class="small">Parcours conseillé, à titre indicatif : l’avis de chaque session fait référence.</p></main>' +
       (visitor ? '<div class="footer share-footer"><a class="btn" href="#/bienvenue">Créer mon profil</a></div>' : tabbar('concours-liste'));
