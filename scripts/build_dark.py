@@ -170,7 +170,7 @@ html.dark .tabbar a.on, html.dark .tabbar a.on svg { color:#FFF; }
 html.dark .category-fit.warn svg, html.dark :is(.fit,.parcours-zone,.parcours-link.stage) svg { color:#262626 !important; }
 html.dark .prep-page button.chip:not(.category-choice) { --choice-ink:var(--theme-ink); }
 html.dark :is(.exam-cal,.exam-places) h5 svg { color:currentColor; }
-html.dark .tabbar a.on::before { background:var(--sun); }
+html.dark .tabbar a.on::before { background:#E0FA6E; }
 html.dark .job-row .fits .fit, html.dark .job-row .fit { background:#2E2E33 !important; border:0 !important; box-shadow:none !important; color:#E2E2E6 !important; }
 html.dark .job-row .fit * { color:#E2E2E6 !important; }
 html.dark .app.theme-Ap, html.dark body.theme-Ap { --lt:#DDC7FF; } html.dark .app.theme-A, html.dark body.theme-A { --lt:#BEF1FD; }
