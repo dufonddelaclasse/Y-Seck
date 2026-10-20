@@ -565,11 +565,10 @@
     ipagDistanceUrl: 'https://www.ipag-cpag.fr/Les-formations-a-distance-Licence-Master.html',
 
     legal: {
-      publisher: '[Nom de l’éditeur]',
-      address: '[Adresse postale]',
-      contact: '[adresse e-mail de contact]',
-      director: '[Nom du ou de la directeur·rice de la publication]',
-      design: 'DFDLC (Du Fond de la Classe)',
+      publisher: 'Yacine Seck',
+      contact: 'yacineseckdore@gmail.com',
+      director: 'Yacine Seck',
+      design: 'Roche Conseil',
       host: 'GitHub, Inc. (GitHub Pages)',
       hostAddress: '88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis',
       updated: '15 octobre 2026'

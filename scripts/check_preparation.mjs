@@ -25,21 +25,23 @@ vm.createContext(context);
 for (const file of ['js/data.js','js/catalog.js','js/ui.js']) vm.runInContext(fs.readFileSync(new URL(file,root),'utf8'),context);
 context.window.YSECK_UI.afterRender=()=>{};
 let source=fs.readFileSync(new URL('js/app.js',root),'utf8');
-source=source.replace('  UI.init();\n  render();\n  booted = true;', '  window.tests={screens,S,filteredJobs,jobFilters,jobCategories,isContractJob,prepHref,examsFor,calendarCategory,calendarRows,indicativeCategories,jobRow,tabbar,categoryBooks,bookList,studyResources,expandedPrepCategories};');
+source=source.replace('  UI.init();\n  render();\n  booted = true;', '  window.tests={screens,S,filteredJobs,jobFilters,jobCategories,isContractJob,prepHref,examsFor,calendarCategory,calendarRows,indicativeCategories,jobRow,tabbar,categoryBooks,bookList,studyResources,expandedPrepCategories,sig};');
 vm.runInContext(source,context);
-const {screens,S,filteredJobs,jobFilters,jobCategories,isContractJob,prepHref,examsFor,calendarCategory,calendarRows,indicativeCategories,jobRow,tabbar,categoryBooks,bookList,studyResources,expandedPrepCategories}=context.window.tests;
+const {screens,S,filteredJobs,jobFilters,jobCategories,isContractJob,prepHref,examsFor,calendarCategory,calendarRows,indicativeCategories,jobRow,tabbar,categoryBooks,bookList,studyResources,expandedPrepCategories,sig}=context.window.tests;
 const data=context.window.DATA;
 Object.assign(S,{profile:'etu',name:'Test',level:'Doctorat',domains:[],metDomains:[],traits:[],budget:'Plus de 1 000 €',prepBudget:'2',boursier:'Non'});
-const fixed=data.jobs.filter(j=>['A+','A','B','C'].includes(j.cat)&&!isContractJob(j));
+const fixed=data.jobs.filter(j=>['A+','A','B','C'].includes(j.cat)&&!isContractJob(j)&&!j.recruitment);
 let counts={};
+// Cartes « Concours et dates » : la fiche métier passe en frise, les cartes restent sur la fiche partagée.
+const cards=id=>screens.fiche(id);
 for (const j of fixed) {
   // Carte repliée par défaut quand plusieurs concours existent : elle n’affiche que les informations de base.
-  const folded=screens.metier(j.id);
+  const folded=cards(j.id);
   const multiple=(folded.match(/class="prep-count"/g)||[]).length>0;
   assert.equal(folded.includes('class="cat-panel"'),!multiple||(folded.match(/class="cat-panel"/g)||[]).length>0,'Pliage : '+j.id);
   expandedPrepCategories[j.id]={[j.cat]:true};
   // La fiche concours (versants, niveau, organisateur, dates) est sur la fiche métier ; Se préparer garde les aides et les prépas.
-  const card=screens.metier(j.id);
+  const card=cards(j.id);
   const html=screens.preparer(j.id);
   assert(html.includes('<h1>Se préparer</h1>'),j.id);
   assert(html.includes('href="#/metier/'+j.id+'"'),j.id);
@@ -67,7 +69,7 @@ for (const j of fixed) {
   for(const session of examsFor(j,true))assert.equal(calendarCategory(session,j),j.cat,'Date d’une autre catégorie dans '+j.id+' : '+session.name);
   for(const rid of j.routeIds){const r=data.accessRoutes[rid];if(r.cat===j.cat)for(const fp of r.fp)if(j.fp.includes(fp)){
     assert(r.examInfo[fp]?.name&&r.examInfo[fp]?.org&&r.examInfo[fp]?.metro&&r.examInfo[fp]?.om,'Organisation du concours : '+rid+' '+fp);
-    assert(card.includes(r.examInfo[fp].name.replace(/&/g,'&amp;')),'Nom du concours affiché : '+rid);
+    assert(card.includes(sig(r.examInfo[fp].name))||card.includes(sig((/^concours\b/i.test(r.examInfo[fp].name)?'':'Concours : ')+r.examInfo[fp].name)),'Nom du concours affiché : '+rid);
   }}
   counts[j.cat]=(counts[j.cat]||0)+1;
 }
@@ -75,15 +77,15 @@ assert(fixed.some(j=>examsFor(j).length>0),'Un cas avec dates doit être vérifi
 assert(fixed.some(j=>examsFor(j).length===0),'Un cas sans date doit être vérifié.');
 // Régression INSP / inspecteurs : une route partagée ne suffit jamais à changer la catégorie d’un avis.
 const administrator=data.jobs.find(j=>j.id==='admin-etat');
-assert(screens.metier('admin-terr').includes('Fonction publique territoriale')&&!screens.metier('admin-terr').includes('Fonction publique de l’État'));
-assert(screens.metier('admin-etat').includes('Fonction publique de l’État'));
+assert(cards('admin-terr').includes('Fonction publique territoriale')&&!cards('admin-terr').includes('Fonction publique de l’État'));
+assert(cards('admin-etat').includes('Fonction publique de l’État'));
 S.level='Bac+3';
-assert(screens.metier('admin-terr').includes('Niveau d’étude compatible'));
-assert(screens.metier('ingenieur-terr').includes('Niveau Bac+5 requis')&&!screens.metier('ingenieur-terr').includes('Niveau d’étude compatible'),'Le niveau du concours prime sur le minimum de la catégorie.');
-assert(!screens.metier('atsem').includes('Niveau d’étude compatible'),'Un niveau compatible ne prouve pas le diplôme spécifique requis.');
-assert(screens.metier('fpsan014').includes('Diplôme requis')&&!screens.metier('fpsan014').includes('Niveau d’étude compatible'),'La qualification du concours est conservée pour les métiers RMFP réglementés.');
+assert(cards('admin-terr').includes('Niveau d’étude compatible'));
+assert(cards('ingenieur-terr').includes('Niveau Bac+5 requis')&&!cards('ingenieur-terr').includes('Niveau d’étude compatible'),'Le niveau du concours prime sur le minimum de la catégorie.');
+assert(!cards('atsem').includes('Niveau d’étude compatible'),'Un niveau compatible ne prouve pas le diplôme spécifique requis.');
+assert(cards('fpsan014').includes('Diplôme requis')&&!cards('fpsan014').includes('Niveau d’étude compatible'),'La qualification du concours est conservée pour les métiers RMFP réglementés.');
 S.level=null;
-assert(screens.metier('admin-terr').includes('Niveau Bac+3 requis'));
+assert(cards('admin-terr').includes('Niveau Bac+3 requis'));
 S.level='Doctorat';
 const wrongSession={id:'regression-category',name:'Concours inspecteur B',cat:'B',fp:'E',voie:'Concours externe',date:'2099-01-01',routeIds:['admin-etat']};
 data.calendar.push(wrongSession);
@@ -98,22 +100,22 @@ assert.deepEqual(Array.from(indicativeCategories(communicator)),['A','B']);
 assert(jobRow(communicator).includes('job-categories')&&!jobRow(communicator).includes('Var.'));
 assert.equal(communicator.cat,'V');assert.equal(prepHref(communicator),'#/preparer/'+communicator.id);
 assert(screens.preparer(communicator.id).includes('<h1>Se préparer</h1>')&&screens.preparer(communicator.id).includes(communicator.name));
-const communicationPrep=screens.metier(communicator.id);
+const communicationPrep=cards(communicator.id);
 assert(communicationPrep.includes('data-action="openPrepCat" data-v="A"')&&communicationPrep.includes('data-action="openPrepCat" data-v="B"'));
 assert(!communicationPrep.includes('data-action="openPrepCat" data-v="A+"')&&!communicationPrep.includes('data-action="openPrepCat" data-v="C"'));
-const openState=(jobId,cat)=>screens.metier(jobId).includes('id="prep-'+jobId+'-'+(cat==='A+'?'cat-Ap':'cat-'+cat)+'"');
+const openState=(jobId,cat)=>cards(jobId).includes('id="prep-'+jobId+'-'+(cat==='A+'?'cat-Ap':'cat-'+cat)+'"');
 const singleRoute=fixed.find(j=>j.fp.length===1&&j.routeIds.length===1),manyRoutes=fixed.find(j=>j.id==='adjoint-adm');
 delete expandedPrepCategories[singleRoute.id];delete expandedPrepCategories[manyRoutes.id];
 assert(openState(singleRoute.id,singleRoute.cat),'Un seul concours : la carte est dépliée.');
-assert(!openState(manyRoutes.id,manyRoutes.cat)&&screens.metier(manyRoutes.id).includes('3 concours possibles'),'Plusieurs concours : la carte est repliée.');
+assert(!openState(manyRoutes.id,manyRoutes.cat)&&cards(manyRoutes.id).includes('3 concours possibles'),'Plusieurs concours : la carte est repliée.');
 const singleVariable=data.jobs.find(j=>j.cat==='V'&&jobCategories(j).length===1);
 assert(singleVariable&&!jobRow(singleVariable).includes('job-categories')&&!jobRow(singleVariable).includes('cat sm'),'Une catégorie VAR unique garde la taille normale.');
 const purchaseJob=data.jobs.find(j=>j.id==='fpach001');
 assert(!screens.etudes(purchaseJob.id).includes('Rédacteur·rice territorial·e')&&!screens.etudes(purchaseJob.id).includes('Secrétaire administratif·ve'),'L’orientation conserve uniquement les routes de la catégorie attribuée.');
 const classified=data.jobs.filter(j=>j.cat==='V'&&jobCategories(j).length);
-Object.assign(S,{level:null,metDomains:[],metFp:'Tous'});
-for(const cat of ['A+','A','B','C']){S.metCat=cat;const selected=filteredJobs();for(const j of classified)assert.equal(selected.some(x=>x.id===j.id),jobCategories(j).includes(cat),'Tri des catégories attribuées : '+j.id+' '+cat);}
-Object.assign(S,{level:'Doctorat',metCat:'Toutes'});
+Object.assign(S,{level:null,metDomains:[],metFps:null});
+for(const cat of ['A+','A','B','C']){S.metCats=[cat];const selected=filteredJobs();for(const j of classified)assert.equal(selected.some(x=>x.id===j.id),jobCategories(j).includes(cat),'Tri des catégories attribuées : '+j.id+' '+cat);}
+Object.assign(S,{level:'Doctorat',metCats:null});
 S.bookCategory='A+';assert(categoryBooks(communicator).every(b=>(b.categories||['A','A+']).includes('A')),'Une fiche A/B ne prend pas la bibliographie A+ sélectionnée sur une autre page.');
 const inspDates=examsFor(administrator);
 assert(inspDates.some(c=>c.id==='insp-2027-concours-externe'&&c.date<'2026-10-17'&&c.written>'2026-10-17'),'Une clôture passée ne masque pas les épreuves INSP2027 à venir.');
@@ -143,27 +145,32 @@ const variable=data.jobs.find(j=>j.cat==='V');
 assert.equal(prepHref(variable),'#/preparer/'+variable.id);
 assert(screens.preparer(variable.id).includes('<h1>Se préparer</h1>'));
 assert.equal(variable.cat,'V');
-Object.assign(S,{metCat:'CDD',showContracts:true});
+Object.assign(S,{metCats:['CDD']});
 assert.equal(filteredJobs().length,contracts.length);
-S.showContracts=false;
-assert.equal(filteredJobs().length,0);
-S.metCat='Toutes';
+S.metCats=['A+','A','B','C'];
 assert(!filteredJobs().some(isContractJob));
 function click(action,value=null){
   const el={getAttribute(name){return name==='data-action'?action:name==='data-v'?value:null;}};
   listeners.click({target:{closest(selector){return selector==='[data-action]'?el:null;}},detail:0,preventDefault(){}});
 }
 click('metCat','CDD');
-assert.equal(S.showContracts,true);
-assert.equal(filteredJobs().length,contracts.length);
-click('showContracts');
-assert.equal(S.showContracts,false);
-assert.equal(S.metCat,'Toutes');
+assert(S.metCats.includes('CDD')&&filteredJobs().some(isContractJob),'Les contractuels s’ajoutent aux catégories choisies.');
+click('metCat','CDD');
+assert(!S.metCats.includes('CDD')&&!filteredJobs().some(isContractJob));
+S.metCats=['B'];click('metCat','B');
+assert.deepEqual(S.metCats,['B'],'Au moins une catégorie reste choisie.');
+S.level='Doctorat';S.metCats=null;
+assert(!filteredJobs().some(isContractJob)&&!filteredJobs().some(j=>jobCategories(j).length&&jobCategories(j).every(c=>c==='C')),'Au-delà de Bac+3, C et contractuels ne sont pas affichés par défaut.');
+click('metCat','C');
+assert(filteredJobs().some(j=>jobCategories(j).includes('C')),'La catégorie C reste disponible au-delà de Bac+3.');
+S.metCats=null;S.metFps=['E','T'];
+assert(filteredJobs().every(j=>/[ET]/.test(j.fp)),'Plusieurs versants peuvent être choisis.');
+S.metFps=null;
 const filters=jobFilters();
-const labels=['Votre sélection','Catégories','Versants','Afficher les emplois contractuels','Domaines'];
+const labels=['Votre sélection','Catégories','Versants','Domaines'];
 for(let i=1;i<labels.length;i++)assert(filters.indexOf(labels[i-1])<filters.indexOf(labels[i]));
 assert(filters.includes('data-v="CDD"'));
-assert.equal((tabbar('accueil').match(/<a /g)||[]).length,4);
+assert.equal((tabbar('accueil').match(/<a /g)||[]).length,5,'Menu : Accueil, Métiers, Concours, Favoris et Profil.');
 assert(!tabbar('accueil').includes('href="#/concours"'));
 assert(screens.accueil().includes('href="#/concours"'),'Le tableau de bord conserve l’accès concours.');
 assert(screens.etudes('greffier').includes('École nationale des greffes'));
@@ -233,15 +240,15 @@ console.log('Ressources vérifiées :',data.studyResources.length,'liens uniques
   const job=data.jobs.find(j=>j.id==='attache-terr');
   const level=(l)=>{S.level=l;return screens.metier(job.id);};
   const college=level('5e');
-  assert(college.includes('class="parcours-line"')&&college.includes('Stage d’observation de 3e')&&college.includes('Stage de seconde')&&college.includes('aria-current="step"'),'Collégien : collège, lycée et supérieur.');
+  assert(college.includes('class="trip"')&&college.includes('>Collège<')&&college.includes('Stage de 3e ?')&&college.includes('Stage de seconde ?')&&college.includes('Mon niveau<span class="study-level">')&&college.includes('<span>5e</span>'),'Collégien : collège, lycée et supérieur.');
   const lycee=level('Seconde');
-  assert(!lycee.includes('>Collège<')&&lycee.includes('Stage de seconde')&&!lycee.includes('Stage d’observation de 3e'),'Lycéen : le collège disparaît.');
+  assert(!lycee.includes('>Collège<')&&lycee.includes('Stage de seconde ?')&&!lycee.includes('Stage de 3e ?'),'Lycéen : le collège disparaît.');
   const etudiant=level('Bac+1 / +2');
-  assert(!etudiant.includes('>Lycée<')&&etudiant.includes('Votre niveau : Bac+1 / +2'),'Étudiant : études supérieures seulement.');
+  assert(!etudiant.includes('>Lycée<')&&etudiant.includes('Mon niveau<span class="study-level">')&&etudiant.includes('<span>Bac+1 / +2</span>'),'Étudiant : études supérieures seulement.');
   const adulte=level('Sans diplôme');
-  assert(adulte.includes('>Collège<')&&adulte.includes('>Lycée<'),'Adulte sans diplôme : parcours complet.');
-  assert(adulte.includes('parcours-step end')&&adulte.includes(job.name),'Le terminus est le métier.');
-  assert(!screens.preparer(job.id).includes('parcours-line'),'La frise n’apparaît pas dans Se préparer.');
+  assert(adulte.includes('>Lycée<')&&adulte.includes('Études supérieures'),'Adulte sans diplôme : lycée puis études.');
+  assert(adulte.includes('trip-item end')&&adulte.includes(job.name),'Le terminus est le métier.');
+  assert(!screens.preparer(job.id).includes('class="trip"'),'La frise n’apparaît pas dans Se préparer.');
   S.level='Doctorat';
   console.log('Parcours vérifiés : collège, lycée, supérieur, adultes et terminus.');
 }
@@ -255,20 +262,36 @@ console.log('Ressources vérifiées :',data.studyResources.length,'liens uniques
   assert(!JSON.stringify(ref).match(/\d+ ?%/),'Aucun taux de réussite n’est repris.');
   const linked=data.jobs.filter(j=>j.rmfpCode&&!isContractJob(j)&&jobCategories(j).length).filter(j=>{
     const cats=jobCategories(j);return j.routeIds.map(id=>data.accessRoutes[id]).some(r=>r&&cats.includes(r.cat)&&r.fp.split('').some(f=>j.fp.includes(f)));});
-  assert(linked.length>=1050,'Presque toutes les fiches ont un concours de leur catégorie : '+linked.length);
+  const classified=data.jobs.filter(j=>j.rmfpCode&&!isContractJob(j)&&jobCategories(j).length);
+  const unexplained=classified.filter(j=>!linked.includes(j)&&!j.recruitment);
+  assert(unexplained.length<=5,'Chaque fiche a un concours de sa catégorie ou une explication du recrutement : '+unexplained.map(j=>j.id).join(', '));
   S.level='Bac+3';
   const fiche=screens.metier('attache');
-  assert(fiche.includes('Voies d’accès')&&fiche.includes('Session 2027'),'La fiche concours reprend voies et sessions documentées.');
-  assert(fiche.includes('Attaché d&#39;administration de l&#39;État')||fiche.includes('Administrateur de l&#39;État'),'Évoluer suit les progressions du référentiel.');
+  assert(fiche.includes('Quelles voies ?')&&fiche.includes('3e concours')&&fiche.includes('À partir de 2027'),'La fiche métier reprend les voies expliquées et les épreuves documentées.');
+  assert(fiche.includes('Administrateur - Administratrice de l’État'),'Évoluer suit les progressions du référentiel, avec les intitulés au masculin et au féminin.');
   const prep=screens.preparer('attache');
-  assert(prep.includes('id="concours-ref"')&&prep.includes('Annales officielles du concours'),'Se préparer présente le concours et ses annales.');
+  assert(prep.includes('id="concours-ref"')&&prep.includes('Préparation conseillée')&&prep.includes('Page officielle du concours')&&!prep.includes('Études utiles'),'Se préparer présente la préparation conseillée et la page officielle du concours.');
   S.level='Seconde';
   assert(screens.preparer('attache').includes('id="stages"'),'Les élèves de seconde reçoivent les conseils de stage.');
-  assert(screens.metier('attache').includes('Voie générale, spécialités conseillées'),'La frise reprend les spécialités conseillées.');
+  assert(screens.metier('attache').includes('Quelles spécialités ?')&&screens.metier('attache').includes('conseillées, jamais obligatoires'),'La frise reprend les spécialités conseillées.');
   S.level='Doctorat';
-  Object.assign(S,{domains:['Numérique'],metDomains:['Numérique'],metCat:'Toutes',metFp:'Tous',q:'administrateur de l\'etat'});
+  Object.assign(S,{domains:['Numérique'],metDomains:['Numérique'],metCats:null,metFps:null,q:'administrateur de l\'etat'});
   assert(filteredJobs().some(j=>j.id==='admin-etat'),'La recherche trouve Administrateur·rice de l’État malgré les domaines choisis.');
   S.q='administratrice';assert(filteredJobs().some(j=>j.id==='admin-etat'),'La forme féminine retrouve aussi le métier.');
   S.q='';S.domains=[];S.metDomains=[];
   console.log('Référentiel vérifié : 61 concours, '+linked.length+' fiches rattachées, fiche concours, Se préparer, Évoluer et recherche.');
+}
+
+// Audit des correspondances (19 octobre 2026) : corrections appliquées et métiers sans concours expliqués.
+{
+  const shown=id=>data.jobs.find(j=>j.id===id).routeIds;
+  assert(!shown('fpctl006').includes('magistrat')&&shown('fpctl006').includes('magistrat-crc'),'Les juridictions financières ne passent pas par l’ENM.');
+  assert(!shown('fpjus017').includes('magistrat'),'Un juriste assistant n’est pas un magistrat.');
+  assert(data.jobs.find(j=>j.id==='fpjus015').categories.includes('A+'),'Le magistrat judiciaire est en A+.');
+  assert(!shown('fpfip011').includes('insp-fip')&&shown('fpfip011').includes('insp-douane'),'Les métiers de la douane relèvent des concours de la douane.');
+  assert(data.accessRoutes['corps-59d7c76139ef'].cat==='A','Les sages-femmes hospitalières sont en catégorie A.');
+  const soldier=screens.metier('fpdef019');
+  assert(soldier.includes('>Recrutement<')&&soldier.includes('sengager.fr'),'Un métier militaire explique le recrutement par les armées.');
+  assert(!screens.metier('fpdef019').includes('data-fp="E"'),'Aucun concours civil n’est proposé à un métier militaire.');
+  console.log('Audit vérifié : corrections appliquées, métiers sans concours expliqués.');
 }

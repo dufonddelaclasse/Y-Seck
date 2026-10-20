@@ -1,0 +1,5687 @@
+{
+ "reject": [
+  {
+   "job_id": "fpagr004",
+   "route_id": "tsdd",
+   "reason": "TSDD = technicien du ministère de l'Écologie ; l'inspection/expertise sanitaire (animaux, végétaux, alimentation) relève des techniciens supérieurs du ministère de l'Agriculture (TSMA)"
+  },
+  {
+   "job_id": "fpagr004",
+   "route_id": "itpe",
+   "reason": "ITPE = corps technique du ministère de l'Écologie (routes, aménagement), pas un corps d'inspection sanitaire/SSA (relève des ISPV, IAE ou techniciens supérieurs du ministère de l'Agriculture)"
+  },
+  {
+   "job_id": "fpagr005",
+   "route_id": "tsdd",
+   "reason": "TSDD = technicien du ministère de l'Écologie ; l'inspection/expertise sanitaire (animaux, végétaux, alimentation) relève des techniciens supérieurs du ministère de l'Agriculture (TSMA)"
+  },
+  {
+   "job_id": "fpagr005",
+   "route_id": "itpe",
+   "reason": "ITPE = corps technique du ministère de l'Écologie (routes, aménagement), pas un corps d'inspection sanitaire/SSA (relève des ISPV, IAE ou techniciens supérieurs du ministère de l'Agriculture)"
+  },
+  {
+   "job_id": "fpagr006",
+   "route_id": "tsdd",
+   "reason": "TSDD = technicien du ministère de l'Écologie ; l'inspection/expertise sanitaire (animaux, végétaux, alimentation) relève des techniciens supérieurs du ministère de l'Agriculture (TSMA)"
+  },
+  {
+   "job_id": "fpagr006",
+   "route_id": "itpe",
+   "reason": "ITPE = corps technique du ministère de l'Écologie (routes, aménagement), pas un corps d'inspection sanitaire/SSA (relève des ISPV, IAE ou techniciens supérieurs du ministère de l'Agriculture)"
+  },
+  {
+   "job_id": "fpagr007",
+   "route_id": "itpe",
+   "reason": "ITPE = corps technique du ministère de l'Écologie (routes, aménagement), pas un corps d'inspection sanitaire/SSA (relève des ISPV, IAE ou techniciens supérieurs du ministère de l'Agriculture)"
+  },
+  {
+   "job_id": "fpagr008",
+   "route_id": "itpe",
+   "reason": "ITPE = corps technique du ministère de l'Écologie (routes, aménagement), pas un corps d'inspection sanitaire/SSA (relève des ISPV, IAE ou techniciens supérieurs du ministère de l'Agriculture)"
+  },
+  {
+   "job_id": "fpagr009",
+   "route_id": "itpe",
+   "reason": "ITPE = corps technique du ministère de l'Écologie (routes, aménagement), pas un corps d'inspection sanitaire/SSA (relève des ISPV, IAE ou techniciens supérieurs du ministère de l'Agriculture)"
+  },
+  {
+   "job_id": "fpagr010",
+   "route_id": "tsdd",
+   "reason": "TSDD = technicien du ministère de l'Écologie ; l'inspection/expertise sanitaire (animaux, végétaux, alimentation) relève des techniciens supérieurs du ministère de l'Agriculture (TSMA)"
+  },
+  {
+   "job_id": "fpagr010",
+   "route_id": "itpe",
+   "reason": "ITPE = corps technique du ministère de l'Écologie (routes, aménagement), pas un corps d'inspection sanitaire/SSA (relève des ISPV, IAE ou techniciens supérieurs du ministère de l'Agriculture)"
+  },
+  {
+   "job_id": "fpagr011",
+   "route_id": "tsdd",
+   "reason": "TSDD = technicien du ministère de l'Écologie ; l'inspection/expertise sanitaire (animaux, végétaux, alimentation) relève des techniciens supérieurs du ministère de l'Agriculture (TSMA)"
+  },
+  {
+   "job_id": "fpagr011",
+   "route_id": "itpe",
+   "reason": "ITPE = corps technique du ministère de l'Écologie (routes, aménagement), pas un corps d'inspection sanitaire/SSA (relève des ISPV, IAE ou techniciens supérieurs du ministère de l'Agriculture)"
+  },
+  {
+   "job_id": "fpagr012",
+   "route_id": "tsdd",
+   "reason": "TSDD = technicien du ministère de l'Écologie ; l'inspection/expertise sanitaire (animaux, végétaux, alimentation) relève des techniciens supérieurs du ministère de l'Agriculture (TSMA)"
+  },
+  {
+   "job_id": "fpagr012",
+   "route_id": "itpe",
+   "reason": "ITPE = corps technique du ministère de l'Écologie (routes, aménagement), pas un corps d'inspection sanitaire/SSA (relève des ISPV, IAE ou techniciens supérieurs du ministère de l'Agriculture)"
+  },
+  {
+   "job_id": "fpagr013",
+   "route_id": "tsdd",
+   "reason": "TSDD = technicien du ministère de l'Écologie ; l'inspection/expertise sanitaire (animaux, végétaux, alimentation) relève des techniciens supérieurs du ministère de l'Agriculture (TSMA)"
+  },
+  {
+   "job_id": "fpagr013",
+   "route_id": "itpe",
+   "reason": "ITPE = corps technique du ministère de l'Écologie (routes, aménagement), pas un corps d'inspection sanitaire/SSA (relève des ISPV, IAE ou techniciens supérieurs du ministère de l'Agriculture)"
+  },
+  {
+   "job_id": "fpagr014",
+   "route_id": "tsdd",
+   "reason": "TSDD = technicien du ministère de l'Écologie ; l'inspection/expertise sanitaire (animaux, végétaux, alimentation) relève des techniciens supérieurs du ministère de l'Agriculture (TSMA)"
+  },
+  {
+   "job_id": "fpagr014",
+   "route_id": "itpe",
+   "reason": "ITPE = corps technique du ministère de l'Écologie (routes, aménagement), pas un corps d'inspection sanitaire/SSA (relève des ISPV, IAE ou techniciens supérieurs du ministère de l'Agriculture)"
+  },
+  {
+   "job_id": "fpagr015",
+   "route_id": "tsdd",
+   "reason": "TSDD = technicien du ministère de l'Écologie ; l'inspection/expertise sanitaire (animaux, végétaux, alimentation) relève des techniciens supérieurs du ministère de l'Agriculture (TSMA)"
+  },
+  {
+   "job_id": "fpagr015",
+   "route_id": "itpe",
+   "reason": "ITPE = corps technique du ministère de l'Écologie (routes, aménagement), pas un corps d'inspection sanitaire/SSA (relève des ISPV, IAE ou techniciens supérieurs du ministère de l'Agriculture)"
+  },
+  {
+   "job_id": "fpagr016",
+   "route_id": "tsdd",
+   "reason": "TSDD = technicien du ministère de l'Écologie ; l'inspection/expertise sanitaire (animaux, végétaux, alimentation) relève des techniciens supérieurs du ministère de l'Agriculture (TSMA)"
+  },
+  {
+   "job_id": "fpagr016",
+   "route_id": "itpe",
+   "reason": "ITPE = corps technique du ministère de l'Écologie (routes, aménagement), pas un corps d'inspection sanitaire/SSA (relève des ISPV, IAE ou techniciens supérieurs du ministère de l'Agriculture)"
+  },
+  {
+   "job_id": "fpagr017",
+   "route_id": "tsdd",
+   "reason": "TSDD = technicien du ministère de l'Écologie ; l'inspection/expertise sanitaire (animaux, végétaux, alimentation) relève des techniciens supérieurs du ministère de l'Agriculture (TSMA)"
+  },
+  {
+   "job_id": "fpagr017",
+   "route_id": "itpe",
+   "reason": "ITPE = corps technique du ministère de l'Écologie (routes, aménagement), pas un corps d'inspection sanitaire/SSA (relève des ISPV, IAE ou techniciens supérieurs du ministère de l'Agriculture)"
+  },
+  {
+   "job_id": "fpagr018",
+   "route_id": "tsdd",
+   "reason": "TSDD = technicien du ministère de l'Écologie ; l'inspection/expertise sanitaire (animaux, végétaux, alimentation) relève des techniciens supérieurs du ministère de l'Agriculture (TSMA)"
+  },
+  {
+   "job_id": "fpagr018",
+   "route_id": "itpe",
+   "reason": "ITPE = corps technique du ministère de l'Écologie (routes, aménagement), pas un corps d'inspection sanitaire/SSA (relève des ISPV, IAE ou techniciens supérieurs du ministère de l'Agriculture)"
+  },
+  {
+   "job_id": "fpagr001",
+   "route_id": "tsdd",
+   "reason": "TSDD = technicien du ministère de l'Écologie ; l'inspection/expertise sanitaire (animaux, végétaux, alimentation) relève des techniciens supérieurs du ministère de l'Agriculture (TSMA)"
+  },
+  {
+   "job_id": "fpagr002",
+   "route_id": "tsdd",
+   "reason": "TSDD = technicien du ministère de l'Écologie ; l'inspection/expertise sanitaire (animaux, végétaux, alimentation) relève des techniciens supérieurs du ministère de l'Agriculture (TSMA)"
+  },
+  {
+   "job_id": "fpagr003",
+   "route_id": "tsdd",
+   "reason": "TSDD = technicien du ministère de l'Écologie ; l'inspection/expertise sanitaire (animaux, végétaux, alimentation) relève des techniciens supérieurs du ministère de l'Agriculture (TSMA)"
+  },
+  {
+   "job_id": "fpagr019",
+   "route_id": "itpe",
+   "reason": "Vétérinaire officiel : corps des inspecteurs de santé publique vétérinaire (ISPV) ou contractuel vétérinaire, jamais ITPE"
+  },
+  {
+   "job_id": "fpagr021",
+   "route_id": "tsdd",
+   "reason": "Technicien élevage/production animale = TSMA (Agriculture), pas TSDD (Écologie)"
+  },
+  {
+   "job_id": "fpagr034",
+   "route_id": "corps-3bcfcbcc7eb5",
+   "reason": "Les CHUV sont des écoles vétérinaires de l'État (ministère de l'Agriculture), pas des hôpitaux de la FPH : corps hospitalier FPH hors sujet (versant H du métier aussi erroné, E seulement)"
+  },
+  {
+   "job_id": "fpagr036",
+   "route_id": "itpe",
+   "reason": "Vétérinaire : ITPE (travaux publics) n'y mène pas ; voie État = ISPV"
+  },
+  {
+   "job_id": "fpagr036",
+   "route_id": "ingenieur-terr",
+   "reason": "Vétérinaire territorial = cadre d'emplois des médecins/biologistes, vétérinaires et pharmaciens territoriaux, pas ingénieur territorial"
+  },
+  {
+   "job_id": "fpagr028",
+   "route_id": "tsdd",
+   "reason": "Gestion d'aides agricoles = fonction administrative B : secrétaire administratif, pas technicien du développement durable"
+  },
+  {
+   "job_id": "fpagr029",
+   "route_id": "tsdd",
+   "reason": "Gestion de dispositifs d'aides = fonction administrative B, pas TSDD"
+  },
+  {
+   "job_id": "fpagr030",
+   "route_id": "itpe",
+   "reason": "Instruction/liquidation des aides = encadrement administratif : attaché, pas ingénieur TPE"
+  },
+  {
+   "job_id": "fpagr030",
+   "route_id": "tsdd",
+   "reason": "Instruction/liquidation des aides = fonction administrative, pas TSDD"
+  },
+  {
+   "job_id": "fpagr025",
+   "route_id": "adj-tech-etat",
+   "reason": "Mission économie agricole/agroalimentaire = fonction administrative/économique, pas adjoint technique"
+  },
+  {
+   "job_id": "fpamt005",
+   "route_id": "ingenieur-terr",
+   "reason": "Gestion d'aides au développement économique = fonction administrative : attaché territorial, pas ingénieur"
+  },
+  {
+   "job_id": "fpamt005",
+   "route_id": "itpe",
+   "reason": "Gestion d'aides au développement économique : pas un métier d'ingénieur TPE"
+  },
+  {
+   "job_id": "fpamt007",
+   "route_id": "tech-terr",
+   "reason": "Études économiques = filière administrative : rédacteur (B) / attaché (A), pas technicien territorial"
+  },
+  {
+   "job_id": "fpamt007",
+   "route_id": "tsdd",
+   "reason": "Études économiques : pas un métier de technicien du développement durable"
+  },
+  {
+   "job_id": "fpamt010",
+   "route_id": "ingenieur-terr",
+   "reason": "Politique de la ville = fonction administrative/de projet, filière administrative (attaché), pas ingénieur"
+  },
+  {
+   "job_id": "fpamt013",
+   "route_id": "ingenieur-terr",
+   "reason": "Développement territorial (économique, partenariats) = filière administrative, pas ingénieur"
+  },
+  {
+   "job_id": "fpamt014",
+   "route_id": "itpe",
+   "reason": "Développement de l'emploi (DREETS/collectivités) = métier administratif, sans lien avec les corps techniques"
+  },
+  {
+   "job_id": "fpamt014",
+   "route_id": "ingenieur-terr",
+   "reason": "Développement de l'emploi (DREETS/collectivités) = métier administratif, sans lien avec les corps techniques"
+  },
+  {
+   "job_id": "fpamt014",
+   "route_id": "tsdd",
+   "reason": "Développement de l'emploi (DREETS/collectivités) = métier administratif, sans lien avec les corps techniques"
+  },
+  {
+   "job_id": "fpamt014",
+   "route_id": "tech-terr",
+   "reason": "Développement de l'emploi (DREETS/collectivités) = métier administratif, sans lien avec les corps techniques"
+  },
+  {
+   "job_id": "fpamt015",
+   "route_id": "ingenieur-terr",
+   "reason": "Promotion touristique = filière administrative, pas ingénieur"
+  },
+  {
+   "job_id": "fpamt015",
+   "route_id": "tech-terr",
+   "reason": "Promotion touristique = filière administrative, pas technicien"
+  },
+  {
+   "job_id": "fpamt031",
+   "route_id": "ingenieur-terr",
+   "reason": "Gestion locative = fonction administrative/juridique, pas ingénieur"
+  },
+  {
+   "job_id": "fpamt032",
+   "route_id": "tech-terr",
+   "reason": "Gestion locative (baux, loyers) = filière administrative"
+  },
+  {
+   "job_id": "fpamt032",
+   "route_id": "adj-tech-terr",
+   "reason": "Gestion locative = filière administrative, pas adjoint technique"
+  },
+  {
+   "job_id": "fpamt035",
+   "route_id": "ingenieur-terr",
+   "reason": "Politique sociale du logement = fonction administrative/sociale, pas ingénieur"
+  },
+  {
+   "job_id": "fpamt036",
+   "route_id": "ingenieur-terr",
+   "reason": "Programmation budgétaire du logement = fonction financière administrative"
+  },
+  {
+   "job_id": "fpamt036",
+   "route_id": "tech-terr",
+   "reason": "Programmation budgétaire du logement = fonction financière administrative"
+  },
+  {
+   "job_id": "fpamt024",
+   "route_id": "adj-tech-etat",
+   "reason": "Contrôle de la sécurité des barrages (DREAL) = inspecteurs A/B (ITPE, TSDD), pas catégorie C"
+  },
+  {
+   "job_id": "fpamt024",
+   "route_id": "adj-tech-terr",
+   "reason": "Contrôle de la sécurité des ouvrages hydrauliques non exercé en catégorie C"
+  },
+  {
+   "job_id": "fpamt025",
+   "route_id": "adj-tech-etat",
+   "reason": "Contrôle des équipements sous pression/canalisations (DREAL) = inspecteurs A/B, pas catégorie C"
+  },
+  {
+   "job_id": "fpamt025",
+   "route_id": "adj-tech-terr",
+   "reason": "Mission régalienne de l'État (DREAL), pas d'adjoint technique territorial"
+  },
+  {
+   "job_id": "fpasp003",
+   "route_id": "admin-terr",
+   "reason": "Direction d'EAJE réservée aux professionnels qualifiés (puéricultrice, EJE, médecin) ; administrateur hors sujet"
+  },
+  {
+   "job_id": "fpasp003",
+   "route_id": "attache-terr",
+   "reason": "Direction d'EAJE exige une qualification petite enfance (art. R2324-34 CSP), pas attaché"
+  },
+  {
+   "job_id": "fpasp014",
+   "route_id": "sa",
+   "reason": "Corps administratif sans lien avec l'animation d'éducation à l'environnement"
+  },
+  {
+   "job_id": "fpasp014",
+   "route_id": "adjoint-adm",
+   "reason": "Corps administratif sans lien avec l'animation"
+  },
+  {
+   "job_id": "fpasp015",
+   "route_id": "corps-b464cbe97049",
+   "reason": "Conseiller jeunesse/vie associative = corps des CEPJ, pas professeur de sport"
+  },
+  {
+   "job_id": "fpasp016",
+   "route_id": "corps-b464cbe97049",
+   "reason": "Inspecteur jeunesse et sports a son propre corps, pas professeur de sport"
+  },
+  {
+   "job_id": "fpasp020",
+   "route_id": "adj-anim",
+   "reason": "Exploitation des équipements sportifs = filière technique, pas animation"
+  },
+  {
+   "job_id": "fpasp025",
+   "route_id": "corps-b464cbe97049",
+   "reason": "Le concours général de professeur de sport n'est pas la voie dédiée aux sportifs de haut niveau"
+  },
+  {
+   "job_id": "fpasp026",
+   "route_id": "sa",
+   "reason": "Secrétaire administratif = corps administratif, sans lien avec l'entraînement sportif"
+  },
+  {
+   "job_id": "fpasp026",
+   "route_id": "animateur",
+   "reason": "Animateur territorial = animation socioculturelle ; l'entraîneur relève des ETAPS"
+  },
+  {
+   "job_id": "fpasp027",
+   "route_id": "admin-etat",
+   "reason": "Les DTN sont essentiellement issus des professeurs de sport / CTPS, pas du corps des administrateurs de l'État"
+  },
+  {
+   "job_id": "fpbat001",
+   "route_id": "itpe",
+   "reason": "Architecte à l'État = corps des architectes et urbanistes de l'État, pas ITPE"
+  },
+  {
+   "job_id": "fpbat019",
+   "route_id": "itpe",
+   "reason": "Électromécanicien = métier d'exécution/technicien (B/C), pas ingénieur"
+  },
+  {
+   "job_id": "fpbat019",
+   "route_id": "ingenieur-terr",
+   "reason": "Électromécanicien = métier d'exécution/technicien (B/C), pas ingénieur"
+  },
+  {
+   "job_id": "fpbat019",
+   "route_id": "ingenieur-hosp",
+   "reason": "Électromécanicien = métier d'exécution/technicien (B/C), pas ingénieur"
+  },
+  {
+   "job_id": "fpcom014",
+   "route_id": "animateur",
+   "reason": "Animateur territorial = filière animation socio-culturelle, sans rapport avec l'animation de réseaux sociaux (community management)"
+  },
+  {
+   "job_id": "fpctl005",
+   "route_id": "redacteur",
+   "reason": "Contrôle technique aéronautique = mission d'État (DGAC), aucun lien avec le cadre d'emplois territorial de rédacteur"
+  },
+  {
+   "job_id": "fpctl006",
+   "route_id": "magistrat",
+   "reason": "Concours ENM = magistrat judiciaire ; les magistrats des juridictions financières sont recrutés par l'INSP (ou concours CRTC)"
+  },
+  {
+   "job_id": "fpctl031",
+   "route_id": "attache",
+   "reason": "Inspection des ICPE (DREAL/DDPP) : métier technique exercé par ingénieurs (ITPE, IIM) et techniciens, pas par les attachés"
+  },
+  {
+   "job_id": "fpctl031",
+   "route_id": "sa",
+   "reason": "Inspection des ICPE : métier technique (TSDD), pas secrétaire administratif"
+  },
+  {
+   "job_id": "fpctl031",
+   "route_id": "attache-terr",
+   "reason": "Inspection des ICPE = police administrative de l'État, pas de cadre d'emplois territorial administratif"
+  },
+  {
+   "job_id": "fpctl031",
+   "route_id": "redacteur",
+   "reason": "Inspection des ICPE = police administrative de l'État, pas de cadre d'emplois territorial administratif"
+  },
+  {
+   "job_id": "fpctl031",
+   "route_id": "aah",
+   "reason": "Inspection des ICPE = mission de l'État, sans lien avec un corps administratif hospitalier"
+  },
+  {
+   "job_id": "fpctl031",
+   "route_id": "corps-9eeb8a61a6a9",
+   "reason": "Inspection des ICPE = mission de l'État, sans lien avec un corps administratif hospitalier"
+  },
+  {
+   "job_id": "fpctl036",
+   "route_id": "dh",
+   "reason": "Directeur d'hôpital = direction d'établissement de santé, sans rapport avec le métier de statisticien"
+  },
+  {
+   "job_id": "fpctl042",
+   "route_id": "collecte",
+   "reason": "Confusion d'homonymie : « agent de collecte » des déchets/conducteur poids lourd ≠ collecteur de données statistiques"
+  },
+  {
+   "job_id": "fpcul004",
+   "route_id": "magasinier",
+   "reason": "Magasinier des bibliothèques = gestion des collections de bibliothèque, pas guide-conférencier"
+  },
+  {
+   "job_id": "fpcul006",
+   "route_id": "magasinier",
+   "reason": "Magasinier des bibliothèques sans rapport avec l'animation auprès des publics"
+  },
+  {
+   "job_id": "fpcul007",
+   "route_id": "magasinier",
+   "reason": "Magasinier des bibliothèques sans rapport avec l'animation d'activités culturelles"
+  },
+  {
+   "job_id": "fpcul011",
+   "route_id": "corps-08e8a6d6b236",
+   "reason": "Responsable d'atelier d'art : relève des chefs de travaux d'art, pas des bibliothécaires"
+  },
+  {
+   "job_id": "fpcul011",
+   "route_id": "biblio-terr",
+   "reason": "Responsable d'atelier d'art/métiers d'art : aucun lien avec bibliothécaire territorial"
+  },
+  {
+   "job_id": "fpcul012",
+   "route_id": "magasinier",
+   "reason": "Magasinier des bibliothèques ne gère pas des œuvres d'art (musées)"
+  },
+  {
+   "job_id": "fpcul017",
+   "route_id": "corps-72087d19dcef",
+   "reason": "Technicien des métiers d'art : corps technique (technicien d'art), pas bibliothécaire assistant spécialisé"
+  },
+  {
+   "job_id": "fpcul018",
+   "route_id": "corps-72087d19dcef",
+   "reason": "Technicien du spectacle (son, lumière, plateau) = filière technique, pas bibliothécaire assistant spécialisé"
+  },
+  {
+   "job_id": "fpcul018",
+   "route_id": "acp",
+   "reason": "Technicien du spectacle (son, lumière, plateau) = filière technique, pas assistant de conservation du patrimoine"
+  },
+  {
+   "job_id": "fpcul018",
+   "route_id": "magasinier",
+   "reason": "Technicien du spectacle (son, lumière, plateau) = filière technique, pas magasinier des bibliothèques"
+  },
+  {
+   "job_id": "fpcul018",
+   "route_id": "adj-patrimoine",
+   "reason": "Technicien du spectacle (son, lumière, plateau) = filière technique, pas adjoint du patrimoine"
+  },
+  {
+   "job_id": "fpcul019",
+   "route_id": "corps-72087d19dcef",
+   "reason": "Artiste-interprète : aucun lien avec les bibliothèques (recrutement contractuel ou enseignement artistique)"
+  },
+  {
+   "job_id": "fpcul019",
+   "route_id": "acp",
+   "reason": "Artiste-interprète : aucun lien avec la conservation du patrimoine"
+  },
+  {
+   "job_id": "fpdef001",
+   "route_id": "corps-f25b82f071a5",
+   "reason": "Métier des forces armées (Défense) : la gendarmerie (officier/sous-officier) n'y mène pas ; recrutement militaire des armées hors liste"
+  },
+  {
+   "job_id": "fpdef002",
+   "route_id": "corps-f25b82f071a5",
+   "reason": "Métier des forces armées (Défense) : la gendarmerie (officier/sous-officier) n'y mène pas ; recrutement militaire des armées hors liste"
+  },
+  {
+   "job_id": "fpdef002",
+   "route_id": "sous-off-gend",
+   "reason": "Métier des forces armées (Défense) : la gendarmerie (officier/sous-officier) n'y mène pas ; recrutement militaire des armées hors liste"
+  },
+  {
+   "job_id": "fpdef003",
+   "route_id": "corps-f25b82f071a5",
+   "reason": "Métier des forces armées (Défense) : la gendarmerie (officier/sous-officier) n'y mène pas ; recrutement militaire des armées hors liste"
+  },
+  {
+   "job_id": "fpdef003",
+   "route_id": "sous-off-gend",
+   "reason": "Métier des forces armées (Défense) : la gendarmerie (officier/sous-officier) n'y mène pas ; recrutement militaire des armées hors liste"
+  },
+  {
+   "job_id": "fpdef004",
+   "route_id": "corps-f25b82f071a5",
+   "reason": "Métier des forces armées (Défense) : la gendarmerie (officier/sous-officier) n'y mène pas ; recrutement militaire des armées hors liste"
+  },
+  {
+   "job_id": "fpdef004",
+   "route_id": "sous-off-gend",
+   "reason": "Métier des forces armées (Défense) : la gendarmerie (officier/sous-officier) n'y mène pas ; recrutement militaire des armées hors liste"
+  },
+  {
+   "job_id": "fpdef005",
+   "route_id": "corps-f25b82f071a5",
+   "reason": "Métier des forces armées (Défense) : la gendarmerie (officier/sous-officier) n'y mène pas ; recrutement militaire des armées hors liste"
+  },
+  {
+   "job_id": "fpdef005",
+   "route_id": "sous-off-gend",
+   "reason": "Métier des forces armées (Défense) : la gendarmerie (officier/sous-officier) n'y mène pas ; recrutement militaire des armées hors liste"
+  },
+  {
+   "job_id": "fpdef006",
+   "route_id": "corps-f25b82f071a5",
+   "reason": "Métier des forces armées (Défense) : la gendarmerie (officier/sous-officier) n'y mène pas ; recrutement militaire des armées hors liste"
+  },
+  {
+   "job_id": "fpdef006",
+   "route_id": "sous-off-gend",
+   "reason": "Métier des forces armées (Défense) : la gendarmerie (officier/sous-officier) n'y mène pas ; recrutement militaire des armées hors liste"
+  },
+  {
+   "job_id": "fpdef007",
+   "route_id": "corps-f25b82f071a5",
+   "reason": "Métier des forces armées (Défense) : la gendarmerie (officier/sous-officier) n'y mène pas ; recrutement militaire des armées hors liste"
+  },
+  {
+   "job_id": "fpdef007",
+   "route_id": "sous-off-gend",
+   "reason": "Métier des forces armées (Défense) : la gendarmerie (officier/sous-officier) n'y mène pas ; recrutement militaire des armées hors liste"
+  },
+  {
+   "job_id": "fpdef008",
+   "route_id": "corps-f25b82f071a5",
+   "reason": "Métier des forces armées (Défense) : la gendarmerie (officier/sous-officier) n'y mène pas ; recrutement militaire des armées hors liste"
+  },
+  {
+   "job_id": "fpdef008",
+   "route_id": "sous-off-gend",
+   "reason": "Métier des forces armées (Défense) : la gendarmerie (officier/sous-officier) n'y mène pas ; recrutement militaire des armées hors liste"
+  },
+  {
+   "job_id": "fpdef009",
+   "route_id": "corps-f25b82f071a5",
+   "reason": "Métier des forces armées (Défense) : la gendarmerie (officier/sous-officier) n'y mène pas ; recrutement militaire des armées hors liste"
+  },
+  {
+   "job_id": "fpdef009",
+   "route_id": "sous-off-gend",
+   "reason": "Métier des forces armées (Défense) : la gendarmerie (officier/sous-officier) n'y mène pas ; recrutement militaire des armées hors liste"
+  },
+  {
+   "job_id": "fpdef010",
+   "route_id": "corps-f25b82f071a5",
+   "reason": "Métier des forces armées (Défense) : la gendarmerie (officier/sous-officier) n'y mène pas ; recrutement militaire des armées hors liste"
+  },
+  {
+   "job_id": "fpdef010",
+   "route_id": "sous-off-gend",
+   "reason": "Métier des forces armées (Défense) : la gendarmerie (officier/sous-officier) n'y mène pas ; recrutement militaire des armées hors liste"
+  },
+  {
+   "job_id": "fpdef011",
+   "route_id": "corps-f25b82f071a5",
+   "reason": "Métier des forces armées (Défense) : la gendarmerie (officier/sous-officier) n'y mène pas ; recrutement militaire des armées hors liste"
+  },
+  {
+   "job_id": "fpdef011",
+   "route_id": "sous-off-gend",
+   "reason": "Métier des forces armées (Défense) : la gendarmerie (officier/sous-officier) n'y mène pas ; recrutement militaire des armées hors liste"
+  },
+  {
+   "job_id": "fpdef012",
+   "route_id": "corps-f25b82f071a5",
+   "reason": "Métier des forces armées (Défense) : la gendarmerie (officier/sous-officier) n'y mène pas ; recrutement militaire des armées hors liste"
+  },
+  {
+   "job_id": "fpdef012",
+   "route_id": "sous-off-gend",
+   "reason": "Métier des forces armées (Défense) : la gendarmerie (officier/sous-officier) n'y mène pas ; recrutement militaire des armées hors liste"
+  },
+  {
+   "job_id": "fpdef013",
+   "route_id": "sous-off-gend",
+   "reason": "Métier des forces armées (Défense) : la gendarmerie (officier/sous-officier) n'y mène pas ; recrutement militaire des armées hors liste"
+  },
+  {
+   "job_id": "fpdef014",
+   "route_id": "corps-f25b82f071a5",
+   "reason": "Métier des forces armées (Défense) : la gendarmerie (officier/sous-officier) n'y mène pas ; recrutement militaire des armées hors liste"
+  },
+  {
+   "job_id": "fpdef014",
+   "route_id": "sous-off-gend",
+   "reason": "Métier des forces armées (Défense) : la gendarmerie (officier/sous-officier) n'y mène pas ; recrutement militaire des armées hors liste"
+  },
+  {
+   "job_id": "fpdef015",
+   "route_id": "sous-off-gend",
+   "reason": "Métier des forces armées (Défense) : la gendarmerie (officier/sous-officier) n'y mène pas ; recrutement militaire des armées hors liste"
+  },
+  {
+   "job_id": "fpdef016",
+   "route_id": "sous-off-gend",
+   "reason": "Métier des forces armées (Défense) : la gendarmerie (officier/sous-officier) n'y mène pas ; recrutement militaire des armées hors liste"
+  },
+  {
+   "job_id": "fpdef017",
+   "route_id": "corps-f25b82f071a5",
+   "reason": "Métier des forces armées (Défense) : la gendarmerie (officier/sous-officier) n'y mène pas ; recrutement militaire des armées hors liste"
+  },
+  {
+   "job_id": "fpdef017",
+   "route_id": "sous-off-gend",
+   "reason": "Métier des forces armées (Défense) : la gendarmerie (officier/sous-officier) n'y mène pas ; recrutement militaire des armées hors liste"
+  },
+  {
+   "job_id": "fpdef019",
+   "route_id": "corps-f25b82f071a5",
+   "reason": "Métier des forces armées (Défense) : la gendarmerie (officier/sous-officier) n'y mène pas ; recrutement militaire des armées hors liste"
+  },
+  {
+   "job_id": "fpdef019",
+   "route_id": "sous-off-gend",
+   "reason": "Métier des forces armées (Défense) : la gendarmerie (officier/sous-officier) n'y mène pas ; recrutement militaire des armées hors liste"
+  },
+  {
+   "job_id": "fpdef020",
+   "route_id": "corps-f25b82f071a5",
+   "reason": "Métier des forces armées (Défense) : la gendarmerie (officier/sous-officier) n'y mène pas ; recrutement militaire des armées hors liste"
+  },
+  {
+   "job_id": "fpdef020",
+   "route_id": "sous-off-gend",
+   "reason": "Métier des forces armées (Défense) : la gendarmerie (officier/sous-officier) n'y mène pas ; recrutement militaire des armées hors liste"
+  },
+  {
+   "job_id": "fpdef021",
+   "route_id": "corps-f25b82f071a5",
+   "reason": "Métier des forces armées (Défense) : la gendarmerie (officier/sous-officier) n'y mène pas ; recrutement militaire des armées hors liste"
+  },
+  {
+   "job_id": "fpdef021",
+   "route_id": "sous-off-gend",
+   "reason": "Métier des forces armées (Défense) : la gendarmerie (officier/sous-officier) n'y mène pas ; recrutement militaire des armées hors liste"
+  },
+  {
+   "job_id": "fpdef023",
+   "route_id": "sous-off-gend",
+   "reason": "Métier des forces armées (Défense) : la gendarmerie (officier/sous-officier) n'y mène pas ; recrutement militaire des armées hors liste"
+  },
+  {
+   "job_id": "fpdef025",
+   "route_id": "corps-f25b82f071a5",
+   "reason": "Métier des forces armées (Défense) : la gendarmerie (officier/sous-officier) n'y mène pas ; recrutement militaire des armées hors liste"
+  },
+  {
+   "job_id": "fpdef027",
+   "route_id": "corps-f25b82f071a5",
+   "reason": "Métier des forces armées (Défense) : la gendarmerie (officier/sous-officier) n'y mène pas ; recrutement militaire des armées hors liste"
+  },
+  {
+   "job_id": "fpdef030",
+   "route_id": "corps-f25b82f071a5",
+   "reason": "Métier des forces armées (Défense) : la gendarmerie (officier/sous-officier) n'y mène pas ; recrutement militaire des armées hors liste"
+  },
+  {
+   "job_id": "fpdef030",
+   "route_id": "sous-off-gend",
+   "reason": "Métier des forces armées (Défense) : la gendarmerie (officier/sous-officier) n'y mène pas ; recrutement militaire des armées hors liste"
+  },
+  {
+   "job_id": "fpdef031",
+   "route_id": "sous-off-gend",
+   "reason": "Métier des forces armées (Défense) : la gendarmerie (officier/sous-officier) n'y mène pas ; recrutement militaire des armées hors liste"
+  },
+  {
+   "job_id": "fpdef032",
+   "route_id": "corps-f25b82f071a5",
+   "reason": "Métier des forces armées (Défense) : la gendarmerie (officier/sous-officier) n'y mène pas ; recrutement militaire des armées hors liste"
+  },
+  {
+   "job_id": "fpdef032",
+   "route_id": "sous-off-gend",
+   "reason": "Métier des forces armées (Défense) : la gendarmerie (officier/sous-officier) n'y mène pas ; recrutement militaire des armées hors liste"
+  },
+  {
+   "job_id": "fpdef005",
+   "route_id": "adjoint-adm",
+   "reason": "Métier opérationnel ou technique de la Défense : adjoint administratif n'y mène pas"
+  },
+  {
+   "job_id": "fpdef013",
+   "route_id": "adjoint-adm",
+   "reason": "Métier opérationnel ou technique de la Défense : adjoint administratif n'y mène pas"
+  },
+  {
+   "job_id": "fpdef015",
+   "route_id": "adjoint-adm",
+   "reason": "Métier opérationnel ou technique de la Défense : adjoint administratif n'y mène pas"
+  },
+  {
+   "job_id": "fpdef016",
+   "route_id": "adjoint-adm",
+   "reason": "Métier opérationnel ou technique de la Défense : adjoint administratif n'y mène pas"
+  },
+  {
+   "job_id": "fpdef022",
+   "route_id": "adjoint-adm",
+   "reason": "Métier opérationnel ou technique de la Défense : adjoint administratif n'y mène pas"
+  },
+  {
+   "job_id": "fpdef023",
+   "route_id": "adjoint-adm",
+   "reason": "Métier opérationnel ou technique de la Défense : adjoint administratif n'y mène pas"
+  },
+  {
+   "job_id": "fpdef026",
+   "route_id": "adjoint-adm",
+   "reason": "Métier opérationnel ou technique de la Défense : adjoint administratif n'y mène pas"
+  },
+  {
+   "job_id": "fpdef028",
+   "route_id": "adjoint-adm",
+   "reason": "Métier opérationnel ou technique de la Défense : adjoint administratif n'y mène pas"
+  },
+  {
+   "job_id": "fpdef029",
+   "route_id": "adjoint-adm",
+   "reason": "Métier opérationnel ou technique de la Défense : adjoint administratif n'y mène pas"
+  },
+  {
+   "job_id": "fpdir008",
+   "route_id": "aah",
+   "reason": "Un attaché d'administration hospitalière ne devient pas chef d'établissement de santé (corps des directeurs d'hôpital)."
+  },
+  {
+   "job_id": "fpdir009",
+   "route_id": "aah",
+   "reason": "L'attaché hospitalier ne mène pas à la direction d'un établissement social/médico-social."
+  },
+  {
+   "job_id": "fpdir011",
+   "route_id": "redacteur",
+   "reason": "DGA de collectivité = emploi fonctionnel de catégorie A/A+, inaccessible aux rédacteurs/adjoints administratifs."
+  },
+  {
+   "job_id": "fpdir011",
+   "route_id": "adjoint-adm",
+   "reason": "DGA de collectivité = emploi fonctionnel de catégorie A/A+, inaccessible aux rédacteurs/adjoints administratifs."
+  },
+  {
+   "job_id": "fpdir018",
+   "route_id": "attache",
+   "reason": "Les inspecteurs généraux (IGÉSR) ne sont pas recrutés parmi les attachés, mais surtout parmi IA-IPR, IEN, enseignants agrégés, administrateurs."
+  },
+  {
+   "job_id": "fpdir019",
+   "route_id": "attache",
+   "reason": "Le chef d'établissement (principal, proviseur) relève du concours de personnel de direction, pas du corps des attachés."
+  },
+  {
+   "job_id": "fpdir021",
+   "route_id": "sa",
+   "reason": "DGS d'université = emploi fonctionnel d'encadrement supérieur, pas un poste B/C."
+  },
+  {
+   "job_id": "fpdir021",
+   "route_id": "adjoint-adm",
+   "reason": "DGS d'université = emploi fonctionnel d'encadrement supérieur, pas un poste B/C."
+  },
+  {
+   "job_id": "fpdir030",
+   "route_id": "dh",
+   "reason": "Le directeur des soins relève du corps des directeurs des soins (concours EHESP), pas des directeurs d'hôpital."
+  },
+  {
+   "job_id": "fpdir030",
+   "route_id": "corps-9eeb8a61a6a9",
+   "reason": "Un adjoint des cadres hospitaliers (B administratif) ne mène pas à la direction des soins."
+  },
+  {
+   "job_id": "fpdoc004",
+   "route_id": "corps-08e8a6d6b236",
+   "reason": "Les bibliothécaires d'État exercent en bibliothèque ; les archives de l'État relèvent des chargés d'études documentaires."
+  },
+  {
+   "job_id": "fpdoc004",
+   "route_id": "biblio-terr",
+   "reason": "Bibliothécaire territorial = spécialité bibliothèques ; les archives territoriales relèvent des attachés/conservateurs du patrimoine."
+  },
+  {
+   "job_id": "fpdoc019",
+   "route_id": "corps-08e8a6d6b236",
+   "reason": "Les bibliothécaires d'État exercent en bibliothèque ; les archives de l'État relèvent des chargés d'études documentaires."
+  },
+  {
+   "job_id": "fpdoc019",
+   "route_id": "biblio-terr",
+   "reason": "Bibliothécaire territorial = spécialité bibliothèques ; les archives territoriales relèvent des attachés/conservateurs du patrimoine."
+  },
+  {
+   "job_id": "fpdoc020",
+   "route_id": "corps-08e8a6d6b236",
+   "reason": "Les bibliothécaires d'État exercent en bibliothèque ; les archives de l'État relèvent des chargés d'études documentaires."
+  },
+  {
+   "job_id": "fpdoc020",
+   "route_id": "biblio-terr",
+   "reason": "Bibliothécaire territorial = spécialité bibliothèques ; les archives territoriales relèvent des attachés/conservateurs du patrimoine."
+  },
+  {
+   "job_id": "fpdoc021",
+   "route_id": "corps-08e8a6d6b236",
+   "reason": "Les bibliothécaires d'État exercent en bibliothèque ; les archives de l'État relèvent des chargés d'études documentaires."
+  },
+  {
+   "job_id": "fpdoc021",
+   "route_id": "biblio-terr",
+   "reason": "Bibliothécaire territorial = spécialité bibliothèques ; les archives territoriales relèvent des attachés/conservateurs du patrimoine."
+  },
+  {
+   "job_id": "fpdoc004",
+   "route_id": "corps-72087d19dcef",
+   "reason": "BIBAS = bibliothèques ; pour les archives, la voie B est l'assistant de conservation (spécialité archives) ou secrétaire de documentation."
+  },
+  {
+   "job_id": "fpdoc019",
+   "route_id": "corps-72087d19dcef",
+   "reason": "BIBAS = bibliothèques ; pour les archives, la voie B est l'assistant de conservation (spécialité archives) ou secrétaire de documentation."
+  },
+  {
+   "job_id": "fpdoc008",
+   "route_id": "magasinier",
+   "reason": "Un chargé de mission numérique n'est pas un magasinier/adjoint du patrimoine (poste d'exécution C)."
+  },
+  {
+   "job_id": "fpdoc008",
+   "route_id": "adj-patrimoine",
+   "reason": "Un chargé de mission numérique n'est pas un magasinier/adjoint du patrimoine (poste d'exécution C)."
+  },
+  {
+   "job_id": "fpdoc018",
+   "route_id": "dh",
+   "reason": "Directeur d'hôpital sans rapport avec la conservation d'archives/bibliothèque."
+  },
+  {
+   "job_id": "fpens003",
+   "route_id": "attache-terr",
+   "reason": "Un enseignant artistique relève des cadres d'emplois d'assistant/professeur territorial d'enseignement artistique, pas des attachés (absents de la liste)."
+  },
+  {
+   "job_id": "fpens013",
+   "route_id": "capes",
+   "reason": "Les conseillers pédagogiques du 1er degré sont des professeurs des écoles (CAFIPEMF), pas des certifiés."
+  },
+  {
+   "job_id": "fpens015",
+   "route_id": "capes",
+   "reason": "Le psychologue de l'Éducation nationale a son propre concours (PsyEN), pas le CAPES."
+  },
+  {
+   "job_id": "fpens018",
+   "route_id": "capes",
+   "reason": "Ingénieur pédagogique : corps des ingénieurs d'études (BAP J), pas le CAPES."
+  },
+  {
+   "job_id": "fpens022",
+   "route_id": "capes",
+   "reason": "Un directeur d'école est un professeur des écoles, pas un certifié."
+  },
+  {
+   "job_id": "fpens023",
+   "route_id": "admin-etat",
+   "reason": "La direction d'exploitation agricole de lycée ne relève pas des administrateurs de l'État."
+  },
+  {
+   "job_id": "fpens023",
+   "route_id": "capes",
+   "reason": "Le CAPES (Éducation nationale) ne mène pas à l'enseignement agricole ; c'est le CAPESA/PCEA ou ingénieur."
+  },
+  {
+   "job_id": "fpens024",
+   "route_id": "attache-terr",
+   "reason": "Le directeur de conservatoire relève du cadre d'emplois des directeurs d'établissement territorial d'enseignement artistique, pas des attachés."
+  },
+  {
+   "job_id": "fpens025",
+   "route_id": "attache-terr",
+   "reason": "Direction d'établissement d'arts plastiques : filière culturelle (directeur d'enseignement artistique), pas attaché."
+  },
+  {
+   "job_id": "fpens025",
+   "route_id": "redacteur",
+   "reason": "Un rédacteur (B administratif) ne mène pas à la direction d'une école d'arts plastiques."
+  },
+  {
+   "job_id": "fpens028",
+   "route_id": "sa",
+   "reason": "Inspecteur de l'enseignement agricole = corps A spécifique, inaccessible via secrétaire administratif."
+  },
+  {
+   "job_id": "fpens029",
+   "route_id": "admin-etat",
+   "reason": "Les inspecteurs des 1er et 2nd degrés sont recrutés par concours IEN / IA-IPR, pas administrateur de l'État."
+  },
+  {
+   "job_id": "fpens030",
+   "route_id": "capes",
+   "reason": "Fonction administrative de gestion de la scolarité/examens : attaché, pas professeur certifié."
+  },
+  {
+   "job_id": "fpens031",
+   "route_id": "capes",
+   "reason": "Fonction administrative de gestion de la scolarité/examens : attaché, pas professeur certifié."
+  },
+  {
+   "job_id": "fpens034",
+   "route_id": "adjoint-adm",
+   "reason": "Les AESH sont recrutés sur contrat, sans concours ; le concours d'adjoint administratif n'y mène pas."
+  },
+  {
+   "job_id": "fpens035",
+   "route_id": "sa",
+   "reason": "Les assistants d'éducation sont des contractuels recrutés par l'établissement ; pas de concours SA/adjoint administratif."
+  },
+  {
+   "job_id": "fpens035",
+   "route_id": "adjoint-adm",
+   "reason": "Les assistants d'éducation sont des contractuels recrutés par l'établissement ; pas de concours SA/adjoint administratif."
+  },
+  {
+   "job_id": "fpens036",
+   "route_id": "sa",
+   "reason": "L'inspection de l'apprentissage agricole relève d'inspecteurs de catégorie A, pas des secrétaires administratifs."
+  },
+  {
+   "job_id": "fpenv004",
+   "route_id": "animateur",
+   "reason": "L'animateur territorial relève de l'animation socio-culturelle, pas de l'animation technique dans le domaine de l'eau."
+  },
+  {
+   "job_id": "fpenv047",
+   "route_id": "adj-tech-etat",
+   "reason": "Délivrance de titres maritimes = tâche administrative (DML/DIRM), pas un emploi d'adjoint technique"
+  },
+  {
+   "job_id": "fpenv053",
+   "route_id": "itpe",
+   "reason": "Les prévisionnistes relèvent de Météo-France (ingénieurs des travaux de la météorologie), pas des ITPE"
+  },
+  {
+   "job_id": "fpenv053",
+   "route_id": "tsdd",
+   "reason": "TSDD = corps du ministère de la Transition écologique, ne mène pas aux postes de prévisionniste Météo-France"
+  },
+  {
+   "job_id": "fpenv054",
+   "route_id": "tsdd",
+   "reason": "Météorologiste conseil = technicien de Météo-France (corps des TSM), pas TSDD"
+  },
+  {
+   "job_id": "fpenv054",
+   "route_id": "adj-tech-etat",
+   "reason": "Pas de voie adjoint technique de l'État vers un poste de météorologiste conseil (Météo-France)"
+  },
+  {
+   "job_id": "fpfip007",
+   "route_id": "insp-fip",
+   "reason": "Un assistant de gestion financière est un emploi B/C, pas inspecteur (A)"
+  },
+  {
+   "job_id": "fpfip007",
+   "route_id": "attache-terr",
+   "reason": "Emploi d'assistant B/C, pas attaché (A)"
+  },
+  {
+   "job_id": "fpfip007",
+   "route_id": "aah",
+   "reason": "Emploi d'assistant B/C, pas attaché hospitalier (A)"
+  },
+  {
+   "job_id": "fpfip008",
+   "route_id": "attache-terr",
+   "reason": "Les comptables publics (trésoriers des collectivités) sont des agents DGFiP, pas des attachés territoriaux ; versant à corriger en E"
+  },
+  {
+   "job_id": "fpfip008",
+   "route_id": "aah",
+   "reason": "Le comptable public d'un hôpital est un agent DGFiP, pas un attaché hospitalier ; versant à corriger en E"
+  },
+  {
+   "job_id": "fpfip010",
+   "route_id": "attache-terr",
+   "reason": "Vérificateur (contrôle fiscal) = inspecteur DGFiP ; pas d'équivalent attaché territorial ; versant à corriger en E"
+  },
+  {
+   "job_id": "fpfip010",
+   "route_id": "aah",
+   "reason": "Vérificateur (contrôle fiscal) = inspecteur DGFiP ; pas d'équivalent hospitalier ; versant à corriger en E"
+  },
+  {
+   "job_id": "fpfip011",
+   "route_id": "insp-fip",
+   "reason": "Procédures douanières = DGDDI : inspecteur des douanes, pas finances publiques"
+  },
+  {
+   "job_id": "fpfip011",
+   "route_id": "ctrl-fip",
+   "reason": "Procédures douanières = DGDDI : contrôleur des douanes, pas finances publiques"
+  },
+  {
+   "job_id": "fpfip012",
+   "route_id": "agent-fip",
+   "reason": "Agent de bureau de douane = agent de constatation des douanes (DGDDI), pas DGFiP"
+  },
+  {
+   "job_id": "fpfip014",
+   "route_id": "ctrl-fip",
+   "reason": "Vérificateur des opérations commerciales douanières = contrôleur des douanes, pas finances publiques"
+  },
+  {
+   "job_id": "fpfip019",
+   "route_id": "insp-fip",
+   "reason": "Les laboratoires de contrôle (SCL douane/DGCCRF) emploient des ingénieurs et techniciens de laboratoire, pas des inspecteurs des finances publiques"
+  },
+  {
+   "job_id": "fpfip019",
+   "route_id": "ctrl-fip",
+   "reason": "Laboratoire de contrôle (SCL) : techniciens de laboratoire, pas contrôleurs des finances publiques"
+  },
+  {
+   "job_id": "fpfip020",
+   "route_id": "insp-fip",
+   "reason": "Agent de laboratoire = technicien de laboratoire, aucun lien avec inspecteur des finances publiques"
+  },
+  {
+   "job_id": "fpgrh016",
+   "route_id": "adjoint-adm",
+   "reason": "Analyste de données RH = fonction d'expertise A (ou B), pas adjoint administratif C"
+  },
+  {
+   "job_id": "fpint037",
+   "route_id": "chancellerie",
+   "reason": "Les gardes de sécurité diplomatique sont des gendarmes/policiers ou militaires, pas des secrétaires de chancellerie"
+  },
+  {
+   "job_id": "fpint037",
+   "route_id": "adj-chancellerie",
+   "reason": "Les gardes de sécurité diplomatique ne sont pas recrutés par le concours d'adjoint de chancellerie"
+  },
+  {
+   "job_id": "fpjus001",
+   "route_id": "dsg",
+   "reason": "Directeur des services de greffe judiciaires : corps des greffes, sans lien avec un responsable d'unité éducative PJJ"
+  },
+  {
+   "job_id": "fpjus002",
+   "route_id": "magistrat",
+   "reason": "Concours ENM sans lien avec la direction de services PJJ"
+  },
+  {
+   "job_id": "fpjus002",
+   "route_id": "dsg",
+   "reason": "Directeur des services de greffe judiciaires : corps des greffes, sans lien avec la direction de services PJJ"
+  },
+  {
+   "job_id": "fpjus003",
+   "route_id": "dsg",
+   "reason": "Directeur des services de greffe judiciaires : corps des greffes, sans lien avec un poste de pilotage institutionnel PJJ"
+  },
+  {
+   "job_id": "fpjus004",
+   "route_id": "dsg",
+   "reason": "Directeur des services de greffe judiciaires : corps des greffes, sans lien avec un conseiller technique PJJ"
+  },
+  {
+   "job_id": "fpjus004",
+   "route_id": "greffier",
+   "reason": "Greffier sans lien avec la fonction de conseiller technique PJJ"
+  },
+  {
+   "job_id": "fpjus005",
+   "route_id": "dsg",
+   "reason": "Directeur des services de greffe judiciaires : corps des greffes, sans lien avec un professeur technique PJJ (corps spécifique absent de la liste)"
+  },
+  {
+   "job_id": "fpjus006",
+   "route_id": "dsg",
+   "reason": "Directeur des services de greffe judiciaires : corps des greffes, sans lien avec un éducateur"
+  },
+  {
+   "job_id": "fpjus008",
+   "route_id": "dsg",
+   "reason": "Les greffes des juridictions administratives relèvent des corps du ministère de l'Intérieur (attachés, SA), pas des DSG judiciaires"
+  },
+  {
+   "job_id": "fpjus009",
+   "route_id": "dsg",
+   "reason": "Un chef de juridiction (président/procureur) est un magistrat, pas un directeur de greffe"
+  },
+  {
+   "job_id": "fpjus011",
+   "route_id": "dsg",
+   "reason": "Greffiers des juridictions administratives : corps SA/attachés de l'Intérieur, pas DSG judiciaire"
+  },
+  {
+   "job_id": "fpjus012",
+   "route_id": "dsg",
+   "reason": "Le greffe pénitentiaire n'est pas tenu par les DSG judiciaires"
+  },
+  {
+   "job_id": "fpjus013",
+   "route_id": "magistrat",
+   "reason": "Chef de juridiction administrative = magistrat administratif, pas concours ENM"
+  },
+  {
+   "job_id": "fpjus015",
+   "route_id": "dsg",
+   "reason": "Un magistrat judiciaire n'est pas recruté par le concours de directeur des services de greffe"
+  },
+  {
+   "job_id": "fpjus017",
+   "route_id": "dsg",
+   "reason": "Juriste assistant/expert auprès des magistrats : recrutement contractuel, sans lien avec le corps des DSG"
+  },
+  {
+   "job_id": "fpjus022",
+   "route_id": "dsg",
+   "reason": "Directeur des services de greffe judiciaires : corps des greffes, sans lien avec la gestion du TIG (SPIP)"
+  },
+  {
+   "job_id": "fpjus022",
+   "route_id": "greffier",
+   "reason": "Le TIG relève des SPIP, pas des greffes"
+  },
+  {
+   "job_id": "fpjus023",
+   "route_id": "magistrat",
+   "reason": "Un chef d'établissement pénitentiaire est directeur des services pénitentiaires, pas magistrat"
+  },
+  {
+   "job_id": "fpjus024",
+   "route_id": "magistrat",
+   "reason": "Le travail pénal n'est pas une fonction de magistrat"
+  },
+  {
+   "job_id": "fpjus024",
+   "route_id": "greffier",
+   "reason": "Greffier judiciaire sans lien avec le travail pénal en détention"
+  },
+  {
+   "job_id": "fpjus025",
+   "route_id": "dsg",
+   "reason": "Directeur des services de greffe judiciaires : corps des greffes, sans lien avec un cadre pénitentiaire"
+  },
+  {
+   "job_id": "fpjus026",
+   "route_id": "greffier",
+   "reason": "Le greffier judiciaire ne mène pas au métier de surveillant"
+  },
+  {
+   "job_id": "fpjus026",
+   "route_id": "adjoint-adm",
+   "reason": "Adjoint administratif sans lien avec la surveillance pénitentiaire"
+  },
+  {
+   "job_id": "fpjus027",
+   "route_id": "magistrat",
+   "reason": "Responsable sécurité/détention = officier ou DSP, pas magistrat"
+  },
+  {
+   "job_id": "fpjus028",
+   "route_id": "greffier",
+   "reason": "Greffier sans lien avec les missions d'escorte/surveillance pénitentiaire"
+  },
+  {
+   "job_id": "fpjus028",
+   "route_id": "adjoint-adm",
+   "reason": "Adjoint administratif sans lien avec les missions d'escorte/surveillance pénitentiaire"
+  },
+  {
+   "job_id": "fpjus029",
+   "route_id": "greffier",
+   "reason": "Greffier sans lien avec les missions d'escorte/surveillance pénitentiaire"
+  },
+  {
+   "job_id": "fpjus029",
+   "route_id": "adjoint-adm",
+   "reason": "Adjoint administratif sans lien avec les missions d'escorte/surveillance pénitentiaire"
+  },
+  {
+   "job_id": "fpjus030",
+   "route_id": "dsg",
+   "reason": "Directeur des services de greffe judiciaires : corps des greffes, sans lien avec un service d'escorte pénitentiaire"
+  },
+  {
+   "job_id": "fpjus030",
+   "route_id": "greffier",
+   "reason": "Greffier sans lien avec l'escorte pénitentiaire"
+  },
+  {
+   "job_id": "fpjus031",
+   "route_id": "dsg",
+   "reason": "L'OMP près le tribunal de police est un commissaire/officier de police, pas un DSG"
+  },
+  {
+   "job_id": "fpjus031",
+   "route_id": "greffier",
+   "reason": "L'OMP n'est pas un greffier"
+  },
+  {
+   "job_id": "fplog003",
+   "route_id": "tsdd",
+   "reason": "TSDD (corps technique du MTE) sans lien avec la gestion du courrier"
+  },
+  {
+   "job_id": "fplog003",
+   "route_id": "tech-terr",
+   "reason": "Technicien territorial : aucune spécialité courrier"
+  },
+  {
+   "job_id": "fplog010",
+   "route_id": "tsdd",
+   "reason": "Conduite d'engins/véhicules = adjoint technique (C), pas technicien B"
+  },
+  {
+   "job_id": "fplog010",
+   "route_id": "tech-terr",
+   "reason": "Conduite d'engins/véhicules = adjoint technique (C), pas technicien territorial"
+  },
+  {
+   "job_id": "fplog011",
+   "route_id": "tsdd",
+   "reason": "Conduite d'engins/véhicules = adjoint technique (C), pas technicien B"
+  },
+  {
+   "job_id": "fplog011",
+   "route_id": "tech-terr",
+   "reason": "Conduite d'engins/véhicules = adjoint technique (C), pas technicien territorial"
+  },
+  {
+   "job_id": "fplog012",
+   "route_id": "tsdd",
+   "reason": "Conduite d'engins/véhicules = adjoint technique (C), pas technicien B"
+  },
+  {
+   "job_id": "fplog012",
+   "route_id": "tech-terr",
+   "reason": "Conduite d'engins/véhicules = adjoint technique (C), pas technicien territorial"
+  },
+  {
+   "job_id": "fplog012",
+   "route_id": "corps-5476869dee76",
+   "reason": "Conduite de véhicules = C, pas technicien hospitalier B"
+  },
+  {
+   "job_id": "fplog036",
+   "route_id": "itpe",
+   "reason": "Electromécanicien = technicien/ouvrier, pas ingénieur"
+  },
+  {
+   "job_id": "fplog036",
+   "route_id": "ingenieur-terr",
+   "reason": "Electromécanicien = technicien/ouvrier, pas ingénieur"
+  },
+  {
+   "job_id": "fplog036",
+   "route_id": "ingenieur-hosp",
+   "reason": "Electromécanicien = technicien/ouvrier, pas ingénieur"
+  },
+  {
+   "job_id": "fplog042",
+   "route_id": "corps-5476869dee76",
+   "reason": "Aucun navire dans la FPH : technicien hospitalier hors sujet"
+  },
+  {
+   "job_id": "fplog042",
+   "route_id": "corps-3bcfcbcc7eb5",
+   "reason": "Aucun navire dans la FPH : ouvrier hospitalier hors sujet"
+  },
+  {
+   "job_id": "fplog044",
+   "route_id": "itpe",
+   "reason": "ITPE (travaux publics) sans lien avec l'imprimerie"
+  },
+  {
+   "job_id": "fplog044",
+   "route_id": "tsdd",
+   "reason": "TSDD (MTE) sans lien avec l'imprimerie"
+  },
+  {
+   "job_id": "fplog046",
+   "route_id": "tsdd",
+   "reason": "TSDD (développement durable) sans lien avec l'imprimerie/éditique"
+  },
+  {
+   "job_id": "fplog047",
+   "route_id": "tsdd",
+   "reason": "TSDD (développement durable) sans lien avec l'imprimerie/éditique"
+  },
+  {
+   "job_id": "fplog048",
+   "route_id": "tsdd",
+   "reason": "TSDD (développement durable) sans lien avec l'imprimerie/éditique"
+  },
+  {
+   "job_id": "fplog049",
+   "route_id": "tsdd",
+   "reason": "TSDD (développement durable) sans lien avec l'imprimerie/éditique"
+  },
+  {
+   "job_id": "fplog050",
+   "route_id": "tsdd",
+   "reason": "TSDD (développement durable) sans lien avec l'imprimerie/éditique"
+  },
+  {
+   "job_id": "fplog058",
+   "route_id": "tsdd",
+   "reason": "TSDD sans lien avec lingerie/couture"
+  },
+  {
+   "job_id": "fplog059",
+   "route_id": "tsdd",
+   "reason": "Stérilisation = fonction hospitalière, sans lien avec TSDD"
+  },
+  {
+   "job_id": "fplog059",
+   "route_id": "tech-terr",
+   "reason": "Stérilisation = fonction hospitalière, pas territoriale"
+  },
+  {
+   "job_id": "fplog066",
+   "route_id": "itpe",
+   "reason": "Armurerie (police/gendarmerie/défense) sans lien avec les ITPE"
+  },
+  {
+   "job_id": "fplog066",
+   "route_id": "tsdd",
+   "reason": "Armurerie sans lien avec le corps des TSDD"
+  },
+  {
+   "job_id": "fplog067",
+   "route_id": "tsdd",
+   "reason": "Armurerie sans lien avec le corps des TSDD"
+  },
+  {
+   "job_id": "fplog074",
+   "route_id": "itpe",
+   "reason": "Corps d'ingénieurs BTP/génie civil : ne forme ni ne recrute des pilotes d'aéronefs."
+  },
+  {
+   "job_id": "fplog074",
+   "route_id": "ingenieur-terr",
+   "reason": "Corps d'ingénieurs BTP/génie civil : ne forme ni ne recrute des pilotes d'aéronefs."
+  },
+  {
+   "job_id": "fplog074",
+   "route_id": "ingenieur-hosp",
+   "reason": "Aucun pilote d'aéronef recruté via le corps des ingénieurs hospitaliers."
+  },
+  {
+   "job_id": "fplog074",
+   "route_id": "corps-5476869dee76",
+   "reason": "Technicien hospitalier : aucune voie vers le pilotage d'aéronefs."
+  },
+  {
+   "job_id": "fplog075",
+   "route_id": "ingenieur-hosp",
+   "reason": "Pas de pilote de drone recruté comme ingénieur hospitalier."
+  },
+  {
+   "job_id": "fplog075",
+   "route_id": "corps-5476869dee76",
+   "reason": "Pas de pilote de drone recruté comme technicien hospitalier."
+  },
+  {
+   "job_id": "fplog077",
+   "route_id": "tsdd",
+   "reason": "Technicien supérieur du développement durable (MTE) : aucun lien avec la restauration collective."
+  },
+  {
+   "job_id": "fplog080",
+   "route_id": "tsdd",
+   "reason": "Technicien supérieur du développement durable (MTE) : aucun lien avec la restauration collective."
+  },
+  {
+   "job_id": "fpmed001",
+   "route_id": "ide",
+   "reason": "Dosimétriste : issu du corps des manipulateurs d'électroradiologie, pas du concours infirmier."
+  },
+  {
+   "job_id": "fpmed002",
+   "route_id": "ide",
+   "reason": "Physicien médical/radiophysicien : diplôme DQPRM, sans aucun lien avec le concours infirmier."
+  },
+  {
+   "job_id": "fpmed004",
+   "route_id": "ide",
+   "reason": "Physicien médical/radiophysicien : diplôme DQPRM, sans aucun lien avec le concours infirmier."
+  },
+  {
+   "job_id": "fpmed005",
+   "route_id": "ash",
+   "reason": "Agent des services hospitaliers (entretien) : ne mène pas à ce métier paramédical/d'appareillage."
+  },
+  {
+   "job_id": "fpmed011",
+   "route_id": "ash",
+   "reason": "Agent des services hospitaliers (entretien) : ne mène pas à ce métier paramédical/d'appareillage."
+  },
+  {
+   "job_id": "fpmed023",
+   "route_id": "ash",
+   "reason": "Agent des services hospitaliers (entretien) : ne mène pas à ce métier paramédical/d'appareillage."
+  },
+  {
+   "job_id": "fpmed024",
+   "route_id": "ash",
+   "reason": "Agent des services hospitaliers (entretien) : ne mène pas à ce métier paramédical/d'appareillage."
+  },
+  {
+   "job_id": "fpmed025",
+   "route_id": "ash",
+   "reason": "Agent des services hospitaliers (entretien) : ne mène pas à ce métier paramédical/d'appareillage."
+  },
+  {
+   "job_id": "fpmed026",
+   "route_id": "ash",
+   "reason": "Agent des services hospitaliers (entretien) : ne mène pas à ce métier paramédical/d'appareillage."
+  },
+  {
+   "job_id": "fpmed027",
+   "route_id": "ash",
+   "reason": "Agent des services hospitaliers (entretien) : ne mène pas à ce métier paramédical/d'appareillage."
+  },
+  {
+   "job_id": "fpmed047",
+   "route_id": "ash",
+   "reason": "Agent des services hospitaliers (entretien) : ne mène pas à ce métier paramédical/d'appareillage."
+  },
+  {
+   "job_id": "fpmed011",
+   "route_id": "as",
+   "reason": "Aide-soignant : sans rapport avec les métiers d'appareillage (orthoprothésiste, oculariste, etc.), qui ont leur propre corps de rééducation/appareillage."
+  },
+  {
+   "job_id": "fpmed023",
+   "route_id": "as",
+   "reason": "Aide-soignant : sans rapport avec les métiers d'appareillage (orthoprothésiste, oculariste, etc.), qui ont leur propre corps de rééducation/appareillage."
+  },
+  {
+   "job_id": "fpmed024",
+   "route_id": "as",
+   "reason": "Aide-soignant : sans rapport avec les métiers d'appareillage (orthoprothésiste, oculariste, etc.), qui ont leur propre corps de rééducation/appareillage."
+  },
+  {
+   "job_id": "fpmed025",
+   "route_id": "as",
+   "reason": "Aide-soignant : sans rapport avec les métiers d'appareillage (orthoprothésiste, oculariste, etc.), qui ont leur propre corps de rééducation/appareillage."
+  },
+  {
+   "job_id": "fpmed026",
+   "route_id": "as",
+   "reason": "Aide-soignant : sans rapport avec les métiers d'appareillage (orthoprothésiste, oculariste, etc.), qui ont leur propre corps de rééducation/appareillage."
+  },
+  {
+   "job_id": "fpmed027",
+   "route_id": "as",
+   "reason": "Aide-soignant : sans rapport avec les métiers d'appareillage (orthoprothésiste, oculariste, etc.), qui ont leur propre corps de rééducation/appareillage."
+  },
+  {
+   "job_id": "fpmed047",
+   "route_id": "as",
+   "reason": "Aide-soignant : sans rapport avec les métiers d'appareillage (orthoprothésiste, oculariste, etc.), qui ont leur propre corps de rééducation/appareillage."
+  },
+  {
+   "job_id": "fpmed006",
+   "route_id": "ide",
+   "reason": "Diététicien : profession de rééducation/paramédicale distincte, le concours infirmier n'y mène pas."
+  },
+  {
+   "job_id": "fpmed007",
+   "route_id": "ide",
+   "reason": "Ergothérapeute : profession de rééducation/paramédicale distincte, le concours infirmier n'y mène pas."
+  },
+  {
+   "job_id": "fpmed008",
+   "route_id": "ide",
+   "reason": "Masseur-kinésithérapeute : profession de rééducation/paramédicale distincte, le concours infirmier n'y mène pas."
+  },
+  {
+   "job_id": "fpmed009",
+   "route_id": "ide",
+   "reason": "Orthophoniste : profession de rééducation/paramédicale distincte, le concours infirmier n'y mène pas."
+  },
+  {
+   "job_id": "fpmed014",
+   "route_id": "ide",
+   "reason": "Psychomotricien : profession de rééducation/paramédicale distincte, le concours infirmier n'y mène pas."
+  },
+  {
+   "job_id": "fpmed010",
+   "route_id": "ide",
+   "reason": "Orthoptiste : profession de rééducation/paramédicale distincte, le concours infirmier n'y mène pas."
+  },
+  {
+   "job_id": "fpmed015",
+   "route_id": "ide",
+   "reason": "Pédicure-podologue : profession de rééducation/paramédicale distincte, le concours infirmier n'y mène pas."
+  },
+  {
+   "job_id": "fpmed022",
+   "route_id": "ide",
+   "reason": "Audioprothésiste : profession de rééducation/paramédicale distincte, le concours infirmier n'y mène pas."
+  },
+  {
+   "job_id": "fpmed017",
+   "route_id": "ide",
+   "reason": "Technicien de laboratoire médical : corps propre, pas le concours infirmier."
+  },
+  {
+   "job_id": "fpmed018",
+   "route_id": "as",
+   "reason": "Aide-soignant non habilité aux prélèvements sanguins."
+  },
+  {
+   "job_id": "fpmed018",
+   "route_id": "ash",
+   "reason": "ASH (entretien) : ne mène pas au métier de préleveur."
+  },
+  {
+   "job_id": "fpmed029",
+   "route_id": "as",
+   "reason": "Préparateur en pharmacie : corps spécifique, aucun lien avec aide-soignant."
+  },
+  {
+   "job_id": "fpmed031",
+   "route_id": "as",
+   "reason": "Assistant de régulation médicale : corps ARM spécifique (ex-AMA), pas aide-soignant."
+  },
+  {
+   "job_id": "fpmed035",
+   "route_id": "ide",
+   "reason": "Sage-femme : profession médicale distincte, le concours infirmier n'y mène pas."
+  },
+  {
+   "job_id": "fpnum006",
+   "route_id": "tsdd",
+   "reason": "TSDD (MTE) sans spécialité informatique ; la voie État B du numérique est le technicien des systèmes d'information."
+  },
+  {
+   "job_id": "fpnum013",
+   "route_id": "tsdd",
+   "reason": "TSDD (MTE) sans spécialité informatique ; la voie État B du numérique est le technicien des systèmes d'information."
+  },
+  {
+   "job_id": "fpnum017",
+   "route_id": "tsdd",
+   "reason": "TSDD (MTE) sans spécialité informatique ; la voie État B du numérique est le technicien des systèmes d'information."
+  },
+  {
+   "job_id": "fpnum018",
+   "route_id": "tsdd",
+   "reason": "TSDD (MTE) sans spécialité informatique ; la voie État B du numérique est le technicien des systèmes d'information."
+  },
+  {
+   "job_id": "fpnum019",
+   "route_id": "tsdd",
+   "reason": "TSDD (MTE) sans spécialité informatique ; la voie État B du numérique est le technicien des systèmes d'information."
+  },
+  {
+   "job_id": "fpnum020",
+   "route_id": "tsdd",
+   "reason": "TSDD (MTE) sans spécialité informatique ; la voie État B du numérique est le technicien des systèmes d'information."
+  },
+  {
+   "job_id": "fpnum021",
+   "route_id": "tsdd",
+   "reason": "TSDD (MTE) sans spécialité informatique ; la voie État B du numérique est le technicien des systèmes d'information."
+  },
+  {
+   "job_id": "fpnum022",
+   "route_id": "tsdd",
+   "reason": "TSDD (MTE) sans spécialité informatique ; la voie État B du numérique est le technicien des systèmes d'information."
+  },
+  {
+   "job_id": "fpnum026",
+   "route_id": "tsdd",
+   "reason": "TSDD (MTE) sans spécialité informatique ; la voie État B du numérique est le technicien des systèmes d'information."
+  },
+  {
+   "job_id": "fpnum036",
+   "route_id": "tsdd",
+   "reason": "TSDD (MTE) sans spécialité informatique ; la voie État B du numérique est le technicien des systèmes d'information."
+  },
+  {
+   "job_id": "fpnum043",
+   "route_id": "tsdd",
+   "reason": "TSDD (MTE) sans spécialité informatique ; la voie État B du numérique est le technicien des systèmes d'information."
+  },
+  {
+   "job_id": "fpnum045",
+   "route_id": "tsdd",
+   "reason": "TSDD (MTE) sans spécialité informatique ; la voie État B du numérique est le technicien des systèmes d'information."
+  },
+  {
+   "job_id": "fpnum011",
+   "route_id": "ipef",
+   "reason": "Administrateur de bases de données = fonction d'expertise A, pas un corps d'encadrement supérieur A+."
+  },
+  {
+   "job_id": "fpnum011",
+   "route_id": "ingenieur-chef",
+   "reason": "Administrateur de bases de données = fonction d'expertise A, pas un corps d'encadrement supérieur A+."
+  },
+  {
+   "job_id": "fprch003",
+   "route_id": "ie",
+   "reason": "Responsable de laboratoire de recherche = directeur d'unité, chercheur ou enseignant-chercheur, pas ingénieur d'études."
+  },
+  {
+   "job_id": "fprch007",
+   "route_id": "ie",
+   "reason": "Ingénieur d'études ≠ chercheur : le métier relève des corps de chargés/directeurs de recherche."
+  },
+  {
+   "job_id": "fprch114",
+   "route_id": "ie",
+   "reason": "Emploi de technicien (BAP, cat. B) : relève du corps TRF, pas des ingénieurs d'études."
+  },
+  {
+   "job_id": "fprch040",
+   "route_id": "tech-env",
+   "reason": "Le corps des techniciens de l'environnement (MTE/OFB, police de la nature) ne mène pas aux emplois de technicien de laboratoire en recherche."
+  },
+  {
+   "job_id": "fprch107",
+   "route_id": "tech-si",
+   "reason": "Technicien des systèmes d'information (informatique/SIC) ≠ technicien SIG en recherche, qui relève des TRF."
+  },
+  {
+   "job_id": "fprch074",
+   "route_id": "trf",
+   "reason": "Emploi d'adjoint technique : catégorie C (ATRF), pas technicien B."
+  },
+  {
+   "job_id": "fprch124",
+   "route_id": "corps-3bcfcbcc7eb5",
+   "reason": "Ouvrier principal (filière ouvrière/technique hospitalière) ne mène pas au métier d'assistant de recherche clinique."
+  },
+  {
+   "job_id": "fpren001",
+   "route_id": "adjoint-adm",
+   "reason": "Le traitement de sources humaines est une fonction opérationnelle exercée par des policiers (ou militaires) habilités, pas par des adjoints administratifs."
+  },
+  {
+   "job_id": "fpren014",
+   "route_id": "officier-police",
+   "reason": "R&D technique : profils d'ingénieurs/contractuels, pas le corps des officiers de police"
+  },
+  {
+   "job_id": "fpren022",
+   "route_id": "officier-police",
+   "reason": "Linguiste : recrutement sur compétence linguistique (contractuels/interprètes), pas concours d'officier de police"
+  },
+  {
+   "job_id": "fpsan003",
+   "route_id": "iass",
+   "reason": "Bio-informatique : métier d'ingénieur, pas inspection sanitaire ni attaché administratif"
+  },
+  {
+   "job_id": "fpsan003",
+   "route_id": "aah",
+   "reason": "Bio-informatique : métier d'ingénieur, pas inspection sanitaire ni attaché administratif"
+  },
+  {
+   "job_id": "fpsan023",
+   "route_id": "sa",
+   "reason": "Conseiller expert technique en santé environnementale : pas un poste de secrétaire administratif"
+  },
+  {
+   "job_id": "fpsan013",
+   "route_id": "iass",
+   "reason": "Infirmier·ère : l'IASS est un corps d'inspection administrative, pas une voie vers un poste infirmier"
+  },
+  {
+   "job_id": "fpsan014",
+   "route_id": "iass",
+   "reason": "Infirmier·ère scolaire : l'IASS ne mène pas à ce métier"
+  },
+  {
+   "job_id": "fpsan020",
+   "route_id": "iass",
+   "reason": "Infirmier·ère de contrôle : l'IASS ne mène pas à un poste infirmier"
+  },
+  {
+   "job_id": "fpsan024",
+   "route_id": "adjoint-adm",
+   "reason": "Ambulancier : corps des ambulanciers hospitaliers, pas adjoint administratif"
+  },
+  {
+   "job_id": "fpsan025",
+   "route_id": "adjoint-adm",
+   "reason": "Brancardier : fonction logistique/soins, pas adjoint administratif"
+  },
+  {
+   "job_id": "fpsan026",
+   "route_id": "adjoint-adm",
+   "reason": "Encadrement des ambulanciers : filière ambulancière, pas administrative"
+  },
+  {
+   "job_id": "fpsan027",
+   "route_id": "aah",
+   "reason": "Services biomédicaux : filière technique (ingénieur/technicien hospitalier), pas administrative"
+  },
+  {
+   "job_id": "fpsan027",
+   "route_id": "corps-9eeb8a61a6a9",
+   "reason": "Services biomédicaux : filière technique (ingénieur/technicien hospitalier), pas administrative"
+  },
+  {
+   "job_id": "fpsan028",
+   "route_id": "aah",
+   "reason": "Encadrement d'unité de soins : cadre de santé paramédical, pas attaché"
+  },
+  {
+   "job_id": "fpsan030",
+   "route_id": "corps-9eeb8a61a6a9",
+   "reason": "Technicien biomédical : filière technique, pas adjoint des cadres (administratif)"
+  },
+  {
+   "job_id": "fpsan031",
+   "route_id": "corps-9eeb8a61a6a9",
+   "reason": "Bio-hygiéniste : technicien de laboratoire/hygiène, pas filière administrative"
+  },
+  {
+   "job_id": "fpsan031",
+   "route_id": "adjoint-adm",
+   "reason": "Bio-hygiéniste : technicien de laboratoire/hygiène, pas filière administrative"
+  },
+  {
+   "job_id": "fpsan032",
+   "route_id": "aah",
+   "reason": "Hygiéniste (infirmier hygiéniste/praticien) : pas filière administrative"
+  },
+  {
+   "job_id": "fpsan032",
+   "route_id": "adjoint-adm",
+   "reason": "Hygiéniste (infirmier hygiéniste/praticien) : pas filière administrative"
+  },
+  {
+   "job_id": "fpsan033",
+   "route_id": "aah",
+   "reason": "Ingénieur en biologie médicale : ingénieur hospitalier, pas attaché"
+  },
+  {
+   "job_id": "fpsan034",
+   "route_id": "aah",
+   "reason": "Ingénierie biomédicale : filière technique, pas administrative"
+  },
+  {
+   "job_id": "fpsan034",
+   "route_id": "corps-9eeb8a61a6a9",
+   "reason": "Ingénierie biomédicale : filière technique, pas administrative"
+  },
+  {
+   "job_id": "fpsan039",
+   "route_id": "admin-etat",
+   "reason": "Conseiller-expert médical/odontologique/pharmaceutique : réservé aux médecins, chirurgiens-dentistes, pharmaciens (MISP/PHISP), aucun corps administratif ne mène à ce métier"
+  },
+  {
+   "job_id": "fpsan039",
+   "route_id": "d3s",
+   "reason": "Conseiller-expert médical/odontologique/pharmaceutique : réservé aux médecins, chirurgiens-dentistes, pharmaciens (MISP/PHISP), aucun corps administratif ne mène à ce métier"
+  },
+  {
+   "job_id": "fpsan039",
+   "route_id": "iass",
+   "reason": "Conseiller-expert médical/odontologique/pharmaceutique : réservé aux médecins, chirurgiens-dentistes, pharmaciens (MISP/PHISP), aucun corps administratif ne mène à ce métier"
+  },
+  {
+   "job_id": "fpsan039",
+   "route_id": "aah",
+   "reason": "Conseiller-expert médical/odontologique/pharmaceutique : réservé aux médecins, chirurgiens-dentistes, pharmaciens (MISP/PHISP), aucun corps administratif ne mène à ce métier"
+  },
+  {
+   "job_id": "fpsan042",
+   "route_id": "aah",
+   "reason": "Santé environnementale : métier technique/scientifique, pas filière administrative"
+  },
+  {
+   "job_id": "fpsan042",
+   "route_id": "sa",
+   "reason": "Santé environnementale : métier technique/scientifique, pas filière administrative"
+  },
+  {
+   "job_id": "fpsan042",
+   "route_id": "corps-9eeb8a61a6a9",
+   "reason": "Santé environnementale : métier technique/scientifique, pas filière administrative"
+  },
+  {
+   "job_id": "fpsan043",
+   "route_id": "tech-env",
+   "reason": "Technicien de l'environnement (OFB, parcs : police de la nature) ≠ technicien sanitaire et de sécurité sanitaire"
+  },
+  {
+   "job_id": "fpsan043",
+   "route_id": "corps-9eeb8a61a6a9",
+   "reason": "Technicien de santé environnementale : pas adjoint des cadres hospitaliers (administratif)"
+  },
+  {
+   "job_id": "fpsan044",
+   "route_id": "adjoint-adm",
+   "reason": "Agent de santé environnementale (hygiène, contrôles) : filière technique"
+  },
+  {
+   "job_id": "fpsec006",
+   "route_id": "corps-9eeb8a61a6a9",
+   "reason": "Sécurité générale/ordre public : corps actifs de police/gendarmerie, pas filière administrative"
+  },
+  {
+   "job_id": "fpsec006",
+   "route_id": "adjoint-adm",
+   "reason": "Sécurité générale/ordre public : corps actifs de police/gendarmerie, pas filière administrative"
+  },
+  {
+   "job_id": "fpsec016",
+   "route_id": "officier-police",
+   "reason": "Responsable de laboratoire : corps scientifiques (ingénieurs PTS), pas corps actifs de police ni police municipale"
+  },
+  {
+   "job_id": "fpsec016",
+   "route_id": "dpm",
+   "reason": "Responsable de laboratoire : corps scientifiques (ingénieurs PTS), pas corps actifs de police ni police municipale"
+  },
+  {
+   "job_id": "fpsec016",
+   "route_id": "gpx",
+   "reason": "Responsable de laboratoire : corps scientifiques (ingénieurs PTS), pas corps actifs de police ni police municipale"
+  },
+  {
+   "job_id": "fpsec016",
+   "route_id": "csmp",
+   "reason": "Responsable de laboratoire : corps scientifiques (ingénieurs PTS), pas corps actifs de police ni police municipale"
+  },
+  {
+   "job_id": "fpsec016",
+   "route_id": "aah",
+   "reason": "Responsable de laboratoire : filière technique/scientifique, pas administrative"
+  },
+  {
+   "job_id": "fpsec016",
+   "route_id": "corps-9eeb8a61a6a9",
+   "reason": "Responsable de laboratoire : filière technique/scientifique, pas administrative"
+  },
+  {
+   "job_id": "fpsec017",
+   "route_id": "officier-police",
+   "reason": "Cadre de laboratoire : ingénieur scientifique, pas officier de police ni attaché"
+  },
+  {
+   "job_id": "fpsec017",
+   "route_id": "aah",
+   "reason": "Cadre de laboratoire : ingénieur scientifique, pas officier de police ni attaché"
+  },
+  {
+   "job_id": "fpsec018",
+   "route_id": "officier-police",
+   "reason": "Exploitation des traces en laboratoire : corps de la police technique et scientifique, pas officier de police"
+  },
+  {
+   "job_id": "fpsec021",
+   "route_id": "officier-police",
+   "reason": "Unité de sécurité civile (UIISC militaires, SDIS) : ni police nationale ni police municipale"
+  },
+  {
+   "job_id": "fpsec021",
+   "route_id": "dpm",
+   "reason": "Unité de sécurité civile (UIISC militaires, SDIS) : ni police nationale ni police municipale"
+  },
+  {
+   "job_id": "fpsec021",
+   "route_id": "gpx",
+   "reason": "Unité de sécurité civile (UIISC militaires, SDIS) : ni police nationale ni police municipale"
+  },
+  {
+   "job_id": "fpsec021",
+   "route_id": "csmp",
+   "reason": "Unité de sécurité civile (UIISC militaires, SDIS) : ni police nationale ni police municipale"
+  },
+  {
+   "job_id": "fpsec022",
+   "route_id": "gpx",
+   "reason": "Gestionnaire défense/sécurité civile (SIDPC, communes) : fonction administrative, pas corps de police"
+  },
+  {
+   "job_id": "fpsec022",
+   "route_id": "csmp",
+   "reason": "Gestionnaire défense/sécurité civile (SIDPC, communes) : fonction administrative, pas corps de police"
+  },
+  {
+   "job_id": "fpsec022",
+   "route_id": "police-mun",
+   "reason": "Gestionnaire défense/sécurité civile (SIDPC, communes) : fonction administrative, pas corps de police"
+  },
+  {
+   "job_id": "fpsec023",
+   "route_id": "gpx",
+   "reason": "Pilote d'avion/hélicoptère de la sécurité civile : recrutement spécifique (licences), ni gardien de la paix ni adjoint administratif"
+  },
+  {
+   "job_id": "fpsec023",
+   "route_id": "adjoint-adm",
+   "reason": "Pilote d'avion/hélicoptère de la sécurité civile : recrutement spécifique (licences), ni gardien de la paix ni adjoint administratif"
+  },
+  {
+   "job_id": "fpsec024",
+   "route_id": "gpx",
+   "reason": "Mécanicien opérateur de bord : recrutement technique aéronautique spécifique, sans lien avec ces corps"
+  },
+  {
+   "job_id": "fpsec024",
+   "route_id": "adjoint-adm",
+   "reason": "Mécanicien opérateur de bord : recrutement technique aéronautique spécifique, sans lien avec ces corps"
+  },
+  {
+   "job_id": "fpsec028",
+   "route_id": "officier-police",
+   "reason": "Expertise risques majeurs : profils ingénieurs/sapeurs-pompiers, pas corps de police"
+  },
+  {
+   "job_id": "fpsec028",
+   "route_id": "gpx",
+   "reason": "Expertise risques majeurs : profils ingénieurs/sapeurs-pompiers, pas corps de police"
+  },
+  {
+   "job_id": "fpsec030",
+   "route_id": "officier-police",
+   "reason": "Planification en sécurité civile : pas la police nationale"
+  },
+  {
+   "job_id": "fpsec032",
+   "route_id": "gpx",
+   "reason": "Prévention des risques (professionnels/naturels) : filière technique/administrative, pas police"
+  },
+  {
+   "job_id": "fpsec032",
+   "route_id": "csmp",
+   "reason": "Prévention des risques (professionnels/naturels) : filière technique/administrative, pas police"
+  },
+  {
+   "job_id": "fpsec032",
+   "route_id": "police-mun",
+   "reason": "Prévention des risques (professionnels/naturels) : filière technique/administrative, pas police"
+  },
+  {
+   "job_id": "fpsec033",
+   "route_id": "animateur",
+   "reason": "Animateur territorial = animation socio-culturelle, sans lien avec la prévention des risques"
+  },
+  {
+   "job_id": "fpsec033",
+   "route_id": "officier-police",
+   "reason": "Prévention des risques : pas corps de police"
+  },
+  {
+   "job_id": "fpsec033",
+   "route_id": "dpm",
+   "reason": "Prévention des risques : pas corps de police"
+  },
+  {
+   "job_id": "fpsec033",
+   "route_id": "gpx",
+   "reason": "Prévention des risques : pas corps de police"
+  },
+  {
+   "job_id": "fpsec034",
+   "route_id": "dpm",
+   "reason": "Prévisionniste SDIS (versant T) : officier de sapeurs-pompiers, pas police municipale"
+  },
+  {
+   "job_id": "fpsec034",
+   "route_id": "csmp",
+   "reason": "Prévisionniste SDIS (versant T) : officier de sapeurs-pompiers, pas police municipale"
+  },
+  {
+   "job_id": "fpsec035",
+   "route_id": "officier-police",
+   "reason": "Continuité d'activité (PCA) : fonction de pilotage administratif, pas corps de police"
+  },
+  {
+   "job_id": "fpsec035",
+   "route_id": "dpm",
+   "reason": "Continuité d'activité (PCA) : fonction de pilotage administratif, pas corps de police"
+  },
+  {
+   "job_id": "fpsec035",
+   "route_id": "gpx",
+   "reason": "Continuité d'activité (PCA) : fonction de pilotage administratif, pas corps de police"
+  },
+  {
+   "job_id": "fpsec035",
+   "route_id": "csmp",
+   "reason": "Continuité d'activité (PCA) : fonction de pilotage administratif, pas corps de police"
+  },
+  {
+   "job_id": "fpsec036",
+   "route_id": "adjoint-adm",
+   "reason": "Sapeur-sauveteur (UIISC, militaires) : sans lien avec adjoint administratif"
+  },
+  {
+   "job_id": "fpsec037",
+   "route_id": "admin-terr",
+   "reason": "DDSIS : officier supérieur de sapeurs-pompiers professionnels, ni administrateur territorial ni police municipale"
+  },
+  {
+   "job_id": "fpsec037",
+   "route_id": "dpm",
+   "reason": "DDSIS : officier supérieur de sapeurs-pompiers professionnels, ni administrateur territorial ni police municipale"
+  },
+  {
+   "job_id": "fpsec038",
+   "route_id": "dpm",
+   "reason": "Chef de groupement SDIS : officier de sapeurs-pompiers, pas police municipale"
+  },
+  {
+   "job_id": "fpsec038",
+   "route_id": "csmp",
+   "reason": "Chef de groupement SDIS : officier de sapeurs-pompiers, pas police municipale"
+  },
+  {
+   "job_id": "fpsec039",
+   "route_id": "dpm",
+   "reason": "Chef de centre d'incendie et de secours : sapeur-pompier professionnel, pas police municipale"
+  },
+  {
+   "job_id": "fpsec039",
+   "route_id": "csmp",
+   "reason": "Chef de centre d'incendie et de secours : sapeur-pompier professionnel, pas police municipale"
+  },
+  {
+   "job_id": "fpsec040",
+   "route_id": "csmp",
+   "reason": "Opérations de secours : sapeurs-pompiers, pas police municipale"
+  },
+  {
+   "job_id": "fpsec040",
+   "route_id": "police-mun",
+   "reason": "Opérations de secours : sapeurs-pompiers, pas police municipale"
+  },
+  {
+   "job_id": "fpsec041",
+   "route_id": "csmp",
+   "reason": "Opérations de secours : sapeurs-pompiers, pas police municipale"
+  },
+  {
+   "job_id": "fpsec041",
+   "route_id": "police-mun",
+   "reason": "Opérations de secours : sapeurs-pompiers, pas police municipale"
+  },
+  {
+   "job_id": "fpsec042",
+   "route_id": "police-mun",
+   "reason": "Opérateur CTA (SDIS) : sapeur-pompier ou personnel administratif, pas policier municipal"
+  },
+  {
+   "job_id": "fpsec044",
+   "route_id": "csmp",
+   "reason": "Garde champêtre : cadre d'emplois spécifique de catégorie C, pas chef de service de police municipale"
+  },
+  {
+   "job_id": "fpsec046",
+   "route_id": "gpx",
+   "reason": "Surveillance du patrimoine (musées, monuments) : pas corps de police"
+  },
+  {
+   "job_id": "fpsec046",
+   "route_id": "csmp",
+   "reason": "Surveillance du patrimoine (musées, monuments) : pas corps de police"
+  },
+  {
+   "job_id": "fpsec046",
+   "route_id": "police-mun",
+   "reason": "Surveillance du patrimoine (musées, monuments) : pas corps de police"
+  },
+  {
+   "job_id": "fpsec047",
+   "route_id": "gpx",
+   "reason": "Sécurité des bâtiments (SSIAP, sûreté) : filière technique, pas police"
+  },
+  {
+   "job_id": "fpsec047",
+   "route_id": "csmp",
+   "reason": "Sécurité des bâtiments (SSIAP, sûreté) : filière technique, pas police"
+  },
+  {
+   "job_id": "fpsec047",
+   "route_id": "police-mun",
+   "reason": "Sécurité des bâtiments (SSIAP, sûreté) : filière technique, pas police"
+  },
+  {
+   "job_id": "fpsec047",
+   "route_id": "corps-9eeb8a61a6a9",
+   "reason": "Adjoint des cadres hospitaliers = filière administrative, sans lien"
+  },
+  {
+   "job_id": "fpsec049",
+   "route_id": "csmp",
+   "reason": "Auxiliaire de surveillance portuaire : agent technique portuaire, pas police municipale"
+  },
+  {
+   "job_id": "fpsec049",
+   "route_id": "police-mun",
+   "reason": "Auxiliaire de surveillance portuaire : agent technique portuaire, pas police municipale"
+  },
+  {
+   "job_id": "fpsec050",
+   "route_id": "police-mun",
+   "reason": "Agent de PC sécurité : filière technique, pas policier municipal"
+  },
+  {
+   "job_id": "fpsec052",
+   "route_id": "officier-police",
+   "reason": "Encadrement d'équipes d'accueil et de surveillance (musées, bâtiments) : pas corps de police"
+  },
+  {
+   "job_id": "fpsec052",
+   "route_id": "dpm",
+   "reason": "Encadrement d'équipes d'accueil et de surveillance (musées, bâtiments) : pas corps de police"
+  },
+  {
+   "job_id": "fpsec052",
+   "route_id": "gpx",
+   "reason": "Encadrement d'équipes d'accueil et de surveillance (musées, bâtiments) : pas corps de police"
+  },
+  {
+   "job_id": "fpsec052",
+   "route_id": "csmp",
+   "reason": "Encadrement d'équipes d'accueil et de surveillance (musées, bâtiments) : pas corps de police"
+  },
+  {
+   "job_id": "fpsec052",
+   "route_id": "police-mun",
+   "reason": "Encadrement d'équipes d'accueil et de surveillance (musées, bâtiments) : pas corps de police"
+  },
+  {
+   "job_id": "fpsec053",
+   "route_id": "officier-police",
+   "reason": "Chef sécurité incendie (SSIAP 3) : filière technique, pas police"
+  },
+  {
+   "job_id": "fpsec053",
+   "route_id": "dpm",
+   "reason": "Chef sécurité incendie (SSIAP 3) : filière technique, pas police"
+  },
+  {
+   "job_id": "fpsec053",
+   "route_id": "gpx",
+   "reason": "Chef sécurité incendie (SSIAP 3) : filière technique, pas police"
+  },
+  {
+   "job_id": "fpsec053",
+   "route_id": "csmp",
+   "reason": "Chef sécurité incendie (SSIAP 3) : filière technique, pas police"
+  },
+  {
+   "job_id": "fpsec053",
+   "route_id": "aah",
+   "reason": "Chef sécurité incendie : filière technique, pas administrative"
+  },
+  {
+   "job_id": "fpsec053",
+   "route_id": "corps-9eeb8a61a6a9",
+   "reason": "Chef sécurité incendie : filière technique, pas administrative"
+  },
+  {
+   "job_id": "fpsec054",
+   "route_id": "adjoint-adm",
+   "reason": "Agent de sécurité incendie (SSIAP) : filière technique, ni administratif ni police municipale"
+  },
+  {
+   "job_id": "fpsec054",
+   "route_id": "police-mun",
+   "reason": "Agent de sécurité incendie (SSIAP) : filière technique, ni administratif ni police municipale"
+  },
+  {
+   "job_id": "fpsec055",
+   "route_id": "gpx",
+   "reason": "Responsable d'une politique de sûreté : fonction de pilotage, pas gardien de la paix"
+  },
+  {
+   "job_id": "fpsec056",
+   "route_id": "commissaire",
+   "reason": "HFDS : haut fonctionnaire (préfet, administrateur de l'État), pas commissaire de police"
+  },
+  {
+   "job_id": "fpsec057",
+   "route_id": "commissaire",
+   "reason": "Direction de CROSS : administrateurs des affaires maritimes/officiers de marine, pas police nationale"
+  },
+  {
+   "job_id": "fpsec057",
+   "route_id": "officier-police",
+   "reason": "Direction de CROSS : administrateurs des affaires maritimes/officiers de marine, pas police nationale"
+  },
+  {
+   "job_id": "fpsec058",
+   "route_id": "gpx",
+   "reason": "Opérateur CROSS : marins militaires et personnels des affaires maritimes, sans lien"
+  },
+  {
+   "job_id": "fpsec058",
+   "route_id": "adjoint-adm",
+   "reason": "Opérateur CROSS : marins militaires et personnels des affaires maritimes, sans lien"
+  },
+  {
+   "job_id": "fpsec059",
+   "route_id": "officier-police",
+   "reason": "Prévention des risques naturels : ingénieurs/techniciens (DDT, DREAL, collectivités), pas police"
+  },
+  {
+   "job_id": "fpsec059",
+   "route_id": "dpm",
+   "reason": "Prévention des risques naturels : ingénieurs/techniciens (DDT, DREAL, collectivités), pas police"
+  },
+  {
+   "job_id": "fpsec059",
+   "route_id": "gpx",
+   "reason": "Prévention des risques naturels : ingénieurs/techniciens (DDT, DREAL, collectivités), pas police"
+  },
+  {
+   "job_id": "fpsec059",
+   "route_id": "csmp",
+   "reason": "Prévention des risques naturels : ingénieurs/techniciens (DDT, DREAL, collectivités), pas police"
+  },
+  {
+   "job_id": "fpsec060",
+   "route_id": "gpx",
+   "reason": "Maintenance aéronautique : technicien aéronautique, pas gardien de la paix"
+  },
+  {
+   "job_id": "fpsoc001",
+   "route_id": "ass",
+   "reason": "Direction de l'action sociale : poste d'encadrement supérieur (attaché/administrateur/CTSE), l'ASS n'y mène pas directement"
+  },
+  {
+   "job_id": "fpsoc005",
+   "route_id": "ass",
+   "reason": "Assistant de service social (DEASS) est une profession distincte de l'éducateur spécialisé (DEES)."
+  },
+  {
+   "job_id": "fpsoc007",
+   "route_id": "agent-social",
+   "reason": "Agent social (aide à domicile, C) ne mène pas au mandat judiciaire de protection des majeurs (CNC MJPM, niveau bac+2 requis)."
+  },
+  {
+   "job_id": "fpsoc008",
+   "route_id": "sa",
+   "reason": "Concours administratif sans lien avec l'intervention sociale et familiale à domicile (TISF/AVS)."
+  },
+  {
+   "job_id": "fpsoc008",
+   "route_id": "redacteur",
+   "reason": "Concours administratif sans lien avec l'intervention sociale et familiale à domicile (TISF/AVS)."
+  },
+  {
+   "job_id": "fpsoc008",
+   "route_id": "adjoint-adm",
+   "reason": "Concours administratif sans lien avec l'intervention sociale et familiale à domicile (TISF/AVS)."
+  },
+  {
+   "job_id": "fpsoc010",
+   "route_id": "agent-social",
+   "reason": "Hors fonction publique : l'accueillant familial est un particulier agréé par le département, rémunéré par la personne accueillie ; aucun concours n'y mène."
+  },
+  {
+   "job_id": "fpsoc011",
+   "route_id": "ass",
+   "reason": "L'assistant familial (famille d'accueil, DEAF) est un contractuel du département ; le concours ASS ne mène pas à ce métier."
+  },
+  {
+   "job_id": "fpsoc014",
+   "route_id": "sa",
+   "reason": "Concours administratif sans lien avec le conseil conjugal et familial (fonction sociale, en PMI ou CPEF)."
+  },
+  {
+   "job_id": "fpsoc014",
+   "route_id": "redacteur",
+   "reason": "Concours administratif sans lien avec le conseil conjugal et familial (fonction sociale, en PMI ou CPEF)."
+  },
+  {
+   "job_id": "fpsoc018",
+   "route_id": "ass",
+   "reason": "Le délégué aux droits des femmes est un poste administratif d'État (attaché), pas d'assistant de service social."
+  },
+  {
+   "job_id": "fpsoc021",
+   "route_id": "ass",
+   "reason": "L'éducateur de jeunes enfants (DEEJE) n'est pas assistant de service social."
+  },
+  {
+   "job_id": "fpsoc022",
+   "route_id": "sa",
+   "reason": "Concours administratif sans lien avec l'accompagnement éducatif de la petite enfance."
+  },
+  {
+   "job_id": "fpsoc022",
+   "route_id": "redacteur",
+   "reason": "Concours administratif sans lien avec l'accompagnement éducatif de la petite enfance."
+  },
+  {
+   "job_id": "fpsoc022",
+   "route_id": "adjoint-adm",
+   "reason": "Concours administratif sans lien avec l'accompagnement éducatif de la petite enfance."
+  },
+  {
+   "job_id": "fpsoc023",
+   "route_id": "sa",
+   "reason": "Secrétaire administratif sans lien avec le métier d'auxiliaire de puériculture (concours spécifique auxpuer)."
+  },
+  {
+   "job_id": "fptra002",
+   "route_id": "adj-tech-etat",
+   "reason": "Concevoir des procédures de circulation aérienne n'est pas une fonction d'adjoint technique (C)."
+  },
+  {
+   "job_id": "fptra003",
+   "route_id": "itpe",
+   "reason": "Le contrôle aérien relève du corps des ICNA (concours ENAC), pas des ITPE."
+  },
+  {
+   "job_id": "fptra008",
+   "route_id": "adj-tech-etat",
+   "reason": "Contrôle technique et réglementaire (STRMTG) exercé par des agents A/B ; aucune fonction de contrôle en C."
+  },
+  {
+   "job_id": "fptra008",
+   "route_id": "adj-tech-terr",
+   "reason": "Contrôle des transports guidés et remontées mécaniques : mission d'État exercée par des agents A/B, pas par des adjoints techniques territoriaux."
+  },
+  {
+   "job_id": "fptra011",
+   "route_id": "itpe",
+   "reason": "L'ITPE ne mène pas au pilotage d'aéronefs : les pilotes de l'État sont contractuels ou militaires."
+  },
+  {
+   "job_id": "fptra013",
+   "route_id": "tsdd",
+   "reason": "Les TSDD n'assurent pas de maintenance d'aéronefs : la voie d'État est celle des techniciens d'études et de fabrications (SIAé, DGA)."
+  },
+  {
+   "job_id": "fptra015",
+   "route_id": "itpe",
+   "reason": "Le concours ITPE ne mène pas à un poste d'enseignant-chercheur (il faut un doctorat et une qualification CNU)."
+  },
+  {
+   "job_id": "fptra016",
+   "route_id": "itpe",
+   "reason": "Les pilotes instructeurs (ENAC) sont des contractuels ou des agents des corps DGAC ; ce concours ne mène pas à ce métier."
+  },
+  {
+   "job_id": "fptra016",
+   "route_id": "ingenieur-terr",
+   "reason": "Les pilotes instructeurs (ENAC) sont des contractuels ou des agents des corps DGAC ; ce concours ne mène pas à ce métier."
+  },
+  {
+   "job_id": "fptra016",
+   "route_id": "tsdd",
+   "reason": "Les pilotes instructeurs (ENAC) sont des contractuels ou des agents des corps DGAC ; ce concours ne mène pas à ce métier."
+  },
+  {
+   "job_id": "fptra016",
+   "route_id": "tech-terr",
+   "reason": "Les pilotes instructeurs (ENAC) sont des contractuels ou des agents des corps DGAC ; ce concours ne mène pas à ce métier."
+  },
+  {
+   "job_id": "fptra017",
+   "route_id": "itpe",
+   "reason": "Les professeurs de l'enseignement maritime (lycées maritimes) forment un corps propre ; l'ITPE n'y mène pas."
+  },
+  {
+   "job_id": "fptra027",
+   "route_id": "tech-terr",
+   "reason": "Les conducteurs de transports en commun sont recrutés comme adjoints techniques (C), pas techniciens."
+  },
+  {
+   "job_id": "fptra030",
+   "route_id": "ingenieur-terr",
+   "reason": "L'inspection de la sécurité des navires est une mission régalienne d'État (DIRM, centres de sécurité des navires)."
+  },
+  {
+   "job_id": "fptra030",
+   "route_id": "tech-terr",
+   "reason": "L'inspection de la sécurité des navires est une mission régalienne d'État (DIRM, centres de sécurité des navires)."
+  },
+  {
+   "job_id": "fptra033",
+   "route_id": "animateur",
+   "reason": "Le cadre d'animateur territorial relève de l'animation socioculturelle, pas de la politique de sécurité routière."
+  },
+  {
+   "job_id": "fptra044",
+   "route_id": "ingenieur-terr",
+   "reason": "La coordination du sauvetage en mer (CROSS) est une mission d'État, pas territoriale."
+  },
+  {
+   "job_id": "fptra044",
+   "route_id": "tech-terr",
+   "reason": "La coordination du sauvetage en mer (CROSS) est une mission d'État, pas territoriale."
+  },
+  {
+   "job_id": "fptra045",
+   "route_id": "tech-terr",
+   "reason": "La surveillance de la navigation (SURNAV, CROSS) est une mission d'État."
+  },
+  {
+   "job_id": "fptra047",
+   "route_id": "tech-terr",
+   "reason": "Le contrôle des affaires maritimes est une mission d'État (DML, ULAM)."
+  },
+  {
+   "job_id": "fptra045",
+   "route_id": "adj-tech-terr",
+   "reason": "La surveillance de la navigation (SURNAV, CROSS) est une mission d'État."
+  },
+  {
+   "job_id": "fptra047",
+   "route_id": "adj-tech-terr",
+   "reason": "Le contrôle des affaires maritimes est une mission d'État (DML, ULAM)."
+  },
+  {
+   "job_id": "fptra048",
+   "route_id": "ingenieur-terr",
+   "reason": "Les unités hauturières des affaires maritimes sont des moyens de l'État."
+  },
+  {
+   "job_id": "fptra048",
+   "route_id": "tech-terr",
+   "reason": "Les unités hauturières des affaires maritimes sont des moyens de l'État."
+  },
+  {
+   "job_id": "fpusa005",
+   "route_id": "adjoint-adm",
+   "reason": "Les gardiens d'immeuble territoriaux sont recrutés dans la filière technique (adjoint technique)."
+  },
+  {
+   "job_id": "fpusa013",
+   "route_id": "redacteur",
+   "reason": "Le renseignement en droit du travail est une mission d'État (DREETS), pas territoriale."
+  },
+  {
+   "job_id": "fpusa013",
+   "route_id": "corps-9eeb8a61a6a9",
+   "reason": "Le renseignement en droit du travail est une mission d'État, pas hospitalière."
+  },
+  {
+   "job_id": "fpusa025",
+   "route_id": "adjoint-adm",
+   "reason": "Les agents funéraires (porteurs, fossoyeurs, opérations funéraires) relèvent de la filière technique."
+  },
+  {
+   "job_id": "fpusa028",
+   "route_id": "redacteur",
+   "reason": "Le maître de cérémonie funéraire ne relève pas du cadre administratif B ; c'est un agent technique."
+  },
+  {
+   "job_id": "fpusa029",
+   "route_id": "redacteur",
+   "reason": "L'opérateur de crémation est un agent technique, pas un rédacteur."
+  },
+  {
+   "job_id": "fpusa029",
+   "route_id": "adjoint-adm",
+   "reason": "L'opérateur de crémation est un agent technique, pas administratif."
+  },
+  {
+   "job_id": "fpusa032",
+   "route_id": "sa",
+   "reason": "Les délégués au permis de conduire forment un corps propre (A), recruté parmi les inspecteurs PCSR."
+  },
+  {
+   "job_id": "fpusa032",
+   "route_id": "adjoint-adm",
+   "reason": "Aucun accès au corps des délégués au permis de conduire par le concours d'adjoint administratif."
+  },
+  {
+   "job_id": "fpusa033",
+   "route_id": "attache",
+   "reason": "Les inspecteurs du permis de conduire forment un corps propre (IPCSR), avec un concours spécifique."
+  },
+  {
+   "job_id": "fpusa033",
+   "route_id": "sa",
+   "reason": "Les inspecteurs du permis de conduire forment un corps propre (IPCSR), avec un concours spécifique."
+  },
+  {
+   "job_id": "fpusa035",
+   "route_id": "sa",
+   "reason": "Qualité et hygiène alimentaire (HACCP) : fonction technique, pas administrative."
+  },
+  {
+   "job_id": "fpusa035",
+   "route_id": "redacteur",
+   "reason": "Qualité et hygiène alimentaire (HACCP) : fonction technique, pas administrative."
+  },
+  {
+   "job_id": "fpusa035",
+   "route_id": "corps-9eeb8a61a6a9",
+   "reason": "Qualité et hygiène alimentaire (HACCP) : fonction technique, pas administrative."
+  },
+  {
+   "job_id": "fpusa037",
+   "route_id": "sa",
+   "reason": "Le service hôtelier et de salle est un métier de la filière technique, pas administrative."
+  },
+  {
+   "job_id": "fpusa037",
+   "route_id": "redacteur",
+   "reason": "Le service hôtelier et de salle est un métier de la filière technique, pas administrative."
+  },
+  {
+   "job_id": "fpusa037",
+   "route_id": "adjoint-adm",
+   "reason": "Le service hôtelier et de salle est un métier de la filière technique, pas administrative."
+  },
+  {
+   "job_id": "fpusa038",
+   "route_id": "sa",
+   "reason": "Le service hôtelier et de salle est un métier de la filière technique, pas administrative."
+  },
+  {
+   "job_id": "fpusa038",
+   "route_id": "redacteur",
+   "reason": "Le service hôtelier et de salle est un métier de la filière technique, pas administrative."
+  },
+  {
+   "job_id": "fpusa038",
+   "route_id": "adjoint-adm",
+   "reason": "Le service hôtelier et de salle est un métier de la filière technique, pas administrative."
+  },
+  {
+   "job_id": "fpusa041",
+   "route_id": "adjoint-adm",
+   "reason": "Le métier de serveur relève de la filière technique, pas administrative."
+  },
+  {
+   "job_id": "fpjus017",
+   "route_id": "magistrat",
+   "reason": "Les juristes assistants des magistrats sont recrutés sur contrat ; ils ne passent pas le concours de l’ENM."
+  }
+ ],
+ "add": [
+  {
+   "job_id": "fpagr028",
+   "route_id": "sa",
+   "reason": "Corps administratif B naturel pour un gestionnaire d'aides (SA de l'Agriculture / interministériel)"
+  },
+  {
+   "job_id": "fpagr029",
+   "route_id": "sa",
+   "reason": "Corps administratif B naturel pour un gestionnaire de dispositifs d'aides"
+  },
+  {
+   "job_id": "fpagr030",
+   "route_id": "attache",
+   "reason": "Corps A naturel pour un responsable d'instruction et liquidation d'aides"
+  },
+  {
+   "job_id": "fpagr030",
+   "route_id": "sa",
+   "reason": "Corps B naturel pour la partie B du métier (instruction d'aides)"
+  },
+  {
+   "job_id": "fpagr025",
+   "route_id": "sa",
+   "reason": "Corps administratif B naturel pour un chargé de mission économie agricole"
+  },
+  {
+   "job_id": "fpagr025",
+   "route_id": "adjoint-adm",
+   "reason": "Voie C administrative pour le volet C du métier"
+  },
+  {
+   "job_id": "fpagr022",
+   "route_id": "attache",
+   "reason": "Corps A généraliste naturel pour un chargé de mission politique publique agricole/rurale en DDT/DRAAF"
+  },
+  {
+   "job_id": "fpagr026",
+   "route_id": "attache",
+   "reason": "Corps A généraliste naturel pour un chargé de mission politique publique agricole/rurale en DDT/DRAAF"
+  },
+  {
+   "job_id": "fpagr027",
+   "route_id": "attache",
+   "reason": "Corps A généraliste naturel pour un chargé de mission politique publique agricole/rurale en DDT/DRAAF"
+  },
+  {
+   "job_id": "fpamt005",
+   "route_id": "attache-terr",
+   "reason": "Cadre d'emplois A naturel (développement économique en collectivité)"
+  },
+  {
+   "job_id": "fpamt005",
+   "route_id": "attache",
+   "reason": "Corps A naturel côté État"
+  },
+  {
+   "job_id": "fpamt007",
+   "route_id": "redacteur",
+   "reason": "Cadre d'emplois B administratif naturel côté territorial"
+  },
+  {
+   "job_id": "fpamt007",
+   "route_id": "sa",
+   "reason": "Corps B administratif naturel côté État"
+  },
+  {
+   "job_id": "fpamt007",
+   "route_id": "attache-terr",
+   "reason": "Voie A naturelle si la catégorie A est retenue"
+  },
+  {
+   "job_id": "fpamt007",
+   "route_id": "attache",
+   "reason": "Voie A naturelle côté État si la catégorie A est retenue"
+  },
+  {
+   "job_id": "fpamt010",
+   "route_id": "attache-terr",
+   "reason": "Cadre d'emplois naturel des chefs de projet politique de la ville"
+  },
+  {
+   "job_id": "fpamt011",
+   "route_id": "admin-terr",
+   "reason": "Voie normale pour une direction (A+) en collectivité"
+  },
+  {
+   "job_id": "fpamt011",
+   "route_id": "attache-terr",
+   "reason": "Voie normale pour une direction (A) en collectivité"
+  },
+  {
+   "job_id": "fpamt013",
+   "route_id": "attache-terr",
+   "reason": "Cadre d'emplois naturel des chargés de développement territorial"
+  },
+  {
+   "job_id": "fpamt014",
+   "route_id": "attache",
+   "reason": "Corps naturel en DREETS (catégorie A, État)"
+  },
+  {
+   "job_id": "fpamt014",
+   "route_id": "sa",
+   "reason": "Corps naturel en DREETS (catégorie B, État)"
+  },
+  {
+   "job_id": "fpamt014",
+   "route_id": "attache-terr",
+   "reason": "Cadre d'emplois naturel (A, territoriale)"
+  },
+  {
+   "job_id": "fpamt014",
+   "route_id": "redacteur",
+   "reason": "Cadre d'emplois naturel (B, territoriale)"
+  },
+  {
+   "job_id": "fpamt015",
+   "route_id": "attache-terr",
+   "reason": "Voie normale (A) pour le développement touristique"
+  },
+  {
+   "job_id": "fpamt015",
+   "route_id": "redacteur",
+   "reason": "Voie normale (B) pour le développement touristique"
+  },
+  {
+   "job_id": "fpamt029",
+   "route_id": "attache-terr",
+   "reason": "Voie la plus courante pour un responsable habitat/logement"
+  },
+  {
+   "job_id": "fpamt029",
+   "route_id": "redacteur",
+   "reason": "Voie courante en catégorie B"
+  },
+  {
+   "job_id": "fpamt030",
+   "route_id": "attache",
+   "reason": "Attaché fréquent en DDT/DREAL sur les politiques du logement"
+  },
+  {
+   "job_id": "fpamt030",
+   "route_id": "attache-terr",
+   "reason": "Voie administrative naturelle côté territorial"
+  },
+  {
+   "job_id": "fpamt031",
+   "route_id": "attache-terr",
+   "reason": "Cadre d'emplois naturel d'un directeur de la gestion locative"
+  },
+  {
+   "job_id": "fpamt032",
+   "route_id": "redacteur",
+   "reason": "Voie normale (B) pour un chargé de gestion locative"
+  },
+  {
+   "job_id": "fpamt032",
+   "route_id": "adjoint-adm",
+   "reason": "Voie normale (C) pour un chargé de gestion locative"
+  },
+  {
+   "job_id": "fpamt035",
+   "route_id": "attache",
+   "reason": "Corps naturel (A, État) pour la politique sociale du logement"
+  },
+  {
+   "job_id": "fpamt035",
+   "route_id": "attache-terr",
+   "reason": "Cadre d'emplois naturel (A, territoriale)"
+  },
+  {
+   "job_id": "fpamt036",
+   "route_id": "attache",
+   "reason": "Corps naturel (A) pour le pilotage budgétaire en DREAL/DDT"
+  },
+  {
+   "job_id": "fpamt036",
+   "route_id": "sa",
+   "reason": "Corps naturel (B) pour la programmation budgétaire"
+  },
+  {
+   "job_id": "fpamt037",
+   "route_id": "attache",
+   "reason": "Attachés fréquents sur le financement du logement social (DDT)"
+  },
+  {
+   "job_id": "fpamt037",
+   "route_id": "sa",
+   "reason": "SA fréquents sur l'instruction des financements"
+  },
+  {
+   "job_id": "fpamt048",
+   "route_id": "attache",
+   "reason": "Corps naturel pour une fonction juridique/contentieux en DDT"
+  },
+  {
+   "job_id": "fpamt024",
+   "route_id": "itpe",
+   "reason": "Corps principal des inspecteurs de la sécurité des ouvrages hydrauliques en DREAL"
+  },
+  {
+   "job_id": "fpamt025",
+   "route_id": "itpe",
+   "reason": "Corps naturel des inspecteurs ESP/canalisations en DREAL"
+  },
+  {
+   "job_id": "fpasp003",
+   "route_id": "eje-terr",
+   "reason": "Les EJE territoriaux dirigent les établissements d'accueil du jeune enfant"
+  },
+  {
+   "job_id": "fpasp003",
+   "route_id": "ide",
+   "reason": "Puériculteurs (infirmiers spécialisés) dirigent les EAJE ; cadre d'emplois infirmier le plus proche disponible"
+  },
+  {
+   "job_id": "fpasp010",
+   "route_id": "eje-terr",
+   "reason": "Voie la plus courante pour l'animation d'un relais petite enfance"
+  },
+  {
+   "job_id": "fpasp014",
+   "route_id": "tech-env",
+   "reason": "Les techniciens de l'environnement (parcs, OFB) assurent l'éducation à l'environnement côté État"
+  },
+  {
+   "job_id": "fpasp015",
+   "route_id": "corps-bb68ae77d884",
+   "reason": "Conseillers d'éducation populaire et de jeunesse : corps exact"
+  },
+  {
+   "job_id": "fpasp016",
+   "route_id": "corps-cbddb06ab042",
+   "reason": "Corps des inspecteurs de la jeunesse et des sports"
+  },
+  {
+   "job_id": "fpasp020",
+   "route_id": "adj-tech-terr",
+   "reason": "Cadre d'emplois naturel pour l'exploitation/entretien d'équipements sportifs"
+  },
+  {
+   "job_id": "fpasp025",
+   "route_id": "corps-babc6bbecc70",
+   "reason": "Concours de professeur de sport réservé aux sportifs de haut niveau"
+  },
+  {
+   "job_id": "fpasp026",
+   "route_id": "corps-b464cbe97049",
+   "reason": "Les entraîneurs nationaux de l'État sont professeurs de sport"
+  },
+  {
+   "job_id": "fpasp026",
+   "route_id": "etaps",
+   "reason": "Cadre d'emplois sportif de la territoriale"
+  },
+  {
+   "job_id": "fpasp027",
+   "route_id": "corps-8d4d1d1dd392",
+   "reason": "Conseillers techniques et pédagogiques supérieurs : corps typique des DTN"
+  },
+  {
+   "job_id": "fpbat001",
+   "route_id": "corps-f8b65ae9182c",
+   "reason": "Corps des architectes et urbanistes de l'État"
+  },
+  {
+   "job_id": "fpbat019",
+   "route_id": "tech-terr",
+   "reason": "Voie normale pour un électromécanicien (B territoriale)"
+  },
+  {
+   "job_id": "fpbat019",
+   "route_id": "tsdd",
+   "reason": "Voie normale pour un électromécanicien (B État)"
+  },
+  {
+   "job_id": "fpbat019",
+   "route_id": "corps-5476869dee76",
+   "reason": "Voie normale pour un électromécanicien (B hospitalière)"
+  },
+  {
+   "job_id": "fpbat019",
+   "route_id": "adj-tech-terr",
+   "reason": "Voie normale pour un électromécanicien (C territoriale)"
+  },
+  {
+   "job_id": "fpbat019",
+   "route_id": "adj-tech-etat",
+   "reason": "Voie normale pour un électromécanicien (C État)"
+  },
+  {
+   "job_id": "fpbat019",
+   "route_id": "corps-3bcfcbcc7eb5",
+   "reason": "Voie normale pour un électromécanicien (C hospitalière)"
+  },
+  {
+   "job_id": "fpcom016",
+   "route_id": "tech-terr",
+   "reason": "Photographe en collectivité : souvent technicien territorial (filière technique)"
+  },
+  {
+   "job_id": "fpcom022",
+   "route_id": "tech-si",
+   "reason": "Webmestre : métier numérique, voie technicien des systèmes d'information pour le niveau B"
+  },
+  {
+   "job_id": "fpctl006",
+   "route_id": "admin-etat",
+   "reason": "Accès aux juridictions financières (auditeur Cour des comptes, conseiller CRTC) par la sortie de l'INSP"
+  },
+  {
+   "job_id": "fpctl014",
+   "route_id": "corps-d65b269b3ea9",
+   "reason": "Enquêtes statistiques : voie naturelle des contrôleurs de l'INSEE (catégorie B)"
+  },
+  {
+   "job_id": "fpctl024",
+   "route_id": "attache",
+   "reason": "Inspecteur santé et sécurité au travail dans l'État : souvent attaché ; versant E sinon couvert seulement par l'inspection du travail"
+  },
+  {
+   "job_id": "fpctl031",
+   "route_id": "itpe",
+   "reason": "Inspecteurs ICPE de catégorie A : principalement ITPE (et IIM)"
+  },
+  {
+   "job_id": "fpctl031",
+   "route_id": "tsdd",
+   "reason": "Inspecteurs ICPE de catégorie B : techniciens supérieurs du développement durable"
+  },
+  {
+   "job_id": "fpctl019",
+   "route_id": "itpe",
+   "reason": "Évaluation environnementale/risques : voie technique naturelle dans l'État (DREAL)"
+  },
+  {
+   "job_id": "fpctl019",
+   "route_id": "ingenieur-terr",
+   "reason": "Évaluation environnementale dans les collectivités : ingénieur territorial"
+  },
+  {
+   "job_id": "fpctl037",
+   "route_id": "corps-d65b269b3ea9",
+   "reason": "Production/collecte statistique de catégorie B : contrôleurs de l'INSEE"
+  },
+  {
+   "job_id": "fpctl038",
+   "route_id": "corps-d65b269b3ea9",
+   "reason": "Production/collecte statistique de catégorie B : contrôleurs de l'INSEE"
+  },
+  {
+   "job_id": "fpctl039",
+   "route_id": "corps-d65b269b3ea9",
+   "reason": "Production/collecte statistique de catégorie B : contrôleurs de l'INSEE"
+  },
+  {
+   "job_id": "fpctl042",
+   "route_id": "corps-d65b269b3ea9",
+   "reason": "Production/collecte statistique de catégorie B : contrôleurs de l'INSEE"
+  },
+  {
+   "job_id": "fpctl040",
+   "route_id": "ingenieur-terr",
+   "reason": "Cartographe (SIG) en collectivité : souvent ingénieur territorial"
+  },
+  {
+   "job_id": "fpctl026",
+   "route_id": "iass",
+   "reason": "Contrôle des établissements et services sociaux/médico-sociaux (ARS, DDETS) : voie naturelle des IASS"
+  },
+  {
+   "job_id": "fpcul001",
+   "route_id": "conservateur",
+   "reason": "Direction d'établissements culturels/patrimoniaux (musées, archives) : conservateurs du patrimoine"
+  },
+  {
+   "job_id": "fpcul001",
+   "route_id": "attache-terr",
+   "reason": "Direction d'équipement culturel territorial : souvent attaché territorial"
+  },
+  {
+   "job_id": "fpcul003",
+   "route_id": "conservateur-bib",
+   "reason": "Versant territorial de l'encadrement supérieur patrimonial (bibliothèques)"
+  },
+  {
+   "job_id": "fpcul006",
+   "route_id": "adj-anim",
+   "reason": "Animation auprès des publics, catégorie C territoriale : adjoint d'animation"
+  },
+  {
+   "job_id": "fpcul007",
+   "route_id": "adj-anim",
+   "reason": "Animation d'activités, catégorie C territoriale : adjoint d'animation"
+  },
+  {
+   "job_id": "fpcul011",
+   "route_id": "corps-52a859c87ab8",
+   "reason": "Chef de travaux d'art : corps d'encadrement des ateliers d'art de l'État"
+  },
+  {
+   "job_id": "fpcul012",
+   "route_id": "corps-ee3da09f46e9",
+   "reason": "Régie des œuvres dans les musées nationaux : chargés d'études documentaires"
+  },
+  {
+   "job_id": "fpcul014",
+   "route_id": "corps-16a06e4fc78c",
+   "reason": "Suivi des opérations sur monuments (DRAC) : ingénieurs des services culturels"
+  },
+  {
+   "job_id": "fpcul015",
+   "route_id": "corps-ee3da09f46e9",
+   "reason": "Expertise patrimoniale dans l'État : chargés d'études documentaires"
+  },
+  {
+   "job_id": "fpcul017",
+   "route_id": "corps-b06ff3482256",
+   "reason": "Technicien d'art : corps de l'État dédié aux métiers d'art"
+  },
+  {
+   "job_id": "fpcul017",
+   "route_id": "tech-terr",
+   "reason": "Métiers d'art en collectivité : technicien territorial"
+  },
+  {
+   "job_id": "fpcul018",
+   "route_id": "tech-terr",
+   "reason": "Technicien du spectacle en collectivité, catégorie B : technicien territorial"
+  },
+  {
+   "job_id": "fpcul018",
+   "route_id": "adj-tech-terr",
+   "reason": "Technicien du spectacle en collectivité, catégorie C : adjoint technique territorial"
+  },
+  {
+   "job_id": "fpcul018",
+   "route_id": "adj-tech-etat",
+   "reason": "Technicien du spectacle dans l'État, catégorie C : adjoint technique"
+  },
+  {
+   "job_id": "fpdef005",
+   "route_id": "tsef",
+   "reason": "Pyrotechnie civile de la Défense : techniciens supérieurs d'études et de fabrications"
+  },
+  {
+   "job_id": "fpdef005",
+   "route_id": "adj-tech-etat",
+   "reason": "Pyrotechnie, catégorie C civile : adjoint technique de l'État"
+  },
+  {
+   "job_id": "fpdef006",
+   "route_id": "corps-e3524ee43429",
+   "reason": "Prévisionniste (voie civile) : ingénieurs des travaux de la météorologie"
+  },
+  {
+   "job_id": "fpdef023",
+   "route_id": "tsef",
+   "reason": "Maintenance avionique civile de la Défense (SIAé/DGA) : TSEF"
+  },
+  {
+   "job_id": "fpdef026",
+   "route_id": "adj-tech-etat",
+   "reason": "Confection textile : métier ouvrier/technique, adjoint technique de l'État"
+  },
+  {
+   "job_id": "fpdef028",
+   "route_id": "adj-tech-etat",
+   "reason": "Exploitation/maintenance pétrolière (personnel civil) : adjoint technique de l'État"
+  },
+  {
+   "job_id": "fpdef032",
+   "route_id": "tech-si",
+   "reason": "Systèmes de communication (personnel civil) : technicien des systèmes d'information"
+  },
+  {
+   "job_id": "fpdir009",
+   "route_id": "d3s",
+   "reason": "Corps des directeurs d'établissement sanitaire, social et médico-social (EHESP)."
+  },
+  {
+   "job_id": "fpdir011",
+   "route_id": "admin-terr",
+   "reason": "Administrateur territorial : vivier naturel des DGA des grandes collectivités."
+  },
+  {
+   "job_id": "fpdir011",
+   "route_id": "attache-terr",
+   "reason": "Attaché territorial (principal) : DGA des collectivités moyennes."
+  },
+  {
+   "job_id": "fpdir018",
+   "route_id": "corps-23df345f4869",
+   "reason": "IA-IPR : vivier principal de l'inspection générale de l'éducation."
+  },
+  {
+   "job_id": "fpdir019",
+   "route_id": "corps-9cd3081e3c69",
+   "reason": "Concours de personnels de direction d'établissement d'enseignement."
+  },
+  {
+   "job_id": "fpdir021",
+   "route_id": "admin-etat",
+   "reason": "Vivier naturel des DGS d'université (emploi fonctionnel A+)."
+  },
+  {
+   "job_id": "fpdir021",
+   "route_id": "attache",
+   "reason": "Attachés principaux / APAE : vivier fréquent des DGS d'université."
+  },
+  {
+   "job_id": "fpdir030",
+   "route_id": "dir-soins",
+   "reason": "Concours de directeur·rice des soins (cadres de santé expérimentés)."
+  },
+  {
+   "job_id": "fpdoc004",
+   "route_id": "corps-ee3da09f46e9",
+   "reason": "Chargés d'études documentaires (spécialité archives) : corps des archivistes de l'État."
+  },
+  {
+   "job_id": "fpdoc019",
+   "route_id": "corps-ee3da09f46e9",
+   "reason": "Chargés d'études documentaires (spécialité archives) : corps des archivistes de l'État."
+  },
+  {
+   "job_id": "fpdoc020",
+   "route_id": "corps-ee3da09f46e9",
+   "reason": "Chargés d'études documentaires (spécialité archives) : corps des archivistes de l'État."
+  },
+  {
+   "job_id": "fpdoc021",
+   "route_id": "corps-ee3da09f46e9",
+   "reason": "Chargés d'études documentaires (spécialité archives) : corps des archivistes de l'État."
+  },
+  {
+   "job_id": "fpdoc008",
+   "route_id": "corps-08e8a6d6b236",
+   "reason": "Bibliothécaire d'État (E). Voie plausible pour une mission numérique en bibliothèque."
+  },
+  {
+   "job_id": "fpdoc008",
+   "route_id": "biblio-terr",
+   "reason": "Bibliothécaire territorial (T). Voie plausible pour une mission numérique en bibliothèque."
+  },
+  {
+   "job_id": "fpdoc008",
+   "route_id": "corps-72087d19dcef",
+   "reason": "BIBAS (B, E). Voie plausible pour une mission numérique en bibliothèque."
+  },
+  {
+   "job_id": "fpdoc008",
+   "route_id": "acp",
+   "reason": "Assistant de conservation du patrimoine (B, T). Voie plausible pour une mission numérique en bibliothèque."
+  },
+  {
+   "job_id": "fpdoc014",
+   "route_id": "corps-ee3da09f46e9",
+   "reason": "Chargés d'études documentaires : corps naturel des documentalistes de l'État."
+  },
+  {
+   "job_id": "fpdoc015",
+   "route_id": "corps-ee3da09f46e9",
+   "reason": "Correspondance exacte : corps des chargés d'études documentaires."
+  },
+  {
+   "job_id": "fpdoc017",
+   "route_id": "corps-08e8a6d6b236",
+   "reason": "Concours de bibliothécaire d'État : voie directe."
+  },
+  {
+   "job_id": "fpdoc017",
+   "route_id": "biblio-terr",
+   "reason": "Concours de bibliothécaire territorial : voie directe."
+  },
+  {
+   "job_id": "fpens005",
+   "route_id": "attache",
+   "reason": "Attaché d'administration de l'État : corps naturel des fonctions de pilotage en rectorat."
+  },
+  {
+   "job_id": "fpens012",
+   "route_id": "ie",
+   "reason": "Ingénieur d'études (BAP J) : ingénierie pédagogique dans le supérieur."
+  },
+  {
+   "job_id": "fpens013",
+   "route_id": "pe",
+   "reason": "Concours de professeur des écoles, puis CAFIPEMF."
+  },
+  {
+   "job_id": "fpens015",
+   "route_id": "corps-919c511897a5",
+   "reason": "Concours de psychologue de l'Éducation nationale."
+  },
+  {
+   "job_id": "fpens018",
+   "route_id": "ie",
+   "reason": "Ingénieur d'études : voie naturelle pour l'ingénierie pédagogique (E)."
+  },
+  {
+   "job_id": "fpens022",
+   "route_id": "pe",
+   "reason": "Concours de professeur des écoles (puis liste d'aptitude de directeur)."
+  },
+  {
+   "job_id": "fpens023",
+   "route_id": "corps-b4a91bad72b8",
+   "reason": "Professeurs certifiés de l'enseignement agricole : vivier des directeurs d'exploitation."
+  },
+  {
+   "job_id": "fpens029",
+   "route_id": "corps-1cbccac47167",
+   "reason": "Concours d'inspecteur de l'éducation nationale (IEN)."
+  },
+  {
+   "job_id": "fpens029",
+   "route_id": "corps-23df345f4869",
+   "reason": "Concours d'IA-IPR (2nd degré)."
+  },
+  {
+   "job_id": "fpens030",
+   "route_id": "attache",
+   "reason": "Attaché d'administration de l'État : corps naturel pour l'encadrement A de ce service."
+  },
+  {
+   "job_id": "fpens031",
+   "route_id": "attache",
+   "reason": "Attaché d'administration de l'État : corps naturel pour l'encadrement A de ce service."
+  },
+  {
+   "job_id": "fpenv033",
+   "route_id": "tech-env",
+   "reason": "Techniciens de l'environnement (OFB) : voie principale de la police de la biodiversité."
+  },
+  {
+   "job_id": "fpenv038",
+   "route_id": "corps-e3524ee43429",
+   "reason": "Ingénieurs des travaux de la météorologie : voie naturelle des climatologues (Météo-France)."
+  },
+  {
+   "job_id": "fpenv041",
+   "route_id": "adj-anim",
+   "reason": "Adjoint territorial d'animation : voie C naturelle pour l'animation environnement."
+  },
+  {
+   "job_id": "fpenv047",
+   "route_id": "sa",
+   "reason": "Corps administratif B de l'État pour l'instruction et la délivrance de titres"
+  },
+  {
+   "job_id": "fpenv047",
+   "route_id": "adjoint-adm",
+   "reason": "Corps administratif C de l'État pour la délivrance de titres"
+  },
+  {
+   "job_id": "fpenv048",
+   "route_id": "adjoint-adm",
+   "reason": "Voie C administrative pour l'instruction des dossiers plaisance"
+  },
+  {
+   "job_id": "fpenv053",
+   "route_id": "corps-e3524ee43429",
+   "reason": "Ingénieurs des travaux de la météorologie : corps naturel du chef prévisionniste"
+  },
+  {
+   "job_id": "fpfip009",
+   "route_id": "ctrl-fip",
+   "reason": "Les géomètres/agents du cadastre de catégorie B relèvent des contrôleurs des finances publiques"
+  },
+  {
+   "job_id": "fpfip011",
+   "route_id": "insp-douane",
+   "reason": "Corps A de la douane pour l'administration des procédures douanières"
+  },
+  {
+   "job_id": "fpfip011",
+   "route_id": "ctrl-douane",
+   "reason": "Corps B de la douane pour les procédures douanières"
+  },
+  {
+   "job_id": "fpfip012",
+   "route_id": "acd",
+   "reason": "Agent de constatation des douanes : voie C normale du bureau de douane"
+  },
+  {
+   "job_id": "fpfip014",
+   "route_id": "ctrl-douane",
+   "reason": "Corps B de la douane (branche opérations commerciales)"
+  },
+  {
+   "job_id": "fpfip019",
+   "route_id": "corps-cf4548531314",
+   "reason": "Technicien de laboratoire (ministères économiques) : voie B du laboratoire de contrôle"
+  },
+  {
+   "job_id": "fpfip020",
+   "route_id": "corps-cf4548531314",
+   "reason": "Technicien de laboratoire : corps naturel de l'agent de laboratoire de contrôle"
+  },
+  {
+   "job_id": "fpint015",
+   "route_id": "chancellerie",
+   "reason": "Secrétaire de chancellerie : corps B du MEAE pour les affaires consulaires"
+  },
+  {
+   "job_id": "fpint016",
+   "route_id": "adj-chancellerie",
+   "reason": "Adjoint administratif de chancellerie : voie C normale des affaires de chancellerie"
+  },
+  {
+   "job_id": "fpint037",
+   "route_id": "sous-off-gend",
+   "reason": "Les gardes de sécurité diplomatique sont majoritairement des sous-officiers de gendarmerie"
+  },
+  {
+   "job_id": "fpint037",
+   "route_id": "gpx",
+   "reason": "Des policiers (gardiens de la paix) assurent aussi la sécurité des postes diplomatiques"
+  },
+  {
+   "job_id": "fpint039",
+   "route_id": "officier-police",
+   "reason": "Officier de police : voie usuelle des conseillers sûreté en poste diplomatique"
+  },
+  {
+   "job_id": "fpjus001",
+   "route_id": "educ-pjj",
+   "reason": "Les RUE de la PJJ sont issus du corps des éducateurs PJJ (promotion)"
+  },
+  {
+   "job_id": "fpjus002",
+   "route_id": "educ-pjj",
+   "reason": "Corps des directeurs PJJ absent de la liste ; accès usuel par le corps des éducateurs PJJ puis concours interne"
+  },
+  {
+   "job_id": "fpjus003",
+   "route_id": "attache",
+   "reason": "Fonction administrative d'encadrement A : corps généraliste des attachés"
+  },
+  {
+   "job_id": "fpjus004",
+   "route_id": "educ-pjj",
+   "reason": "Conseillers techniques PJJ issus des éducateurs PJJ (ou ASS/psychologues)"
+  },
+  {
+   "job_id": "fpjus006",
+   "route_id": "educ-pjj",
+   "reason": "Voie naturelle : concours d'éducateur de la PJJ"
+  },
+  {
+   "job_id": "fpjus008",
+   "route_id": "attache",
+   "reason": "Chef de greffe de TA/CAA = attaché d'administration (Intérieur)"
+  },
+  {
+   "job_id": "fpjus008",
+   "route_id": "sa",
+   "reason": "Chef de greffe dans les petites juridictions administratives : secrétaire administratif"
+  },
+  {
+   "job_id": "fpjus009",
+   "route_id": "magistrat",
+   "reason": "Chef de juridiction judiciaire = magistrat (concours ENM)"
+  },
+  {
+   "job_id": "fpjus011",
+   "route_id": "sa",
+   "reason": "Greffier de TA/CAA = secrétaire administratif (Intérieur)"
+  },
+  {
+   "job_id": "fpjus011",
+   "route_id": "attache",
+   "reason": "Greffier en chef / greffier A de TA/CAA = attaché"
+  },
+  {
+   "job_id": "fpjus012",
+   "route_id": "sa",
+   "reason": "Greffe pénitentiaire : personnels administratifs (SA) ou de surveillance"
+  },
+  {
+   "job_id": "fpjus013",
+   "route_id": "magistrat-administratif",
+   "reason": "Voie normale : corps des magistrats des TA et CAA"
+  },
+  {
+   "job_id": "fpjus014",
+   "route_id": "surveillant",
+   "reason": "Le greffe pénitentiaire est en grande partie assuré par des surveillants"
+  },
+  {
+   "job_id": "fpjus015",
+   "route_id": "magistrat",
+   "reason": "Voie normale : concours ENM"
+  },
+  {
+   "job_id": "fpjus022",
+   "route_id": "cpip",
+   "reason": "Responsable TIG en SPIP = CPIP"
+  },
+  {
+   "job_id": "fpjus023",
+   "route_id": "dsp",
+   "reason": "Voie normale : concours de directeur des services pénitentiaires"
+  },
+  {
+   "job_id": "fpjus024",
+   "route_id": "dsp",
+   "reason": "Responsable du travail pénal : DSP ou cadres pénitentiaires"
+  },
+  {
+   "job_id": "fpjus024",
+   "route_id": "sa",
+   "reason": "Encadrement intermédiaire administratif du travail pénal"
+  },
+  {
+   "job_id": "fpjus025",
+   "route_id": "corps-143f2d97d76a",
+   "reason": "Cadre pénitentiaire = officier (capitaine pénitentiaire)"
+  },
+  {
+   "job_id": "fpjus026",
+   "route_id": "surveillant",
+   "reason": "Voie normale : concours de surveillant pénitentiaire"
+  },
+  {
+   "job_id": "fpjus026",
+   "route_id": "corps-78bc2eb29931",
+   "reason": "Voie normale : concours de surveillant pénitentiaire"
+  },
+  {
+   "job_id": "fpjus026",
+   "route_id": "corps-f2ef31da013b",
+   "reason": "Voie normale : concours de surveillant pénitentiaire"
+  },
+  {
+   "job_id": "fpjus027",
+   "route_id": "corps-143f2d97d76a",
+   "reason": "Chef de détention = officier pénitentiaire"
+  },
+  {
+   "job_id": "fpjus027",
+   "route_id": "dsp",
+   "reason": "Direction de la détention : DSP"
+  },
+  {
+   "job_id": "fpjus028",
+   "route_id": "surveillant",
+   "reason": "Missions exercées par des surveillants pénitentiaires"
+  },
+  {
+   "job_id": "fpjus028",
+   "route_id": "corps-78bc2eb29931",
+   "reason": "Missions exercées par des surveillants pénitentiaires"
+  },
+  {
+   "job_id": "fpjus028",
+   "route_id": "corps-f2ef31da013b",
+   "reason": "Missions exercées par des surveillants pénitentiaires"
+  },
+  {
+   "job_id": "fpjus029",
+   "route_id": "surveillant",
+   "reason": "Missions exercées par des surveillants pénitentiaires"
+  },
+  {
+   "job_id": "fpjus029",
+   "route_id": "corps-78bc2eb29931",
+   "reason": "Missions exercées par des surveillants pénitentiaires"
+  },
+  {
+   "job_id": "fpjus029",
+   "route_id": "corps-f2ef31da013b",
+   "reason": "Missions exercées par des surveillants pénitentiaires"
+  },
+  {
+   "job_id": "fpjus030",
+   "route_id": "corps-143f2d97d76a",
+   "reason": "Responsable de pôle d'escorte = officier pénitentiaire"
+  },
+  {
+   "job_id": "fpjus030",
+   "route_id": "surveillant",
+   "reason": "Encadrement B (premier surveillant) issu du corps des surveillants"
+  },
+  {
+   "job_id": "fpjus031",
+   "route_id": "commissaire",
+   "reason": "OMP près le tribunal de police : commissaire de police"
+  },
+  {
+   "job_id": "fpjus031",
+   "route_id": "officier-police",
+   "reason": "OMP : à défaut, officier de police"
+  },
+  {
+   "job_id": "fplog003",
+   "route_id": "adjoint-adm",
+   "reason": "Gestion du courrier : adjoint administratif"
+  },
+  {
+   "job_id": "fplog017",
+   "route_id": "agent-maitrise",
+   "reason": "Coordination d'équipes de collecte : agent de maîtrise territorial"
+  },
+  {
+   "job_id": "fplog036",
+   "route_id": "tech-terr",
+   "reason": "Corps technicien/adjoint technique adapté à l'électromécanique"
+  },
+  {
+   "job_id": "fplog036",
+   "route_id": "tsdd",
+   "reason": "Corps technicien/adjoint technique adapté à l'électromécanique"
+  },
+  {
+   "job_id": "fplog036",
+   "route_id": "corps-5476869dee76",
+   "reason": "Corps technicien/adjoint technique adapté à l'électromécanique"
+  },
+  {
+   "job_id": "fplog036",
+   "route_id": "adj-tech-terr",
+   "reason": "Corps technicien/adjoint technique adapté à l'électromécanique"
+  },
+  {
+   "job_id": "fplog036",
+   "route_id": "adj-tech-etat",
+   "reason": "Corps technicien/adjoint technique adapté à l'électromécanique"
+  },
+  {
+   "job_id": "fplog036",
+   "route_id": "corps-3bcfcbcc7eb5",
+   "reason": "Corps technicien/adjoint technique adapté à l'électromécanique"
+  },
+  {
+   "job_id": "fplog055",
+   "route_id": "corps-423d9c5175ba",
+   "reason": "Encadrement de blanchisserie/bio-nettoyage hospitalier : agent de maîtrise hospitalier"
+  },
+  {
+   "job_id": "fplog060",
+   "route_id": "corps-423d9c5175ba",
+   "reason": "Encadrement de blanchisserie/bio-nettoyage hospitalier : agent de maîtrise hospitalier"
+  },
+  {
+   "job_id": "fplog061",
+   "route_id": "corps-423d9c5175ba",
+   "reason": "Encadrement de blanchisserie/bio-nettoyage hospitalier : agent de maîtrise hospitalier"
+  },
+  {
+   "job_id": "fplog066",
+   "route_id": "tsef",
+   "reason": "Technicien d'études et fabrications (Défense) : voie technique armement"
+  },
+  {
+   "job_id": "fplog081",
+   "route_id": "ash",
+   "reason": "Le bionettoyage hospitalier est le cœur de métier des agents des services hospitaliers (ASH)."
+  },
+  {
+   "job_id": "fplog082",
+   "route_id": "ash",
+   "reason": "Les agents de stérilisation sont majoritairement recrutés comme ASH (ou OP)."
+  },
+  {
+   "job_id": "fpmed001",
+   "route_id": "manip",
+   "reason": "Les dosimétristes hospitaliers sont des manipulateurs en électroradiologie médicale spécialisés."
+  },
+  {
+   "job_id": "fpmed002",
+   "route_id": "ingenieur-hosp",
+   "reason": "À l'hôpital, les physiciens médicaux sont recrutés comme ingénieurs hospitaliers ou contractuels."
+  },
+  {
+   "job_id": "fpmed004",
+   "route_id": "ingenieur-hosp",
+   "reason": "À l'hôpital, les physiciens médicaux sont recrutés comme ingénieurs hospitaliers ou contractuels."
+  },
+  {
+   "job_id": "fpmed006",
+   "route_id": "corps-a858c23e1fd9",
+   "reason": "Corps hospitalier propre aux diététiciens."
+  },
+  {
+   "job_id": "fpmed007",
+   "route_id": "corps-25c5d13bcc67",
+   "reason": "Corps hospitalier propre aux ergothérapeutes."
+  },
+  {
+   "job_id": "fpmed008",
+   "route_id": "corps-5262c8692a47",
+   "reason": "Corps hospitalier propre aux masseur-kinésithérapeutes."
+  },
+  {
+   "job_id": "fpmed009",
+   "route_id": "corps-05649e6ff27a",
+   "reason": "Corps hospitalier propre aux orthophonistes."
+  },
+  {
+   "job_id": "fpmed014",
+   "route_id": "corps-d785cb350fca",
+   "reason": "Corps hospitalier propre aux psychomotriciens."
+  },
+  {
+   "job_id": "fpmed018",
+   "route_id": "corps-0e034401a009",
+   "reason": "Les techniciens de laboratoire médical réalisent les prélèvements."
+  },
+  {
+   "job_id": "fpmed021",
+   "route_id": "corps-3bcfcbcc7eb5",
+   "reason": "Ouvrier principal : corps technique C naturel pour la production en pharmacie hospitalière."
+  },
+  {
+   "job_id": "fpmed029",
+   "route_id": "corps-fe7341cee5b3",
+   "reason": "Corps des préparateurs en pharmacie hospitalière."
+  },
+  {
+   "job_id": "fpmed035",
+   "route_id": "corps-59d7c76139ef",
+   "reason": "Corps des sages-femmes hospitalières."
+  },
+  {
+   "job_id": "fpmed042",
+   "route_id": "corps-4a204be7001d",
+   "reason": "Corps spécifique des infirmiers anesthésistes (IADE)."
+  },
+  {
+   "job_id": "fpmed043",
+   "route_id": "corps-a68e56a74959",
+   "reason": "Corps des auxiliaires médicaux en pratique avancée (IPA)."
+  },
+  {
+   "job_id": "fpnum006",
+   "route_id": "tech-si",
+   "reason": "Technicien des systèmes d'information : corps État B du numérique."
+  },
+  {
+   "job_id": "fpnum013",
+   "route_id": "tech-si",
+   "reason": "Technicien des systèmes d'information : corps État B du numérique."
+  },
+  {
+   "job_id": "fpnum017",
+   "route_id": "tech-si",
+   "reason": "Technicien des systèmes d'information : corps État B du numérique."
+  },
+  {
+   "job_id": "fpnum018",
+   "route_id": "tech-si",
+   "reason": "Technicien des systèmes d'information : corps État B du numérique."
+  },
+  {
+   "job_id": "fpnum019",
+   "route_id": "tech-si",
+   "reason": "Technicien des systèmes d'information : corps État B du numérique."
+  },
+  {
+   "job_id": "fpnum020",
+   "route_id": "tech-si",
+   "reason": "Technicien des systèmes d'information : corps État B du numérique."
+  },
+  {
+   "job_id": "fpnum021",
+   "route_id": "tech-si",
+   "reason": "Technicien des systèmes d'information : corps État B du numérique."
+  },
+  {
+   "job_id": "fpnum022",
+   "route_id": "tech-si",
+   "reason": "Technicien des systèmes d'information : corps État B du numérique."
+  },
+  {
+   "job_id": "fpnum026",
+   "route_id": "tech-si",
+   "reason": "Technicien des systèmes d'information : corps État B du numérique."
+  },
+  {
+   "job_id": "fpnum036",
+   "route_id": "tech-si",
+   "reason": "Technicien des systèmes d'information : corps État B du numérique."
+  },
+  {
+   "job_id": "fpnum043",
+   "route_id": "tech-si",
+   "reason": "Technicien des systèmes d'information : corps État B du numérique."
+  },
+  {
+   "job_id": "fpnum045",
+   "route_id": "tech-si",
+   "reason": "Technicien des systèmes d'information : corps État B du numérique."
+  },
+  {
+   "job_id": "fpnum046",
+   "route_id": "attache",
+   "reason": "DPO : fonction juridique de catégorie A, attaché = corps généraliste naturel (État)."
+  },
+  {
+   "job_id": "fpnum046",
+   "route_id": "attache-terr",
+   "reason": "DPO en collectivité : attaché territorial (filière administrative)."
+  },
+  {
+   "job_id": "fpnum046",
+   "route_id": "aah",
+   "reason": "DPO à l'hôpital : attaché d'administration hospitalière."
+  },
+  {
+   "job_id": "fprch003",
+   "route_id": "chercheur",
+   "reason": "Les directeurs de laboratoire sont des chercheurs (DR/CR)."
+  },
+  {
+   "job_id": "fprch007",
+   "route_id": "chercheur",
+   "reason": "Concours de chargé de recherche."
+  },
+  {
+   "job_id": "fprch114",
+   "route_id": "trf",
+   "reason": "Corps des techniciens de recherche et de formation, voie normale pour un technicien en archéologie/archéométrie."
+  },
+  {
+   "job_id": "fprch040",
+   "route_id": "trf",
+   "reason": "Technicien de recherche et de formation : corps REFERENS de ce métier."
+  },
+  {
+   "job_id": "fprch107",
+   "route_id": "trf",
+   "reason": "Corps TRF, voie normale pour un technicien en information géographique (REFERENS)."
+  },
+  {
+   "job_id": "fpren009",
+   "route_id": "attache",
+   "reason": "Les analystes du renseignement (DGSI, ministère de l'Intérieur) sont aussi recrutés parmi les attachés d'administration de l'État ; voie A non policière manquante."
+  },
+  {
+   "job_id": "fpren017",
+   "route_id": "attache",
+   "reason": "Police administrative (mesures d'entrave) : gestion juridico-administrative, corps des attachés"
+  },
+  {
+   "job_id": "fpren019",
+   "route_id": "attache",
+   "reason": "Pilotage de la police administrative : fonction administrative A, attaché naturel"
+  },
+  {
+   "job_id": "fpsan003",
+   "route_id": "ingenieur-hosp",
+   "reason": "Bio-informaticien en CHU : ingénieur hospitalier"
+  },
+  {
+   "job_id": "fpsan003",
+   "route_id": "ie",
+   "reason": "Bio-informaticien côté État (recherche) : ingénieur d'études"
+  },
+  {
+   "job_id": "fpsan004",
+   "route_id": "ingenieur-hosp",
+   "reason": "Analyse de données PMSI/DIM : souvent ingénieur hospitalier"
+  },
+  {
+   "job_id": "fpsan024",
+   "route_id": "corps-09f80b8586a1",
+   "reason": "Corps des ambulanciers de la FPH"
+  },
+  {
+   "job_id": "fpsan025",
+   "route_id": "ash",
+   "reason": "Brancardiers recrutés parmi les agents des services hospitaliers"
+  },
+  {
+   "job_id": "fpsan026",
+   "route_id": "corps-09f80b8586a1",
+   "reason": "Encadrant transport sanitaire issu du corps des ambulanciers"
+  },
+  {
+   "job_id": "fpsan027",
+   "route_id": "ingenieur-hosp",
+   "reason": "Responsable biomédical : ingénieur hospitalier"
+  },
+  {
+   "job_id": "fpsan027",
+   "route_id": "corps-5476869dee76",
+   "reason": "Responsable biomédical B : technicien supérieur hospitalier"
+  },
+  {
+   "job_id": "fpsan028",
+   "route_id": "cadre-sante",
+   "reason": "Cadre de santé paramédical = voie normale d'encadrement d'unité de soins"
+  },
+  {
+   "job_id": "fpsan030",
+   "route_id": "corps-5476869dee76",
+   "reason": "Technicien biomédical : technicien supérieur hospitalier"
+  },
+  {
+   "job_id": "fpsan031",
+   "route_id": "corps-5476869dee76",
+   "reason": "Bio-hygiéniste : technicien supérieur hospitalier"
+  },
+  {
+   "job_id": "fpsan031",
+   "route_id": "corps-0e034401a009",
+   "reason": "Bio-hygiéniste : technicien de laboratoire hospitalier"
+  },
+  {
+   "job_id": "fpsan032",
+   "route_id": "ide",
+   "reason": "Infirmier·ère hygiéniste : concours infirmier"
+  },
+  {
+   "job_id": "fpsan033",
+   "route_id": "ingenieur-hosp",
+   "reason": "Corps des ingénieurs hospitaliers"
+  },
+  {
+   "job_id": "fpsan034",
+   "route_id": "ingenieur-hosp",
+   "reason": "Conseiller en ingénierie biomédicale A : ingénieur hospitalier"
+  },
+  {
+   "job_id": "fpsan034",
+   "route_id": "corps-5476869dee76",
+   "reason": "Niveau B : technicien supérieur hospitalier"
+  },
+  {
+   "job_id": "fpsan035",
+   "route_id": "cadre-sante",
+   "reason": "Conseiller technique paramédical : cadre de santé"
+  },
+  {
+   "job_id": "fpsan044",
+   "route_id": "adj-tech-terr",
+   "reason": "Agents d'hygiène des collectivités : adjoint technique territorial"
+  },
+  {
+   "job_id": "fpsec002",
+   "route_id": "attache",
+   "reason": "SGZDS : nombreux attachés d'administration de l'État"
+  },
+  {
+   "job_id": "fpsec006",
+   "route_id": "sous-off-gend",
+   "reason": "Sécurité publique générale assurée aussi par les sous-officiers de gendarmerie"
+  },
+  {
+   "job_id": "fpsec010",
+   "route_id": "sous-off-gend",
+   "reason": "Interventions spécialisées (GIGN, PSIG) : sous-officiers de gendarmerie"
+  },
+  {
+   "job_id": "fpsec012",
+   "route_id": "sous-off-gend",
+   "reason": "Enquêteurs de police judiciaire en gendarmerie : sous-officiers (OPJ)"
+  },
+  {
+   "job_id": "fpsec014",
+   "route_id": "corps-4f5fac5ddf0f",
+   "reason": "Responsable PTS : ingénieur de police technique et scientifique"
+  },
+  {
+   "job_id": "fpsec015",
+   "route_id": "corps-4f5fac5ddf0f",
+   "reason": "PTS : corps des ingénieurs de police technique et scientifique"
+  },
+  {
+   "job_id": "fpsec016",
+   "route_id": "corps-4f5fac5ddf0f",
+   "reason": "Laboratoires de police scientifique : ingénieurs PTS"
+  },
+  {
+   "job_id": "fpsec016",
+   "route_id": "ingenieur-hosp",
+   "reason": "Laboratoires hospitaliers : ingénieur hospitalier"
+  },
+  {
+   "job_id": "fpsec016",
+   "route_id": "ingenieur-terr",
+   "reason": "Laboratoires départementaux : ingénieur territorial"
+  },
+  {
+   "job_id": "fpsec017",
+   "route_id": "corps-4f5fac5ddf0f",
+   "reason": "Ingénieurs de police technique et scientifique"
+  },
+  {
+   "job_id": "fpsec017",
+   "route_id": "ingenieur-hosp",
+   "reason": "Cadre de laboratoire hospitalier : ingénieur hospitalier"
+  },
+  {
+   "job_id": "fpsec018",
+   "route_id": "corps-4f5fac5ddf0f",
+   "reason": "Ingénieurs de police technique et scientifique"
+  },
+  {
+   "job_id": "fpsec019",
+   "route_id": "insp-douane",
+   "reason": "Contrôle des flux de marchandises aux frontières : inspecteurs des douanes"
+  },
+  {
+   "job_id": "fpsec020",
+   "route_id": "ctrl-douane",
+   "reason": "Contrôle des flux aux frontières : contrôleurs des douanes"
+  },
+  {
+   "job_id": "fpsec022",
+   "route_id": "sa",
+   "reason": "Préfectures (SIDPC) : secrétaire administratif"
+  },
+  {
+   "job_id": "fpsec022",
+   "route_id": "redacteur",
+   "reason": "Collectivités : rédacteur territorial"
+  },
+  {
+   "job_id": "fpsec029",
+   "route_id": "attache",
+   "reason": "Planification et coordination de crise en préfecture : attaché"
+  },
+  {
+   "job_id": "fpsec030",
+   "route_id": "attache",
+   "reason": "Planification de sécurité civile en préfecture : attaché"
+  },
+  {
+   "job_id": "fpsec032",
+   "route_id": "tech-terr",
+   "reason": "Prévention des risques en collectivité : technicien territorial"
+  },
+  {
+   "job_id": "fpsec032",
+   "route_id": "sa",
+   "reason": "Prévention des risques côté État : secrétaire administratif"
+  },
+  {
+   "job_id": "fpsec033",
+   "route_id": "attache",
+   "reason": "Animation d'une politique de prévention des risques : attaché"
+  },
+  {
+   "job_id": "fpsec033",
+   "route_id": "attache-terr",
+   "reason": "Animation d'une politique de prévention des risques : attaché"
+  },
+  {
+   "job_id": "fpsec033",
+   "route_id": "tech-terr",
+   "reason": "Niveau B en collectivité : technicien territorial"
+  },
+  {
+   "job_id": "fpsec035",
+   "route_id": "attache",
+   "reason": "Responsable PCA : attaché (État/territorial)"
+  },
+  {
+   "job_id": "fpsec035",
+   "route_id": "attache-terr",
+   "reason": "Responsable PCA : attaché (État/territorial)"
+  },
+  {
+   "job_id": "fpsec037",
+   "route_id": "colonel",
+   "reason": "DDSIS issu des colonels de sapeurs-pompiers professionnels"
+  },
+  {
+   "job_id": "fpsec039",
+   "route_id": "spp",
+   "reason": "Chefs de centre issus des sapeurs-pompiers professionnels"
+  },
+  {
+   "job_id": "fpsec040",
+   "route_id": "spp",
+   "reason": "Sapeur-pompier professionnel"
+  },
+  {
+   "job_id": "fpsec041",
+   "route_id": "spp",
+   "reason": "Sapeur-pompier professionnel"
+  },
+  {
+   "job_id": "fpsec042",
+   "route_id": "spp",
+   "reason": "Opérateurs CTA souvent sapeurs-pompiers professionnels"
+  },
+  {
+   "job_id": "fpsec046",
+   "route_id": "adj-patrimoine",
+   "reason": "Collectivités : adjoint territorial du patrimoine (surveillance des salles)"
+  },
+  {
+   "job_id": "fpsec046",
+   "route_id": "adj-tech-etat",
+   "reason": "État (culture) : adjoint technique d'accueil, de surveillance et de magasinage"
+  },
+  {
+   "job_id": "fpsec047",
+   "route_id": "adj-tech-terr",
+   "reason": "Agents de sécurité des bâtiments : filière technique (adjoint technique / ouvrier hospitalier)"
+  },
+  {
+   "job_id": "fpsec047",
+   "route_id": "adj-tech-etat",
+   "reason": "Agents de sécurité des bâtiments : filière technique (adjoint technique / ouvrier hospitalier)"
+  },
+  {
+   "job_id": "fpsec047",
+   "route_id": "corps-3bcfcbcc7eb5",
+   "reason": "Agents de sécurité des bâtiments : filière technique (adjoint technique / ouvrier hospitalier)"
+  },
+  {
+   "job_id": "fpsec048",
+   "route_id": "adj-tech-terr",
+   "reason": "ASVP souvent recrutés comme adjoints techniques territoriaux"
+  },
+  {
+   "job_id": "fpsec049",
+   "route_id": "adj-tech-terr",
+   "reason": "Ports décentralisés : adjoint technique territorial"
+  },
+  {
+   "job_id": "fpsec050",
+   "route_id": "adj-tech-terr",
+   "reason": "Agent de PC/sécurité : adjoint technique"
+  },
+  {
+   "job_id": "fpsec050",
+   "route_id": "adj-tech-etat",
+   "reason": "Agent de PC/sécurité : adjoint technique"
+  },
+  {
+   "job_id": "fpsec052",
+   "route_id": "agent-maitrise",
+   "reason": "Encadrement d'équipes techniques en collectivité : agent de maîtrise"
+  },
+  {
+   "job_id": "fpsec053",
+   "route_id": "tech-terr",
+   "reason": "Chef SSI : technicien territorial / technicien hospitalier"
+  },
+  {
+   "job_id": "fpsec053",
+   "route_id": "corps-c982d9b9fb7d",
+   "reason": "Chef SSI : technicien territorial / technicien hospitalier"
+  },
+  {
+   "job_id": "fpsec054",
+   "route_id": "adj-tech-terr",
+   "reason": "Agents SSIAP : adjoint technique / ouvrier hospitalier"
+  },
+  {
+   "job_id": "fpsec054",
+   "route_id": "adj-tech-etat",
+   "reason": "Agents SSIAP : adjoint technique / ouvrier hospitalier"
+  },
+  {
+   "job_id": "fpsec054",
+   "route_id": "corps-3bcfcbcc7eb5",
+   "reason": "Agents SSIAP : adjoint technique / ouvrier hospitalier"
+  },
+  {
+   "job_id": "fpsec055",
+   "route_id": "attache",
+   "reason": "Pilotage de la politique de sûreté : attaché"
+  },
+  {
+   "job_id": "fpsec055",
+   "route_id": "attache-terr",
+   "reason": "Pilotage de la politique de sûreté : attaché"
+  },
+  {
+   "job_id": "fpsec056",
+   "route_id": "admin-etat",
+   "reason": "HFDS issu de la haute fonction publique (administrateurs de l'État)"
+  },
+  {
+   "job_id": "fpsec059",
+   "route_id": "itpe",
+   "reason": "Risques naturels : ITPE/TSDD (État), ingénieur/technicien territorial"
+  },
+  {
+   "job_id": "fpsec059",
+   "route_id": "tsdd",
+   "reason": "Risques naturels : ITPE/TSDD (État), ingénieur/technicien territorial"
+  },
+  {
+   "job_id": "fpsec059",
+   "route_id": "ingenieur-terr",
+   "reason": "Risques naturels : ITPE/TSDD (État), ingénieur/technicien territorial"
+  },
+  {
+   "job_id": "fpsec059",
+   "route_id": "tech-terr",
+   "reason": "Risques naturels : ITPE/TSDD (État), ingénieur/technicien territorial"
+  },
+  {
+   "job_id": "fpsoc001",
+   "route_id": "admin-terr",
+   "reason": "Directeur de l'action sociale en collectivité"
+  },
+  {
+   "job_id": "fpsoc001",
+   "route_id": "attache-terr",
+   "reason": "Directeur de l'action sociale en collectivité"
+  },
+  {
+   "job_id": "fpsoc001",
+   "route_id": "ctse",
+   "reason": "Directeur de l'action sociale en collectivité"
+  },
+  {
+   "job_id": "fpsoc017",
+   "route_id": "ctse",
+   "reason": "Conseiller territorial socio-éducatif : cadre d'emplois A naturel de l'encadrement socio-éducatif territorial."
+  },
+  {
+   "job_id": "fpsoc018",
+   "route_id": "attache",
+   "reason": "Attaché d'administration de l'État : voie naturelle (A) pour les délégués aux droits des femmes en préfecture."
+  },
+  {
+   "job_id": "fpsoc019",
+   "route_id": "ctse",
+   "reason": "Conseiller territorial socio-éducatif : cadre A naturel pour l'encadrement de l'ASE en département."
+  },
+  {
+   "job_id": "fpsoc020",
+   "route_id": "ctse",
+   "reason": "Conseiller territorial socio-éducatif : cadre A naturel pour un responsable territorial d'action sociale."
+  },
+  {
+   "job_id": "fpsoc021",
+   "route_id": "eje-terr",
+   "reason": "Éducateur territorial de jeunes enfants : cadre d'emplois propre au métier."
+  },
+  {
+   "job_id": "fpsoc022",
+   "route_id": "atsem",
+   "reason": "ATSEM : concours territorial accessible avec le CAP AEPE, voie directe vers les fonctions petite enfance."
+  },
+  {
+   "job_id": "fptra013",
+   "route_id": "tsef",
+   "reason": "Technicien supérieur d'études et de fabrications (ministère des Armées, SIAé) : voie naturelle pour la maintenance aéronautique d'État en B."
+  },
+  {
+   "job_id": "fptra033",
+   "route_id": "tech-terr",
+   "reason": "Technicien territorial : voie naturelle en B pour la sécurité routière dans les collectivités."
+  },
+  {
+   "job_id": "fpusa005",
+   "route_id": "adj-tech-terr",
+   "reason": "Adjoint technique territorial : cadre d'emplois normal des gardiens d'immeuble."
+  },
+  {
+   "job_id": "fpusa023",
+   "route_id": "adjoint-adm",
+   "reason": "En mairie, l'état civil est tenu surtout par des adjoints administratifs territoriaux (officiers d'état civil délégués)."
+  },
+  {
+   "job_id": "fpusa025",
+   "route_id": "adj-tech-terr",
+   "reason": "Adjoint technique territorial : cadre d'emplois normal des agents funéraires."
+  },
+  {
+   "job_id": "fpusa028",
+   "route_id": "adj-tech-terr",
+   "reason": "Adjoint technique territorial : cadre d'emplois normal en régie funéraire."
+  },
+  {
+   "job_id": "fpusa029",
+   "route_id": "adj-tech-terr",
+   "reason": "Adjoint technique territorial : cadre d'emplois normal des opérateurs de crémation."
+  },
+  {
+   "job_id": "fpusa032",
+   "route_id": "corps-09789e66a53a",
+   "reason": "On devient délégué après avoir été inspecteur du permis de conduire, puis par concours interne ou promotion."
+  },
+  {
+   "job_id": "fpusa033",
+   "route_id": "corps-09789e66a53a",
+   "reason": "Corps des inspecteurs du permis de conduire et de la sécurité routière : la voie exacte."
+  },
+  {
+   "job_id": "fpusa034",
+   "route_id": "tech-terr",
+   "reason": "Les responsables de restauration territoriaux relèvent souvent de la filière technique (technicien territorial)."
+  },
+  {
+   "job_id": "fpusa034",
+   "route_id": "corps-c982d9b9fb7d",
+   "reason": "À l'hôpital, la restauration est encadrée par des techniciens hospitaliers."
+  },
+  {
+   "job_id": "fpusa039",
+   "route_id": "tech-terr",
+   "reason": "Les responsables de restauration territoriaux relèvent souvent de la filière technique (technicien territorial)."
+  },
+  {
+   "job_id": "fpusa039",
+   "route_id": "corps-c982d9b9fb7d",
+   "reason": "À l'hôpital, la restauration est encadrée par des techniciens hospitaliers."
+  },
+  {
+   "job_id": "fpusa035",
+   "route_id": "tech-terr",
+   "reason": "Technicien territorial : voie naturelle pour la qualité en restauration collective."
+  },
+  {
+   "job_id": "fpusa035",
+   "route_id": "corps-c982d9b9fb7d",
+   "reason": "Technicien hospitalier : voie naturelle pour la qualité en restauration hospitalière."
+  },
+  {
+   "job_id": "fpusa037",
+   "route_id": "adj-tech-etat",
+   "reason": "Adjoint technique de l'État : cadre normal des personnels de service et d'hôtellerie des ministères."
+  },
+  {
+   "job_id": "fpusa037",
+   "route_id": "adj-tech-terr",
+   "reason": "Adjoint technique territorial : cadre normal des personnels de restauration et de service."
+  },
+  {
+   "job_id": "fpusa038",
+   "route_id": "adj-tech-etat",
+   "reason": "Adjoint technique de l'État : cadre normal des personnels de service et d'hôtellerie des ministères."
+  },
+  {
+   "job_id": "fpusa038",
+   "route_id": "adj-tech-terr",
+   "reason": "Adjoint technique territorial : cadre normal des personnels de restauration et de service."
+  },
+  {
+   "job_id": "fpusa041",
+   "route_id": "adj-tech-etat",
+   "reason": "Adjoint technique de l'État : cadre normal du service en restaurant administratif."
+  },
+  {
+   "job_id": "fpusa041",
+   "route_id": "adj-tech-terr",
+   "reason": "Adjoint technique territorial : cadre normal du service de restauration collective."
+  },
+  {
+   "job_id": "fpsan011",
+   "route_id": "corps-e8169521ead8",
+   "reason": "Corps des médecins de l’Éducation nationale."
+  },
+  {
+   "job_id": "fpctl006",
+   "route_id": "magistrat-crc",
+   "reason": "Concours de conseiller de chambre régionale des comptes, en plus de la voie INSP."
+  }
+ ],
+ "doubt": [
+  {
+   "job_id": "fpagr025",
+   "route_id": "tsdd",
+   "reason": "Mission économique : corps administratif (SA) plus naturel que TSDD ; éventuellement TSMA, pas TSDD"
+  },
+  {
+   "job_id": "fpagr022",
+   "route_id": "itpe",
+   "reason": "ITPE présents en DDT(M) mais la voie normale pour la politique agricole/rurale est IAE (absent) ou attaché ; correspondance faible"
+  },
+  {
+   "job_id": "fpagr026",
+   "route_id": "itpe",
+   "reason": "ITPE présents en DDT(M) mais la voie normale pour la politique agricole/rurale est IAE (absent) ou attaché ; correspondance faible"
+  },
+  {
+   "job_id": "fpagr027",
+   "route_id": "itpe",
+   "reason": "ITPE présents en DDT(M) mais la voie normale pour la politique agricole/rurale est IAE (absent) ou attaché ; correspondance faible"
+  },
+  {
+   "job_id": "fpagr023",
+   "route_id": "itpe",
+   "reason": "Politique agricole et rurale : IAE ou attaché plus naturels que ITPE"
+  },
+  {
+   "job_id": "fpagr023",
+   "route_id": "tsdd",
+   "reason": "Politique agricole : TSMA plus naturel que TSDD"
+  },
+  {
+   "job_id": "fpagr032",
+   "route_id": "itpe",
+   "reason": "Filière forêt-bois : voie normale IAE / IPEF ; ITPE possible en DDT mais marginal"
+  },
+  {
+   "job_id": "fpagr032",
+   "route_id": "tsdd",
+   "reason": "Filière forêt-bois : voie normale TSMA (spécialité forêt) ; TSDD marginal"
+  },
+  {
+   "job_id": "fpagr031",
+   "route_id": "tsdd",
+   "reason": "Technicien terroir/signes de qualité (INAO, DRAAF) : TSMA plutôt que TSDD"
+  },
+  {
+   "job_id": "fpagr031",
+   "route_id": "corps-cc4af259e81d",
+   "reason": "À vérifier : si 'Techniciens supérieurs' désigne les TSMA (Agriculture), c'est la bonne voie B pour ce métier et pour les métiers SSA (fpagr001-018, 021)"
+  },
+  {
+   "job_id": "fpagr021",
+   "route_id": "corps-cc4af259e81d",
+   "reason": "Idem : à ajouter si ce corps = techniciens supérieurs du ministère de l'Agriculture"
+  },
+  {
+   "job_id": "fpamt011",
+   "route_id": "ingenieur-chef",
+   "reason": "Développement territorial = surtout développement économique/administratif ; ingénieur en chef possible seulement si orientation aménagement"
+  },
+  {
+   "job_id": "fpamt011",
+   "route_id": "ingenieur-terr",
+   "reason": "Idem : direction du développement territorial relève plutôt de la filière administrative"
+  },
+  {
+   "job_id": "fpamt029",
+   "route_id": "ingenieur-terr",
+   "reason": "Politique de l'habitat souvent portée par la filière administrative ; ingénieur possible côté opérationnel"
+  },
+  {
+   "job_id": "fpamt029",
+   "route_id": "tech-terr",
+   "reason": "Idem, technicien possible mais rédacteur plus courant"
+  },
+  {
+   "job_id": "fpamt030",
+   "route_id": "ingenieur-terr",
+   "reason": "Politiques du logement : attaché territorial plus naturel que ingénieur"
+  },
+  {
+   "job_id": "fpamt035",
+   "route_id": "itpe",
+   "reason": "Politique sociale du logement : souvent attachés en DDETS/DDT ; ITPE possible mais moins naturel"
+  },
+  {
+   "job_id": "fpamt036",
+   "route_id": "itpe",
+   "reason": "Programmation budgétaire = fonction financière, attaché plus naturel"
+  },
+  {
+   "job_id": "fpamt036",
+   "route_id": "tsdd",
+   "reason": "Programmation budgétaire = fonction financière, SA plus naturel"
+  },
+  {
+   "job_id": "fpamt037",
+   "route_id": "ingenieur-terr",
+   "reason": "Financement du logement social = surtout filière administrative"
+  },
+  {
+   "job_id": "fpamt037",
+   "route_id": "tech-terr",
+   "reason": "Financement du logement social = surtout filière administrative"
+  },
+  {
+   "job_id": "fpamt044",
+   "route_id": "corps-5476869dee76",
+   "reason": "Ingénierie aéronautique : quasi inexistant en hospitalière"
+  },
+  {
+   "job_id": "fpamt048",
+   "route_id": "itpe",
+   "reason": "Police de l'urbanisme et contentieux = fonction juridique, attaché plus naturel (ITPE possible)"
+  },
+  {
+   "job_id": "fpamt025",
+   "route_id": "tech-terr",
+   "reason": "Mission de contrôle régalienne de l'État : peu de débouché territorial"
+  },
+  {
+   "job_id": "fpasp010",
+   "route_id": "adj-anim",
+   "reason": "Animation de relais petite enfance confiée surtout à des EJE/CESF ; adjoint d'animation peu habituel"
+  },
+  {
+   "job_id": "fpasp025",
+   "route_id": "attache-terr",
+   "reason": "Recrutement de SHN par conventions d'insertion, attaché territorial possible mais non spécifique"
+  },
+  {
+   "job_id": "fpasp025",
+   "route_id": "aah",
+   "reason": "Idem, aucune voie spécifique SHN en hospitalière"
+  },
+  {
+   "job_id": "fpcom016",
+   "route_id": "redacteur",
+   "reason": "Photographe : métier technique, recruté plutôt en filière technique (adjoint technique/technicien) qu'en rédacteur"
+  },
+  {
+   "job_id": "fpcom016",
+   "route_id": "sa",
+   "reason": "Photographe : métier technique, le corps de secrétaire administratif n'est pas la voie naturelle"
+  },
+  {
+   "job_id": "fpctl005",
+   "route_id": "sa",
+   "reason": "Contrôle technique d'exploitation aéronautique (DGAC) : relève des TSEEAC, corps technique absent de la liste ; corps administratif peu adapté"
+  },
+  {
+   "job_id": "fpctl005",
+   "route_id": "adjoint-adm",
+   "reason": "Contrôle technique d'exploitation aéronautique (DGAC) : relève des TSEEAC, corps technique absent de la liste ; corps administratif peu adapté"
+  },
+  {
+   "job_id": "fpctl036",
+   "route_id": "admin-etat",
+   "reason": "Statisticiens A+ = administrateurs de l'INSEE (corps absent de la liste) ; administrateur de l'État discutable"
+  },
+  {
+   "job_id": "fpctl036",
+   "route_id": "admin-terr",
+   "reason": "Administrateur territorial = direction générale de collectivité, peu pertinent pour un statisticien"
+  },
+  {
+   "job_id": "fpcul012",
+   "route_id": "corps-08e8a6d6b236",
+   "reason": "Régisseur d'œuvres (musées) : plutôt chargé d'études documentaires/assistant de conservation que bibliothécaire"
+  },
+  {
+   "job_id": "fpcul014",
+   "route_id": "corps-08e8a6d6b236",
+   "reason": "Instruction/contrôle d'opérations patrimoniales (DRAC) : plutôt ingénieurs des services culturels ou attachés que bibliothécaires"
+  },
+  {
+   "job_id": "fpcul017",
+   "route_id": "acp",
+   "reason": "Assistant de conservation : possible pour la restauration en collectivité, mais les métiers d'art relèvent plutôt de la filière technique"
+  },
+  {
+   "job_id": "fpdef018",
+   "route_id": "corps-f25b82f071a5",
+   "reason": "La gendarmerie a des pilotes d'hélicoptère, mais le métier vise les forces armées (Terre/Marine/Air), recrutées hors concours FP"
+  },
+  {
+   "job_id": "fpdef018",
+   "route_id": "sous-off-gend",
+   "reason": "La gendarmerie a des pilotes d'hélicoptère, mais le métier vise les forces armées (Terre/Marine/Air), recrutées hors concours FP"
+  },
+  {
+   "job_id": "fpdef027",
+   "route_id": "",
+   "reason": "Assurance qualité des fournitures (DGA) : ingénieurs d'études et fabrications/IETA absents de la liste ; aucune voie pertinente proposée après rejet"
+  },
+  {
+   "job_id": "fpdir009",
+   "route_id": "dh",
+   "reason": "Les DH peuvent diriger certains ESMS, mais la voie naturelle est le concours D3S."
+  },
+  {
+   "job_id": "fpdir017",
+   "route_id": "attache",
+   "reason": "Les sous-préfets sont surtout issus des administrateurs de l'État ; un attaché n'y accède qu'exceptionnellement (après promotion)."
+  },
+  {
+   "job_id": "fpdir034",
+   "route_id": "adjoint-adm",
+   "reason": "Médiateur de la police nationale : fonction d'encadrement/expertise, un poste C semble peu plausible."
+  },
+  {
+   "job_id": "fpdoc001",
+   "route_id": "conservateur",
+   "reason": "Les conservateurs ne sont pas une voie naturelle vers la terminologie (souvent contractuels, traducteurs ou chargés d'études)."
+  },
+  {
+   "job_id": "fpdoc001",
+   "route_id": "conservateur-bib",
+   "reason": "Les conservateurs ne sont pas une voie naturelle vers la terminologie (souvent contractuels, traducteurs ou chargés d'études)."
+  },
+  {
+   "job_id": "fpdoc005",
+   "route_id": "aah",
+   "reason": "L'attaché hospitalier n'est guère une voie vers une politique éditoriale de collection."
+  },
+  {
+   "job_id": "fpdoc017",
+   "route_id": "adjoint-adm",
+   "reason": "Adjoint administratif : pas une voie naturelle vers le métier de bibliothécaire."
+  },
+  {
+   "job_id": "fpdoc017",
+   "route_id": "corps-9eeb8a61a6a9",
+   "reason": "Adjoint des cadres hospitaliers : pas une voie naturelle vers le métier de bibliothécaire."
+  },
+  {
+   "job_id": "fpens005",
+   "route_id": "capes",
+   "reason": "Pilotage de l'offre de formation en rectorat : surtout attachés ou personnels d'inspection ; le CAPES est indirect."
+  },
+  {
+   "job_id": "fpens012",
+   "route_id": "capes",
+   "reason": "Appui à la pédagogie (université) : surtout ingénieurs d'études ; un certifié peut y être détaché."
+  },
+  {
+   "job_id": "fpens016",
+   "route_id": "capes",
+   "reason": "Responsable FTLV : attachés / ingénieurs plutôt ; enseignants possibles par détachement (GRETA)."
+  },
+  {
+   "job_id": "fpens020",
+   "route_id": "capes",
+   "reason": "Ingénierie de formation : plutôt ingénieurs d'études ou attachés ; CAPES indirect."
+  },
+  {
+   "job_id": "fpenv014",
+   "route_id": "tech-terr",
+   "reason": "Contrôle des émissions/sécurité des véhicules : mission d'État (DREAL) ; versant territorial peu plausible."
+  },
+  {
+   "job_id": "fpenv015",
+   "route_id": "itpe",
+   "reason": "Exploitation forestière : plutôt ONF / ingénieurs de l'agriculture et de l'environnement ; ITPE indirect."
+  },
+  {
+   "job_id": "fpenv033",
+   "route_id": "ingenieur-terr",
+   "reason": "Police de la biodiversité : mission d'État (OFB) ; versant territorial douteux."
+  },
+  {
+   "job_id": "fpenv033",
+   "route_id": "tech-terr",
+   "reason": "Police de la biodiversité : mission d'État (OFB) ; versant territorial douteux."
+  },
+  {
+   "job_id": "fpenv041",
+   "route_id": "adj-tech-terr",
+   "reason": "Animateur environnement : filière animation plutôt que technique."
+  },
+  {
+   "job_id": "fpenv047",
+   "route_id": "tsdd",
+   "reason": "Instruction administrative des titres plutôt portée par SA/adjoints administratifs ; TSDD possible en service maritime mais pas la voie principale"
+  },
+  {
+   "job_id": "fpenv048",
+   "route_id": "adj-tech-etat",
+   "reason": "Instruction de dossiers plaisance = tâche administrative ; adjoint administratif plus naturel qu'adjoint technique"
+  },
+  {
+   "job_id": "fpenv054",
+   "route_id": "tech-terr",
+   "reason": "Métier quasi exclusivement exercé à Météo-France (État) ; existence en territoriale douteuse"
+  },
+  {
+   "job_id": "fpenv054",
+   "route_id": "adj-tech-terr",
+   "reason": "Métier de prévision météo exercé à Météo-France ; adjoint technique territorial peu plausible"
+  },
+  {
+   "job_id": "fpint015",
+   "route_id": "sa",
+   "reason": "Au MEAE, le corps B est secrétaire de chancellerie ; SA d'un autre ministère n'y mène qu'en détachement"
+  },
+  {
+   "job_id": "fpint016",
+   "route_id": "adjoint-adm",
+   "reason": "Au MEAE, la voie C est adjoint administratif de chancellerie (concours spécifique)"
+  },
+  {
+   "job_id": "fpint039",
+   "route_id": "attache",
+   "reason": "Conseiller technique sûreté : poste généralement tenu par des officiers de police/gendarmerie en détachement plutôt que par des attachés"
+  },
+  {
+   "job_id": "fpjus024",
+   "route_id": "adjoint-adm",
+   "reason": "Poste de responsable : adjoint administratif (C) peu plausible"
+  },
+  {
+   "job_id": "fplog001",
+   "route_id": "ipef",
+   "reason": "IPEF (corps technique supérieur) rarement la voie d'un directeur de la logistique"
+  },
+  {
+   "job_id": "fplog003",
+   "route_id": "corps-5476869dee76",
+   "reason": "Technicien hospitalier pour le courrier : peu plausible (fonction C)"
+  },
+  {
+   "job_id": "fplog004",
+   "route_id": "tsdd",
+   "reason": "TSDD (MTE) peu lié à la gestion de stocks"
+  },
+  {
+   "job_id": "fplog030",
+   "route_id": "tsdd",
+   "reason": "TSDD (MTE) peu lié au métier de magasinier"
+  },
+  {
+   "job_id": "fplog017",
+   "route_id": "tsdd",
+   "reason": "TSDD (MTE) peu lié à la collecte des déchets (compétence territoriale)"
+  },
+  {
+   "job_id": "fplog044",
+   "route_id": "ingenieur-terr",
+   "reason": "Ingénieur territorial : pas de spécialité imprimerie"
+  },
+  {
+   "job_id": "fplog059",
+   "route_id": "adj-tech-terr",
+   "reason": "Stérilisation : quasi exclusivement hospitalière"
+  },
+  {
+   "job_id": "fplog059",
+   "route_id": "adj-tech-etat",
+   "reason": "Stérilisation : quasi exclusivement hospitalière (hôpitaux militaires ?)"
+  },
+  {
+   "job_id": "fplog067",
+   "route_id": "tsef",
+   "reason": "TSEF (Défense) plausible pour un armurier B"
+  },
+  {
+   "job_id": "fplog074",
+   "route_id": "tsdd",
+   "reason": "TSDD (MTE) n'a pas de spécialité aéronautique ; les pilotes de l'État relèvent surtout de corps spécifiques (sécurité civile, douane, DGAC) ou de contrats."
+  },
+  {
+   "job_id": "fplog074",
+   "route_id": "tech-terr",
+   "reason": "Pilotage d'avions/hélicoptères rare en collectivité ; recrutement surtout contractuel."
+  },
+  {
+   "job_id": "fplog075",
+   "route_id": "itpe",
+   "reason": "Possible ponctuellement (topographie, ouvrages) mais pas une voie normale vers le métier de pilote de drone."
+  },
+  {
+   "job_id": "fplog075",
+   "route_id": "ingenieur-terr",
+   "reason": "Pilote de drone = surtout niveau technicien ; ingénieur territorial peu naturel."
+  },
+  {
+   "job_id": "fplog075",
+   "route_id": "tsdd",
+   "reason": "Plausible en DDT/DIR pour relevés, mais pas une voie identifiée."
+  },
+  {
+   "job_id": "fplog081",
+   "route_id": "corps-3bcfcbcc7eb5",
+   "reason": "Ouvrier principal possible mais le bionettoyage relève normalement des ASH."
+  },
+  {
+   "job_id": "fpmed005",
+   "route_id": "as",
+   "reason": "Pas de corps hospitalier propre aux assistants dentaires ; le corps aide-soignant n'est pas la voie normale."
+  },
+  {
+   "job_id": "fpmed021",
+   "route_id": "ash",
+   "reason": "Production de produits de santé (pharmacie hospitalière) : relève plutôt des ouvriers professionnels que des ASH."
+  },
+  {
+   "job_id": "fpnum001",
+   "route_id": "ipef",
+   "reason": "IPEF possible pour un DNUM ministériel mais les directeurs du numérique viennent souvent d'autres corps A+ (administrateurs de l'État) ou du contrat."
+  },
+  {
+   "job_id": "fpnum027",
+   "route_id": "itpe",
+   "reason": "Intrapreneur de startup d'État : agent de tout corps A ; ITPE pas spécialement indiqué."
+  },
+  {
+   "job_id": "fpnum046",
+   "route_id": "itpe",
+   "reason": "DPO : fonction surtout juridique/administrative ; corps d'ingénieurs possible mais pas la voie principale."
+  },
+  {
+   "job_id": "fpnum046",
+   "route_id": "ingenieur-terr",
+   "reason": "DPO : fonction surtout juridique/administrative ; corps d'ingénieurs possible mais pas la voie principale."
+  },
+  {
+   "job_id": "fpnum046",
+   "route_id": "ingenieur-hosp",
+   "reason": "DPO : fonction surtout juridique/administrative ; corps d'ingénieurs possible mais pas la voie principale."
+  },
+  {
+   "job_id": "fprch015",
+   "route_id": "ie",
+   "reason": "Assistant ingénieur = corps distinct (AI, cat. A, bac+2) absent de la liste ; IE est le corps supérieur, correspondance approximative."
+  },
+  {
+   "job_id": "fprch016",
+   "route_id": "ie",
+   "reason": "Assistant ingénieur = corps distinct (AI, cat. A, bac+2) absent de la liste ; IE est le corps supérieur, correspondance approximative."
+  },
+  {
+   "job_id": "fprch017",
+   "route_id": "ie",
+   "reason": "Assistant ingénieur = corps distinct (AI, cat. A, bac+2) absent de la liste ; IE est le corps supérieur, correspondance approximative."
+  },
+  {
+   "job_id": "fprch023",
+   "route_id": "ie",
+   "reason": "Emploi-type REFERENS du corps des ingénieurs de recherche (IR), absent du référentiel ; IE n'y mène que par promotion. Ajouter le corps IR."
+  },
+  {
+   "job_id": "fprch024",
+   "route_id": "ie",
+   "reason": "Emploi-type REFERENS du corps des ingénieurs de recherche (IR), absent du référentiel ; IE n'y mène que par promotion. Ajouter le corps IR."
+  },
+  {
+   "job_id": "fprch027",
+   "route_id": "ie",
+   "reason": "Emploi-type du corps des assistants ingénieurs (ASI, cat. A), absent du référentiel ; IE est le corps supérieur, pas la voie d'accès normale. Ajouter le corps ASI."
+  },
+  {
+   "job_id": "fprch028",
+   "route_id": "ie",
+   "reason": "Emploi-type du corps des assistants ingénieurs (ASI, cat. A), absent du référentiel ; IE est le corps supérieur, pas la voie d'accès normale. Ajouter le corps ASI."
+  },
+  {
+   "job_id": "fprch032",
+   "route_id": "ie",
+   "reason": "Emploi-type REFERENS du corps des ingénieurs de recherche (IR), absent du référentiel ; IE n'y mène que par promotion. Ajouter le corps IR."
+  },
+  {
+   "job_id": "fprch034",
+   "route_id": "ie",
+   "reason": "Emploi-type du corps des assistants ingénieurs (ASI, cat. A), absent du référentiel ; IE est le corps supérieur, pas la voie d'accès normale. Ajouter le corps ASI."
+  },
+  {
+   "job_id": "fprch037",
+   "route_id": "ie",
+   "reason": "Emploi-type REFERENS du corps des ingénieurs de recherche (IR), absent du référentiel ; IE n'y mène que par promotion. Ajouter le corps IR."
+  },
+  {
+   "job_id": "fprch039",
+   "route_id": "ie",
+   "reason": "Emploi-type du corps des assistants ingénieurs (ASI, cat. A), absent du référentiel ; IE est le corps supérieur, pas la voie d'accès normale. Ajouter le corps ASI."
+  },
+  {
+   "job_id": "fprch045",
+   "route_id": "ie",
+   "reason": "Emploi-type REFERENS du corps des ingénieurs de recherche (IR), absent du référentiel ; IE n'y mène que par promotion. Ajouter le corps IR."
+  },
+  {
+   "job_id": "fprch047",
+   "route_id": "ie",
+   "reason": "Emploi-type du corps des assistants ingénieurs (ASI, cat. A), absent du référentiel ; IE est le corps supérieur, pas la voie d'accès normale. Ajouter le corps ASI."
+  },
+  {
+   "job_id": "fprch050",
+   "route_id": "ie",
+   "reason": "Emploi-type REFERENS du corps des ingénieurs de recherche (IR), absent du référentiel ; IE n'y mène que par promotion. Ajouter le corps IR."
+  },
+  {
+   "job_id": "fprch052",
+   "route_id": "ie",
+   "reason": "Emploi-type du corps des assistants ingénieurs (ASI, cat. A), absent du référentiel ; IE est le corps supérieur, pas la voie d'accès normale. Ajouter le corps ASI."
+  },
+  {
+   "job_id": "fprch055",
+   "route_id": "ie",
+   "reason": "Emploi-type REFERENS du corps des ingénieurs de recherche (IR), absent du référentiel ; IE n'y mène que par promotion. Ajouter le corps IR."
+  },
+  {
+   "job_id": "fprch059",
+   "route_id": "ie",
+   "reason": "Emploi-type REFERENS du corps des ingénieurs de recherche (IR), absent du référentiel ; IE n'y mène que par promotion. Ajouter le corps IR."
+  },
+  {
+   "job_id": "fprch070",
+   "route_id": "ie",
+   "reason": "Emploi-type du corps des assistants ingénieurs (ASI, cat. A), absent du référentiel ; IE est le corps supérieur, pas la voie d'accès normale. Ajouter le corps ASI."
+  },
+  {
+   "job_id": "fprch071",
+   "route_id": "ie",
+   "reason": "Emploi-type du corps des assistants ingénieurs (ASI, cat. A), absent du référentiel ; IE est le corps supérieur, pas la voie d'accès normale. Ajouter le corps ASI."
+  },
+  {
+   "job_id": "fprch081",
+   "route_id": "ie",
+   "reason": "Emploi-type du corps des assistants ingénieurs (ASI, cat. A), absent du référentiel ; IE est le corps supérieur, pas la voie d'accès normale. Ajouter le corps ASI."
+  },
+  {
+   "job_id": "fprch082",
+   "route_id": "ie",
+   "reason": "Emploi-type du corps des assistants ingénieurs (ASI, cat. A), absent du référentiel ; IE est le corps supérieur, pas la voie d'accès normale. Ajouter le corps ASI."
+  },
+  {
+   "job_id": "fprch083",
+   "route_id": "ie",
+   "reason": "Emploi-type du corps des assistants ingénieurs (ASI, cat. A), absent du référentiel ; IE est le corps supérieur, pas la voie d'accès normale. Ajouter le corps ASI."
+  },
+  {
+   "job_id": "fprch091",
+   "route_id": "ie",
+   "reason": "Emploi-type du corps des assistants ingénieurs (ASI, cat. A), absent du référentiel ; IE est le corps supérieur, pas la voie d'accès normale. Ajouter le corps ASI."
+  },
+  {
+   "job_id": "fprch092",
+   "route_id": "ie",
+   "reason": "Emploi-type du corps des assistants ingénieurs (ASI, cat. A), absent du référentiel ; IE est le corps supérieur, pas la voie d'accès normale. Ajouter le corps ASI."
+  },
+  {
+   "job_id": "fprch093",
+   "route_id": "ie",
+   "reason": "Emploi-type du corps des assistants ingénieurs (ASI, cat. A), absent du référentiel ; IE est le corps supérieur, pas la voie d'accès normale. Ajouter le corps ASI."
+  },
+  {
+   "job_id": "fprch094",
+   "route_id": "ie",
+   "reason": "Emploi-type du corps des assistants ingénieurs (ASI, cat. A), absent du référentiel ; IE est le corps supérieur, pas la voie d'accès normale. Ajouter le corps ASI."
+  },
+  {
+   "job_id": "fprch100",
+   "route_id": "ie",
+   "reason": "Emploi-type REFERENS du corps des ingénieurs de recherche (IR), absent du référentiel ; IE n'y mène que par promotion. Ajouter le corps IR."
+  },
+  {
+   "job_id": "fprch102",
+   "route_id": "ie",
+   "reason": "Emploi-type du corps des assistants ingénieurs (ASI, cat. A), absent du référentiel ; IE est le corps supérieur, pas la voie d'accès normale. Ajouter le corps ASI."
+  },
+  {
+   "job_id": "fprch104",
+   "route_id": "ie",
+   "reason": "Emploi-type REFERENS du corps des ingénieurs de recherche (IR), absent du référentiel ; IE n'y mène que par promotion. Ajouter le corps IR."
+  },
+  {
+   "job_id": "fprch106",
+   "route_id": "ie",
+   "reason": "Emploi-type du corps des assistants ingénieurs (ASI, cat. A), absent du référentiel ; IE est le corps supérieur, pas la voie d'accès normale. Ajouter le corps ASI."
+  },
+  {
+   "job_id": "fprch108",
+   "route_id": "ie",
+   "reason": "Emploi-type REFERENS du corps des ingénieurs de recherche (IR), absent du référentiel ; IE n'y mène que par promotion. Ajouter le corps IR."
+  },
+  {
+   "job_id": "fprch112",
+   "route_id": "ie",
+   "reason": "Emploi-type du corps des assistants ingénieurs (ASI, cat. A), absent du référentiel ; IE est le corps supérieur, pas la voie d'accès normale. Ajouter le corps ASI."
+  },
+  {
+   "job_id": "fprch113",
+   "route_id": "ie",
+   "reason": "Emploi-type du corps des assistants ingénieurs (ASI, cat. A), absent du référentiel ; IE est le corps supérieur, pas la voie d'accès normale. Ajouter le corps ASI."
+  },
+  {
+   "job_id": "fprch126",
+   "route_id": "ie",
+   "reason": "Emploi-type REFERENS du corps des ingénieurs de recherche (IR), absent du référentiel ; IE n'y mène que par promotion. Ajouter le corps IR."
+  },
+  {
+   "job_id": "fprch127",
+   "route_id": "ie",
+   "reason": "Emploi-type REFERENS du corps des ingénieurs de recherche (IR), absent du référentiel ; IE n'y mène que par promotion. Ajouter le corps IR."
+  },
+  {
+   "job_id": "fpren008",
+   "route_id": "adjoint-adm",
+   "reason": "Enquêtes du renseignement exercées surtout par des policiers ; un adjoint administratif peut au mieux réaliser des enquêtes administratives de sécurité en appui."
+  },
+  {
+   "job_id": "fpren015",
+   "route_id": "officier-police",
+   "reason": "Analyste numérique en service de renseignement : surtout contractuels/ingénieurs ; officier de police possible à la DGSI seulement"
+  },
+  {
+   "job_id": "fpren016",
+   "route_id": "officier-police",
+   "reason": "Renseignement technique (ROEM/cyber) : surtout ingénieurs/contractuels ; voie police marginale"
+  },
+  {
+   "job_id": "fpren019",
+   "route_id": "gpx",
+   "reason": "Un·e responsable de police administrative relève peu du corps d'encadrement et d'application"
+  },
+  {
+   "job_id": "fpsan023",
+   "route_id": "iass",
+   "reason": "Expertise en santé environnementale : relève plutôt des ingénieurs d'études sanitaires (absents de la liste) que des IASS"
+  },
+  {
+   "job_id": "fpsan035",
+   "route_id": "sa",
+   "reason": "Conseiller technique pour les professions de santé : poste généralement tenu par des professionnels de santé (cadres de santé), pas par des B administratifs"
+  },
+  {
+   "job_id": "fpsan035",
+   "route_id": "corps-9eeb8a61a6a9",
+   "reason": "Conseiller technique pour les professions de santé : poste généralement tenu par des professionnels de santé (cadres de santé), pas par des B administratifs"
+  },
+  {
+   "job_id": "fpsan042",
+   "route_id": "iass",
+   "reason": "Santé environnementale : relève surtout des ingénieurs d'études sanitaires/génie sanitaire (absents), IASS peu typique"
+  },
+  {
+   "job_id": "fpsec029",
+   "route_id": "officier-police",
+   "reason": "Planification de crise (préfectures, COGIC) : surtout attachés ; officier de police possible mais non typique"
+  },
+  {
+   "job_id": "fpsec044",
+   "route_id": "police-mun",
+   "reason": "Garde champêtre : cadre d'emplois distinct (gardes champêtres), voisin de la police municipale ; pas de route dédiée"
+  },
+  {
+   "job_id": "fpsec046",
+   "route_id": "adjoint-adm",
+   "reason": "Surveillance du patrimoine : relève surtout des adjoints techniques d'accueil et de surveillance (culture)"
+  },
+  {
+   "job_id": "fpsec047",
+   "route_id": "adjoint-adm",
+   "reason": "Sécurité des bâtiments : plutôt filière technique"
+  },
+  {
+   "job_id": "fpsec048",
+   "route_id": "police-mun",
+   "reason": "ASVP : cadre distinct (souvent adjoint technique ou administratif), la police municipale est un autre métier"
+  },
+  {
+   "job_id": "fpsoc007",
+   "route_id": "adjoint-adm",
+   "reason": "Préposé MJPM rarement recruté en C : le CNC exige expérience et niveau bac+2 ; voie peu naturelle."
+  },
+  {
+   "job_id": "fptra001",
+   "route_id": "itpe",
+   "reason": "Les cadres de la navigation aérienne relèvent des corps DGAC (IEEAC, ICNA), absents de la liste ; l'ITPE n'en est pas la voie normale."
+  },
+  {
+   "job_id": "fptra002",
+   "route_id": "tsdd",
+   "reason": "La conception de procédures aériennes relève des corps DGAC (IEEAC, TSEEAC), pas des TSDD."
+  },
+  {
+   "job_id": "fptra004",
+   "route_id": "itpe",
+   "reason": "Le détachement civil de coordination est armé par des contrôleurs aériens (ICNA) et des TSEEAC ; l'ITPE est une voie très marginale."
+  },
+  {
+   "job_id": "fptra004",
+   "route_id": "tsdd",
+   "reason": "Fonction propre aux corps DGAC (ICNA/TSEEAC), TSDD peu pertinent."
+  },
+  {
+   "job_id": "fptra005",
+   "route_id": "itpe",
+   "reason": "La tenue du registre d'immatriculation des aéronefs est une fonction juridique et administrative (DGAC), pas d'ingénierie des TPE."
+  },
+  {
+   "job_id": "fptra005",
+   "route_id": "tsdd",
+   "reason": "Fonction administrative et juridique : les corps administratifs (attaché, SA) seraient plus naturels que TSDD."
+  },
+  {
+   "job_id": "fptra006",
+   "route_id": "itpe",
+   "reason": "Spécialité des IESSA (électronique et systèmes de la sécurité aérienne), corps DGAC absent de la liste."
+  },
+  {
+   "job_id": "fptra006",
+   "route_id": "tsdd",
+   "reason": "Spécialité des IESSA/TSEEAC, pas des TSDD."
+  },
+  {
+   "job_id": "fptra012",
+   "route_id": "ingenieur-hosp",
+   "reason": "La maintenance aéronautique n'est pas une fonction d'ingénieur hospitalier (les hélicoptères SAMU sont entretenus par les opérateurs)."
+  },
+  {
+   "job_id": "fptra012",
+   "route_id": "itpe",
+   "reason": "La maintenance aéronautique d'État relève surtout de la DGA ou du SIAé (ingénieurs d'études et de fabrications), pas des ITPE."
+  },
+  {
+   "job_id": "fptra013",
+   "route_id": "corps-5476869dee76",
+   "reason": "La maintenance aéronautique n'existe guère dans la fonction publique hospitalière."
+  },
+  {
+   "job_id": "fptra013",
+   "route_id": "corps-3bcfcbcc7eb5",
+   "reason": "La maintenance aéronautique n'existe guère dans la fonction publique hospitalière."
+  },
+  {
+   "job_id": "fptra014",
+   "route_id": "ipef",
+   "reason": "La recherche aéronautique relève surtout des ingénieurs de l'armement ou de l'aviation civile (IEEAC) ; l'IPEF est une voie possible mais marginale."
+  },
+  {
+   "job_id": "fptra015",
+   "route_id": "chercheur",
+   "reason": "Un enseignant-chercheur est recruté comme maître de conférences, pas sur concours de chercheur ; voie proche seulement."
+  },
+  {
+   "job_id": "fptra022",
+   "route_id": "ingenieur-terr",
+   "reason": "Le contrôle des transports routiers est une mission d'État (DREAL), pas exercée par les collectivités."
+  },
+  {
+   "job_id": "fptra022",
+   "route_id": "tech-terr",
+   "reason": "Le contrôle des transports routiers est une mission d'État (DREAL), pas exercée par les collectivités."
+  },
+  {
+   "job_id": "fptra039",
+   "route_id": "itpe",
+   "reason": "Les pilotes inspecteurs (DSAC) sont surtout des contractuels pilotes ou des agents des corps DGAC."
+  },
+  {
+   "job_id": "fptra039",
+   "route_id": "tsdd",
+   "reason": "Les pilotes inspecteurs (DSAC) sont surtout des contractuels pilotes ou des agents des corps DGAC."
+  },
+  {
+   "job_id": "fpusa027",
+   "route_id": "admin-terr",
+   "reason": "Administrateur territorial (A+, INET) : voie disproportionnée pour diriger une régie funéraire ; attaché suffit."
+  }
+ ],
+ "category": [
+  {
+   "job_id": "fpamt007",
+   "categories": [
+    "A",
+    "B"
+   ],
+   "reason": "Chargé d'études économiques est surtout un emploi de catégorie A (attaché/attaché territorial) ; B seul est réducteur"
+  },
+  {
+   "job_id": "fpasp003",
+   "categories": [
+    "A"
+   ],
+   "reason": "Direction d'EAJE = EJE/puéricultrice/cadre de santé (A), pas encadrement supérieur A+"
+  },
+  {
+   "job_id": "fpbat019",
+   "categories": [
+    "B",
+    "C"
+   ],
+   "reason": "Électromécanicien = technicien ou agent technique, pas cadre A"
+  },
+  {
+   "job_id": "fpamt024",
+   "categories": [
+    "A",
+    "B"
+   ],
+   "reason": "Contrôle de la sécurité des ouvrages hydrauliques = inspecteurs A/B en DREAL"
+  },
+  {
+   "job_id": "fpamt025",
+   "categories": [
+    "A",
+    "B"
+   ],
+   "reason": "Contrôle ESP/canalisations/gaz = inspecteurs A/B en DREAL"
+  },
+  {
+   "job_id": "fpasp026",
+   "categories": [
+    "A",
+    "B"
+   ],
+   "reason": "Entraîneurs de l'État = professeurs de sport (A) ; ETAPS (B) en territoriale"
+  },
+  {
+   "job_id": "fpcul001",
+   "categories": [
+    "A+",
+    "A"
+   ],
+   "reason": "Direction d'établissement culturel/patrimonial souvent tenue par des conservateurs (A+)"
+  },
+  {
+   "job_id": "fpctl031",
+   "categories": [
+    "A",
+    "B"
+   ],
+   "reason": "Catégories correctes, mais versant à corriger : inspection ICPE = État uniquement (E, pas T/H)"
+  },
+  {
+   "job_id": "fpcul019",
+   "categories": [
+    "B"
+   ],
+   "reason": "Aucun corps/cadre d'emplois de la liste ne correspond : métier à présenter sans concours (contractuel)"
+  },
+  {
+   "job_id": "fpdir008",
+   "categories": [
+    "A+"
+   ],
+   "reason": "Chef d'établissement de santé = directeur d'hôpital, A+."
+  },
+  {
+   "job_id": "fpdir009",
+   "categories": [
+    "A+"
+   ],
+   "reason": "Chef d'établissement social/médico-social = D3S, A+."
+  },
+  {
+   "job_id": "fpdir011",
+   "categories": [
+    "A+",
+    "A"
+   ],
+   "reason": "DGA de collectivité : emploi de direction A+/A, pas B/C."
+  },
+  {
+   "job_id": "fpdir018",
+   "categories": [
+    "A+"
+   ],
+   "reason": "Inspection générale = haute fonction publique, A+."
+  },
+  {
+   "job_id": "fpdir021",
+   "categories": [
+    "A+",
+    "A"
+   ],
+   "reason": "DGS d'université : emploi de direction A+/A, pas B/C."
+  },
+  {
+   "job_id": "fpdir030",
+   "categories": [
+    "A+"
+   ],
+   "reason": "Directeur des soins = A+ ; la catégorie B est fausse."
+  },
+  {
+   "job_id": "fpdoc001",
+   "categories": [
+    "A"
+   ],
+   "reason": "Terminologue : fonction d'expertise A, pas encadrement supérieur A+."
+  },
+  {
+   "job_id": "fpdoc008",
+   "categories": [
+    "A",
+    "B"
+   ],
+   "reason": "Chargé de mission numérique : fonction A/B, pas C."
+  },
+  {
+   "job_id": "fpdoc017",
+   "categories": [
+    "A",
+    "B",
+    "C"
+   ],
+   "reason": "Le métier de bibliothécaire relève d'abord de la catégorie A (corps/cadre des bibliothécaires), absente."
+  },
+  {
+   "job_id": "fpens023",
+   "categories": [
+    "A"
+   ],
+   "reason": "Fonction A, pas encadrement supérieur A+."
+  },
+  {
+   "job_id": "fpens028",
+   "categories": [
+    "A"
+   ],
+   "reason": "Inspecteur de l'enseignement agricole : catégorie A."
+  },
+  {
+   "job_id": "fpens036",
+   "categories": [
+    "A"
+   ],
+   "reason": "Fonction d'inspection : catégorie A."
+  },
+  {
+   "job_id": "fpfip007",
+   "categories": [
+    "B",
+    "C"
+   ],
+   "reason": "Assistant de gestion financière = catégories B/C, pas A"
+  },
+  {
+   "job_id": "fpfip009",
+   "categories": [
+    "A",
+    "B",
+    "C"
+   ],
+   "reason": "Le cadastre emploie massivement des agents B (géomètres, contrôleurs)"
+  },
+  {
+   "job_id": "fpfip020",
+   "categories": [
+    "B"
+   ],
+   "reason": "Agent de laboratoire = technicien (catégorie B), pas A"
+  },
+  {
+   "job_id": "fpgrh016",
+   "categories": [
+    "A",
+    "B"
+   ],
+   "reason": "Analyste de données : catégorie A (éventuellement B), pas C"
+  },
+  {
+   "job_id": "fpjus002",
+   "categories": [
+    "A"
+   ],
+   "reason": "Directeur de service PJJ = catégorie A, pas haute fonction publique A+"
+  },
+  {
+   "job_id": "fpjus004",
+   "categories": [
+    "A"
+   ],
+   "reason": "Conseiller technique PJJ = catégorie A"
+  },
+  {
+   "job_id": "fpjus009",
+   "categories": [
+    "A+"
+   ],
+   "reason": "Chef de juridiction = magistrat, A+ dans l'app"
+  },
+  {
+   "job_id": "fpjus015",
+   "categories": [
+    "A+"
+   ],
+   "reason": "Magistrat judiciaire = A+ dans l'app"
+  },
+  {
+   "job_id": "fpjus022",
+   "categories": [
+    "A"
+   ],
+   "reason": "Fonction exercée par des CPIP (A)"
+  },
+  {
+   "job_id": "fpjus023",
+   "categories": [
+    "A"
+   ],
+   "reason": "Corps des DSP = catégorie A (cohérent avec la route dsp)"
+  },
+  {
+   "job_id": "fpjus024",
+   "categories": [
+    "A",
+    "B"
+   ],
+   "reason": "A+ injustifié ; fonction de responsable A/B"
+  },
+  {
+   "job_id": "fpjus026",
+   "categories": [
+    "B"
+   ],
+   "reason": "Surveillants pénitentiaires reclassés en catégorie B"
+  },
+  {
+   "job_id": "fpjus027",
+   "categories": [
+    "A"
+   ],
+   "reason": "Officiers et DSP = catégorie A"
+  },
+  {
+   "job_id": "fpjus028",
+   "categories": [
+    "B"
+   ],
+   "reason": "Surveillants pénitentiaires = catégorie B"
+  },
+  {
+   "job_id": "fpjus029",
+   "categories": [
+    "B"
+   ],
+   "reason": "Surveillants pénitentiaires = catégorie B"
+  },
+  {
+   "job_id": "fpjus031",
+   "categories": [
+    "A+",
+    "A"
+   ],
+   "reason": "OMP = commissaire (A+) ou officier de police (A)"
+  },
+  {
+   "job_id": "fplog010",
+   "categories": [
+    "C"
+   ],
+   "reason": "Métier de conducteur relevant de la catégorie C"
+  },
+  {
+   "job_id": "fplog011",
+   "categories": [
+    "C"
+   ],
+   "reason": "Métier de conducteur relevant de la catégorie C"
+  },
+  {
+   "job_id": "fplog012",
+   "categories": [
+    "C"
+   ],
+   "reason": "Métier de conducteur relevant de la catégorie C"
+  },
+  {
+   "job_id": "fplog036",
+   "categories": [
+    "B",
+    "C"
+   ],
+   "reason": "Electromécanicien = B/C, pas A"
+  },
+  {
+   "job_id": "fpnum011",
+   "categories": [
+    "A"
+   ],
+   "reason": "Administrateur de BDD : fonction technique de catégorie A, pas A+ (encadrement supérieur)."
+  },
+  {
+   "job_id": "fprch003",
+   "categories": [
+    "A+"
+   ],
+   "reason": "Direction d'unité de recherche : corps de chercheurs, A+ dans l'app."
+  },
+  {
+   "job_id": "fprch007",
+   "categories": [
+    "A+"
+   ],
+   "reason": "Chercheurs (CR/DR) classés A+ dans l'app (cohérent avec la route chercheur)."
+  },
+  {
+   "job_id": "fprch114",
+   "categories": [
+    "B"
+   ],
+   "reason": "Technicien = catégorie B (corps TRF), non A."
+  },
+  {
+   "job_id": "fprch074",
+   "categories": [
+    "C"
+   ],
+   "reason": "Adjoint technique en instrumentation = emploi-type de catégorie C (corps ATRF)."
+  },
+  {
+   "job_id": "fprch124",
+   "categories": [
+    "B"
+   ],
+   "reason": "ARC = niveau technicien (B, TSH) voire A ; pas de corps C correspondant."
+  },
+  {
+   "job_id": "fpsec037",
+   "categories": [
+    "A+"
+   ],
+   "reason": "DDSIS : emploi de direction supérieure (contrôleur général/colonel), A+"
+  },
+  {
+   "job_id": "fpsec038",
+   "categories": [
+    "A"
+   ],
+   "reason": "Chef de groupement SDIS : officier supérieur (commandant/lieutenant-colonel), pas B"
+  },
+  {
+   "job_id": "fpsec044",
+   "categories": [
+    "C"
+   ],
+   "reason": "Gardes champêtres : cadre d'emplois de catégorie C"
+  },
+  {
+   "job_id": "fpsan032",
+   "categories": [
+    "A",
+    "B"
+   ],
+   "reason": "Hygiéniste : infirmier hygiéniste (A) ou technicien bio-hygiéniste (B) ; C non pertinent"
+  },
+  {
+   "job_id": "fpsec049",
+   "categories": [
+    "C"
+   ],
+   "reason": "Auxiliaire de surveillance portuaire : emploi d'exécution C"
+  },
+  {
+   "job_id": "fpsoc007",
+   "categories": [
+    "A",
+    "B"
+   ],
+   "reason": "Fonction exigeant le CNC MJPM et un niveau bac+2 : exercée par des agents A/B (ASS, CESF, adjoints des cadres), pas C."
+  },
+  {
+   "job_id": "fpsoc011",
+   "categories": [
+    "C"
+   ],
+   "reason": "Assistant familial : diplôme DEAF de niveau 3 (CAP), agent non titulaire ; catégorie A manifestement fausse."
+  },
+  {
+   "job_id": "fpsoc022",
+   "categories": [
+    "C"
+   ],
+   "reason": "Métier accessible avec le CAP AEPE (niveau 3) : catégorie C, pas B."
+  },
+  {
+   "job_id": "fptra002",
+   "categories": [
+    "A",
+    "B"
+   ],
+   "reason": "Fonction d'ingénierie aéronautique (IEEAC/TSEEAC) : A ou B, jamais C."
+  },
+  {
+   "job_id": "fptra008",
+   "categories": [
+    "A",
+    "B"
+   ],
+   "reason": "Contrôle réglementaire STRMTG exercé par des ingénieurs et techniciens (A/B)."
+  },
+  {
+   "job_id": "fptra027",
+   "categories": [
+    "C"
+   ],
+   "reason": "Métier de conduite (permis D) : catégorie C."
+  },
+  {
+   "job_id": "fpusa023",
+   "categories": [
+    "A",
+    "B",
+    "C"
+   ],
+   "reason": "L'état civil est majoritairement assuré par des agents de catégorie C (adjoints administratifs délégués)."
+  },
+  {
+   "job_id": "fpusa027",
+   "categories": [
+    "A"
+   ],
+   "reason": "Direction d'une régie funéraire : encadrement A, pas A+ (haute fonction publique)."
+  },
+  {
+   "job_id": "fpusa028",
+   "categories": [
+    "C"
+   ],
+   "reason": "Métier funéraire d'exécution : catégorie C."
+  },
+  {
+   "job_id": "fpusa029",
+   "categories": [
+    "C"
+   ],
+   "reason": "Métier technique d'exécution : catégorie C."
+  },
+  {
+   "job_id": "fpusa032",
+   "categories": [
+    "A"
+   ],
+   "reason": "Les délégués au permis de conduire et à la sécurité routière forment un corps de catégorie A."
+  },
+  {
+   "job_id": "fpusa033",
+   "categories": [
+    "B"
+   ],
+   "reason": "Les IPCSR forment un corps de catégorie B."
+  },
+  {
+   "job_id": "fpusa038",
+   "categories": [
+    "C"
+   ],
+   "reason": "Personnel d'exécution du service hôtelier : catégorie C."
+  },
+  {
+   "job_id": "fpens029",
+   "categories": [
+    "A"
+   ],
+   "reason": "Inspecteurs de l’éducation nationale et IA-IPR : corps de catégorie A recrutés par concours."
+  }
+ ],
+ "fp": [
+  {
+   "job_id": "fpfip008",
+   "fp": "E",
+   "reason": "Comptable public : agent de la DGFiP, y compris auprès des collectivités et des hôpitaux."
+  },
+  {
+   "job_id": "fpfip010",
+   "fp": "E",
+   "reason": "Vérificateur : contrôle fiscal de la DGFiP."
+  },
+  {
+   "job_id": "fpctl031",
+   "fp": "E",
+   "reason": "Inspection des installations classées : mission de l’État (DREAL, DDPP)."
+  },
+  {
+   "job_id": "fpenv014",
+   "fp": "E",
+   "reason": "Contrôle des émissions et de la sécurité des véhicules : mission de l’État (DREAL)."
+  },
+  {
+   "job_id": "fpenv033",
+   "fp": "E",
+   "reason": "Police de la biodiversité : mission de l’État (OFB)."
+  },
+  {
+   "job_id": "fpagr034",
+   "fp": "E",
+   "reason": "Les CHUV sont des écoles nationales vétérinaires de l’État, pas des hôpitaux de la fonction publique hospitalière."
+  }
+ ],
+ "source": "Audit des 2 755 correspondances affichées, 19 octobre 2026 : rejets et ajouts motivés ; les doutes restent affichés comme indicatifs.",
+ "notes": [
+  {
+   "job_ids": [
+    "fpdef001",
+    "fpdef002",
+    "fpdef003",
+    "fpdef004",
+    "fpdef007",
+    "fpdef008",
+    "fpdef009",
+    "fpdef010",
+    "fpdef011",
+    "fpdef012",
+    "fpdef013",
+    "fpdef014",
+    "fpdef015",
+    "fpdef016",
+    "fpdef017",
+    "fpdef019",
+    "fpdef020",
+    "fpdef021",
+    "fpdef022",
+    "fpdef025",
+    "fpdef027",
+    "fpdef029",
+    "fpdef030",
+    "fpdef031",
+    "fpsec036"
+   ],
+   "text": "Ces métiers s’exercent comme militaire : recrutement par engagement (soldat, matelot, aviateur, sous-officier) ou par les concours des écoles d’officiers (Saint-Cyr, École navale, École de l’air et de l’espace), sans concours de la fonction publique civile.",
+   "url": "https://www.sengager.fr/",
+   "label": "S’engager dans l’armée de Terre, la Marine ou l’armée de l’Air et de l’Espace"
+  },
+  {
+   "job_ids": [
+    "fpmed028",
+    "fpmed030",
+    "fpmed033",
+    "fpmed034",
+    "fpmed036",
+    "fpmed038",
+    "fpsan010",
+    "fpsan019",
+    "fpsan039"
+   ],
+   "text": "Le diplôme d’État de docteur en médecine ou en pharmacie est obligatoire. Le recrutement se fait ensuite selon l’employeur : praticien hospitalier, médecin ou pharmacien territorial ou de sapeurs-pompiers sur titres, médecin inspecteur de santé publique ou médecin de prévention.",
+   "url": "https://www.onisep.fr/metier/decouvrir-le-monde-professionnel/sante",
+   "label": "Les études de santé sur Onisep"
+  },
+  {
+   "job_ids": [
+    "fpmed010",
+    "fpmed011",
+    "fpmed015",
+    "fpmed022",
+    "fpmed023",
+    "fpmed024",
+    "fpmed025",
+    "fpmed026",
+    "fpmed027",
+    "fpmed047",
+    "fpmed031",
+    "fpsan043"
+   ],
+   "text": "Profession réglementée : le diplôme d’État ou le certificat de la profession est obligatoire. Les hôpitaux recrutent ensuite directement, sur titre ou sur contrat, sans concours national.",
+   "url": "https://www.onisep.fr/metier/decouvrir-le-monde-professionnel/sante",
+   "label": "Les formations paramédicales sur Onisep"
+  },
+  {
+   "job_ids": [
+    "fpens007",
+    "fpens008",
+    "fpens037"
+   ],
+   "text": "Les enseignants-chercheurs sont recrutés par les universités après un doctorat : qualification par le Conseil national des universités (CNU), puis concours sur poste organisé par chaque établissement.",
+   "url": "https://www.enseignementsup-recherche.gouv.fr/fr/devenir-enseignant-chercheur",
+   "label": "Devenir enseignant-chercheur"
+  },
+  {
+   "job_ids": [
+    "fpens003",
+    "fpens024",
+    "fpens025"
+   ],
+   "text": "Filière culturelle territoriale : concours d’assistant ou de professeur d’enseignement artistique, ou de directeur d’établissement d’enseignement artistique, organisés par le CNFPT ou les centres de gestion, après un diplôme d’État de la discipline.",
+   "url": "https://www.concours-territorial.fr/",
+   "label": "Concours territoriaux de la filière culturelle"
+  },
+  {
+   "job_ids": [
+    "fpens034",
+    "fpens035",
+    "fpsoc010",
+    "fpsoc011",
+    "fpjus017"
+   ],
+   "text": "Recrutement sur contrat, sans concours : l’employeur (rectorat, établissement, département ou juridiction) recrute directement selon le diplôme ou l’expérience demandés.",
+   "url": "https://www.fonction-publique.gouv.fr/",
+   "label": "Les emplois contractuels de la fonction publique"
+  },
+  {
+   "job_ids": [
+    "fpsec021",
+    "fpsec028",
+    "fpsec034",
+    "fpsec038",
+    "fpsec039",
+    "fpsec023",
+    "fpsec024",
+    "fpsec060",
+    "fpsec057",
+    "fpsec058"
+   ],
+   "text": "Sécurité civile : sapeurs-pompiers professionnels recrutés par concours de lieutenant ou de capitaine (CNFPT) puis par les SDIS, ou personnels de l’État (militaires de la sécurité civile, pilotes et mécaniciens recrutés sur titres et expérience).",
+   "url": "https://www.pompiers.fr/",
+   "label": "Devenir sapeur-pompier"
+  },
+  {
+   "job_ids": [
+    "fptra003",
+    "fptra011",
+    "fptra016",
+    "fptra017",
+    "fpens028",
+    "fpens036",
+    "fpusa032",
+    "fpren014",
+    "fpren022",
+    "fpjus005",
+    "fpsoc014",
+    "fpcul019"
+   ],
+   "text": "Corps ou recrutement spécifique, absent pour l’instant de l’application (par exemple contrôleur aérien recruté sur concours de l’École nationale de l’aviation civile, inspecteur de l’enseignement agricole, professeur de l’enseignement maritime, linguiste du renseignement sur contrat).",
+   "url": "https://choisirleservicepublic.gouv.fr/",
+   "label": "Rechercher les offres et concours sur Choisir le service public"
+  }
+ ]
+}

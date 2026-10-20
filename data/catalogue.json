@@ -98,6 +98,7 @@
     "catalogue/study-resources-25.json",
     "catalogue/exam-details-01.json",
     "catalogue/calendar-official-2027.json",
+    "catalogue/calendar-research-2027.json",
     "catalogue/ref-concours-01.json",
     "catalogue/ref-concours-02.json",
     "catalogue/ref-concours-03.json",
@@ -112,6 +113,7 @@
     "catalogue/ref-links-06.json",
     "catalogue/ref-links-07.json",
     "catalogue/ref-links-08.json",
-    "catalogue/ref-annales-01.json"
+    "catalogue/ref-annales-01.json",
+    "catalogue/audit-01.json"
   ]
 }

@@ -1,6 +1,6 @@
 # Y-Seck — orientation dans le service public
 
-Application mobile en HTML, CSS et JavaScript : police Geologica, indigo #2500BA pour la navigation, lilas #DAD1FF et jaune #FFE6A1 en accents, fond gris #DBDBD7. Catégories : A+ #714DFF / #D2C7FF, A #0004FF / #D1DBFF, B #28A1A1 / #E0FFF4, C #FF804A / #FFE8D9 ; contractuels en blanc cerclé de gris. La charte est regroupée dans le dernier bloc de `css/style.css`.
+Application mobile en HTML, CSS et JavaScript : police Geologica, indigo #2500BA pour la navigation, lilas #DAD1FF et jaune orangé #FFCF7A en accents, fond gris #E7E7E7. Catégories : A+ #3C05FF / #DDC7FF, A #0051FF / #BEF1FD, B #0096AD / #CCFFED, C #FF804A / #FFE8D9 ; contractuels en blanc cerclé de gris. La charte est regroupée dans le dernier bloc de `css/style.css`.
 
 ## Lancer la preview
 
@@ -14,13 +14,14 @@ Ouvrir http://localhost:8000. Un serveur est nécessaire à la recherche locale 
 
 - Choix du profil, puis questionnaire en cinq étapes : prénom ou pseudo obligatoire, niveau d’études sur l’écran suivant, centres d’intérêt, préférences de travail, situation. Un retour permet de corriger le choix initial du profil ; l’ajout d’un enfant dans une famille existante commence directement par son prénom.
 - Accueil personnel étudiant ou espace famille avec plusieurs profils enfants indépendants.
-- Après modification d’un profil complété, « Valider les modifications » permet de revenir directement à l’accueil. Chaque enfant conserve sa validation en attente ; la suppression d’un enfant préserve les autres profils et laisse un espace famille vide si c’était le dernier.
+- Après modification d’un profil complété, « Valider les modifications » permet de revenir directement à l’accueil. Chaque enfant conserve sa validation en attente ; la suppression d’un enfant préserve les autres profils ; si c’était le dernier, on revient au tout premier écran, comme après « Effacer mes données ».
 - 1 069 métiers RMFP et 65 fiches d’accès existantes. Les domaines renseignés sont présélectionnés ; le bouton « Pour vous » ou « Pour votre enfant » les rétablit.
-- Filtres par domaine, catégorie et versant ; à partir de Bac+5, seules les fiches associées à une catégorie B, A ou A+ sont affichées. Une catégorie variable ne constitue pas une condition de diplôme.
+- Filtres par domaine, catégorie et versant, à choix multiple (par exemple B et C, ou deux versants ; les trois versants sont cochés par défaut) ; à partir de Bac+5, seules les fiches associées à une catégorie B, A ou A+ sont affichées par défaut, et les emplois contractuels sont masqués ; la catégorie C et l’interrupteur des contractuels restent disponibles dans les filtres. Une catégorie variable ne constitue pas une condition de diplôme.
 - 23 centres d’intérêt, dont diplomatie, renseignement, mer, architecture et protection animale. Les thèmes transversaux s’appuient sur les domaines, familles et intitulés RMFP ; les domaines principaux et les correspondances statutaires sont conservés. `node scripts/check_interests.mjs` contrôle la couverture de chaque thème.
 - Fiches métiers, activités et compétences du répertoire, voies d’accès sourcées, dates de concours et favoris par profil.
 - Pages « Se préparer » adaptées au métier : catégories retenues, versants, dates disponibles, études, aides documentaires et prépas. Les métiers à catégorie variable ont aussi leur page personnelle ; les catégories encore indéterminées restent explicitement à préciser. Les emplois contractuels identifiés portent la pastille CDD et leur propre parcours sans concours. La navigation principale comporte Accueil, Métiers, Favoris et Profil.
 - Fiche métier : catégorie et centres d’intérêt, titre, description, favoris (bouton noir) et détails (bouton de la couleur du métier). Le bloc « Quelles études choisir » présente le parcours conseillé en frise pointillée (épingle de départ, étapes, point d’arrivée), par étape : collège avec le stage d’observation de 3e dès la 6e pour un·e collégien·ne, lycée avec le stage de seconde, après le bac, concours, puis le métier. Un·e lycéen·ne part du lycée, à partir du bac le parcours part du niveau atteint, un adulte sans diplôme voit tout le parcours ; pour un parent, l’enfant sélectionné sert de référence.
+- Sous la description de la fiche métier, un bandeau « Vous ressemble » dans la teinte de la catégorie, puis une barre d’actions : Plus de détails, Ajouter en favoris, Partager. Le partage envoie un message et un lien `#/fiche/<id>` : une fiche courte, lisible sans profil (catégorie, domaines, études, concours et dates, évolution), sans barre du haut ni menu, avec « Créer mon profil » collé en bas. Sur un appareil qui a déjà un profil, la même fiche s’affiche avec « Voir la fiche complète » à la place de « Créer mon profil ». La fiche d’un concours a la même barre (Favori, Partager) ; les concours mis en favori apparaissent dans les favoris avec les métiers.
 - Le bloc « Concours et dates » de la fiche réunit, par catégorie, la fiche concours : versants, niveau requis, bandeau du concours, organisateur, calendrier de la prochaine session, lieux en métropole et en outre-mer, source et avis officiels. Une fiche avec un seul concours est dépliée ; avec plusieurs, seules les informations de base restent visibles.
 - « Se préparer » regroupe les aides (annales, bibliographie) et les prépas (boursier·e, budget, Prépas Talents). Fiche et pages liées prennent la couleur de la catégorie la plus élevée du métier.
 - Prépas Talents triées par distance à la commune renseignée, parmi les résultats du filtre choisi. Distances indicatives à vol d’oiseau entre centres de communes ; formations à distance en dernier.
@@ -67,6 +68,25 @@ Le script écrit uniquement des fichiers `data/catalogue/ref-*.json`, sans modif
 - le glossaire des sigles, les conseils de stage de 3e et de seconde, et les organismes de préparation, sans aucun taux de réussite.
 
 Incohérences rectifiées à l’import : annales du CNG pour DH, D3S et directeur·rice des soins, annales 2026 de l’inspection du travail et annales du ministère des Affaires étrangères, toutes citées dans d’autres onglets ; renvois internes « voir onglet … » retirés des textes publics ; progression du greffier rattachée aux directeur·rices des services de greffe.
+
+### Audit des correspondances métier / concours
+
+Les 2 755 correspondances affichées ont été relues une à une le 19 octobre 2026. Les décisions motivées sont dans `scripts/audit-concours-2026-10.json` et s’appliquent avec :
+
+```sh
+python3 scripts/audit_concours.py --check
+python3 scripts/audit_concours.py
+```
+
+Le script écrit `data/catalogue/audit-01.json` (à relancer après `import_referentiel.py`, qui le conserve) :
+
+- 554 rapprochements rejetés, qui l’emportent sur tout rapprochement proposé (exemples : juridictions financières ≠ ENM, douanes ≠ finances publiques, métiers militaires ≠ gendarmerie, paramédicaux ≠ concours infirmier) ;
+- 413 rapprochements corrigés, vers le bon corps ;
+- 6 corps ajoutés : ingénieurs de recherche, assistants ingénieurs, inspecteurs de santé publique vétérinaire, ingénieurs de l’agriculture et de l’environnement, techniciens supérieurs du ministère de l’Agriculture, magistrats des chambres régionales des comptes ;
+- catégories et versants rectifiés pour 71 fiches, et catégorie statutaire des 18 corps hospitaliers qui n’en avaient pas ;
+- pour les métiers sans concours de la fonction publique (militaires, médecins et pharmaciens, professions paramédicales sur diplôme, emplois sur contrat, enseignants-chercheurs, sécurité civile), la vraie modalité de recrutement, avec une source officielle.
+
+Les 154 cas jugés douteux restent affichés comme correspondances indicatives.
 
 ### Reprendre les catégories à préciser
 

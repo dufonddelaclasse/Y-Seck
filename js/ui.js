@@ -2,7 +2,7 @@
 (function () {
   'use strict';
   var icons = {}, paths = {
-    settings: '<path d="M3 7h3m6 0h9M3 17h9m6 0h3"/><path d="M9 5c-1-2-4-1-3 1 0 2 3 4 3 4s3-2 3-4c1-2-2-3-3-1zM15 15c-1-2-4-1-3 1 0 2 3 4 3 4s3-2 3-4c1-2-2-3-3-1z"/>',
+    settings: '<path d="M3 8.8h2.6M10.6 8.8H21M3 15.2h10.6M18.6 15.2H21"/><circle cx="8.1" cy="8.8" r="2.5"/><circle cx="16.1" cy="15.2" r="2.5"/>',
     heart: '<path d="M12 20S3 14.6 3 8.5a4.5 4.5 0 0 1 9-1 4.5 4.5 0 0 1 9 1C21 14.6 12 20 12 20z"/>',
     bookmark: '<path d="M7 3.5h10a1.5 1.5 0 0 1 1.5 1.5v15L12 16l-6.5 4V5A1.5 1.5 0 0 1 7 3.5z"/>',
     home: '<path d="M3.5 10.5 11 4a1.5 1.5 0 0 1 2 0l7.5 6.5V19a1.5 1.5 0 0 1-1.5 1.5H15v-7H9v7H5A1.5 1.5 0 0 1 3.5 19z"/>',
@@ -26,9 +26,11 @@
   /* Contractuels : document plié, trait épais comme sur la maquette. */
   icons.contract = '<svg class="contract-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h9.5A1.5 1.5 0 0 1 20 4.5v15a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 19.5V8z"/><path d="M9 3v5H4"/><path d="M8 11.5h8M8 14.5h8M8 17.5h4"/></svg>';
   Object.keys(paths).forEach(function (k) { icons[k] = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + paths[k] + '</svg>'; });
-  var dialog, toolbar, cfg, kind = null, returnTo, pendingUrl = '', contextHeading, scrollFrame;
+  var dialog, toolbar, cfg, kind = null, alwaysBar = false, returnTo, pendingUrl = '', contextHeading, scrollFrame;
   function updateContext(){
-    toolbar.hidden=!contextHeading||window.scrollY<=0||contextHeading.getBoundingClientRect().top>=0;
+    toolbar.hidden=!alwaysBar&&(!contextHeading||window.scrollY<=0||contextHeading.getBoundingClientRect().top>=0);
+    /* Hauteur réelle de la barre : les blocs collants de la page se placent juste en dessous. */
+    if(!toolbar.hidden&&toolbar.offsetHeight)document.documentElement.style.setProperty('--context-h',toolbar.offsetHeight+'px');
   }
   function scheduleContext(){
     if(scrollFrame)return;
@@ -120,10 +122,16 @@
   function afterRender(options) {
     cfg=options; if(options.changed){syncHistory();if(kind)close();} decorate(options.root);
     options.root.querySelectorAll('a[href]').forEach(function(a){try{var u=new URL(a.href,location.href);if(/^https?:$/.test(u.protocol)&&u.origin!==location.origin){a.classList.add('external-link');if(/(^|\.)gouv\.fr$/.test(u.hostname)||u.hostname==='service-public.fr')a.classList.add('government-link');}}catch(err){/* lien local */}});
-    toolbar.innerHTML = '<button class="icon-btn context-back" type="button" data-ui="back" aria-label="Retour à l’écran précédent">'+icons.back+'</button><button class="context-title" type="button" data-ui="top" aria-label="Revenir au début : ' + esc(options.title) + '">' + esc(options.title) + '</button>' + (options.category ? '<span class="cat context-category '+esc(options.category.className)+'" aria-label="'+(options.category.label==='CDD'?'Emploi contractuel':'Catégorie '+esc(options.category.label))+'">'+(options.category.label==='CDD'?icons.contract:esc(options.category.label))+'</span>' : (options.categories||[]).length?'<span class="context-categories" aria-label="Catégories selon le poste">'+options.categories.map(function(c){return '<span class="cat sm '+esc(c.className)+'">'+esc(c.label)+'</span>';}).join('')+'</span>':'') + (options.isJobs ? '<button class="icon-btn" type="button" data-action="openFilters" aria-label="Régler les filtres métiers">' + icons.settings + '</button><div class="context-summary">' + options.summary + '</div>' : '');
-    contextHeading=options.root.querySelector('h1');
+    /* Pages de premier niveau : titre seul, sans flèche de retour. */
+    toolbar.classList.toggle('top-level', !!options.topLevel);
+    toolbar.innerHTML = (options.topLevel ? '' : '<button class="icon-btn context-back" type="button" data-ui="back" aria-label="Retour à l’écran précédent">'+icons.back+'</button>') + '<button class="context-title" type="button" data-ui="top" aria-label="Revenir au début : ' + esc(options.title) + '">' + esc(options.title) + '</button>' + (options.category ? '<span class="cat context-category '+esc(options.category.className)+'" aria-label="'+(options.category.label==='CDD'?'Emploi contractuel':'Catégorie '+esc(options.category.label))+'">'+(options.category.label==='CDD'?icons.contract:esc(options.category.label))+'</span>' : (options.categories||[]).length?'<span class="context-categories" aria-label="Catégories selon le poste">'+options.categories.map(function(c){return '<span class="cat sm '+esc(c.className)+'">'+esc(c.label)+'</span>';}).join('')+'</span>':'') + (options.isJobs ? '<button class="icon-btn" type="button" data-action="openFilters" aria-label="Régler les filtres">' + icons.settings + '</button><div class="context-summary">' + options.summary + '</div>' : '');
+    contextHeading=options.noBar?null:options.root.querySelector('h1');
+    /* Sous-pages : la barre reste affichée avec le titre de la page actuelle et remplace le lien de retour. */
+    alwaysBar=!options.noBar&&!options.topLevel&&!options.root.classList.contains('onboarding')&&!!options.root.querySelector('.screen > a.back, .topbar > a.back');
+    if(document.body&&document.body.classList)document.body.classList.toggle('has-bar',alwaysBar);
     updateContext();
-    if(kind==='filters')content('Filtrer les métiers',options.filters);
+    if(kind==='filters')content(options.filtersTitle||'Filtrer les métiers',options.filters);
+    if(kind==='profile-field'&&options.profileField)content(options.profileFieldTitle,options.profileField);
     if(kind==='resource-filters')content('Filtrer les ressources',options.resourceFilters);
   }
   window.YSECK_UI = {icons:icons,inclusive:inclusive,init:init,afterRender:afterRender,open:open,close:close,current:function(){return kind;}};
