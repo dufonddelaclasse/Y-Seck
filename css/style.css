@@ -2055,3 +2055,7 @@ body::before { content:''; position:fixed; inset:0; z-index:-1; background:linea
 /* Bandeau d’aide des réglages : le bouton des filtres passe au-dessus du bandeau pour rester visible ; texte un peu plus petit. */
 #filters-open.pulse { position:relative; z-index:21; }
 .top-notice { font-size:.875rem; padding-right:76px; }
+/* Plus de détails : description en paragraphes séparés par un espace. */
+.source-desc { margin-top:8px; }
+.source-desc p { margin:0; overflow-wrap:anywhere; }
+.source-desc p + p { margin-top:12px; }
