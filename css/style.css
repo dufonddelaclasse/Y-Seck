@@ -2116,3 +2116,11 @@ html[data-contrast="true"] .intro-tabs-screen .intro-hero { background:#000; }
 @keyframes enter-up { from { opacity:0; transform:translateY(18px); } to { opacity:1; transform:none; } }
 .enter-up { animation:enter-up .55s cubic-bezier(.2,.7,.2,1) both; animation-delay:calc(var(--enter-i, 0) * 80ms + 60ms); }
 @media (prefers-reduced-motion:reduce) { .enter-up { animation:none; } }
+/* Filtres des métiers et des concours : une catégorie non choisie est grise, sans couleur ; une catégorie choisie prend sa couleur. */
+.sheet-content button.chip.category-choice[data-action="metCat"]:not(.on), .sheet-content button.chip.category-choice[data-action="metCat"]:not(.on):hover { background:#E3E3E3; color:#8E8E93; box-shadow:none; }
+.sheet-content button.chip.category-choice.cat-CDD[data-action="metCat"]:not(.on), .sheet-content button.chip.category-choice.cat-CDD[data-action="metCat"]:not(.on):hover { background:#E3E3E3; color:#8E8E93; box-shadow:none; }
+.sheet-content button.chip.category-choice.cat-CDD[data-action="metCat"]:not(.on) svg { color:#8E8E93; }
+.sheet-content button.chip.category-choice[data-action="metCat"].on, .sheet-content button.chip.category-choice[data-action="metCat"].on:hover { background:var(--cat-fill); color:#FFF; box-shadow:none; }
+.sheet-content button.chip.category-choice.cat-CDD[data-action="metCat"].on, .sheet-content button.chip.category-choice.cat-CDD[data-action="metCat"].on:hover { background:#141414; color:#FFF; box-shadow:none; }
+html.dark .sheet-content button.chip.category-choice[data-action="metCat"]:not(.on), html.dark .sheet-content button.chip.category-choice.cat-CDD[data-action="metCat"]:not(.on) { background:#3A3A3A; color:#8E8E93; }
+html[data-contrast="true"] .sheet-content button.chip.category-choice[data-action="metCat"]:not(.on) { background:#FFF; color:#000; box-shadow:inset 0 0 0 1px #000; }

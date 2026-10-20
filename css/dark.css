@@ -757,6 +757,12 @@ html:where(.dark) { background:#2D2D2D; }
 @media (prefers-reduced-motion:reduce) {
   :where(html.dark) .screen.loading-screen .loading-text { background:none; color:var(--ink); }
 }
+:where(html.dark) .sheet-content button.chip.category-choice[data-action="metCat"]:not(.on), :where(html.dark) .sheet-content button.chip.category-choice[data-action="metCat"]:not(.on):hover { background:#303030; color:#A3A3A7; box-shadow:none; }
+:where(html.dark) .sheet-content button.chip.category-choice.cat-CDD[data-action="metCat"]:not(.on), :where(html.dark) .sheet-content button.chip.category-choice.cat-CDD[data-action="metCat"]:not(.on):hover { background:#303030; color:#A3A3A7; box-shadow:none; }
+:where(html.dark) .sheet-content button.chip.category-choice.cat-CDD[data-action="metCat"]:not(.on) svg { color:#A3A3A7; }
+:where(html.dark) .sheet-content button.chip.category-choice[data-action="metCat"].on, :where(html.dark) .sheet-content button.chip.category-choice[data-action="metCat"].on:hover { background:var(--cat-fill); color:#FFF; box-shadow:none; }
+:where(html.dark) .sheet-content button.chip.category-choice.cat-CDD[data-action="metCat"].on, :where(html.dark) .sheet-content button.chip.category-choice.cat-CDD[data-action="metCat"].on:hover { background:#4C4C4C; color:#FFF; box-shadow:none; }
+html:where(.dark).dark .sheet-content button.chip.category-choice[data-action="metCat"]:not(.on), html:where(.dark).dark .sheet-content button.chip.category-choice.cat-CDD[data-action="metCat"]:not(.on) { background:#4C4C4C; color:#A3A3A7; }
 
 /* Retouches */
 html.dark { --brand:#8F7BFF; --blue:#A493FF; --accent:#7C66FF; --accent-hover:#9785FF; --theme-btn:var(--brand); --red:#FF6B6B; --surface:#1E1E22; }
