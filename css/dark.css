@@ -728,6 +728,9 @@ html:where(.dark).dark .ladder-alt-row, html:where(.dark).dark .ladder-alt-row:h
   :where(html.dark) .personal-home .home-name-enter { background:none; color:inherit; }
 }
 :where(html.dark) .concours-page .related-note { color:var(--ink-2); }
+:where(html.dark) a.rung.rung-link { color:var(--ink); }
+:where(html.dark) a.rung.rung-link:hover { color:var(--ink); }
+:where(html.dark) a.rung.rung-link > .chev { color:var(--muted); }
 
 /* Retouches */
 html.dark { --brand:#8F7BFF; --blue:#A493FF; --accent:#7C66FF; --accent-hover:#9785FF; --theme-btn:var(--brand); --red:#FF6B6B; --surface:#1E1E22; }

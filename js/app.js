@@ -898,11 +898,17 @@
     var c=ref||jobRef(j);if(!c||!c.next||!c.next.length)return null;
     var rungs=[[j.name,ref?ref.cat:themeCategory(j)||c.cat]],seen={};
     while(c&&c.next&&c.next.length&&!seen[c.id]&&rungs.length<7){
-      seen[c.id]=true;var p=c.next[0];
-      rungs.push([p.voie.split(/[,;]/)[0]]);rungs.push([p.toName,p.toCat]);
-      c=D.concoursById[p.to];
+      seen[c.id]=true;var p=c.next[0],to=D.concoursById[p.to];
+      rungs.push([p.voie.split(/[,;]/)[0]]);rungs.push([p.toName,p.toCat,rungHref(p.toName)||(to?'#/concours-fiche/'+concoursKey(to):'')]);
+      c=to;
     }
     return rungs;
+  }
+  /* Évoluer : une étape mène à la fiche du métier du même nom, sinon à la fiche du concours qui y donne accès. */
+  var jobsByName=null;
+  function rungHref(name) {
+    if(!jobsByName){jobsByName={};D.jobs.forEach(function(x){jobsByName[norm(x.name)]=x.id;});}
+    var id=jobsByName[norm(name)];return id?'#/metier/'+id:'';
   }
   /* Une étape par niveau (collège, lycée, après le bac, concours), puis le métier. */
   function parcoursSteps(j, refOverride) {
@@ -984,7 +990,8 @@
         if (r.length === 1) return '<div class="via">↓ ' + esc(r[0]) + '</div>';
         var categories=String(r[1]).split(/\s*(?:,|\/|\bou\b)\s*/);
         var known=categories.length&&categories.every(function(c){return ['A+','A','B','C','CDD'].indexOf(c)>-1;});
-        return '<div class="rung"><span>' + esc(r[0]) + '</span>'+(known?'<span class="rung-categories">'+categories.map(function(c){return catBadge(c,'sm');}).join('<span class="sr-only">ou </span>')+'</span>':'<small>'+esc(r[1])+'</small>')+'</div>';
+        var href = r[0] === j.name ? '' : r[2] || rungHref(r[0]), tag = href ? 'a' : 'div';
+        return '<' + tag + ' class="rung' + (href ? ' rung-link' : '') + '"' + (href ? ' href="' + href + '"' : '') + '><span>' + esc(r[0]) + '</span>'+(known?'<span class="rung-categories">'+categories.map(function(c){return catBadge(c,'sm');}).join('<span class="sr-only">ou </span>')+'</span>':'<small>'+esc(r[1])+'</small>')+(href ? I.chev : '')+'</' + tag + '>';
       }).join('') + '</div>' + (extra || '') + '</section>';
   }
 

@@ -2040,3 +2040,7 @@ html[data-contrast="true"] .job-page .job-match { background:none; border:0; col
 /* Fiche concours : légende qui sépare les métiers relevant aussi d’autres catégories. */
 .concours-page .related-note { margin:26px 0 2px; font-size:.9375rem; line-height:1.45; font-weight:400; color:var(--ink-2); }
 .concours-page .job-cards + .related-note { margin-top:30px; }
+/* Évoluer : les étapes qui mènent à une fiche (métier ou concours) sont des liens, signalés par un chevron. */
+a.rung.rung-link { color:var(--ink); text-decoration:none; }
+a.rung.rung-link:hover { color:var(--ink); }
+a.rung.rung-link > .chev { flex:none; width:18px; height:18px; margin-right:-4px; color:var(--muted); }
