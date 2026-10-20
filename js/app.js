@@ -440,10 +440,13 @@
   var screens = {};
   var STEPS = 5;
 
+  /* Prépa Talents : carte blanche aux coins biseautés, logo, présentation, pointillés puis la bourse.
+     En titre de page (h1), le logo tient lieu de titre visible. */
+  var TALENTS_LOGO = '<img class="talents-logo" src="assets/prepa-talents-logo.png" alt="Prépa Talents" width="480" height="208">';
   function talentsFeature(title,body,heading,extraClass) {
     heading=heading||'h2';
-    return '<section class="talents-feature talents-split'+(extraClass?' '+extraClass:'')+'"><div class="talents-intro"><img class="talents-logo" src="assets/prepa-talents.png" alt="Prépa Talents" width="220" height="80"><'+heading+' class="no-icon">'+title+'</'+heading+'>'+body+'</div>' +
-      '<div class="talents-grant"><p><b>Une bourse de ' + esc(D.talentsGrantLabel || '5 000 €') + ' par an</b> est versée aux élèves. L’entrée se fait sur dossier et entretien, selon les ressources et la motivation.</p></div></section>';
+    return '<section class="talents-card'+(extraClass?' '+extraClass:'')+'">'+TALENTS_LOGO+'<'+heading+' class="no-icon'+(heading==='h1'?' sr-only':'')+'">'+title+'</'+heading+'>'+body +
+      '<div class="talents-perf" aria-hidden="true"></div><p><b>Une bourse de ' + esc(D.talentsGrantLabel || '5 000 €') + ' par an</b> est versée aux élèves. L’entrée se fait sur dossier et entretien, selon les ressources et la motivation.</p></section>';
   }
 
   screens.bienvenue = function () {
@@ -1550,7 +1553,9 @@
       (list.length?'':'<p class="empty">Aucune préparation pour ce métier avec ce budget.</p>') + '<div class="stack">' + list.map(function (p) {
         var hi = p.talents && on;
         var extra = p.id === 'talents' && (job||S.domains.length) ? '<span class="fit on">' + nbT + (job?' pour ce métier':' pour '+(isParent()?'ses':'vos')+' choix') + '</span>' : '';
-        return '<a class="prep' + (hi ? ' hi talents-feature' : '') + '" href="#/prepa/' + p.id + (job?'/'+job.id:'') + '">'+(hi?'<img class="talents-logo" src="assets/prepa-talents.png" alt="Prépa Talents" width="220" height="80">':'')+'<div class="head"><h2 class="h3'+(hi?' no-icon':'')+'">' + sig(p.t) + '</h2><span class="price">' + esc(p.price) + '</span></div>' +
+        if (hi) return '<a class="prep hi talents-card" href="#/prepa/' + p.id + (job?'/'+job.id:'') + '"><div class="head">' + TALENTS_LOGO + '<span class="price">' + esc(p.price) + '</span></div><h2 class="sr-only">' + sig(p.t) + '</h2>' +
+          '<p>' + esc(p.d) + '</p><div class="talents-perf" aria-hidden="true"></div><span class="prep-foot">' + extra + '<span class="more">Voir le détail' + I.chev + '</span></span></a>';
+        return '<a class="prep" href="#/prepa/' + p.id + (job?'/'+job.id:'') + '"><div class="head"><h2 class="h3">' + sig(p.t) + '</h2><span class="price">' + esc(p.price) + '</span></div>' +
           '<p>' + esc(p.d) + '</p><span class="prep-foot">' + extra + '<span class="more">Voir le détail' + I.chev + '</span></span></a>';
       }).join('') + '</div>' +
       (on && list.some(function(p){return p.talents;}) ? '<div class="bourse"><div><b>' + esc(D.talentsGrantLabel || '5 000 €') + ' / an</b><span>Bourse Talents ' + esc(D.talentsGrantYear || '2026-2027') + ', pour les élèves des Prépas Talents.</span></div><span class="dot big" aria-hidden="true"></span></div>' : '') +

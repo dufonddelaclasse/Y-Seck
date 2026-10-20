@@ -190,7 +190,7 @@ html.dark .app.themed :is(.section-heading svg,.job-action svg,.btn-bare svg,.ex
 html.dark .job-row .fit.like { background:transparent !important; box-shadow:inset 0 0 0 1px #5A5A60 !important; }
 html.dark :is(.personal-home .study-level,.trip .study-level,.home-interest,.tag.tag-btn,.job-page .job-meta .tag) { background:#45454A !important; border:0 !important; color:#E2E2E6 !important; }
 html.dark :is(.personal-home .study-level,.trip .study-level,.home-interest) svg { color:#D4D4D8 !important; }
-html.dark :is(#jobs .job-row,.job-cards .job-row,.home-access,.home-shortcuts a,.profile-row,.prep,.study-card,.book-card,.family-card,.ref-card,.parcours-card,.talents-feature.talents-split,.concours-page .job-section .ref-panel) { background:#161616 !important; }
+html.dark :is(#jobs .job-row,.job-cards .job-row,.home-access,.home-shortcuts a,.profile-row,.prep:not(.talents-card),.study-card,.book-card,.family-card,.ref-card,.parcours-card,.concours-page .job-section .ref-panel) { background:#161616 !important; }
 html.dark { --theme-ink:#B3A6FF; --cat-ap-ink:#B9A8FF; --cat-a-ink:#9BA6FF; --cat-b-ink:#6FD6D6; --cat-c-ink:#FFA982; }
 html.dark .app.theme-Ap, html.dark body.theme-Ap { --theme-ink:#B9A8FF; } html.dark .app.theme-A, html.dark body.theme-A { --theme-ink:#9BA6FF; } html.dark .app.theme-B, html.dark body.theme-B { --theme-ink:#6FD6D6; }
 html.dark .app.theme-C, html.dark body.theme-C { --theme-ink:#FFA982; } html.dark .app.theme-CDD, html.dark body.theme-CDD { --theme-ink:#E2E2E6; }
@@ -202,6 +202,10 @@ html.dark .personal-home .home-concours :is(.home-feature-copy b, .home-feature-
 html.dark .personal-home .home-concours .home-go { background:#FFF; color:#161616; }
 /* Ovale d’arrivée clair en mode sombre : le pictogramme passe en sombre. */
 html.dark .trip-pill svg { color:#161616; }
+/* Prépa Talents : la carte reste blanche, avec son logo et un texte sombre. */
+html.dark .talents-card, html.dark .talents-card :is(h1,h2,p,b,.more,.chev) { color:#161616 !important; }
+html.dark .talents-card .price { background:#F0F0EE !important; color:#5D5D63 !important; }
+html.dark .talents-perf { background-image:radial-gradient(circle, #DEDEDE 1.3px, transparent 1.8px) !important; }
 """
 
 if __name__ == '__main__':
