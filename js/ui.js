@@ -134,9 +134,5 @@
     if(kind==='profile-field'&&options.profileField)content(options.profileFieldTitle,options.profileField);
     if(kind==='resource-filters')content('Filtrer les ressources',options.resourceFilters);
   }
-  /* Pas de zoom dans l’app : Safari sur iPhone ignore « user-scalable=no », le pincement à deux doigts est donc bloqué ici.
-     Le confort de lecture (grands caractères) reste proposé dans l’app. */
-  ['gesturestart', 'gesturechange'].forEach(function (type) { document.addEventListener(type, function (e) { e.preventDefault(); }, { passive: false }); });
-  document.addEventListener('touchmove', function (e) { if (e.touches && e.touches.length > 1) e.preventDefault(); }, { passive: false });
   window.YSECK_UI = {icons:icons,inclusive:inclusive,init:init,afterRender:afterRender,open:open,close:close,current:function(){return kind;}};
 })();
