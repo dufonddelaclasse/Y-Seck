@@ -2052,3 +2052,6 @@ body, .app { background:transparent; }
 body::before { content:''; position:fixed; inset:0; z-index:-1; background:linear-gradient(180deg, #F2F2F2 0%, #E6E6E6 100%); pointer-events:none; }
 .footer { background:#E6E6E6; }
 .context-bar { background:#F2F2F2; }
+/* Bandeau d’aide des réglages : le bouton des filtres passe au-dessus du bandeau pour rester visible ; texte un peu plus petit. */
+#filters-open.pulse { position:relative; z-index:21; }
+.top-notice { font-size:.875rem; padding-right:76px; }
