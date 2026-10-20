@@ -733,7 +733,7 @@ html:where(.dark).dark .ladder-alt-row, html:where(.dark).dark .ladder-alt-row:h
 :where(html.dark) a.rung.rung-link > .chev { color:var(--muted); }
 html:where(.dark) { background:#28272E; }
 :where(html.dark) body, :where(html.dark) .app { background:transparent; }
-:where(html.dark) body::before { background:linear-gradient(180deg, #171714 0%, #28272E 100%); }
+:where(html.dark) body::before { background:linear-gradient(180deg, #171714 0, #28272E 860px); }
 :where(html.dark) .footer { background:#28272E; }
 :where(html.dark) .context-bar { background:#171714; }
 :where(html.dark) .intro-tabs-screen .intro-hero { background:linear-gradient(180deg, rgba(24,44,178,.38) 0%, rgba(24,44,178,.30) 45%, rgba(14,26,120,.55) 100%), var(--hero-photo) 70% 30% / cover no-repeat #23379E; color:#FFF; }

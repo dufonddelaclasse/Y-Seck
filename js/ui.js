@@ -26,11 +26,15 @@
   /* Contractuels : document plié, trait épais comme sur la maquette. */
   icons.contract = '<svg class="contract-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h9.5A1.5 1.5 0 0 1 20 4.5v15a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 19.5V8z"/><path d="M9 3v5H4"/><path d="M8 11.5h8M8 14.5h8M8 17.5h4"/></svg>';
   Object.keys(paths).forEach(function (k) { icons[k] = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + paths[k] + '</svg>'; });
-  var dialog, toolbar, cfg, kind = null, alwaysBar = false, returnTo, pendingUrl = '', contextHeading, scrollFrame;
+  var dialog, toolbar, cfg, kind = null, alwaysBar = false, returnTo, pendingUrl = '', contextHeading, scrollFrame, contextH = 0;
+  /* Appelée à chaque défilement et redimensionnement (Chrome sur iPhone redimensionne la page quand ses barres se rétractent) :
+     rien n’est réécrit tant que rien ne change, pour ne pas relancer le calcul des styles de toute la page. */
   function updateContext(){
-    toolbar.hidden=!alwaysBar&&(!contextHeading||window.scrollY<=0||contextHeading.getBoundingClientRect().top>=0);
+    var hidden=!alwaysBar&&(!contextHeading||window.scrollY<=0||contextHeading.getBoundingClientRect().top>=0);
+    if(toolbar.hidden!==hidden)toolbar.hidden=hidden;
     /* Hauteur réelle de la barre : les blocs collants de la page se placent juste en dessous. */
-    if(!toolbar.hidden&&toolbar.offsetHeight)document.documentElement.style.setProperty('--context-h',toolbar.offsetHeight+'px');
+    var h=hidden?0:toolbar.offsetHeight;
+    if(h&&h!==contextH){contextH=h;document.documentElement.style.setProperty('--context-h',h+'px');}
   }
   function scheduleContext(){
     if(scrollFrame)return;

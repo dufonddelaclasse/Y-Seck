@@ -2051,7 +2051,9 @@ html { background:#E3E1EF; }
 body, .app { background:transparent; }
 /* Le corps de page isole ses calques : le dégradé (z-index:-1) reste derrière le contenu mais devant le fond de la page, y compris sur Safari iPhone. */
 body { isolation:isolate; }
-body::before { content:''; position:fixed; inset:0; z-index:-1; background:linear-gradient(180deg, #F6F7F2 0%, #E3E1EF 100%); pointer-events:none; }
+/* Calque de fond de taille fixe : quand Chrome sur iPhone agrandit la fenêtre, il se déplace sans être redessiné.
+   Le dégradé atteint #E3E1EF à 860 px, puis se fond dans le fond de la page, de la même couleur. */
+body::before { content:''; position:fixed; top:0; left:0; right:0; height:1100px; z-index:-1; background:linear-gradient(180deg, #F6F7F2 0, #E3E1EF 860px); pointer-events:none; }
 .footer { background:#E3E1EF; }
 .context-bar { background:#F6F7F2; }
 /* Bandeau d’aide des réglages : le bouton des filtres passe au-dessus du bandeau pour rester visible ; texte un peu plus petit. */
