@@ -787,7 +787,7 @@
   screens.metiers = function () {
     return '<main class="screen pt">' +
       '<div class="title-row"><h1>' + (isParent() ? 'Ses métiers' : 'Vos métiers') + '</h1><button id="filters-open" type="button" class="icon-btn' + (showFilterNotice ? ' pulse' : '') + '" data-action="openFilters" aria-label="Régler les filtres métiers">' + I.settings + '</button></div>' + childSelector() +
-      (showFilterNotice ? '<div class="top-notice" role="status"><span>Utilisez les réglages pour filtrer les métiers par catégorie.</span></div>' : '') +
+      (showFilterNotice ? '<div class="top-notice" role="status"><span>Filtrez les métiers par catégorie<span aria-hidden="true"> →</span><span class="sr-only"> avec le bouton des réglages</span></span></div>' : '') +
       '<div class="row filter-summary" aria-label="Filtres actifs">' + filterSummary() + '</div>' +
       '<div class="search-wrap">' + searchField('q','Rechercher un métier','Rechercher un métier',S.q) +
       '<ul class="suggest" id="q-suggest" aria-label="Suggestions" hidden></ul></div>' +

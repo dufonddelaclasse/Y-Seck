@@ -2056,7 +2056,8 @@ body::before { content:''; position:fixed; inset:0; z-index:-1; background:linea
 .context-bar { background:#F2F2F2; }
 /* Bandeau d’aide des réglages : le bouton des filtres passe au-dessus du bandeau pour rester visible ; texte un peu plus petit. */
 #filters-open.pulse { position:relative; z-index:21; }
-.top-notice { font-size:.875rem; padding-right:76px; }
+.top-notice { display:flex; align-items:center; box-sizing:border-box; min-height:calc(66px + env(safe-area-inset-top,0px)); padding-top:calc(env(safe-area-inset-top,0px)); padding-bottom:0; padding-right:76px; font-size:.8125rem; }
+.top-notice > span { min-width:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 /* Plus de détails : description en paragraphes séparés par un espace. */
 .source-desc { margin-top:8px; }
 .source-desc p { margin:0; overflow-wrap:anywhere; }
