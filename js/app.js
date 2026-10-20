@@ -445,7 +445,7 @@
 
   /* Prépa Talents : bandeau photo teinté de bleu avec le logo blanc, puis carte blanche au liseré bleu
      (coins biseautés en bas) : présentation, pointillés, puis la bourse. En titre de page (h1), le logo tient lieu de titre visible. */
-  function talentsHero(extra) { return '<div class="talents-hero"><img class="talents-logo" src="assets/prepa-talents-logo-blanc.png" alt="Prépa Talents" width="420" height="200">' + (extra || '') + '</div>'; }
+  function talentsHero(extra) { return '<div class="talents-hero"><img class="talents-logo" src="assets/prepas-talents-logo.png" alt="Prépas Talents" width="360" height="173">' + (extra || '') + '</div>'; }
   function talentsFeature(title,body,heading,extraClass) {
     heading=heading||'h2';
     return '<section class="talents-card'+(extraClass?' '+extraClass:'')+'">'+talentsHero()+'<div class="talents-body"><'+heading+' class="no-icon'+(heading==='h1'?' sr-only':'')+'">'+title+'</'+heading+'>'+body +
@@ -645,7 +645,7 @@
       (isParent() ? '<a class="link-plain" href="#/accueil">Tous les parcours de la famille</a>' : '') +
       '<div class="home-features mt-s"><a class="home-feature home-discover" href="#/metiers" data-action="discoverJobs"><span class="home-tile home-count' + countSize(jobs.length) + '">' + jobs.length + '</span><span class="home-feature-copy"><b>' + (isParent() ? 'Ses métiers à découvrir' : 'Vos métiers à découvrir') + '</b><span>sélectionnés pour ' + (isParent() ? 'votre enfant' : 'vous') + '.</span></span><span class="home-go">' + I.arrow + '</span></a>' +
       '<a class="home-feature home-concours" href="#/concours-liste" data-action="discoverConcours"><span class="home-tile home-count' + countSize(concours.length) + '">' + concours.length + '</span><span class="home-feature-copy"><b>' + (isParent() ? 'Ses concours' : 'Vos concours') + '</b><span>sélectionnés pour ' + (isParent() ? 'votre enfant' : 'vous') + '.</span></span><span class="home-go">' + I.arrow + '</span></a>' +
-      '<a class="home-feature home-access" href="#/concours"><span class="home-tile home-tile-parcours">' + I.parcours + '</span><span class="home-feature-copy"><b>Comment y accéder</b><span>Les concours A+, A, B et C selon le diplôme spécifique et les conditions du concours</span></span><span class="home-go">' + I.arrow + '</span></a></div>' +
+      '<a class="home-feature home-access" href="#/concours"><span class="home-tile home-tile-parcours">' + I.journey + '</span><span class="home-feature-copy"><b>Comment y accéder</b><span>Les concours A+, A, B et C selon le diplôme spécifique et les conditions du concours</span></span><span class="home-go">' + I.arrow + '</span></a></div>' +
       '<div class="grid-2 home-shortcuts"><a href="#/favoris"><span class="home-tile home-count' + countSize(S.favorites.length) + '">' + S.favorites.length + '</span><span><b>' + (isParent() ? 'Ses métiers favoris' : 'Vos métiers favoris') + '</b></span></a><a href="#/interets"><span class="home-tile">' + I.pencil + '</span><span><b>' + (isParent() ? 'Son projet' : 'Votre projet') + '</b> <span>Affiner les préférences</span></span></a></div>' +
       '</main>' + tabbar('accueil');
   }
@@ -1243,6 +1243,7 @@
   /* Position sur la frise en années depuis l’entrée en 6e : le bac tombe à 7, la licence à 10. */
   var TRIP_POS = { '6e': 0, '5e': 1, '4e': 2, '3e': 3, 'Seconde': 4, 'Première': 5, 'Terminale': 6, 'Sans diplôme': 4, 'Brevet': 4, 'CAP / BEP': 5, 'Bac': 7, 'Bac+1 / +2': 8, 'Bac+2': 9, 'Bac+3': 10, 'Bac+5': 12, 'Doctorat': 15 };
   var TRIP_AFTER_BAC = [0, 0, 0, 2, 3, 5, 8];
+  I.journey = '<svg class="journey-icon" viewBox="0 0 200 844" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M100 2a72 72 0 0 1 72 72c0 46-50 86-72 108-22-22-72-62-72-108A72 72 0 0 1 100 2zm0 38a34 34 0 1 0 0 68 34 34 0 1 0 0-68z"/><g transform="translate(-6.6 202.6) scale(9)" fill="none" stroke="currentColor" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.4" cy="3.6" r="1.9" fill="currentColor" stroke="none"/><path d="M12.6 7.6 11.4 13.2M12.4 8.4l-2.9 2-.8 2.6M12.6 8.6l2.2 2 2.6.9M11.4 13.2l2.5 3.2.2 4.2M11.4 13.2l-1.5 3.7-2.6 3.6"/></g><circle cx="100" cy="448" r="11"/><circle cx="100" cy="537" r="11"/><circle cx="100" cy="627" r="11"/><circle cx="100" cy="762" r="68"/></svg>';
   I.walk = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="13.4" cy="3.6" r="1.9" fill="currentColor" stroke="none"/><path d="M12.6 7.6 11.4 13.2M12.4 8.4l-2.9 2-.8 2.6M12.6 8.6l2.2 2 2.6.9M11.4 13.2l2.5 3.2.2 4.2M11.4 13.2l-1.5 3.7-2.6 3.6"/></svg>';
   function concoursJobs(c) {
     if (!c._jobs) c._jobs = D.jobs.filter(function (j) { return (j.routeIds || []).some(function (id) { return c.routeIds.indexOf(id) > -1; }) && jobCategories(j).indexOf(c.cat) > -1 && j.fp.indexOf(c.fp) > -1; });
@@ -2008,6 +2009,13 @@
       if (r.name !== 'accessibilite') main.insertAdjacentHTML('beforeend', '<a class="a11y-link" href="#/accessibilite">Confort de lecture et accessibilité</a>');
     }
     /* Arrivée sur le tableau de bord après le chargement du catalogue : chaque bloc apparaît du haut vers le bas, menu compris. */
+    /* Onboarding : à chaque nouvel écran, les éléments montent en fondu l’un après l’autre, bouton du bas compris. */
+    if (changed && main && ['bienvenue', 'versants', 'categories-intro', 'choix-profil', 'profil', 'niveau', 'interets', 'traits', 'situation'].indexOf(r.name) > -1) {
+      var entering = [].slice.call(main.children).concat([].slice.call(root.querySelectorAll(':scope > .footer')));
+      entering.forEach(function (el, i) { el.classList.add('enter-up'); el.style.setProperty('--enter-i', i); });
+      /* Une fois l’écran apparu, les onglets retrouvent leur propre transition. */
+      setTimeout(function () { entering.forEach(function (el) { el.classList.remove('enter-up'); }); }, 1800);
+    }
     if (dashboardEnter && main) {
       dashboardEnter = false;
       [].slice.call(main.children).concat([].slice.call(root.querySelectorAll(':scope > .tabbar'))).forEach(function (el, i) {

@@ -155,7 +155,7 @@ html.dark .home-discover .home-go { background:#FFF; color:#3B21C9; }
 html.dark img:not([src$=".svg"]) { filter:brightness(.92); }
 html.dark .book-card img { background:#2A2A2F; }
 html.dark ::placeholder { color:#8A8A92; }
-html.dark { --choice:#6347FF; --choice-ink:#B3A6FF; --sun:#E6E6E6; --sun-soft:#E6E6E6; --yellow:#E6E6E6; }
+html.dark { --choice:#6347FF; --choice-ink:#B3A6FF; --sun:#FFD499; --sun-soft:#FFD499; --yellow:#FFD499; }
 html.dark :is(.fit,.prep .price,.update-notice,.parcours-zone,.parcours-link.stage,.category-fit.warn,.home-tile) { background:var(--sun) !important; color:#262626 !important; }
 html.dark :is(.ref-tip,.todo,.bourse,.filter-hint) { background:#000 !important; color:#FFF !important; border-color:#000 !important; }
 html.dark :is(.ref-tip,.todo,.bourse,.filter-hint) :is(b,p,span,small,li) { color:#FFF !important; }
@@ -209,6 +209,7 @@ html.dark .talents-card, html.dark .talents-card :is(h1,h2,p,b,.more,.chev) { co
 html.dark .talents-card .talents-hero .price { background:#FFF !important; color:#1129AD !important; }
 /* Prénom de l’accueil : vague partant du texte clair, sans bleu sombre peu lisible sur fond sombre. */
 html.dark { --name-sweep:linear-gradient(180deg, var(--ink) 0%, var(--ink) 25%, #E7E6EB 27.08%, #E1DFEF 29.17%, #D7D4F4 31.25%, #CCC5FA 33.33%, #BFB6FE 35.42%, #B3A6FF 37.5%, #A898FE 39.58%, #9E8CFB 41.67%, #9683F7 43.75%, #917DF4 45.83%, #8D79F1 47.92%, #8C78F0 50%, #8D79F1 52.08%, #917DF4 54.17%, #9683F7 56.25%, #9E8CFB 58.33%, #A898FE 60.42%, #B3A6FF 62.5%, #BFB6FE 64.58%, #CCC5FA 66.67%, #D7D4F4 68.75%, #E1DFEF 70.83%, #E7E6EB 72.92%, var(--ink) 75%, var(--ink) 100%); }
+html.dark .talents-body { background:#FFF; }
 html.dark .talents-perf { background-image:radial-gradient(circle, #DEDEDE 1.3px, transparent 1.8px) !important; }
 """
 
