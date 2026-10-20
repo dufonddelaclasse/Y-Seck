@@ -1411,7 +1411,7 @@
     }).join('');
     return '<main class="screen top-tight job-page concours-trip job-trip">' + back('#/metiers', 'Métiers') +
       '<div class="job-hero trip-head"><div class="trip-summary"><span class="trip-modes">' + I.walk + '<span class="trip-sep" aria-hidden="true"></span>' + jobBadges(j) + '</span></div>' +
-        '<h1>' + esc(j.name) + '</h1>' + (shared.length ? '<p class="job-match"><span class="job-match-dot" aria-hidden="true"></span><span><span class="job-match-label">' + (isParent() ? 'Lui ressemble' : 'Vous ressemble') + ' :</span> ' + esc(shared.map(traitLabel).join(', ').toLowerCase()) + '</span></p>' : '') +
+        '<h1>' + esc(j.name) + '</h1>' + (shared.length ? '<p class="job-match">' + (isParent() ? 'Lui ressemble' : 'Vous ressemble') + ' : ' + esc(shared.map(traitLabel).join(', ').toLowerCase()) + '</p>' : '') +
         '<p class="body">' + esc(j.desc.length > 300 ? j.desc.slice(0, 297).replace(/\s+\S*$/, '') + '…' : j.desc) + '</p></div>' +
       '<div class="job-actions">' +
         '<button type="button" class="job-action" data-action="jobDetails"' + attr('v', j.id) + ' aria-label="En savoir plus">' + I.info + '<span aria-hidden="true">En savoir +</span></button>' +

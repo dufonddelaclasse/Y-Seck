@@ -179,8 +179,7 @@ html.dark :is(.catcard-wrap.tint-cyan,.preparation-card.prep-cat-B,.intro-catego
 html.dark :is(.catcard-wrap.tint-yellow,.preparation-card.prep-cat-C,.intro-category-fold.tint-yellow) { --cc:#FFE8D9; }
 html.dark :is(.catcard-wrap,.intro-category-fold) { background:transparent !important; border:1.5px solid var(--cc,#5A5A60) !important; box-shadow:none !important; }
 html.dark .catcard-wrap :is(.catcard,.catcard-panel,.explain) { background:transparent !important; }
-html.dark .job-page .job-match { background:transparent !important; box-shadow:inset 0 0 0 1px var(--lt,#5A5A60) !important; }
-html.dark .job-page .job-match-dot { background:var(--lt,#E2E2E6) !important; }
+html.dark .job-page .job-match { background:none !important; box-shadow:none !important; color:var(--theme-ink) !important; }
 html.dark .job-page .rung { background:transparent !important; border:1.5px solid var(--lt,#5A5A60) !important; }
 html.dark .category-fit:not(.warn) { background:transparent !important; box-shadow:inset 0 0 0 1px #C9F2A6 !important; color:#E2E2E6 !important; }
 html.dark .category-fit:not(.warn) svg { color:#C9F2A6 !important; }

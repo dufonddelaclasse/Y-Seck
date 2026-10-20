@@ -707,8 +707,13 @@ html:where(.dark).dark .ladder-alt-row, html:where(.dark).dark .ladder-alt-row:h
 :where(html.dark) .sheet-content button.chip.category-choice[data-action="metCat"], :where(html.dark) .sheet-content button.chip.category-choice[data-action="metCat"]:hover { border-color:transparent; }
 :where(html.dark) .app.themed main.job-page .rung, :where(html.dark) .job-page .rung { background:#292929; }
 :where(html.dark) .trip-pill svg { color:#FFF; }
-:where(html.dark) .trip-track.dots { background:repeating-linear-gradient(to bottom, var(--theme, var(--ink)) 0 6px, transparent 6px 12px); }
+:where(html.dark) .trip-track.dots { background:radial-gradient(circle, var(--theme, var(--ink)) 1.6px, transparent 2.1px) center top / 4px 9px repeat-y; }
 :where(html.dark) .trip-access { background:#3B3B3B; color:var(--ink); }
+:where(html.dark) .job-page .job-match, :where(html.dark) .job-page:not(.concours-page) .job-match { border:0; background:none; color:var(--ink); }
+:where(html.dark) .app.theme-Ap .job-page .job-match { color:var(--cat-ap-ink); }
+:where(html.dark) .app.theme-A .job-page .job-match { color:var(--cat-a-ink); }
+:where(html.dark) .app.theme-B .job-page .job-match { color:var(--cat-b-ink); }
+:where(html.dark) .app.theme-C .job-page .job-match { color:var(--cat-c-ink); }
 
 /* Retouches */
 html.dark { --brand:#8F7BFF; --blue:#A493FF; --accent:#7C66FF; --accent-hover:#9785FF; --theme-btn:var(--brand); --red:#FF6B6B; --surface:#1E1E22; }
@@ -746,8 +751,7 @@ html.dark :is(.catcard-wrap.tint-cyan,.preparation-card.prep-cat-B,.intro-catego
 html.dark :is(.catcard-wrap.tint-yellow,.preparation-card.prep-cat-C,.intro-category-fold.tint-yellow) { --cc:#FFE8D9; }
 html.dark :is(.catcard-wrap,.intro-category-fold) { background:transparent !important; border:1.5px solid var(--cc,#5A5A60) !important; box-shadow:none !important; }
 html.dark .catcard-wrap :is(.catcard,.catcard-panel,.explain) { background:transparent !important; }
-html.dark .job-page .job-match { background:transparent !important; box-shadow:inset 0 0 0 1px var(--lt,#5A5A60) !important; }
-html.dark .job-page .job-match-dot { background:var(--lt,#E2E2E6) !important; }
+html.dark .job-page .job-match { background:none !important; box-shadow:none !important; color:var(--theme-ink) !important; }
 html.dark .job-page .rung { background:transparent !important; border:1.5px solid var(--lt,#5A5A60) !important; }
 html.dark .category-fit:not(.warn) { background:transparent !important; box-shadow:inset 0 0 0 1px #C9F2A6 !important; color:#E2E2E6 !important; }
 html.dark .category-fit:not(.warn) svg { color:#C9F2A6 !important; }
