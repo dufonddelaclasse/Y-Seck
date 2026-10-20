@@ -1414,6 +1414,7 @@
     var level = testLevel ? decodeURIComponent(testLevel) : (S.done ? S.level : null);
     var jobs = concoursJobs(c);
     var lead = jobs.filter(function (j) { return jobRef(j) === c; })[0] || jobs[0] || null;
+    var prepLink = lead ? (isContractJob(lead) ? prepHref(lead) : '#/preparer/' + lead.id + '/' + concoursKey(c)) : '';
     var favKey = 'concours:' + concoursKey(c), fav = S.favorites.indexOf(favKey) > -1, visitor = !S.done;
     var line = tripLine(c, level, tripWho(level, testLevel), { name: 'Obtention du concours', icon: I.seal, track: 'dots', body: '<p class="trip-dir">' + catBadge(c.cat, 'sm') + I.arrow + '<span>' + esc(FP_FULL[c.fp] || D.fps[c.fp]) + '</span></p>' });
     return '<main class="screen top-tight job-page concours-page concours-trip">' + back('#/concours-liste', 'Concours') +
@@ -1426,8 +1427,10 @@
       '<section class="trip-wrap" aria-label="Parcours jusqu’au concours"><ol class="trip">' + line + '</ol></section>' +
       /* Les pointillés de l’obtention du concours mènent jusqu’à la boussole des métiers liés. */
       '<section class="stack job-section trip-next"><h2 class="section-heading">' + I.compass + '<span>Métiers liés</span></h2>' + (jobs.length ? relatedJobs(c, jobs) : '<p class="body">Les métiers associés figurent dans l’avis du concours.</p>') + '</section>' +
-      (visitor ? '<a class="btn theme mt-m" href="#/bienvenue">Créer un compte pour préparer le concours</a>' : lead ? '<a class="btn theme mt-m" href="' + (isContractJob(lead) ? prepHref(lead) : '#/preparer/' + lead.id + '/' + concoursKey(c)) + '">' + I.book + 'Se préparer</a>' : '') +
+      (visitor ? '<a class="btn theme mt-m" href="#/bienvenue">Créer un compte pour préparer le concours</a>' : lead ? '<a class="btn theme mt-m prep-cta" href="' + prepLink + '">' + I.book + 'Se préparer</a>' : '') +
       '<p class="small">Parcours conseillé, à titre indicatif : l’avis de chaque session fait référence.</p></main>' +
+      /* Copie réduite, réservée à la vue : le vrai bouton reste celui de la page pour le clavier et les lecteurs d’écran. */
+      (!visitor && lead ? '<a class="btn theme prep-float" href="' + prepLink + '" tabindex="-1" aria-hidden="true">' + I.book + 'Se préparer</a>' : '') +
       (visitor ? '<div class="footer share-footer"><a class="btn" href="#/bienvenue">Créer mon profil</a></div>' : tabbar('concours-liste'));
   };
   /* Ancienne adresse de la page test : même fiche. */
@@ -1962,6 +1965,24 @@
 
   var lastRoute = null;
   var booted = false;
+  /* Fiche concours : dès qu’on arrive aux métiers liés, « Se préparer » flotte en petit au-dessus du menu ; quand le vrai
+     bouton atteint cette place en fin de liste, la copie s’efface et lui grossit jusqu’à sa taille réelle. */
+  var prepFloatFrame = null;
+  function updatePrepFloat() {
+    prepFloatFrame = null;
+    var fl = root.querySelector('.prep-float'), real = root.querySelector('.prep-cta'), sec = root.querySelector('.trip-next');
+    if (!fl || !real || !sec) return;
+    var bar = root.querySelector('.tabbar'), gap = (bar ? bar.offsetHeight : 0) + 12, limit = window.innerHeight - gap;
+    fl.style.bottom = gap + 'px';
+    var reached = real.getBoundingClientRect().bottom <= limit, started = sec.getBoundingClientRect().top < limit;
+    var wasShown = fl.classList.contains('show');
+    fl.classList.toggle('show', started && !reached);
+    if (reached && wasShown) real.classList.add('grow');
+    else if (!reached) real.classList.remove('grow');
+  }
+  function schedulePrepFloat() { if (!prepFloatFrame) prepFloatFrame = requestAnimationFrame(updatePrepFloat); }
+  window.addEventListener('scroll', schedulePrepFloat, { passive: true });
+  window.addEventListener('resize', schedulePrepFloat);
   /* Mode sombre : « auto » suit le réglage clair ou sombre de l’appareil, en direct. */
   var darkQuery = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
   function applyColorMode() {
@@ -2081,6 +2102,7 @@
       var el = root.querySelector(focusSel);
       if (el) el.focus({ preventScroll: true });
     }
+    schedulePrepFloat();
   }
 
   /* Chargement du catalogue complet : écran d’attente animé, affiché au moins 2 secondes pour être lu, puis fondu vers l’écran demandé. */
