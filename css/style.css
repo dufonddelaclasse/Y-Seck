@@ -2174,10 +2174,12 @@ html.crios .profile-footer { bottom:calc(86px + env(safe-area-inset-bottom, 0px)
 /* Fiche concours : « Se préparer » flotte en taille réduite au-dessus du menu pendant les métiers liés, puis le vrai bouton
    grossit à sa place en fin de liste (position calculée dans app.js selon la hauteur du menu). */
 .btn.prep-float { position:fixed; z-index:6; left:50%; bottom:100px; width:auto; min-height:44px; padding:0 20px; gap:8px; font-size:.9375rem; white-space:nowrap;
-  box-shadow:0 8px 24px rgba(0,0,0,.22); opacity:0; pointer-events:none; transform:translateX(-50%); transition:opacity .2s ease; }
-.btn.prep-float.show { opacity:1; pointer-events:auto; }
+  box-shadow:0 8px 24px rgba(0,0,0,.22); opacity:0; pointer-events:none; transform:translate(-50%, 14px);
+  transition:opacity .2s ease, transform 0s linear .2s; }
+/* Apparition en fondu vers le haut. La disparition reste un simple fondu sur place : le bouton ne redescend qu'une fois invisible. */
+.btn.prep-float.show { opacity:1; pointer-events:auto; transform:translateX(-50%); transition:opacity .25s ease-out, transform .25s ease-out; }
 .btn.prep-cta.pending { opacity:0; }
 .btn.prep-float svg { width:18px; height:18px; }
 .btn.prep-cta.grow { animation:prep-grow .35s cubic-bezier(.2,.8,.2,1) both; }
 @keyframes prep-grow { from { transform:scale(.6); opacity:.6; } to { transform:scale(1); opacity:1; } }
-@media (prefers-reduced-motion:reduce) { .btn.prep-float { transition:none; } .btn.prep-cta.grow { animation:none; } }
+@media (prefers-reduced-motion:reduce) { .btn.prep-float, .btn.prep-float.show { transition:none; } .btn.prep-cta.grow { animation:none; } }
