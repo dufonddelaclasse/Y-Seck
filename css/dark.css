@@ -733,9 +733,9 @@ html:where(.dark).dark .ladder-alt-row, html:where(.dark).dark .ladder-alt-row:h
 :where(html.dark) a.rung.rung-link > .chev { color:var(--muted); }
 html:where(.dark) { background:#28272E; }
 :where(html.dark) body, :where(html.dark) .app { background:transparent; }
-:where(html.dark) body::before { background:linear-gradient(180deg, #292523 0%, #28272E 100%); }
+:where(html.dark) body::before { background:linear-gradient(180deg, #171714 0%, #28272E 100%); }
 :where(html.dark) .footer { background:#28272E; }
-:where(html.dark) .context-bar { background:#292523; }
+:where(html.dark) .context-bar { background:#171714; }
 :where(html.dark) .intro-tabs-screen .intro-hero { background:linear-gradient(180deg, rgba(24,44,178,.38) 0%, rgba(24,44,178,.30) 45%, rgba(14,26,120,.55) 100%), var(--hero-photo) 70% 30% / cover no-repeat #23379E; color:#FFF; }
 :where(html.dark) .screen.intro-tabs-screen .intro-hero .topbar > :is(.back, .eyebrow) { color:#FFF; }
 :where(html.dark) .screen.intro-tabs-screen .intro-hero .topbar .back svg { color:#FFF; }
@@ -768,6 +768,7 @@ html:where(.dark).dark .sheet-content button.chip.category-choice[data-action="m
 :where(html.dark) .personal-home .home-feature.home-access { background:#161616; }
 :where(html.dark) .home-tile .journey-icon { color:#EAEAEA; }
 :where(html.dark) .ref-tip { background:#161616; }
+:where(html.dark) .home-tile { background:#E0FA6E; color:#EAEAEA; }
 
 /* Retouches */
 html.dark { --brand:#8F7BFF; --blue:#A493FF; --accent:#7C66FF; --accent-hover:#9785FF; --theme-btn:var(--brand); --red:#FF6B6B; --surface:#1E1E22; }
@@ -836,4 +837,5 @@ html.dark .talents-card .talents-hero .price { background:#FFF !important; color
 /* Prénom de l’accueil : vague partant du texte clair, sans bleu sombre peu lisible sur fond sombre. */
 html.dark { --name-sweep:linear-gradient(180deg, var(--ink) 0%, var(--ink) 25%, #E7E6EB 27.08%, #E1DFEF 29.17%, #D7D4F4 31.25%, #CCC5FA 33.33%, #BFB6FE 35.42%, #B3A6FF 37.5%, #A898FE 39.58%, #9E8CFB 41.67%, #9683F7 43.75%, #917DF4 45.83%, #8D79F1 47.92%, #8C78F0 50%, #8D79F1 52.08%, #917DF4 54.17%, #9683F7 56.25%, #9E8CFB 58.33%, #A898FE 60.42%, #B3A6FF 62.5%, #BFB6FE 64.58%, #CCC5FA 66.67%, #D7D4F4 68.75%, #E1DFEF 70.83%, #E7E6EB 72.92%, var(--ink) 75%, var(--ink) 100%); }
 html.dark .talents-body { background:#FFF; }
+html.dark .home-tile { background:#E0FA6E !important; color:#141414 !important; }
 html.dark .talents-perf { background-image:radial-gradient(circle, #DEDEDE 1.3px, transparent 1.8px) !important; }

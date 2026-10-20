@@ -1662,7 +1662,7 @@ html[data-contrast="true"] .tabbar a.on, html[data-contrast="true"] .tabbar a.on
 /* Espace personnel : « Vos métiers à découvrir » parcouru en continu par un dégradé doux, de gauche à droite.
    Teintes calculées sur une courbe en cosinus (24 paliers) : aucune cassure de pente, donc aucune ligne visible. */
 /* Dégradé dans une variable : le générateur du mode sombre ne l’assombrit pas. */
-:root { --discover-flow:linear-gradient(90deg,#2B0BC5 0%,#2F0EC4 4.17%,#3918C2 8.33%,#4A28BF 12.5%,#603DBA 16.67%,#7A55B5 20.83%,#956FAF 25%,#B08AA9 29.17%,#CAA2A4 33.33%,#E0B79F 37.5%,#F1C79C 41.67%,#FBD19A 45.83%,#FFD499 50%,#FBD19A 54.17%,#F1C79C 58.33%,#E0B79F 62.5%,#CAA2A4 66.67%,#B08AA9 70.83%,#956FAF 75%,#7A55B5 79.17%,#603DBA 83.33%,#4A28BF 87.5%,#3918C2 91.67%,#2F0EC4 95.83%,#2B0BC5 100%); }
+:root { --discover-flow:linear-gradient(90deg,#0D033B 0%,#0D033C 2.08%,#0E0340 4.17%,#0F0446 6.25%,#11044D 8.33%,#130558 10.42%,#160563 12.5%,#190671 14.58%,#1C0780 16.67%,#200890 18.75%,#2309A1 20.83%,#270AB3 22.92%,#2B0BC5 25%,#4124CD 27.08%,#573DD4 29.17%,#6C55DB 31.25%,#7F6BE2 33.33%,#9280E8 35.42%,#A393EE 37.5%,#B1A4F3 39.58%,#BDB2F7 41.67%,#C7BDFB 43.75%,#CEC5FD 45.83%,#D3CAFF 47.92%,#D4CCFF 50%,#D3CAFF 52.08%,#CEC5FD 54.17%,#C7BDFB 56.25%,#BDB2F7 58.33%,#B1A4F3 60.42%,#A393EE 62.5%,#9280E8 64.58%,#806CE2 66.67%,#6C55DB 68.75%,#573DD4 70.83%,#4124CD 72.92%,#2B0BC5 75%,#270AB3 77.08%,#2309A1 79.17%,#200890 81.25%,#1C0780 83.33%,#190671 85.42%,#160563 87.5%,#130558 89.58%,#11044D 91.67%,#0F0446 93.75%,#0E0340 95.83%,#0D033C 97.92%,#0D033B 100%); }
 @keyframes discover-flow { from { background-position:0 0; } to { background-position:-200% 0; } }
 .personal-home .home-discover, .personal-home .home-discover:hover, html.dark body .personal-home .home-discover { background:var(--discover-flow) 0 0 / 200% 100% repeat-x; animation:discover-flow 7s linear infinite; }
 @media (prefers-reduced-motion:reduce) { .personal-home .home-discover, html.dark body .personal-home .home-discover { animation:none; background:var(--brand); } }
@@ -2044,16 +2044,16 @@ html[data-contrast="true"] .job-page .job-match { background:none; border:0; col
 a.rung.rung-link { color:var(--ink); text-decoration:none; }
 a.rung.rung-link:hover { color:var(--ink); }
 a.rung.rung-link > .chev { flex:none; width:18px; height:18px; margin-right:-4px; color:var(--muted); }
-/* Fond des écrans : dégradé vertical, #EFECEA en haut de l’écran et #E3E1EF en bas. Il est posé sur un calque fixe
+/* Fond des écrans : dégradé vertical, #F6F7F2 en haut de l’écran et #E3E1EF en bas. Il est posé sur un calque fixe
    (et non en « background-attachment: fixed », ignoré par Safari sur iPhone) : il ne bouge pas quand on fait défiler.
    Les zones blanches (en-tête des fiches métier et concours, pages blanches) restent blanches. */
 html { background:#E3E1EF; }
 body, .app { background:transparent; }
 /* Le corps de page isole ses calques : le dégradé (z-index:-1) reste derrière le contenu mais devant le fond de la page, y compris sur Safari iPhone. */
 body { isolation:isolate; }
-body::before { content:''; position:fixed; inset:0; z-index:-1; background:linear-gradient(180deg, #EFECEA 0%, #E3E1EF 100%); pointer-events:none; }
+body::before { content:''; position:fixed; inset:0; z-index:-1; background:linear-gradient(180deg, #F6F7F2 0%, #E3E1EF 100%); pointer-events:none; }
 .footer { background:#E3E1EF; }
-.context-bar { background:#EFECEA; }
+.context-bar { background:#F6F7F2; }
 /* Bandeau d’aide des réglages : le bouton des filtres passe au-dessus du bandeau pour rester visible ; texte un peu plus petit. */
 #filters-open.pulse { position:relative; z-index:21; }
 .top-notice { display:flex; align-items:center; box-sizing:border-box; min-height:calc(66px + env(safe-area-inset-top,0px)); padding-top:calc(env(safe-area-inset-top,0px)); padding-bottom:0; padding-right:76px; font-size:.8125rem; }
@@ -2141,3 +2141,7 @@ html { touch-action:manipulation; }
 @keyframes enter-fade { from { opacity:0; } to { opacity:1; } }
 .enter-fade { animation:enter-fade .45s ease-out both; }
 @media (prefers-reduced-motion:reduce) { .enter-fade { animation:none; } }
+/* Accueil : carrés des chiffres et des pictogrammes en vert anis. */
+.home-tile { background:#E0FA6E; color:#141414; }
+/* Bloc « Vos métiers à découvrir » : léger halo sous le texte blanc, lisible quand le lavande clair du dégradé passe dessous. */
+.personal-home .home-discover .home-feature-copy :is(b, span) { text-shadow:0 1px 10px rgba(13,3,59,.45), 0 0 2px rgba(13,3,59,.25); }
