@@ -25,9 +25,9 @@ vm.createContext(context);
 for (const file of ['js/data.js','js/catalog.js','js/ui.js']) vm.runInContext(fs.readFileSync(new URL(file,root),'utf8'),context);
 context.window.YSECK_UI.afterRender=()=>{};
 let source=fs.readFileSync(new URL('js/app.js',root),'utf8');
-source=source.replace('  UI.init();\n  render();\n  booted = true;', '  window.tests={screens,S,filteredJobs,jobFilters,jobCategories,isContractJob,prepHref,examsFor,calendarCategory,calendarRows,indicativeCategories,jobRow,tabbar,categoryBooks,bookList,studyResources,expandedPrepCategories,sig};');
+source=source.replace('  UI.init();\n  render();\n  booted = true;', '  window.tests={screens,S,filteredJobs,jobFilters,jobCategories,isContractJob,prepHref,examsFor,calendarCategory,calendarRows,indicativeCategories,jobRow,tabbar,categoryBooks,bookList,studyResources,expandedPrepCategories,sig,selCats,myJobs,ALL_CATS,D};');
 vm.runInContext(source,context);
-const {screens,S,filteredJobs,jobFilters,jobCategories,isContractJob,prepHref,examsFor,calendarCategory,calendarRows,indicativeCategories,jobRow,tabbar,categoryBooks,bookList,studyResources,expandedPrepCategories,sig}=context.window.tests;
+const {screens,S,filteredJobs,jobFilters,jobCategories,isContractJob,prepHref,examsFor,calendarCategory,calendarRows,indicativeCategories,jobRow,tabbar,categoryBooks,bookList,studyResources,expandedPrepCategories,sig,selCats,myJobs,ALL_CATS,D}=context.window.tests;
 const data=context.window.DATA;
 Object.assign(S,{profile:'etu',name:'Test',level:'Doctorat',domains:[],metDomains:[],traits:[],budget:'Plus de 1 000 €',prepBudget:'2',boursier:'Non'});
 const fixed=data.jobs.filter(j=>['A+','A','B','C'].includes(j.cat)&&!isContractJob(j)&&!j.recruitment);
@@ -159,10 +159,27 @@ click('metCat','CDD');
 assert(!S.metCats.includes('CDD')&&!filteredJobs().some(isContractJob));
 S.metCats=['B'];click('metCat','B');
 assert.deepEqual(S.metCats,['B'],'Au moins une catégorie reste choisie.');
-S.level='Doctorat';S.metCats=null;
-assert(!filteredJobs().some(isContractJob)&&!filteredJobs().some(j=>jobCategories(j).length&&jobCategories(j).every(c=>c==='C')),'Au-delà de Bac+3, C et contractuels ne sont pas affichés par défaut.');
+for(const level of ['Bac+3','Doctorat']){
+  S.level=level;S.metCats=null;
+  assert.deepEqual([...selCats()],['A+','A','B'],level+' : seules A+, A et B sont cochées par défaut.');
+  assert(!filteredJobs().some(isContractJob)&&!filteredJobs().some(j=>jobCategories(j).length&&jobCategories(j).every(c=>c==='C')),'À partir de Bac+3, C et contractuels ne sont pas affichés par défaut.');
+  assert(!myJobs().some(isContractJob),'À partir de Bac+3, l’accueil ne compte pas les contractuels.');
+}
 click('metCat','C');
-assert(filteredJobs().some(j=>jobCategories(j).includes('C')),'La catégorie C reste disponible au-delà de Bac+3.');
+assert(filteredJobs().some(j=>jobCategories(j).includes('C')),'La catégorie C reste disponible à partir de Bac+3.');
+S.level='Bac+1 / +2';S.metCats=null;
+assert.deepEqual([...selCats()],[...ALL_CATS],'Avant Bac+3, toutes les catégories sont cochées.');
+{
+  const saved=S.domains;S.domains=[];
+  const contractRanked=D.jobs.filter(isContractJob)[0];
+  /* Même un contractuel au meilleur score laisse les quatre premières places aux catégories A+ à C. */
+  S.traits=(contractRanked.traits||[]).slice();
+  for(const list of [filteredJobs(),myJobs()]){
+    assert(list.some(isContractJob),'Des contractuels restent proposés.');
+    assert(!list.slice(0,4).some(isContractJob),'Les contractuels arrivent à partir de la 5e place.');
+  }
+  S.domains=saved;S.traits=[];
+}
 S.metCats=null;S.metFps=['E','T'];
 assert(filteredJobs().every(j=>/[ET]/.test(j.fp)),'Plusieurs versants peuvent être choisis.');
 S.metFps=null;

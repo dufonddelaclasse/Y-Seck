@@ -351,9 +351,9 @@
     return ['A+','A','B','C','CDD'].filter(function(c){return cats.indexOf(c)>-1;})[0]||null;
   }
   function jobFits(j) { return isOpen(j)||jobCategories(j).some(function(c){return categoryFit(c)!=='';}); }
-  /* Filtres à choix multiple. Au-delà de Bac+3, catégorie C et contractuels restent proposés mais ne sont pas cochés par défaut. */
+  /* Filtres à choix multiple. À partir de Bac+3, catégorie C et contractuels restent proposés mais ne sont pas cochés par défaut. */
   var ALL_CATS = ['A+', 'A', 'B', 'C', 'CDD'], ALL_FPS = ['E', 'T', 'H'];
-  function defaultCats() { return userRank() >= 5 ? ['A+', 'A', 'B'] : ALL_CATS.slice(); }
+  function defaultCats() { return userRank() >= RANK['Bac+3'] ? ['A+', 'A', 'B'] : ALL_CATS.slice(); }
   function selCats() { return S.metCats || defaultCats(); }
   function selFps() { return S.metFps || ALL_FPS.slice(); }
   function passesCats(j, cats) {
@@ -383,7 +383,12 @@
   function score(j) { return (matchesDomains(j,S.domains) ? 3 : 0) + sharedTraits(j).length; }
   function myJobs() {
     var base = D.jobs.filter(function (j) { return passesLevelCategory(j) && (!S.domains.length || matchesDomains(j,S.domains)); });
-    return base.sort(function (a, b) { return score(b) - score(a); });
+    return contractsLater(base.sort(function (a, b) { return score(b) - score(a); }));
+  }
+  /* Les quatre premières places reviennent aux métiers de catégorie A+, A, B ou C : les contractuels arrivent ensuite. */
+  function contractsLater(list) {
+    var head = list.filter(function (j) { return !isContractJob(j); }).slice(0, 4);
+    return head.concat(list.filter(function (j) { return head.indexOf(j) === -1; }));
   }
   function activeDomains() { return S.metDomains === null ? S.domains.slice() : S.metDomains; }
 
@@ -712,9 +717,11 @@
       if (words.length && !matchesWords(searchText(j), words)) return false;
       return true;
     });
-    return list.slice().sort(function (a, b) {
+    list = list.slice().sort(function (a, b) {
       return score(b) - score(a) || (isOpen(a) ? 0 : 1) - (isOpen(b) ? 0 : 1) || a.lvl - b.lvl;
     });
+    /* Une recherche garde l’ordre de pertinence : le métier cherché reste en tête, même contractuel. */
+    return words.length ? list : contractsLater(list);
   }
   function jobRow(j) {
       var ranked = userRank() !== null;
