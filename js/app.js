@@ -475,13 +475,14 @@
       }).join('') + '</div>' +
       '<div class="callout tint-yellow"><span class="pin"></span><p>Bon à savoir : un même métier existe souvent dans les trois. Et au cours d’une carrière, on peut passer de l’une à l’autre.</p></div>';
   }
+  var CATS_INTRO = [
+    { id: 'A+', t: 'Les cadres supérieurs', d: 'Ils dirigent les grandes administrations et pilotent les politiques publiques.', dip: 'Bac+3 minimum, souvent Bac+5', ex: 'Directeur·rice d’hôpital, magistrat·e, commissaire', tint: 'tint-blue' },
+    { id: 'A', t: 'Concevoir, élaborer, manager', d: 'Ils imaginent les projets, préparent les décisions et encadrent des équipes.', dip: 'Bac+3 minimum', ex: 'Attaché·e, inspecteur·rice, professeur·e, infirmier·ère', tint: 'tint-mint' },
+    { id: 'B', t: 'Appliquer, rédiger, gérer', d: 'Ils mettent en œuvre les décisions, suivent les dossiers et peuvent encadrer une petite équipe.', dip: 'Bac minimum', ex: 'Greffier·ère, technicien·ne, gardien·ne de la paix', tint: 'tint-cyan' },
+    { id: 'C', t: 'Exécuter, accueillir, assurer', d: 'Ils font tourner le service au quotidien, sur le terrain et au contact du public.', dip: 'Brevet, CAP, BEP, ou sans diplôme', ex: 'Adjoint·e administratif·ve, agent·e technique, ATSEM', tint: 'tint-yellow' }
+  ];
   function categoriesBlocks(h, fold) {
-    var cats = [
-      { id: 'A+', t: 'Les cadres supérieurs', d: 'Ils dirigent les grandes administrations et pilotent les politiques publiques.', dip: 'Bac+3 minimum, souvent Bac+5', ex: 'Directeur·rice d’hôpital, magistrat·e, commissaire', tint: 'tint-blue' },
-      { id: 'A', t: 'Concevoir, élaborer, manager', d: 'Ils imaginent les projets, préparent les décisions et encadrent des équipes.', dip: 'Bac+3 minimum', ex: 'Attaché·e, inspecteur·rice, professeur·e, infirmier·ère', tint: 'tint-mint' },
-      { id: 'B', t: 'Appliquer, rédiger, gérer', d: 'Ils mettent en œuvre les décisions, suivent les dossiers et peuvent encadrer une petite équipe.', dip: 'Bac minimum', ex: 'Greffier·ère, technicien·ne, gardien·ne de la paix', tint: 'tint-cyan' },
-      { id: 'C', t: 'Exécuter, accueillir, assurer', d: 'Ils font tourner le service au quotidien, sur le terrain et au contact du public.', dip: 'Brevet, CAP, BEP, ou sans diplôme', ex: 'Adjoint·e administratif·ve, agent·e technique, ATSEM', tint: 'tint-yellow' }
-    ];
+    var cats = CATS_INTRO;
     return '<div class="category-heading mt-m"><' + h + ' class="understand-title no-icon">4 catégories</' + h + '><div class="row" aria-hidden="true">' + ['A+','A','B','C'].map(function(c){return '<span class="cat sm '+catClass(c)+'">'+c+'</span>';}).join('') + '</div></div>' +
       '<p class="lead">Chaque poste appartient à une catégorie. Elle dépend du niveau de responsabilité et du diplôme demandé pour y entrer.</p>' +
       '<div class="stack mt-s">' + cats.map(function (c) {
@@ -496,14 +497,14 @@
   /* Onboarding : bandeau photo teinté de bleu, puis un onglet par fonction publique. */
   var FP_ICONS = { E: 'government', T: 'city', H: 'hospital' };
   screens.versants = function () {
-    return '<main class="screen intro-screen versants-screen">' +
-      '<section class="versants-hero"><div class="topbar">' + back('#/bienvenue', 'Retour') + '<span class="eyebrow">Comprendre 1 / 2</span></div>' +
-        '<div class="versants-hero-text"><h1>3 fonctions publiques</h1><p class="lead">Travailler dans le service public, c’est travailler pour l’un de ces trois employeurs.</p></div></section>' +
+    return '<main class="screen intro-screen intro-tabs-screen">' +
+      '<section class="intro-hero versants-hero"><div class="topbar">' + back('#/bienvenue', 'Retour') + '<span class="eyebrow">Comprendre 1 / 2</span></div>' +
+        '<div class="intro-hero-text"><h1>3 fonctions publiques</h1><p class="lead">Travailler dans le service public, c’est travailler pour l’un de ces trois employeurs.</p></div></section>' +
       '<div class="fp-tabs" role="tablist" aria-label="Les trois fonctions publiques">' + FPS_INTRO.map(function (f, i) {
         return '<button type="button" class="fp-tab" role="tab" id="fp-tab-' + f.k + '" aria-controls="fp-panel-' + f.k + '" aria-selected="' + (i === 0) + '"' + attr('action', 'fpTab') + attr('v', f.k) + '><span class="fp-tab-icon" aria-hidden="true">' + I[FP_ICONS[f.k]] + '</span><span>' + esc(f.short) + '</span></button>';
       }).join('') + '</div>' +
       FPS_INTRO.map(function (f, i) {
-        return '<section class="fp-panel" role="tabpanel" id="fp-panel-' + f.k + '" aria-labelledby="fp-tab-' + f.k + '"' + (i ? ' hidden' : '') + '>' +
+        return '<section class="fp-panel" role="tabpanel" id="fp-panel-' + f.k + '" data-k="' + f.k + '" aria-labelledby="fp-tab-' + f.k + '"' + (i ? ' hidden' : '') + '>' +
           '<h2 class="no-icon">' + esc(f.t) + '</h2><p>' + esc(f.d) + '</p><p><b>Par exemple :</b> ' + esc(f.ex) + '</p></section>';
       }).join('') +
       '<p class="fp-note">' + I.arrow + '<span>Bon à savoir : un même métier existe souvent dans les trois. Et au cours d’une carrière, on peut passer de l’une à l’autre.</span></p>' +
@@ -511,12 +512,26 @@
   };
   function selectFpTab(scope, k) {
     scope.querySelectorAll('.fp-tab').forEach(function (t) { t.setAttribute('aria-selected', String(t.getAttribute('data-v') === k)); });
-    scope.querySelectorAll('.fp-panel').forEach(function (p) { p.hidden = p.id !== 'fp-panel-' + k; });
+    scope.querySelectorAll('.fp-panel').forEach(function (p) { p.hidden = p.getAttribute('data-k') !== k; });
   }
 
+  /* Onboarding : même gabarit que les fonctions publiques, un onglet par catégorie (pastille), soulignement à sa couleur. */
   screens['categories-intro'] = function () {
-    return '<main class="screen category-screen">' +
-      '<div class="topbar">' + back('#/versants', 'Retour') + '<span class="eyebrow">Comprendre 2 / 2</span></div>' + categoriesBlocks('h1', 'h2') +
+    return '<main class="screen category-screen intro-tabs-screen">' +
+      '<section class="intro-hero categories-hero"><div class="topbar">' + back('#/versants', 'Retour') + '<span class="eyebrow">Comprendre 2 / 2</span></div>' +
+        '<div class="intro-hero-text"><h1>4 catégories</h1><p class="lead">Chaque poste appartient à une catégorie. Elle dépend du niveau de responsabilité et du diplôme demandé pour y entrer.</p></div></section>' +
+      '<div class="fp-tabs cat-tabs" role="tablist" aria-label="Les quatre catégories">' + CATS_INTRO.map(function (c, i) {
+        var k = catClass(c.id).slice(4);
+        return '<button type="button" class="fp-tab" role="tab" id="cat-tab-' + k + '" aria-controls="cat-panel-' + k + '" aria-selected="' + (i === 0) + '"' + attr('action', 'fpTab') + attr('v', k) + ' style="--tab-color:var(--cat-' + k.toLowerCase() + ')">' +
+          '<span class="cat sm ' + catClass(c.id) + '" aria-hidden="true">' + c.id + '</span><span class="sr-only">Catégorie ' + c.id + '</span></button>';
+      }).join('') + '</div>' +
+      CATS_INTRO.map(function (c, i) {
+        var k = catClass(c.id).slice(4);
+        return '<section class="fp-panel" role="tabpanel" id="cat-panel-' + k + '" data-k="' + k + '" aria-labelledby="cat-tab-' + k + '"' + (i ? ' hidden' : '') + '>' +
+          '<div class="fp-panel-head"><h2 class="no-icon">' + esc(c.t) + '</h2><p class="fp-sub">Catégorie ' + c.id + '</p></div>' +
+          '<p>' + esc(c.d) + '</p><p><b>Pour y entrer :</b> ' + esc(c.dip) + '</p><p><b>Par exemple :</b> ' + esc(c.ex) + '</p>' + categoryFit(c.id) + '</section>';
+      }).join('') +
+      '<p class="fp-note">' + I.arrow + '<span>Rien n’est figé : on peut monter de catégorie au cours de sa carrière, par concours interne ou par promotion.</span></p>' +
       '</main><div class="footer"><button type="button" class="btn" data-action="startProfile">Démarrer mon profil</button></div>';
   };
 

@@ -736,21 +736,23 @@ html:where(.dark) { background:#2D2D2D; }
 :where(html.dark) body::before { background:linear-gradient(180deg, #161616 0%, #2D2D2D 100%); }
 :where(html.dark) .footer { background:#2D2D2D; }
 :where(html.dark) .context-bar { background:#161616; }
-:where(html.dark) .versants-screen .versants-hero { background:linear-gradient(180deg, rgba(24,44,178,.38) 0%, rgba(24,44,178,.30) 45%, rgba(14,26,120,.55) 100%), url(../assets/fonctions-publiques-pantheon.jpg) 70% 30% / cover no-repeat #23379E; color:#FFF; }
-:where(html.dark) .screen.versants-screen .versants-hero .topbar > :is(.back, .eyebrow) { color:#FFF; }
-:where(html.dark) .screen.versants-screen .versants-hero .topbar .back svg { color:#FFF; }
-:where(html.dark) .screen.versants-screen .versants-hero h1 { color:#FFF; }
-:where(html.dark) .screen.versants-screen .versants-hero .lead { color:#FFF; }
+:where(html.dark) .intro-tabs-screen .intro-hero { background:linear-gradient(180deg, rgba(24,44,178,.38) 0%, rgba(24,44,178,.30) 45%, rgba(14,26,120,.55) 100%), var(--hero-photo) 70% 30% / cover no-repeat #23379E; color:#FFF; }
+:where(html.dark) .screen.intro-tabs-screen .intro-hero .topbar > :is(.back, .eyebrow) { color:#FFF; }
+:where(html.dark) .screen.intro-tabs-screen .intro-hero .topbar .back svg { color:#FFF; }
+:where(html.dark) .screen.intro-tabs-screen .intro-hero h1 { color:#FFF; }
+:where(html.dark) .screen.intro-tabs-screen .intro-hero .lead { color:#FFF; }
 :where(html.dark) .fp-tabs { border-bottom:2px solid #3F3F3F; }
 :where(html.dark) .fp-tab { border:0; background:none; color:#9A9A9F; }
 :where(html.dark) .fp-tab[aria-selected="true"] { color:var(--ink); }
-:where(html.dark) .fp-tab[aria-selected="true"]::after { background:var(--brand); }
+:where(html.dark) .fp-tab[aria-selected="true"]::after { background:var(--tab-color, var(--brand)); }
 :where(html.dark) .fp-tab[aria-selected="true"] .fp-tab-icon { background:#261F51; color:var(--brand); }
 :where(html.dark) .fp-tab:focus-visible { outline:2px solid var(--brand); }
 :where(html.dark) .screen .fp-panel h2 { color:var(--ink); }
 :where(html.dark) .fp-panel p { color:var(--ink); }
 :where(html.dark) .fp-note { color:var(--ink); }
 :where(html.dark) .fp-note svg { color:var(--brand); }
+:where(html.dark) .cat-tabs .fp-tab .cat.sm { box-shadow:none; }
+:where(html.dark) .fp-panel .fp-sub { color:var(--muted); }
 
 /* Retouches */
 html.dark { --brand:#8F7BFF; --blue:#A493FF; --accent:#7C66FF; --accent-hover:#9785FF; --theme-btn:var(--brand); --red:#FF6B6B; --surface:#1E1E22; }
