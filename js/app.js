@@ -1975,8 +1975,10 @@
     var bar = root.querySelector('.tabbar'), gap = (bar ? bar.offsetHeight : 0) + 12, limit = window.innerHeight - gap;
     fl.style.bottom = gap + 'px';
     var reached = real.getBoundingClientRect().bottom <= limit, started = sec.getBoundingClientRect().top < limit;
-    var wasShown = fl.classList.contains('show');
-    fl.classList.toggle('show', started && !reached);
+    var wasShown = fl.classList.contains('show'), floating = started && !reached;
+    fl.classList.toggle('show', floating);
+    /* Le grand bouton reste invisible tant que le petit flotte : il n’apparaît qu’au moment où le petit s’efface. */
+    real.classList.toggle('pending', floating);
     if (reached && wasShown) real.classList.add('grow');
     else if (!reached) real.classList.remove('grow');
   }
