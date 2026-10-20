@@ -6,6 +6,9 @@
   var UI = window.YSECK_UI;
   var expandedDatesJob = null, jobSlideRequested = false, expandedPrepCategories = {}, visitedRoutes = [];
   var talentIntroAnimate = false, nameAnimate = false, interestGesture = null;
+  /* Premier passage : seul l’onboarding est chargé ; le catalogue complet arrive à la fin de la création du profil. */
+  var catalogReady = !window.YSECK_CATALOG || window.YSECK_CATALOG.full, catalogLoading = false, dashboardEnter = false;
+  var LIGHT_ROUTES = ['bienvenue', 'versants', 'categories-intro', 'choix-profil', 'profil', 'niveau', 'interets', 'traits', 'situation', 'confidentialite', 'accessibilite', 'mentions'];
   var KEY = 'ofp-state-v1';
 
   /* ---------- État ---------- */
@@ -1954,6 +1957,7 @@
       var required=!S.profile?'choix-profil':!nameReady()?'profil':(!S.level&&r.name!=='niveau'?'niveau':null);
       if(required){r={name:required};history.replaceState(null,'','#/'+required);}
     }
+    if (!catalogReady && LIGHT_ROUTES.indexOf(r.name) < 0) { loadCatalog(); return; }
     var key = r.name + '/' + (r.arg || '') + '/' + (r.arg2 || '');
     var changed = key !== lastRoute;
     var hash=location.hash||'#/', slide=null, SLIDES=['metier','preparer','bibliographie'];
@@ -2002,6 +2006,13 @@
       }
       if (r.name !== 'accessibilite') main.insertAdjacentHTML('beforeend', '<a class="a11y-link" href="#/accessibilite">Confort de lecture et accessibilité</a>');
     }
+    /* Arrivée sur le tableau de bord après le chargement du catalogue : chaque bloc apparaît du haut vers le bas, menu compris. */
+    if (dashboardEnter && main) {
+      dashboardEnter = false;
+      [].slice.call(main.children).concat([].slice.call(root.querySelectorAll(':scope > .tabbar'))).forEach(function (el, i) {
+        el.classList.add('enter-up'); el.style.setProperty('--enter-i', i);
+      });
+    }
     var themedJob=['metier','metier-test','fiche','preparer','sans-concours','etudes','calendrier','annales','ressources-biblio','handicap'].indexOf(r.name)>-1&&r.arg&&jobById(r.arg);
     var theme=themedJob&&themeCategory(themedJob);
     if((r.name==='concours-fiche'||r.name==='concours-test')&&r.arg){var shownConcours=concoursByKey(r.arg);if(shownConcours)theme=shownConcours.cat;}
@@ -2028,6 +2039,28 @@
       var el = root.querySelector(focusSel);
       if (el) el.focus({ preventScroll: true });
     }
+  }
+
+  /* Chargement du catalogue complet, une seule fois : écran d’attente animé, puis fondu vers l’écran demandé. */
+  function loadCatalog() {
+    if (catalogLoading) return;
+    catalogLoading = true; lastRoute = null;
+    root.classList.remove('onboarding', 'themed', 'job-transition');
+    root.innerHTML = '<main class="screen loading-screen" id="contenu"><p class="loading-text" role="status">Identification des métiers et concours qui ' + (isParent() ? 'lui' : 'vous') + ' correspondent</p></main>';
+    document.title = 'Chargement · Y-Seck';
+    UI.afterRender({ root: root, noBar: true, title: 'Y-Seck', topLevel: true });
+    var started = Date.now();
+    window.YSECK_CATALOG.loadAll().then(function () {
+      jobsByName = null; SIGLE_RE = null;
+      catalogReady = true;
+      setTimeout(function () {
+        var screen = root.querySelector('.loading-screen'); if (screen) screen.classList.add('leaving');
+        setTimeout(function () { catalogLoading = false; dashboardEnter = LIGHT_ROUTES.indexOf(route().name) < 0; render(); }, 350);
+      }, Math.max(0, 1800 - (Date.now() - started)));
+    }).catch(function () {
+      catalogLoading = false;
+      root.innerHTML = '<main class="screen" id="contenu"><h1>Chargement interrompu</h1><p>Les métiers n’ont pas pu être chargés. Vérifiez votre connexion puis réessayez.</p><button type="button" class="btn" data-action="retryCatalog">Réessayer</button></main>';
+    });
   }
 
   function countAnnounce(sel) {
@@ -2105,6 +2138,7 @@
     var i, next;
     switch (a) {
       case 'tripTab': selectTripTab(el.closest('main') || document, v); break;
+      case 'retryCatalog': loadCatalog(); break;
       case 'fpTab': selectFpTab(el.closest('main') || document, v); break;
       case 'tripCat': var catMain = el.closest('main') || document, firstTab = null;
         catMain.querySelectorAll('.trip-cat').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-v') === v)); });
