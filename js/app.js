@@ -1270,6 +1270,7 @@
   /* En-tête de frise : autant de points que la catégorie est élevée (C : 1, B : 2, A : 3, A+ : 4). */
   function tripSeps(cat) { return '<span class="trip-seps" aria-hidden="true">' + new Array(({ 'A+': 4, A: 3, B: 2 }[cat] || 1) + 1).join('<span class="trip-sep"></span>') + '</span>'; }
   function tripWho(level, testLevel) { return level ? (isParent() && !testLevel ? 'Niveau de ' + childName() : 'Mon niveau') : 'Entrée en 6e'; }
+  var FP_FULL = { E: 'Fonction publique de l’État', T: 'Fonction publique territoriale', H: 'Fonction publique hospitalière' };
   var CAT_VARS = { 'A+': ['--cat-ap', '#3C05FF'], A: ['--cat-a', '#0051FF'], B: ['--cat-b', '#00707F'], C: ['--cat-c', '#A8461B'] };
   function tripStop(cls, node, name, body, track, style) {
     return '<li class="trip-item ' + cls + '"' + (style ? ' style="' + style + '"' : '') + '><span class="trip-rail" aria-hidden="true">' + node + (track ? '<i class="trip-track ' + track + '"></i>' : '') + '</span><div class="trip-body">' +
@@ -1306,7 +1307,7 @@
     if (c.recruit) return head + stop('trip-exam', catBadge(c.cat), esc(c.recruit.title), c.recruit.body, 'line', catStyle) + arrival();
     return head +
       stop('trip-exam', catBadge(c.cat), esc(c.name),
-        '<p class="trip-dir">' + I.arrow + '<span>' + esc({ E: 'Fonction publique de l’État', T: 'Fonction publique territoriale', H: 'Fonction publique hospitalière' }[c.fp] || D.fps[c.fp]) + '</span></p>' +
+        '<p class="trip-dir">' + I.arrow + '<span>' + esc(FP_FULL[c.fp] || D.fps[c.fp]) + '</span></p>' +
         tripFold('Prochaines sessions', sessions.length ? '<ul class="trip-sessions">' + sessions.slice(0, 3).map(function (x) {
           return '<li><span>' + esc(x.voie || 'Session') + (x.provisional ? ' · prévisionnel' : '') + '</span><span>' + (x.date ? (x.date < todayISO() ? 'inscriptions closes' : 'clôture ' + esc(short(x.date))) : esc(x.closeLabel || 'date à venir')) + '</span></li>';
         }).join('') + '</ul>' + (sessions.length > 3 ? '<a class="link-plain" href="' + datesHref + '">Voir les ' + sessions.length + ' sessions</a>' : '') + missingNote : '<p class="trip-a">' + unpublished + '</p>' + expected) +
@@ -1333,8 +1334,7 @@
     var jobs = concoursJobs(c);
     var lead = jobs.filter(function (j) { return jobRef(j) === c; })[0] || jobs[0] || null;
     var favKey = 'concours:' + concoursKey(c), fav = S.favorites.indexOf(favKey) > -1, visitor = !S.done;
-    var dot = function (t) { return t && !/[.!?]$/.test(t) ? t + '.' : t; };
-    var line = tripLine(c, level, tripWho(level, testLevel), { name: 'Arrivée', icon: I.seal, body: c.metiers ? '<p class="trip-meta">' + sig(dot(c.metiers)) + '</p>' : '' });
+    var line = tripLine(c, level, tripWho(level, testLevel), { name: 'Obtention du concours', icon: I.seal, body: '<p class="trip-dir">' + catBadge(c.cat, 'sm') + I.arrow + '<span>' + esc(FP_FULL[c.fp] || D.fps[c.fp]) + '</span></p>' });
     return '<main class="screen top-tight job-page concours-page concours-trip">' + back('#/concours-liste', 'Concours') +
       '<div class="job-hero trip-head"><div class="trip-summary"><span class="trip-modes">' + I.walk + tripSeps(c.cat) + catBadge(c.cat) + '</span></div>' +
         '<h1>' + sig(c.name) + '</h1></div>' +
@@ -1392,7 +1392,7 @@
     if (!refs.length) refs = [recruitConcours(j)];
     var main = jobRef(j), sel = Math.max(0, refs.indexOf(main));
     var level = testLevel ? decodeURIComponent(testLevel) : S.level || null, who = tripWho(level, testLevel);
-    var fpLabel = { E: 'Fonction publique de l’État', T: 'Fonction publique territoriale', H: 'Fonction publique hospitalière' };
+    var fpLabel = FP_FULL;
     var shared = sharedTraits(j), fav = S.favorites.indexOf(j.id) > -1;
     var label = function (c) { var twin = refs.some(function (o) { return o !== c && o.cat === c.cat && o.fp === c.fp; }); return twin ? c.name : D.fps[c.fp]; };
     /* Métier sur plusieurs catégories : on choisit d’abord la catégorie, puis le versant. */
