@@ -2029,3 +2029,9 @@ html[data-contrast="true"] .job-page .job-match { background:none; border:0; col
 .understand-page h2.understand-title { margin:0; font-size:1.875rem; font-weight:500; line-height:1.1; letter-spacing:-.02em; }
 .understand-page h2.understand-title.mt-m { margin-top:22px; }
 .understand-page .category-heading { margin-top:44px; }
+/* Fiche concours : les pointillés de l’obtention du concours descendent jusqu’à la boussole des métiers liés,
+   placée dans l’axe de la frise (même colonne de 34 px), le titre aligné sur les étapes. */
+.concours-page .trip-item.end .trip-body { padding-bottom:40px; }
+.concours-page .job-section.trip-next { margin-top:6px; }
+.concours-page .trip-next > .section-heading { display:grid; grid-template-columns:34px minmax(0,1fr); column-gap:14px; align-items:center; }
+.concours-page .trip-next > .section-heading > svg { justify-self:center; }

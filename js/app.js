@@ -1309,7 +1309,7 @@
     var arrival = function () {
       return (end.admission ? stop('admit', '<span class="trip-pill">' + I.medal + '</span><span class="trip-walk">' + I.walk + '</span>', 'Obtention du concours' + catBadge(c.cat, 'sm'),
         '<p class="trip-access"><b>Le concours rend ce poste accessible, sans le garantir.</b> Il s’obtient ensuite selon votre classement à la sortie de l’école, ou après un entretien avec l’employeur.</p>', 'dots', catStyle) : '') +
-        stop('end', '<span class="trip-pill">' + (end.icon || '') + '</span>', end.name, end.body, '', catStyle);
+        stop('end', '<span class="trip-pill">' + (end.icon || '') + '</span>', end.name, end.body, end.track || '', catStyle);
     };
     /* Départ : « Mon niveau » puis la pastille du niveau actuel, comme sur l’accueil. */
     var head = stop('start', I.pin, 'Départ', '<p class="trip-sub' + (level ? ' trip-level' : '') + '">' + esc(who) + (level ? '<span class="study-level">' + I.graduation + '<span>' + esc(level) + '</span></span>' : '') + '</p>', '') +
@@ -1347,7 +1347,7 @@
     var jobs = concoursJobs(c);
     var lead = jobs.filter(function (j) { return jobRef(j) === c; })[0] || jobs[0] || null;
     var favKey = 'concours:' + concoursKey(c), fav = S.favorites.indexOf(favKey) > -1, visitor = !S.done;
-    var line = tripLine(c, level, tripWho(level, testLevel), { name: 'Obtention du concours', icon: I.seal, body: '<p class="trip-dir">' + catBadge(c.cat, 'sm') + I.arrow + '<span>' + esc(FP_FULL[c.fp] || D.fps[c.fp]) + '</span></p>' });
+    var line = tripLine(c, level, tripWho(level, testLevel), { name: 'Obtention du concours', icon: I.seal, track: 'dots', body: '<p class="trip-dir">' + catBadge(c.cat, 'sm') + I.arrow + '<span>' + esc(FP_FULL[c.fp] || D.fps[c.fp]) + '</span></p>' });
     return '<main class="screen top-tight job-page concours-page concours-trip">' + back('#/concours-liste', 'Concours') +
       '<div class="job-hero trip-head"><div class="trip-summary"><span class="trip-modes">' + I.walk + tripSeps(c.cat) + catBadge(c.cat) + '</span></div>' +
         '<h1>' + sig(c.name) + '</h1></div>' +
@@ -1356,7 +1356,8 @@
         '<button type="button" class="job-action" data-action="share"' + attr('v', favKey) + '>' + I.send + '<span>Partager</span></button>' +
       '</div>') +
       '<section class="trip-wrap" aria-label="Parcours jusqu’au concours"><ol class="trip">' + line + '</ol></section>' +
-      '<section class="stack mt-m job-section"><h2 class="section-heading">' + I.compass + '<span>Métiers liés</span></h2>' + (jobs.length ? '<div class="list job-cards">' + jobs.slice(0, 40).map(jobRow).join('') + '</div>' : '<p class="body">Les métiers associés figurent dans l’avis du concours.</p>') + '</section>' +
+      /* Les pointillés de l’obtention du concours mènent jusqu’à la boussole des métiers liés. */
+      '<section class="stack job-section trip-next"><h2 class="section-heading">' + I.compass + '<span>Métiers liés</span></h2>' + (jobs.length ? '<div class="list job-cards">' + jobs.slice(0, 40).map(jobRow).join('') + '</div>' : '<p class="body">Les métiers associés figurent dans l’avis du concours.</p>') + '</section>' +
       (visitor ? '<a class="btn theme mt-m" href="#/bienvenue">Créer un compte pour préparer le concours</a>' : lead ? '<a class="btn theme mt-m" href="' + prepHref(lead) + '">' + I.book + 'Se préparer</a>' : '') +
       '<p class="small">Parcours conseillé, à titre indicatif : l’avis de chaque session fait référence.</p></main>' +
       (visitor ? '<div class="footer share-footer"><a class="btn" href="#/bienvenue">Créer mon profil</a></div>' : tabbar('concours-liste'));
