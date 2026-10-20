@@ -56,7 +56,8 @@
   function skipStep(href) { return profileNeedsValidation()?'':'<a class="skip-step" href="'+href+'">Passer cette étape</a>'; }
   function validateProfile() {
     if(!identityReady()){navigate(nameReady()?'#/niveau':'#/profil');announce(nameReady()?'Choisissez un niveau pour continuer.':'Renseignez un prénom pour continuer.');return;}
-    S.name=S.name.trim();markValidated();profileSnapshot=profileSignature();save();navigate('#/accueil');announce('Modifications enregistrées.');
+    var back=profileReturn;profileReturn=null;
+    S.name=S.name.trim();markValidated();profileSnapshot=profileSignature();save();navigate(back||'#/accueil');announce('Modifications enregistrées.');
   }
   function activeChild() { return S.children.find(function (c) { return c.id === S.activeChild; }); }
   function syncPerson() {
@@ -1656,6 +1657,15 @@
     return { shown: shown, matched: matched.length, total: all.length, hasKeys: keys.length > 0 };
   }
 
+  /* Nombre de prépas affichées, présenté comme un résultat (« 156 métiers ») ; un lien bascule entre la sélection et toute la région. */
+  function talentsCount(r, scope) {
+    function count(n) { return n + ' Prépa' + (n > 1 ? 's' : '') + ' Talents'; }
+    var label = scope || 'pour ' + (isParent() ? 'ses' : 'vos') + ' métiers';
+    if (!r.hasKeys || r.matched === r.total) return '<p class="small talents-count">' + count(r.hasKeys ? r.matched : r.total) + (r.hasKeys ? ' ' + esc(label) : '') + '</p>';
+    return '<p class="small talents-count">' + (S.talentsAll
+      ? count(r.total) + ' · <button type="button" class="text-btn"' + attr('action', 'talentsAll') + attr('v', 'mine') + '>Seulement ' + esc(label) + ' (' + r.matched + ')</button>'
+      : count(r.matched) + ' ' + esc(label) + ' · <button type="button" class="text-btn"' + attr('action', 'talentsAll') + attr('v', 'all') + '>Voir les ' + r.total + '</button>') + '</p>';
+  }
   function talentsRows(r) {
     if (!r.shown.length) return '<p class="empty">Aucune Prépa Talents dans cette région pour ces concours.</p>';
     return r.shown.map(function (x) {
@@ -1686,9 +1696,8 @@
       var scope = job ? 'pour ' + job.name : (S.domains.length ? 'pour ' + (isParent() ? 'ses' : 'vos') + ' choix' : '');
       return '<main class="screen top-tight">'+back(contextJob?prepHref(contextJob):'#/concours',contextJob?'Se préparer':'Concours et prépas')+
         talentsFeature('Prépas Talents','<p>Préparations gratuites, avec tutorat, aux concours A, A+ et B.</p>','h1') +
-        (S.location ? '<p class="small m0">Du plus proche au plus éloigné de ' + esc(S.location.label) + '. Distances entre centres des communes.</p>' : '<a class="link-plain" href="#/moi">Ajouter un lieu de vie pour classer par proximité</a>') +
-        regionSelect() +
-        (r.hasKeys ? '<div class="row">' + chip('talentsAll', 'mine', r.matched + ' ' + scope, !S.talentsAll, 'blue') + chip('talentsAll', 'all', 'Toutes (' + r.total + ')', S.talentsAll, 'blue') + '</div>' : '') +
+        (S.location ? '<p class="small m0">Du plus proche au plus éloigné de ' + esc(S.location.label) + '. Distances entre centres des communes.</p>' : '<a class="link-plain" href="#/moi" data-action="addLocation">Ajouter un lieu de vie pour classer par proximité</a>') +
+        regionSelect() + talentsCount(r, scope) +
         '<div class="list" id="talents">' + talentsRows(r) + '</div>' +
         '<p class="small m0">Source : fonction-publique.gouv.fr, liste consultée le 15/10/2026.</p>' + foot;
     }
@@ -1860,6 +1869,7 @@
       ['Budget', S.budget || 'Non renseigné']
     ];
     return '<main class="screen pt">' +
+      (profileReturn ? back(profileReturn, 'Prépas Talents') : '') +
       '<h1>' + (isParent() ? 'Le profil de ' + esc(childName()) : 'Votre profil') + '</h1>' + childSelector() +
       '<p class="small m0">Touchez une ligne pour modifier votre réponse.</p>' +
       '<div class="list m0 profile-rows">' + rows.map(function (r, i) {
@@ -1875,7 +1885,7 @@
       '<a class="list-row" href="#/mentions"><div class="main"><span class="name">Mentions légales</span></div>' + I.chev + '</a>' +
       '</div></main>' +
       /* Modifications en attente : bouton fixe au-dessus du menu, comme dans l’onboarding. */
-      (profileNeedsValidation()?'<div class="footer profile-footer"><button type="button" class="btn" data-action="validateProfile">Terminer les modifications</button></div>':'') + tabbar('moi');
+      (profileNeedsValidation()?'<div class="footer profile-footer"><button type="button" class="btn" data-action="validateProfile">' + (profileReturn ? 'Terminer et revenir aux Prépas Talents' : 'Terminer les modifications') + '</button></div>':'') + tabbar('moi');
   };
 
   screens.confidentialite = function () {
@@ -1957,6 +1967,9 @@
   }
   if (darkQuery) { if (darkQuery.addEventListener) darkQuery.addEventListener('change', applyColorMode); else if (darkQuery.addListener) darkQuery.addListener(applyColorMode); }
   var showFilterNotice = false, hintTimer = null, editingField = null;
+  /* Page à retrouver après « Terminer les modifications » quand on vient compléter son profil depuis une autre page
+     (lieu de vie ajouté depuis les Prépas Talents) : l'usager ne perd pas le fil. Oubliée dès qu'on quitte le profil. */
+  var profileReturn = null;
   function render() {
     document.documentElement.dataset.contrast = String(!!S.contrast);
     document.documentElement.dataset.colorMode = S.colorMode || 'auto';
@@ -1964,6 +1977,7 @@
     document.documentElement.dataset.largeText = String(!!S.largeText);
     document.documentElement.dataset.dysFont = String(!!S.dysFont);
     var r = route();
+    if (profileReturn && r.name !== 'moi') profileReturn = null;
     if(['niveau','interets','traits','situation'].indexOf(r.name)>-1){
       var required=!S.profile?'choix-profil':!nameReady()?'profil':(!S.level&&r.name!=='niveau'?'niveau':null);
       if(required){r={name:required};history.replaceState(null,'','#/'+required);}
@@ -1995,7 +2009,8 @@
 
     var a = document.activeElement;
     var focusSel = null;
-    if (!changed && a && root.contains(a)) {
+    /* Sur écran tactile, redonner le focus à une liste déroulante la rouvre aussitôt (iPhone) : elle reste fermée après le choix. */
+    if (!changed && a && root.contains(a) && !(a.tagName === 'SELECT' && root.classList.contains('touch-input'))) {
       if (a.id) focusSel = '#' + a.id;
       else if (a.getAttribute('data-action')) {
         focusSel = '[data-action="' + a.getAttribute('data-action') + '"]' + (a.getAttribute('data-v') !== null ? '[data-v="' + a.getAttribute('data-v').replace(/"/g, '\\"') + '"]' : '');
@@ -2253,6 +2268,12 @@
       case 'calFp': set({ calFp: v, calLimit: 40 }); break;
       case 'calView': set({ calView: v, calLimit: 40 }); break;
       case 'moreCalendar': set({ calLimit: S.calLimit + 40 }); break;
+      case 'addLocation': {
+        e.preventDefault(); profileReturn = location.hash; navigate('#/moi');
+        var where = document.getElementById('location-query');
+        if (where) { where.closest('section').scrollIntoView({ block: 'start' }); where.focus({ preventScroll: true }); }
+        break;
+      }
       case 'searchLocation': searchLocation(); break;
       case 'selectLocation': {
         var loc = locationResults[Number(v)];
