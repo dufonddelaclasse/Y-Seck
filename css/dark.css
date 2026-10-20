@@ -195,7 +195,8 @@ html.dark { color-scheme:dark; }
 :where(html.dark) .icon-btn:hover { border-color:var(--accent); color:var(--blue); }
 :where(html.dark) .filter-hint { background:var(--accent-tint); color:var(--blue); }
 :where(html.dark) .link-action { color:var(--blue); border:0; background:transparent; }
-:where(html.dark) a.external-link, :where(html.dark) a.external-link:hover { background:transparent !important; color:#BBBBBF !important; border:0 !important; box-shadow:none !important; }
+:where(html.dark) a.external-link { background:transparent !important; color:#BBBBBF !important; border:0 !important; box-shadow:none !important; }
+:where(html.dark) a.external-link:hover { background:transparent !important; color:#BBBBBF !important; border:0 !important; box-shadow:none !important; }
 :where(html.dark) .sheet { border:0; background:#292929; color:var(--ink); box-shadow:0 -12px 50px rgba(76,76,76,0.13); }
 :where(html.dark) .sheet::backdrop { background:rgba(70,70,83,0.43); }
 :where(html.dark) .sheet-handle { background:#42423E; }

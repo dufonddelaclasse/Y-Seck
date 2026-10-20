@@ -567,7 +567,10 @@ svg { stroke-linecap:round; stroke-linejoin:round; }
 .filter-hint { position:static; margin:0; background:var(--accent-tint); color:var(--blue); border-radius:12px; font-size:.8125rem; padding:10px 12px; }
 .link-action { display:inline-flex; align-items:center; justify-content:center; gap:8px; min-height:44px; color:var(--accent); border:0; background:transparent; font:500 .9375rem var(--font); }
 .link-action svg { width:20px; height:20px; }
-a.external-link,a.external-link:hover { background:transparent !important; color:#626268 !important; border:0 !important; padding:4px 0 !important; min-height:44px; text-decoration:underline !important; text-underline-offset:3px; text-decoration-thickness:1px; box-shadow:none !important; display:inline-flex; justify-content:flex-start; font-size:.875rem; line-height:1.5; border-radius:0; }
+a.external-link { background:transparent !important; color:#626268 !important; border:0 !important; padding:4px 0 !important; min-height:44px; text-decoration:underline !important; text-underline-offset:3px; text-decoration-thickness:1px; box-shadow:none !important; display:inline-flex; justify-content:flex-start; font-size:.875rem; line-height:1.5; border-radius:0; }
+/* Au toucher, le survol reste actif sur iPhone : il ne fige que les couleurs, jamais la taille, l’interligne ni la hauteur,
+   sinon un lien plus petit ailleurs (13 px) grossit au passage du doigt et décale la page. */
+a.external-link:hover { background:transparent !important; color:#626268 !important; border:0 !important; text-decoration:underline !important; box-shadow:none !important; }
 
 /* Panneau inférieur natif : focus, touche Échap et contenu de fond inerte. */
 html.has-sheet { overflow:hidden; }
