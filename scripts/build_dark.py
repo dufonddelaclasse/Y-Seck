@@ -156,7 +156,7 @@ html.dark img:not([src$=".svg"]) { filter:brightness(.92); }
 html.dark .book-card img { background:#2A2A2F; }
 html.dark ::placeholder { color:#8A8A92; }
 html.dark { --choice:#6347FF; --choice-ink:#B3A6FF; --sun:#FFD499; --sun-soft:#FFD499; --yellow:#FFD499; }
-html.dark :is(.fit,.prep .price,.update-notice,.parcours-zone,.parcours-link.stage,.category-fit.warn,.home-tile) { background:var(--sun) !important; color:#262626 !important; }
+html.dark :is(.fit,.prep .price,.update-notice,.parcours-zone,.parcours-link.stage,.category-fit.warn) { background:var(--sun) !important; color:#262626 !important; }
 html.dark :is(.ref-tip,.todo,.bourse,.filter-hint) { background:#000 !important; color:#FFF !important; border-color:#000 !important; }
 html.dark :is(.ref-tip,.todo,.bourse,.filter-hint) :is(b,p,span,small,li) { color:#FFF !important; }
 html.dark :is(.ref-tip,.bourse) .small { color:#C8C8CE !important; }
