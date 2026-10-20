@@ -1968,3 +1968,5 @@ a.trip-official { display:inline; color:var(--ink); text-decoration:underline; t
 .app:not(.onboarding) .list.job-cards, .app:not(.onboarding) #jobs { gap:14px; }
 /* Filtres : pastilles de catégorie sans liseré clair autour. */
 .sheet-content button.chip.category-choice[data-action="metCat"], .sheet-content button.chip.category-choice[data-action="metCat"]:hover { border-color:transparent; }
+/* Évoluer : étapes sur fond blanc, comme les autres cartes. */
+.app.themed main.job-page .rung, .job-page .rung { background:#FFF; }
