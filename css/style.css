@@ -2156,3 +2156,9 @@ html { touch-action:manipulation; }
    Chrome sur iPhone recalcule les styles de toute la page quand ses barres se rétractent ou réapparaissent : les 60 cartes
    ne pèsent plus sur ce moment. 140 px : hauteur médiane du contenu d'une carte, en attendant son premier affichage. */
 #jobs > .list-row { content-visibility:auto; contain-intrinsic-size:auto 140px; }
+/* Sans viewport-fit=cover, l'iPhone garde lui-même la zone de la barre d'accueil hors de la page : Chrome ne fait plus varier
+   la zone de sécurité quand ses barres se rétractent. Le menu du bas prend 10 px de plus sous ses libellés pour ne pas coller au bord. */
+.tabbar { height:calc(86px + env(safe-area-inset-bottom, 0px)); padding-bottom:calc(10px + env(safe-area-inset-bottom, 0px)); }
+html:is([data-large-text="true"], [data-dys-font="true"]) .tabbar { min-height:calc(86px + env(safe-area-inset-bottom, 0px)); }
+.update-notice { bottom:calc(92px + env(safe-area-inset-bottom, 0px)); }
+.profile-footer { bottom:calc(86px + env(safe-area-inset-bottom, 0px)); }
