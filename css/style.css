@@ -2098,3 +2098,10 @@ html[data-contrast="true"] .intro-tabs-screen .intro-hero { background:#000; }
 .fp-panel-head { display:flex; flex-direction:column; gap:4px; }
 .fp-panel .fp-sub { font-size:.8125rem; line-height:1.3; font-weight:400; color:var(--muted); }
 .intro-tabs-screen .fp-panel .category-fit { margin-top:4px; }
+/* Écrans d’introduction : tout tient sur un écran d’iPhone. Bandeau 50 px plus bas de hauteur, onglets collés au bandeau
+   et moins hauts, contenu de l’onglet resserré. */
+.intro-tabs-screen .intro-hero { min-height:268px; }
+.intro-tabs-screen .fp-tabs { margin-top:-12px; }
+.intro-tabs-screen .fp-tab { min-height:44px; padding-top:4px; padding-bottom:4px; }
+.intro-tabs-screen .fp-panel { gap:10px; padding-top:18px; }
+.intro-tabs-screen .fp-note { margin-top:20px; }
