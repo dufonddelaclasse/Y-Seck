@@ -2133,6 +2133,8 @@ html[data-contrast="true"] .sheet-content button.chip.category-choice[data-actio
 /* Accueil : bloc « Comment y accéder » sur fond #F4F4F4, nouveau pictogramme de trajet. */
 .personal-home .home-feature.home-access { background:#F4F4F4; }
 .home-tile .journey-icon { width:15px; height:62px; color:#141414; }
+/* Pas de zoom au double toucher. */
+html { touch-action:manipulation; }
 /* Blocs de stage et de rencontre métier : toujours gris très clair, distincts de l’accent pêche. */
 .ref-tip { background:#EFEFEF; }
 /* Onboarding : fondu simple de l’écran, sans mouvement vertical. */
