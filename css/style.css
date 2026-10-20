@@ -2018,12 +2018,14 @@ html[data-contrast="true"] .job-page .job-match { background:none; border:0; col
 .app .prep.hi.talents-card .talents-perf { margin:12px calc(10px - var(--talents-pad)) 4px; }
 .app .prep.hi.talents-card .more, .app .prep.hi.talents-card:hover { color:#161616; }
 /* Espace personnel : à l’arrivée, une vague aux couleurs du bloc « Vos métiers à découvrir » remonte le prénom
-   de bas en haut, en dégradé large et doux, puis le prénom reprend sa couleur. Le dégradé est découpé dans le texte. */
+   de bas en haut, puis le prénom reprend sa couleur. Dégradé calculé en OKLab sur une courbe continue (24 paliers),
+   sans teinte trop claire au centre : aucune rupture de contraste. Le dégradé est découpé dans le texte. */
 @keyframes home-name-sweep { from { background-position:0 0; } to { background-position:0 100%; } }
 /* Dégradé dans une variable : le générateur du mode sombre ne le transforme pas. */
-:root { --name-sweep:linear-gradient(180deg, var(--ink) 0%, var(--ink) 18%, #2B04CC 30%, #6247DF 38%, #9B8BF2 45%, #C0B8FF 50%, #9B8BF2 55%, #6247DF 62%, #2B04CC 70%, var(--ink) 82%, var(--ink) 100%); }
-.personal-home .home-name-enter { background:var(--name-sweep) 0 0 / 100% 300% no-repeat;
-  -webkit-background-clip:text; background-clip:text; color:transparent; -webkit-text-fill-color:transparent; animation:home-name-sweep 1.8s ease-in-out .15s both; }
+:root { --name-sweep:linear-gradient(180deg, var(--ink) 0%, var(--ink) 25%, #13151C 27.08%, #101833 29.17%, #0F1955 31.25%, #14137E 33.33%, #1E06A8 35.42%, #2B04CC 37.5%, #391EE5 39.58%, #4A38F1 41.67%, #5C4EF4 43.75%, #6D5DEF 45.83%, #7966EA 47.92%, #7D69E8 50%, #7966EA 52.08%, #6D5DEF 54.17%, #5C4EF4 56.25%, #4A38F1 58.33%, #391EE5 60.42%, #2B04CC 62.5%, #1E06A8 64.58%, #14137E 66.67%, #0F1955 68.75%, #101833 70.83%, #13151C 72.92%, var(--ink) 75%, var(--ink) 100%); }
+/* Fond 4 fois plus haut que le texte et vague entre 25 % et 75 % : le prénom commence et finit dans sa couleur. */
+.personal-home .home-name-enter { background:var(--name-sweep) 0 0 / 100% 400% no-repeat;
+  -webkit-background-clip:text; background-clip:text; color:transparent; -webkit-text-fill-color:transparent; animation:home-name-sweep 2s linear .15s both; }
 @media (prefers-reduced-motion:reduce) { .personal-home .home-name-enter { animation:none; background:none; color:inherit; -webkit-text-fill-color:currentColor; } }
 /* Comprendre la fonction publique (depuis le profil) : les deux écrans d’introduction réunis, titres de section à la taille des titres d’écran. */
 .understand-page h2.understand-title { margin:0; font-size:1.875rem; font-weight:500; line-height:1.1; letter-spacing:-.02em; }

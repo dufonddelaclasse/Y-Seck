@@ -205,6 +205,8 @@ html.dark .trip-pill svg { color:#161616; }
 /* Prépa Talents : la carte reste blanche, avec son logo et un texte sombre. */
 html.dark .talents-card, html.dark .talents-card :is(h1,h2,p,b,.more,.chev) { color:#161616 !important; }
 html.dark .talents-card .talents-hero .price { background:#FFF !important; color:#1129AD !important; }
+/* Prénom de l’accueil : vague partant du texte clair, sans bleu sombre peu lisible sur fond sombre. */
+html.dark { --name-sweep:linear-gradient(180deg, var(--ink) 0%, var(--ink) 25%, #E7E6EB 27.08%, #E1DFEF 29.17%, #D7D4F4 31.25%, #CCC5FA 33.33%, #BFB6FE 35.42%, #B3A6FF 37.5%, #A898FE 39.58%, #9E8CFB 41.67%, #9683F7 43.75%, #917DF4 45.83%, #8D79F1 47.92%, #8C78F0 50%, #8D79F1 52.08%, #917DF4 54.17%, #9683F7 56.25%, #9E8CFB 58.33%, #A898FE 60.42%, #B3A6FF 62.5%, #BFB6FE 64.58%, #CCC5FA 66.67%, #D7D4F4 68.75%, #E1DFEF 70.83%, #E7E6EB 72.92%, var(--ink) 75%, var(--ink) 100%); }
 html.dark .talents-perf { background-image:radial-gradient(circle, #DEDEDE 1.3px, transparent 1.8px) !important; }
 """
 
