@@ -2049,6 +2049,8 @@ a.rung.rung-link > .chev { flex:none; width:18px; height:18px; margin-right:-4px
    Les zones blanches (en-tête des fiches métier et concours, pages blanches) restent blanches. */
 html { background:#E6E6E6; }
 body, .app { background:transparent; }
+/* Le corps de page isole ses calques : le dégradé (z-index:-1) reste derrière le contenu mais devant le fond de la page, y compris sur Safari iPhone. */
+body { isolation:isolate; }
 body::before { content:''; position:fixed; inset:0; z-index:-1; background:linear-gradient(180deg, #F2F2F2 0%, #E6E6E6 100%); pointer-events:none; }
 .footer { background:#E6E6E6; }
 .context-bar { background:#F2F2F2; }
