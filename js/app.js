@@ -1980,7 +1980,7 @@
     if (reached && wasShown) real.classList.add('grow');
     else if (!reached) real.classList.remove('grow');
   }
-  function schedulePrepFloat() { if (!prepFloatFrame) prepFloatFrame = requestAnimationFrame(updatePrepFloat); }
+  function schedulePrepFloat() { if (!prepFloatFrame && root.querySelector('.prep-float')) prepFloatFrame = window.requestAnimationFrame ? requestAnimationFrame(updatePrepFloat) : setTimeout(updatePrepFloat, 16); }
   window.addEventListener('scroll', schedulePrepFloat, { passive: true });
   window.addEventListener('resize', schedulePrepFloat);
   /* Mode sombre : « auto » suit le réglage clair ou sombre de l’appareil, en direct. */
