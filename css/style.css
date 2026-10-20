@@ -1970,8 +1970,8 @@ a.trip-official { display:inline; color:var(--ink); text-decoration:underline; t
 .sheet-content button.chip.category-choice[data-action="metCat"], .sheet-content button.chip.category-choice[data-action="metCat"]:hover { border-color:transparent; }
 /* Évoluer : étapes sur fond blanc, comme les autres cartes. */
 .app.themed main.job-page .rung, .job-page .rung { background:#FFF; }
-/* Admission : médaille blanche dans l’ovale noir de la dernière étape (fiches métier). */
+/* Admission : pictogramme blanc dans l’ovale noir de la dernière étape (médaille sur les fiches métier, sceau sur les fiches concours). */
 .trip-pill { display:grid; place-items:center; }
-.trip-pill .medal-icon { width:18px; height:18px; color:#FFF; }
+.trip-pill svg { width:18px; height:18px; color:#FFF; }
 /* Se préparer : la première rubrique suit de près le titre principal. */
 .app:not(.onboarding) .prep-page > h1 + .sr-only + section { margin-top:12px; }

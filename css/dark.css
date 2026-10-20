@@ -706,7 +706,7 @@ html:where(.dark).dark .ladder-alt-row, html:where(.dark).dark .ladder-alt-row:h
 :where(html.dark) .trip-expected { color:var(--muted); }
 :where(html.dark) .sheet-content button.chip.category-choice[data-action="metCat"], :where(html.dark) .sheet-content button.chip.category-choice[data-action="metCat"]:hover { border-color:transparent; }
 :where(html.dark) .app.themed main.job-page .rung, :where(html.dark) .job-page .rung { background:#292929; }
-:where(html.dark) .trip-pill .medal-icon { color:#FFF; }
+:where(html.dark) .trip-pill svg { color:#FFF; }
 
 /* Retouches */
 html.dark { --brand:#8F7BFF; --blue:#A493FF; --accent:#7C66FF; --accent-hover:#9785FF; --theme-btn:var(--brand); --red:#FF6B6B; --surface:#1E1E22; }
@@ -766,5 +766,5 @@ html.dark .app.themed .eyebrow, html.dark .app.themed .section-heading { color:v
 html.dark .personal-home .home-concours, html.dark .personal-home .home-concours:hover { background:#DCD3FF; color:#161616; }
 html.dark .personal-home .home-concours :is(.home-feature-copy b, .home-feature-copy > span, .home-count) { color:#161616; }
 html.dark .personal-home .home-concours .home-go { background:#FFF; color:#161616; }
-/* Ovale d’arrivée clair en mode sombre : la médaille passe en sombre. */
-html.dark .trip-pill .medal-icon { color:#161616; }
+/* Ovale d’arrivée clair en mode sombre : le pictogramme passe en sombre. */
+html.dark .trip-pill svg { color:#161616; }

@@ -158,9 +158,10 @@
   I.send = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l6 6-6 6"/><path d="M21 11h-9a8 8 0 0 0-8 8v1"/></svg>';
   I.plus = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>';
   I.grid = UI.icons.compass;
-  /* Concours : copie et crayon (onglet) ; médaille de l’admission (frise des fiches métier) ; cible (Se préparer). */
+  /* Concours : copie et crayon (onglet) ; médaille de l’admission (fiches métier) et sceau validé (fiches concours) dans l’ovale d’arrivée ; cible (Se préparer). */
   I.exam = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 20.5H6.5A1.5 1.5 0 0 1 5 19V5a1.5 1.5 0 0 1 1.5-1.5h9A1.5 1.5 0 0 1 17 5v4.5"/><path d="M8.5 8h5M8.5 11.5h5M8.5 15h2.5"/><path d="m19.6 12.6 1.8 1.8-6.2 6.2-2.6.8.8-2.6z"/></svg>';
-  I.medal = '<svg class="medal-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9" r="5.5"/><path d="M8.5 13.3 7 21l5-2.5 5 2.5-1.5-7.7"/></svg>';
+  I.medal = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9" r="5.5"/><path d="M8.5 13.3 7 21l5-2.5 5 2.5-1.5-7.7"/></svg>';
+  I.seal = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.91 1.98 3.45.66.66 3.45L21 12l-1.98 2.91-.66 3.45-3.45.66L12 21l-2.91-1.98-3.45-.66-.66-3.45L3 12l1.98-2.91.66-3.45 3.45-.66z"/><path d="m8.6 12.2 2.3 2.3 4.5-4.8"/></svg>';
   I.target = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r=".8" fill="currentColor"/></svg>';
   I.layers = UI.icons.book;
 
@@ -1319,7 +1320,7 @@
     var lead = jobs.filter(function (j) { return jobRef(j) === c; })[0] || jobs[0] || null;
     var favKey = 'concours:' + concoursKey(c), fav = S.favorites.indexOf(favKey) > -1, visitor = !S.done;
     var dot = function (t) { return t && !/[.!?]$/.test(t) ? t + '.' : t; };
-    var line = tripLine(c, level, tripWho(level, testLevel), { name: 'Arrivée', body: c.metiers ? '<p class="trip-meta">' + sig(dot(c.metiers)) + '</p>' : '' });
+    var line = tripLine(c, level, tripWho(level, testLevel), { name: 'Arrivée', icon: I.seal, body: c.metiers ? '<p class="trip-meta">' + sig(dot(c.metiers)) + '</p>' : '' });
     return '<main class="screen top-tight job-page concours-page concours-trip">' + back('#/concours-liste', 'Concours') +
       '<div class="job-hero trip-head"><div class="trip-summary"><span class="trip-modes">' + I.walk + '<span class="trip-sep" aria-hidden="true"></span>' + catBadge(c.cat) + '</span></div>' +
         '<h1>' + sig(c.name) + '</h1></div>' +
