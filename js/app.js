@@ -1357,7 +1357,10 @@
     /* Départ : « Mon niveau » puis la pastille du niveau actuel, comme sur l’accueil. */
     var head = stop('start', I.pin, 'Départ', '<p class="trip-sub' + (level ? ' trip-level' : '') + '">' + esc(who) + (level ? '<span class="study-level">' + I.graduation + '<span>' + esc(level) + '</span></span>' : '') + '</p>', '') +
       (first ? stop('leg', '<span class="trip-walk">' + I.walk + '</span>', '', '<p class="trip-lead">' + esc(TRIP_TITLES[first.kind]) + '</p>' + tripPhase(c, first, trip.lvl, prepaText(c)), 'line c-' + first.kind)
-        : stop('leg', '<span class="trip-walk">' + I.walk + '</span>', '', '<p class="trip-meta">Votre niveau suffit<span aria-hidden="true"> | </span><span class="sr-only">, </span>concours accessible dès maintenant</p>', 'line c-none')) +
+        /* Bac+3 face à un concours A+ ou A : accessible, mais la plupart des admis ont un Bac+5. */
+        : stop('leg', '<span class="trip-walk">' + I.walk + '</span>', '', level === 'Bac+3' && (c.cat === 'A+' || c.cat === 'A')
+          ? '<p class="trip-meta">Concours accessible.<br>Pour information, la grande majorité des admis à ce concours ont un Bac+5 minimum.</p>'
+          : '<p class="trip-meta">Votre niveau suffit<span aria-hidden="true"> | </span><span class="sr-only">, </span>concours accessible dès maintenant</p>', 'line c-none')) +
       trip.phases.slice(1).map(function (p) { return stop('mid', '<span class="trip-dot c-' + p.kind + '"></span>', esc(TRIP_TITLES[p.kind]), tripPhase(c, p, trip.lvl, prepaText(c)), 'line c-' + p.kind); }).join('');
     /* Métier recruté sans concours : l’étape du recrutement remplace celle du concours. */
     if (c.recruit) return head + stop('trip-exam', catBadge(c.cat), esc(c.recruit.title), c.recruit.body, 'line', catStyle) + arrival();
@@ -2009,12 +2012,11 @@
       if (r.name !== 'accessibilite') main.insertAdjacentHTML('beforeend', '<a class="a11y-link" href="#/accessibilite">Confort de lecture et accessibilité</a>');
     }
     /* Arrivée sur le tableau de bord après le chargement du catalogue : chaque bloc apparaît du haut vers le bas, menu compris. */
-    /* Onboarding : à chaque nouvel écran, les éléments montent en fondu l’un après l’autre, bouton du bas compris. */
+    /* Onboarding : chaque nouvel écran apparaît en fondu simple, sans mouvement, bouton du bas compris. */
     if (changed && main && ['bienvenue', 'versants', 'categories-intro', 'choix-profil', 'profil', 'niveau', 'interets', 'traits', 'situation'].indexOf(r.name) > -1) {
-      var entering = [].slice.call(main.children).concat([].slice.call(root.querySelectorAll(':scope > .footer')));
-      entering.forEach(function (el, i) { el.classList.add('enter-up'); el.style.setProperty('--enter-i', i); });
-      /* Une fois l’écran apparu, les onglets retrouvent leur propre transition. */
-      setTimeout(function () { entering.forEach(function (el) { el.classList.remove('enter-up'); }); }, 1800);
+      var entering = [main].concat([].slice.call(root.querySelectorAll(':scope > .footer')));
+      entering.forEach(function (el) { el.classList.add('enter-fade'); });
+      setTimeout(function () { entering.forEach(function (el) { el.classList.remove('enter-fade'); }); }, 900);
     }
     if (dashboardEnter && main) {
       dashboardEnter = false;

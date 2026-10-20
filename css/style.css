@@ -2137,6 +2137,7 @@ html[data-contrast="true"] .sheet-content button.chip.category-choice[data-actio
 html { touch-action:manipulation; }
 /* Blocs de stage et de rencontre métier : toujours gris très clair, distincts de l’accent pêche. */
 .ref-tip { background:#EFEFEF; }
-/* Onboarding : le contenu de l’onglet suit l’ordre d’apparition de l’écran. */
-.intro-tabs-screen .fp-panel.enter-up:not([hidden]) { animation:enter-up .55s cubic-bezier(.2,.7,.2,1) both; animation-delay:calc(var(--enter-i, 0) * 80ms + 60ms); }
-@media (prefers-reduced-motion:reduce) { .intro-tabs-screen .fp-panel.enter-up:not([hidden]) { animation:none; } }
+/* Onboarding : fondu simple de l’écran, sans mouvement vertical. */
+@keyframes enter-fade { from { opacity:0; } to { opacity:1; } }
+.enter-fade { animation:enter-fade .45s ease-out both; }
+@media (prefers-reduced-motion:reduce) { .enter-fade { animation:none; } }
