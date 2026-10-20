@@ -1986,3 +1986,7 @@ a.trip-official { display:inline; color:var(--ink); text-decoration:underline; t
 .app.theme-B .job-page .job-match { color:var(--cat-b-deep); }
 .app.theme-C .job-page .job-match { color:var(--cat-c-deep); }
 html[data-contrast="true"] .job-page .job-match { background:none; border:0; color:#000; }
+/* Frise : pastille du niveau au départ, comme sur l’accueil ; catégorie en petit sous l’obtention du concours. */
+.trip-sub .study-level { margin-top:4px; padding:5px 9px; border:0; background:#D9D9D9; color:var(--ink-2); font-size:.8125rem; line-height:normal; font-weight:400; }
+.trip-sub .study-level svg { width:14px; height:14px; }
+.trip-item.admit .trip-meta { margin-top:2px; font-size:.9375rem; }

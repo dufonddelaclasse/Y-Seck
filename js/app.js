@@ -1262,7 +1262,7 @@
     return found.length ? '<dl class="trip-voies">' + found.map(function (v) { return '<dt>' + esc(v[1]) + '</dt><dd>' + esc(v[2]) + '</dd>'; }).join('') + '</dl>' : '';
   }
   var TRIP_TITLES = { college: 'Collège', lycee: 'Lycée', pro: 'Lycée professionnel', sup: 'Études supérieures' };
-  function tripWho(level, testLevel) { return level ? (isParent() && !testLevel ? 'Position de ' + childName() : 'Ma position') + ' · ' + level : 'Entrée en 6e'; }
+  function tripWho(level, testLevel) { return level ? (isParent() && !testLevel ? 'Position de ' + childName() : 'Ma position') : 'Entrée en 6e'; }
   var CAT_VARS = { 'A+': ['--cat-ap', '#3C05FF'], A: ['--cat-a', '#0051FF'], B: ['--cat-b', '#00707F'], C: ['--cat-c', '#A8461B'] };
   function tripStop(cls, node, name, body, track, style) {
     return '<li class="trip-item ' + cls + '"' + (style ? ' style="' + style + '"' : '') + '><span class="trip-rail" aria-hidden="true">' + node + (track ? '<i class="trip-track ' + track + '"></i>' : '') + '</span><div class="trip-body">' +
@@ -1286,11 +1286,12 @@
     var short = function (iso) { var d = fmtDate(iso); return d.day + ' ' + d.month + ' ' + d.year; };
     /* Fiche métier : le concours obtenu (médaille) ouvre l’accès au poste, rejoint en pointillés ; il ne le garantit pas. */
     var arrival = function () {
-      return (end.admission ? stop('admit', '<span class="trip-pill">' + I.medal + '</span>', 'Obtention du concours de catégorie ' + esc(c.cat),
-        '<p class="trip-access"><b>Le concours rend ce poste accessible, sans le garantir.</b> Il s’obtient ensuite selon votre classement à la sortie de l’école, ou après un entretien avec l’employeur.</p>', 'dots', catStyle) : '') +
-        stop('end', '<span class="trip-pill">' + (end.icon || '') + '</span>', end.name, end.body, '');
+      return (end.admission ? stop('admit', '<span class="trip-pill">' + I.medal + '</span>', 'Obtention du concours',
+        '<p class="trip-meta">' + esc(catLabel(c.cat)) + '</p><p class="trip-access"><b>Le concours rend ce poste accessible, sans le garantir.</b> Il s’obtient ensuite selon votre classement à la sortie de l’école, ou après un entretien avec l’employeur.</p>', 'dots', catStyle) : '') +
+        stop('end', '<span class="trip-pill">' + (end.icon || '') + '</span>', end.name, end.body, '', catStyle);
     };
-    var head = stop('start', I.pin, 'Départ', '<p class="trip-sub">' + esc(who) + '</p>', '') +
+    /* Départ : la pastille du niveau actuel, comme sur l’accueil. */
+    var head = stop('start', I.pin, 'Départ', '<p class="trip-sub">' + (level ? '<span class="sr-only">' + esc(who) + ' : </span><span class="study-level">' + I.graduation + '<span>' + esc(level) + '</span></span>' : esc(who)) + '</p>', '') +
       (first ? stop('leg', '<span class="trip-walk">' + I.walk + '</span>', '', '<p class="trip-lead">' + esc(TRIP_TITLES[first.kind]) + '</p>' + tripPhase(c, first, trip.lvl, prepaText(c)), 'line c-' + first.kind)
         : stop('leg', '<span class="trip-walk">' + I.walk + '</span>', '', '<p class="trip-meta">Votre niveau suffit<span aria-hidden="true"> | </span><span class="sr-only">, </span>concours accessible dès maintenant</p>', 'line c-none')) +
       trip.phases.slice(1).map(function (p) { return stop('mid', '<span class="trip-dot c-' + p.kind + '"></span>', esc(TRIP_TITLES[p.kind]), tripPhase(c, p, trip.lvl, prepaText(c)), 'line c-' + p.kind); }).join('');
@@ -1398,7 +1399,7 @@
     }).join('') + '</div></div>' : '';
     var panels = refs.map(function (c, i) {
       return '<div class="trip-panel" id="trip-panel-' + i + '" role="tabpanel" aria-labelledby="trip-tab-' + i + '" data-tab="' + i + '"' + (i === sel ? '' : ' hidden') + '><ol class="trip">' +
-        tripLine(c, level, who, { name: esc(j.name), icon: I.seal, admission: !c.recruit, body: '<p class="trip-meta">' + esc(catLabel(c.cat) + ' · ' + (c.recruit ? j.fp.split('').map(function (f) { return fpLabel[f]; }).join(', ') : fpLabel[c.fp])) + '</p>' }) + '</ol></div>';
+        tripLine(c, level, who, { name: esc(j.name), icon: I.seal, admission: !c.recruit, body: '<p class="trip-meta">' + esc(catLabel(c.cat)) + '</p><p class="trip-dir">' + I.arrow + '<span>' + esc(c.recruit ? j.fp.split('').map(function (f) { return fpLabel[f]; }).join(', ') : fpLabel[c.fp]) + '</span></p>' }) + '</ol></div>';
     }).join('');
     /* Évoluer : progression du concours choisi, puis celles des autres concours possibles. */
     var ladders = refs.map(function (c, i) {

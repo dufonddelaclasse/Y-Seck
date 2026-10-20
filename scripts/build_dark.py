@@ -188,8 +188,8 @@ html.dark .app.themed .btn.theme, html.dark .app.themed .btn.theme:hover { backg
 html.dark .app.themed .btn.theme svg { color:#FFF !important; }
 html.dark .app.themed :is(.section-heading svg,.job-action svg,.btn-bare svg,.exam-cal h5 svg,.exam-places h5 svg) { color:var(--lt) !important; }
 html.dark .job-row .fit.like { background:transparent !important; box-shadow:inset 0 0 0 1px #5A5A60 !important; }
-html.dark :is(.personal-home .study-level,.home-interest,.tag.tag-btn,.job-page .job-meta .tag) { background:#45454A !important; border:0 !important; color:#E2E2E6 !important; }
-html.dark :is(.personal-home .study-level,.home-interest) svg { color:#D4D4D8 !important; }
+html.dark :is(.personal-home .study-level,.trip .study-level,.home-interest,.tag.tag-btn,.job-page .job-meta .tag) { background:#45454A !important; border:0 !important; color:#E2E2E6 !important; }
+html.dark :is(.personal-home .study-level,.trip .study-level,.home-interest) svg { color:#D4D4D8 !important; }
 html.dark :is(#jobs .job-row,.job-cards .job-row,.home-access,.home-shortcuts a,.profile-row,.prep,.study-card,.book-card,.family-card,.ref-card,.parcours-card,.talents-feature.talents-split,.concours-page .job-section .ref-panel) { background:#161616 !important; }
 html.dark { --theme-ink:#B3A6FF; --cat-ap-ink:#B9A8FF; --cat-a-ink:#9BA6FF; --cat-b-ink:#6FD6D6; --cat-c-ink:#FFA982; }
 html.dark .app.theme-Ap, html.dark body.theme-Ap { --theme-ink:#B9A8FF; } html.dark .app.theme-A, html.dark body.theme-A { --theme-ink:#9BA6FF; } html.dark .app.theme-B, html.dark body.theme-B { --theme-ink:#6FD6D6; }
