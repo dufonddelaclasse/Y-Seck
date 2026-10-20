@@ -2165,3 +2165,9 @@ html.crios .tabbar { height:calc(86px + env(safe-area-inset-bottom, 0px)); paddi
 html.crios:is([data-large-text="true"], [data-dys-font="true"]) .tabbar { min-height:calc(86px + env(safe-area-inset-bottom, 0px)); }
 html.crios .update-notice { bottom:calc(92px + env(safe-area-inset-bottom, 0px)); }
 html.crios .profile-footer { bottom:calc(86px + env(safe-area-inset-bottom, 0px)); }
+/* Préparations : pictogramme à la couleur du concours, puis pastille de prix en vert anis (accent de l'espace personnel),
+   au-dessus de l'intitulé. */
+.prep .prep-top { display:flex; align-items:center; gap:10px; }
+.prep .prep-ico { display:inline-flex; flex:none; color:var(--theme-btn, var(--brand)); }
+.prep .prep-ico svg { width:24px; height:24px; }
+.prep .price { background:#E0FA6E; color:#141414; }

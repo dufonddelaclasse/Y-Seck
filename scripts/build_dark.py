@@ -156,7 +156,7 @@ html.dark img:not([src$=".svg"]) { filter:brightness(.92); }
 html.dark .book-card img { background:#2A2A2F; }
 html.dark ::placeholder { color:#8A8A92; }
 html.dark { --choice:#6347FF; --choice-ink:#B3A6FF; --sun:#FFD499; --sun-soft:#FFD499; --yellow:#FFD499; }
-html.dark :is(.fit,.prep .price,.update-notice,.parcours-zone,.parcours-link.stage,.category-fit.warn) { background:var(--sun) !important; color:#262626 !important; }
+html.dark :is(.fit,.update-notice,.parcours-zone,.parcours-link.stage,.category-fit.warn) { background:var(--sun) !important; color:#262626 !important; }
 html.dark :is(.ref-tip,.todo,.bourse,.filter-hint) { background:#000 !important; color:#FFF !important; border-color:#000 !important; }
 html.dark :is(.ref-tip,.todo,.bourse,.filter-hint) :is(b,p,span,small,li) { color:#FFF !important; }
 html.dark :is(.ref-tip,.bourse) .small { color:#C8C8CE !important; }
@@ -212,6 +212,8 @@ html.dark .talents-card .talents-hero .price { background:#FFF !important; color
 html.dark { --name-sweep:linear-gradient(180deg, var(--ink) 0%, var(--ink) 25%, #E8F2C6 27%, #E4F69E 29.5%, #E0FA6E 32%, #E0FA6E 34%, #D9EA97 36.5%, #D2D8C8 38.5%, #CCC5FA 40.5%, #BFB6FE 43%, #B3A6FF 45.5%, #A898FE 48%, #9E8CFB 50.5%, #917DF4 53%, #8C78F0 55%, #917DF4 57.5%, #9E8CFB 60%, #B3A6FF 63%, #CCC5FA 66.5%, #E1DFEF 70%, #E7E6EB 72.5%, var(--ink) 75%, var(--ink) 100%); }
 html.dark .talents-body { background:#FFF; }
 html.dark .home-tile { background:#E0FA6E !important; color:#141414 !important; }
+html.dark .prep .price { background:#E0FA6E !important; color:#141414 !important; }
+html.dark .app.themed .prep .prep-ico { color:var(--lt); }
 /* Prénom et écran de chargement : le dégradé reste découpé dans le texte. */
 html.dark :is(.personal-home .home-name-enter, .screen.loading-screen .loading-text) { -webkit-background-clip:text; background-clip:text; }
 html.dark .talents-perf { background-image:radial-gradient(circle, #DEDEDE 1.3px, transparent 1.8px) !important; }

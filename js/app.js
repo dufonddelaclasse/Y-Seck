@@ -1634,7 +1634,7 @@
         var extra = p.id === 'talents' && (job||S.domains.length) ? '<span class="fit on">' + nbT + (job?' pour ce métier':' pour '+(isParent()?'ses':'vos')+' choix') + '</span>' : '';
         if (hi) return '<a class="prep hi talents-card" href="#/prepa/' + p.id + (job?'/'+job.id:'') + '">' + talentsHero('<span class="price">' + esc(p.price) + '</span>') + '<div class="talents-body"><h2 class="sr-only">' + sig(p.t) + '</h2>' +
           '<p>' + esc(p.d) + '</p><div class="talents-perf" aria-hidden="true"></div><span class="prep-foot">' + extra + '<span class="more">Voir le détail' + I.chev + '</span></span></div></a>';
-        return '<a class="prep" href="#/prepa/' + p.id + (job?'/'+job.id:'') + '"><div class="head"><h2 class="h3">' + sig(p.t) + '</h2><span class="price">' + esc(p.price) + '</span></div>' +
+        return '<a class="prep" href="#/prepa/' + p.id + (job?'/'+job.id:'') + '"><div class="prep-top"><span class="prep-ico" aria-hidden="true">' + I.book + '</span><span class="price">' + esc(p.price) + '</span></div><h2 class="h3 no-icon">' + sig(p.t) + '</h2>' +
           '<p>' + esc(p.d) + '</p><span class="prep-foot">' + extra + '<span class="more">Voir le détail' + I.chev + '</span></span></a>';
       }).join('') + '</div>' +
       (on && list.some(function(p){return p.talents;}) ? '<div class="bourse"><div><b>' + esc(D.talentsGrantLabel || '5 000 €') + ' / an</b><span>Bourse Talents ' + esc(D.talentsGrantYear || '2026-2027') + ', pour les élèves des Prépas Talents.</span></div><span class="dot big" aria-hidden="true"></span></div>' : '') +
