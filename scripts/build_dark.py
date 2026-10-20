@@ -155,19 +155,19 @@ html.dark .home-discover .home-go { background:#FFF; color:#3B21C9; }
 html.dark img:not([src$=".svg"]) { filter:brightness(.92); }
 html.dark .book-card img { background:#2A2A2F; }
 html.dark ::placeholder { color:#8A8A92; }
-html.dark { --choice:#6347FF; --choice-ink:#B3A6FF; --sun:#FFF3EB; --sun-soft:#FFF3EB; --yellow:#FFF3EB; }
-html.dark :is(.fit,.prep .price,.update-notice,.parcours-zone,.parcours-link.stage,.category-fit.warn,.home-tile) { background:var(--sun) !important; color:#3A2214 !important; }
+html.dark { --choice:#6347FF; --choice-ink:#B3A6FF; --sun:#E6E6E6; --sun-soft:#E6E6E6; --yellow:#E6E6E6; }
+html.dark :is(.fit,.prep .price,.update-notice,.parcours-zone,.parcours-link.stage,.category-fit.warn,.home-tile) { background:var(--sun) !important; color:#262626 !important; }
 html.dark :is(.ref-tip,.todo,.bourse,.filter-hint) { background:#000 !important; color:#FFF !important; border-color:#000 !important; }
 html.dark :is(.ref-tip,.todo,.bourse,.filter-hint) :is(b,p,span,small,li) { color:#FFF !important; }
 html.dark :is(.ref-tip,.bourse) .small { color:#C8C8CE !important; }
 html.dark .ref-tip a, html.dark .ref-tip .link-plain { color:#FFF !important; }
-html.dark .update-notice * { color:#3A2214; }
-html.dark .update-notice .update-notice-action { background:#3A2214 !important; border-color:#3A2214 !important; color:#FFF3EB !important; }
-html.dark .update-notice .update-notice-dismiss { background:transparent; border-color:#3A2214; color:#3A2214; }
+html.dark .update-notice * { color:#262626; }
+html.dark .update-notice .update-notice-action { background:#262626 !important; border-color:#262626 !important; color:#F2F2F2 !important; }
+html.dark .update-notice .update-notice-dismiss { background:transparent; border-color:#262626; color:#262626; }
 html.dark .home-tile svg, html.dark .home-tile b, html.dark .home-tile span { color:#141414; }
 html.dark .tabbar a, html.dark .tabbar a svg { color:#8C8C93; }
 html.dark .tabbar a.on, html.dark .tabbar a.on svg { color:#FFF; }
-html.dark .category-fit.warn svg, html.dark :is(.fit,.parcours-zone,.parcours-link.stage) svg { color:#3A2214 !important; }
+html.dark .category-fit.warn svg, html.dark :is(.fit,.parcours-zone,.parcours-link.stage) svg { color:#262626 !important; }
 html.dark .prep-page button.chip:not(.category-choice) { --choice-ink:var(--theme-ink); }
 html.dark :is(.exam-cal,.exam-places) h5 svg { color:currentColor; }
 html.dark .tabbar a.on::before { background:var(--sun); }

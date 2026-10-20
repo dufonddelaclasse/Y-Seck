@@ -1219,7 +1219,7 @@
     if(!refs.length)return recruitmentNote(job)?'<section class="stack mt-m" id="concours-ref"><h2 class="section-heading">'+I.calendar+'<span>Le recrutement</span></h2>'+recruitmentNote(job)+'</section>':'';
     /* Se préparer : pour chaque concours, seulement la préparation conseillée et la page officielle. */
     return '<section class="stack mt-m" id="concours-ref"><h2 class="section-heading">'+I.target+'<span>Le concours</span></h2>'+refs.slice(0,6).map(function(c,i){
-      return '<details class="ref-card"'+(refs.length===1||i===0?' open':'')+'><summary>'+catBadge(c.cat,'sm')+'<span class="ref-name"><b>'+sig(c.name)+'</b><span>'+esc(D.fps[c.fp])+(c.voies?' · '+sig(c.voies):'')+'</span></span><span class="details-toggle" aria-hidden="true">'+I.down+'</span></summary><div class="ref-body">'+
+      return '<details class="ref-card" style="--ref-tint:var(--cat-'+catClass(c.cat).slice(4).toLowerCase()+'-tint)"'+(refs.length===1||i===0?' open':'')+'><summary>'+catBadge(c.cat,'sm')+'<span class="ref-name"><b>'+sig(c.name)+'</b><span>'+esc(D.fps[c.fp])+(c.voies?' · '+sig(c.voies):'')+'</span></span><span class="details-toggle" aria-hidden="true">'+I.down+'</span></summary><div class="ref-body">'+
         '<h3 class="no-icon">Préparation conseillée</h3><p>'+(prepaText(c)?sig(prepaText(c)):'Pas de préparation particulière identifiée : consulter la page officielle du concours.')+'</p>'+
         ext(c.source,'Page officielle du concours','link-plain')+'</div></details>';
     }).join('')+'<p class="small m0">Informations indicatives, vérifiées le 18 octobre 2026 : l’avis de chaque session fait référence.</p></section>';
