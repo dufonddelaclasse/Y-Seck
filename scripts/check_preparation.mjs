@@ -240,11 +240,11 @@ console.log('Ressources vérifiées :',data.studyResources.length,'liens uniques
   const job=data.jobs.find(j=>j.id==='attache-terr');
   const level=(l)=>{S.level=l;return screens.metier(job.id);};
   const college=level('5e');
-  assert(college.includes('class="trip"')&&college.includes('>Collège<')&&college.includes('Stage de 3e ?')&&college.includes('Stage de seconde ?')&&college.includes('Ma position : </span>')&&college.includes('<span>5e</span>'),'Collégien : collège, lycée et supérieur.');
+  assert(college.includes('class="trip"')&&college.includes('>Collège<')&&college.includes('Stage de 3e ?')&&college.includes('Stage de seconde ?')&&college.includes('Mon niveau<span class="study-level">')&&college.includes('<span>5e</span>'),'Collégien : collège, lycée et supérieur.');
   const lycee=level('Seconde');
   assert(!lycee.includes('>Collège<')&&lycee.includes('Stage de seconde ?')&&!lycee.includes('Stage de 3e ?'),'Lycéen : le collège disparaît.');
   const etudiant=level('Bac+1 / +2');
-  assert(!etudiant.includes('>Lycée<')&&etudiant.includes('Ma position : </span><span class="study-level">')&&etudiant.includes('<span>Bac+1 / +2</span>'),'Étudiant : études supérieures seulement.');
+  assert(!etudiant.includes('>Lycée<')&&etudiant.includes('Mon niveau<span class="study-level">')&&etudiant.includes('<span>Bac+1 / +2</span>'),'Étudiant : études supérieures seulement.');
   const adulte=level('Sans diplôme');
   assert(adulte.includes('>Lycée<')&&adulte.includes('Études supérieures'),'Adulte sans diplôme : lycée puis études.');
   assert(adulte.includes('trip-item end')&&adulte.includes(job.name),'Le terminus est le métier.');

@@ -1264,7 +1264,7 @@
   var TRIP_TITLES = { college: 'Collège', lycee: 'Lycée', pro: 'Lycée professionnel', sup: 'Études supérieures' };
   /* En-tête de frise : autant de points que la catégorie est élevée (C : 1, B : 2, A : 3, A+ : 4). */
   function tripSeps(cat) { return '<span class="trip-seps" aria-hidden="true">' + new Array(({ 'A+': 4, A: 3, B: 2 }[cat] || 1) + 1).join('<span class="trip-sep"></span>') + '</span>'; }
-  function tripWho(level, testLevel) { return level ? (isParent() && !testLevel ? 'Position de ' + childName() : 'Ma position') : 'Entrée en 6e'; }
+  function tripWho(level, testLevel) { return level ? (isParent() && !testLevel ? 'Niveau de ' + childName() : 'Mon niveau') : 'Entrée en 6e'; }
   var CAT_VARS = { 'A+': ['--cat-ap', '#3C05FF'], A: ['--cat-a', '#0051FF'], B: ['--cat-b', '#00707F'], C: ['--cat-c', '#A8461B'] };
   function tripStop(cls, node, name, body, track, style) {
     return '<li class="trip-item ' + cls + '"' + (style ? ' style="' + style + '"' : '') + '><span class="trip-rail" aria-hidden="true">' + node + (track ? '<i class="trip-track ' + track + '"></i>' : '') + '</span><div class="trip-body">' +
@@ -1292,8 +1292,8 @@
         '<p class="trip-meta">' + esc(catLabel(c.cat)) + '</p><p class="trip-access"><b>Le concours rend ce poste accessible, sans le garantir.</b> Il s’obtient ensuite selon votre classement à la sortie de l’école, ou après un entretien avec l’employeur.</p>', 'dots', catStyle) : '') +
         stop('end', '<span class="trip-pill">' + (end.icon || '') + '</span>', end.name, end.body, '', catStyle);
     };
-    /* Départ : la pastille du niveau actuel, comme sur l’accueil. */
-    var head = stop('start', I.pin, 'Départ', '<p class="trip-sub">' + (level ? '<span class="sr-only">' + esc(who) + ' : </span><span class="study-level">' + I.graduation + '<span>' + esc(level) + '</span></span>' : esc(who)) + '</p>', '') +
+    /* Départ : « Mon niveau » puis la pastille du niveau actuel, comme sur l’accueil. */
+    var head = stop('start', I.pin, 'Départ', '<p class="trip-sub' + (level ? ' trip-level' : '') + '">' + esc(who) + (level ? '<span class="study-level">' + I.graduation + '<span>' + esc(level) + '</span></span>' : '') + '</p>', '') +
       (first ? stop('leg', '<span class="trip-walk">' + I.walk + '</span>', '', '<p class="trip-lead">' + esc(TRIP_TITLES[first.kind]) + '</p>' + tripPhase(c, first, trip.lvl, prepaText(c)), 'line c-' + first.kind)
         : stop('leg', '<span class="trip-walk">' + I.walk + '</span>', '', '<p class="trip-meta">Votre niveau suffit<span aria-hidden="true"> | </span><span class="sr-only">, </span>concours accessible dès maintenant</p>', 'line c-none')) +
       trip.phases.slice(1).map(function (p) { return stop('mid', '<span class="trip-dot c-' + p.kind + '"></span>', esc(TRIP_TITLES[p.kind]), tripPhase(c, p, trip.lvl, prepaText(c)), 'line c-' + p.kind); }).join('');
