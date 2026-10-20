@@ -2148,3 +2148,5 @@ html { touch-action:manipulation; }
 /* Filtres : une catégorie non cochée porte une petite croix grise, pour qu'on la sache écartée au premier coup d'œil. */
 .sheet-content button.chip.category-choice[data-action="metCat"] { position:relative; }
 .sheet-content button.chip.category-choice[data-action="metCat"]:not(.on)::after { content:''; position:absolute; top:-4px; right:-4px; width:20px; height:20px; border-radius:50%; background-color:#8E8E93; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M2.5 2.5l5 5M7.5 2.5l-5 5' stroke='%23FFF' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E"); background-position:center; background-size:10px 10px; background-repeat:no-repeat; box-shadow:0 0 0 2px #FFF; pointer-events:none; }
+/* Espace personnel : la phrase d'accroche reprend la taille et le gris du texte « Aucun métier enregistré » des favoris. */
+.app:not(.onboarding) .screen.personal-home .lead { font-size:.9375rem; color:var(--muted); }

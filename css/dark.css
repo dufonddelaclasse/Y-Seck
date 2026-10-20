@@ -770,6 +770,7 @@ html:where(.dark).dark .sheet-content button.chip.category-choice[data-action="m
 :where(html.dark) .ref-tip { background:#161616; }
 :where(html.dark) .home-tile { background:#E0FA6E; color:#EAEAEA; }
 :where(html.dark) .sheet-content button.chip.category-choice[data-action="metCat"]:not(.on)::after { background-color:#69696E; box-shadow:0 0 0 2px #292929; }
+:where(html.dark) .app:not(.onboarding) .screen.personal-home .lead { color:var(--muted); }
 
 /* Retouches */
 html.dark { --brand:#8F7BFF; --blue:#A493FF; --accent:#7C66FF; --accent-hover:#9785FF; --theme-btn:var(--brand); --red:#FF6B6B; --surface:#1E1E22; }
