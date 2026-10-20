@@ -456,45 +456,58 @@
       (S.done ? '<a class="link-plain" href="#/accueil">Aller à mon parcours</a>' : '') + '</div>';
   };
 
-  screens.versants = function () {
+  /* Comprendre la fonction publique : les 3 versants puis les 4 catégories. Contenus partagés par l’onboarding
+     (un écran chacun, titre h1) et par la page du profil (une seule page, titres h2). */
+  function versantsBlocks(h, fold) {
     var fps = [
       { k: 'E', t: 'La fonction publique d’État', d: 'Elle fait tourner les services de l’État, partout en France.', ex: 'Ministères, préfectures, écoles et lycées, tribunaux, impôts, police, armées.', tint: 'tint-blue', dot: 'var(--blue)' },
       { k: 'T', t: 'La fonction publique territoriale', d: 'Elle travaille au plus près des habitant·es, dans leur ville, leur département, leur région.', ex: 'Mairies, intercommunalités, conseils départementaux et régionaux.', tint: 'tint-mint', dot: 'var(--mint)' },
       { k: 'H', t: 'La fonction publique hospitalière', d: 'Elle soigne et accompagne, dans les établissements publics de santé.', ex: 'Hôpitaux publics, EHPAD publics, établissements sociaux et médico-sociaux.', tint: 'tint-cyan', dot: '#22C7E0' }
     ];
-    return '<main class="screen intro-screen">' +
-      '<div class="topbar">' + back('#/bienvenue', 'Retour') + '<span class="eyebrow">Comprendre 1 / 2</span></div>' +
-      '<h1 class="mt-m">3 fonctions publiques</h1>' +
+    return '<' + h + ' class="mt-m understand-title no-icon">3 fonctions publiques</' + h + '>' +
       '<p class="lead">Travailler dans le service public, c’est travailler pour l’un de ces trois employeurs.</p>' +
       '<div class="stack employer-list">' + fps.map(function (f) {
         /* Bloc replié : pictogramme et nom ; le détail s’ouvre au toucher. */
         return '<details class="intro-fold intro-employer-fold"><summary><span class="employer-icon" aria-hidden="true">' + ({E:I.government,T:I.city,H:I.hospital})[f.k] + '</span>' +
-          '<h2 class="employer-title no-icon">' + esc(f.t) + '</h2><span class="details-toggle" aria-hidden="true">' + I.down + '</span></summary>' +
+          '<' + fold + ' class="employer-title no-icon">' + esc(f.t) + '</' + fold + '><span class="details-toggle" aria-hidden="true">' + I.down + '</span></summary>' +
           '<div class="intro-fold-body"><p>' + esc(f.d) + '</p><p class="ex"><b>Par exemple :</b> ' + esc(f.ex) + '</p></div></details>';
       }).join('') + '</div>' +
-      '<div class="callout tint-yellow"><span class="pin"></span><p>Bon à savoir : un même métier existe souvent dans les trois. Et au cours d’une carrière, on peut passer de l’une à l’autre.</p></div>' +
-      '</main><div class="footer"><a class="btn" href="#/categories-intro">J’ai compris</a></div>';
-  };
-
-  screens['categories-intro'] = function () {
+      '<div class="callout tint-yellow"><span class="pin"></span><p>Bon à savoir : un même métier existe souvent dans les trois. Et au cours d’une carrière, on peut passer de l’une à l’autre.</p></div>';
+  }
+  function categoriesBlocks(h, fold) {
     var cats = [
       { id: 'A+', t: 'Les cadres supérieurs', d: 'Ils dirigent les grandes administrations et pilotent les politiques publiques.', dip: 'Bac+3 minimum, souvent Bac+5', ex: 'Directeur·rice d’hôpital, magistrat·e, commissaire', tint: 'tint-blue' },
       { id: 'A', t: 'Concevoir, élaborer, manager', d: 'Ils imaginent les projets, préparent les décisions et encadrent des équipes.', dip: 'Bac+3 minimum', ex: 'Attaché·e, inspecteur·rice, professeur·e, infirmier·ère', tint: 'tint-mint' },
       { id: 'B', t: 'Appliquer, rédiger, gérer', d: 'Ils mettent en œuvre les décisions, suivent les dossiers et peuvent encadrer une petite équipe.', dip: 'Bac minimum', ex: 'Greffier·ère, technicien·ne, gardien·ne de la paix', tint: 'tint-cyan' },
       { id: 'C', t: 'Exécuter, accueillir, assurer', d: 'Ils font tourner le service au quotidien, sur le terrain et au contact du public.', dip: 'Brevet, CAP, BEP, ou sans diplôme', ex: 'Adjoint·e administratif·ve, agent·e technique, ATSEM', tint: 'tint-yellow' }
     ];
-    return '<main class="screen category-screen">' +
-      '<div class="topbar">' + back('#/versants', 'Retour') + '<span class="eyebrow">Comprendre 2 / 2</span></div>' +
-      '<div class="category-heading mt-m"><h1>4 catégories</h1><div class="row" aria-hidden="true">' + ['A+','A','B','C'].map(function(c){return '<span class="cat sm '+catClass(c)+'">'+c+'</span>';}).join('') + '</div></div>' +
+    return '<div class="category-heading mt-m"><' + h + ' class="understand-title no-icon">4 catégories</' + h + '><div class="row" aria-hidden="true">' + ['A+','A','B','C'].map(function(c){return '<span class="cat sm '+catClass(c)+'">'+c+'</span>';}).join('') + '</div></div>' +
       '<p class="lead">Chaque poste appartient à une catégorie. Elle dépend du niveau de responsabilité et du diplôme demandé pour y entrer.</p>' +
       '<div class="stack mt-s">' + cats.map(function (c) {
         return '<details class="intro-fold intro-category-fold ' + c.tint + '"><summary>' +
           '<span class="cat lg ' + catClass(c.id) + '" aria-hidden="true">' + c.id + '</span>' +
-          '<span class="intro-fold-name"><h2 class="explain-t no-icon"><span class="sr-only">Catégorie ' + c.id + ' : </span>' + esc(c.t) + '</h2><span class="intro-fold-sub">Catégorie ' + c.id + '</span></span><span class="details-toggle" aria-hidden="true">' + I.down + '</span></summary>' +
+          '<span class="intro-fold-name"><' + fold + ' class="explain-t no-icon"><span class="sr-only">Catégorie ' + c.id + ' : </span>' + esc(c.t) + '</' + fold + '><span class="intro-fold-sub">Catégorie ' + c.id + '</span></span><span class="details-toggle" aria-hidden="true">' + I.down + '</span></summary>' +
           '<div class="intro-fold-body"><p>' + esc(c.d) + '</p><p class="ex"><b>Pour y entrer :</b> ' + esc(c.dip) + '</p><p class="ex"><b>Par exemple :</b> ' + esc(c.ex) + '</p>' + categoryFit(c.id) + '</div></details>';
       }).join('') + '</div>' +
-      '<div class="callout tint-blue"><span class="pin"></span><p>Rien n’est figé : on peut monter de catégorie au cours de sa carrière, par concours interne ou par promotion.</p></div>' +
+      '<div class="callout tint-blue"><span class="pin"></span><p>Rien n’est figé : on peut monter de catégorie au cours de sa carrière, par concours interne ou par promotion.</p></div>';
+  }
+
+  screens.versants = function () {
+    return '<main class="screen intro-screen">' +
+      '<div class="topbar">' + back('#/bienvenue', 'Retour') + '<span class="eyebrow">Comprendre 1 / 2</span></div>' + versantsBlocks('h1', 'h2') +
+      '</main><div class="footer"><a class="btn" href="#/categories-intro">J’ai compris</a></div>';
+  };
+
+  screens['categories-intro'] = function () {
+    return '<main class="screen category-screen">' +
+      '<div class="topbar">' + back('#/versants', 'Retour') + '<span class="eyebrow">Comprendre 2 / 2</span></div>' + categoriesBlocks('h1', 'h2') +
       '</main><div class="footer"><button type="button" class="btn" data-action="startProfile">Démarrer mon profil</button></div>';
+  };
+
+  /* Depuis le profil : les deux écrans réunis sur une page, sans bouton d’action, avec un retour vers le profil. */
+  screens.comprendre = function () {
+    return '<main class="screen top-tight intro-screen category-screen understand-page">' + back('#/moi', 'Profil') +
+      '<h1 class="sr-only">Comprendre la fonction publique</h1>' + versantsBlocks('h2', 'h3') + categoriesBlocks('h2', 'h3') + '</main>' + tabbar('moi');
   };
 
   /* ---------- Écrans : onboarding ---------- */
@@ -1793,7 +1806,7 @@
       (isParent()?'<button type="button" class="danger-link" data-action="deleteChild">Effacer ce profil</button>':'<button type="button" class="danger-link" data-action="wipe">Effacer mes données</button>') +
       '<p class="notice">' + I.lock + '<span>Ces informations sont enregistrées uniquement dans ce navigateur. Elles ne sont envoyées à personne.</span></p>' +
       '<div class="list mt-m">' +
-      '<a class="list-row" href="#/versants"><div class="main"><span class="name">Comprendre la fonction publique</span><span class="meta">Les 3 fonctions publiques et les 4 catégories</span></div>' + I.chev + '</a>' +
+      '<a class="list-row" href="#/comprendre"><div class="main"><span class="name">Comprendre la fonction publique</span><span class="meta">Les 3 fonctions publiques et les 4 catégories</span></div>' + I.chev + '</a>' +
       '<a class="list-row" href="#/confidentialite"><div class="main"><span class="name">Données personnelles</span></div>' + I.chev + '</a>' +
       '<a class="list-row" href="#/accessibilite"><div class="main"><span class="name">Accessibilité et confort de lecture</span></div>' + I.chev + '</a>' +
       '<a class="list-row" href="#/mentions"><div class="main"><span class="name">Mentions légales</span></div>' + I.chev + '</a>' +

@@ -723,7 +723,7 @@ html:where(.dark).dark .ladder-alt-row, html:where(.dark).dark .ladder-alt-row:h
 :where(html.dark) .talents-card :is(h1,h2) { color:#E9E9E9; }
 :where(html.dark) .talents-card p, :where(html.dark) .app .prep.hi.talents-card p { color:#E9E9E9; }
 :where(html.dark) .app .prep.hi.talents-card .more, :where(html.dark) .app .prep.hi.talents-card:hover { color:#E9E9E9; }
-:where(html.dark) .personal-home .home-name-enter { background:var(--name-sweep) 100% 0 / 300% 100% no-repeat; color:transparent; }
+:where(html.dark) .personal-home .home-name-enter { background:var(--name-sweep) 0 0 / 100% 300% no-repeat; color:transparent; }
 @media (prefers-reduced-motion:reduce) {
   :where(html.dark) .personal-home .home-name-enter { background:none; color:inherit; }
 }
