@@ -1262,6 +1262,8 @@
     return found.length ? '<dl class="trip-voies">' + found.map(function (v) { return '<dt>' + esc(v[1]) + '</dt><dd>' + esc(v[2]) + '</dd>'; }).join('') + '</dl>' : '';
   }
   var TRIP_TITLES = { college: 'Collège', lycee: 'Lycée', pro: 'Lycée professionnel', sup: 'Études supérieures' };
+  /* En-tête de frise : autant de points que la catégorie est élevée (C : 1, B : 2, A : 3, A+ : 4). */
+  function tripSeps(cat) { return '<span class="trip-seps" aria-hidden="true">' + new Array(({ 'A+': 4, A: 3, B: 2 }[cat] || 1) + 1).join('<span class="trip-sep"></span>') + '</span>'; }
   function tripWho(level, testLevel) { return level ? (isParent() && !testLevel ? 'Position de ' + childName() : 'Ma position') : 'Entrée en 6e'; }
   var CAT_VARS = { 'A+': ['--cat-ap', '#3C05FF'], A: ['--cat-a', '#0051FF'], B: ['--cat-b', '#00707F'], C: ['--cat-c', '#A8461B'] };
   function tripStop(cls, node, name, body, track, style) {
@@ -1329,7 +1331,7 @@
     var dot = function (t) { return t && !/[.!?]$/.test(t) ? t + '.' : t; };
     var line = tripLine(c, level, tripWho(level, testLevel), { name: 'Arrivée', icon: I.seal, body: c.metiers ? '<p class="trip-meta">' + sig(dot(c.metiers)) + '</p>' : '' });
     return '<main class="screen top-tight job-page concours-page concours-trip">' + back('#/concours-liste', 'Concours') +
-      '<div class="job-hero trip-head"><div class="trip-summary"><span class="trip-modes">' + I.walk + '<span class="trip-sep" aria-hidden="true"></span>' + catBadge(c.cat) + '</span></div>' +
+      '<div class="job-hero trip-head"><div class="trip-summary"><span class="trip-modes">' + I.walk + tripSeps(c.cat) + catBadge(c.cat) + '</span></div>' +
         '<h1>' + sig(c.name) + '</h1></div>' +
       (visitor ? '' : '<div class="job-actions">' +
         '<button type="button" class="job-action" data-action="favorite"' + attr('v', favKey) + ' aria-pressed="' + fav + '" aria-label="' + (fav ? 'Retirer des favoris' : 'Ajouter aux favoris') + '">' + I.bookmark + '<span aria-hidden="true">Favori</span></button>' +
@@ -1411,7 +1413,7 @@
       return '<div data-tab="' + i + '"' + (i === sel ? '' : ' hidden') + '>' + jobLadder(j, c, alt) + '</div>';
     }).join('');
     return '<main class="screen top-tight job-page concours-trip job-trip">' + back('#/metiers', 'Métiers') +
-      '<div class="job-hero trip-head"><div class="trip-summary"><span class="trip-modes">' + I.walk + '<span class="trip-sep" aria-hidden="true"></span>' + jobBadges(j) + '</span></div>' +
+      '<div class="job-hero trip-head"><div class="trip-summary"><span class="trip-modes">' + I.walk + tripSeps(themeCategory(j)) + jobBadges(j) + '</span></div>' +
         '<h1>' + esc(j.name) + '</h1>' + (shared.length ? '<p class="job-match">' + (isParent() ? 'Lui ressemble' : 'Vous ressemble') + ' : ' + esc(shared.map(traitLabel).join(', ').toLowerCase()) + '</p>' : '') +
         '<p class="body">' + esc(j.desc.length > 300 ? j.desc.slice(0, 297).replace(/\s+\S*$/, '') + '…' : j.desc) + '</p></div>' +
       '<div class="job-actions">' +
