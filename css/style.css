@@ -1970,3 +1970,6 @@ a.trip-official { display:inline; color:var(--ink); text-decoration:underline; t
 .sheet-content button.chip.category-choice[data-action="metCat"], .sheet-content button.chip.category-choice[data-action="metCat"]:hover { border-color:transparent; }
 /* Évoluer : étapes sur fond blanc, comme les autres cartes. */
 .app.themed main.job-page .rung, .job-page .rung { background:#FFF; }
+/* Admission : médaille blanche dans l’ovale noir de la dernière étape (fiches métier). */
+.trip-pill { display:grid; place-items:center; }
+.trip-pill .medal-icon { width:18px; height:18px; color:#FFF; }

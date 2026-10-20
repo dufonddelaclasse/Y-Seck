@@ -201,6 +201,8 @@ html.dark .app.themed .eyebrow, html.dark .app.themed .section-heading { color:v
 html.dark .personal-home .home-concours, html.dark .personal-home .home-concours:hover { background:#DCD3FF; color:#161616; }
 html.dark .personal-home .home-concours :is(.home-feature-copy b, .home-feature-copy > span, .home-count) { color:#161616; }
 html.dark .personal-home .home-concours .home-go { background:#FFF; color:#161616; }
+/* Ovale d’arrivée clair en mode sombre : la médaille passe en sombre. */
+html.dark .trip-pill .medal-icon { color:#161616; }
 """
 
 if __name__ == '__main__':

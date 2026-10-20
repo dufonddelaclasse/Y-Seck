@@ -158,7 +158,10 @@
   I.send = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l6 6-6 6"/><path d="M21 11h-9a8 8 0 0 0-8 8v1"/></svg>';
   I.plus = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>';
   I.grid = UI.icons.compass;
-  I.exam = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/><path d="M9 13.5l2 2 4-4"/></svg>';
+  /* Concours : copie et crayon (onglet) ; médaille de l’admission (frise des fiches métier) ; cible (Se préparer). */
+  I.exam = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 20.5H6.5A1.5 1.5 0 0 1 5 19V5a1.5 1.5 0 0 1 1.5-1.5h9A1.5 1.5 0 0 1 17 5v4.5"/><path d="M8.5 8h5M8.5 11.5h5M8.5 15h2.5"/><path d="m19.6 12.6 1.8 1.8-6.2 6.2-2.6.8.8-2.6z"/></svg>';
+  I.medal = '<svg class="medal-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9" r="5.5"/><path d="M8.5 13.3 7 21l5-2.5 5 2.5-1.5-7.7"/></svg>';
+  I.target = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r=".8" fill="currentColor"/></svg>';
   I.layers = UI.icons.book;
 
   /* ---------- Outils ---------- */
@@ -1154,7 +1157,7 @@
     var refs=jobRefs(job);
     if(!refs.length)return recruitmentNote(job)?'<section class="stack mt-m" id="concours-ref"><h2 class="section-heading">'+I.calendar+'<span>Le recrutement</span></h2>'+recruitmentNote(job)+'</section>':'';
     /* Se préparer : pour chaque concours, seulement la préparation conseillée et la page officielle. */
-    return '<section class="stack mt-m" id="concours-ref"><h2 class="section-heading">'+I.calendar+'<span>Le concours</span></h2>'+refs.slice(0,6).map(function(c,i){
+    return '<section class="stack mt-m" id="concours-ref"><h2 class="section-heading">'+I.target+'<span>Le concours</span></h2>'+refs.slice(0,6).map(function(c,i){
       return '<details class="ref-card"'+(refs.length===1||i===0?' open':'')+'><summary>'+catBadge(c.cat,'sm')+'<span class="ref-name"><b>'+sig(c.name)+'</b><span>'+esc(D.fps[c.fp])+(c.voies?' · '+sig(c.voies):'')+'</span></span><span class="details-toggle" aria-hidden="true">'+I.down+'</span></summary><div class="ref-body">'+
         '<h3 class="no-icon">Préparation conseillée</h3><p>'+(prepaText(c)?sig(prepaText(c)):'Pas de préparation particulière identifiée : consulter la page officielle du concours.')+'</p>'+
         ext(c.source,'Page officielle du concours','link-plain')+'</div></details>';
@@ -1285,7 +1288,7 @@
         : stop('leg', '<span class="trip-walk">' + I.walk + '</span>', '', '<p class="trip-meta">Votre niveau suffit<span aria-hidden="true"> | </span><span class="sr-only">, </span>concours accessible dès maintenant</p>', 'line c-none')) +
       trip.phases.slice(1).map(function (p) { return stop('mid', '<span class="trip-dot c-' + p.kind + '"></span>', esc(TRIP_TITLES[p.kind]), tripPhase(c, p, trip.lvl, prepaText(c)), 'line c-' + p.kind); }).join('');
     /* Métier recruté sans concours : l’étape du recrutement remplace celle du concours. */
-    if (c.recruit) return head + stop('trip-exam', catBadge(c.cat), esc(c.recruit.title), c.recruit.body, 'line', catStyle) + stop('end', '<span class="trip-pill"></span>', end.name, end.body, '');
+    if (c.recruit) return head + stop('trip-exam', catBadge(c.cat), esc(c.recruit.title), c.recruit.body, 'line', catStyle) + stop('end', '<span class="trip-pill">' + (end.icon || '') + '</span>', end.name, end.body, '');
     return head +
       stop('trip-exam', catBadge(c.cat), esc(c.name),
         '<p class="trip-dir">' + I.arrow + '<span>' + esc({ E: 'Fonction publique de l’État', T: 'Fonction publique territoriale', H: 'Fonction publique hospitalière' }[c.fp] || D.fps[c.fp]) + '</span></p>' +
@@ -1305,7 +1308,7 @@
             '<dt>Écrits ou sélection</dt><dd>' + esc(next.writtenLabel || 'Non publiés') + '</dd><dt>Oraux</dt><dd>' + esc(next.oralLabel || 'Non publiés') + '</dd></dl>'
             : '<p class="trip-a">' + unpublished + '</p>' + expected) + (next ? missingNote : '') +
           (allSessions.length ? '<a class="trip-all-dates" href="' + datesHref + '">Voir toutes les dates du concours</a>' : '')), 'line', catStyle) +
-      stop('end', '<span class="trip-pill"></span>', end.name, end.body, '');
+      stop('end', '<span class="trip-pill">' + (end.icon || '') + '</span>', end.name, end.body, '');
   }
   /* Un niveau dans l’adresse (#/concours-fiche/<clé>/<niveau>) permet de vérifier la frise sans modifier le profil. */
   screens['concours-fiche'] = function (key, testLevel) {
@@ -1388,7 +1391,7 @@
     }).join('') + '</div></div>' : '';
     var panels = refs.map(function (c, i) {
       return '<div class="trip-panel" id="trip-panel-' + i + '" role="tabpanel" aria-labelledby="trip-tab-' + i + '" data-tab="' + i + '"' + (i === sel ? '' : ' hidden') + '><ol class="trip">' +
-        tripLine(c, level, who, { name: esc(j.name), body: '<p class="trip-meta">' + esc(catLabel(c.cat) + ' · ' + (c.recruit ? j.fp.split('').map(function (f) { return fpLabel[f]; }).join(', ') : fpLabel[c.fp])) + '</p>' }) + '</ol></div>';
+        tripLine(c, level, who, { name: esc(j.name), icon: c.recruit ? '' : I.medal, body: '<p class="trip-meta">' + esc(catLabel(c.cat) + ' · ' + (c.recruit ? j.fp.split('').map(function (f) { return fpLabel[f]; }).join(', ') : fpLabel[c.fp])) + '</p>' }) + '</ol></div>';
     }).join('');
     /* Évoluer : progression du concours choisi, puis celles des autres concours possibles. */
     var ladders = refs.map(function (c, i) {
