@@ -2000,20 +2000,20 @@ html[data-contrast="true"] .job-page .job-match { background:none; border:0; col
 .trip-item.admit .trip-walk svg { width:24px; height:24px; }
 .trip-item.admit .trip-access { margin-top:22px; }
 .trip-item.end .trip-dir { margin-top:10px; }
-/* Prépa Talents : carte blanche aux coins biseautés et liseré bleu (image de bordure en 9 parties : les coins gardent leur taille),
-   logo, présentation, ligne de pointillés d’un bord à l’autre, puis la bourse. */
-.talents-card, .app .prep.hi.talents-card { --talents-pad:30px; position:relative; display:flex; flex-direction:column; gap:14px; padding:34px var(--talents-pad) 32px; border-style:solid !important; border-width:1px !important; border-color:transparent !important; border-radius:0 !important; box-shadow:none !important; background:none !important; color:#161616;
-  border-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cpath d='M31.76 4.99Q36 0.75 42 0.75L78 0.75Q84 0.75 88.24 4.99L115.01 31.76Q119.25 36 119.25 42L119.25 78Q119.25 84 115.01 88.24L88.24 115.01Q84 119.25 78 119.25L42 119.25Q36 119.25 31.76 115.01L4.99 88.24Q0.75 84 0.75 78L0.75 42Q0.75 36 4.99 31.76Z' fill='%23FFF' stroke='%231129AD' stroke-width='1.5'/%3E%3C/svg%3E") 48 fill / 48px stretch !important; }
-.talents-card .talents-logo { display:block; width:112px; max-width:100%; height:auto; margin:0 0 8px; }
+/* Prépa Talents : bandeau photo teinté de bleu (logo blanc), puis carte blanche au liseré bleu sans trait en haut,
+   coins biseautés en bas (image de bordure en 9 parties : les coins gardent leur taille). */
+.talents-card, .app .prep.hi.talents-card { display:flex; flex-direction:column; gap:0; padding:0 !important; border-style:none !important; border-radius:0 !important; border-image:none !important; box-shadow:none !important; background:none !important; color:#161616; text-decoration:none; }
+.talents-hero { display:flex; align-items:flex-start; justify-content:space-between; gap:12px; min-height:176px; padding:22px 24px; border-radius:12px 12px 0 0;
+  background:linear-gradient(90deg, rgba(8,40,175,.96) 0%, rgba(8,40,175,.62) 30%, rgba(8,40,175,.18) 56%, rgba(8,40,175,0) 76%), url(../assets/prepa-talents-photo.jpg) 60% 30% / cover no-repeat #0828AF; }
+.talents-hero .talents-logo { display:block; width:96px; max-width:100%; height:auto; margin:0; }
+.talents-hero .price, .app .prep.hi.talents-card .talents-hero .price { background:#FFF; color:#1129AD; }
+.talents-body { --talents-pad:26px; display:flex; flex-direction:column; gap:14px; padding:36px var(--talents-pad) 52px; border-style:solid; border-width:0 1px 1px; border-color:transparent;
+  border-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cpath d='M0.75 0L0.75 81Q0.75 84 2.87 86.12L33.88 117.13Q36 119.25 39 119.25L81 119.25Q84 119.25 86.12 117.13L117.13 86.12Q119.25 84 119.25 81L119.25 0Z' fill='%23FFF'/%3E%3Cpath d='M0.75 0L0.75 81Q0.75 84 2.87 86.12L33.88 117.13Q36 119.25 39 119.25L81 119.25Q84 119.25 86.12 117.13L117.13 86.12Q119.25 84 119.25 81L119.25 0' fill='none' stroke='%231129AD' stroke-width='1.5'/%3E%3C/svg%3E") 48 fill / 48px stretch; }
 .talents-card :is(h1,h2) { margin:0; font-size:1.0625rem; line-height:1.4; font-weight:500; color:#161616; }
 .talents-card p, .app .prep.hi.talents-card p { margin:0; font-size:1rem; line-height:1.6; font-weight:300; color:#161616; }
 .talents-card p b { font-weight:500; }
 .talents-perf { flex:none; height:4px; margin:18px calc(10px - var(--talents-pad)); background-image:radial-gradient(circle, #DEDEDE 1.3px, transparent 1.8px); background-size:11.5px 4px; background-position:0 50%; background-repeat:space no-repeat; }
-.app .prep.hi.talents-card { gap:10px; text-decoration:none; }
-.app .prep.hi.talents-card .head { align-items:flex-start; }
-.app .prep.hi.talents-card .talents-logo { margin:0; }
+.app .prep.hi.talents-card .talents-hero { min-height:150px; }
+.app .prep.hi.talents-card .talents-body { gap:10px; padding:26px var(--talents-pad) 40px; }
 .app .prep.hi.talents-card .talents-perf { margin:12px calc(10px - var(--talents-pad)) 4px; }
-.app .prep.hi.talents-card .price { background:#F0F0EE; color:#5D5D63; }
-.app .prep.hi.talents-card .more { color:#161616; }
-.app .prep.hi.talents-card:hover { color:#161616; }
-html[data-contrast="true"] .talents-card .talents-logo { background:none; }
+.app .prep.hi.talents-card .more, .app .prep.hi.talents-card:hover { color:#161616; }

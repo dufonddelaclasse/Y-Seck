@@ -440,13 +440,13 @@
   var screens = {};
   var STEPS = 5;
 
-  /* Prépa Talents : carte blanche aux coins biseautés, logo, présentation, pointillés puis la bourse.
-     En titre de page (h1), le logo tient lieu de titre visible. */
-  var TALENTS_LOGO = '<img class="talents-logo" src="assets/prepa-talents-logo.png" alt="Prépa Talents" width="480" height="208">';
+  /* Prépa Talents : bandeau photo teinté de bleu avec le logo blanc, puis carte blanche au liseré bleu
+     (coins biseautés en bas) : présentation, pointillés, puis la bourse. En titre de page (h1), le logo tient lieu de titre visible. */
+  function talentsHero(extra) { return '<div class="talents-hero"><img class="talents-logo" src="assets/prepa-talents-logo-blanc.png" alt="Prépa Talents" width="420" height="200">' + (extra || '') + '</div>'; }
   function talentsFeature(title,body,heading,extraClass) {
     heading=heading||'h2';
-    return '<section class="talents-card'+(extraClass?' '+extraClass:'')+'">'+TALENTS_LOGO+'<'+heading+' class="no-icon'+(heading==='h1'?' sr-only':'')+'">'+title+'</'+heading+'>'+body +
-      '<div class="talents-perf" aria-hidden="true"></div><p><b>Une bourse de ' + esc(D.talentsGrantLabel || '5 000 €') + ' par an</b> est versée aux élèves. L’entrée se fait sur dossier et entretien, selon les ressources et la motivation.</p></section>';
+    return '<section class="talents-card'+(extraClass?' '+extraClass:'')+'">'+talentsHero()+'<div class="talents-body"><'+heading+' class="no-icon'+(heading==='h1'?' sr-only':'')+'">'+title+'</'+heading+'>'+body +
+      '<div class="talents-perf" aria-hidden="true"></div><p><b>Une bourse de ' + esc(D.talentsGrantLabel || '5 000 €') + ' par an</b> est versée aux élèves. L’entrée se fait sur dossier et entretien, selon les ressources et la motivation.</p></div></section>';
   }
 
   screens.bienvenue = function () {
@@ -1553,8 +1553,8 @@
       (list.length?'':'<p class="empty">Aucune préparation pour ce métier avec ce budget.</p>') + '<div class="stack">' + list.map(function (p) {
         var hi = p.talents && on;
         var extra = p.id === 'talents' && (job||S.domains.length) ? '<span class="fit on">' + nbT + (job?' pour ce métier':' pour '+(isParent()?'ses':'vos')+' choix') + '</span>' : '';
-        if (hi) return '<a class="prep hi talents-card" href="#/prepa/' + p.id + (job?'/'+job.id:'') + '"><div class="head">' + TALENTS_LOGO + '<span class="price">' + esc(p.price) + '</span></div><h2 class="sr-only">' + sig(p.t) + '</h2>' +
-          '<p>' + esc(p.d) + '</p><div class="talents-perf" aria-hidden="true"></div><span class="prep-foot">' + extra + '<span class="more">Voir le détail' + I.chev + '</span></span></a>';
+        if (hi) return '<a class="prep hi talents-card" href="#/prepa/' + p.id + (job?'/'+job.id:'') + '">' + talentsHero('<span class="price">' + esc(p.price) + '</span>') + '<div class="talents-body"><h2 class="sr-only">' + sig(p.t) + '</h2>' +
+          '<p>' + esc(p.d) + '</p><div class="talents-perf" aria-hidden="true"></div><span class="prep-foot">' + extra + '<span class="more">Voir le détail' + I.chev + '</span></span></div></a>';
         return '<a class="prep" href="#/prepa/' + p.id + (job?'/'+job.id:'') + '"><div class="head"><h2 class="h3">' + sig(p.t) + '</h2><span class="price">' + esc(p.price) + '</span></div>' +
           '<p>' + esc(p.d) + '</p><span class="prep-foot">' + extra + '<span class="more">Voir le détail' + I.chev + '</span></span></a>';
       }).join('') + '</div>' +

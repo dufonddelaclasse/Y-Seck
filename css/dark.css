@@ -716,12 +716,13 @@ html:where(.dark).dark .ladder-alt-row, html:where(.dark).dark .ladder-alt-row:h
 :where(html.dark) .app.theme-C .job-page .job-match { color:var(--cat-c-ink); }
 :where(html.dark) .trip-sub .study-level { border:0; background:#3B3B3B; color:var(--ink-2); }
 :where(html.dark) :is(.trip-item.admit .trip-name, .trip-item.end .trip-dir) .cat.sm { box-shadow:none; }
-:where(html.dark) .talents-card, :where(html.dark) .app .prep.hi.talents-card { border-color:transparent !important; box-shadow:none !important; background:none !important; color:#E9E9E9; }
+:where(html.dark) .talents-card, :where(html.dark) .app .prep.hi.talents-card { box-shadow:none !important; background:none !important; color:#E9E9E9; }
+:where(html.dark) .talents-hero { background:linear-gradient(90deg, rgba(8,40,175,.96) 0%, rgba(8,40,175,.62) 30%, rgba(8,40,175,.18) 56%, rgba(8,40,175,0) 76%), url(../assets/prepa-talents-photo.jpg) 60% 30% / cover no-repeat #0828AF; }
+:where(html.dark) .talents-hero .price, :where(html.dark) .app .prep.hi.talents-card .talents-hero .price { background:#292929; color:#8697F3; }
+:where(html.dark) .talents-body { border-color:transparent; }
 :where(html.dark) .talents-card :is(h1,h2) { color:#E9E9E9; }
 :where(html.dark) .talents-card p, :where(html.dark) .app .prep.hi.talents-card p { color:#E9E9E9; }
-:where(html.dark) .app .prep.hi.talents-card .price { background:#171714; color:#BEBEC2; }
-:where(html.dark) .app .prep.hi.talents-card .more { color:#E9E9E9; }
-:where(html.dark) .app .prep.hi.talents-card:hover { color:#E9E9E9; }
+:where(html.dark) .app .prep.hi.talents-card .more, :where(html.dark) .app .prep.hi.talents-card:hover { color:#E9E9E9; }
 
 /* Retouches */
 html.dark { --brand:#8F7BFF; --blue:#A493FF; --accent:#7C66FF; --accent-hover:#9785FF; --theme-btn:var(--brand); --red:#FF6B6B; --surface:#1E1E22; }
@@ -784,5 +785,5 @@ html.dark .personal-home .home-concours .home-go { background:#FFF; color:#16161
 html.dark .trip-pill svg { color:#161616; }
 /* Prépa Talents : la carte reste blanche, avec son logo et un texte sombre. */
 html.dark .talents-card, html.dark .talents-card :is(h1,h2,p,b,.more,.chev) { color:#161616 !important; }
-html.dark .talents-card .price { background:#F0F0EE !important; color:#5D5D63 !important; }
+html.dark .talents-card .talents-hero .price { background:#FFF !important; color:#1129AD !important; }
 html.dark .talents-perf { background-image:radial-gradient(circle, #DEDEDE 1.3px, transparent 1.8px) !important; }

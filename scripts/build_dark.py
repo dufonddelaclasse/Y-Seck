@@ -204,7 +204,7 @@ html.dark .personal-home .home-concours .home-go { background:#FFF; color:#16161
 html.dark .trip-pill svg { color:#161616; }
 /* Prépa Talents : la carte reste blanche, avec son logo et un texte sombre. */
 html.dark .talents-card, html.dark .talents-card :is(h1,h2,p,b,.more,.chev) { color:#161616 !important; }
-html.dark .talents-card .price { background:#F0F0EE !important; color:#5D5D63 !important; }
+html.dark .talents-card .talents-hero .price { background:#FFF !important; color:#1129AD !important; }
 html.dark .talents-perf { background-image:radial-gradient(circle, #DEDEDE 1.3px, transparent 1.8px) !important; }
 """
 
