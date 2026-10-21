@@ -86,12 +86,22 @@
   function familyEstablished() { return isParent() && S.children.some(function(c){return c.done;}); }
   function nameReady() { return !!(S.profile && S.name.trim()); }
   function identityReady() { return !!(nameReady() && S.level); }
+  /* Sur téléphone, l’écran suivant n’apparaît qu’une fois le clavier refermé : sinon son bouton du bas suit la fermeture
+     du clavier et bouge avant de se poser. Sans clavier ouvert (ou sans visualViewport), on enchaîne aussitôt. */
+  function afterKeyboard(fn) {
+    var vv = window.visualViewport, open = function () { return window.innerHeight - vv.height > 120; };
+    if (!vv || !open()) { fn(); return; }
+    var done = false, timer = setTimeout(go, 500);
+    function go() { if (done) return; done = true; clearTimeout(timer); vv.removeEventListener('resize', check); fn(); }
+    function check() { if (!open()) setTimeout(go, 60); }
+    vv.addEventListener('resize', check);
+  }
   function confirmName(advance) {
     var input=document.getElementById('person-name');
     if(!input||!input.value.trim())return;
     S.name=input.value.trim();input.value=S.name;save();
     input.blur();
-    if(advance){if(profileNeedsValidation())validateProfile();else navigate('#/niveau');return;}
+    if(advance){afterKeyboard(function(){if(profileNeedsValidation())validateProfile();else navigate('#/niveau');});return;}
     var button=document.getElementById('name-confirm');if(button)button.focus({preventScroll:true});
     announce('Prénom enregistré.');
   }
@@ -2067,7 +2077,7 @@
     /* Arrivée sur le tableau de bord après le chargement du catalogue : chaque bloc apparaît du haut vers le bas, menu compris. */
     /* Onboarding : chaque nouvel écran apparaît en fondu simple, sans mouvement, bouton du bas compris. */
     if (changed && main && ['bienvenue', 'versants', 'categories-intro', 'choix-profil', 'profil', 'niveau', 'interets', 'traits', 'situation'].indexOf(r.name) > -1) {
-      var entering = [main].concat([].slice.call(root.querySelectorAll(':scope > .footer')));
+      var entering = [main].concat([].slice.call(root.querySelectorAll(':scope > .footer, :scope > form > .footer')));
       entering.forEach(function (el) { el.classList.add('enter-fade'); });
       setTimeout(function () { entering.forEach(function (el) { el.classList.remove('enter-fade'); }); }, 900);
     }
