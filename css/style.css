@@ -2275,3 +2275,8 @@ html.crios .profile-footer { bottom:calc(86px + env(safe-area-inset-bottom, 0px)
 .ref-tip.stage-tip b { line-height:1.35; }
 .stage-where { display:flex; align-items:flex-start; gap:8px; margin-top:2px; }
 .stage-where svg { flex:none; width:18px; height:18px; margin-top:1px; color:var(--theme, var(--blue)); }
+/* Écrans tactiles : poser le doigt sur un bouton pendant le défilement ne le met plus en surbrillance (survol « collé » sur iPhone). */
+@media (hover:none) {
+  html .btn.outline:hover { background:var(--surface); border-color:var(--lilac); color:var(--blue); }
+  html .prep-page .btn.outline:hover, html .prep-page button.chip:not(.on):hover { background:transparent; border-color:var(--theme-btn,var(--blue)); color:var(--ink); }
+}

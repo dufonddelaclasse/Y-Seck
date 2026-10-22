@@ -810,6 +810,10 @@ html:where(.dark).dark .sheet-content button.chip.category-choice[data-action="m
 :where(html.dark) .talents-counter { border:0; background:none; }
 :where(html.dark) .ref-tip.stage-tip { background:transparent; }
 :where(html.dark) .stage-where svg { color:var(--theme-ink, var(--blue)); }
+@media (hover:none) {
+  html:where(.dark) .btn.outline:hover { background:var(--surface); border-color:var(--lilac); color:var(--blue); }
+  html:where(.dark) .prep-page .btn.outline:hover, html:where(.dark) .prep-page button.chip:not(.on):hover { background:transparent; border-color:var(--theme-btn,var(--blue)); color:var(--ink); }
+}
 
 /* Retouches */
 html.dark { --brand:#8F7BFF; --blue:#A493FF; --accent:#7C66FF; --accent-hover:#9785FF; --theme-btn:var(--brand); --red:#FF6B6B; --surface:#1E1E22; }
