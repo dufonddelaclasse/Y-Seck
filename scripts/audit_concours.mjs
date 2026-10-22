@@ -12,7 +12,7 @@ let src=fs.readFileSync(new URL('js/app.js',root),'utf8');
 src=src.replace('  UI.init();\n  render();\n  booted = true;', '  window.tests={D,concoursSessions,concoursJobs,jobRefs,jobCategories,prepaText};');
 vm.runInContext(src,context);
 const {D,concoursSessions,concoursJobs,jobRefs}=context.window.tests;
-const today='2026-10-21';
+const today=new Date().toISOString().slice(0,10);
 console.log('CONCOURS', D.concours.length, '| calendrier', D.calendar.length, '| routes', Object.keys(D.accessRoutes).length, '| jobs', D.jobs.length);
 const rows=[];
 for (const c of D.concours) {
@@ -24,7 +24,7 @@ rows.sort((a,b)=>a[5]-b[5]||a[4]-b[4]);
 console.log(['id','cat','fp','nom','sessions(toutes)','à venir','métiers liés','sessions champ','next','annales','examDetails'].join(' | '));
 for (const r of rows) console.log(r.join(' | '));
 // Écoles / concours cités dans les fiches métiers mais absents du catalogue concours
-const names=D.concours.map(c=>c.name.toLowerCase()).join(' ');
+const names=D.concours.map(c=>[c.name,c.school,c.organizer].filter(Boolean).join(' ').toLowerCase()).join(' '); // école et organisateur comptent aussi
 const schools=['ENM','magistrature','ENG','greffes','ENAP','ENPJJ','ENSP','ENSOP','EOGN','gendarmerie','ENFiP','douanes','ENCCRF','EHESP','INET','IRA','INSP','Enssib','INP','patrimoine','chartes','ENSAI','ENSAE','INSEE','ENTPE','météorologie','ENSG','EN3S','ENSOSP','ENAC','ENSM','INTEFP','ENSV','vétérinaire','Saint-Cyr','navale','Polytechnique','CRPE','CAPES','agrégation','ENSTA','Cour des comptes','Conseil d’État','Banque de France','ENSAP','pénitentiaire','police','sapeur','ingénieur des ponts','IGN','armées','commissaire des armées','santé des armées','officier','ENSEA','Mines','ENA'];
 const hits={};
 for (const j of D.jobs) { const text=[j.name,j.desc,(j.steps||[]).join(' '),j.prep,j.access,j.conditions].join(' '); for (const s of schools) if (new RegExp('\\b'+s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'\\b','i').test(text)) (hits[s] ||= []).push(j.name.slice(0,45)); }

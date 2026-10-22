@@ -781,7 +781,7 @@
     return D.concours.filter(function (c) { return cats.indexOf(c.cat) > -1 && (!S.domains.length || concoursJobs(c).some(function (j) { return matchesDomains(j, S.domains); })); });
   }
   /* Auto-complétion : métiers et concours dont le nom commence par la saisie d’abord, puis ceux qui la contiennent. */
-  function concoursSearchText(c) { if (!c._search) { var raw = c.name + ' ' + c.metiers + ' ' + c.domain; c._search = ' ' + searchNorm(raw) + ' ' + feminineForms(raw) + ' '; } return c._search; }
+  function concoursSearchText(c) { if (!c._search) { var raw = c.name + ' ' + c.metiers + ' ' + c.domain + ' ' + (c.school || ''); c._search = ' ' + searchNorm(raw) + ' ' + feminineForms(raw) + ' '; } return c._search; }
   function suggestions(q) {
     var words = searchWords(q), nq = searchNorm(q);
     if (!words.length || nq.length < 2) return [];
@@ -1038,9 +1038,9 @@
   }
   function jobConcours(j, dates) {
     if (isContractJob(j)) return '';
-    var cats=D.categories.filter(function(c){return jobCategories(j).indexOf(c.id)>-1;});
+    var cats=D.categories.filter(function(c){return jobCategories(j).indexOf(c.id)>-1;}), note=recruitmentNote(j);
     return '<section class="stack mt-m job-section" aria-labelledby="concours-title"><h2 id="concours-title" class="section-heading">' + I.calendar + '<span>Concours et dates</span></h2>' +
-      (recruitmentNote(j) || (cats.length?'<div class="stack">' + cats.slice().reverse().sort(function(a,b){return ['A+','A','B','C'].indexOf(a.id)-['A+','A','B','C'].indexOf(b.id);}).map(function(c){return preparationCategoryCard(c,j);}).join('') + '</div>':'<p class="body">La catégorie et le corps d’accès à ce métier restent à préciser selon le poste. Consultez les conditions de l’offre de recrutement.</p>')) +
+      (note && !jobRoutes(j).length ? note : note + (cats.length?'<div class="stack">' + cats.slice().reverse().sort(function(a,b){return ['A+','A','B','C'].indexOf(a.id)-['A+','A','B','C'].indexOf(b.id);}).map(function(c){return preparationCategoryCard(c,j);}).join('') + '</div>':'<p class="body">La catégorie et le corps d’accès à ce métier restent à préciser selon le poste. Consultez les conditions de l’offre de recrutement.</p>')) +
       (dates.length?'<a class="btn btn-bare" href="#/calendrier/'+j.id+'">'+I.calendar+'<span>Toutes les dates des concours ('+dates.length+')</span></a>':'') + '</section>';
   }
   function jobLadder(j, ref, extra) {
@@ -1229,8 +1229,9 @@
   }
   /* Se préparer : chaque concours du métier, avec épreuves, annales, préparations et études conseillées. */
   /* Métiers sans concours de la fonction publique : la vraie modalité de recrutement, sourcée. */
+  /* Métiers des armées : la note reste à côté des concours des écoles militaires (l’engagement en est l’autre voie). */
   function recruitmentNote(j) {
-    if(!j.recruitment||jobRoutes(j).length)return '';
+    if(!j.recruitment||jobRoutes(j).some(function(r){return !r.military;}))return '';
     return '<div class="ref-tip recruitment-note"><b>Comment on est recruté</b><p>'+sig(j.recruitment.text)+'</p>'+ext(j.recruitment.url,j.recruitment.label,'link-plain')+'</div>';
   }
   /* Préparations conseillées complétées pour les concours administratifs :
@@ -1544,7 +1545,7 @@
         '<button type="button" class="job-action" data-action="favorite"' + attr('v', j.id) + ' aria-pressed="' + fav + '" aria-label="' + (fav ? 'Retirer des favoris' : 'Ajouter aux favoris') + '">' + I.bookmark + '<span aria-hidden="true">Favori</span></button>' +
         '<button type="button" class="job-action" data-action="share"' + attr('v', j.id) + '>' + I.send + '<span>Partager</span></button>' +
       '</div>' +
-      tabs + '<section class="trip-wrap" aria-label="Parcours jusqu’au métier">' + panels + '</section>' + ladders +
+      tabs + '<section class="trip-wrap" aria-label="Parcours jusqu’au métier">' + panels + '</section>' + (refs[0].recruit ? '' : recruitmentNote(j)) + ladders +
       '<a class="btn theme mt-m" href="' + prepHref(j) + '">' + (isContractJob(j) ? I.route + 'Entrer sans concours' : I.book + 'Se préparer') + '</a>' +
       ext('https://www.fonction-publique.gouv.fr/toutes-les-publications/repertoire-commun-des-metiers-de-la-fonction-publique', 'Consulter la source métier sur fonction-publique.gouv.fr', 'link-plain') + '</main>' + tabbar('metiers');
   };

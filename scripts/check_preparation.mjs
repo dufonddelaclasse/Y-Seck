@@ -25,9 +25,9 @@ vm.createContext(context);
 for (const file of ['js/data.js','js/catalog.js','js/ui.js']) vm.runInContext(fs.readFileSync(new URL(file,root),'utf8'),context);
 context.window.YSECK_UI.afterRender=()=>{};
 let source=fs.readFileSync(new URL('js/app.js',root),'utf8');
-source=source.replace('  UI.init();\n  render();\n  booted = true;', '  window.tests={screens,S,filteredJobs,jobFilters,jobCategories,isContractJob,prepHref,examsFor,calendarCategory,calendarRows,indicativeCategories,jobRow,tabbar,categoryBooks,bookList,studyResources,expandedPrepCategories,sig,selCats,myJobs,ALL_CATS,D};');
+source=source.replace('  UI.init();\n  render();\n  booted = true;', '  window.tests={screens,S,filteredJobs,jobFilters,jobCategories,isContractJob,prepHref,examsFor,calendarCategory,calendarRows,indicativeCategories,jobRow,tabbar,categoryBooks,bookList,studyResources,expandedPrepCategories,sig,selCats,myJobs,ALL_CATS,D,jobRefs,concoursJobs};');
 vm.runInContext(source,context);
-const {screens,S,filteredJobs,jobFilters,jobCategories,isContractJob,prepHref,examsFor,calendarCategory,calendarRows,indicativeCategories,jobRow,tabbar,categoryBooks,bookList,studyResources,expandedPrepCategories,sig,selCats,myJobs,ALL_CATS,D}=context.window.tests;
+const {screens,S,filteredJobs,jobFilters,jobCategories,isContractJob,prepHref,examsFor,calendarCategory,calendarRows,indicativeCategories,jobRow,tabbar,categoryBooks,bookList,studyResources,expandedPrepCategories,sig,selCats,myJobs,ALL_CATS,D,jobRefs,concoursJobs}=context.window.tests;
 const data=context.window.DATA;
 Object.assign(S,{profile:'etu',name:'Test',level:'Doctorat',domains:[],metDomains:[],traits:[],budget:'Plus de 1 000 €',prepBudget:'2',boursier:'Non'});
 const fixed=data.jobs.filter(j=>['A+','A','B','C'].includes(j.cat)&&!isContractJob(j)&&!j.recruitment);
@@ -274,7 +274,8 @@ console.log('Ressources vérifiées :',data.studyResources.length,'liens uniques
 // Référentiel du 18 octobre 2026 : concours rattachés, fiche concours, Se préparer, Évoluer et recherche.
 {
   const ref=data.concours;
-  assert.equal(ref.length,61,'Les 61 concours du référentiel sont chargés.');
+  for(let n=1;n<=61;n++)assert(ref.some(c=>Number(c.id.slice(2))===n),'Concours du référentiel du 18 octobre : '+n);
+  assert(ref.length>=94,'Les 61 concours du référentiel et les écoles du service public (22 octobre 2026) sont chargés.');
   for(const c of ref)assert(c.routeIds.every(id=>data.accessRoutes[id]),'Corps du concours '+c.id);
   assert(!JSON.stringify(ref).includes('onglet'),'Aucun renvoi interne au classeur n’est affiché.');
   assert(!JSON.stringify(ref).match(/\d+ ?%/),'Aucun taux de réussite n’est repris.');
@@ -285,7 +286,7 @@ console.log('Ressources vérifiées :',data.studyResources.length,'liens uniques
   assert(unexplained.length<=5,'Chaque fiche a un concours de sa catégorie ou une explication du recrutement : '+unexplained.map(j=>j.id).join(', '));
   S.level='Bac+3';
   const fiche=screens.metier('attache');
-  assert(fiche.includes('Quelles voies ?')&&fiche.includes('3e concours')&&fiche.includes('À partir de 2027'),'La fiche métier reprend les voies expliquées et les épreuves documentées.');
+  assert(fiche.includes('Quelles voies ?')&&fiche.includes('3e concours')&&/À partir de (la session )?2027/.test(fiche),'La fiche métier reprend les voies expliquées et les épreuves documentées.');
   assert(fiche.includes('Administrateur - Administratrice de l’État'),'Évoluer suit les progressions du référentiel, avec les intitulés au masculin et au féminin.');
   const prep=screens.preparer('attache');
   assert(prep.includes('id="concours-ref"')&&prep.includes('Préparation conseillée')&&prep.includes('Page officielle du concours')&&!prep.includes('Études utiles'),'Se préparer présente la préparation conseillée et la page officielle du concours.');
@@ -297,7 +298,26 @@ console.log('Ressources vérifiées :',data.studyResources.length,'liens uniques
   assert(filteredJobs().some(j=>j.id==='admin-etat'),'La recherche trouve Administrateur·rice de l’État malgré les domaines choisis.');
   S.q='administratrice';assert(filteredJobs().some(j=>j.id==='admin-etat'),'La forme féminine retrouve aussi le métier.');
   S.q='';S.domains=[];S.metDomains=[];
-  console.log('Référentiel vérifié : 61 concours, '+linked.length+' fiches rattachées, fiche concours, Se préparer, Évoluer et recherche.');
+  console.log('Référentiel vérifié : '+ref.length+' concours, '+linked.length+' fiches rattachées, fiche concours, Se préparer, Évoluer et recherche.');
+}
+
+// Écoles du service public (recherche du 22 octobre 2026) : descriptions, nouveaux concours, liens et bouton Information.
+{
+  const ref=data.concours,wasDone=S.done;
+  S.done=true;
+  assert(ref.every(c=>c.description),'Chaque concours a une description pour le bouton Information.');
+  assert(jobRefs(data.jobs.find(j=>j.id==='magistrat')).some(c=>/magistrature/.test(c.name)),'Le métier de magistrat propose le concours de l’ENM.');
+  assert(ref.some(c=>/Orient/.test(c.name)),'La voie Orient de l’INSP existe.');
+  assert(screens['concours-fiche']('E-001').includes('data-action="concoursInfo"'),'Le bouton Information s’affiche sur la fiche concours.');
+  /* Concours sans fiche correspondante dans le répertoire des métiers : ils restent sans métier lié. */
+  const noJob={'sécurité sociale':'organismes hors fonction publique, aucune fiche du répertoire','Commissaire des armées':'métiers d’administration et de soutien des armées non distingués dans le répertoire','Médecin des armées':'aucune fiche de médecin militaire dans le répertoire'};
+  const recent=ref.filter(c=>Number(c.id.slice(2))>61);
+  for(const c of recent)assert(concoursJobs(c).length||Object.keys(noJob).some(k=>c.name.includes(k)),'Métiers liés au nouveau concours '+c.id+' : '+c.name);
+  const enm=ref.find(c=>/magistrature/.test(c.name)),fiche=screens['concours-fiche'](enm.id.replace('É','E'));
+  assert(fiche.includes('data-action="concoursInfo"')&&concoursJobs(enm).some(j=>j.id==='magistrat'),'Fiche ENM : bouton Information et métier de magistrat.');
+  for(const c of ref.filter(c=>c.researchNotes))assert(!screens['concours-fiche'](c.id.replace('É','E')).includes(c.researchNotes.slice(0,60)),'Notes de recherche jamais affichées : '+c.id);
+  S.done=wasDone;
+  console.log('Écoles du service public vérifiées : '+recent.length+' nouveaux concours, '+(recent.length-Object.keys(noJob).length)+' avec métiers liés, descriptions et bouton Information.');
 }
 
 // Audit des correspondances (19 octobre 2026) : corrections appliquées et métiers sans concours expliqués.
@@ -309,7 +329,8 @@ console.log('Ressources vérifiées :',data.studyResources.length,'liens uniques
   assert(!shown('fpfip011').includes('insp-fip')&&shown('fpfip011').includes('insp-douane'),'Les métiers de la douane relèvent des concours de la douane.');
   assert(data.accessRoutes['corps-59d7c76139ef'].cat==='A','Les sages-femmes hospitalières sont en catégorie A.');
   const soldier=screens.metier('fpdef019');
-  assert(soldier.includes('>Recrutement<')&&soldier.includes('sengager.fr'),'Un métier militaire explique le recrutement par les armées.');
-  assert(!screens.metier('fpdef019').includes('data-fp="E"'),'Aucun concours civil n’est proposé à un métier militaire.');
+  assert(soldier.includes('recruitment-note')&&soldier.includes('sengager.fr')&&screens.fiche('fpdef019').includes('recruitment-note')&&screens.fiche('fpdef019').includes('data-fp="E"'),'Un métier militaire explique le recrutement par les armées, même avec les concours des écoles d’officiers.');
+  assert(data.jobs.find(j=>j.id==='fpdef019').routeIds.every(id=>data.accessRoutes[id].military),'Aucun concours civil n’est proposé à un métier militaire.');
+  assert(screens.metier('fpdef022').includes('>Recrutement<')&&screens.metier('fpdef022').includes('sengager.fr'),'Sans école militaire rattachée, la frise présente le recrutement par engagement.');
   console.log('Audit vérifié : corrections appliquées, métiers sans concours expliqués.');
 }
