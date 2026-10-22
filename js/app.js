@@ -1331,7 +1331,7 @@
   }
   /* Une zone de la frise : seulement ce qui est conseillé pour ce concours (options, spécialités, stages, prépa). */
   function tripPhase(c, p, lvl, prepa) {
-    var dot = function (t) { return t && !/[.!?]$/.test(t) ? t + '.' : t; }, qa = [], meta = '';
+    var qa = [], meta = '';
     var search = D.stagesAdvice.filter(function (a) { return /rechercher/.test(norm(a.domain)); })[0];
     var link = search ? ext(search.source, 'Chercher un stage sur 1 élève 1 stage', 'link-plain') : '';
     if (p.kind === 'college') {
@@ -1350,7 +1350,34 @@
     var levelNote = p.kind === 'sup' && (c.cat === 'A' || c.cat === 'A+') ? (lvl >= 5 ? ['Bac+5 minimum'] : ['Bac+3 minimum', 'Bac+5 recommandé']) : null;
     var sep = '<span aria-hidden="true"> | </span><span class="sr-only">, </span>';
     return '<p class="trip-meta">' + (levelNote ? levelNote.map(esc).join(sep) : yearsLabel(p.years) + sep + esc(meta)) + '</p>' +
-      qa.filter(function (x) { return x[1]; }).map(function (x) { return tripFold(x[0], '<p class="trip-a">' + sig(dot(x[1])) + '</p>' + (x[2] || '')); }).join('');
+      qa.filter(function (x) { return x[1]; }).map(function (x) { return tripFold(x[0], tripAnswer(x[1]) + (x[2] || '')); }).join('');
+  }
+  /* Réponse d’une rubrique dépliée : chaque partie annoncée par un intitulé (« Externe : », « Admissibilité : »…)
+     reçoit ce titre, mis en forme comme « En métropole » dans « Lieux et sources ». */
+  var TRIP_LABEL = /^(?:concours|externe|interne|troisi[eè]me|3e|premi(?:er|ère)|deuxi[eè]me|seconde?|admissibilit[eé]|admission|[ée]preuves?|voies?|session|[àa] partir|sur titres|talents|sp[ée]cial|pour les?|cadre|option|[ée]crits?|oraux|oral|phase|recrutement|pr[ée]s[ée]lection|s[ée]lection|tests?|candidats?|branche|sp[ée]cialit[ée]s?|lieutenant|caporal|agents?|fonctionnaires|docteurs?|titulaires?|sportifs|militaires?|[ée]l[èe]ves?|cpge|licence|master|bac|dipl[ôo]mes? requis)(?![A-Za-zÀ-ÖØ-öø-ÿ])/i;
+  function capFirst(t) { return t ? t.charAt(0).toUpperCase() + t.slice(1) : t; }
+  function tripSegments(text) {
+    var t = String(text || '').trim(), re = /(^|[.;]\s+)([A-ZÀ-ÖØ-Þa-zà-öø-ÿ0-9][^.;:]{0,95}?)\s?:\s/g, marks = [], m;
+    while ((m = re.exec(t))) {
+      var label = m[2].trim(), core = label.split(/,\s|\s\(/)[0];
+      /* Un intitulé court, qui annonce une voie ou une phase (« Technicien externe », « 1re classe interne », « Admissibilité »). */
+      if (core.split(/\s+/).length > 9 || !(TRIP_LABEL.test(core) || /(^|\s)(externes?|internes?|troisi[eè]me concours)(?![A-Za-zÀ-ÖØ-öø-ÿ])/i.test(core)) || (label.match(/\(/g) || []).length !== (label.match(/\)/g) || []).length) continue;
+      marks.push({ start: m.index + m[1].length, label: label, from: re.lastIndex });
+    }
+    if (!marks.length) return t ? [{ label: '', text: t }] : [];
+    var out = marks[0].start > 0 ? [{ label: '', text: t.slice(0, marks[0].start).trim() }] : [];
+    marks.forEach(function (mk, i) {
+      var body = t.slice(mk.from, i + 1 < marks.length ? marks[i + 1].start : t.length).trim().replace(/[;,]$/, ''), head = mk.label;
+      /* « Admission, à Paris : … » ou « Admissibilité (écrits sur deux jours) : … » : le titre garde l’essentiel. */
+      var cut = head.search(/,\s|\s\(/);
+      if (cut > 0) { body = head.slice(cut).replace(/^,\s*/, '').replace(/^\s*\((.*)\)$/, '$1').trim() + ' : ' + body; head = head.slice(0, cut); }
+      out.push({ label: capFirst(head), text: body });
+    });
+    return out;
+  }
+  function tripAnswer(text) {
+    var dot = function (t) { return t && !/[.!?]$/.test(t) ? t + '.' : t; };
+    return tripSegments(text).map(function (x) { return (x.label ? '<p class="trip-q">' + sig(x.label) + '</p>' : '') + '<p class="trip-a">' + sig(dot(capFirst(x.text))) + '</p>'; }).join('');
   }
   /* Chaque rubrique de la frise se déplie depuis son titre, comme « Lieux et sources ». */
   function tripFold(title, body) { return '<details class="trip-more"><summary><span>' + esc(title) + '</span>' + I.down + '</summary><div class="trip-fold">' + body + '</div></details>'; }
@@ -1398,7 +1425,7 @@
     var missingNote = missing.length ? '<p class="trip-missing"><b>' + esc(missing.join(' et ')) + '</b><br>' + unpublished + '</p>' + expected : '';
     var stop = tripStop, catVar = CAT_VARS[c.cat], catStyle = catVar ? '--theme:var(' + catVar[0] + ');--trip-ink:' + catVar[1] : '';
     /* Question en gras, réponse à la ligne en noir. */
-    var qa = function (q, a, more) { return a ? tripFold(q, '<p class="trip-a">' + sig(dot(a)) + '</p>' + (more || '')) : ''; };
+    var qa = function (q, a, more) { return a ? tripFold(q, tripAnswer(a) + (more || '')) : ''; };
     var short = function (iso) { var d = fmtDate(iso); return d.day + ' ' + d.month + ' ' + d.year; };
     /* Fiche métier : le concours obtenu (médaille) ouvre l’accès au poste, rejoint à pied en pointillés ; il ne le garantit pas. */
     var arrival = function () {

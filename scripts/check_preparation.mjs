@@ -328,6 +328,10 @@ console.log('Ressources vérifiées :',data.studyResources.length,'liens uniques
   const enm=ref.find(c=>/magistrature/.test(c.name)),fiche=screens['concours-fiche'](enm.id.replace('É','E'));
   assert(fiche.includes('data-action="concoursInfo"')&&concoursJobs(enm).some(j=>j.id==='magistrat'),'Fiche ENM : bouton Information et métier de magistrat.');
   for(const c of ref.filter(c=>c.researchNotes))assert(!screens['concours-fiche'](c.id.replace('É','E')).includes(c.researchNotes.slice(0,60)),'Notes de recherche jamais affichées : '+c.id);
+  // Rubriques dépliées : chaque voie ou phase annoncée par « Externe : », « Admissibilité : »… reçoit son sous-titre.
+  const territorial=screens['concours-fiche']('T-026'),inspection=screens['concours-fiche']('E-004');
+  assert(territorial.includes('<p class="trip-q">Externe</p>')&&territorial.includes('<p class="trip-q">Interne</p>')&&territorial.includes('<p class="trip-q">Troisième concours</p>'),'Quels diplômes : un sous-titre par voie.');
+  assert(inspection.includes('<p class="trip-q">Admissibilité</p>')&&inspection.includes('<p class="trip-q">Admission</p>'),'Quelles épreuves : un sous-titre par phase.');
   S.done=wasDone;
   console.log('Écoles du service public vérifiées : '+recent.length+' nouveaux concours, '+(recent.length-Object.keys(noJob).length)+' avec métiers liés, descriptions et bouton Information.');
 }
