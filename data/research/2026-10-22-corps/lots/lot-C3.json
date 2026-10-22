@@ -1,0 +1,1022 @@
+[
+ {
+  "routeId": "adj-tech-etat",
+  "name": "Adjoint technique - Adjointe technique des administrations de l’État",
+  "cat": "C",
+  "versants": "E",
+  "lvl": 0,
+  "source": "https://www.interieur.gouv.fr/recrutement",
+  "access": "Concours · consulter l’avis",
+  "jobsCount": 92,
+  "jobsWithoutOtherConcours": 20,
+  "jobs": [
+   {
+    "id": "fpagr001",
+    "name": "Personne ressource en santé et protection animales",
+    "categories": [
+     "B",
+     "C"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Mobilise sa compétence dans la gestion et le suivi de la santé et de la protection animale en appui aux services territoriaux de l'État"
+   },
+   {
+    "id": "fpagr002",
+    "name": "Personne ressource en santé et protection des végétaux",
+    "categories": [
+     "B",
+     "C"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Mobilise sa compétence dans la gestion et le suivi de la santé et protection végétale en appui aux services territoriaux de l'État"
+   },
+   {
+    "id": "fpagr003",
+    "name": "Personne ressource en sécurité sanitaire de l'alimentation",
+    "categories": [
+     "B",
+     "C"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Apporte sa compétence aux services territoriaux de l'État dans la gestion et le suivi de la sécurité sanitaire des aliments"
+   },
+   {
+    "id": "fpagr024",
+    "name": "Chargé - Chargée de gestion patrimoniale « forêt, chasse et pêche »",
+    "categories": [
+     "B",
+     "C"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Élabore, pilote ou met en œuvre les actions ou des aménagements nécessaires au développement durable de la forêt et/ou de la chasse-pêche"
+   },
+   {
+    "id": "fpagr031",
+    "name": "Technicien - Technicienne terroir et signes de qualité",
+    "categories": [
+     "B",
+     "C"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Participe, en liaison étroite avec un ingénieur, à l'instruction des cahiers des charges et au contrôle des signes d'identification de la qualité et de l'origine dont il a la responsabilité sur son périmètre géographique d'intervention"
+   },
+   {
+    "id": "fpagr034",
+    "name": "Assistant hospitalier - Assistante hospitalière des centres hospitaliers universitaires vétérinaires (CHUV)",
+    "categories": [
+     "C"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Assure la prise en charge médicale des animaux et leur procure les actes médicaux nécessaires."
+   },
+   {
+    "id": "fpamt054",
+    "name": "Référent territorial - Référente territoriale",
+    "categories": [
+     "B",
+     "C"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Intègre différentes politiques publiques sur un territoire et accompagne les acteurs sur le terrain (fait le lien entre les services de l'état et les élus)\r\nContribue à la définition des politiques et décline en missions (programmes, dispos"
+   },
+   {
+    "id": "fpamt057",
+    "name": "Animateur - Animatrice régional ou interdépartemental de la qualité de la construction",
+    "categories": [
+     "B",
+     "C"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Fait valoir les enjeux de la qualité des constructions, et les moyens d'y répondre, auprès de l'ensemble des acteurs politiques et professionnels du bâtiment."
+   },
+   {
+    "id": "fpamt058",
+    "name": "Référent - Référente technique bâtiment construction",
+    "categories": [
+     "B",
+     "C"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Apporte un appui et un conseil technique, de manière transversale, au sein des services déconcentrés, sur une ou des thématiques spécifiques relevant du domaine du bâtiment"
+   },
+   {
+    "id": "fpamt060",
+    "name": "Chargé - Chargée des commissions consultatives d'accessibilité et de sécurité",
+    "categories": [
+     "B",
+     "C"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Participe, en tant que représentant des services de l'état aux commissions consultatives départementales et aux sous-commissions de sécurité et d'accessibilité. Fait office de référent et d'expert local, pour les professionnels et le minist"
+   },
+   {
+    "id": "fpdef005",
+    "name": "Opérateur - Opératrice en pyrotechnie",
+    "categories": [
+     "A",
+     "B",
+     "C"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Réaliser des opérations de stockage, d’assemblage, de distribution, de maintenance préventive et corrective, d’élimination sur tous types de munitions, systèmes pyrotechniques (poudres, explosifs…) et associés."
+   },
+   {
+    "id": "fpdef026",
+    "name": "Agent - Agente de confection textiles et cuir",
+    "categories": [
+     "C"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Assurer les opérations de confection, de réparation, d'entretien et de conditionnement des textiles et du cuir."
+   }
+  ]
+ },
+ {
+  "routeId": "tsdd",
+  "name": "Technicien supérieur - Technicienne supérieure du développement durable",
+  "cat": "B",
+  "versants": "E",
+  "lvl": 2,
+  "source": "https://www.fonction-publique.gouv.fr/devenir-agent-public/calendrier-general-concours",
+  "access": "Concours",
+  "jobsCount": 130,
+  "jobsWithoutOtherConcours": 13,
+  "jobs": [
+   {
+    "id": "tsdd",
+    "name": "Technicien supérieur - Technicienne supérieure du développement durable",
+    "categories": [
+     "B"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Routes, risques naturels, bâtiments durables : suit des chantiers et des contrôles."
+   },
+   {
+    "id": "fpagr024",
+    "name": "Chargé - Chargée de gestion patrimoniale « forêt, chasse et pêche »",
+    "categories": [
+     "B",
+     "C"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Élabore, pilote ou met en œuvre les actions ou des aménagements nécessaires au développement durable de la forêt et/ou de la chasse-pêche"
+   },
+   {
+    "id": "fpagr031",
+    "name": "Technicien - Technicienne terroir et signes de qualité",
+    "categories": [
+     "B",
+     "C"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Participe, en liaison étroite avec un ingénieur, à l'instruction des cahiers des charges et au contrôle des signes d'identification de la qualité et de l'origine dont il a la responsabilité sur son périmètre géographique d'intervention"
+   },
+   {
+    "id": "fpamt054",
+    "name": "Référent territorial - Référente territoriale",
+    "categories": [
+     "B",
+     "C"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Intègre différentes politiques publiques sur un territoire et accompagne les acteurs sur le terrain (fait le lien entre les services de l'état et les élus)\r\nContribue à la définition des politiques et décline en missions (programmes, dispos"
+   },
+   {
+    "id": "fpamt057",
+    "name": "Animateur - Animatrice régional ou interdépartemental de la qualité de la construction",
+    "categories": [
+     "B",
+     "C"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Fait valoir les enjeux de la qualité des constructions, et les moyens d'y répondre, auprès de l'ensemble des acteurs politiques et professionnels du bâtiment."
+   },
+   {
+    "id": "fpamt058",
+    "name": "Référent - Référente technique bâtiment construction",
+    "categories": [
+     "B",
+     "C"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Apporte un appui et un conseil technique, de manière transversale, au sein des services déconcentrés, sur une ou des thématiques spécifiques relevant du domaine du bâtiment"
+   },
+   {
+    "id": "fpamt060",
+    "name": "Chargé - Chargée des commissions consultatives d'accessibilité et de sécurité",
+    "categories": [
+     "B",
+     "C"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Participe, en tant que représentant des services de l'état aux commissions consultatives départementales et aux sous-commissions de sécurité et d'accessibilité. Fait office de référent et d'expert local, pour les professionnels et le minist"
+   },
+   {
+    "id": "fpamt061",
+    "name": "Chargé - Chargée de l’habitat indigne",
+    "categories": [
+     "B"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Impulse une dynamique locale en matière de lutte contre l'habitat indigne, en articulation avec d'autres politiques publiques."
+   },
+   {
+    "id": "fpenv014",
+    "name": "Chargé - Chargée des émissions et de la sécurité des véhicules à moteur",
+    "categories": [
+     "B"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Participer à la définition opérationnelle, la conception et la mise en œuvre de la politique de développement des véhicules sobres en énergie, non polluants, sécuritaires et à sa promotion."
+   },
+   {
+    "id": "fpenv049",
+    "name": "Gestionnaire des espaces littoraux et marins",
+    "categories": [
+     "B",
+     "C"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Instruit les dossiers d’occupation du domaine public maritime (DPM) notamment au titre des cultures marines, des concessions de plage, des mouillages et contribue à la police en matière environnementale et sanitaire."
+   },
+   {
+    "id": "fptra002",
+    "name": "Concepteur - Conceptrice de procédures de circulation aérienne",
+    "categories": [
+     "A",
+     "B"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Conçoit les procédures qui organisent la circulation aérienne afin d’améliorer continuellement la sécurité, la capacité et la fluidité du trafic."
+   },
+   {
+    "id": "fptra045",
+    "name": "Opérateur - Opératrice SURNAV",
+    "categories": [
+     "B",
+     "C"
+    ],
+    "versants": "ET",
+    "hasOtherConcours": false,
+    "description": "Gère, au sein d’un centre régional opérationnel de surveillance et sauvetage (Cross), la surveillance des dispositifs de séparation du trafic maritime."
+   }
+  ]
+ },
+ {
+  "routeId": "cuisine",
+  "name": "Cuisinier - Cuisinière en restauration collective",
+  "cat": "C",
+  "versants": "TH",
+  "lvl": 1,
+  "source": "https://www.fonction-publique.gouv.fr/devenir-agent-public/calendrier-general-concours",
+  "access": "Avec ou sans concours",
+  "jobsCount": 5,
+  "jobsWithoutOtherConcours": 4,
+  "jobs": [
+   {
+    "id": "cuisine",
+    "name": "Cuisinier - Cuisinière en restauration collective",
+    "categories": [
+     "C"
+    ],
+    "versants": "TH",
+    "hasOtherConcours": false,
+    "description": "Prépare les repas des cantines scolaires, des crèches ou de l’hôpital."
+   },
+   {
+    "id": "fplog076",
+    "name": "Agent - Agente de restauration",
+    "categories": [
+     "C"
+    ],
+    "versants": "ETH",
+    "hasOtherConcours": false,
+    "description": "Participer aux activités de production de repas, aux missions de réception, de distribution et de service des repas, d'accompagnement des convives et d'entretien des locaux et matériels de restauration."
+   },
+   {
+    "id": "fplog078",
+    "name": "cuisinier - Cuisinière",
+    "categories": [
+     "C"
+    ],
+    "versants": "ETH",
+    "hasOtherConcours": false,
+    "description": "Assurer la production des plats à partir des fiches techniques dans le respect des normes d'hygiène de la restauration collective et participer à la distribution. "
+   },
+   {
+    "id": "fplog079",
+    "name": "Commis - Commise de cuisine de collectivité",
+    "categories": [
+     "C"
+    ],
+    "versants": "ETH",
+    "hasOtherConcours": false,
+    "description": "Confectionner et présenter les plats ou les prestations à servir en restauration collective ; assurer l'entretien de la vaisselle, matériels et locaux, assurer l'interface avec les convives"
+   },
+   {
+    "id": "fplog077",
+    "name": "intendant - Intendante de service de restauration",
+    "categories": [
+     "B",
+     "C"
+    ],
+    "versants": "ETH",
+    "hasOtherConcours": true,
+    "description": "Piloter, organiser, avec son équipe, le service de restauration d’une structure dans le respect des règles protocolaires et d’hygiène et sécurité."
+   }
+  ]
+ },
+ {
+  "routeId": "agent-social",
+  "name": "Agent social - Agente sociale",
+  "cat": "C",
+  "versants": "T",
+  "lvl": 0,
+  "source": "https://www.concours-territorial.fr/",
+  "access": "Recrutement direct",
+  "jobsCount": 5,
+  "jobsWithoutOtherConcours": 4,
+  "jobs": [
+   {
+    "id": "agent-social",
+    "name": "Agent social - Agente sociale",
+    "categories": [
+     "C"
+    ],
+    "versants": "T",
+    "hasOtherConcours": false,
+    "description": "Aide à domicile ou en établissement des personnes âgées ou handicapées."
+   },
+   {
+    "id": "fpsoc003",
+    "name": "Auxiliaire de vie",
+    "categories": [
+     "C"
+    ],
+    "versants": "T",
+    "hasOtherConcours": false,
+    "description": "Assister les personnes fragiles, dépendantes ou en difficulté sociale en leur apportant une aide dans l'accomplissement des tâches et des activités de la vie quotidienne, y compris les loisirs et en fournissant un soutien psychologique et s"
+   },
+   {
+    "id": "fpsoc004",
+    "name": "Accompagnant - Accompagnante éducatif et social",
+    "categories": [
+     "C"
+    ],
+    "versants": "T",
+    "hasOtherConcours": false,
+    "description": "Contribue au maintien à domicile des personnes âgées, handicapées, malades ou familles rencontrant des difficultés permanentes ou passagères. Apporte une aide à la personne, dans son cadre de vie, pour l'accomplissement des tâches de la vie"
+   },
+   {
+    "id": "fpsoc008",
+    "name": "Agent - Agente d'intervention sociale et familiale",
+    "categories": [
+     "B",
+     "C"
+    ],
+    "versants": "ET",
+    "hasOtherConcours": false,
+    "description": "Assure l'action socio-éducative auprès des familles, à partir du support des activités d'aide à la vie quotidienne et à l'éducation des enfants. Contribue à l'autonomisation et à la prévention d'interventions plus lourdes, voire de placemen"
+   },
+   {
+    "id": "fpsoc022",
+    "name": "Assistant - Assistante d'éducation de la petite enfance",
+    "categories": [
+     "C"
+    ],
+    "versants": "ET",
+    "hasOtherConcours": true,
+    "description": "Organise et effectue l'accueil et les activités qui contribuent au développement de l'enfant dans le cadre du projet éducatif du service ou de l'établissement, au sein d'une équipe pluridisciplinaire"
+   }
+  ]
+ },
+ {
+  "routeId": "tech-si",
+  "name": "Technicien - Technicienne des systèmes d’information",
+  "cat": "B",
+  "versants": "ET",
+  "lvl": 2,
+  "source": "https://www.fonction-publique.gouv.fr/devenir-agent-public/calendrier-general-concours",
+  "access": "Concours",
+  "jobsCount": 15,
+  "jobsWithoutOtherConcours": 2,
+  "jobs": [
+   {
+    "id": "tech-si",
+    "name": "Technicien - Technicienne des systèmes d’information",
+    "categories": [
+     "B"
+    ],
+    "versants": "ET",
+    "hasOtherConcours": false,
+    "description": "Réseaux, postes de travail, assistance : fait tourner l’informatique d’un service."
+   },
+   {
+    "id": "fpdef032",
+    "name": "Spécialiste des systèmes de communication opérationnels",
+    "categories": [
+     "A",
+     "B"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Mettre en œuvre des systèmes de communication afin de mener à bien des missions opérationnelles."
+   },
+   {
+    "id": "fpcom022",
+    "name": "Webmestre",
+    "categories": [
+     "A",
+     "B"
+    ],
+    "versants": "ETH",
+    "hasOtherConcours": true,
+    "description": "Elle/il a pour mission de gérer un site Internet et/ou intranet en prenant en charge l’ensemble des aspects techniques et éditoriaux.\nSelon la taille de l'organisation et du site web qu'elle/il doit gérer, elle/il gère les prestataires exte"
+   },
+   {
+    "id": "fpnum006",
+    "name": "Gestionnaire des systèmes applicatifs",
+    "categories": [
+     "A",
+     "B"
+    ],
+    "versants": "ETH",
+    "hasOtherConcours": true,
+    "description": "Elle/il assure et coordonne les activités d'évolution et de maintenance corrective et applicative du système dont il est responsable.\nElle/il supervise la résolution des incidents qui lui sont remontés, et veille au respect du contrat de se"
+   },
+   {
+    "id": "fpnum013",
+    "name": "Spécialiste outils, systèmes d’exploitation, réseaux et télécoms",
+    "categories": [
+     "A",
+     "B"
+    ],
+    "versants": "ETH",
+    "hasOtherConcours": true,
+    "description": "Elle/il assure un rôle de conseil, d'assistance, d'information, de formation et d'alerte. Elle/il peut intervenir directement sur tout ou partie d'un projet qui relève de son domaine d'expertise.\r\nL'expert/experte système d'exploitation / r"
+   },
+   {
+    "id": "fpnum017",
+    "name": "Superviseur - Superviseuse d’exploitation",
+    "categories": [
+     "A",
+     "B"
+    ],
+    "versants": "ETH",
+    "hasOtherConcours": true,
+    "description": "Elle/il assure en permanence la surveillance de l’ensemble des ressources informatiques et leur gestion opérationnelle.\nElle/il veille au niveau et aux engagements de service ainsi qu'à la qualité des traitements conformément au plan d’assu"
+   },
+   {
+    "id": "fpnum018",
+    "name": "Technicien - Technicienne d’exploitation et maintenance 1er niveau",
+    "categories": [
+     "B"
+    ],
+    "versants": "ETH",
+    "hasOtherConcours": true,
+    "description": "La/le technicienne/technicien d'exploitation assure la gestion courante de l'exploitation (hors réseaux) dans le respect des plannings et de la qualité attendue. Elle/il surveille le fonctionnement des équipements informatiques physiques et"
+   },
+   {
+    "id": "fpnum019",
+    "name": "Technicien - Technicienne poste de travail et maintenance",
+    "categories": [
+     "B"
+    ],
+    "versants": "ETH",
+    "hasOtherConcours": true,
+    "description": "Elle/il assure l'installation et la garantie de fonctionnement des équipements informatiques et/ou téléphoniques (matériels et logiciels) liés au poste de travail, notamment dans le cadre de projets de déploiement. À la demande des utilisat"
+   },
+   {
+    "id": "fpnum020",
+    "name": "Technicien - Technicienne réseaux, télécoms et/ou Multimédias et maintenance",
+    "categories": [
+     "B"
+    ],
+    "versants": "ETH",
+    "hasOtherConcours": true,
+    "description": "Elle/il s'assure de la disponibilité des réseaux, des télécoms et / ou des systèmes multimédia dont Elle/il a la responsabilité. Elle/il veille au bon fonctionnement des équipements de réseaux, de télécommunications et multimédia, dans le c"
+   },
+   {
+    "id": "fpnum021",
+    "name": "Assistant fonctionnel - Assistante fonctionnelle",
+    "categories": [
+     "A",
+     "B"
+    ],
+    "versants": "ETH",
+    "hasOtherConcours": true,
+    "description": "Référent Métier, elle/il apporte à l’utilisateur final une aide en matière d’utilisation de logiciels, en période de déploiement ou en régime de croisière, et contribue à résoudre toute difficulté que celui-ci rencontre.\nElle/il contribue à"
+   },
+   {
+    "id": "fpnum022",
+    "name": "Chargé - Chargée de relation sur l'offre de services SI",
+    "categories": [
+     "A",
+     "B"
+    ],
+    "versants": "ETH",
+    "hasOtherConcours": true,
+    "description": "Elle/Il porte l’offre de services auprès du métier : elle/il leur propose les différentes solutions disponibles en interne et pouvant répondre à leur besoin. \nElle/Il construit et anime les relations entre la DNUM/DSI et ses clients. Elle/i"
+   },
+   {
+    "id": "fpnum026",
+    "name": "Technicien - Technicienne support utilisateurs",
+    "categories": [
+     "B"
+    ],
+    "versants": "ETH",
+    "hasOtherConcours": true,
+    "description": "Elle/il assure la réception des incidents (ruptures du service habituellement rendu) ou difficultés déclarés par les utilisateurs. Elle/il assure leur prise en charge par les ressources capables d'y apporter une solution.\r\nElle/il contribue"
+   }
+  ]
+ },
+ {
+  "routeId": "corps-4f5fac5ddf0f",
+  "name": "Ingénieur - Ingénieures de police technique et scientifique de la police nationale",
+  "cat": "A",
+  "versants": "E",
+  "lvl": null,
+  "source": "https://www.fonction-publique.gouv.fr/devenir-agent-public/calendrier-general-concours/ingenieurs-de-police-technique-et-scientifique-de-la-police-nationale",
+  "access": "Concours interne",
+  "jobsCount": 5,
+  "jobsWithoutOtherConcours": 2,
+  "jobs": [
+   {
+    "id": "fpsec017",
+    "name": "Cadre de laboratoire",
+    "categories": [
+     "A"
+    ],
+    "versants": "EH",
+    "hasOtherConcours": false,
+    "description": "Organiser les activités analytiques, développer des techniques et protocoles destinés à l’analyse scientifique "
+   },
+   {
+    "id": "fpsec018",
+    "name": "Analyste chargé - Analyste chargée de l'exploitation des traces et indices en laboratoire",
+    "categories": [
+     "A"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Effectuer des examens et expertises dans le cadre de procédures définies pour répondre aux besoins d’une enquête  et assurer une assistance technique aux services partenaires "
+   },
+   {
+    "id": "fpsec014",
+    "name": "Responsable d’investigation en police technique et scientifique",
+    "categories": [
+     "A",
+     "B"
+    ],
+    "versants": "E",
+    "hasOtherConcours": true,
+    "description": "Contribuer à la conception, la direction et/ou au commandement d'une entité en charge de la police technique et scientifique, apporter une expertise, mettre en œuvre et développer les techniques et protocoles destinés à satisfaire les besoi"
+   },
+   {
+    "id": "fpsec015",
+    "name": "Chargé - Chargée d’investigation en police technique et scientifique",
+    "categories": [
+     "A",
+     "B"
+    ],
+    "versants": "E",
+    "hasOtherConcours": true,
+    "description": "Participer, en matière de police technique et scientifique, à la mise en œuvre de la logistique, des techniques et protocoles destinés à satisfaire les besoins d'une enquête et contribuer à l'encadrement des activités de police technique et"
+   },
+   {
+    "id": "fpsec016",
+    "name": "Responsable de laboratoire",
+    "categories": [
+     "A",
+     "B"
+    ],
+    "versants": "ETH",
+    "hasOtherConcours": true,
+    "description": "Assurer la direction administrative, scientifique et technique  d’un laboratoire dans le cadre de la politique définie par l’administration"
+   }
+  ]
+ },
+ {
+  "routeId": "corps-cf4548531314",
+  "name": "Technicien - Technicienne de laboratoire de classe supérieure",
+  "cat": "B",
+  "versants": "E",
+  "lvl": null,
+  "source": "https://www.fonction-publique.gouv.fr/devenir-agent-public/calendrier-general-concours/technicien-de-laboratoire-de-classe-superieure",
+  "access": "Concours interne",
+  "jobsCount": 2,
+  "jobsWithoutOtherConcours": 2,
+  "jobs": [
+   {
+    "id": "fpfip019",
+    "name": "Responsable de laboratoire de contrôle",
+    "categories": [
+     "A",
+     "B"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Assurer la direction administrative, scientifique et technique d’une unité de recherche"
+   },
+   {
+    "id": "fpfip020",
+    "name": "Agent - Agente de laboratoire de contrôle",
+    "categories": [
+     "B"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Réaliser des analyses d’échantillons dans le cadre d’un protocole prédéfini. Effectuer des essais, des mesures physiques et chimiques selon les normes en vigueur, participer au maintien de l’accréditation du laboratoire."
+   }
+  ]
+ },
+ {
+  "routeId": "magistrat-administratif",
+  "name": "Concours de magistrat des tribunaux administratifs et cours administratives d’appel - Concours de magistrate des tribunaux administratifs et cours administratives d’appel",
+  "cat": "A+",
+  "versants": "E",
+  "lvl": 4,
+  "source": "https://www.conseil-etat.fr/pages/nous-rejoindre/les-metiers-de-juge-et-de-conseil-juridique/devenir-magistrat-et-magistrate-administratif/concours-et-prepas-pour-devenir-magistrat-magistrate-administratif/devenez-magistrat-et-magistrate-administratif-par-concours",
+  "access": "Concours externe ou interne de recrutement direct, distinct du concours judiciaire de l’ENM",
+  "jobsCount": 2,
+  "jobsWithoutOtherConcours": 2,
+  "jobs": [
+   {
+    "id": "fpjus013",
+    "name": "Chef - Cheffe de juridiction administrative",
+    "categories": [
+     "A+"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Diriger une juridiction administrative, prendre des décisions juridictionnelles"
+   },
+   {
+    "id": "fpjus016",
+    "name": "Magistrat - Magistrate de l'ordre administratif",
+    "categories": [
+     "A+"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Analyse et jugement des litiges relevant du contentieux administratif"
+   }
+  ]
+ },
+ {
+  "routeId": "corps-cbddb06ab042",
+  "name": "Inspecteurs de la jeunesse et des sports",
+  "cat": "A",
+  "versants": "E",
+  "lvl": null,
+  "source": "https://www.fonction-publique.gouv.fr/devenir-agent-public/calendrier-general-concours/inspecteurs-de-la-jeunesse-et-des-sports",
+  "access": "Concours externe",
+  "jobsCount": 1,
+  "jobsWithoutOtherConcours": 1,
+  "jobs": [
+   {
+    "id": "fpasp016",
+    "name": "Inspecteur - Inspectrice de la jeunesse et des sports",
+    "categories": [
+     "A"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Diriger un service ; piloter et mettre en œuvre les politiques publiques en faveur du sport, de la jeunesse, de l'engagement et de la vie associative dans un cadre transversal et interministériel ; inspecter, contrôler les organismes du cha"
+   }
+  ]
+ },
+ {
+  "routeId": "corps-8d4d1d1dd392",
+  "name": "Conseillers techniques et pédagogiques supérieurs",
+  "cat": "A",
+  "versants": "E",
+  "lvl": null,
+  "source": "https://www.fonction-publique.gouv.fr/devenir-agent-public/calendrier-general-concours/conseillers-techniques-et-pedagogiques-superieurs",
+  "access": "Concours interne",
+  "jobsCount": 1,
+  "jobsWithoutOtherConcours": 1,
+  "jobs": [
+   {
+    "id": "fpasp027",
+    "name": "Directeur - Directrice technique nationale et DTN adjoint",
+    "categories": [
+     "A+",
+     "A"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Direction des politiques techniques nationales"
+   }
+  ]
+ },
+ {
+  "routeId": "corps-23df345f4869",
+  "name": "Inspecteurs d'académie - inspecteurs pédagogiques régionaux",
+  "cat": "A",
+  "versants": "E",
+  "lvl": null,
+  "source": "https://www.fonction-publique.gouv.fr/devenir-agent-public/calendrier-general-concours/inspecteurs-dacademie-inspecteurs-pedagogiques-regionaux",
+  "access": "Concours externe",
+  "jobsCount": 1,
+  "jobsWithoutOtherConcours": 1,
+  "jobs": [
+   {
+    "id": "fpens029",
+    "name": "Inspecteur - Inspectrice des 1er et 2nd degrés",
+    "categories": [
+     "A"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Sous l’autorité du recteur d’académie, évaluer les personnels enseignants et d’éducation, participer à l’animation pédagogique, au recrutement et à la formation des personnels de l’éducation nationale ; développer une démarche prospective, "
+   }
+  ]
+ },
+ {
+  "routeId": "corps-a858c23e1fd9",
+  "name": "Diététicien",
+  "cat": "A",
+  "versants": "H",
+  "lvl": null,
+  "source": "https://www.concours-fph.ars.sante.fr/consulter/concours/21032",
+  "access": "Concours hospitalier · consulter l’avis",
+  "jobsCount": 1,
+  "jobsWithoutOtherConcours": 1,
+  "jobs": [
+   {
+    "id": "fpmed006",
+    "name": "Diététicien - Diététicienne",
+    "categories": [
+     "A"
+    ],
+    "versants": "H",
+    "hasOtherConcours": false,
+    "description": "Elaborer un diagnostic diététique et les modalités de la mise en œuvre des soins diététiques, de l'éducation et de la prévention diététiques, intégrés dans un programme de soin global.\nAdapter l'alimentation et conseiller une personne ou un"
+   }
+  ]
+ },
+ {
+  "routeId": "corps-fe7341cee5b3",
+  "name": "Préparateur - Préparatrice en pharmacie hospitalière",
+  "cat": "B",
+  "versants": "H",
+  "lvl": null,
+  "source": "https://www.concours-fph.ars.sante.fr/consulter/concours/21025",
+  "access": "Concours hospitalier · consulter l’avis",
+  "jobsCount": 1,
+  "jobsWithoutOtherConcours": 1,
+  "jobs": [
+   {
+    "id": "fpmed029",
+    "name": "Préparateur - Préparatrice en pharmacie",
+    "categories": [
+     "B"
+    ],
+    "versants": "H",
+    "hasOtherConcours": false,
+    "description": "Sous la responsabilité et le contrôle effectif d'un pharmacien: préparer, délivrer, gérer et approvisionner les médicaments anticancéreux et les dispositifs médicaux stériles; concourir aux opérations de stérilisation"
+   }
+  ]
+ },
+ {
+  "routeId": "corps-59d7c76139ef",
+  "name": "Sage-femme",
+  "cat": "A",
+  "versants": "H",
+  "lvl": null,
+  "source": "https://www.concours-fph.ars.sante.fr/consulter/concours/21088",
+  "access": "Concours hospitalier · consulter l’avis",
+  "jobsCount": 1,
+  "jobsWithoutOtherConcours": 1,
+  "jobs": [
+   {
+    "id": "fpmed035",
+    "name": "Sage-femme",
+    "categories": [
+     "A"
+    ],
+    "versants": "H",
+    "hasOtherConcours": false,
+    "description": "Assure sur son territoire d'intervention, auprès de la femme et de la femme enceinte, une prévention médico-psycho-sociale, un suivi gynécologique et un suivi global de la grossesse, du postnatal et du périnatal. Participe aux activités de "
+   }
+  ]
+ },
+ {
+  "routeId": "corps-d65b269b3ea9",
+  "name": "Contrôleurs de l'Institut national de la statistique et des études économiques (INSEE)",
+  "cat": "B",
+  "versants": "E",
+  "lvl": null,
+  "source": "https://www.fonction-publique.gouv.fr/devenir-agent-public/calendrier-general-concours/controleurs-de-linstitut-national-de-la-statistique-et-des-etudes-economiques-insee",
+  "access": "Concours externe",
+  "jobsCount": 5,
+  "jobsWithoutOtherConcours": 0,
+  "jobs": [
+   {
+    "id": "fpctl014",
+    "name": "Chargé - Chargée d'enquêtes à des fins statistiques",
+    "categories": [
+     "A",
+     "B"
+    ],
+    "versants": "ET",
+    "hasOtherConcours": true,
+    "description": "Recueillir, gérer et analyser des données statistiques recueillies via des questionnaires auprès des ménages ou des entreprises."
+   },
+   {
+    "id": "fpctl037",
+    "name": "Concepteur - Conceptrice d’opérations statistiques",
+    "categories": [
+     "B",
+     "C"
+    ],
+    "versants": "ETH",
+    "hasOtherConcours": true,
+    "description": "Le concepteur d’opérations statistiques organise, met en œuvre et assure le suivi d’un ou plusieurs projets concourant à la réalisation d’opérations statistiques."
+   },
+   {
+    "id": "fpctl038",
+    "name": "Chargé - Chargée de productions statistiques",
+    "categories": [
+     "A",
+     "B"
+    ],
+    "versants": "ETH",
+    "hasOtherConcours": true,
+    "description": "Contribue à la production, l’analyse et statistiques sur un phénomène économique ou social, la réalisation des produits de diffusion et la rédaction d’articles présentant les résultats."
+   },
+   {
+    "id": "fpctl039",
+    "name": "Chargé - Chargée d'indices",
+    "categories": [
+     "A",
+     "B"
+    ],
+    "versants": "ETH",
+    "hasOtherConcours": true,
+    "description": "Le chargé d’indices garantit la bonne réalisation des enquêtes dans le respect des protocoles et des méthodes ; il assure l’élaboration et la publication d’indices relevant d’un domaine donné (prix, production, bâtiment et travaux publics,…"
+   },
+   {
+    "id": "fpctl042",
+    "name": "Collecteur - Collectrice de données",
+    "categories": [
+     "B",
+     "C"
+    ],
+    "versants": "ETH",
+    "hasOtherConcours": true,
+    "description": "Produit et met à disposition des informations de base utiles, réalise des cotations notamment (ex : réseau des nouvelles et des marchés) et études."
+   }
+  ]
+ },
+ {
+  "routeId": "corps-c982d9b9fb7d",
+  "name": "Technicien hospitalier - Technicienne hospitalier",
+  "cat": "B",
+  "versants": "H",
+  "lvl": null,
+  "source": "https://www.concours-fph.ars.sante.fr/consulter/concours/21206",
+  "access": "Concours hospitalier · consulter l’avis",
+  "jobsCount": 4,
+  "jobsWithoutOtherConcours": 0,
+  "jobs": [
+   {
+    "id": "fpsec053",
+    "name": "Chef - Cheffe sécurité incendie",
+    "categories": [
+     "A",
+     "B"
+    ],
+    "versants": "ETH",
+    "hasOtherConcours": true,
+    "description": "Organiser les actions permettant d'assurer la prévention des risques incendie et de panique ; assurer les interventions permettant la protection contre l'incendie des personnes et du bâti"
+   },
+   {
+    "id": "fpusa034",
+    "name": "Responsable de restauration collective",
+    "categories": [
+     "A",
+     "B"
+    ],
+    "versants": "ETH",
+    "hasOtherConcours": true,
+    "description": "Organise et gère les moyens concourant à la production et à la  distribution des repas servis aux différents convives de la collectivité"
+   },
+   {
+    "id": "fpusa035",
+    "name": "Responsable qualité en restauration collective",
+    "categories": [
+     "B"
+    ],
+    "versants": "ETH",
+    "hasOtherConcours": true,
+    "description": "Planifie, gère et contrôle les productions d'une unité centrale, de plusieurs unités de fabrication, d'une seule unité de fabrication ou d'un secteur de production (chaud, froid, pâtisserie, conditionnement, magasin)"
+   },
+   {
+    "id": "fpusa039",
+    "name": "Responsable de restauration",
+    "categories": [
+     "A",
+     "B"
+    ],
+    "versants": "ETH",
+    "hasOtherConcours": true,
+    "description": "Organise et gère les moyens concourant à la production et à la distribution des repas servis aux différents convives de la collectivité"
+   }
+  ]
+ },
+ {
+  "routeId": "corps-babc6bbecc70",
+  "name": "Professeurs de sport réservé aux sportifs de haut niveau",
+  "cat": "A",
+  "versants": "E",
+  "lvl": null,
+  "source": "https://www.fonction-publique.gouv.fr/devenir-agent-public/calendrier-general-concours/professeurs-de-sport-reserve-aux-sportifs-de-haut-niveau",
+  "access": "Concours externe",
+  "jobsCount": 1,
+  "jobsWithoutOtherConcours": 0,
+  "jobs": [
+   {
+    "id": "fpasp025",
+    "name": "Sportif - Sportive de haut niveau",
+    "categories": [
+     "A",
+     "C"
+    ],
+    "versants": "ETH",
+    "hasOtherConcours": true,
+    "description": "Pratiquer une activité sportive sur une période limitée afin d’atteindre des niveaux d’excellence et représenter la France et son institution dans les compétitions nationales et internationales."
+   }
+  ]
+ },
+ {
+  "routeId": "corps-f8b65ae9182c",
+  "name": "Architectes et urbanistes de l'État",
+  "cat": "A",
+  "versants": "E",
+  "lvl": null,
+  "source": "https://www.fonction-publique.gouv.fr/devenir-agent-public/calendrier-general-concours/architectes-et-urbanistes-de-letat",
+  "access": "Concours interne",
+  "jobsCount": 1,
+  "jobsWithoutOtherConcours": 0,
+  "jobs": [
+   {
+    "id": "fpbat001",
+    "name": "Architecte",
+    "categories": [
+     "A"
+    ],
+    "versants": "ETH",
+    "hasOtherConcours": true,
+    "description": "L’architecte participe à l’aménagement de l’espace, et plus particulièrement aux activités de construction."
+   }
+  ]
+ },
+ {
+  "routeId": "corps-a68e56a74959",
+  "name": "Auxiliaire médical en pratique avancée",
+  "cat": "A",
+  "versants": "H",
+  "lvl": null,
+  "source": "https://www.concours-fph.ars.sante.fr/consulter/concours/21137",
+  "access": "Concours hospitalier · consulter l’avis",
+  "jobsCount": 1,
+  "jobsWithoutOtherConcours": 0,
+  "jobs": [
+   {
+    "id": "fpmed043",
+    "name": "Infirmier - Infirmière en pratique avancée",
+    "categories": [
+     "A"
+    ],
+    "versants": "H",
+    "hasOtherConcours": true,
+    "description": "Participer à la prise en charge globale des patients dont le suivi est confié par un médecin dans le cadre d’un protocole d’organisation.\nDans le respect du parcours de soins du patient coordonné par le médecin, apporter son expertise et pa"
+   }
+  ]
+ }
+]

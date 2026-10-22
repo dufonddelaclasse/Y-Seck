@@ -1,0 +1,890 @@
+[
+ {
+  "id": "É-014",
+  "name": "Secrétaire administratif - Secrétaire administrative",
+  "cat": "B",
+  "fp": "E",
+  "source": "https://www.education.gouv.fr/concours-de-secretaire-administratif-de-classe-normale-5324",
+  "missing": [
+   "school",
+   "trainingMonths",
+   "paidTraining"
+  ],
+  "current": {
+   "school": null,
+   "trainingMonths": null,
+   "paidTraining": null
+  },
+  "description": "Le secrétaire administratif est un agent de catégorie B qui assure la gestion administrative dans un établissement scolaire, un rectorat ou un service de ministère : gestion des personnels, suivi du budget, organisation des examens, accueil et information. Le concours commun de secrétaire administra"
+ },
+ {
+  "id": "É-019",
+  "name": "Technicien - Technicienne de recherche et de formation",
+  "cat": "B",
+  "fp": "E",
+  "source": "https://www.enseignementsup-recherche.gouv.fr/fr/recrutements/itrf",
+  "missing": [
+   "school"
+  ],
+  "current": {
+   "school": null,
+   "trainingMonths": 12,
+   "paidTraining": "Non"
+  },
+  "description": "Le concours de technicien de recherche et de formation permet de travailler comme technicien dans une université, une grande école ou un laboratoire de recherche public. On ne passe pas un concours général : on s’inscrit sur un poste précis, rattaché à une branche d’activité professionnelle (BAP) co"
+ },
+ {
+  "id": "É-020",
+  "name": "Agent administratif principal - Agente administrative principale DGFiP",
+  "cat": "C",
+  "fp": "E",
+  "source": "https://www.economie.gouv.fr/rejoignez-nous/agent-administratif-principal-des-finances-publiques-de-2eme-classe-externe-dgfip",
+  "missing": [
+   "trainingMonths"
+  ],
+  "current": {
+   "school": "École nationale des finances publiques (ENFiP)",
+   "trainingMonths": null,
+   "paidTraining": "Oui, rémunéré en tant qu’agent stagiaire (formation rémunérée dans une école de la DGFiP, puis année de stage)"
+  },
+  "description": "Ce concours de catégorie C est la porte d’entrée la plus accessible à la Direction générale des finances publiques (DGFiP) : il est ouvert avec le diplôme national du brevet. Il est organisé en commun avec les douanes, et le candidat choisit à l’inscription une affectation nationale ou locale (Hauts"
+ },
+ {
+  "id": "É-021",
+  "name": "Adjoint administratif - Adjointe administrative du ministère de l’Intérieur",
+  "cat": "C",
+  "fp": "E",
+  "source": "https://www.interieur.gouv.fr/ministere/metiers-du-ministere/je-veux-devenir-agent-public/adjoint-administratif-de-linterieur",
+  "missing": [
+   "school",
+   "trainingMonths"
+  ],
+  "current": {
+   "school": null,
+   "trainingMonths": null,
+   "paidTraining": "Oui, rémunéré en tant que fonctionnaire stagiaire directement en poste (pas d’école)"
+  },
+  "description": "Ce concours permet d’entrer au ministère de l’Intérieur comme adjoint administratif principal de 2e classe, un emploi de catégorie C. Il est ouvert sans diplôme en externe et il est organisé chaque année région par région, par les préfectures et les SGAMI. Il n’y a pas d’école : les lauréats sont no"
+ },
+ {
+  "id": "É-023",
+  "name": "Adjoint administratif - Adjointe administrative de chancellerie",
+  "cat": "C",
+  "fp": "E",
+  "source": "https://www.diplomatie.gouv.fr/fr/concours/adjointe-adjoint-administratif-principal-de-2eme-classe-de-chancellerie",
+  "missing": [
+   "school",
+   "trainingMonths",
+   "paidTraining"
+  ],
+  "current": {
+   "school": null,
+   "trainingMonths": null,
+   "paidTraining": null
+  },
+  "description": "Ce concours de catégorie C recrute des adjoints administratifs principaux de 2e classe de chancellerie pour le ministère de l’Europe et des Affaires étrangères. Il est ouvert dans trois sections : assistance de direction, gestion administrative et numérique. Il n’y a pas d’école après le concours : "
+ },
+ {
+  "id": "T-026",
+  "name": "Attaché territorial - Attachée territoriale",
+  "cat": "A",
+  "fp": "T",
+  "source": "https://www.concours-territorial.fr/epreuves.aspx?id=275",
+  "missing": [
+   "school",
+   "trainingMonths"
+  ],
+  "current": {
+   "school": null,
+   "trainingMonths": null,
+   "paidTraining": "Oui, rémunéré en tant qu’attaché stagiaire une fois recruté par une collectivité (pas d’école, formation d’intégration courte au CNFPT)"
+  },
+  "description": "Le concours d’attaché territorial est le principal concours de catégorie A pour devenir cadre dans une mairie, une intercommunalité, un département ou une région. Il a lieu tous les deux ans, les années paires, et il est organisé par les centres de gestion avec cinq spécialités : administration géné"
+ },
+ {
+  "id": "T-027",
+  "name": "Ingénieur territorial - Ingénieure territoriale",
+  "cat": "A",
+  "fp": "T",
+  "source": "https://www.concours-territorial.fr/epreuves.aspx?id=327&spe=118",
+  "missing": [
+   "school",
+   "trainingMonths",
+   "paidTraining"
+  ],
+  "current": {
+   "school": null,
+   "trainingMonths": null,
+   "paidTraining": null
+  },
+  "description": "Le concours d’ingénieur territorial recrute, en catégorie A, les cadres techniques des collectivités territoriales : communes, intercommunalités, départements, régions et leurs établissements. Il est organisé tous les deux ans par les centres de gestion dans cinq spécialités : ingénierie, gestion te"
+ },
+ {
+  "id": "T-028",
+  "name": "Conseiller territorial socio-éducatif - Conseillère territoriale socio-éducative",
+  "cat": "A",
+  "fp": "T",
+  "source": "https://www.concours-territorial.fr/epreuves.aspx?id=254",
+  "missing": [
+   "school",
+   "trainingMonths"
+  ],
+  "current": {
+   "school": null,
+   "trainingMonths": null,
+   "paidTraining": "Oui, rémunéré en tant que fonctionnaire stagiaire dès le recrutement par une collectivité (pas d’école, courte formation d’intégration au CNFPT)"
+  },
+  "description": "Le concours de conseiller territorial socio-éducatif permet d’entrer dans un cadre d’emplois de catégorie A de la fonction publique territoriale, dans les départements, les communes ou les centres communaux d’action sociale. Il s’adresse à des travailleurs sociaux déjà diplômés et expérimentés (assi"
+ },
+ {
+  "id": "T-029",
+  "name": "Bibliothécaire territorial - Bibliothécaire territoriale",
+  "cat": "A",
+  "fp": "T",
+  "source": "https://www.concours-territorial.fr/",
+  "missing": [
+   "school",
+   "trainingMonths",
+   "paidTraining"
+  ],
+  "current": {
+   "school": null,
+   "trainingMonths": null,
+   "paidTraining": null
+  },
+  "description": "Le bibliothécaire territorial est un cadre de catégorie A qui organise ou dirige une bibliothèque ou une médiathèque d’une commune, d’une intercommunalité ou d’un département. Le concours est organisé par les centres de gestion environ tous les trois ans (sessions 2023 et 2026), avec un concours ext"
+ },
+ {
+  "id": "T-030",
+  "name": "Assistant socio-éducatif territorial - Assistante socio-éducative territoriale",
+  "cat": "A",
+  "fp": "T",
+  "source": "https://www.concours-territorial.fr/",
+  "missing": [
+   "school",
+   "trainingMonths",
+   "paidTraining"
+  ],
+  "current": {
+   "school": null,
+   "trainingMonths": null,
+   "paidTraining": null
+  },
+  "description": "Ce concours permet de devenir assistant socio-éducatif dans une collectivité : département, commune, intercommunalité ou centre communal d’action sociale. Il est réservé aux personnes qui ont déjà un diplôme d’État du travail social : assistant de service social, éducateur spécialisé ou conseiller e"
+ },
+ {
+  "id": "T-031",
+  "name": "Éducateur territorial - Éducatrice territoriale de jeunes enfants",
+  "cat": "A",
+  "fp": "T",
+  "source": "https://www.concours-territorial.fr/",
+  "missing": [
+   "school",
+   "trainingMonths"
+  ],
+  "current": {
+   "school": null,
+   "trainingMonths": null,
+   "paidTraining": "Non"
+  },
+  "description": "Ce concours permet de devenir éducateur de jeunes enfants dans une commune, une intercommunalité ou un département, le plus souvent en crèche ou en multi-accueil. Il est réservé aux personnes qui ont déjà le diplôme d’État d’éducateur de jeunes enfants (trois ans d’études après le bac) : c’est un co"
+ },
+ {
+  "id": "T-033",
+  "name": "Rédacteur territorial - Rédactrice territoriale",
+  "cat": "B",
+  "fp": "T",
+  "source": "https://www.concours-territorial.fr/epreuves.aspx?id=235",
+  "missing": [
+   "school",
+   "trainingMonths"
+  ],
+  "current": {
+   "school": null,
+   "trainingMonths": null,
+   "paidTraining": "Oui, rémunéré en tant que fonctionnaire stagiaire dès le recrutement par une collectivité (pas d’école, courte formation d’intégration au CNFPT)"
+  },
+  "description": "Le concours de rédacteur territorial recrute des agents de catégorie B pour les mairies, intercommunalités, départements et régions. Le rédacteur est un gestionnaire administratif polyvalent : il prépare les décisions des élus, gère des dossiers de ressources humaines, de finances, de marchés public"
+ },
+ {
+  "id": "T-034",
+  "name": "Rédacteur principal - Rédactrice principale de 2e classe",
+  "cat": "B",
+  "fp": "T",
+  "source": "https://www.concours-territorial.fr/epreuves.aspx?id=236",
+  "missing": [
+   "school",
+   "trainingMonths",
+   "paidTraining"
+  ],
+  "current": {
+   "school": null,
+   "trainingMonths": null,
+   "paidTraining": null
+  },
+  "description": "Le rédacteur principal de 2e classe est un agent de catégorie B des collectivités territoriales (mairies, intercommunalités, départements, régions) qui assure des tâches administratives qualifiées : rédaction d’actes, ressources humaines, finances, marchés publics ou urbanisme, souvent avec l’encadr"
+ },
+ {
+  "id": "T-035",
+  "name": "Technicien territorial - Technicienne territoriale",
+  "cat": "B",
+  "fp": "T",
+  "source": "https://www.concours-territorial.fr/epreuves.aspx?id=281&spe=190",
+  "missing": [
+   "school",
+   "trainingMonths",
+   "paidTraining"
+  ],
+  "current": {
+   "school": null,
+   "trainingMonths": null,
+   "paidTraining": null
+  },
+  "description": "Le concours de technicien territorial permet d’entrer dans la fonction publique territoriale en catégorie B pour des missions techniques dans les communes, départements, régions et leurs établissements. Il est organisé tous les deux ans par les centres de gestion, dans des spécialités comme le bâtim"
+ },
+ {
+  "id": "T-036",
+  "name": "Animateur territorial - Animatrice territoriale",
+  "cat": "B",
+  "fp": "T",
+  "source": "https://www.concours-territorial.fr/epreuves.aspx?id=263",
+  "missing": [
+   "school",
+   "trainingMonths",
+   "paidTraining"
+  ],
+  "current": {
+   "school": null,
+   "trainingMonths": null,
+   "paidTraining": null
+  },
+  "description": "Le concours d’animateur territorial (catégorie B) permet de devenir responsable d’animation dans une commune, une intercommunalité ou un département. L’animateur coordonne des accueils de loisirs, des projets jeunesse, des actions culturelles ou des animations pour les seniors, encadre des équipes d"
+ },
+ {
+  "id": "T-038",
+  "name": "Assistant - Assistante de conservation du patrimoine et des bibliothèques",
+  "cat": "B",
+  "fp": "T",
+  "source": "https://www.concours-territorial.fr/",
+  "missing": [
+   "school",
+   "trainingMonths"
+  ],
+  "current": {
+   "school": null,
+   "trainingMonths": null,
+   "paidTraining": "Non"
+  },
+  "description": "Ce concours de catégorie B ouvre les métiers de la culture dans les collectivités : bibliothèques et médiathèques, musées, archives et centres de documentation. On choisit une spécialité à l’inscription (bibliothèque, musée, archives ou documentation), on passe un écrit en mai, puis un entretien ave"
+ },
+ {
+  "id": "T-039",
+  "name": "Éducateur - Éducatrice des activités physiques et sportives",
+  "cat": "B",
+  "fp": "T",
+  "source": "https://www.concours-territorial.fr/",
+  "missing": [
+   "school",
+   "trainingMonths",
+   "paidTraining"
+  ],
+  "current": {
+   "school": null,
+   "trainingMonths": null,
+   "paidTraining": null
+  },
+  "description": "L’éducateur territorial des activités physiques et sportives (ETAPS) est un agent de catégorie B qui encadre le sport dans une commune ou une intercommunalité : école municipale des sports, piscine, activités pour les enfants, les adultes ou les seniors. Le concours est organisé par les centres de g"
+ },
+ {
+  "id": "T-040",
+  "name": "Adjoint administratif principal - Adjointe administrative principale de 2e classe",
+  "cat": "C",
+  "fp": "T",
+  "source": "https://www.concours-territorial.fr/epreuves.aspx?id=279",
+  "missing": [
+   "school",
+   "trainingMonths",
+   "paidTraining"
+  ],
+  "current": {
+   "school": null,
+   "trainingMonths": null,
+   "paidTraining": null
+  },
+  "description": "Ce concours de catégorie C permet d’entrer dans la fonction publique territoriale comme adjoint administratif principal de 2e classe. C’est la porte d’entrée pour travailler à l’accueil, au secrétariat, à l’état civil, à la comptabilité ou aux ressources humaines d’une mairie, d’un département, d’un"
+ },
+ {
+  "id": "T-041",
+  "name": "Adjoint technique principal - Adjointe technique principale de 2e classe",
+  "cat": "C",
+  "fp": "T",
+  "source": "https://www.concours-territorial.fr/epreuves.aspx?id=283",
+  "missing": [
+   "school",
+   "trainingMonths"
+  ],
+  "current": {
+   "school": null,
+   "trainingMonths": null,
+   "paidTraining": "Non"
+  },
+  "description": "Ce concours de catégorie C permet d’entrer dans la fonction publique territoriale pour un métier manuel ou technique : bâtiment, voirie, espaces verts, restauration collective, conduite de véhicules, mécanique, propreté ou environnement. On s’inscrit dans une spécialité et une option, et les épreuve"
+ },
+ {
+  "id": "T-042",
+  "name": "ATSEM principal - ATSEM principale de 2e classe",
+  "cat": "C",
+  "fp": "T",
+  "source": "https://www.concours-territorial.fr/epreuves.aspx?id=363",
+  "missing": [
+   "school",
+   "trainingMonths"
+  ],
+  "current": {
+   "school": null,
+   "trainingMonths": null,
+   "paidTraining": "Oui, rémunéré en tant que fonctionnaire stagiaire directement en poste (pas d’école)"
+  },
+  "description": "Le concours d’ATSEM principal de 2e classe permet de travailler dans une école maternelle, aux côtés de l’enseignant : accueillir les enfants, les aider pour l’habillage, le repas et l’hygiène, préparer le matériel des activités et entretenir les locaux. En externe, il faut le CAP accompagnant éduca"
+ },
+ {
+  "id": "T-043",
+  "name": "Agent de maîtrise territorial - Agente de maîtrise territoriale",
+  "cat": "C",
+  "fp": "T",
+  "source": "https://www.concours-territorial.fr/epreuves.aspx?id=331&spe=24",
+  "missing": [
+   "school",
+   "trainingMonths",
+   "paidTraining"
+  ],
+  "current": {
+   "school": null,
+   "trainingMonths": null,
+   "paidTraining": null
+  },
+  "description": "Le concours d’agent de maîtrise territorial recrute, en catégorie C, des agents techniques qualifiés qui encadrent une petite équipe ou assurent des travaux complexes dans les collectivités territoriales. Il est organisé par les centres de gestion dans plusieurs spécialités, comme le bâtiment et la "
+ },
+ {
+  "id": "T-045",
+  "name": "Adjoint territorial d’animation principal - Adjointe territoriale d’animation principale de 2e classe",
+  "cat": "C",
+  "fp": "T",
+  "source": "https://concours-territorial.fr/calendrier.aspx?annee=2026&type=concours",
+  "missing": [
+   "school",
+   "trainingMonths"
+  ],
+  "current": {
+   "school": null,
+   "trainingMonths": null,
+   "paidTraining": "Oui, rémunéré en tant que fonctionnaire stagiaire directement en poste (pas d’école)"
+  },
+  "description": "Ce concours de catégorie C permet de devenir adjoint d’animation principal de 2e classe dans une commune, une intercommunalité ou un département. Il est organisé par les centres de gestion, avec une épreuve écrite le même jour dans toute la France, le 25 mars 2027 pour la prochaine session. Une fois"
+ },
+ {
+  "id": "T-046",
+  "name": "Adjoint territorial du patrimoine principal - Adjointe territoriale du patrimoine principale de 2e classe",
+  "cat": "C",
+  "fp": "T",
+  "source": "https://concours-territorial.fr/calendrier.aspx?annee=2026&type=concours",
+  "missing": [
+   "school",
+   "trainingMonths",
+   "paidTraining"
+  ],
+  "current": {
+   "school": null,
+   "trainingMonths": null,
+   "paidTraining": null
+  },
+  "description": "L’adjoint territorial du patrimoine principal de 2e classe est un agent de catégorie C qui travaille dans une bibliothèque, une médiathèque, un musée, un service d’archives ou un monument géré par une collectivité. Il accueille et renseigne le public, range et équipe les documents, surveille les sal"
+ },
+ {
+  "id": "H-051",
+  "name": "Infirmier - Infirmière en soins généraux",
+  "cat": "A",
+  "fp": "H",
+  "source": "https://www.onisep.fr/formation/comment-devenir-infirmier-ou-infirmiere",
+  "missing": [
+   "trainingMonths"
+  ],
+  "current": {
+   "school": "Aucune après le recrutement : la formation se fait avant, en institut de formation en soins infirmiers (IFSI), trois ans, diplôme d’État d’infirmier de grade licence",
+   "trainingMonths": null,
+   "paidTraining": "Non"
+  },
+  "description": "Pour devenir infirmier à l’hôpital public, il n’y a pas de concours avec des écrits : on suit d’abord trois ans de formation en institut de formation en soins infirmiers (IFSI), où l’on entre après le bac via Parcoursup, et on obtient le diplôme d’État d’infirmier. Avec ce diplôme, on est recruté pa"
+ },
+ {
+  "id": "H-052",
+  "name": "Psychologue hospitalier - Psychologue hospitalière",
+  "cat": "A",
+  "fp": "H",
+  "source": "https://concours.aphp.fr/informations-candidats/",
+  "missing": [
+   "school",
+   "trainingMonths"
+  ],
+  "current": {
+   "school": null,
+   "trainingMonths": null,
+   "paidTraining": "Non, pas d’école : le lauréat est nommé psychologue stagiaire, en poste et rémunéré"
+  },
+  "description": "Pour devenir psychologue titulaire à l’hôpital ou dans un établissement public social ou médico-social, il faut d’abord avoir le master de psychologie qui donne le titre de psychologue, puis réussir un concours sur titres organisé par l’établissement qui recrute. Il n’y a pas d’écrit : le jury exami"
+ },
+ {
+  "id": "H-053",
+  "name": "Cadre de santé paramédical",
+  "cat": "A",
+  "fp": "H",
+  "source": "https://concours.aphp.fr/informations-candidats/",
+  "missing": [
+   "school",
+   "trainingMonths",
+   "paidTraining"
+  ],
+  "current": {
+   "school": null,
+   "trainingMonths": null,
+   "paidTraining": null
+  },
+  "description": "Le cadre de santé paramédical est un soignant expérimenté (infirmier, kinésithérapeute, manipulateur radio, technicien de laboratoire, etc.) qui encadre une équipe dans un hôpital public. Pour le devenir, il faut d’abord obtenir le diplôme de cadre de santé, préparé en une dizaine de mois dans un in"
+ },
+ {
+  "id": "H-054",
+  "name": "Adjoint - Adjointe des cadres hospitaliers (ACH)",
+  "cat": "B",
+  "fp": "H",
+  "source": "https://concours.aphp.fr/informations-candidats/",
+  "missing": [
+   "school",
+   "trainingMonths"
+  ],
+  "current": {
+   "school": null,
+   "trainingMonths": null,
+   "paidTraining": "Oui, rémunéré en tant que fonctionnaire stagiaire dès le recrutement (pas d’école, formation d’adaptation à l’emploi)"
+  },
+  "description": "L’adjoint des cadres hospitaliers est un agent administratif de catégorie B de la fonction publique hospitalière. Il travaille dans un hôpital ou un établissement médico-social public, dans l’une de deux branches : la gestion administrative générale (ressources humaines, admissions des patients, sec"
+ },
+ {
+  "id": "H-055",
+  "name": "Assistant médico-administratif - Assistante médico-administrative (AMA)",
+  "cat": "B",
+  "fp": "H",
+  "source": "https://concours.aphp.fr/informations-candidats/",
+  "missing": [
+   "school",
+   "trainingMonths",
+   "paidTraining"
+  ],
+  "current": {
+   "school": null,
+   "trainingMonths": null,
+   "paidTraining": null
+  },
+  "description": "L’assistant médico-administratif (AMA) est un agent de catégorie B de l’hôpital public. Dans la branche secrétariat médical, il accueille les patients, gère les rendez-vous, les dossiers médicaux et les courriers des médecins ; dans la branche assistance de régulation médicale (ARM), il répond aux a"
+ },
+ {
+  "id": "H-056",
+  "name": "Technicien supérieur hospitalier - Technicienne supérieure hospitalière",
+  "cat": "B",
+  "fp": "H",
+  "source": "https://concours.aphp.fr/informations-candidats/",
+  "missing": [
+   "school",
+   "trainingMonths",
+   "paidTraining"
+  ],
+  "current": {
+   "school": null,
+   "trainingMonths": null,
+   "paidTraining": null
+  },
+  "description": "Le technicien supérieur hospitalier est le spécialiste technique de l’hôpital public : il travaille dans l’informatique, la maintenance des bâtiments, le biomédical, la restauration, la logistique, la sécurité ou l’information médicale. Il n’existe pas de concours national : chaque hôpital organise "
+ },
+ {
+  "id": "H-057",
+  "name": "Aide-soignant - Aide-soignante",
+  "cat": "B",
+  "fp": "H",
+  "source": "https://www.concours-fph.ars.sante.fr/",
+  "missing": [
+   "trainingMonths"
+  ],
+  "current": {
+   "school": "Aucune après le recrutement : la formation se fait avant, en institut de formation d’aides-soignants (IFAS), environ un an, diplôme d’État d’aide-soignant",
+   "trainingMonths": null,
+   "paidTraining": "Non"
+  },
+  "description": "L’aide-soignant travaille au plus près des patients : toilette, repas, aide aux déplacements, surveillance de l’état de santé, en lien avec les infirmiers. Pour exercer à l’hôpital public, il faut d’abord obtenir le diplôme d’État d’aide-soignant en institut de formation (IFAS), une formation d’envi"
+ },
+ {
+  "id": "H-058",
+  "name": "Auxiliaire de puériculture",
+  "cat": "B",
+  "fp": "H",
+  "source": "https://concours-fph.ars.sante.fr/home?corpsIds=35",
+  "missing": [
+   "trainingMonths"
+  ],
+  "current": {
+   "school": "Institut de formation d’auxiliaires de puériculture (IFAP), avant le concours, pour obtenir le diplôme d’État ; aucune école après le concours",
+   "trainingMonths": null,
+   "paidTraining": "Non, pas d’école après le concours : le lauréat est nommé stagiaire en poste et rémunéré (la formation au DEAP en IFAP, avant le concours, peut être gratuite ou financée selon le statut)"
+  },
+  "description": "L’auxiliaire de puériculture s’occupe des bébés et des jeunes enfants : soins d’hygiène, repas, éveil, surveillance de la santé et soutien des parents. Il faut d’abord obtenir le diplôme d’État d’auxiliaire de puériculture (DEAP), préparé en 11 mois (1 540 heures) dans un IFAP, accessible dès 17 ans"
+ },
+ {
+  "id": "H-059",
+  "name": "Adjoint administratif hospitalier - Adjointe administrative hospitalière",
+  "cat": "C",
+  "fp": "H",
+  "source": "https://concours.aphp.fr/informations-candidats/",
+  "missing": [
+   "school",
+   "trainingMonths",
+   "paidTraining"
+  ],
+  "current": {
+   "school": null,
+   "trainingMonths": null,
+   "paidTraining": null
+  },
+  "description": "L’adjoint administratif hospitalier est un agent de catégorie C qui fait tourner l’administration d’un hôpital public : accueil et admission des patients, secrétariat, facturation, paie, ressources humaines. Il existe deux portes d’entrée. Le recrutement sans concours, pour le premier grade, se fait"
+ },
+ {
+  "id": "H-060",
+  "name": "Agent des services hospitaliers qualifié - Agente des services hospitaliers qualifiée (ASHQ)",
+  "cat": "C",
+  "fp": "H",
+  "source": "https://concours.aphp.fr/informations-candidats/",
+  "missing": [
+   "school",
+   "trainingMonths"
+  ],
+  "current": {
+   "school": null,
+   "trainingMonths": null,
+   "paidTraining": "Oui, rémunéré en tant que fonctionnaire stagiaire dès le recrutement (pas de formation initiale en école)"
+  },
+  "description": "L’agent des services hospitaliers qualifié (ASHQ) est un agent de catégorie C de la fonction publique hospitalière. Il assure l’hygiène et la propreté des chambres et des locaux, participe à la distribution des repas et au confort des patients, et aide l’équipe soignante dans des tâches simples, à l"
+ },
+ {
+  "id": "H-061",
+  "name": "Personnel ouvrier hospitalier qualifié",
+  "cat": "C",
+  "fp": "H",
+  "source": "https://concours-fph.ars.sante.fr/home?keywords=ouvrier+principal",
+  "missing": [
+   "school",
+   "trainingMonths",
+   "paidTraining"
+  ],
+  "current": {
+   "school": null,
+   "trainingMonths": null,
+   "paidTraining": null
+  },
+  "description": "Les ouvriers de l’hôpital public assurent la cuisine, la blanchisserie, la logistique, la maintenance des bâtiments et des équipements, la sécurité ou la stérilisation dans les établissements de santé et les EHPAD publics. Le grade recruté par concours est celui d’ouvrier principal de 2e classe (cat"
+ },
+ {
+  "id": "É-070",
+  "name": "Technicien - Technicienne de police technique et scientifique",
+  "cat": "B",
+  "fp": "E",
+  "source": "https://www.police-nationale.interieur.gouv.fr/nous-rejoindre/dates-a-retenir-concours-technicien-de-police-technique-et-scientifique-tpts",
+  "missing": [
+   "trainingMonths"
+  ],
+  "current": {
+   "school": "Police nationale (formation initiale de fonctionnaire stagiaire après le concours ; lieu et durée non trouvés)",
+   "trainingMonths": null,
+   "paidTraining": "Oui, rémunéré en tant que fonctionnaire stagiaire"
+  },
+  "description": "Le technicien de police technique et scientifique (PTS) est un fonctionnaire de la police nationale, de catégorie B, qui recherche et analyse les traces et indices : relevés sur les scènes d’infraction, photos, prélèvements, travail en laboratoire. Il existe deux portes d’entrée : le concours de tec"
+ },
+ {
+  "id": "T-076",
+  "name": "Attaché territorial - Attachée territoriale de conservation du patrimoine",
+  "cat": "A",
+  "fp": "T",
+  "source": "https://www.concours-territorial.fr/calendrier.aspx",
+  "missing": [
+   "school",
+   "trainingMonths"
+  ],
+  "current": {
+   "school": null,
+   "trainingMonths": null,
+   "paidTraining": "Non"
+  },
+  "description": "Ce concours recrute des cadres de catégorie A pour les musées, les services d’archives, les services archéologiques et l’Inventaire des collectivités territoriales. Il est organisé environ tous les trois ans par les centres de gestion, chaque spécialité étant confiée à un centre pour toute la France"
+ },
+ {
+  "id": "É-106",
+  "name": "Ingénieur - Ingénieure de l’armement (IA)",
+  "cat": "A+",
+  "fp": "E",
+  "source": "https://www.defense.gouv.fr/dga/nous-rejoindre/profil-ingenieur",
+  "missing": [
+   "trainingMonths",
+   "paidTraining"
+  ],
+  "current": {
+   "school": "École polytechnique (Palaiseau) pour la voie principale, puis formation complémentaire au ministère des Armées",
+   "trainingMonths": null,
+   "paidTraining": null
+  },
+  "description": "Le corps des ingénieurs de l’armement est un grand corps technique de l’État à statut militaire, placé sous l’autorité du ministère des Armées. La plupart de ses membres sont recrutés à la sortie de l’École polytechnique, selon leur classement final, et d’autres entrent par un concours sur titres ré"
+ },
+ {
+  "id": "É-107",
+  "name": "Ingénieur civil - Ingénieure civile de la défense (ICD)",
+  "cat": "A",
+  "fp": "E",
+  "source": "https://www.defense.gouv.fr/dga/nous-rejoindre/profil-ingenieur",
+  "missing": [
+   "school",
+   "trainingMonths",
+   "paidTraining"
+  ],
+  "current": {
+   "school": null,
+   "trainingMonths": null,
+   "paidTraining": null
+  },
+  "description": "Les ingénieurs civils de la défense sont des fonctionnaires civils de catégorie A du ministère des Armées. Ils dirigent des équipes, font de l’expertise et des études techniques pour concevoir, moderniser et sécuriser les équipements, les systèmes et les infrastructures des armées. Le concours se pa"
+ },
+ {
+  "id": "É-108",
+  "name": "Administrateur - Administratrice des affaires maritimes (AAM)",
+  "cat": "A+",
+  "fp": "E",
+  "source": "https://recrutement.ecologie.gouv.fr/concours/eleve-administrateur-trice-affaires-maritimes-2e-classe-article-41-aam-concours-externe",
+  "missing": [
+   "paidTraining"
+  ],
+  "current": {
+   "school": "École d’administration des affaires maritimes (EAAM), au sein de l’École nationale de la sécurité et de l’administration de la mer (ENSAM), Le Havre",
+   "trainingMonths": 24,
+   "paidTraining": null
+  },
+  "description": "Les administrateurs des affaires maritimes forment un corps d’officiers à statut militaire, au service du ministère chargé de la mer. Après le concours, on suit deux ans de formation à l’École d’administration des affaires maritimes, au sein de l’ENSAM au Havre. On travaille ensuite pour le sauvetag"
+ },
+ {
+  "id": "H-109",
+  "name": "Orthoptiste hospitalier - Orthoptiste hospitalière (concours sur titres)",
+  "cat": "A",
+  "fp": "H",
+  "source": "https://concours-fph.ars.sante.fr/concours/orthoptiste",
+  "missing": [
+   "school",
+   "trainingMonths",
+   "paidTraining"
+  ],
+  "current": {
+   "school": null,
+   "trainingMonths": null,
+   "paidTraining": null
+  },
+  "description": "Ce concours sur titres permet d’entrer dans le corps des orthoptistes de la fonction publique hospitalière, un corps de catégorie A. Il n’existe pas de concours national : chaque hôpital public organise le sien quand il a un poste à pourvoir et publie l’avis sur le portail des concours de la fonctio"
+ },
+ {
+  "id": "H-110",
+  "name": "Pédicure-podologue hospitalier - Pédicure-podologue hospitalière (concours sur titres)",
+  "cat": "A",
+  "fp": "H",
+  "source": "https://concours-fph.ars.sante.fr/concours/pedicure-podologue",
+  "missing": [
+   "school",
+   "trainingMonths",
+   "paidTraining"
+  ],
+  "current": {
+   "school": null,
+   "trainingMonths": null,
+   "paidTraining": null
+  },
+  "description": "Ce concours sur titres permet d’entrer dans le corps des pédicures-podologues de la fonction publique hospitalière, un corps de catégorie A. Il n’y a pas de concours national : chaque hôpital public organise le sien quand il a un poste à pourvoir, et l’avis est publié sur le portail des concours de "
+ },
+ {
+  "id": "H-111",
+  "name": "Praticien hospitalier - Praticienne hospitalière (concours national de praticien hospitalier, CNPH)",
+  "cat": "A",
+  "fp": "H",
+  "source": "https://www.cng.sante.fr/candidats/concours/internats/concours-medicaux/concours-medicaux-cnph-evc/concours-national-praticien-hospitalier-cnph",
+  "missing": [
+   "school",
+   "trainingMonths",
+   "paidTraining"
+  ],
+  "current": {
+   "school": null,
+   "trainingMonths": null,
+   "paidTraining": null
+  },
+  "description": "Le concours national de praticien hospitalier (CNPH) permet aux médecins, pharmaciens et chirurgiens-dentistes diplômés de devenir praticien hospitalier, c’est-à-dire médecin ou pharmacien titulaire d’un hôpital public. On le passe dans une spécialité (médecine générale, pédiatrie, pharmacie hospita"
+ },
+ {
+  "id": "T-112",
+  "name": "Médecin ou pharmacien - Médecin ou pharmacienne de sapeurs-pompiers professionnels de classe normale",
+  "cat": "A",
+  "fp": "T",
+  "source": "https://www.agirhe-concours.fr/?dep=63",
+  "missing": [
+   "school",
+   "trainingMonths",
+   "paidTraining"
+  ],
+  "current": {
+   "school": null,
+   "trainingMonths": null,
+   "paidTraining": null
+  },
+  "description": "Ce concours sur titres avec épreuve recrute les médecins et les pharmaciens qui deviennent officiers de sapeurs-pompiers professionnels dans les services départementaux d’incendie et de secours (SDIS). Il est organisé une seule fois pour toute la France par un centre de gestion, en général tous les "
+ },
+ {
+  "id": "T-113",
+  "name": "Médecin territorial - Médecin territoriale de 2e classe",
+  "cat": "A",
+  "fp": "T",
+  "source": "https://www.agirhe-concours.fr/?dep=28",
+  "missing": [
+   "school",
+   "trainingMonths",
+   "paidTraining"
+  ],
+  "current": {
+   "school": null,
+   "trainingMonths": null,
+   "paidTraining": null
+  },
+  "description": "Ce concours sur titres avec épreuve permet aux médecins de devenir fonctionnaires des collectivités territoriales (départements, communes, intercommunalités) au grade de médecin territorial de 2e classe. Il est organisé par les centres de gestion, région par région, avec une date d’oral commune à to"
+ },
+ {
+  "id": "É-119",
+  "name": "Attaché - Attachée de la direction générale de la sécurité extérieure (DGSE)",
+  "cat": "A",
+  "fp": "E",
+  "source": "https://www.dgse.gouv.fr/fr/le-recrutement/nous-rejoindre/les-concours/concours-categorie-a",
+  "missing": [
+   "school",
+   "trainingMonths",
+   "paidTraining"
+  ],
+  "current": {
+   "school": null,
+   "trainingMonths": null,
+   "paidTraining": null
+  },
+  "description": "Ce concours recrute des cadres de catégorie A pour la DGSE, le service de renseignement extérieur de la France rattaché au ministère des Armées. À l’inscription, le candidat choisit une spécialité : celle des futurs linguistes est « langues et civilisations », dont l’épreuve écrite se passe entièrem"
+ },
+ {
+  "id": "É-121",
+  "name": "Délégué - Déléguée au permis de conduire et à la sécurité routière",
+  "cat": "A",
+  "fp": "E",
+  "source": "https://www.interieur.gouv.fr/ministere/metiers-du-ministere/je-veux-devenir-agent-public/delegue-au-permis-de-conduire-et-a-securite-routiere",
+  "missing": [
+   "school",
+   "trainingMonths",
+   "paidTraining"
+  ],
+  "current": {
+   "school": null,
+   "trainingMonths": null,
+   "paidTraining": null
+  },
+  "description": "Ce concours de catégorie A du ministère de l’Intérieur recrute les cadres qui dirigent les bureaux de l’éducation routière : ils encadrent les inspecteurs du permis de conduire, organisent les examens, contrôlent les auto-écoles et animent la politique de sécurité routière dans un département. Il ex"
+ },
+ {
+  "id": "T-122",
+  "name": "Professeur territorial - Professeure territoriale d’enseignement artistique",
+  "cat": "A",
+  "fp": "T",
+  "source": "https://www.agirhe-concours.fr/docs/35/brochures/AVIS_CONCOURS_PEA_2027_COMMUN.pdf",
+  "missing": [
+   "school",
+   "trainingMonths",
+   "paidTraining"
+  ],
+  "current": {
+   "school": null,
+   "trainingMonths": null,
+   "paidTraining": null
+  },
+  "description": "Ce concours de catégorie A de la fonction publique territoriale recrute les professeurs des conservatoires (musique, danse, art dramatique) et des écoles d’art (arts plastiques) gérés par les villes, les intercommunalités ou les départements. Pour la musique, la danse et le théâtre, il faut déjà avo"
+ },
+ {
+  "id": "T-123",
+  "name": "Assistant territorial - Assistante territoriale d’enseignement artistique principal de 2e classe",
+  "cat": "B",
+  "fp": "T",
+  "source": "https://agirhe-concours.fr/docs/13/brochures/AVIS_CONCOURS_NATIONAL.pdf",
+  "missing": [
+   "school",
+   "trainingMonths",
+   "paidTraining"
+  ],
+  "current": {
+   "school": null,
+   "trainingMonths": null,
+   "paidTraining": null
+  },
+  "description": "Ce concours de catégorie B de la fonction publique territoriale recrute des enseignants de musique, de danse, d’art dramatique ou d’arts plastiques pour les conservatoires et écoles de musique des collectivités. Le concours externe est ouvert aux titulaires d’un diplôme de niveau bac+2 dans la disci"
+ },
+ {
+  "id": "T-124",
+  "name": "Directeur - Directrice d’établissement territorial d’enseignement artistique (1re et 2e catégorie)",
+  "cat": "A",
+  "fp": "T",
+  "source": "https://www.maisondescommunes85.fr/sites/default/files/concours/brochures/brochure_directeur_creation_06_2026_1ere_et_2eme_categorie.pdf",
+  "missing": [
+   "school",
+   "trainingMonths",
+   "paidTraining"
+  ],
+  "current": {
+   "school": null,
+   "trainingMonths": null,
+   "paidTraining": null
+  },
+  "description": "Ce concours de catégorie A de la fonction publique territoriale recrute les directeurs des conservatoires (musique, danse, art dramatique) et des écoles d’art (arts plastiques) contrôlés par l’État. Il existe deux grades : la 2e catégorie pour diriger un conservatoire à rayonnement départemental ou "
+ },
+ {
+  "id": "É-125",
+  "name": "Maître - Maîtresse de conférences (qualification CNU puis concours sur poste)",
+  "cat": "A",
+  "fp": "E",
+  "source": "https://www.galaxie.enseignementsup-recherche.gouv.fr/ensup/cand_recrutement.htm",
+  "missing": [
+   "school"
+  ],
+  "current": {
+   "school": null,
+   "trainingMonths": 12,
+   "paidTraining": "Oui, rémunéré comme maître de conférences stagiaire pendant l’année de stage"
+  },
+  "description": "Les maîtres de conférences sont les enseignants-chercheurs titulaires des universités : ils donnent des cours et mènent des recherches dans un laboratoire. Pour y accéder, il faut un doctorat, puis obtenir la qualification du Conseil national des universités, dont une section par discipline examine "
+ },
+ {
+  "id": "É-126",
+  "name": "Musicien - Musicienne de la Garde républicaine (orchestre, Musique et chœur de l’Armée française)",
+  "cat": "B",
+  "fp": "E",
+  "source": "https://www.gendarmerie.interieur.gouv.fr/garde-republicaine/recrutement-et-formation/militaire/musicien-de-l-orchestre",
+  "missing": [
+   "school",
+   "trainingMonths",
+   "paidTraining"
+  ],
+  "current": {
+   "school": null,
+   "trainingMonths": null,
+   "paidTraining": null
+  },
+  "description": "La Garde républicaine, qui fait partie de la gendarmerie nationale, possède un orchestre symphonique, un orchestre d’harmonie (la Musique de la Garde républicaine) et le chœur de l’Armée française, qui jouent lors des cérémonies officielles et en concert. Les musiciens ont un statut militaire : ils "
+ }
+]

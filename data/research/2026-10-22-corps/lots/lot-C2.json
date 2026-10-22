@@ -1,0 +1,928 @@
+[
+ {
+  "routeId": "asi",
+  "name": "Assistant ingénieur - Assistante ingénieure",
+  "cat": "A",
+  "versants": "E",
+  "lvl": 3,
+  "source": "https://www.enseignementsup-recherche.gouv.fr/fr/recrutements/itrf",
+  "access": "Concours · consulter l’avis",
+  "jobsCount": 22,
+  "jobsWithoutOtherConcours": 22,
+  "jobs": [
+   {
+    "id": "fprch015",
+    "name": "Assistant - Assistante ingénieur biologiste en traitement de données",
+    "categories": [
+     "A"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Collecter et traiter les données issues de la recherche en sciences du vivant"
+   },
+   {
+    "id": "fprch016",
+    "name": "Assistant - Assistante ingénieur en expérimentation et instrumentation biologiques",
+    "categories": [
+     "A"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Adapter et mettre en œuvre les technologies spécifiques d'une approche méthodologique de la biologie"
+   },
+   {
+    "id": "fprch017",
+    "name": "Assistant - Assistante ingénieur en biologie, sciences de la vie et de la terre",
+    "categories": [
+     "A"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Mettre en œuvre des techniques spécialisées pour obtenir des échantillons biologiques et les étudier ; piloter des missions d'enseignement scientifique"
+   },
+   {
+    "id": "fprch027",
+    "name": "Assistant - Assistante ingénieur en biologie animale",
+    "categories": [
+     "A"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Adapter et mettre en œuvre des procédures expérimentales sur l'animal"
+   },
+   {
+    "id": "fprch028",
+    "name": "Assistant - Assistante ingénieur en centre d’expérimentation animale",
+    "categories": [
+     "A"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Adapter et mettre en place des processus d'élevage ou de maintenance de lignées animales"
+   },
+   {
+    "id": "fprch034",
+    "name": "Assistant - Assistante ingénieur en expérimentation et production végétale",
+    "categories": [
+     "A"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Mettre en œuvre et adapter les protocoles expérimentaux et les processus de production végétale"
+   },
+   {
+    "id": "fprch039",
+    "name": "Assistant - Assistante ingénieur en études d’environnements géo-naturels et anthropisés",
+    "categories": [
+     "A"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Appliquer et mettre en œuvre des protocoles d'étude des environnements géo-naturels et anthropisés, de leurs dynamiques d'évolution et le cas échéant, de leurs modalités de gestion"
+   },
+   {
+    "id": "fprch047",
+    "name": "Assistant - Assistante ingénieur en analyse chimique",
+    "categories": [
+     "A"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Conduire une ou plusieurs techniques d'analyse et les adapter en fonction de l'espèce analysée et des objectifs de recherche"
+   },
+   {
+    "id": "fprch052",
+    "name": "Assistant - Assistante ingénieur en synthèse chimique",
+    "categories": [
+     "A"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Préparer et conduire des synthèses usuelles à partir de protocoles préétablis adaptés en fonction de l'espèce chimique synthétisée et des objectifs de recherche"
+   },
+   {
+    "id": "fprch070",
+    "name": "Assistant - Assistante Ingénieur en instrumentation et techniques expérimentales",
+    "categories": [
+     "A"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Réaliser des dispositifs expérimentaux en mettant au point ou en adaptant les montages et les protocoles"
+   },
+   {
+    "id": "fprch071",
+    "name": "Assistant - Assistante Ingénieur d’exploitation d’instrument",
+    "categories": [
+     "A"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Assurer la mise en marche, les réglages et la conduite d'instruments ou d'appareils complexes et s'assurer de leur fonctionnement"
+   },
+   {
+    "id": "fprch081",
+    "name": "Assistant - Assistante Ingénieur électronicien",
+    "categories": [
+     "A"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Assurer le développement et la réalisation de tout ou partie de dispositifs électroniques jusqu'aux tests et à la mise en service"
+   }
+  ]
+ },
+ {
+  "routeId": "ir",
+  "name": "Ingénieur - Ingénieure de recherche",
+  "cat": "A",
+  "versants": "E",
+  "lvl": 5,
+  "source": "https://www.enseignementsup-recherche.gouv.fr/fr/recrutements/itrf",
+  "access": "Concours · consulter l’avis",
+  "jobsCount": 13,
+  "jobsWithoutOtherConcours": 13,
+  "jobs": [
+   {
+    "id": "fprch023",
+    "name": "Ingénieur - Ingénieure de recherche en biologie animale",
+    "categories": [
+     "A"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Concevoir, développer, adapter et expérimenter de nouvelles méthodologies dans le cadre de thématiques de recherche en biologie animale, dans le respect des règles d'éthique"
+   },
+   {
+    "id": "fprch024",
+    "name": "Ingénieur - Ingénieure de recherche en centre d’expérimentation animale",
+    "categories": [
+     "A"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Assurer l'organisation du centre d'expérimentation animale en relation avec les équipes de recherche"
+   },
+   {
+    "id": "fprch032",
+    "name": "Ingénieur - Ingénieure de recherche en expérimentation et production végétales",
+    "categories": [
+     "A"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Concevoir, mettre en œuvre et assurer le suivi des programmes et protocoles expérimentaux"
+   },
+   {
+    "id": "fprch037",
+    "name": "Ingénieur - Ingénieure de recherche en environnement géo-naturels et anthropisés",
+    "categories": [
+     "A"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Concevoir et organiser les inventaires, les études et le suivi des environnements géo-naturels et anthropisés"
+   },
+   {
+    "id": "fprch045",
+    "name": "Ingénieur - Ingénieure de recherche en analyse chimique",
+    "categories": [
+     "A"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Coordonner la mise en œuvre d'une technique ou d'un ensemble cohérent de techniques d'analyse d'entités chimiques"
+   },
+   {
+    "id": "fprch050",
+    "name": "Ingénieur - Ingénieure de recherche en synthèse chimique",
+    "categories": [
+     "A"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Mettre en œuvre et développer des méthodes, des techniques de synthèse et de préparation d'espèces chimiques"
+   },
+   {
+    "id": "fprch055",
+    "name": "Ingénieur - Ingénieure de recherche en science des matériaux / caractérisation",
+    "categories": [
+     "A"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Concevoir et développer des méthodes et techniques de caractérisation structurale, mécanique, physique, physico-chimique des matériaux"
+   },
+   {
+    "id": "fprch059",
+    "name": "Ingénieur - Ingénieure de recherche en sciences des matériaux / élaboration",
+    "categories": [
+     "A"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Concevoir et développer la technologie et les procédés pour l'obtention de matériaux (massifs et/ou couches minces) ou de composants nouveaux"
+   },
+   {
+    "id": "fprch100",
+    "name": "Ingénieur - Ingénieure de recherche en production, traitement et analyse de données",
+    "categories": [
+     "A"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Concevoir (en lien avec l'équipe de recherche en science humaine et sociale ou en réponse à une demande externe) et piloter des dispositifs de recherche ou d'études ; développer et conduire des méthodes d'exploitation, d'analyse de bases de"
+   },
+   {
+    "id": "fprch104",
+    "name": "Ingénieur - Ingénieure de recherche en sciences de l'information géographique",
+    "categories": [
+     "A"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Proposer des méthodes et des techniques d'analyse et conduire les travaux de traitement de l'information géographique (Sx-IG) ; garantir la validité des résultats issus de la recherche ; développer et définir des problématiques de recherche"
+   },
+   {
+    "id": "fprch108",
+    "name": "Ingénieur - Ingénieure de recherche en analyse des sources historiques et culturelles",
+    "categories": [
+     "A"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Elaborer et exploiter un corpus de sources et de données délimité à partir d'une problématique scientifique définie dans le cadre d'une équipe de recherche ; concevoir et mettre en œuvre des méthodes et des outils d'analyse, de mise en form"
+   },
+   {
+    "id": "fprch126",
+    "name": "Ingénieur - Ingénieure de recherche en archéologie",
+    "categories": [
+     "A"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Etre responsable d’un chantier archéologique et/ou d’une étude architecturale et/ou de l’étude du matériel issu de la fouille ; déterminer la stratégie de fouille ou celle de l’étude architecturale ; choisir et développer les méthodes et te"
+   }
+  ]
+ },
+ {
+  "routeId": "tsef",
+  "name": "Technicien supérieur - Technicienne supérieure d’études et de fabrications",
+  "cat": "B",
+  "versants": "E",
+  "lvl": 3,
+  "source": "https://www.fonction-publique.gouv.fr/devenir-agent-public/calendrier-general-concours",
+  "access": "Concours",
+  "jobsCount": 5,
+  "jobsWithoutOtherConcours": 4,
+  "jobs": [
+   {
+    "id": "tsef",
+    "name": "Technicien supérieur - Technicienne supérieure d’études et de fabrications",
+    "categories": [
+     "B"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Études techniques et suivi de fabrication pour le ministère des Armées."
+   },
+   {
+    "id": "fpdef005",
+    "name": "Opérateur - Opératrice en pyrotechnie",
+    "categories": [
+     "A",
+     "B",
+     "C"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Réaliser des opérations de stockage, d’assemblage, de distribution, de maintenance préventive et corrective, d’élimination sur tous types de munitions, systèmes pyrotechniques (poudres, explosifs…) et associés."
+   },
+   {
+    "id": "fpdef023",
+    "name": "Technicien - Technicienne avionique",
+    "categories": [
+     "B",
+     "C"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Fournir l’expertise technique nécessaire au développement et au maintien en conditions des systèmes avioniques (électriques, électroniques, électrotechniques, ...) liés au domaine aéronautique, en dirigeant si besoin une équipe de spécialis"
+   },
+   {
+    "id": "fplog066",
+    "name": "Responsable d'armurerie",
+    "categories": [
+     "A",
+     "B"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Piloter et coordonner la gestion, l’entretien, la réparation, le reconditionnement de l’armement et de ses accessoires"
+   },
+   {
+    "id": "fptra013",
+    "name": "Intervenant - Intervenante de maintenance aéronautique",
+    "categories": [
+     "B",
+     "C"
+    ],
+    "versants": "ETH",
+    "hasOtherConcours": true,
+    "description": "Met à disposition des équipages un aéronef en condition d’exploitation."
+   }
+  ]
+ },
+ {
+  "routeId": "chercheur",
+  "name": "Chercheur - Chercheuse",
+  "cat": "A+",
+  "versants": "E",
+  "lvl": 6,
+  "source": "https://www.fonction-publique.gouv.fr/devenir-agent-public/calendrier-general-concours",
+  "access": "Concours sur dossier",
+  "jobsCount": 4,
+  "jobsWithoutOtherConcours": 4,
+  "jobs": [
+   {
+    "id": "chercheur",
+    "name": "Chercheur - Chercheuse",
+    "categories": [
+     "A+"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Fait avancer la connaissance au CNRS, à l’Inserm ou dans un autre organisme public."
+   },
+   {
+    "id": "fprch003",
+    "name": "Responsable de laboratoire de recherche",
+    "categories": [
+     "A+"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Assurer la direction administrative, scientifique ou technique d’un laboratoire ou d’une unité de recherche.\nEncadrer les opérations de contrôle, d’analyses, les expérimentations, les activités de recherches ; Interpréter et garantir les ré"
+   },
+   {
+    "id": "fprch007",
+    "name": "Chercheur - Chercheuse",
+    "categories": [
+     "A+"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Instruire et mettre en œuvre une démarche scientifique, pour produire, exploiter et diffuser des connaissances en vue d’en certifier certaines, d’en produire de nouvelles ou d’en reformuler d’anciennes"
+   },
+   {
+    "id": "fptra015",
+    "name": "Enseignant - chercheur - Enseignante - chercheuse aéronautique",
+    "categories": [
+     "A+",
+     "A"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Dispense des formations théoriques et pratiques aux étudiants et stagiaires devant exercer leur activité professionnelle dans un cadre réglementaire aéronautique"
+   }
+  ]
+ },
+ {
+  "routeId": "manip",
+  "name": "Manipulateur - Manipulatrice en électroradiologie médicale",
+  "cat": "A",
+  "versants": "H",
+  "lvl": 4,
+  "source": "https://www.concours-fph.ars.sante.fr/",
+  "access": "Recrutement sur titre",
+  "jobsCount": 3,
+  "jobsWithoutOtherConcours": 3,
+  "jobs": [
+   {
+    "id": "manip",
+    "name": "Manipulateur - Manipulatrice en électroradiologie médicale",
+    "categories": [
+     "A"
+    ],
+    "versants": "H",
+    "hasOtherConcours": false,
+    "description": "Réalise les radios, scanners et IRM, et accompagne les patient·es pendant l’examen."
+   },
+   {
+    "id": "fpmed001",
+    "name": "Dosimétriste",
+    "categories": [
+     "A"
+    ],
+    "versants": "H",
+    "hasOtherConcours": false,
+    "description": "Préparer et planifier les traitements par radiations ionisantes en lien avec le physicien médical et le médecin prescripteur.\nMettre en œuvre les outils permettant le calcul des doses de rayonnements ionisants afin d'optimiser les doses reç"
+   },
+   {
+    "id": "fpmed003",
+    "name": "Manipulateur - Manipulatrice en électro-radiologie médicale",
+    "categories": [
+     "A"
+    ],
+    "versants": "H",
+    "hasOtherConcours": false,
+    "description": "Réaliser des actes relevant de l'imagerie médicale, de la médecine nucléaire, des explorations fonctionnelles et de la radiothérapie qui concourent à la prévention, au dépistage, au diagnostic, au traitement et à la recherche."
+   }
+  ]
+ },
+ {
+  "routeId": "collecte",
+  "name": "Conducteur de poids lourd, agent de collecte - Conductrice de poids lourd, agente de collecte",
+  "cat": "C",
+  "versants": "T",
+  "lvl": 0,
+  "source": "https://www.concours-territorial.fr/",
+  "access": "Avec ou sans concours",
+  "jobsCount": 3,
+  "jobsWithoutOtherConcours": 2,
+  "jobs": [
+   {
+    "id": "collecte",
+    "name": "Conducteur de poids lourd, agent de collecte - Conductrice de poids lourd, agente de collecte",
+    "categories": [
+     "C"
+    ],
+    "versants": "T",
+    "hasOtherConcours": false,
+    "description": "Collecte des déchets, transports de matériel pour une commune ou une intercommunalité."
+   },
+   {
+    "id": "fplog014",
+    "name": "Agent - Agente de collecte des déchets",
+    "categories": [
+     "C"
+    ],
+    "versants": "T",
+    "hasOtherConcours": false,
+    "description": "Collecte les déchets ménagers et assimilés jusqu'à leur lieu de valorisation, de recyclage ou de réparation"
+   },
+   {
+    "id": "fplog017",
+    "name": "Coordonnateur - Coordonnatrice collecte des déchets",
+    "categories": [
+     "B",
+     "C"
+    ],
+    "versants": "ETH",
+    "hasOtherConcours": true,
+    "description": "Coordonne, organise les tournées de collecte et l'activité de la ou des équipes dont elle ou il a la charge, et gère les remontées de données de la collecte"
+   }
+  ]
+ },
+ {
+  "routeId": "corps-0e034401a009",
+  "name": "Technicien - Technicienne de laboratoire",
+  "cat": "B",
+  "versants": "H",
+  "lvl": null,
+  "source": "https://www.concours-fph.ars.sante.fr/consulter/concours/21109",
+  "access": "Concours hospitalier · consulter l’avis",
+  "jobsCount": 3,
+  "jobsWithoutOtherConcours": 2,
+  "jobs": [
+   {
+    "id": "fpmed017",
+    "name": "Technicien - Technicienne de laboratoire médical",
+    "categories": [
+     "A",
+     "B"
+    ],
+    "versants": "H",
+    "hasOtherConcours": false,
+    "description": "Mettre en œuvre les technologies nécessaires à l'obtention des résultats des examens de biologie médicale et d'anatomie et cytologie pathologiques à visée de prévention, de dépistage, de diagnostic et de suivi thérapeutique.\nRéaliser des pr"
+   },
+   {
+    "id": "fpmed018",
+    "name": "Préleveur - Préleveuse",
+    "categories": [
+     "B",
+     "C"
+    ],
+    "versants": "ETH",
+    "hasOtherConcours": false,
+    "description": "Effectue les prélèvements, leur acheminement et stockages. Effectue des mesures sur site et prépare des échantillonnages"
+   },
+   {
+    "id": "fpsan031",
+    "name": "Bio-hygiéniste",
+    "categories": [
+     "B",
+     "C"
+    ],
+    "versants": "H",
+    "hasOtherConcours": true,
+    "description": "Assurer une veille sur la qualité de l'environnement (surface, eau, air, dispositifs médicaux) et contrôler l'application des procédures en hygiène environnementale et hospitalière"
+   }
+  ]
+ },
+ {
+  "routeId": "corps-09f80b8586a1",
+  "name": "Ambulancier - Ambulancière",
+  "cat": "C",
+  "versants": "H",
+  "lvl": null,
+  "source": "https://www.concours-fph.ars.sante.fr/consulter/concours/20985",
+  "access": "Concours hospitalier · consulter l’avis",
+  "jobsCount": 2,
+  "jobsWithoutOtherConcours": 2,
+  "jobs": [
+   {
+    "id": "fpsan024",
+    "name": "Ambulancier - Ambulancière",
+    "categories": [
+     "C"
+    ],
+    "versants": "H",
+    "hasOtherConcours": false,
+    "description": "Transporter et accompagner dans des véhicules affectés à cet usage, des personnes, notamment des malades, des blessés ou parturientes"
+   },
+   {
+    "id": "fpsan026",
+    "name": "Encadrant - Encadrante transport sanitaire",
+    "categories": [
+     "C"
+    ],
+    "versants": "H",
+    "hasOtherConcours": false,
+    "description": "Organiser, coordonner, superviser les activités de transports sanitaires en animant une équipe de professionnels (brancardiers, ambulanciers et coursiers (pour échantillons, prélèvements sanguins éventuellement produits sanguins labiles - E"
+   }
+  ]
+ },
+ {
+  "routeId": "tech-env",
+  "name": "Technicien - Technicienne de l’environnement",
+  "cat": "B",
+  "versants": "E",
+  "lvl": 2,
+  "source": "https://www.fonction-publique.gouv.fr/devenir-agent-public/calendrier-general-concours",
+  "access": "Concours",
+  "jobsCount": 3,
+  "jobsWithoutOtherConcours": 1,
+  "jobs": [
+   {
+    "id": "tech-env",
+    "name": "Technicien - Technicienne de l’environnement",
+    "categories": [
+     "B"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Protège la faune, la flore et l’eau sur le terrain, dans les parcs ou à l’OFB."
+   },
+   {
+    "id": "fpasp014",
+    "name": "Chargé - Chargée d'animation à l'éducation au développement durable",
+    "categories": [
+     "B",
+     "C"
+    ],
+    "versants": "ET",
+    "hasOtherConcours": true,
+    "description": "Contribue à la mise en œuvre de l'éducation et de la formation à l'environnement et au développement durable en accompagnement des milieux professionnels de l'éducation et de la formation (continue, professionnelle...) et des acteurs territ"
+   },
+   {
+    "id": "fpenv033",
+    "name": "Chargé - Chargée de la police de la biodiversité",
+    "categories": [
+     "A",
+     "B"
+    ],
+    "versants": "E",
+    "hasOtherConcours": true,
+    "description": "Met en œuvre, coordonne et suit les politiques de protection et de gestion de la biodiversité (espaces naturels, flore et faune sauvages)."
+   }
+  ]
+ },
+ {
+  "routeId": "corps-52a859c87ab8",
+  "name": "Chef - Cheffe de travaux d’art",
+  "cat": "A",
+  "versants": "E",
+  "lvl": null,
+  "source": "https://www.fonction-publique.gouv.fr/devenir-agent-public/calendrier-general-concours/chef-de-travaux-dart",
+  "access": "Concours interne",
+  "jobsCount": 1,
+  "jobsWithoutOtherConcours": 1,
+  "jobs": [
+   {
+    "id": "fpcul011",
+    "name": "Responsable d’atelier d’art ou d’un service des métiers d’art et du patrimoine",
+    "categories": [
+     "A"
+    ],
+    "versants": "ET",
+    "hasOtherConcours": false,
+    "description": "Organise le travail sous l’angle technique et humain, la conservation et le développement des savoir-faire dans un atelier de restauration d’œuvres d’art ou un service des métiers d’art et du patrimoine. Il est chargé de la réalisation de d"
+   }
+  ]
+ },
+ {
+  "routeId": "corps-1cbccac47167",
+  "name": "Inspecteurs de l'éducation nationale",
+  "cat": "A",
+  "versants": "E",
+  "lvl": null,
+  "source": "https://www.fonction-publique.gouv.fr/devenir-agent-public/calendrier-general-concours/inspecteurs-de-leducation-nationale",
+  "access": "Concours externe",
+  "jobsCount": 1,
+  "jobsWithoutOtherConcours": 1,
+  "jobs": [
+   {
+    "id": "fpens029",
+    "name": "Inspecteur - Inspectrice des 1er et 2nd degrés",
+    "categories": [
+     "A"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Sous l’autorité du recteur d’académie, évaluer les personnels enseignants et d’éducation, participer à l’animation pédagogique, au recrutement et à la formation des personnels de l’éducation nationale ; développer une démarche prospective, "
+   }
+  ]
+ },
+ {
+  "routeId": "corps-25c5d13bcc67",
+  "name": "Ergothérapeute",
+  "cat": "A",
+  "versants": "H",
+  "lvl": null,
+  "source": "https://www.concours-fph.ars.sante.fr/consulter/concours/20930",
+  "access": "Concours hospitalier · consulter l’avis",
+  "jobsCount": 1,
+  "jobsWithoutOtherConcours": 1,
+  "jobs": [
+   {
+    "id": "fpmed007",
+    "name": "Ergothérapeute - ergonome",
+    "categories": [
+     "A"
+    ],
+    "versants": "ETH",
+    "hasOtherConcours": false,
+    "description": "Elaborer un diagnostic et évaluer les intégrités, les lésions, les capacités de la personne ainsi que ses performances motrices, sensorielles, cognitives, psychiques.\nAnalyser les besoins, les habitudes de vie, les facteurs environnementaux"
+   }
+  ]
+ },
+ {
+  "routeId": "corps-d785cb350fca",
+  "name": "Psychomotricien",
+  "cat": "A",
+  "versants": "H",
+  "lvl": null,
+  "source": "https://www.concours-fph.ars.sante.fr/consulter/concours/19778",
+  "access": "Concours hospitalier · consulter l’avis",
+  "jobsCount": 1,
+  "jobsWithoutOtherConcours": 1,
+  "jobs": [
+   {
+    "id": "fpmed014",
+    "name": "Psychomotricien - Psychomotricienne",
+    "categories": [
+     "A"
+    ],
+    "versants": "H",
+    "hasOtherConcours": false,
+    "description": "Elaborer un diagnostic et réaliser en individuel ou en groupe des activités d'éducation psychomotrice, de prévention, d'éducation pour la santé, de rééducation, de réadaptation des fonctions psychomotrices et de thérapie psychocorporelle."
+   }
+  ]
+ },
+ {
+  "routeId": "colonel",
+  "name": "Colonel de sapeur-pompier professionnel - Colonelle de sapeurses-pompierères professionnelles",
+  "cat": "A+",
+  "versants": "T",
+  "lvl": 4,
+  "source": "https://www.cnfpt.fr/evoluer/quels-sont-concours-examens-professionnels-organises-cnfpt/concours-colonel-sapeurs-pompiers-professionnels/national",
+  "access": "Concours ou examen selon les conditions du cadre d’emplois",
+  "jobsCount": 1,
+  "jobsWithoutOtherConcours": 1,
+  "jobs": [
+   {
+    "id": "fpsec037",
+    "name": "Directeur départemental - Directrice départementale des services d'incendie et de secours",
+    "categories": [
+     "A+"
+    ],
+    "versants": "T",
+    "hasOtherConcours": false,
+    "description": "En lien avec ses autorités de tutelle, administrative et opérationnelle, contribue à la définition d'une stratégie partagée de la politique d'incendie et de secours d'un territoire. Traduit les orientations du schéma d'analyse et de couvert"
+   }
+  ]
+ },
+ {
+  "routeId": "corps-ee3da09f46e9",
+  "name": "Chargé - Chargée d'études documentaires",
+  "cat": "A",
+  "versants": "E",
+  "lvl": null,
+  "source": "https://www.fonction-publique.gouv.fr/devenir-agent-public/calendrier-general-concours/charge-detudes-documentaires",
+  "access": "Concours externe",
+  "jobsCount": 8,
+  "jobsWithoutOtherConcours": 0,
+  "jobs": [
+   {
+    "id": "fpcul012",
+    "name": "Régisseur - Régisseuse d’œuvres",
+    "categories": [
+     "A",
+     "B",
+     "C"
+    ],
+    "versants": "ET",
+    "hasOtherConcours": true,
+    "description": "Assurer la gestion logistique et administrative relative aux mouvements des œuvres et des collections , en intégrant la gestion des risques, qu'il s'agisse de prêts, d'organisation d'expositions, de mouvements de et vers les réserves, de tr"
+   },
+   {
+    "id": "fpcul015",
+    "name": "Expert - Experte du patrimoine",
+    "categories": [
+     "A",
+     "B"
+    ],
+    "versants": "E",
+    "hasOtherConcours": true,
+    "description": "Exerce des responsabilités scientifiques et techniques en matière d’étude, d’enrichissement, de conservation et de mise en valeur du patrimoine en étant garant de l’application du code du patrimoine dans ses domaines de spécialité. Il parti"
+   },
+   {
+    "id": "fpdoc004",
+    "name": "Archiviste",
+    "categories": [
+     "A",
+     "B"
+    ],
+    "versants": "ETH",
+    "hasOtherConcours": true,
+    "description": "Collecte et conserve les archives. \nAssure la gestion des documents sur tous types de supports, selon une chaîne de traitement définie.\nParticipe à l’accueil et à l'orientation du public et assure la valorisation des fonds d’archives."
+   },
+   {
+    "id": "fpdoc014",
+    "name": "Documentaliste",
+    "categories": [
+     "A",
+     "B"
+    ],
+    "versants": "ETH",
+    "hasOtherConcours": true,
+    "description": "Rechercher, traiter, gérer et diffuser l’information pour répondre et anticiper les besoins des usagers"
+   },
+   {
+    "id": "fpdoc015",
+    "name": "Chargé - Chargée d'études documentaires",
+    "categories": [
+     "A",
+     "B"
+    ],
+    "versants": "ETH",
+    "hasOtherConcours": true,
+    "description": "Met en œuvre la politique de gestion de l’information documentaire"
+   },
+   {
+    "id": "fpdoc019",
+    "name": "Responsable de secteur archivistique",
+    "categories": [
+     "A",
+     "B"
+    ],
+    "versants": "ETH",
+    "hasOtherConcours": true,
+    "description": "Il assure la responsabilité d’une unité d’archives : collecte, conservation, expertise, communication et valorisation des archives de toute nature conservées par l’unité.\nIl assure à tous l’accès aux archives en salle de lecture et en ligne"
+   },
+   {
+    "id": "fpdoc020",
+    "name": "Encadrant - Encadrante d'un service d'archives",
+    "categories": [
+     "A"
+    ],
+    "versants": "ETH",
+    "hasOtherConcours": true,
+    "description": "Mettre en œuvre la politique d'archivage, en animant une équipe de professionnels et en veillant à l'efficacité et à la qualité des prestations fournies."
+   },
+   {
+    "id": "fpdoc021",
+    "name": "Responsable archives",
+    "categories": [
+     "A"
+    ],
+    "versants": "ETH",
+    "hasOtherConcours": true,
+    "description": "Concevoir, conduire, piloter la mise en œuvre de la politique archives.\nDévelopper les méthodes, procédures et outils de gestion des archives"
+   }
+  ]
+ },
+ {
+  "routeId": "corps-78bc2eb29931",
+  "name": "Surveillants de l'administration pénitentiaire - affectation locale",
+  "cat": "B",
+  "versants": "E",
+  "lvl": null,
+  "source": "https://www.fonction-publique.gouv.fr/devenir-agent-public/calendrier-general-concours/surveillants-de-ladministration-penitentiaire-affectation-locale",
+  "access": "Concours externe",
+  "jobsCount": 3,
+  "jobsWithoutOtherConcours": 0,
+  "jobs": [
+   {
+    "id": "fpjus026",
+    "name": "Surveillant - Surveillante pénitentiaire",
+    "categories": [
+     "B"
+    ],
+    "versants": "E",
+    "hasOtherConcours": true,
+    "description": "Prendre en charge les personnes placées sous main de justice\nEn assurer la garde et contribuer à leur réinsertion"
+   },
+   {
+    "id": "fpjus028",
+    "name": "Agent - Agente d'escorte pénitentiaire",
+    "categories": [
+     "B"
+    ],
+    "versants": "E",
+    "hasOtherConcours": true,
+    "description": "Prendre en charge les personnes détenues à l’extérieur d’un établissement pénitentiaire dans le cadre de leur transfert\nVeiller à la sécurisation des établissements pénitentiaires, de leurs abords et des parcours empruntés lors des déplacem"
+   },
+   {
+    "id": "fpjus029",
+    "name": "Agent - Agente en charge de la surveillance électronique",
+    "categories": [
+     "B"
+    ],
+    "versants": "E",
+    "hasOtherConcours": true,
+    "description": "Assurer la mise en place et le suivi des mesures de surveillance électronique\nConcourir aux objectifs de l’individualisation de la peine"
+   }
+  ]
+ },
+ {
+  "routeId": "corps-bb68ae77d884",
+  "name": "Conseillers d'éducation populaire et de jeunesse",
+  "cat": "A",
+  "versants": "E",
+  "lvl": null,
+  "source": "https://www.fonction-publique.gouv.fr/devenir-agent-public/calendrier-general-concours/conseillers-deducation-populaire-et-de-jeunesse",
+  "access": "Concours externe",
+  "jobsCount": 1,
+  "jobsWithoutOtherConcours": 0,
+  "jobs": [
+   {
+    "id": "fpasp015",
+    "name": "Conseiller - Conseillère jeunesse et développement de l’engagement et de la vie associative",
+    "categories": [
+     "A"
+    ],
+    "versants": "ET",
+    "hasOtherConcours": true,
+    "description": "Met en œuvre les politiques sectorielles et interministérielles de jeunesse de l'état en matière de jeunesse et d'engagement, ainsi que de développement de la vie associative et de l'éducation populaire (synthétisé ci-après JEPVA) en les ad"
+   }
+  ]
+ },
+ {
+  "routeId": "magistrat-crc",
+  "name": "Magistrat - Magistrate des chambres régionales des comptes",
+  "cat": "A+",
+  "versants": "E",
+  "lvl": 5,
+  "source": "https://www.ccomptes.fr/fr/nous-rejoindre",
+  "access": "Concours · consulter l’avis",
+  "jobsCount": 1,
+  "jobsWithoutOtherConcours": 0,
+  "jobs": [
+   {
+    "id": "fpctl006",
+    "name": "Magistrat - Magistrate des juridictions financières",
+    "categories": [
+     "A+"
+    ],
+    "versants": "E",
+    "hasOtherConcours": true,
+    "description": "S’assurer du bon emploi des deniers publics"
+   }
+  ]
+ },
+ {
+  "routeId": "corps-4a204be7001d",
+  "name": "Infirmier anesthésiste - Infirmière anesthésiste",
+  "cat": "A",
+  "versants": "H",
+  "lvl": null,
+  "source": "https://www.concours-fph.ars.sante.fr/consulter/concours/21059",
+  "access": "Concours hospitalier · consulter l’avis",
+  "jobsCount": 1,
+  "jobsWithoutOtherConcours": 0,
+  "jobs": [
+   {
+    "id": "fpmed042",
+    "name": "Infirmier - Infirmière anesthésiste",
+    "categories": [
+     "A"
+    ],
+    "versants": "H",
+    "hasOtherConcours": true,
+    "description": "Réaliser des soins infirmiers d'anesthésie et/ou de réanimation concourant au diagnostic, au traitement et à la recherche.\nAccompagner le patient, dans les domaines de l'intervention chirurgicale, du traitement de la douleur, de l'urgence o"
+   }
+  ]
+ }
+]

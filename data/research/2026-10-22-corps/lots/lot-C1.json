@@ -1,0 +1,1249 @@
+[
+ {
+  "routeId": "ie",
+  "name": "Ingénieur - Ingénieure d’études",
+  "cat": "A",
+  "versants": "E",
+  "lvl": 4,
+  "source": "https://www.fonction-publique.gouv.fr/devenir-agent-public/calendrier-general-concours",
+  "access": "Concours ou contrat",
+  "jobsCount": 44,
+  "jobsWithoutOtherConcours": 36,
+  "jobs": [
+   {
+    "id": "ie",
+    "name": "Ingénieur - Ingénieure d’études",
+    "categories": [
+     "A"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Appuie les équipes de recherche dans les universités et les laboratoires publics."
+   },
+   {
+    "id": "fprch008",
+    "name": "Chargé - Chargée de médiation scientifique",
+    "categories": [
+     "A"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Participer au rayonnement et à la transmission au public des découvertes scientifiques afin de susciter l'intérêt pour la recherche scientifique"
+   },
+   {
+    "id": "fprch009",
+    "name": "Ingénieur biologiste - Ingénieure biologiste en analyse de données",
+    "categories": [
+     "A"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Concevoir et organiser la collecte et le traitement de données issues de la recherche en sciences du vivant"
+   },
+   {
+    "id": "fprch010",
+    "name": "Ingénieur biologiste - Ingénieure biologiste en plateforme scientifique",
+    "categories": [
+     "A"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Concevoir, développer et conduire en spécialiste une approche méthodologique"
+   },
+   {
+    "id": "fprch011",
+    "name": "Ingénieur biologiste - Ingénieure biologiste en laboratoire",
+    "categories": [
+     "A"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Concevoir, développer, adapter et expérimenter de nouvelles méthodologies dans le cadre de thématiques de recherche en biologie"
+   },
+   {
+    "id": "fprch013",
+    "name": "Ingénieur - Ingénieure en expérimentation et instrumentation biologiques",
+    "categories": [
+     "A"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Adapter et mettre en œuvre les technologies spécifiques d'une approche méthodologique de la biologie"
+   },
+   {
+    "id": "fprch014",
+    "name": "Ingénieur - Ingénieure en techniques biologiques",
+    "categories": [
+     "A"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Choisir, adapter et mettre en œuvre les techniques de biologie dans le cadre des projets scientifiques d'une équipe de recherche"
+   },
+   {
+    "id": "fprch025",
+    "name": "Ingénieur - Ingénieure en biologie animale",
+    "categories": [
+     "A"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Mettre en œuvre des programmes et développer des techniques expérimentales dans le cadre de projets de recherche sur l'animal"
+   },
+   {
+    "id": "fprch026",
+    "name": "Ingénieur - Ingénieure en centre d’expérimentation animale",
+    "categories": [
+     "A"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Assurer l’organisation de la plate-forme, mettre en œuvre  et développer des programmes d’élevage et de maintenance de lignées d’animaux en coordination avec les équipes de recherche"
+   },
+   {
+    "id": "fprch033",
+    "name": "Ingénieur - Ingénieure en expérimentation et production végétale",
+    "categories": [
+     "A"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Mettre en œuvre et adapter les protocoles expérimentaux et les processus de production végétale"
+   },
+   {
+    "id": "fprch038",
+    "name": "Ingénieur - Ingénieure en études d’environnements géo-naturels et anthropisés",
+    "categories": [
+     "A"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Appliquer et mettre en œuvre des protocoles d'étude des environnements géo-naturels et anthropisés, de leurs dynamiques d'évolution et le cas échéant, de leurs modalités de gestion"
+   },
+   {
+    "id": "fprch046",
+    "name": "Ingénieur - Ingénieure en analyse chimique",
+    "categories": [
+     "A"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Mettre en œuvre et adapter une ou plusieurs techniques d'analyse et de caractérisation pour l'identification d'entités chimiques"
+   }
+  ]
+ },
+ {
+  "routeId": "ingenieur-hosp",
+  "name": "Ingénieur hospitalier - Ingénieure hospitalière",
+  "cat": "A",
+  "versants": "H",
+  "lvl": 5,
+  "source": "https://www.concours-fph.ars.sante.fr/",
+  "access": "Concours · consulter l’avis",
+  "jobsCount": 87,
+  "jobsWithoutOtherConcours": 7,
+  "jobs": [
+   {
+    "id": "fpmed002",
+    "name": "Radiophysicien - Radiophysicienne",
+    "categories": [
+     "A"
+    ],
+    "versants": "EH",
+    "hasOtherConcours": false,
+    "description": "Concevoir, préparer et mettre en œuvre des études dosimétriques, des procédures de suivi technique des appareils utilisant les radiations ionisantes, en imagerie médicale, radiothérapie, curiethérapie, médecine nucléaire, et des procédures "
+   },
+   {
+    "id": "fpmed004",
+    "name": "Physicien médical - Physicienne médicale",
+    "categories": [
+     "A"
+    ],
+    "versants": "H",
+    "hasOtherConcours": false,
+    "description": "Concevoir, préparer et mettre en œuvre des études dosimétriques, des procédures de suivi technique des appareils utilisant les radiations ionisantes, en imagerie médicale, radiothérapie, curiethérapie et des procédures de suivi qualitatif d"
+   },
+   {
+    "id": "fprch122",
+    "name": "Ingénieur - Ingénieure de recherche hospitalier",
+    "categories": [
+     "A"
+    ],
+    "versants": "H",
+    "hasOtherConcours": false,
+    "description": "Concevoir et développer des ruptures technologiques et/ou organisationnelles dans tous les domaines liés à la santé"
+   },
+   {
+    "id": "fprch125",
+    "name": "Chef - Cheffe de projet de recherche clinique",
+    "categories": [
+     "A"
+    ],
+    "versants": "H",
+    "hasOtherConcours": false,
+    "description": "Gérer un portefeuille de projets en recherche clinique, dont l'établissement est promoteur ou gestionnaire, sur les aspects réglementaires, financiers, logistiques, administratifs, organisationnels et humains."
+   },
+   {
+    "id": "fpsan003",
+    "name": "Bio informaticien - Bio informaticienne",
+    "categories": [
+     "A"
+    ],
+    "versants": "EH",
+    "hasOtherConcours": false,
+    "description": "Mettre au point des outils et logiciels informatiques permettant d'organiser, de comparer, d'analyser, de diffuser des données biologiques, physiques, chimiques"
+   },
+   {
+    "id": "fpsan033",
+    "name": "Ingénieur - Ingénieure en biologie médicale",
+    "categories": [
+     "A"
+    ],
+    "versants": "H",
+    "hasOtherConcours": false,
+    "description": "Mettre en œuvre, optimiser l'organisation et la gestion de plateaux techniques en biologie médicale et développer et adapter de nouvelles méthodes ou technologies en biologie médicale"
+   },
+   {
+    "id": "fpsec017",
+    "name": "Cadre de laboratoire",
+    "categories": [
+     "A"
+    ],
+    "versants": "EH",
+    "hasOtherConcours": false,
+    "description": "Organiser les activités analytiques, développer des techniques et protocoles destinés à l’analyse scientifique "
+   },
+   {
+    "id": "fpamt028",
+    "name": "Géomaticien - Géomaticienne",
+    "categories": [
+     "A"
+    ],
+    "versants": "ETH",
+    "hasOtherConcours": true,
+    "description": "Exploite un système d'information géographique afin de réaliser des traitements sur les données localisées et des analyses spatiales complexes.\r\nAssure une veille sur les choix en terme de méthode et d'outils pour l'acquisition et le traite"
+   },
+   {
+    "id": "fpbat001",
+    "name": "Architecte",
+    "categories": [
+     "A"
+    ],
+    "versants": "ETH",
+    "hasOtherConcours": true,
+    "description": "L’architecte participe à l’aménagement de l’espace, et plus particulièrement aux activités de construction."
+   },
+   {
+    "id": "fpbat004",
+    "name": "Ingénieur Patrimoine immobilier - Ingénieure Patrimoine immobilier",
+    "categories": [
+     "A"
+    ],
+    "versants": "ETH",
+    "hasOtherConcours": true,
+    "description": "Assurer la coordination administrative, financière et technique des activités immobilières"
+   },
+   {
+    "id": "fpbat005",
+    "name": "Ingénieur - Ingénieure de maintenance ou de travaux",
+    "categories": [
+     "A"
+    ],
+    "versants": "ETH",
+    "hasOtherConcours": true,
+    "description": "Assurer le pilotage et la coordination de la production des chantiers de maintenance"
+   },
+   {
+    "id": "fpbat009",
+    "name": "Responsable d'exploitation des installations de chauffage, ventilation et climatisation",
+    "categories": [
+     "A",
+     "B"
+    ],
+    "versants": "ETH",
+    "hasOtherConcours": true,
+    "description": "Assure l'entretien et le pilotage des installations de chauffage, plomberie, climatisation et gaz dans le patrimoine bâti de la collectivité, soit en régie directe, soit en recourant à des entreprises"
+   }
+  ]
+ },
+ {
+  "routeId": "tsma",
+  "name": "Technicien supérieur - Technicienne supérieure du ministère de l’Agriculture",
+  "cat": "B",
+  "versants": "E",
+  "lvl": 2,
+  "source": "https://agriculture.gouv.fr/concours-et-examens-professionnels",
+  "access": "Concours · consulter l’avis",
+  "jobsCount": 25,
+  "jobsWithoutOtherConcours": 6,
+  "jobs": [
+   {
+    "id": "fpagr001",
+    "name": "Personne ressource en santé et protection animales",
+    "categories": [
+     "B",
+     "C"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Mobilise sa compétence dans la gestion et le suivi de la santé et de la protection animale en appui aux services territoriaux de l'État"
+   },
+   {
+    "id": "fpagr002",
+    "name": "Personne ressource en santé et protection des végétaux",
+    "categories": [
+     "B",
+     "C"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Mobilise sa compétence dans la gestion et le suivi de la santé et protection végétale en appui aux services territoriaux de l'État"
+   },
+   {
+    "id": "fpagr003",
+    "name": "Personne ressource en sécurité sanitaire de l'alimentation",
+    "categories": [
+     "B",
+     "C"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Apporte sa compétence aux services territoriaux de l'État dans la gestion et le suivi de la sécurité sanitaire des aliments"
+   },
+   {
+    "id": "fpagr021",
+    "name": "Technicien - Technicienne en élevage et production animale",
+    "categories": [
+     "B"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Assure les activités d'élevage des équins et la maintenance du site d'affectation"
+   },
+   {
+    "id": "fpagr024",
+    "name": "Chargé - Chargée de gestion patrimoniale « forêt, chasse et pêche »",
+    "categories": [
+     "B",
+     "C"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Élabore, pilote ou met en œuvre les actions ou des aménagements nécessaires au développement durable de la forêt et/ou de la chasse-pêche"
+   },
+   {
+    "id": "fpagr031",
+    "name": "Technicien - Technicienne terroir et signes de qualité",
+    "categories": [
+     "B",
+     "C"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Participe, en liaison étroite avec un ingénieur, à l'instruction des cahiers des charges et au contrôle des signes d'identification de la qualité et de l'origine dont il a la responsabilité sur son périmètre géographique d'intervention"
+   },
+   {
+    "id": "fpagr004",
+    "name": "Chargé - Chargée de mission en sécurité et qualité sanitaire de l’alimentation",
+    "categories": [
+     "A",
+     "B"
+    ],
+    "versants": "E",
+    "hasOtherConcours": true,
+    "description": "Élabore, dans un domaine de la sécurité et la qualité sanitaire de l'alimentation, des textes techniques et normatifs et en assure la mise en œuvre"
+   },
+   {
+    "id": "fpagr005",
+    "name": "Chargé - Chargée de mission santé et protection des animaux",
+    "categories": [
+     "A",
+     "B"
+    ],
+    "versants": "E",
+    "hasOtherConcours": true,
+    "description": "Élabore, dans un domaine de la santé et de la protection des animaux, des textes techniques et normatifs et en assure la mise en œuvre"
+   },
+   {
+    "id": "fpagr006",
+    "name": "Chargé - Chargée de mission santé et protection des végétaux",
+    "categories": [
+     "A",
+     "B"
+    ],
+    "versants": "E",
+    "hasOtherConcours": true,
+    "description": "Élabore, dans un domaine de la santé et de la protection des végétaux, des textes techniques et normatifs et en assure la mise en œuvre"
+   },
+   {
+    "id": "fpagr010",
+    "name": "Chargé - Chargée de la maîtrise de délégation en santé et protection des animaux",
+    "categories": [
+     "A",
+     "B"
+    ],
+    "versants": "E",
+    "hasOtherConcours": true,
+    "description": "Définit, met en œuvre et assure le suivi, grâce à un réseau d'appui, d'une ou de plusieurs délégations"
+   },
+   {
+    "id": "fpagr011",
+    "name": "Chargé - Chargée de la maîtrise de délégation en santé et protection des végétaux",
+    "categories": [
+     "A",
+     "B"
+    ],
+    "versants": "E",
+    "hasOtherConcours": true,
+    "description": "Définit, met en œuvre et assure le suivi, grâce à un réseau d'appui, d'une ou de plusieurs délégations"
+   },
+   {
+    "id": "fpagr012",
+    "name": "Référent expert - Référente experte en santé et protection animales",
+    "categories": [
+     "A",
+     "B"
+    ],
+    "versants": "E",
+    "hasOtherConcours": true,
+    "description": "Apporte les compétences de son domaine d'expertise aux structures qui les sollicitent dans un cadre d'une démarche de mutualisation nationale"
+   }
+  ]
+ },
+ {
+  "routeId": "atrf",
+  "name": "Adjoint technique - Adjointe technique de recherche et de formation",
+  "cat": "C",
+  "versants": "E",
+  "lvl": 0,
+  "source": "https://www.fonction-publique.gouv.fr/devenir-agent-public/calendrier-general-concours",
+  "access": "Avec ou sans concours",
+  "jobsCount": 6,
+  "jobsWithoutOtherConcours": 3,
+  "jobs": [
+   {
+    "id": "atrf",
+    "name": "Adjoint technique - Adjointe technique de recherche et de formation",
+    "categories": [
+     "C"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Prépare le matériel des laboratoires et des salles de cours dans les universités."
+   },
+   {
+    "id": "fprch074",
+    "name": "Adjoint - Adjointe technique en instrumentation, expérimentation et mesure",
+    "categories": [
+     "C"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Mettre en œuvre des dispositifs expérimentaux et contribuer à la gestion, la maintenance et les achats de matériels expérimentaux ou pédagogiques"
+   },
+   {
+    "id": "fprch099",
+    "name": "Adjoint - Adjointe en fabrication mécanique",
+    "categories": [
+     "C"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Accomplir des travaux d'assemblage de pièces, assurer la réalisation, la mise en œuvre et la maintenance de montages mécaniques"
+   },
+   {
+    "id": "fprch031",
+    "name": "Soigneur - Soigneuse",
+    "categories": [
+     "B",
+     "C"
+    ],
+    "versants": "E",
+    "hasOtherConcours": true,
+    "description": "Assurer l'hébergement et l'entretien des animaux de laboratoire ou d'élevage ainsi que la maintenance de leur environnement"
+   },
+   {
+    "id": "fprch042",
+    "name": "Assistant - Assistante en prothèse dentaire",
+    "categories": [
+     "B",
+     "C"
+    ],
+    "versants": "E",
+    "hasOtherConcours": true,
+    "description": "Mettre en œuvre des travaux complexes de prothèse, mettre au point de nouveaux modèles pédagogiques et assurer l'accompagnement technique des étudiants en chirurgie dentaire"
+   },
+   {
+    "id": "fprch117",
+    "name": "Assistant statisticien - Assistante statisticienne",
+    "categories": [
+     "B",
+     "C"
+    ],
+    "versants": "E",
+    "hasOtherConcours": true,
+    "description": "Participer à une étude statistique ou un projet de recherche en rassemblant, organisant les données, contrôlant leur cohérence, les maintenant, les exploitant et en exécutant des traitements statistiques"
+   }
+  ]
+ },
+ {
+  "routeId": "espaces-verts",
+  "name": "Agent - Agente des espaces verts",
+  "cat": "C",
+  "versants": "T",
+  "lvl": 0,
+  "source": "https://www.concours-territorial.fr/",
+  "access": "Avec ou sans concours",
+  "jobsCount": 4,
+  "jobsWithoutOtherConcours": 3,
+  "jobs": [
+   {
+    "id": "espaces-verts",
+    "name": "Agent - Agente des espaces verts",
+    "categories": [
+     "C"
+    ],
+    "versants": "T",
+    "hasOtherConcours": false,
+    "description": "Entretient les parcs, jardins et arbres d’une commune."
+   },
+   {
+    "id": "fplog024",
+    "name": "Chargé - Chargée d'entretien des espaces verts",
+    "categories": [
+     "C"
+    ],
+    "versants": "T",
+    "hasOtherConcours": false,
+    "description": "Réalise les travaux liés à l'aménagement, à l'entretien, à la conservation ou à la restauration et à la protection des espaces naturels"
+   },
+   {
+    "id": "fplog027",
+    "name": "Jardinier - Jardinière",
+    "categories": [
+     "C"
+    ],
+    "versants": "T",
+    "hasOtherConcours": false,
+    "description": "Effectue l'entretien des espaces verts et naturels dans le respect de la qualité écologique et paysagère du site. Maintient un espace public propre, accueillant, pédagogique, sécurisé pour les usagers "
+   },
+   {
+    "id": "fplog028",
+    "name": "Chargé - Chargée de travaux espaces verts",
+    "categories": [
+     "B",
+     "C"
+    ],
+    "versants": "T",
+    "hasOtherConcours": true,
+    "description": "Contrôle et guide la réalisation de travaux neufs ou de restauration des espaces verts et naturels en s'adaptant aux contraintes et vérifie leur bonne exécution. Intègre la spécificité des matériaux vivants (eau, végétaux, terre, etc.) et l"
+   }
+  ]
+ },
+ {
+  "routeId": "ide",
+  "name": "Infirmier - Infirmière",
+  "cat": "A",
+  "versants": "HT",
+  "lvl": 4,
+  "source": "https://www.fonction-publique.gouv.fr/devenir-agent-public/calendrier-general-concours",
+  "access": "Recrutement sur titre",
+  "jobsCount": 3,
+  "jobsWithoutOtherConcours": 2,
+  "jobs": [
+   {
+    "id": "fpmed032",
+    "name": "Infirmier - Infirmière de SDIS",
+    "categories": [
+     "A"
+    ],
+    "versants": "T",
+    "hasOtherConcours": false,
+    "description": "Sous l'autorité du médecin-chef ou cheffe, participe aux missions du service de santé et secours du SDIS en mettant en œuvre les stratégies de soins infirmiers afin de protéger, maintenir, restaurer et promouvoir la santé des personnes tant"
+   },
+   {
+    "id": "fpsan014",
+    "name": "Infirmier - Infirmière scolaire ou universitaire",
+    "categories": [
+     "A"
+    ],
+    "versants": "ET",
+    "hasOtherConcours": false,
+    "description": "Dispenser des soins préventifs et/ou curatifs dans l’objectif de contribuer au bien-être et à la réussite des élèves et des étudiants, et concevoir, mettre en œuvre et évaluer des actions tant individuelles que collective d’éducation à la s"
+   },
+   {
+    "id": "fpasp003",
+    "name": "Responsable d'établissement d'accueil du jeune enfant",
+    "categories": [
+     "A"
+    ],
+    "versants": "T",
+    "hasOtherConcours": true,
+    "description": "Dirige une structure d'accueil non permanent pour les enfants de moins de 6 ans"
+   }
+  ]
+ },
+ {
+  "routeId": "corps-b464cbe97049",
+  "name": "Professeurs de sport",
+  "cat": "A",
+  "versants": "E",
+  "lvl": null,
+  "source": "https://www.fonction-publique.gouv.fr/devenir-agent-public/calendrier-general-concours/professeurs-de-sport",
+  "access": "Concours externe",
+  "jobsCount": 3,
+  "jobsWithoutOtherConcours": 2,
+  "jobs": [
+   {
+    "id": "fpasp023",
+    "name": "Conseiller - Conseillère en développement des politiques sportives",
+    "categories": [
+     "A"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Conception, mise en œuvre et évaluation d'actions ou de dispositifs de développement des pratiques sportives au plan local ou national \r\nContribution à la formation professionnelle dans les champs du sport et de l'animation\r\nParticipation a"
+   },
+   {
+    "id": "fpasp027",
+    "name": "Directeur - Directrice technique nationale et DTN adjoint",
+    "categories": [
+     "A+",
+     "A"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Direction des politiques techniques nationales"
+   },
+   {
+    "id": "fpasp026",
+    "name": "Entraîneur sportif - Entraîneuse sportive",
+    "categories": [
+     "A",
+     "B"
+    ],
+    "versants": "ET",
+    "hasOtherConcours": true,
+    "description": "Mise en œuvre du projet d'entrainement de sportifs\r\nAccompagnement des sportifs dans la recherche de la performance \r\nParticiper aux politiques publiques jeunesse, engagement et sports"
+   }
+  ]
+ },
+ {
+  "routeId": "chancellerie",
+  "name": "Secrétaire de chancellerie",
+  "cat": "B",
+  "versants": "E",
+  "lvl": 2,
+  "source": "https://www.fonction-publique.gouv.fr/devenir-agent-public/calendrier-general-concours",
+  "access": "Concours",
+  "jobsCount": 17,
+  "jobsWithoutOtherConcours": 1,
+  "jobs": [
+   {
+    "id": "chancellerie",
+    "name": "Secrétaire de chancellerie",
+    "categories": [
+     "B"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Travaille dans les ambassades et consulats : visas, état civil, gestion. Mobilité à l’étranger."
+   },
+   {
+    "id": "fpint010",
+    "name": "Gestionnaire du protocole",
+    "categories": [
+     "B",
+     "C"
+    ],
+    "versants": "E",
+    "hasOtherConcours": true,
+    "description": "Gérer soit les marchés publics et les dépenses liés à l’activité internationale, soit les dossiers des privilèges et immunités diplomatiques et consulaires, soit les distinctions honorifiques"
+   },
+   {
+    "id": "fpint015",
+    "name": "Chargé - Chargée des affaires consulaires en administration centrale",
+    "categories": [
+     "A",
+     "B"
+    ],
+    "versants": "E",
+    "hasOtherConcours": true,
+    "description": "Assurer le suivi et l’instruction de dossiers, suivre une activité consulaire dans une zone géographique précise"
+   },
+   {
+    "id": "fpint017",
+    "name": "Chef - Cheffe de chancellerie/de section consulaire",
+    "categories": [
+     "A",
+     "B"
+    ],
+    "versants": "E",
+    "hasOtherConcours": true,
+    "description": "Assumer la responsabilité de la section consulaire.\nProtéger et gérer l’administration des Français à l’étranger ainsi que la circulation des étrangers en France."
+   },
+   {
+    "id": "fpint018",
+    "name": "Chargé - Chargée des affaires sociales des Français à l'étranger",
+    "categories": [
+     "A",
+     "B"
+    ],
+    "versants": "E",
+    "hasOtherConcours": true,
+    "description": "Participer à l’aide, à la protection et à la sécurité des Français à l’étranger."
+   },
+   {
+    "id": "fpint020",
+    "name": "Chef - Cheffe de secteur \"état civil-nationalité\"",
+    "categories": [
+     "A",
+     "B"
+    ],
+    "versants": "E",
+    "hasOtherConcours": true,
+    "description": "Diriger, coordonner, organiser et animer le secteur état civil / nationalité sous l’autorité de la cheffe / du chef de mission diplomatique / de poste consulaire et / ou de la cheffe / du chef de chancellerie, ou du de la cheffe / du chef d"
+   },
+   {
+    "id": "fpint021",
+    "name": "Instructeur - Instructrice de dossiers de visas",
+    "categories": [
+     "A",
+     "B"
+    ],
+    "versants": "E",
+    "hasOtherConcours": true,
+    "description": "Effectuer l’instruction des dossiers de demandes de visas sous l’autorité de la cheffe / du chef de mission diplomatique / de poste consulaire, de la cheffe / du chef de chancellerie et de la cheffe / du chef de service des visas."
+   },
+   {
+    "id": "fpint022",
+    "name": "Instructeur - Instructrice de dossiers visas en vue d’une demande d'asile",
+    "categories": [
+     "A",
+     "B"
+    ],
+    "versants": "E",
+    "hasOtherConcours": true,
+    "description": "Effectuer l’instruction des dossiers liés à une demande d’asile ou à une réinstallation en France, sous l’autorité de la cheffe / du chef de mission diplomatique / de poste consulaire, de la cheffe / du chef de chancellerie et de la cheffe "
+   },
+   {
+    "id": "fpint023",
+    "name": "Chargé - Chargée de l'état civil en administration centrale",
+    "categories": [
+     "A",
+     "B"
+    ],
+    "versants": "E",
+    "hasOtherConcours": true,
+    "description": "Le/la chargé(e) de l’état civil en administration centrale établie et exploite des actes et traite des dossiers d’état civil."
+   },
+   {
+    "id": "fpint024",
+    "name": "Chargé - Chargée de l'état civil - nationalité à l'étranger",
+    "categories": [
+     "A",
+     "B"
+    ],
+    "versants": "E",
+    "hasOtherConcours": true,
+    "description": "Animer l'accueil (physique et téléphonique) des demandeurs en matière d'état civil et de nationalité.\nProdiguer des conseils d'ordre pratique et juridique sous l'autorité de la cheffe / du chef de mission diplomatique / de poste consulaire "
+   },
+   {
+    "id": "fpint025",
+    "name": "Chargé - Chargée de l'administration des français à l'étranger",
+    "categories": [
+     "A",
+     "B"
+    ],
+    "versants": "E",
+    "hasOtherConcours": true,
+    "description": "Sous l'autorité de la cheffe / du chef de mission diplomatique / de poste consulaire ou de la cheffe / du chef de chancellerie :\nanimer l'accueil (physique et téléphonique) ;\nassurer le traitement de la gestion administrative de la communau"
+   },
+   {
+    "id": "fpint030",
+    "name": "Chargé - Chargée de la mise en œuvre des actions de coopération internationale",
+    "categories": [
+     "A",
+     "B"
+    ],
+    "versants": "E",
+    "hasOtherConcours": true,
+    "description": "Le chargé de la mise en œuvre des actions de coopération internationale assure l’organisation et le suivi des actions de coopération menées dans les zones géographiques de son secteur de compétence."
+   }
+  ]
+ },
+ {
+  "routeId": "magasinier",
+  "name": "Magasinier - Magasinière des bibliothèques",
+  "cat": "C",
+  "versants": "E",
+  "lvl": 0,
+  "source": "https://www.fonction-publique.gouv.fr/devenir-agent-public/calendrier-general-concours",
+  "access": "Avec ou sans concours",
+  "jobsCount": 6,
+  "jobsWithoutOtherConcours": 1,
+  "jobs": [
+   {
+    "id": "magasinier",
+    "name": "Magasinier - Magasinière des bibliothèques",
+    "categories": [
+     "C"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Range, prête et entretient les collections des bibliothèques universitaires."
+   },
+   {
+    "id": "fpdoc010",
+    "name": "Gestionnaire de ressources documentaires",
+    "categories": [
+     "B",
+     "C"
+    ],
+    "versants": "ETH",
+    "hasOtherConcours": true,
+    "description": "Assurer la gestion et la valorisation de la documentation ; fournir des services et des produits documentaires sous format papier ou numérique"
+   },
+   {
+    "id": "fpdoc011",
+    "name": "Chargé - Chargée d’encadrement des équipes d’agents de magasinage, d’accueil et de surveillance",
+    "categories": [
+     "A",
+     "B",
+     "C"
+    ],
+    "versants": "ETH",
+    "hasOtherConcours": true,
+    "description": "Il assure l’encadrement de proximité d’une équipe de magasinage, d’accueil ou de surveillance"
+   },
+   {
+    "id": "fpdoc012",
+    "name": "Magasinier - Magasinière d’archives ou de bibliothèque",
+    "categories": [
+     "C"
+    ],
+    "versants": "ETH",
+    "hasOtherConcours": true,
+    "description": "Il assure au sein de son entité (établissement ou service) les opérations de stockage, manipulations nécessaires au classement ou à la communication des documents."
+   },
+   {
+    "id": "fpdoc017",
+    "name": "Bibliothécaire",
+    "categories": [
+     "A",
+     "B",
+     "C"
+    ],
+    "versants": "ETH",
+    "hasOtherConcours": true,
+    "description": "Sélectionne et enrichit les ressources documentaires dans le cadre du projet et des objectifs de développement de la bibliothèque ou du centre documentaire. Participe à la conception et à la mise en œuvre d'installations et de services aux "
+   },
+   {
+    "id": "fpdoc023",
+    "name": "Opérateur - Opératrice de numérisation",
+    "categories": [
+     "C"
+    ],
+    "versants": "ETH",
+    "hasOtherConcours": true,
+    "description": "L’opérateur de numérisation est amené à travailler sur un système de numérisation de type appareil photographique ou scanner dédié, qui peut être manuel ou présenter certains automatismes, afin de reproduire tout type de document appartenan"
+   }
+  ]
+ },
+ {
+  "routeId": "corps-9cd3081e3c69",
+  "name": "Personnels de direction d'établissement d'enseignement ou de formation",
+  "cat": "A",
+  "versants": "E",
+  "lvl": null,
+  "source": "https://www.fonction-publique.gouv.fr/devenir-agent-public/calendrier-general-concours/personnels-de-direction-detablissement-denseignement-ou-de-formation",
+  "access": "Concours interne",
+  "jobsCount": 1,
+  "jobsWithoutOtherConcours": 1,
+  "jobs": [
+   {
+    "id": "fpdir019",
+    "name": "Responsable de direction d'un établissement d'éducation",
+    "categories": [
+     "A"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Assurer le pilotage et le fonctionnement de l’établissement dans les domaines pédagogique, administratif, financier et des ressources humaines, et dans l’évaluation des politiques et des actions conduites dans le cadre du projet d’établisse"
+   }
+  ]
+ },
+ {
+  "routeId": "corps-b4a91bad72b8",
+  "name": "Professeurs certifiés de l'enseignement agricole",
+  "cat": "A",
+  "versants": "E",
+  "lvl": null,
+  "source": "https://www.fonction-publique.gouv.fr/devenir-agent-public/calendrier-general-concours/professeurs-certifies-de-lenseignement-agricole",
+  "access": "Concours externe",
+  "jobsCount": 1,
+  "jobsWithoutOtherConcours": 1,
+  "jobs": [
+   {
+    "id": "fpens023",
+    "name": "Directeur - Directrice d’exploitation agricole ou d’atelier technologique",
+    "categories": [
+     "A"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Organise, pilote, et gère une exploitation agricole ou un atelier technologique"
+   }
+  ]
+ },
+ {
+  "routeId": "corps-5262c8692a47",
+  "name": "Masseur kinésithérapeute",
+  "cat": "A",
+  "versants": "H",
+  "lvl": null,
+  "source": "https://www.concours-fph.ars.sante.fr/consulter/concours/20939",
+  "access": "Concours hospitalier · consulter l’avis",
+  "jobsCount": 1,
+  "jobsWithoutOtherConcours": 1,
+  "jobs": [
+   {
+    "id": "fpmed008",
+    "name": "Masseur - Masseuse kinésithérapeute",
+    "categories": [
+     "A"
+    ],
+    "versants": "H",
+    "hasOtherConcours": false,
+    "description": "Elaborer un diagnostic kinésithérapique et des objectifs de soins.\nMettre en œuvre des actes et techniques de soins de rééducation de façon manuelle ou instrumentale dans un but thérapeutique ou non pour favoriser le maintien ou l'améliorat"
+   }
+  ]
+ },
+ {
+  "routeId": "corps-05649e6ff27a",
+  "name": "Orthophoniste",
+  "cat": "A",
+  "versants": "H",
+  "lvl": null,
+  "source": "https://www.concours-fph.ars.sante.fr/consulter/concours/21050",
+  "access": "Concours hospitalier · consulter l’avis",
+  "jobsCount": 1,
+  "jobsWithoutOtherConcours": 1,
+  "jobs": [
+   {
+    "id": "fpmed009",
+    "name": "Orthophoniste",
+    "categories": [
+     "A"
+    ],
+    "versants": "H",
+    "hasOtherConcours": false,
+    "description": "Elaborer un diagnostic, prévenir, évaluer et prendre en charge des personnes susceptibles de présenter des troubles de la communication, du langage dans toutes ses dimensions, et des autres activités cognitives, et des fonctions oro-myo-fac"
+   }
+  ]
+ },
+ {
+  "routeId": "corps-09789e66a53a",
+  "name": "Inspecteurs du permis de conduire et de la sécurité routière",
+  "cat": "B",
+  "versants": "E",
+  "lvl": null,
+  "source": "https://www.fonction-publique.gouv.fr/devenir-agent-public/calendrier-general-concours/inspecteurs-du-permis-de-conduire-et-de-la-securite-routiere",
+  "access": "Concours externe",
+  "jobsCount": 1,
+  "jobsWithoutOtherConcours": 1,
+  "jobs": [
+   {
+    "id": "fpusa033",
+    "name": "Inspecteur - Inspectrice du permis de conduire et de la sécurité routière",
+    "categories": [
+     "B"
+    ],
+    "versants": "E",
+    "hasOtherConcours": false,
+    "description": "Evaluer les compétences et les connaissances des candidats à la conduite "
+   }
+  ]
+ },
+ {
+  "routeId": "corps-72087d19dcef",
+  "name": "Bibliothécaires assistants spécialisés de classe normale",
+  "cat": "B",
+  "versants": "E",
+  "lvl": null,
+  "source": "https://www.fonction-publique.gouv.fr/devenir-agent-public/calendrier-general-concours/bibliothecaires-assistants-specialises-de-classe-normale",
+  "access": "Concours externe",
+  "jobsCount": 15,
+  "jobsWithoutOtherConcours": 0,
+  "jobs": [
+   {
+    "id": "fpcul007",
+    "name": "Animateur - Animatrice d'activités culturelles, techniques ou ludiques",
+    "categories": [
+     "A",
+     "B",
+     "C"
+    ],
+    "versants": "ET",
+    "hasOtherConcours": true,
+    "description": "L’activité de l’animateur d’activités culturelles, techniques ou ludiques vise à permettre la rencontre entre les publics et les différentes formes culturelles instituées. A ce titre, il a pour mission de délivrer des actions de médiation p"
+   },
+   {
+    "id": "fpcul008",
+    "name": "Chargé - Chargée de production culturelle",
+    "categories": [
+     "A",
+     "B"
+    ],
+    "versants": "ET",
+    "hasOtherConcours": true,
+    "description": "Il coordonne la production de projets culturels et des évènements de médiation et en assure la mise en œuvre en direction des publics."
+   },
+   {
+    "id": "fpcul009",
+    "name": "Responsable de production et de programmation culturelle",
+    "categories": [
+     "A",
+     "B"
+    ],
+    "versants": "ET",
+    "hasOtherConcours": true,
+    "description": "Il conçoit des produits culturels dans un souci de diffusion auprès des publics et de valorisation de l'établissement et de ses collections.\r\nIl supervise et coordonne leur réalisation."
+   },
+   {
+    "id": "fpcul012",
+    "name": "Régisseur - Régisseuse d’œuvres",
+    "categories": [
+     "A",
+     "B",
+     "C"
+    ],
+    "versants": "ET",
+    "hasOtherConcours": true,
+    "description": "Assurer la gestion logistique et administrative relative aux mouvements des œuvres et des collections , en intégrant la gestion des risques, qu'il s'agisse de prêts, d'organisation d'expositions, de mouvements de et vers les réserves, de tr"
+   },
+   {
+    "id": "fpcul014",
+    "name": "Chargé - Chargée d'instruction, de contrôle ou de suivi des opérations",
+    "categories": [
+     "A",
+     "B"
+    ],
+    "versants": "ET",
+    "hasOtherConcours": true,
+    "description": "Le chargé d'instruction, de contrôle et de suivi des opérations est affecté au sein d'une conservation régionale des monuments historiques, d'un service régional de l'archéologie ou d'une unité départementale de l'architecture ou du patrimo"
+   },
+   {
+    "id": "fpcul015",
+    "name": "Expert - Experte du patrimoine",
+    "categories": [
+     "A",
+     "B"
+    ],
+    "versants": "E",
+    "hasOtherConcours": true,
+    "description": "Exerce des responsabilités scientifiques et techniques en matière d’étude, d’enrichissement, de conservation et de mise en valeur du patrimoine en étant garant de l’application du code du patrimoine dans ses domaines de spécialité. Il parti"
+   },
+   {
+    "id": "fpdoc003",
+    "name": "Secrétaire d’édition",
+    "categories": [
+     "A",
+     "B"
+    ],
+    "versants": "ET",
+    "hasOtherConcours": true,
+    "description": "Assure la réalisation matérielle et le suivi de fabrication des publications depuis leur conception jusqu’à leur envoi pour impression. Assure un travail de hiérarchisation, de relecture et de correction des textes. Organise le contenu (tex"
+   },
+   {
+    "id": "fpdoc008",
+    "name": "Chargé - Chargée de mission numérique",
+    "categories": [
+     "A",
+     "B"
+    ],
+    "versants": "ET",
+    "hasOtherConcours": true,
+    "description": "Proposer, animer et suivre les projets d’actions innovantes dans le domaine du numérique"
+   },
+   {
+    "id": "fpdoc010",
+    "name": "Gestionnaire de ressources documentaires",
+    "categories": [
+     "B",
+     "C"
+    ],
+    "versants": "ETH",
+    "hasOtherConcours": true,
+    "description": "Assurer la gestion et la valorisation de la documentation ; fournir des services et des produits documentaires sous format papier ou numérique"
+   },
+   {
+    "id": "fpdoc011",
+    "name": "Chargé - Chargée d’encadrement des équipes d’agents de magasinage, d’accueil et de surveillance",
+    "categories": [
+     "A",
+     "B",
+     "C"
+    ],
+    "versants": "ETH",
+    "hasOtherConcours": true,
+    "description": "Il assure l’encadrement de proximité d’une équipe de magasinage, d’accueil ou de surveillance"
+   },
+   {
+    "id": "fpdoc013",
+    "name": "Responsable d’une unité de bibliothèque",
+    "categories": [
+     "A",
+     "B"
+    ],
+    "versants": "ETH",
+    "hasOtherConcours": true,
+    "description": "Définit les rôles et contributions de la bibliothèque en faveur des enjeux sociaux, économiques et culturels de la collectivité. Conduit un projet d'établissement, optimise et contrôle l'emploi des ressources"
+   },
+   {
+    "id": "fpdoc014",
+    "name": "Documentaliste",
+    "categories": [
+     "A",
+     "B"
+    ],
+    "versants": "ETH",
+    "hasOtherConcours": true,
+    "description": "Rechercher, traiter, gérer et diffuser l’information pour répondre et anticiper les besoins des usagers"
+   }
+  ]
+ },
+ {
+  "routeId": "corps-f2ef31da013b",
+  "name": "Surveillants de l'administration pénitentiaire - affectation nationale",
+  "cat": "B",
+  "versants": "E",
+  "lvl": null,
+  "source": "https://www.fonction-publique.gouv.fr/devenir-agent-public/calendrier-general-concours/surveillants-de-ladministration-penitentiaire-affectation-nationale",
+  "access": "Concours interne",
+  "jobsCount": 3,
+  "jobsWithoutOtherConcours": 0,
+  "jobs": [
+   {
+    "id": "fpjus026",
+    "name": "Surveillant - Surveillante pénitentiaire",
+    "categories": [
+     "B"
+    ],
+    "versants": "E",
+    "hasOtherConcours": true,
+    "description": "Prendre en charge les personnes placées sous main de justice\nEn assurer la garde et contribuer à leur réinsertion"
+   },
+   {
+    "id": "fpjus028",
+    "name": "Agent - Agente d'escorte pénitentiaire",
+    "categories": [
+     "B"
+    ],
+    "versants": "E",
+    "hasOtherConcours": true,
+    "description": "Prendre en charge les personnes détenues à l’extérieur d’un établissement pénitentiaire dans le cadre de leur transfert\nVeiller à la sécurisation des établissements pénitentiaires, de leurs abords et des parcours empruntés lors des déplacem"
+   },
+   {
+    "id": "fpjus029",
+    "name": "Agent - Agente en charge de la surveillance électronique",
+    "categories": [
+     "B"
+    ],
+    "versants": "E",
+    "hasOtherConcours": true,
+    "description": "Assurer la mise en place et le suivi des mesures de surveillance électronique\nConcourir aux objectifs de l’individualisation de la peine"
+   }
+  ]
+ },
+ {
+  "routeId": "corps-423d9c5175ba",
+  "name": "Agent - Agente de maîtrise (C2)",
+  "cat": "C",
+  "versants": "H",
+  "lvl": null,
+  "source": "https://www.concours-fph.ars.sante.fr/consulter/concours/21221",
+  "access": "Concours hospitalier · consulter l’avis",
+  "jobsCount": 3,
+  "jobsWithoutOtherConcours": 0,
+  "jobs": [
+   {
+    "id": "fplog055",
+    "name": "Responsable de production en blanchisserie",
+    "categories": [
+     "C"
+    ],
+    "versants": "ETH",
+    "hasOtherConcours": true,
+    "description": "Programmer la production en fonction des prévisions, organiser les temps  de production, contrôler la fiabilité des matériels, piloter la  maintenance. Il peut avoir une fonction d'encadrement"
+   },
+   {
+    "id": "fplog060",
+    "name": "Encadrant - Encadrante du bio-nettoyage",
+    "categories": [
+     "C"
+    ],
+    "versants": "ETH",
+    "hasOtherConcours": true,
+    "description": "Planifier, piloter et contrôler la réalisation des activités  de bio-nettoyage des locaux, en animant une / des équipes\nFormer et informer les professionnels dans le domaine de l'entretien et l'hygiène des locaux"
+   },
+   {
+    "id": "fplog061",
+    "name": "Responsable de blanchisserie",
+    "categories": [
+     "C"
+    ],
+    "versants": "ETH",
+    "hasOtherConcours": true,
+    "description": "Planifier, organiser et piloter l'ensemble des secteurs de production  fonction linge / blanchisserie, de la réception à l'expédition du linge, en animant une équipe de professionnels et en veillant à l'efficacité et à la qualité des presta"
+   }
+  ]
+ },
+ {
+  "routeId": "corps-16a06e4fc78c",
+  "name": "Ingénieur - Ingénieure des services culturels",
+  "cat": "A",
+  "versants": "E",
+  "lvl": null,
+  "source": "https://www.fonction-publique.gouv.fr/devenir-agent-public/calendrier-general-concours/ingenieur-des-services-culturels",
+  "access": "Concours externe",
+  "jobsCount": 1,
+  "jobsWithoutOtherConcours": 0,
+  "jobs": [
+   {
+    "id": "fpcul014",
+    "name": "Chargé - Chargée d'instruction, de contrôle ou de suivi des opérations",
+    "categories": [
+     "A",
+     "B"
+    ],
+    "versants": "ET",
+    "hasOtherConcours": true,
+    "description": "Le chargé d'instruction, de contrôle et de suivi des opérations est affecté au sein d'une conservation régionale des monuments historiques, d'un service régional de l'archéologie ou d'une unité départementale de l'architecture ou du patrimo"
+   }
+  ]
+ },
+ {
+  "routeId": "corps-b06ff3482256",
+  "name": "Technicien - Technicienne d'art",
+  "cat": "B",
+  "versants": "E",
+  "lvl": null,
+  "source": "https://www.fonction-publique.gouv.fr/devenir-agent-public/calendrier-general-concours/technicien-dart",
+  "access": "Concours externe",
+  "jobsCount": 1,
+  "jobsWithoutOtherConcours": 0,
+  "jobs": [
+   {
+    "id": "fpcul017",
+    "name": "Technicien - Technicienne des métiers d'art et du patrimoine",
+    "categories": [
+     "B"
+    ],
+    "versants": "ET",
+    "hasOtherConcours": true,
+    "description": "Par la mise en œuvre de savoir-faire traditionnels ou innovants, de techniques ou de procédures spécifiques :\nRéaliser ou contribuer à la création, à la restauration et à la préservation de fonds, de collections, d’objets, de dispositifs ou"
+   }
+  ]
+ }
+]
