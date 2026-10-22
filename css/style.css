@@ -2284,3 +2284,5 @@ html.crios .profile-footer { bottom:calc(86px + env(safe-area-inset-bottom, 0px)
 .prep.prep-static { cursor:default; }
 .prep.prep-static:hover { border-color:var(--line); }
 .prep-page .prep.prep-static:hover { border-color:var(--theme-tint,var(--lilac)); }
+/* Accueil (essai) : titres en Geologica Regular, la graisse sous le Medium du reste de l’app. */
+.screen.personal-home > h1, .personal-home > h1 .home-name, .personal-home .home-feature b, .personal-home .home-shortcuts b { font-weight:400; }
