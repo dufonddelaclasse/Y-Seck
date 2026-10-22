@@ -82,6 +82,30 @@ for (const c of existing) {
 }
 note('Concours existants : ' + replaced + ' champs remplacés par une valeur de recherche plus précise.');
 
+/* Liens officiels morts (404 au contrôle du 22 octobre 2026), remplacés par la page actuelle de l’organisateur. */
+const DOUANE = 'https://www.douane.gouv.fr/recrutement', DOUANE_FICHE = 'https://www.douane.gouv.fr/fiche/';
+const LINK_FIXES = [
+  ['catalogue/ref-concours-01.json', 'concours', 'É-010', DOUANE, DOUANE_FICHE + 'inspecteur-des-douanes-categorie-a'],
+  ['catalogue/ref-concours-01.json', 'concours', 'É-018', DOUANE, DOUANE_FICHE + 'controleur-des-douanes-categorie-b'],
+  ['catalogue/ref-concours-01.json', 'concours', 'É-022', DOUANE, DOUANE_FICHE + 'agent-de-constatation-des-douanes-categorie-c'],
+  ['catalogue/ref-routes-01.json', 'routes', 'insp-douane', DOUANE, DOUANE_FICHE + 'inspecteur-des-douanes-categorie-a'],
+  ['catalogue/ref-routes-01.json', 'routes', 'acd', DOUANE, DOUANE_FICHE + 'agent-de-constatation-des-douanes-categorie-c'],
+  ['catalogue/ref-exam-details-01.json', 'examDetails', 'insp-douane__E', DOUANE, DOUANE_FICHE + 'inspecteur-des-douanes-categorie-a'],
+  ['catalogue/ref-exam-details-01.json', 'examDetails', 'acd__E', DOUANE, DOUANE_FICHE + 'agent-de-constatation-des-douanes-categorie-c'],
+  ['catalogue/exam-details-01.json', 'examDetails', 'cpip__E', 'https://www.enap.justice.fr/conseiller-penitentiaire-dinsertion-et-de-probation', 'https://www.enap.justice.fr/conseiller-penitentiaire-dinsertion-et-probation']
+];
+const DEAD_ANNALES = ['T-028']; // page du CIG petite couronne supprimée, aucun rapport de jury en ligne
+const fixedFiles = {};
+for (const [path, key, id, from, to] of LINK_FIXES) {
+  const file = path.startsWith('catalogue/ref-concours-0') ? existingFiles.find(f => f.path === path) : (fixedFiles[path] ||= { path, data: read('data/' + path) });
+  const list = file.data[key], i = list.findIndex(o => o.id === id);
+  if (i < 0) throw new Error('Objet introuvable pour le lien ' + id);
+  list[i] = JSON.parse(JSON.stringify(list[i]).split(JSON.stringify(from).slice(1, -1)).join(to));
+  if (key === 'concours') concoursById[id] = list[i];
+}
+existing.splice(0, existing.length, ...[].concat(...existingFiles.map(f => f.data.concours)));
+for (const id of DEAD_ANNALES) if (concoursById[id] && concoursById[id].annales && !hasValue((byRef[id] || {}).annalesUrl)) delete concoursById[id].annales;
+
 /* ---------- B.2 / B.3 : nouveaux concours et nouveaux corps ---------- */
 /* Champs d’orientation copiés du concours donneur, puis adaptés au concours (o). */
 const ORIENTATION = ['college', 'collegeOption', 'lyceeGeneral', 'lyceeTechno', 'lyceePro', 'lyceeWhy', 'stage', 'optionSeconde', 'optionTerminale', 'studies', 'l1', 'l2', 'l3', 'master', 'prepa', 'afterBac', 'vigilance'];
@@ -114,7 +138,7 @@ const NEW = [
     o: { prepa: 'IEJ, IPAG ou IEP ; prépas Talents justice', studies: 'Droit, sciences sociales ou administration publique (bac+3)' } },
   { ref: 'NEW-sog', fp: 'E', cat: 'B', name: 'Sous-officier - Sous-officière de gendarmerie', routes: ['sous-off-gend'], donor: 'É-016', domain: 'Sécurité, police, défense',
     o: { prepa: 'Préparation militaire gendarmerie ; classes préparatoires Talents de la gendarmerie ; entraînement physique ; réserve opérationnelle', studies: 'Bac exigé ; BUT carrières juridiques ou licence de droit utiles, jamais obligatoires', stage: GEND_STAGE, afterBac: 'Oui : le bac suffit pour le concours externe' } },
-  { ref: 'NEW-eogn', fp: 'E', cat: 'A', name: 'Officier - Officière de gendarmerie (concours de l’EOGN)', routes: ['officier-gend', 'corps-f25b82f071a5', 'corps-1284fb947d8a'], donor: 'É-008', domain: 'Sécurité, police, défense',
+  { ref: 'NEW-eogn', fp: 'E', cat: 'A', name: 'Officier - Officière de gendarmerie (concours de l’AMGN, ex-EOGN)', routes: ['officier-gend', 'corps-f25b82f071a5', 'corps-1284fb947d8a'], donor: 'É-008', domain: 'Sécurité, police, défense',
     o: { prepa: 'Master de droit, IEP, école d’ingénieurs ou de commerce ; classes préparatoires Talents de la gendarmerie ; préparation physique ; réserve opérationnelle', studies: 'Master (bac+5) en droit, science politique, sciences, ingénierie ou gestion', master: 'Master ou diplôme d’ingénieur exigé pour le concours universitaire', afterBac: 'Non : bac+5 exigé pour le concours universitaire', stage: GEND_STAGE } },
   { ref: 'NEW-pts', fp: 'E', cat: 'B', name: 'Technicien - Technicienne de police technique et scientifique', routes: ['pts'], donor: 'É-019', domain: 'Sécurité, police, défense',
     o: { prepa: 'Bac général scientifique ou STL ; BUT génie biologique, chimie ou mesures physiques utiles', studies: 'Bac exigé ; BUT ou licence de biologie, de chimie ou de physique utiles', lyceeTechno: 'Sciences et technologies de laboratoire (STL)', lyceeWhy: 'Biologie, chimie, physique, rigueur et observation', stage: 'Rencontrer un policier lors d’une journée portes ouvertes ou d’un forum des métiers ; certains services ne peuvent accueillir des mineurs.' + ONE_STAGE, afterBac: 'Oui : le bac suffit pour le concours externe' } },
@@ -192,7 +216,7 @@ const NEW = [
 const NEW_ROUTES = [
   { id: 'capitaine-pen', ref: 'NEW-lieutenant-pen', name: 'Capitaine pénitentiaire', cat: 'A', lvl: 4, fp: 'E', matchPattern: 'capitaine.*penitentiaire|officier.*penitentiaire|lieutenant.*penitentiaire|chef de detention', cardTitle: 'Concours de l’ENAP' },
   { id: 'dir-pjj', ref: 'NEW-dir-pjj', name: 'Directeur - Directrice des services de la protection judiciaire de la jeunesse', cat: 'A', lvl: 4, fp: 'E', matchPattern: 'directeur.*(pjj|protection judiciaire)', cardTitle: 'Concours de l’ENPJJ' },
-  { id: 'officier-gend', ref: 'NEW-eogn', name: 'Officier - Officière de gendarmerie', cat: 'A', lvl: 5, fp: 'E', matchPattern: 'officier.*gendarmerie|commandant.*gendarmerie|gendarmerie.*(commandement|encadrement)', cardTitle: 'Concours de l’EOGN' },
+  { id: 'officier-gend', ref: 'NEW-eogn', name: 'Officier - Officière de gendarmerie', cat: 'A', lvl: 5, fp: 'E', matchPattern: 'officier.*gendarmerie|commandant.*gendarmerie|gendarmerie.*(commandement|encadrement)', cardTitle: 'Concours de l’AMGN (ex-EOGN)' },
   { id: 'pts', ref: 'NEW-pts', name: 'Technicien - Technicienne de police technique et scientifique', cat: 'B', lvl: 2, fp: 'E', matchPattern: 'police technique et scientifique|identite judiciaire|technicien.*scientifique.*police', cardTitle: 'Concours de la police scientifique' },
   { id: 'conservateur-bib-etat', ref: 'NEW-enssib', name: 'Conservateur - Conservatrice des bibliothèques', cat: 'A+', lvl: 4, fp: 'E', matchPattern: 'conservateur.*biblioth', cardTitle: 'Concours de l’Enssib' },
   { id: 'bibliothecaire', ref: 'NEW-biblio-etat', name: 'Bibliothécaire d’État', cat: 'A', lvl: 4, fp: 'E', matchPattern: '^bibliothecaire|biblio.caire\\b', cardTitle: 'Concours des bibliothèques' },
@@ -322,7 +346,7 @@ for (const [routeId, jobIds] of Object.entries(LINKS)) {
     const equivalent = c.routeIds.filter(x => x !== routeId).find(x => linkedNow[jobId] && linkedNow[jobId].has(x));
     if (equivalent) { note('Déjà rattaché au corps équivalent ' + equivalent + ' : ' + id); continue; }
     if (!route.fp.split('').some(f => job.fp.includes(f))) note('Versant différent, lien sans effet : ' + id);
-    links.push({ id, jobId, routeId, status: 'proposé', source: route.source || c.source, note: NOTE });
+    links.push({ id, jobId, routeId, status: 'proposé', source: c.source || route.source, note: NOTE });
   }
 }
 
@@ -384,7 +408,7 @@ for (const r of research) {
 /* ---------- B.6 : sigles ---------- */
 const SIGLES = [
   ['ENM', 'École nationale de la magistrature'], ['ENG', 'École nationale des greffes'], ['ENAP', 'École nationale d’administration pénitentiaire'],
-  ['ENPJJ', 'École nationale de protection judiciaire de la jeunesse'], ['EOGN', 'École des officiers de la gendarmerie nationale'],
+  ['ENPJJ', 'École nationale de protection judiciaire de la jeunesse'], ['EOGN', 'École des officiers de la gendarmerie nationale'], ['AMGN', 'Académie militaire de la gendarmerie nationale'],
   ['ENSOSP', 'École nationale supérieure des officiers de sapeurs-pompiers'], ['INP', 'Institut national du patrimoine'],
   ['Enssib', 'École nationale supérieure des sciences de l’information et des bibliothèques'], ['ENSAI', 'École nationale de la statistique et de l’analyse de l’information'],
   ['ENSAE', 'École nationale de la statistique et de l’administration économique'], ['INSED', 'Ingénieur de la statistique, de l’économie et de la donnée'],
@@ -405,7 +429,7 @@ const knownSigles = new Set((base.sigles || []).map(x => x.id));
 const sigles = SIGLES.filter(([id]) => !knownSigles.has(id)).map(([id, label]) => ({ id, label }));
 
 /* ---------- Écriture ---------- */
-for (const f of existingFiles) writeCompact(f.path, f.data);
+for (const f of existingFiles.concat(Object.values(fixedFiles))) writeCompact(f.path, f.data);
 writeCompact(OUT.concours, { concours: created });
 writeCompact(OUT.routes, { routes: newRoutes });
 writeCompact(OUT.links, { links });
