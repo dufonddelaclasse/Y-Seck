@@ -55,17 +55,20 @@ function start(saved) {
 
 const personal=(extra={})=>({profile:'etu',name:'Camille',level:'Bac',domains:['Justice'],traits:['equipe'],boursier:'Non',budget:'Gratuit uniquement',done:true,location:null,favorites:['attache','magistrat'],filterHintSeen:true,...extra});
 
-// Onglets Métiers et Concours : chaque page liste un seul type, sans filtre « Affichage ».
+// Onglet Explorer : métiers et concours sous le même onglet, chaque liste garde son affichage.
 {
   const t=start(personal());
   t.location.hash='#/metiers';
   const page=t.screens.metiers();
-  assert(page.includes('Vos métiers')&&!page.includes('concours-row'),'La page Métiers ne liste que des métiers.');
-  assert(page.includes('href="#/concours-liste"')&&page.includes('>Métiers</a>')&&page.includes('>Concours</a>'),'Le menu propose Métiers et Concours.');
-  assert(!t.screens.metiers().includes('Explorer'),'L’onglet Explorer devient Métiers.');
+  assert(page.includes('<h1>Explorer</h1>')&&page.includes('explore-switch')&&!page.includes('concours-row'),'La liste Métiers s’affiche sous Explorer, sans concours.');
+  const menu=page.slice(page.indexOf('<nav class="tabbar"'));
+  assert(menu.includes('>Explorer</a>')&&!menu.includes('>Métiers</a>')&&!menu.includes('>Concours</a>'),'Le menu propose un seul onglet Explorer.');
+  assert(/explore-switch[\s\S]*href="#\/metiers" class="on"/.test(page),'La bascule marque Métiers.');
   t.location.hash='#/concours-liste';
   const concours=t.screens['concours-liste']();
-  assert(concours.includes('Vos concours')&&concours.includes('concours-row')&&!concours.includes('href="#/metier/'),'La page Concours ne liste que des concours.');
+  assert(concours.includes('<h1>Explorer</h1>')&&concours.includes('concours-row')&&!concours.includes('href="#/metier/'),'La liste Concours s’affiche sous Explorer, sans métiers.');
+  assert(/explore-switch[\s\S]*href="#\/concours-liste" class="on"/.test(concours),'La bascule marque Concours.');
+  assert(concours.includes('href="#/concours-liste" class="on" aria-current="page"'),'L’onglet Explorer rouvre la dernière liste consultée.');
   const key=concours.match(/#\/concours-fiche\/([^"]+)/)[1];
   const fiche=t.screens['concours-fiche'](key);
   assert(fiche.includes('<h1>')&&fiche.includes('job-cards')&&fiche.includes('class="trip"'),'La fiche concours suit la frise et présente les métiers liés en cartes.');

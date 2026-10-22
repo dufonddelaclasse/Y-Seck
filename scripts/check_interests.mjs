@@ -15,7 +15,7 @@ const context={window:{PUBLIC_DATA:db}};
 vm.createContext(context);
 for(const file of ['js/data.js','js/catalog.js'])vm.runInContext(fs.readFileSync(new URL(file,root),'utf8'),context);
 const data=context.window.DATA;
-assert.equal(new Set(data.domains).size,23,'Les 23 choix doivent être distincts.');
+assert.equal(new Set(data.domains).size,37,'Les 37 choix doivent être distincts.');
 assert.equal(data.jobs.length,db.legacyJobs.concat(db.rmfp).filter(job=>job.active!==false).length);
 assert(data.jobs.every(job=>job.interests.includes(job.domain)),'Les domaines principaux doivent rester compatibles.');
 assert(data.jobs.find(job=>job.id==='chancellerie').interests.includes('Diplomatie'));

@@ -229,14 +229,21 @@
     for (var i = 1; i <= total; i++) out += '<span class="' + (i <= n ? 'on' : '') + '"></span>';
     return out + '</div>';
   }
+  /* Métiers et concours partagent l’onglet Explorer : il rouvre la dernière liste consultée. */
+  function exploreHref() { return S.explore === 'concours' ? '#/concours-liste' : '#/metiers'; }
+  function exploreSwitch(active) {
+    return '<div class="explore-switch" role="tablist" aria-label="Métiers ou concours">' + [['metiers', 'Métiers'], ['concours', 'Concours']].map(function (t) {
+      var on = t[0] === active;
+      return '<a role="tab" href="' + (t[0] === 'concours' ? '#/concours-liste' : '#/metiers') + '" class="' + (on ? 'on' : '') + '" aria-selected="' + on + '">' + esc(t[1]) + '</a>';
+    }).join('') + '</div>';
+  }
   function tabbar(active) {
     if (active === 'prepas' || active === 'concours') active = 'accueil';
-    /* Parcours ouvert depuis une fiche concours : l’onglet Concours reste allumé jusque dans les sous-pages. */
-    if (active === 'metiers' && prepFocus) active = 'concours-liste';
-    var tabs = [['accueil', isParent() ? 'Famille' : 'Accueil', I.home], ['metiers', 'Métiers', I.grid], ['concours-liste', 'Concours', I.exam], ['favoris', 'Favoris', I.bookmark], ['moi', isParent()&&S.children.length>=2?'Profils':'Profil', I.user]];
+    if (active === 'metiers' || active === 'concours-liste') active = 'explorer';
+    var tabs = [['accueil', isParent() ? 'Famille' : 'Accueil', I.home], ['explorer', 'Explorer', I.compass], ['favoris', 'Favoris', I.bookmark], ['moi', isParent()&&S.children.length>=2?'Profils':'Profil', I.user]];
     return '<nav class="tabbar" aria-label="Navigation principale">' + tabs.map(function (t) {
       var on = t[0] === active;
-      return '<a href="#/' + t[0] + '" class="' + (on ? 'on' : '') + '"' + (on ? ' aria-current="page"' : '') + '>' + t[2] + esc(t[1]) + '</a>';
+      return '<a href="' + (t[0] === 'explorer' ? exploreHref() : '#/' + t[0]) + '" class="' + (on ? 'on' : '') + '"' + (on ? ' aria-current="page"' : '') + '>' + t[2] + esc(t[1]) + '</a>';
     }).join('') + '</nav>';
   }
   function chip(action, value, label, on, extraCls) {
@@ -842,8 +849,9 @@
       '<div class="sheet-actions"><button type="button" class="btn" data-ui="close">Afficher ' + resultsLabel() + '</button></div>';
   }
   screens.metiers = function () {
+    S.explore = 'metiers';
     return '<main class="screen pt">' +
-      '<div class="title-row"><h1>' + (isParent() ? 'Ses métiers' : 'Vos métiers') + '</h1><button id="filters-open" type="button" class="icon-btn' + (showFilterNotice ? ' pulse' : '') + '" data-action="openFilters" aria-label="Régler les filtres métiers">' + I.settings + '</button></div>' + childSelector() +
+      '<div class="title-row"><h1>Explorer</h1><button id="filters-open" type="button" class="icon-btn' + (showFilterNotice ? ' pulse' : '') + '" data-action="openFilters" aria-label="Régler les filtres métiers">' + I.settings + '</button></div>' + childSelector() + exploreSwitch('metiers') +
       (showFilterNotice ? '<div class="top-notice" role="status"><span>Filtrez les métiers par catégorie<span aria-hidden="true"> →</span><span class="sr-only"> avec le bouton des réglages</span></span></div>' : '') +
       '<div class="row filter-summary" aria-label="Filtres actifs">' + filterSummary() + '</div>' +
       '<div class="search-wrap">' + searchField('q','Rechercher un métier','Rechercher un métier',S.q) +
@@ -852,8 +860,9 @@
   };
   /* Page Concours : même présentation et mêmes filtres que la page Métiers. */
   screens['concours-liste'] = function () {
+    S.explore = 'concours';
     return '<main class="screen pt">' +
-      '<div class="title-row"><h1>' + (isParent() ? 'Ses concours' : 'Vos concours') + '</h1><button id="filters-open" type="button" class="icon-btn" data-action="openFilters" aria-label="Régler les filtres concours">' + I.settings + '</button></div>' + childSelector() +
+      '<div class="title-row"><h1>Explorer</h1><button id="filters-open" type="button" class="icon-btn" data-action="openFilters" aria-label="Régler les filtres concours">' + I.settings + '</button></div>' + childSelector() + exploreSwitch('concours') +
       '<div class="row filter-summary" aria-label="Filtres actifs">' + filterSummary() + '</div>' +
       '<div class="search-wrap">' + searchField('q','Rechercher un concours','Rechercher un concours',S.cq) +
       '<ul class="suggest" id="q-suggest" aria-label="Suggestions" hidden></ul></div>' +
@@ -1418,6 +1427,19 @@
       (others.length ? '<p class="related-note">Ces métiers sont aussi accessibles par d’autres concours, d’une autre catégorie ou d’un autre versant de la fonction publique.</p>' +
         '<div class="list job-cards">' + others.map(jobRow).join('') + '</div>' : '');
   }
+  function concoursInfo(c) {
+    var facts = [];
+    if (c.school) facts.push(['École, formation', c.school]);
+    if (c.organizer) facts.push(['Organisateur', c.organizer]);
+    if (c.trainingMonths) facts.push(['Durée de la formation', c.trainingMonths + ' mois' + (c.paidTraining && /^oui/i.test(c.paidTraining) ? ', rémunérée' : '')]);
+    if (c.places) facts.push(['Postes', c.places]);
+    if (c.evolution) facts.push(['Et après', c.evolution]);
+    return '<div class="concours-info"><p class="eyebrow">' + catBadge(c.cat, 'sm') + ' ' + esc(D.fps[c.fp] || '') + '</p><h3 class="no-icon">' + sig(c.name) + '</h3>' +
+      String(c.description).split(/\n+/).map(function (t) { return '<p class="body">' + sig(t.trim()) + '</p>'; }).join('') +
+      (facts.length ? '<dl class="concours-facts">' + facts.map(function (f) { return '<dt>' + esc(f[0]) + '</dt><dd>' + sig(f[1]) + '</dd>'; }).join('') + '</dl>' : '') +
+      (c.metiers ? '<p class="small"><b>Métiers après le concours :</b> ' + sig(c.metiers) + '</p>' : '') +
+      (c.source ? ext(c.source, 'Page officielle du concours', 'link-plain') : '') + '</div>';
+  }
   screens['concours-fiche'] = function (key, testLevel) {
     var c = key && concoursByKey(key);
     if (!c) return screens['concours-liste']();
@@ -1431,6 +1453,7 @@
       '<div class="job-hero trip-head"><div class="trip-summary"><span class="trip-modes">' + I.walk + tripSeps(c.cat) + catBadge(c.cat) + '</span></div>' +
         '<h1>' + sig(c.name) + '</h1></div>' +
       (visitor ? '' : '<div class="job-actions">' +
+        (c.description ? '<button type="button" class="job-action" data-action="concoursInfo"' + attr('v', concoursKey(c)) + ' aria-haspopup="dialog">' + I.info + '<span>Information</span></button>' : '') +
         '<button type="button" class="job-action" data-action="favorite"' + attr('v', favKey) + ' aria-pressed="' + fav + '" aria-label="' + (fav ? 'Retirer des favoris' : 'Ajouter aux favoris') + '">' + I.bookmark + '<span aria-hidden="true">Favori</span></button>' +
         '<button type="button" class="job-action" data-action="share"' + attr('v', favKey) + '>' + I.send + '<span>Partager</span></button>' +
       '</div>') +
@@ -2016,6 +2039,7 @@
     document.documentElement.dataset.largeText = String(!!S.largeText);
     document.documentElement.dataset.dysFont = String(!!S.dysFont);
     var r = route();
+    if (r.name === 'explorer') { r = { name: S.explore === 'concours' ? 'concours-liste' : 'metiers' }; history.replaceState(null, '', '#/' + r.name); }
     if (profileReturn && r.name !== 'moi') profileReturn = null;
     if (r.name === 'preparer') prepFocus = r.arg2 && concoursByKey(r.arg2) ? { job: r.arg, key: r.arg2 } : null;
     else if (prepFocus && PREP_PAGES.indexOf(r.name) < 0) prepFocus = null;
@@ -2254,6 +2278,7 @@
       case 'askUnfavorite': { var fj = favItem(v); UI.open('confirm', 'Retirer des favoris ?', '<p class="body">' + esc(fj ? fj.name : 'Ce métier') + ' ne fera plus partie de ' + (isParent() ? 'ses' : 'vos') + ' favoris.</p><div class="sheet-actions"><button type="button" class="btn danger-solid" data-action="unfavorite"' + attr('v', v) + '>Retirer des favoris</button><button type="button" class="btn outline" data-ui="close">Annuler</button></div>', el); break; }
       case 'unfavorite': { UI.close(); set({ favorites: S.favorites.filter(function (id) { return id !== v; }) }); announce((String(v).indexOf('concours:') === 0 ? 'Concours' : 'Métier') + ' retiré des favoris'); break; }
       case 'share': e.preventDefault(); shareJob(v, el); break;
+      case 'concoursInfo': { var infoC = concoursByKey(v); if (infoC) UI.open('concours-info', 'Information', concoursInfo(infoC), el); break; }
       case 'copyShare': {
         var input = document.querySelector('.share-url');
         var done = function () { announce('Message copié'); el.textContent = 'Message copié'; };

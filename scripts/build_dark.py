@@ -168,6 +168,9 @@ html.dark .category-fit.warn svg, html.dark :is(.fit,.parcours-zone,.parcours-li
 html.dark .prep-page button.chip:not(.category-choice) { --choice-ink:var(--theme-ink); }
 html.dark :is(.exam-cal,.exam-places) h5 svg { color:currentColor; }
 html.dark .tabbar a.on::before { background:var(--brand); }
+html.dark .explore-switch { background:#2E2E33; }
+html.dark .explore-switch a { color:#C2C2C6; }
+html.dark .explore-switch a.on { background:var(--brand); color:#161616; }
 /* Bandeau de mise à jour : fond noir à 100 % (le générateur éclaircirait le noir de style.css). */
 html.dark body .update-notice { background:#000 !important; }
 html.dark .sheet-content button.chip.category-choice[data-action="metCat"]:not(.on)::after { background-color:#8E8E93; box-shadow:0 0 0 2px #292929; }

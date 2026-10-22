@@ -98,15 +98,36 @@
     j.routeIds = linkedRoutes(j.id);
     j.source = j.source || (r ? r.source : D.jobsUrl);
   });
+  /* « Ce qui vous ressemble » : chaque trait est reconnu dans les activités, compétences et qualités des fiches RMFP.
+     Les règles restent ciblées (« conduite » seule attraperait « conduite de projet »). */
+  var TRAIT_RULES = [
+    ['accueil', /accueill/], ['manager', /manager|encadrer une équipe|encadrement d.équipe/], ['ecrire', /rédiger/], ['chiffres', /calcul|comptab|budget/], ['equipe', /travailler en équipe|travail en équipe/], ['organise', /organiser|planifier/],
+    ['dehors', /extérieur|sur le terrain|plein air|chantier/], ['sangfroid', /sang-froid|maîtrise de soi|gestion du stress|garder son calme/], ['souplesse', /adaptab|souplesse|flexib/], ['agile', /polyvalen|réactiv|agilit/],
+    ['public_parler', /aisance orale|expression orale|prise de parole|s.exprimer en public|animer des réunions/], ['meticuleux', /rigueur|rigoureux|minuti|précision/], ['droit', /réglementation|juridique|\bdroit\b|législ/],
+    ['sciences', /scientifique|biolog|chimi|\bphysique\b|géolog/], ['numerique', /développement (informatique|logiciel)|programm|système d.information|cybers|informaticien|réseaux informatiques|outils numériques avancés/],
+    ['langues', /langues? étrangères?|\banglais\b|bilingue|traduction|interprétariat/], ['aider', /aider les|accompagner les|aide aux|soutien aux/], ['vulnerables', /vulnérab|fragil|handicap|dépendan/], ['enfants', /\benfants?\b/],
+    ['mobilite', /déplacements fréquents|mobilité géographique|itinéran|voyage/], ['conduire', /conduite de véhicule|conduire un véhicule|permis b|véhicules? de service|engins?\b/], ['manuel', /travaux manuels|travail manuel|manutention|outillage/],
+    ['charges', /port de charges|charges lourdes|effort physique/], ['horaires', /horaires décalés|travail de nuit|week-end|astreinte|horaires variables/], ['uniforme', /uniforme|hiérarchie militaire|statut militaire/], ['sport', /sportif|condition physique|entraînement physique|activités physiques/],
+    ['creer', /concevoir|créer/], ['cuisine', /cuisine|culinaire|repas/], ['nature', /\bnature\b|biodiversit|faune|flore|animaux|forêt/], ['intellect', /expertise|étudier|réflexion|conceptuel/], ['teletravail', /télétravail/],
+    ['jeunes', /adolescent|\bjeunes\b|jeunesse|collégien|lycéen|étudiant/], ['international', /international|à l.étranger|ambassade|consulat|européen/], ['labo', /laborato|paillasse|échantillon/], ['hopital', /hôpital|hospitali|établissement de santé/], ['ecole', /élèves?\b|établissement scolaire|école|collège|lycée/],
+    ['urgence', /urgence|situation de crise|astreinte|intervention rapide|secours/], ['enseigner', /\benseign(er|ement|ant)|\bformer (des|les)\b|animer des formations|pédagogi|transmettre (des|ses) (savoirs|connaissances)/], ['enqueter', /enquêt|investig|recherche d.informations|recueillir des informations/],
+    ['proteger', /protéger|protection des personnes|secourir|sauvetage|surveillance/], ['soigner', /\bsoins?\b|soigner|thérapeut|prise en charge médicale|paramédical/], ['art', /artisti|graphiste|graphisme|infographi|\bdesign|esthéti|scénograph|photograph|vidéo|illustrat|musique|théâtre|\bdessin/], ['histoire', /\bhistoire\b|historique|patrimoine|archiv|archéolog|musée|monument/],
+    ['technique', /\bmachines?\b|équipements techniques|installations techniques|maintenance|dépann|mécani|électri|hydrauli/], ['analyser', /analyse de données|statistiq|exploiter des données|modélis|indicateurs de/], ['controler', /contrôler la conformité|contrôles? (sur place|de conformité|réglementaire)|audit|inspect|vérifier la conformité/], ['negocier', /négoci|convaincre|argument|persuad|médiation/],
+    ['curieux', /curiosité/], ['patient', /patience/], ['ecoute', /écoute|empath|bienveill|relation d.aide/], ['creatif', /créativ|imagin|créatif/]
+  ];
+  /* Traits ajoutés après coup : les 65 métiers historiques gardent leurs traits choisis à la main et reçoivent seulement ceux-ci. */
+  var ADDED_TRAITS = ['jeunes', 'international', 'labo', 'hopital', 'ecole', 'urgence', 'enseigner', 'enqueter', 'proteger', 'soigner', 'art', 'histoire', 'technique', 'analyser', 'controler', 'negocier', 'curieux', 'patient', 'ecoute', 'creatif'];
   P.rmfp.forEach(function (j) {
     j.routeIds = linkedRoutes(j.id);
     j.steps = j.steps && j.steps.length ? j.steps : ['Repérer les corps ou cadres d’emplois et les diplômes correspondant au poste', '*Consulter les concours et les recrutements de l’employeur', 'Vérifier les conditions et candidater auprès du service recruteur'];
     if (j.traits && j.traits.length) return;
     j.traits = [];
-    var text = (j.activities + ' ' + j.skills).toLowerCase();
-    [['accueil', /accueill/], ['manager', /manager|encadrer une équipe/], ['ecrire', /rédiger/], ['chiffres', /calcul|statistiq|comptab/], ['equipe', /travailler en équipe/], ['organise', /organiser|planifier/]].forEach(function (p) {
-      if (p[1].test(text)) j.traits.push(p[0]);
-    });
+    var text = (j.activities + ' ' + j.skills + ' ' + (j.qualities || '')).toLowerCase();
+    TRAIT_RULES.forEach(function (p) { if (p[1].test(text)) j.traits.push(p[0]); });
+  });
+  D.jobs.forEach(function (j) {
+    var text = (j.name + ' ' + (j.desc || '') + ' ' + (j.steps || []).join(' ')).toLowerCase();
+    TRAIT_RULES.forEach(function (p) { if (ADDED_TRAITS.indexOf(p[0]) > -1 && j.traits.indexOf(p[0]) === -1 && p[1].test(text)) j.traits.push(p[0]); });
   });
   D.jobs = D.jobs.concat(P.rmfp.filter(function (j) { return j.active !== false; }));
   /* Les centres d’intérêt complètent le domaine principal sans modifier les liens métier / corps. */
@@ -115,14 +136,14 @@
   function normalize(value){return String(value||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[’']/g,' ').toLowerCase();}
   var interests = D.domainOptions.map(function(option){
     D.domainLabels[option.id]=option.label;
-    return {option:option,namePattern:option.namePattern?new RegExp(option.namePattern):null};
+    return {option:option,namePattern:option.namePattern?new RegExp(option.namePattern):null,textPattern:option.textPattern?new RegExp(option.textPattern):null};
   });
   D.domains = D.domainOptions.map(function(option){return option.id;});
   D.jobs.forEach(function(job){
-    var name=normalize(job.name);
+    var name=normalize(job.name), text=normalize((job.activities||job.desc||'')+' '+(job.skills||''));
     job.interests=interests.filter(function(rule){var option=rule.option;return option.id===job.domain||
       (option.rmfpDomains||[]).indexOf(job.rmfpDomain)>-1||(option.families||[]).indexOf(job.family)>-1||
-      (rule.namePattern&&rule.namePattern.test(name));}).map(function(rule){return rule.option.id;});
+      (rule.namePattern&&rule.namePattern.test(name))||(rule.textPattern&&rule.textPattern.test(text));}).map(function(rule){return rule.option.id;});
   });
   D.calendar = P.calendar.filter(function(c){return !c.duplicateOf;});
   /* Prochaines sessions attendues, quand les dates ne sont pas encore publiées (recherche du 19 octobre 2026). */
