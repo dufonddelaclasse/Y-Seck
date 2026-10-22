@@ -71,12 +71,13 @@
   P.links.forEach(function (l) { if (l.status !== 'rejeté' && !rejectedLinks[l.jobId + '|' + l.routeId]) { var list = linksByJob[l.jobId] || (linksByJob[l.jobId] = []); if (list.indexOf(l.routeId) === -1) list.push(l.routeId); } });
   function linkedRoutes(id) { return (linksByJob[id] || []).slice(); }
   /* Audit : catégories et versants rectifiés des métiers, catégories statutaires des corps. */
-  var jobFix = {}; (P.jobCorrections || []).forEach(function (f) { jobFix[f.id] = f; });
+  /* Les corrections d’un même métier se complètent (audit, puis explications du recrutement) ; recruitment: null retire la note. */
+  var jobFix = {}; (P.jobCorrections || []).forEach(function (f) { jobFix[f.id] = Object.assign(jobFix[f.id] || {}, f); });
   (P.rmfp || []).concat(P.legacyJobs || []).forEach(function (j) {
     var f = jobFix[j.id]; if (!f) return;
     if (f.categories) { j.categories = f.categories.slice(); delete j.categoryCounts; j.cat = f.categories.length === 1 ? f.categories[0] : 'V'; j.categorySource = 'audit'; }
     if (f.fp) j.fp = f.fp;
-    if (f.recruitment) j.recruitment = f.recruitment;
+    if (f.recruitment) j.recruitment = f.recruitment; else if (f.recruitment === null) delete j.recruitment;
   });
   var routeFix = {}; (P.routeCorrections || []).forEach(function (f) { routeFix[f.id] = f; });
   P.routes.forEach(function (r) { if (routeFix[r.id]) r.cat = routeFix[r.id].cat; });
