@@ -38,7 +38,7 @@ const { chromium } = require('/opt/node22/lib/node_modules/playwright');
 Dossier `data/research/2026-10-22/` :
 - `BRIEF.md` : consigne et schéma de sortie donnés aux agents de recherche.
 - `lots/lot-E1..E6.json` : les 61 concours existants (avec liens officiels tirés du fichier Excel de l'utilisateur) ; `lots/lot-N1..N5.json` : 43 nouveaux concours pressentis (écoles du service public).
-- `out/E1..E6.json` : 61 fiches de recherche (toutes livrées) ; `out/N1..N4.json` : 33 nouveaux concours livrés. **`out/N5.json` (armées, agrégation, CAPLP, CAPEPS, PsyEN) a été relancé** : s'il n'est pas là, relancer un agent avec `BRIEF.md` + `lots/lot-N5.json`, sortie attendue au même schéma.
+- `out/E1..E6.json` : 61 fiches de recherche (toutes livrées) ; `out/N1..N5.json` : 43 nouveaux concours livrés (N5 : armées, agrégation, CAPLP, CAPEPS, PsyEN ; les sous-officiers des armées sont un recrutement sur dossier et tests, sans session de concours).
 - `reference-routes.json`, `reference-legacy-jobs.json`, `reference-concours.json` : extraits des données actuelles (routes = corps, 182 ; métiers historiques, 65 ; concours, 61).
 - `Y-Seck-liens-references-concours.xlsx` et `liens-references.json` : le fichier Excel de l'utilisateur (export des liens de l'app, 7 feuilles).
 
