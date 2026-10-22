@@ -87,6 +87,13 @@
   D.accessRoutes = byRoute;
   /* Référentiel des concours : chaque corps reçoit les concours qui y mènent, par versant. */
   D.concours = P.concours || []; D.sigles = P.sigles || []; D.stagesAdvice = P.stagesAdvice || []; D.prepaOrganisms = P.prepaOrganisms || [];
+  /* Corrections des fiches concours : champs complétés après recherche, corps rattachés à un concours existant (addRouteIds). */
+  var concoursFix = {}; (P.concoursCorrections || []).forEach(function (f) { concoursFix[f.id] = Object.assign(concoursFix[f.id] || {}, f); });
+  D.concours.forEach(function (c) {
+    var f = concoursFix[c.id]; if (!f) return;
+    Object.keys(f).forEach(function (k) { if (k !== 'id' && k !== 'addRouteIds') c[k] = f[k]; });
+    (f.addRouteIds || []).forEach(function (id) { if (c.routeIds.indexOf(id) === -1) c.routeIds.push(id); });
+  });
   D.concoursById = {};
   D.concours.forEach(function (c) { D.concoursById[c.id] = c; c.routeIds.forEach(function (id) { var r = byRoute[id]; if (r) (r.refs || (r.refs = [])).push(c); }); });
   D.crosswalk = P.links;
