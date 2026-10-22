@@ -1370,7 +1370,7 @@
     }
     if (p.kind === 'sup') { meta = 'jusqu’à un ' + DIP[lvl]; qa = [['Quelles études ?', c.studies], ['Comment se préparer ?', prepa]]; }
     /* Catégories A et A+ : niveau minimum et niveau recommandé, à la place de la durée. */
-    var levelNote = p.kind === 'sup' && (c.cat === 'A' || c.cat === 'A+') ? (lvl >= 5 ? ['Bac+5 minimum'] : ['Bac+3 minimum', 'Bac+5 recommandé']) : null;
+    var levelNote = p.kind === 'sup' && (c.cat === 'A' || c.cat === 'A+') && lvl >= 4 ? (lvl >= 5 ? ['Bac+5 minimum'] : ['Bac+3 minimum', 'Bac+5 recommandé']) : null;
     var sep = '<span aria-hidden="true"> | </span><span class="sr-only">, </span>';
     return '<p class="trip-meta">' + (levelNote ? levelNote.map(esc).join(sep) : yearsLabel(p.years) + sep + esc(meta)) + '</p>' +
       qa.filter(function (x) { return x[1]; }).map(function (x) { return tripFold(x[0], tripAnswer(x[1]) + (x[2] || '')); }).join('');
@@ -1558,7 +1558,8 @@
     return out.sort(function (a, b) { return ['A+', 'A', 'B', 'C'].indexOf(a.cat) - ['A+', 'A', 'B', 'C'].indexOf(b.cat) || versant(a) - versant(b); });
   }
   function recruitConcours(j) {
-    var contract = isContractJob(j), cat = contract ? 'CDD' : themeCategory(j) || 'CDD', lvl = typeof j.lvl === 'number' ? j.lvl : 2;
+    /* Sans niveau connu, un métier A ou A+ passe quand même par les études supérieures : bac+3 minimum, bac+5 recommandé. */
+    var contract = isContractJob(j), cat = contract ? 'CDD' : themeCategory(j) || 'CDD', lvl = typeof j.lvl === 'number' ? j.lvl : cat === 'A' || cat === 'A+' ? 4 : 2;
     var body = contract ? '<p class="trip-a">' + esc('Recruté·e sur CV et entretien, en CDD. Un CDI est possible après 6 ans.') + '</p>'
       : '<p class="trip-a">' + sig(j.recruitment ? j.recruitment.text : 'Recrutement selon l’employeur : consulter les offres.') + '</p>' + (j.recruitment ? ext(j.recruitment.url, j.recruitment.label, 'link-plain') : '');
     return Object.assign({ id: 'recruit-' + j.id, routeIds: [], cat: cat, fp: j.fp.charAt(0), lvl: lvl, recruit: { title: contract ? 'Recrutement sans concours' : 'Recrutement', body: body } }, studyFields(j, lvl));

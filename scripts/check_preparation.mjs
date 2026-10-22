@@ -225,6 +225,13 @@ assert(!screens.preparer('magasinier').includes('talents-bourse'),'Pas de bourse
   assert(/class="ref-tip stage-tip"[\s\S]*class="small stage-where"><svg[\s\S]*Où : <\/span>/.test(stages)&&!/Comparer deux métiers|Quelles études diplômantes/.test(stages),'Stages : repère de lieu, conseils annexes retirés.');
 }
 {
+  // Métier A sans concours ni niveau connu : la frise passe quand même par les études supérieures (bac+3 minimum, bac+5 recommandé).
+  const level=S.level; S.level='Seconde';
+  const artistic=screens.metier('fpens003');
+  S.level=level;
+  assert(/trip-name">Études supérieures<\/p><p class="trip-meta">Bac\+3 minimum<span aria-hidden="true"> \| <\/span><span class="sr-only">, <\/span>Bac\+5 recommandé/.test(artistic),'Catégorie A : étape des études supérieures toujours présente.');
+}
+{
   // « Avec des animaux » : métiers au contact des animaux, sans les mentions en passant (vétérinaires parmi le personnel d’un SDIS).
   const animals=D.jobs.filter(j=>j.traits.includes('animaux')).map(j=>j.id);
   assert(animals.length>=20&&['fprch031','fpagr019','fpenv045','fpdef015','tech-env'].every(id=>animals.includes(id))&&!animals.includes('fpmed030'),'Trait animaux : '+animals.length+' métiers.');
