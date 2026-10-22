@@ -1,0 +1,191 @@
+[
+ {
+  "id": "fpdef001",
+  "name": "Architecte système de force, d’arme ou équipement",
+  "domaine": "Défense",
+  "famille": "Conduite des opérations d'armement",
+  "categories": [
+   "A"
+  ],
+  "versants": "E",
+  "description": "Conduire des opérations d’armement.\nPréparer, concevoir, développer, expérimenter et évaluer des systèmes de forces, d’armes et d’équipement ainsi que leur système de soutien.\nContrôler la conformité des équipements délivrés par les industriels.",
+  "activites": "Conduire des opérations, programmes et projets d’armement en maîtrisant les risques, les coûts, les délais et les performances.\nAssurer des prestations d’architecture, d’expertise et d’essais.\nContrôler la conformité des systèmes d’armes et des équipements délivrés par les industriels de l’armement.\nConduire des travaux prospectifs liés aux systèmes de forces.\nDéfinir et mettre en œuvre la politique d’innovation du ministère des armées.\nSoutenir l’industrie d’armement française.",
+  "noteActuelle": "Ces métiers s’exercent comme militaire : recrutement par engagement (soldat, matelot, aviateur, sous-officier) ou par les concours des écoles d’officiers (Saint-Cyr, École navale, École de l’air et de l’espace), sans concours de la fonction publique civile."
+ },
+ {
+  "id": "fpdef022",
+  "name": "Spécialiste de la protection des forces, installations ou matériels sensibles de l’Etat",
+  "domaine": "Défense",
+  "famille": "Opérations des forces armées",
+  "categories": [
+   "C"
+  ],
+  "versants": "E",
+  "description": "Assurer la sécurité des sites, des locaux, des équipements, techniques, des personnes et l’autorisation d’accès des sites ou installations aux seules personnes habilitées ou autorisées. Donner l’alerte en cas d’évènement anormal.",
+  "activites": "Surveiller conformément au respect des consignes de sécurité\nMettre en œuvre et délivrer de l’armement ou un système d’armes\nFiltrer et contrôler les entrées\nDiriger une équipes d’agents de sécurité et protection\nSurveiller l’état des divers dispositifs de protection, intervenir sur alarme et appliquer les procédures de traitement adaptées à chaque incident\nEffectuer des rondes de contrôles d’intégrité de clôture, de bâtiments, et de sites de type zone protégé",
+  "noteActuelle": "Ces métiers s’exercent comme militaire : recrutement par engagement (soldat, matelot, aviateur, sous-officier) ou par les concours des écoles d’officiers (Saint-Cyr, École navale, École de l’air et de l’espace), sans concours de la fonction publique civile."
+ },
+ {
+  "id": "fpdef025",
+  "name": "Spécialiste en radioprotection",
+  "domaine": "Défense",
+  "famille": "Radioprotection",
+  "categories": [
+   "A"
+  ],
+  "versants": "E",
+  "description": "Assurer le respect des exigences réglementaires relatives à la radioprotection. Cela comprend des missions de conseil du commandement, de suivi radiologique du personnel exposé, de contrôle de l’impact environnemental des activités liées à l’exploitation nucléaire.",
+  "activites": "Contribuer au respect de la réglementation\nContribuer à l'amélioration de la sécurité dans le domaine de la radioprotection\nManager un laboratoire ou un service\nGarantir la qualité des activités techniques",
+  "noteActuelle": "Ces métiers s’exercent comme militaire : recrutement par engagement (soldat, matelot, aviateur, sous-officier) ou par les concours des écoles d’officiers (Saint-Cyr, École navale, École de l’air et de l’espace), sans concours de la fonction publique civile."
+ },
+ {
+  "id": "fpdef027",
+  "name": "Expert - Experte en assurance de la qualité des fournitures",
+  "domaine": "Défense",
+  "famille": "Soutien aux opérations des forces armées",
+  "categories": [
+   "A"
+  ],
+  "versants": "E",
+  "description": "Piloter, manager et coordonner les expertises, études, analyses et le suivi technique de la conception, de la réalisation et de la confection dans le domaine de l’habillement ou alimentaire. \nParticiper au pilotage de la politique du domaine. \nVeiller à la conformité des fournitures ou des aliments dans le cadre du processus d’assurance de la qualité des fournitures (AQF).",
+  "activites": "Définir, élaborer et réaliser la politique et les méthodes d’AQF.\nMener l’analyse des risques du domaine industriel.\nGérer et acquérir de la ressource budgétaire dédiée\nConcevoir des articles permettant de répondre aux besoins opérationnels des armées\nContrôler les opérations de réparation des articles\nPiloter et manager le suivi technique\nOrganiser les missions et les projets\n\nActivités spécifiques de la FPE : \nAssurer la performance et la qualité du service rendu  \nProcéder à la réparation des articles\nRéaliser les programmes d’acquisition\nAssurer le suivi technique des marchés et commandes\n",
+  "noteActuelle": "Ces métiers s’exercent comme militaire : recrutement par engagement (soldat, matelot, aviateur, sous-officier) ou par les concours des écoles d’officiers (Saint-Cyr, École navale, École de l’air et de l’espace), sans concours de la fonction publique civile."
+ },
+ {
+  "id": "fpdef029",
+  "name": "Spécialiste de l’aide au déploiement des forces combattantes",
+  "domaine": "Défense",
+  "famille": "Soutien aux opérations des forces armées",
+  "categories": [
+   "C"
+  ],
+  "versants": "E",
+  "description": "Permettre le déploiement et l’engagement opérationnels des forces combattantes dans un milieu hostile",
+  "activites": "Déminer des zones afin de permettre afin de permettre le déplacement des troupes\nConstruire des infrastructures afin de permettre le déploiement et la sécurisation des forces en mouvement\nPiloter des engins spécialisés en milieu hostile\nRéhabiliter des lieux de vie au profit de populations civiles",
+  "noteActuelle": "Ces métiers s’exercent comme militaire : recrutement par engagement (soldat, matelot, aviateur, sous-officier) ou par les concours des écoles d’officiers (Saint-Cyr, École navale, École de l’air et de l’espace), sans concours de la fonction publique civile."
+ },
+ {
+  "id": "fpsec036",
+  "name": "Sapeur-sauveteur - Sapeuse-sauveteuse",
+  "domaine": "Sécurité",
+  "famille": "Sécurité civile",
+  "categories": [
+   "C"
+  ],
+  "versants": "E",
+  "description": "Intervient face aux risques majeurs de toute nature pour protéger les populations en temps de crise tant en France qu'à l'étranger.",
+  "activites": "Porter secours et assiste les personnes et protège les biens et l'environnement en cas de catastrophe naturelle ou technologique, selon sa spécialité et selon la nature des risques\r\nPorter secours aide et apporte un soutien psychologique et physique aux personnes en cas de catastrophes\r\nDévelopper et entretenir des relations extérieures et de représentation auprès des partenaires publics et privés, des médias et du grand public\r\nS'entraîner et se former aux situations de crise, à la manipulation du matériel et maintenir sa condition physique\r\nAssurer la maintenance courante des matériels\r\nForm",
+  "noteActuelle": "Ces métiers s’exercent comme militaire : recrutement par engagement (soldat, matelot, aviateur, sous-officier) ou par les concours des écoles d’officiers (Saint-Cyr, École navale, École de l’air et de l’espace), sans concours de la fonction publique civile."
+ },
+ {
+  "id": "fpsec021",
+  "name": "Responsable d'unité de sécurité civile",
+  "domaine": "Sécurité",
+  "famille": "Sécurité civile",
+  "categories": [
+   "A",
+   "B"
+  ],
+  "versants": "ET",
+  "description": "Assure l'encadrement opérationnel d'une unité de sécurité civile qui intervient face aux risques de toute nature pour protéger et secourir les populations en temps de crise tant en France qu'à l'étranger",
+  "activites": "Analyse les risques et organise la montée en puissance et le déploiement des moyens opérationnels\nCommande des équipes en intervention\nMaintient une liaison avec les autorités\nGère la logistique des interventions\nAssure l’instruction, la formation et l’entraînement du personnel du secours, français et étranger\nMaintiens en condition le matériel d'intervention\nRédige des comptes rendu et retours d'expérience\nCommunique en externe sur l’intervention (autorités civiles, médias…)",
+  "noteActuelle": "Sécurité civile : sapeurs-pompiers professionnels recrutés par concours de lieutenant ou de capitaine (CNFPT) puis par les SDIS, ou personnels de l’État (militaires de la sécurité civile, pilotes et mécaniciens recrutés sur titres et expérience)."
+ },
+ {
+  "id": "fpsec023",
+  "name": "Pilote et copilote des moyens aériens de la sécurité civile",
+  "domaine": "Sécurité",
+  "famille": "Sécurité civile",
+  "categories": [
+   "B",
+   "C"
+  ],
+  "versants": "E",
+  "description": "Les pilotes et copilotes d'avions et les pilotes d'hélicoptères de la sécurité civile contribuent à la mise en œuvre de la politique de protection des populations et à la gestion des crises",
+  "activites": "Piloter les aéronefs\r\nAssurer la lutte contre les feux de forêts\r\nAssurer le secours aux personnes\r\nMaintenir le niveau de qualification aéronautique et des spécificités techniques des interventions de missions de secours\r\nParticiper et contribuer au fonctionnement général de la structure",
+  "noteActuelle": "Sécurité civile : sapeurs-pompiers professionnels recrutés par concours de lieutenant ou de capitaine (CNFPT) puis par les SDIS, ou personnels de l’État (militaires de la sécurité civile, pilotes et mécaniciens recrutés sur titres et expérience)."
+ },
+ {
+  "id": "fpsec024",
+  "name": "Mécanicien opérateur - Mécanicienne opératrice de bord",
+  "domaine": "Sécurité",
+  "famille": "Sécurité civile",
+  "categories": [
+   "B",
+   "C"
+  ],
+  "versants": "E",
+  "description": "Un mécanicien opérateur de bord, qui est un mécanicien et un auxiliaire de pilotage en vol, contribue à la bonne réalisation des missions de vols ainsi qu'à l'entretien de la flotte d'hélicoptères de la sécurité civile",
+  "activites": "Participer aux missions opérationnelles du groupement des hélicoptères\r\nAssurer la mise en condition opérationnelle des hélicoptères affectés dans une base\r\nContribuer au fonctionnement général du site",
+  "noteActuelle": "Sécurité civile : sapeurs-pompiers professionnels recrutés par concours de lieutenant ou de capitaine (CNFPT) puis par les SDIS, ou personnels de l’État (militaires de la sécurité civile, pilotes et mécaniciens recrutés sur titres et expérience)."
+ },
+ {
+  "id": "fpsec028",
+  "name": "Expert - Experte en risques majeurs de sécurité civile",
+  "domaine": "Sécurité",
+  "famille": "Sécurité civile",
+  "categories": [
+   "A",
+   "B"
+  ],
+  "versants": "E",
+  "description": "Assure une expertise sur la connaissance des risques majeurs sanitaires, naturels ou technologiques afin d'assister les autorités compétentes en prévention des risques, en préparation ou en gestion de crise",
+  "activites": "Participe à la vulgarisation du risque vers les autorités et les équipes de direction en charge de la prévention ou de la gestion de crises\nInforme et conseille les autorités en matière de risque en phase d'anticipation, de préparation à la gestion de crise, en situation de crise et lors des retours d'expérience d'évènements majeurs\nElabore des notes et synthèses sur les risques pour les autorités de direction\nParticipe à la rédaction des plans de secours, de feuilles de route ou de plan d'actions et des textes législatifs ou réglementaires en matière de gestion des risques\nAssure une veille d",
+  "noteActuelle": "Sécurité civile : sapeurs-pompiers professionnels recrutés par concours de lieutenant ou de capitaine (CNFPT) puis par les SDIS, ou personnels de l’État (militaires de la sécurité civile, pilotes et mécaniciens recrutés sur titres et expérience)."
+ },
+ {
+  "id": "fpsec034",
+  "name": "Prévisionniste",
+  "domaine": "Sécurité",
+  "famille": "Gestion des risques",
+  "categories": [
+   "A",
+   "B"
+  ],
+  "versants": "T",
+  "description": "Analyse, vérifie et optimise l'adéquation entre les moyens opérationnels à mobiliser et l'exposition aux risques des personnes, des biens et de l'environnement. Contribue à définir les documents de planification, les documents opérationnels et les supports d'aide à l'intervention nécessaires au bon déroulement des opérations d'incendie et de secours et à la sécurité des acteurs de la chaîne d'inte",
+  "activites": "Participation à la définition et à la mise à jour du schéma départemental d'analyse et de couverture des risques \nÉlaboration des documents opérationnels et des supports d'aide à l'intervention \nVérification et optimisation de l'opérationnalité des moyens de défense extérieure contre l'incendie \nInstruction des demandes et rédaction des avis techniques relatifs à la sécurité \nOrganisation de la collecte, analyse et traitement d'informations, organisation de bases de données \nParticipation aux retours d'expérience opérationnelle\nOrganisation et conduite d'action de sensibilisation sur la sécuri",
+  "noteActuelle": "Sécurité civile : sapeurs-pompiers professionnels recrutés par concours de lieutenant ou de capitaine (CNFPT) puis par les SDIS, ou personnels de l’État (militaires de la sécurité civile, pilotes et mécaniciens recrutés sur titres et expérience)."
+ },
+ {
+  "id": "fpsec057",
+  "name": "Directeur - Directrice de centre régional opérationnel de surveillance et de sauvetage (CROSS)",
+  "domaine": "Sécurité",
+  "famille": "Secours",
+  "categories": [
+   "A+",
+   "A"
+  ],
+  "versants": "E",
+  "description": "Responsable d’un centre opérationnel en charge du sauvetage des vies humaines en mer et de la surveillance de la navigation maritime.",
+  "activites": "Organise et gère l’activité du centre régional opérationnel de surveillance et de sauvetage\nEncadre et anime une équipe de civils et de militaires\nResponsable de la surveillance de la navigation maritime et des milieux marins\nResponsable de la détection des pollutions maritimes\nResponsable du contrôle des pêches maritimes en mer\nResponsable de la diffusion des renseignements de sécurité maritime\nCoordonne les opérations de recherche et de sauvetage en mer et met en place le plan Orsec maritime, notamment dans les volets sauvetage et assistance à navire en difficulté",
+  "noteActuelle": "Sécurité civile : sapeurs-pompiers professionnels recrutés par concours de lieutenant ou de capitaine (CNFPT) puis par les SDIS, ou personnels de l’État (militaires de la sécurité civile, pilotes et mécaniciens recrutés sur titres et expérience)."
+ },
+ {
+  "id": "fpsec058",
+  "name": "Opérateur - Opératrice de centre régional opérationnel de surveillance et de sauvetage (CROSS)",
+  "domaine": "Sécurité",
+  "famille": "Secours",
+  "categories": [
+   "B",
+   "C"
+  ],
+  "versants": "E",
+  "description": "Gère des opérations de sauvetage en direct sous la responsabilité d’un officier de permanence. Assure un quart en matière de surveillance de la navigation.",
+  "activites": "3 macro-activités :\n    Renseignement\n    Sécurité maritime\n    Pollution\nVeille les alertes\nAnalyse et exploite toutes les informations opérationnelles\nPrend les premières mesures requises par l’urgence d’une situation\nAssiste le CMS dans les différentes phases d’une opération de sauvetage\nAssure le suivi général de la circulation maritime",
+  "noteActuelle": "Sécurité civile : sapeurs-pompiers professionnels recrutés par concours de lieutenant ou de capitaine (CNFPT) puis par les SDIS, ou personnels de l’État (militaires de la sécurité civile, pilotes et mécaniciens recrutés sur titres et expérience)."
+ },
+ {
+  "id": "fpsec060",
+  "name": "Technicien - Technicienne de maintenance aéronautique de la sécurité civile",
+  "domaine": "Sécurité",
+  "famille": "Sécurité civile",
+  "categories": [
+   "B"
+  ],
+  "versants": "E",
+  "description": "Assurer la maintenance au sol des aéronefs de la sécurité civile (hélicoptères).",
+  "activites": "Démonter, contrôler, vérifier l’état et la conformité des pièces et éléments d’aéronefs (cellule, moteur, systèmes mécaniques, électriques, hydraulique…) conformément aux procédures du manuel de l’organisme d’entretien.\nAssurer la traçabilité de ces interventions conformément aux procédures de la FRA 145.",
+  "noteActuelle": "Sécurité civile : sapeurs-pompiers professionnels recrutés par concours de lieutenant ou de capitaine (CNFPT) puis par les SDIS, ou personnels de l’État (militaires de la sécurité civile, pilotes et mécaniciens recrutés sur titres et expérience)."
+ }
+]

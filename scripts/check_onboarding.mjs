@@ -104,4 +104,12 @@ old.click('profile','rec');assert.equal(old.S.budget,'Avec frais d’inscription
 assert.equal(old.saved().budget,'Avec frais d’inscription');
 const guard=start();guard.location.hash='#/situation';guard.render();assert.equal(guard.location.hash,'#/choix-profil');
 guard.S.profile='etu';guard.location.hash='#/niveau';guard.render();assert.equal(guard.location.hash,'#/profil');
-console.log('Onboarding vérifié : prénom obligatoire distinct du niveau, 5 étapes, retours, clavier, famille et migration du budget.');
+// Écrans d'introduction en carrousel (bande glissante et rail des contenus), mention bac+5 des catégories A et A+, trait « Avec des animaux ».
+{
+  const t=start({profile:'etu',name:'Alexis',level:'Bac+3'}), fps=t.screens.versants(), cats=t.screens['categories-intro']();
+  for(const html of [fps,cats])assert(html.includes('class="fp-ink"')&&html.includes('<div class="fp-viewport"><div class="fp-track">'),'Les onglets d’introduction défilent comme un carrousel.');
+  assert.equal((cats.match(/Bac\+3 minimum, Bac\+5 recommandé/g)||[]).length,2);
+  assert.equal((cats.match(/La très grande majorité des admis ont un bac\+5/g)||[]).length,2,'Mention réservée aux catégories A et A+.');
+  assert(/Avec qui[\s\S]*data-v="animaux"[\s\S]*Avec des animaux/.test(t.screens.traits()),'« Avec des animaux » figure dans « Avec qui ».');
+}
+console.log('Onboarding vérifié : prénom obligatoire distinct du niveau, 5 étapes, retours, clavier, famille, migration du budget, carrousel des introductions et trait animaux.');

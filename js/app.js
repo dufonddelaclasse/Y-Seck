@@ -526,11 +526,13 @@
       '<div class="callout tint-yellow"><span class="pin"></span><p>Bon à savoir : un même métier existe souvent dans les trois. Et au cours d’une carrière, on peut passer de l’une à l’autre.</p></div>';
   }
   var CATS_INTRO = [
-    { id: 'A+', t: 'Les cadres supérieurs', d: 'Ils dirigent les grandes administrations et pilotent les politiques publiques.', dip: 'Bac+3 minimum, souvent Bac+5', ex: 'Directeur·rice d’hôpital, magistrat·e, commissaire', tint: 'tint-blue' },
-    { id: 'A', t: 'Concevoir, élaborer, manager', d: 'Ils imaginent les projets, préparent les décisions et encadrent des équipes.', dip: 'Bac+3 minimum', ex: 'Attaché·e, inspecteur·rice, professeur·e, infirmier·ère', tint: 'tint-mint' },
+    { id: 'A+', t: 'Les cadres supérieurs', d: 'Ils dirigent les grandes administrations et pilotent les politiques publiques.', dip: 'Bac+3 minimum, Bac+5 recommandé', mention: 'La très grande majorité des admis ont un bac+5.', ex: 'Directeur·rice d’hôpital, magistrat·e, commissaire', tint: 'tint-blue' },
+    { id: 'A', t: 'Concevoir, élaborer, manager', d: 'Ils imaginent les projets, préparent les décisions et encadrent des équipes.', dip: 'Bac+3 minimum, Bac+5 recommandé', mention: 'La très grande majorité des admis ont un bac+5.', ex: 'Attaché·e, inspecteur·rice, professeur·e, infirmier·ère', tint: 'tint-mint' },
     { id: 'B', t: 'Appliquer, rédiger, gérer', d: 'Ils mettent en œuvre les décisions, suivent les dossiers et peuvent encadrer une petite équipe.', dip: 'Bac minimum', ex: 'Greffier·ère, technicien·ne, gardien·ne de la paix', tint: 'tint-cyan' },
     { id: 'C', t: 'Exécuter, accueillir, assurer', d: 'Ils font tourner le service au quotidien, sur le terrain et au contact du public.', dip: 'Brevet, CAP, BEP, ou sans diplôme', ex: 'Adjoint·e administratif·ve, agent·e technique, ATSEM', tint: 'tint-yellow' }
   ];
+  /* Catégories A et A+ : le bac+3 suffit pour s’inscrire, mais la plupart des lauréats ont un bac+5. */
+  function catMention(c) { return c.mention ? '<p class="cat-mention">' + I.info + '<span>' + esc(c.mention) + '</span></p>' : ''; }
   function categoriesBlocks(h, fold) {
     var cats = CATS_INTRO;
     return '<div class="category-heading mt-m"><' + h + ' class="understand-title no-icon">4 catégories</' + h + '><div class="row" aria-hidden="true">' + ['A+','A','B','C'].map(function(c){return '<span class="cat sm '+catClass(c)+'">'+c+'</span>';}).join('') + '</div></div>' +
@@ -539,7 +541,7 @@
         return '<details class="intro-fold intro-category-fold ' + c.tint + '"><summary>' +
           '<span class="cat lg ' + catClass(c.id) + '" aria-hidden="true">' + c.id + '</span>' +
           '<span class="intro-fold-name"><' + fold + ' class="explain-t no-icon"><span class="sr-only">Catégorie ' + c.id + ' : </span>' + esc(c.t) + '</' + fold + '><span class="intro-fold-sub">Catégorie ' + c.id + '</span></span><span class="details-toggle" aria-hidden="true">' + I.down + '</span></summary>' +
-          '<div class="intro-fold-body"><p>' + esc(c.d) + '</p><p class="ex"><b>Pour y entrer :</b> ' + esc(c.dip) + '</p><p class="ex"><b>Par exemple :</b> ' + esc(c.ex) + '</p>' + categoryFit(c.id) + '</div></details>';
+          '<div class="intro-fold-body"><p>' + esc(c.d) + '</p><p class="ex"><b>Pour y entrer :</b> ' + esc(c.dip) + '</p>' + catMention(c) + '<p class="ex"><b>Par exemple :</b> ' + esc(c.ex) + '</p>' + categoryFit(c.id) + '</div></details>';
       }).join('') + '</div>' +
       '<div class="callout tint-blue"><span class="pin"></span><p>Rien n’est figé : on peut monter de catégorie au cours de sa carrière, par concours interne ou par promotion.</p></div>';
   }
@@ -552,17 +554,38 @@
         '<div class="intro-hero-text"><h1>3 fonctions publiques</h1><p class="lead">Travailler dans le service public, c’est travailler pour l’un de ces trois employeurs.</p></div></section>' +
       '<div class="fp-tabs" role="tablist" aria-label="Les trois fonctions publiques">' + FPS_INTRO.map(function (f, i) {
         return '<button type="button" class="fp-tab" role="tab" id="fp-tab-' + f.k + '" aria-controls="fp-panel-' + f.k + '" aria-selected="' + (i === 0) + '"' + attr('action', 'fpTab') + attr('v', f.k) + '><span class="fp-tab-icon" aria-hidden="true">' + I[FP_ICONS[f.k]] + '</span><span>' + esc(f.short) + '</span></button>';
-      }).join('') + '</div>' +
+      }).join('') + FP_INK + '</div><div class="fp-viewport"><div class="fp-track">' +
       FPS_INTRO.map(function (f, i) {
         return '<section class="fp-panel" role="tabpanel" id="fp-panel-' + f.k + '" data-k="' + f.k + '" aria-labelledby="fp-tab-' + f.k + '"' + (i ? ' hidden' : '') + '>' +
           '<h2 class="no-icon">' + esc(f.t) + '</h2><p>' + esc(f.d) + '</p><p><b>Par exemple :</b> ' + esc(f.ex) + '</p></section>';
-      }).join('') +
+      }).join('') + '</div></div>' +
       '<p class="fp-note">' + I.arrow + '<span>Bon à savoir : un même métier existe souvent dans les trois. Et au cours d’une carrière, on peut passer de l’une à l’autre.</span></p>' +
       '</main><div class="footer"><a class="btn" href="#/categories-intro">J’ai compris</a></div>';
   };
+  var FP_INK = '<span class="fp-ink" aria-hidden="true"></span>';
   function selectFpTab(scope, k) {
-    scope.querySelectorAll('.fp-tab').forEach(function (t) { t.setAttribute('aria-selected', String(t.getAttribute('data-v') === k)); });
+    var index = 0;
+    scope.querySelectorAll('.fp-tab').forEach(function (t, i) { var on = t.getAttribute('data-v') === k; t.setAttribute('aria-selected', String(on)); if (on) index = i; });
     scope.querySelectorAll('.fp-panel').forEach(function (p) { p.hidden = p.getAttribute('data-k') !== k; });
+    placeFpTabs(scope, index);
+  }
+  /* Carrousel des écrans d’introduction : la bande glisse sous l’onglet choisi et les contenus défilent à sa suite.
+     La hauteur suit celle du contenu affiché. */
+  function placeFpTabs(scope, index, drag) {
+    var bar = scope.querySelector('.fp-tabs'), track = scope.querySelector('.fp-track');
+    if (!bar || !track) return;
+    var tabs = bar.querySelectorAll('.fp-tab');
+    if (index == null) index = Math.max(0, [].map.call(tabs, function (t) { return t.getAttribute('aria-selected'); }).indexOf('true'));
+    var tab = tabs[index], panel = track.children[index];
+    track.style.transform = 'translateX(' + (drag ? 'calc(' + (-100 * index) + '% + ' + drag + 'px)' : (-100 * index) + '%') + ')';
+    if (drag) return;
+    if (tab && tab.offsetWidth) {
+      bar.style.setProperty('--ink-x', tab.offsetLeft + 'px');
+      bar.style.setProperty('--ink-w', tab.offsetWidth + 'px');
+      bar.style.setProperty('--ink-color', tab.style.getPropertyValue('--tab-color') || 'var(--brand)');
+      bar.classList.add('inked');
+    }
+    if (panel && panel.offsetHeight) track.parentNode.style.height = panel.offsetHeight + 'px';
   }
 
   /* Onboarding : même gabarit que les fonctions publiques, un onglet par catégorie (pastille), soulignement à sa couleur. */
@@ -574,13 +597,13 @@
         var k = catClass(c.id).slice(4);
         return '<button type="button" class="fp-tab" role="tab" id="cat-tab-' + k + '" aria-controls="cat-panel-' + k + '" aria-selected="' + (i === 0) + '"' + attr('action', 'fpTab') + attr('v', k) + ' style="--tab-color:var(--cat-' + k.toLowerCase() + ')">' +
           '<span class="cat sm ' + catClass(c.id) + '" aria-hidden="true">' + c.id + '</span><span class="sr-only">Catégorie ' + c.id + '</span></button>';
-      }).join('') + '</div>' +
+      }).join('') + FP_INK + '</div><div class="fp-viewport"><div class="fp-track">' +
       CATS_INTRO.map(function (c, i) {
         var k = catClass(c.id).slice(4);
         return '<section class="fp-panel" role="tabpanel" id="cat-panel-' + k + '" data-k="' + k + '" aria-labelledby="cat-tab-' + k + '"' + (i ? ' hidden' : '') + '>' +
           '<div class="fp-panel-head"><h2 class="no-icon">' + esc(c.t) + '</h2><p class="fp-sub">Catégorie ' + c.id + '</p></div>' +
-          '<p>' + esc(c.d) + '</p><p><b>Pour y entrer :</b> ' + esc(c.dip) + '</p><p><b>Par exemple :</b> ' + esc(c.ex) + '</p>' + categoryFit(c.id) + '</section>';
-      }).join('') +
+          '<p>' + esc(c.d) + '</p><p><b>Pour y entrer :</b> ' + esc(c.dip) + '</p>' + catMention(c) + '<p><b>Par exemple :</b> ' + esc(c.ex) + '</p>' + categoryFit(c.id) + '</section>';
+      }).join('') + '</div></div>' +
       '<p class="fp-note">' + I.arrow + '<span>Rien n’est figé : on peut monter de catégorie au cours de sa carrière, par concours interne ou par promotion.</span></p>' +
       '</main><div class="footer"><button type="button" class="btn" data-action="startProfile">Démarrer mon profil</button></div>';
   };
@@ -671,7 +694,7 @@
         return '<button type="button" class="opt sm' + (on ? ' on' : '') + '" aria-pressed="' + on + '"' + attr('action', 'budget') + attr('v', b) + '><span>' + b + '</span>' + (on ? I.check : '') + '</button>';
       }).join('') + '</div>' +
       (S.boursier==='Oui'?talentsFeature('C’est quoi, une Prépa Talents ?',
-      '<p>Une préparation <b>gratuite</b> aux concours de catégorie A, A+ et B, dans une université, un IEP ou une école du service public. Plus de 100 en France, outre-mer compris.</p>' +
+      '<p>Une préparation <b>gratuite</b> aux concours de catégorie A, A+ et B, dans une université, un IEP (institut d’études politiques, c’est-à-dire un Sciences Po) ou une école du service public. Plus de 100 en France, outre-mer compris.</p>' +
       '<p>Au programme : cours, entraînements aux épreuves et un·e tuteur·rice qui vous suit toute l’année.</p>','h2',talentIntroAnimate?'talents-enter':''):'') +
       '</main><div class="footer">'+(profileNeedsValidation()?profileContinuation('#/accueil',''):(S.boursier&&S.budget?'<a class="btn" href="#/accueil" data-action="finish">':'<span class="small center">Répondez aux deux questions pour continuer.</span><button type="button" class="btn" disabled>')+'Voir '+(isParent()?'son parcours':'mon parcours')+(S.boursier&&S.budget?'</a>':'</button>'))+'</div>';
   };
@@ -1776,6 +1799,7 @@
       var distance = distanceTo(t);
       return '<div class="list-row static top"><span class="pin-ico" aria-hidden="true">' + I.pin + '</span><div class="main">' +
         '<span class="name sm">' + esc(t.name) + '</span>' +
+        (/^IEP\b/.test(t.name) ? '<span class="meta">Institut d’études politiques (Sciences Po)</span>' : '') +
         '<span class="meta">' + esc(t.city + ' · ' + REG[reg]) + (t.online ? ' · en ligne' : '') + '</span>' +
         (S.location ? '<span class="meta">' + (t.online ? 'À distance' : (Number.isFinite(distance) ? 'Environ ' + Math.round(distance) + ' km à vol d’oiseau' : 'Distance indisponible')) + '</span>' : '') +
         '<span class="meta long">' + (x.m.length ? '<b class="ok">Prépare : </b>' : 'Concours : ') + esc(conc.slice(0, 3).join(', ')) + esc(extra) + '</span>' +
@@ -1796,7 +1820,7 @@
       var r = talentsList(job);
       var scope = job ? 'pour ce concours' : (S.domains.length ? 'pour ' + (isParent() ? 'ses' : 'vos') + ' choix' : '');
       return '<main class="screen top-tight">'+back(contextJob?prepHref(contextJob):'#/concours',contextJob?'Se préparer':'Concours et prépas')+
-        talentsFeature('Prépas Talents','<p>Préparations gratuites, avec tutorat, aux concours A, A+ et B.</p>','h1','talents-flat') +
+        talentsFeature('Prépas Talents','<p>Préparations gratuites, avec tutorat, aux concours A, A+ et B. Elles ont lieu dans des universités, des écoles du service public et des IEP, les instituts d’études politiques (Sciences Po).</p>','h1','talents-flat') +
         '<section class="region-zone" aria-labelledby="region-title"><h2 class="region-title no-icon" id="region-title">Région</h2>' + regionMap() + regionField() + '</section>' +
         talentsCounter(r, scope || 'pour ' + (isParent() ? 'ses' : 'vos') + ' choix') +
         (r.shown.length ? '<div class="talents-order"><p>' + (S.location ? 'Affichage de la prépa la plus proche à la plus éloignée.' : 'Ajoutez votre localisation pour afficher les prépas de la plus proche à la plus éloignée.') + '</p>' +
@@ -2160,6 +2184,10 @@
       if (r.name !== 'accessibilite') main.insertAdjacentHTML('beforeend', '<a class="a11y-link" href="#/accessibilite">Confort de lecture et accessibilité</a>');
     }
     /* Arrivée sur le tableau de bord après le chargement du catalogue : chaque bloc apparaît du haut vers le bas, menu compris. */
+    if (root.querySelector('.fp-track')) {
+      placeFpTabs(root);
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { placeFpTabs(root); });
+    }
     /* Onboarding : chaque nouvel écran apparaît en fondu simple, sans mouvement, bouton du bas compris. */
     if (changed && main && ['bienvenue', 'versants', 'categories-intro', 'choix-profil', 'profil', 'niveau', 'interets', 'traits', 'situation'].indexOf(r.name) > -1) {
       var entering = [main].concat([].slice.call(root.querySelectorAll(':scope > .footer, :scope > form > .footer')));
@@ -2273,6 +2301,32 @@
   },{passive:true});
   window.addEventListener('pointercancel',function(e){var g=interestGesture;if(g&&g.id===e.pointerId){g.down=false;g.moved=true;g.ended=Date.now();}},{passive:true});
   window.addEventListener('scroll',function(){if(interestGesture&&interestGesture.down)interestGesture.moved=true;},{passive:true});
+
+  /* Écrans d’introduction : glisser le contenu vers la gauche ou la droite passe à l’onglet voisin, le contenu suit le doigt. */
+  var fpSwipe=null;
+  root.addEventListener('pointerdown',function(e){
+    var view=e.target.closest('.fp-viewport');
+    if(!view||e.button>0)return;
+    var scope=view.closest('main')||root,tabs=[].slice.call(scope.querySelectorAll('.fp-tab'));
+    fpSwipe={id:e.pointerId,scope:scope,view:view,tabs:tabs,index:Math.max(0,tabs.map(function(t){return t.getAttribute('aria-selected');}).indexOf('true')),x:e.clientX,y:e.clientY,dx:0,active:false};
+  },{passive:true});
+  window.addEventListener('pointermove',function(e){
+    var g=fpSwipe;if(!g||g.id!==e.pointerId)return;
+    var dx=e.clientX-g.x,dy=e.clientY-g.y;
+    if(!g.active){if(Math.abs(dy)>10&&Math.abs(dy)>Math.abs(dx)){fpSwipe=null;return;}if(Math.abs(dx)<8)return;g.active=true;g.view.classList.add('dragging');}
+    var edge=(g.index===0&&dx>0)||(g.index===g.tabs.length-1&&dx<0);
+    g.dx=edge?dx/3:dx;placeFpTabs(g.scope,g.index,g.dx||0.01);
+  },{passive:true});
+  function endFpSwipe(e,cancel){
+    var g=fpSwipe;if(!g||g.id!==e.pointerId)return;fpSwipe=null;if(!g.active)return;
+    g.view.classList.remove('dragging');
+    var to=g.index+(!cancel&&g.dx<-50?1:!cancel&&g.dx>50?-1:0);
+    to=Math.max(0,Math.min(g.tabs.length-1,to));
+    selectFpTab(g.scope,g.tabs[to].getAttribute('data-v'));
+  }
+  window.addEventListener('pointerup',function(e){endFpSwipe(e,false);},{passive:true});
+  window.addEventListener('pointercancel',function(e){endFpSwipe(e,true);},{passive:true});
+  window.addEventListener('resize',function(){if(root.querySelector('.fp-track'))placeFpTabs(root);});
 
   /* Favoris : glisser une carte vers la gauche dévoile « Retirer » ; un glissement long demande directement la confirmation. */
   var swipe=null,swipeClick=0,SWIPE_OPEN=96;

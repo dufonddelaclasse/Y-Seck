@@ -129,6 +129,10 @@
     var text = (j.name + ' ' + (j.desc || '') + ' ' + (j.steps || []).join(' ')).toLowerCase();
     TRAIT_RULES.forEach(function (p) { if (ADDED_TRAITS.indexOf(p[0]) > -1 && j.traits.indexOf(p[0]) === -1 && p[1].test(text)) j.traits.push(p[0]); });
   });
+  /* « Avec des animaux » : reconnu dans l’intitulé et la description, pour écarter les activités qui citent les animaux en passant
+     (fourrière, aides animalières, vétérinaires parmi d’autres personnels). */
+  var ANIMALS = /\banima(l|ux|li)|zootechn|soigneu(r|se)\b|fauconn|abattoir|élevage|\bfaune\b|garde champêtre|chasse et pêche|cynophil|maître-chien|équestre|chevaux|vétérinaire (officiel|équin)|universitaires vétérinaires/;
+  D.jobs.concat(P.rmfp).forEach(function (j) { if (j.traits && j.traits.indexOf('animaux') === -1 && ANIMALS.test((j.name + ' ' + (j.desc || '')).toLowerCase())) j.traits.push('animaux'); });
   D.jobs = D.jobs.concat(P.rmfp.filter(function (j) { return j.active !== false; }));
   /* Les centres d’intérêt complètent le domaine principal sans modifier les liens métier / corps. */
   D.domainOptions = D.interestOptions || D.domains.map(function(id){return {id:id,label:id};});

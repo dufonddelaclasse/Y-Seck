@@ -208,10 +208,19 @@ assert(!screens.preparer('magasinier').includes('talents-bourse'),'Pas de bourse
   assert(page.includes('class="region-zone"')&&page.includes('>Région</h2>')&&(page.match(/<path [^>]*data-action="pickRegion"/g)||[]).length===13,'Prépas Talents : carte des 13 régions de métropole.');
   assert(page.includes('data-action="openRegions"')&&page.includes('talents-counter')&&/Afficher les \d+/.test(page),'Prépas Talents : champ région, compteur et lien vers toutes les prépas.');
   assert(page.includes('Ajouter ma localisation')&&page.includes('talents-flat'),'Prépas Talents : lien de localisation, carte de présentation sans contour.');
+  assert(page.includes('IEP, les instituts d’études politiques (Sciences Po)'),'Prépas Talents : les IEP sont expliqués.');
+  S.talentsAll=true;
+  assert(/IEP de [^<]+<\/span><span class="meta">Institut d’études politiques \(Sciences Po\)<\/span>/.test(screens.prepa('talents','attache')),'Chaque IEP de la liste est expliqué.');
+  S.talentsAll=false;
   click('pickRegion','ARA');
   assert.equal(S.region,'ARA');
   assert(screens.prepa('talents','attache').includes('class="on" data-action="pickRegion" data-v="ARA"'),'La région choisie est en couleur sur la carte.');
   S.region='Toutes';
+}
+{
+  // « Avec des animaux » : métiers au contact des animaux, sans les mentions en passant (vétérinaires parmi le personnel d’un SDIS).
+  const animals=D.jobs.filter(j=>j.traits.includes('animaux')).map(j=>j.id);
+  assert(animals.length>=20&&['fprch031','fpagr019','fpenv045','fpdef015','tech-env'].every(id=>animals.includes(id))&&!animals.includes('fpmed030'),'Trait animaux : '+animals.length+' métiers.');
 }
 assert(/\d+ Prépas? Talents<\/b>[\s\S]*Cliquez pour consulter les prépas identifiées pour ce concours[\s\S]*talents-perf[\s\S]*talents-bourse[\s\S]*Découvrir les prépas Talents/.test(screens.preparer('attache')),'La carte Prépas Talents réunit le nombre de prépas, la bourse et le bouton.');
 assert(!screens.preparer('magasinier').includes('href="#/prepa/talents'));

@@ -476,10 +476,10 @@
 
   /* ---------- Catégories ---------- */
   var categories = [
-    { id: 'A+', dip: 'Bac+3 minimum, souvent Bac+5', role: 'Diriger, encadrer au plus haut niveau', ex: 'Administrateur·rice de l’État, directeur·rice d’hôpital, magistrat·e, commissaire', tint: 'tint-blue',
-      note: 'Concours nationaux, suivis d’une école (INSP, INET, EHESP, ENM, ENSP, INP). Des concours Talents sont réservés aux élèves des Prépas Talents.' },
-    { id: 'A', dip: 'Bac+3 minimum', role: 'Concevoir, encadrer, décider', ex: 'Attaché·e, inspecteur·rice, professeur·e, infirmier·ère', tint: 'tint-mint',
-      note: 'Certains corps demandent un Bac+5 (ingénieur·es, psychologues).' },
+    { id: 'A+', dip: 'Bac+3 minimum, Bac+5 recommandé', role: 'Diriger, encadrer au plus haut niveau', ex: 'Administrateur·rice de l’État, directeur·rice d’hôpital, magistrat·e, commissaire', tint: 'tint-blue',
+      note: 'La très grande majorité des admis ont un bac+5. Concours nationaux, suivis d’une école (INSP, INET, EHESP, ENM, ENSP, INP). Des concours Talents sont réservés aux élèves des Prépas Talents.' },
+    { id: 'A', dip: 'Bac+3 minimum, Bac+5 recommandé', role: 'Concevoir, encadrer, décider', ex: 'Attaché·e, inspecteur·rice, professeur·e, infirmier·ère', tint: 'tint-mint',
+      note: 'La très grande majorité des admis ont un bac+5. Certains corps l’exigent (ingénieur·es, psychologues).' },
     { id: 'B', dip: 'Bac minimum', role: 'Appliquer, rédiger, gérer', ex: 'Greffier·ère, contrôleur·se, technicien·ne, gardien·ne de la paix', tint: 'tint-cyan',
       note: 'Certains concours B demandent un Bac+2.' },
     { id: 'C', dip: 'Brevet, CAP, BEP ou sans diplôme', role: 'Exécuter, accueillir, assurer', ex: 'Adjoint·e administratif·ve, agent·e technique, ATSEM', tint: 'tint-yellow',

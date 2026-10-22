@@ -1,0 +1,291 @@
+[
+ {
+  "id": "fpcul019",
+  "name": "Artiste-Interprète",
+  "domaine": "Culture et Patrimoine",
+  "famille": "Spectacle",
+  "categories": [
+   "B"
+  ],
+  "versants": "ET",
+  "description": "Exercer son art, en tant qu’interprète ou créateur, pour la réalisation d’œuvres ou la production d’événements à caractère culturel, protocolaire, festif ou documentaire. \nAssurer la prestation d’œuvres sous plusieurs formes (représentation, chant, récital, orchestre) ou exécute de toute autre manière une œuvre littéraire ou artistique.",
+  "activites": "Diriger et coordonner une formation artistique, musicale ou culturelle.\nRéaliser les répétitions.\nConserver, enrichir et la mettre en valeur le répertoire et/ou le patrimoine national, matériel et immatériel.\nJouer d'un instrument.\nParticiper aux prestations à caractère culturel \nManager le personnel.\nSuperviser et mettre en œuvre la politique et les actions de conservation, d'études, d'enrichissement, de mise en valeur et de diffusion des patrimoines culturels.\nAdapter et contrôler les installations en fonction des prestations.\nInstaller les équipements nécessaires aux représentations.\n\nActiv",
+  "noteActuelle": "Corps ou recrutement spécifique, absent pour l’instant de l’application (par exemple contrôleur aérien recruté sur concours de l’École nationale de l’aviation civile, inspecteur de l’enseignement agricole, professeur de l’enseignement maritime, linguiste du renseignement sur contrat)."
+ },
+ {
+  "id": "fpens028",
+  "name": "Inspecteur - Inspectrice de l'enseignement agricole",
+  "domaine": "Enseignement et Formation",
+  "famille": "Pilotage",
+  "categories": [
+   "A"
+  ],
+  "versants": "E",
+  "description": "Met en œuvre de la politique d’éducation et de formation définie par le ministre chargé de l’agriculture et veille au respect des règles et prescriptions nationales. Exerce les missions de pilotage et d’évaluation pédagogique, de management et de conseil.",
+  "activites": "Évaluer et accompagner les agents exerçant dans les établissements d’enseignement et de formation (conseiller, contrôler).\nÉvaluer et inspecter les établissements et les dispositifs d’enseignement et de formation\nConduire des entretiens et des investigations sur pièces et sur place.\nApporter une expertise et un appui aux différents niveaux de l’administration.\nConcevoir et réaliser les sujets d'examen de l'enseignement technique agricole ainsi que ceux des concours de recrutement des personnels de l'enseignement agricole.\nParticiper à l’élaboration de prescriptions, recommandations, réglementa",
+  "noteActuelle": "Corps ou recrutement spécifique, absent pour l’instant de l’application (par exemple contrôleur aérien recruté sur concours de l’École nationale de l’aviation civile, inspecteur de l’enseignement agricole, professeur de l’enseignement maritime, linguiste du renseignement sur contrat)."
+ },
+ {
+  "id": "fpens036",
+  "name": "Chargé - Chargée de l'inspection de l'apprentissage de l'enseignement agricole",
+  "domaine": "Enseignement et Formation",
+  "famille": "Pilotage",
+  "categories": [
+   "A"
+  ],
+  "versants": "E",
+  "description": "Assure un rôle technique de contrôle, d'évaluation, d'avis et de conseil auprès du DRAAF.",
+  "activites": "Inspecter des établissements et des dispositifs d’enseignement et de formation\nContrôler des centres de formation d'apprentis, des sections d'apprentissage et des unités de formation par apprentissage sur les champs de la pédagogiques mais aussi administratifs et financiers.\nFormuler des avis relatifs aux contrats d'apprentissage.\nInspecter les dispositifs de formation en CFA et en entreprises.\nInspecter de façon conjointe (avec l'inspection du travail ou d'autres services d'inspection) l'application de la législation du travail et de l'apprentissage.\nContrôler la délivrance du titre de maître",
+  "noteActuelle": "Corps ou recrutement spécifique, absent pour l’instant de l’application (par exemple contrôleur aérien recruté sur concours de l’École nationale de l’aviation civile, inspecteur de l’enseignement agricole, professeur de l’enseignement maritime, linguiste du renseignement sur contrat)."
+ },
+ {
+  "id": "fpjus005",
+  "name": "Professeur - Professeure technique",
+  "domaine": "Justice",
+  "famille": "Action éducative ",
+  "categories": [
+   "A"
+  ],
+  "versants": "E",
+  "description": "Contribuer à la prise en charge des mineurs dans le cadre de l’intervention éducative en mettant en œuvre le module des acquisitions par des séquences d’apprentissage grâce à l’utilisation de différents médias pédagogiques\nContribuer à l'élaboration du projet individuel du mineur en vue de favoriser son évolution, son insertion et de prévenir la réitération\nRendre compte de l'intervention aux supé",
+  "activites": "Utiliser différents médias pédagogiques techniques, scolaires ou culturels dans le cadre de séquences d’apprentissage\nConstruire des outils pédagogiques\nFavoriser les processus de valorisation et de socialisation, l’acquisition de savoirs et de techniques\nConstruire avec les mineurs et leurs représentants légaux le projet individualisé d’insertion sociale, scolaire et professionnelle\nDévelopper les partenariats diversifiés pour faciliter l’accès aux dispositifs de droit commun et la découverte du monde du travail\nEvaluer quantitativement et qualitativement les actions mises en place\nEchanger a",
+  "noteActuelle": "Corps ou recrutement spécifique, absent pour l’instant de l’application (par exemple contrôleur aérien recruté sur concours de l’École nationale de l’aviation civile, inspecteur de l’enseignement agricole, professeur de l’enseignement maritime, linguiste du renseignement sur contrat)."
+ },
+ {
+  "id": "fpren014",
+  "name": "Chargé - Chargée de recherche et développement",
+  "domaine": "Renseignement",
+  "famille": "Renseignement d’origine technique",
+  "categories": [
+   "A"
+  ],
+  "versants": "E",
+  "description": "Collabore à la conception et au développement de nouveaux produits, services ou procédés ; conçoit et développe des solutions techniques en fonction des besoins des services opérationnels.",
+  "activites": "Analyser, concevoir, paramétrer et développer des solutions applicatives ou des développements concernant les infrastructures numériques et les systèmes d’information,\nEn assurer la réalisation et les évolutions dans le respect des normes de sécurité, de graphisme et de référencement,\nAdministrer les composants logiciels réutilisables et mettre à jour la nomenclature de ces composants,\nMener des travaux de recherche appliqués à son ou ses domaines d’activités,\nAssurer une veille technologique permanente des systèmes, composants et protocoles innovants.",
+  "noteActuelle": "Corps ou recrutement spécifique, absent pour l’instant de l’application (par exemple contrôleur aérien recruté sur concours de l’École nationale de l’aviation civile, inspecteur de l’enseignement agricole, professeur de l’enseignement maritime, linguiste du renseignement sur contrat)."
+ },
+ {
+  "id": "fpren022",
+  "name": "Linguiste",
+  "domaine": "Renseignement",
+  "famille": "Appui",
+  "categories": [
+   "A"
+  ],
+  "versants": "E",
+  "description": "Traduit et exploite une langue étrangère vers le français de divers documents sous différents formats pour produire du renseignement. ",
+  "activites": "Recueillir et exploiter des données de toute origine diffusées en langue étrangère,\nAssurer la traduction et la transcription des éléments recueillis en langue étrangère,\nMobiliser une ou plusieurs langues étrangères pour exploiter des données de toutes origines à des fins opérationnelles,\nParticiper à l’élaboration du renseignement.",
+  "noteActuelle": "Corps ou recrutement spécifique, absent pour l’instant de l’application (par exemple contrôleur aérien recruté sur concours de l’École nationale de l’aviation civile, inspecteur de l’enseignement agricole, professeur de l’enseignement maritime, linguiste du renseignement sur contrat)."
+ },
+ {
+  "id": "fpsoc014",
+  "name": "Conseiller conjugal - Conseillère conjugale",
+  "domaine": "Social, enfance et famille",
+  "famille": "Conseil et accompagnement",
+  "categories": [
+   "B"
+  ],
+  "versants": "ET",
+  "description": "Recevoir des personnes ou des couples présentant une demande d'aide psychologique, liée à une difficulté personnelle, conjugale ou familiale, afin d'assurer l'écoute de chacun, de favoriser l'échange en offrant un cadre spatio-temporel structurant, d'analyser leur demande, d' aider à une élaboration psychique et de les orienter",
+  "activites": "Accueil et prise en charge des personnes (agents, patients, usagers, etc.), dans son domaine\nInformation et conseil auprès des personnels / utilisateurs / usagers, relatif au domaine d'activité\nMédiation des relations avec la famille, le représentant légal de la personne et les différents partenaires extérieurs\nRecueil / collecte de données ou informations spécifiques à son domaine d'activité\nTenue d'entretiens avec des personnes (patients, familles,...)\nVeille spécifique à son domaine d'activité",
+  "noteActuelle": "Corps ou recrutement spécifique, absent pour l’instant de l’application (par exemple contrôleur aérien recruté sur concours de l’École nationale de l’aviation civile, inspecteur de l’enseignement agricole, professeur de l’enseignement maritime, linguiste du renseignement sur contrat)."
+ },
+ {
+  "id": "fptra011",
+  "name": "Pilote d'aéronefs dédiés au transport de passagers",
+  "domaine": "Transports",
+  "famille": "Exploitation des aéronefs",
+  "categories": [
+   "A"
+  ],
+  "versants": "E",
+  "description": "Conduit et utilise un aéronef avec le meilleur niveau de sécurité dans le cadre des missions de service public de la DGAC.",
+  "activites": "conduit et utilise un aéronef\nrespecte les règlements applicables ainsi que les règles, méthodes et procédures définies par l’exploitant\ncontribue à la sécurité des activités aéronautiques",
+  "noteActuelle": "Corps ou recrutement spécifique, absent pour l’instant de l’application (par exemple contrôleur aérien recruté sur concours de l’École nationale de l’aviation civile, inspecteur de l’enseignement agricole, professeur de l’enseignement maritime, linguiste du renseignement sur contrat)."
+ },
+ {
+  "id": "fptra016",
+  "name": "Pilote instructeur aérien - Pilote instructrice aérienne",
+  "domaine": "Transports",
+  "famille": "Formation",
+  "categories": [
+   "A",
+   "B"
+  ],
+  "versants": "ET",
+  "description": "Dispense des formations théoriques et pratiques aux élèves et stagiaires devant exercer leur activité professionnelle dans un cadre réglementaire aéronautique",
+  "activites": "Mettre en œuvre une ingénierie pédagogique\nConcevoir, élaborer et transmettre des savoirs théoriques et pratiques aéronautiques\nMettre en œuvre des équipements réels (radio navigation…) ou simulés (radars…) pour transmettre les savoirs pratiques\nProcéder à des évaluations pédagogiques\nConcevoir et mettre en œuvre des modalités d’évaluation\nSuivre, conseiller et orienter les élèves et stagiaires\nAssurer une veille scientifique, technologique et réglementaire du domaine\nMaintenir ses qualifications techniques et opérationnelles\nPiloter les aéronefs dans son domaine d’emploi ",
+  "noteActuelle": "Corps ou recrutement spécifique, absent pour l’instant de l’application (par exemple contrôleur aérien recruté sur concours de l’École nationale de l’aviation civile, inspecteur de l’enseignement agricole, professeur de l’enseignement maritime, linguiste du renseignement sur contrat)."
+ },
+ {
+  "id": "fptra017",
+  "name": "Professeur - Professeure de l'enseignement maritime",
+  "domaine": "Transports",
+  "famille": "Formation",
+  "categories": [
+   "A"
+  ],
+  "versants": "E",
+  "description": "Participe à l’élaboration des programmes de formation initiale et professionnelle et forme, par transmission des connaissances et des savoir-faire, des élèves et stagiaires dans un établissement d’enseignement délivrant un titre de certification professionnelle.",
+  "activites": "conçoit et met en œuvre des modules d’enseignement dans le cadre défini par le maître d’ouvrage ou dans le cadre de programmes et référentiels nationaux\nassure la transmission des connaissances et savoir-faire\nanime des formations sous différentes formes (face-à-face, à distance, tutorat…)\nmet en œuvre des méthodes, des outils et des démarches adaptés aux publics\nconçoit et met en œuvre les modalités d’évaluation des élèves\névalue les compétences et savoir-faire acquis et participe à leur valorisation\naccueille et positionne les stagiaires\nconduit des démarches d’accompagnement individuel en r",
+  "noteActuelle": "Corps ou recrutement spécifique, absent pour l’instant de l’application (par exemple contrôleur aérien recruté sur concours de l’École nationale de l’aviation civile, inspecteur de l’enseignement agricole, professeur de l’enseignement maritime, linguiste du renseignement sur contrat)."
+ },
+ {
+  "id": "fpusa032",
+  "name": "Délégué - Déléguée du permis de conduire et de la sécurité routière",
+  "domaine": "Relation à l'usager",
+  "famille": "Sécurité routière",
+  "categories": [
+   "A"
+  ],
+  "versants": "E",
+  "description": "Encadrer l’activité des membres du bureau d’éducation routière et veiller au bon déroulement des examens.\nPlanifier l’activité des IPCSR.\nVeiller au bon fonctionnement des centres d’examens.\nAnimer le réseau des partenaires et participer à la promotion de la politique de sécurité routière.\nParticiper à la lutte contre la fraude.",
+  "activites": "Management :\nContrôler la qualité du travail des agents (Inspecteurs du permis de conduire et de la sécurité routière)\nAssurer le suivi des productions de la cellule \nAssurer le suivi du quotidien des agents\nS’assurer du bon déroulement des examens\n\nPortage – animation de politiques :\nPromouvoir l’action éducative autour de la sécurité routière et pouvoir participer à la conception et à la coordination des actions de communication et d’animation\n\nAnimation de réseau :\nVeiller au bon fonctionnement des établissements d’enseignement de la conduite, notamment en matière pédagogique\nParticiper au ",
+  "noteActuelle": "Corps ou recrutement spécifique, absent pour l’instant de l’application (par exemple contrôleur aérien recruté sur concours de l’École nationale de l’aviation civile, inspecteur de l’enseignement agricole, professeur de l’enseignement maritime, linguiste du renseignement sur contrat)."
+ },
+ {
+  "id": "fpens003",
+  "name": "Enseignant - Enseignante artistique",
+  "domaine": "Enseignement et Formation",
+  "famille": "Enseignement ",
+  "categories": [
+   "A"
+  ],
+  "versants": "T",
+  "description": "A partir d'une expertise artistique et pédagogique, enseigne des pratiques artistiques spécialisées. Développe la curiosité et l'engagement artistique, transmet les répertoires les plus larges possible en inscrivant son activité dans un projet collectif d'établissement et d'enseignement",
+  "activites": "Enseignement d'une discipline artistique (musique, danse, théâtre) \nOrganisation et suivi des études des élèves \nÉvaluation des élèves \nConduite et accompagnement de projets pédagogiques, artistiques et culturels \nPratique artistique\nCoordination d'un département\nProgrammation artistique\nDirection d'ensemble\nInterventions artistique et pédagogique\nApplication des règles d'hygiène, de santé et de sécurité des personnes",
+  "noteActuelle": "Filière culturelle territoriale : concours d’assistant ou de professeur d’enseignement artistique, ou de directeur d’établissement d’enseignement artistique, organisés par le CNFPT ou les centres de gestion, après un diplôme d’État de la discipline."
+ },
+ {
+  "id": "fpens024",
+  "name": "Directeur - Directrice d'établissement d'enseignement artistique",
+  "domaine": "Enseignement et Formation",
+  "famille": "Pilotage",
+  "categories": [
+   "A"
+  ],
+  "versants": "T",
+  "description": "Pilote le projet de l'établissement dans le cadre des schémas pédagogiques nationaux et du développement culturel de la collectivité. Organise et coordonne l'action pédagogique et administrative. Impulse les actions et garantit leur cohérence, définit des projets innovants en favorisant des partenariats, organise la communication générale de l'établissement ",
+  "activites": "Élaboration et mise en œuvre d'un projet d'établissement \nÉlaboration et mise en œuvre d'un programme d'éducation artistique et d'action culturelle \nOrganisation des études \nCoordination et pilotage des projets pédagogiques et des pratiques collectives \nAnimation de la réflexion et de l'innovation pédagogique \nConseil et orientation des élèves \nRecherche, création et production\nPratique artistique et /ou culture active dans sa spécialité (musique, art dramatique, chorégraphique)\nAide à la décision et mise en œuvre des orientations d'une politique publique\nVeille et observation sectorielle\nMana",
+  "noteActuelle": "Filière culturelle territoriale : concours d’assistant ou de professeur d’enseignement artistique, ou de directeur d’établissement d’enseignement artistique, organisés par le CNFPT ou les centres de gestion, après un diplôme d’État de la discipline."
+ },
+ {
+  "id": "fpens025",
+  "name": "Directeur - Directrice d'établissement d'arts plastiques",
+  "domaine": "Enseignement et Formation",
+  "famille": "Pilotage",
+  "categories": [
+   "A",
+   "B"
+  ],
+  "versants": "T",
+  "description": "Pilote le projet de l'établissement dans le cadre des programmes nationaux des diplômes préparés et du développement culturel de la collectivité. Organise et coordonne l'action pédagogique et administrative. Impulse les actions et garantit leur cohérence, définit des projets innovants en favorisant des partenariats, organise la communication générale de l'établissement ",
+  "activites": "Élaboration d'un projet d'établissement et organisation des études \nAnimation de la réflexion et de l'innovation pédagogique \nConseil et orientation des étudiants \nCoordination et pilotage des projets pédagogiques \nÉlaboration et mise en œuvre d'un programme d'éducation artistique et d'action culturelle \nRecherche, création et production artistique\nEnseignement dans un domaine ou une spécialité\nParticipation à des commissions et jurys\nConduite d'expertise\nCommissariat d'expositions\nRédaction de textes critiques ou théoriques\nAide à la décision et mise en œuvre des orientations d'une politique ",
+  "noteActuelle": "Filière culturelle territoriale : concours d’assistant ou de professeur d’enseignement artistique, ou de directeur d’établissement d’enseignement artistique, organisés par le CNFPT ou les centres de gestion, après un diplôme d’État de la discipline."
+ },
+ {
+  "id": "fpens007",
+  "name": "Enseignant chercheur - Enseignante chercheuse",
+  "domaine": "Enseignement et Formation",
+  "famille": "Enseignement supérieur",
+  "categories": [
+   "A"
+  ],
+  "versants": "E",
+  "description": "Dispenser des enseignements théoriques et pratiques en formation initiale et continue dans l’enseignement supérieur ; élargir le champ des connaissances en déployant une activité de recherche fondamentale et/ou appliquée ; contribuer à la diffusion de ses résultats ; contribuer au dialogue entre les sciences et la société",
+  "activites": "Élaborer et transmettre des connaissances en s’appuyant sur les acquis de la recherche au titre de la formation initiale et continue incluant, le cas échéant, l’utilisation des TICE\nOrganiser un enseignement au sein d’équipes pédagogiques et en liaison avec les milieux professionnels, y compris le milieu médical (hospitalier, ambulatoire)\nDiriger, évaluer, conseiller, orienter et contribuer à l’insertion professionnelle des étudiants\nCréer, développer, expertiser et coordonner la recherche fondamentale, appliquée, pédagogique\nInnover, inventer, valoriser les résultats de la recherche et techni",
+  "noteActuelle": "Les enseignants-chercheurs sont recrutés par les universités après un doctorat : qualification par le Conseil national des universités (CNU), puis concours sur poste organisé par chaque établissement."
+ },
+ {
+  "id": "fpens008",
+  "name": "Enseignant - Enseignante dans le supérieur",
+  "domaine": "Enseignement et Formation",
+  "famille": "Enseignement supérieur",
+  "categories": [
+   "A"
+  ],
+  "versants": "E",
+  "description": "Concevoir et dispenser des enseignements dans le cadre de la formation initiale et continue dans l’enseignement supérieur. Faire de la recherche fondamentale et/ou appliquée et en transmettre les méthodes. Contribuer au dialogue entre les sciences et la société.",
+  "activites": "Élaborer et transmettre des connaissances en s’appuyant sur les acquis de la recherche au titre de la formation initiale et continue incluant, le cas échéant, l’utilisation des TICE\nOrganiser un enseignement au sein d’équipes pédagogiques et en liaison avec les milieux professionnels, y compris le milieu médical (hospitalier, ambulatoire)\nDiriger, évaluer, conseiller, orienter et contribuer à l’insertion professionnelle des apprenants\nDévelopper et participer à la recherche fondamentale et appliquée\nValoriser les résultats de la recherche\nFormer à la recherche et par la recherche les jeunes ch",
+  "noteActuelle": "Les enseignants-chercheurs sont recrutés par les universités après un doctorat : qualification par le Conseil national des universités (CNU), puis concours sur poste organisé par chaque établissement."
+ },
+ {
+  "id": "fpens037",
+  "name": "Responsable de l’accompagnement des étudiants des établissements d’enseignement supérieur culturel",
+  "domaine": "Enseignement et Formation",
+  "famille": "Conseil et accompagnement",
+  "categories": [
+   "A"
+  ],
+  "versants": "E",
+  "description": "Il organise et anime la vie scolaire afin de mettre l’élève dans les meilleures conditions de vie et de réussite scolaire",
+  "activites": "Participer à l’organisation et l’animation de la vie de l’établissement \nOrganiser et superviser le travail de l’équipe de surveillance \nSuivre le comportement et l’activité des jeunes en lien avec la communauté éducative\nRechercher des solutions permettant de prévenir les difficultés des jeunes, et de les surmonter, en lien avec la communauté éducative et les partenaires extérieurs \nSuivre la vie de classe, notamment par la participation aux différentes instances éducatives et pédagogiques \nOrganiser la vie collective hors du temps de classe, animation éducative \nÉtablir des relations directe",
+  "noteActuelle": "Les enseignants-chercheurs sont recrutés par les universités après un doctorat : qualification par le Conseil national des universités (CNU), puis concours sur poste organisé par chaque établissement."
+ },
+ {
+  "id": "fpens034",
+  "name": "Accompagnant - Accompagnante d'Élèves en Situation de Handicap",
+  "domaine": "Enseignement et Formation",
+  "famille": "Vie scolaire",
+  "categories": [
+   "C"
+  ],
+  "versants": "ET",
+  "description": "Les accompagnants d'élèves en situation de handicap (AESH) sont des personnels chargés de l'aide humaine. Ils ont pour mission de favoriser l'autonomie de l'élève en situation de handicap, qu'ils interviennent au titre de l'aide humaine individuelle, de l'aide humaine mutualisée ou de l'accompagnement collectif.",
+  "activites": "Les activités des personnels chargés de l'aide humaine sont divisées en trois domaines qui regroupent les différentes formes d'aides apportées aux élèves en situation de handicap, sur tous les temps et lieux scolaires (dont les stages, les sorties et voyages scolaires)\nL'accompagnement des élèves favorise les actes de sa vie quotidienne, l'accès aux activités d'apprentissage (scolaires, éducatives, culturelles, sportives, artistiques ou professionnelles), les activités de la vie sociale et relationnelle\nLes AESH participent aux réunions des équipes et contribuent à la mise en œuvre du projet p",
+  "noteActuelle": "Recrutement sur contrat, sans concours : l’employeur (rectorat, établissement, département ou juridiction) recrute directement selon le diplôme ou l’expérience demandés."
+ },
+ {
+  "id": "fpens035",
+  "name": "Assistant - Assistante d'éducation",
+  "domaine": "Enseignement et Formation",
+  "famille": "Vie scolaire",
+  "categories": [
+   "B",
+   "C"
+  ],
+  "versants": "E",
+  "description": "Les assistants d’éducation exercent dans les établissements scolaires des fonctions d’assistance à l’équipe éducative, notamment pour l’encadrement et la surveillance des élèves.",
+  "activites": "Surveiller et encadrer les élèves durant le temps scolaire, gérer les absences et les relations avec les parents\nApporter leur concours aux projets éducatifs mis en place par les CPE et la communauté éducative \nEncadrer les sorties scolaires\nAider à l’étude et aux devoirs, à l’utilisation des nouvelles technologies\nParticiper à l’encadrement et à l’animation d’activités éducatives, culturelles, artistiques et sportives\nParticiper éventuellement à l’animation des bibliothèques et centres documentaires, en appui des professeurs documentalistes",
+  "noteActuelle": "Recrutement sur contrat, sans concours : l’employeur (rectorat, établissement, département ou juridiction) recrute directement selon le diplôme ou l’expérience demandés."
+ },
+ {
+  "id": "fpjus017",
+  "name": "Juriste expert - Juriste experte auprès des magistrats judiciaires",
+  "domaine": "Justice",
+  "famille": "Magistrature",
+  "categories": [
+   "A"
+  ],
+  "versants": "E",
+  "description": "Apporter son concours à l’activité juridictionnelle des magistrats judiciaires, notamment dans les dossiers comportant des éléments de complexité ou nécessitant une expertise particulière.",
+  "activites": "Réaliser des recherches juridiques (documentation, jurisprudence)\nRédiger des notes de synthèse de dossiers\nRédiger des projets de décisions juridictionnelles ou d’actes de poursuite, sous le contrôle d’un magistrat\nAnalyser des dossiers comportant des éléments de complexité ou nécessitant une expertise particulière\nAssurer le suivi et la coordination d’une politique de juridiction ",
+  "noteActuelle": "Recrutement sur contrat, sans concours : l’employeur (rectorat, établissement, département ou juridiction) recrute directement selon le diplôme ou l’expérience demandés."
+ },
+ {
+  "id": "fpsoc010",
+  "name": "Accueillant familial - Accueillante familiale",
+  "domaine": "Social, enfance et famille",
+  "famille": "Accueil",
+  "categories": [
+   "C"
+  ],
+  "versants": "T",
+  "description": "Accueillir à son domicile, pour un temps donné, et prendre en charge au quotidien, des personnes âgées ou handicapées (physiques et/ou psychiques) adultes dans le cadre d'un contrat de gré à gré ou géré par un établissement",
+  "activites": "Accueil des personnes (patients, usagers, familles, etc.)\nAccueil et installation du patient, aménagement de l'environnement (confort et sécurité)\nÉlaboration et rédaction de projets individuels\nRédaction et mise à jour du dossier patient\nTenue d'entretiens avec des personnes (patients, familles,...)",
+  "noteActuelle": "Recrutement sur contrat, sans concours : l’employeur (rectorat, établissement, département ou juridiction) recrute directement selon le diplôme ou l’expérience demandés."
+ },
+ {
+  "id": "fpsoc011",
+  "name": "Assistant familial - Assistante familiale en protection de l'enfance",
+  "domaine": "Social, enfance et famille",
+  "famille": "Accueil",
+  "categories": [
+   "C"
+  ],
+  "versants": "ET",
+  "description": "Accueillir à son domicile des enfants ou adolescents jusqu'à 18 ans ou de jeunes majeurs jusqu'à 21 ans, ainsi que les mères avec enfants de moins de 3 ans.\nAssurer le développement et le bien-être physique, affectif, psychique et social des enfants et des adolescents accueillis, leur offrir un cadre éducatif familial et participer à la mise en œuvre de leur projet.",
+  "activites": "Accueil et accompagnement d’enfants ou de jeunes, dans son domaine, notamment des enfants en situation de handicap ou ayant des besoins spécifiques ainsi que des mineurs non accompagnés\nAssurer la sécurité, la protection de l’enfant dans son environnement\nProposer une disponibilité relationnelle, favoriser un sentiment de sécurité affective\nApporter tous les soins et les repères éducatifs nécessaires dans le cadre d’une vie familiale\nAccompagner et favoriser les apprentissages dont le suivi scolaire ou le suivi de l’insertion professionnel\nAccompagner le développement de l’autonomie et l’arriv",
+  "noteActuelle": "Recrutement sur contrat, sans concours : l’employeur (rectorat, établissement, département ou juridiction) recrute directement selon le diplôme ou l’expérience demandés."
+ }
+]

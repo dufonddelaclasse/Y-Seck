@@ -2017,8 +2017,8 @@ html[data-contrast="true"] .job-page .job-match { background:none; border:0; col
 .talents-card p, .app .prep.hi.talents-card p { margin:0; font-size:1rem; line-height:1.6; font-weight:300; color:#161616; }
 .talents-card p b { font-weight:500; }
 .talents-perf { flex:none; height:4px; margin:18px calc(10px - var(--talents-pad)); background-image:radial-gradient(circle, #DEDEDE 1.3px, transparent 1.8px); background-size:11.5px 4px; background-position:0 50%; background-repeat:space no-repeat; }
-/* Photo des Prépas Talents dans Se préparer : hauteur au ratio de l’image (900 × 539). */
-.app .prep.hi.talents-card .talents-hero { min-height:0; aspect-ratio:900 / 539; }
+/* Photo des Prépas Talents (Se préparer, onboarding, page Prépas Talents) : hauteur au ratio de l’image (900 × 539). */
+.talents-hero, .app .prep.hi.talents-card .talents-hero { min-height:0; aspect-ratio:900 / 539; }
 .app .prep.hi.talents-card .talents-body { gap:10px; padding:26px var(--talents-pad) 40px; }
 .app .prep.hi.talents-card .talents-perf { margin:12px calc(10px - var(--talents-pad)) 4px; }
 .app .prep.hi.talents-card .more, .app .prep.hi.talents-card:hover { color:#161616; }
@@ -2247,3 +2247,23 @@ html.crios .profile-footer { bottom:calc(86px + env(safe-area-inset-bottom, 0px)
 .install-steps { display:flex; flex-direction:column; gap:10px; margin:18px 0 6px; padding-left:22px; font-size:.9375rem; line-height:1.45; }
 .install-steps li::marker { font-weight:600; color:var(--brand); }
 .install-share { display:inline-block; width:20px; height:20px; margin:0 2px; vertical-align:-4px; color:var(--brand); }
+/* Écrans d’introduction en carrousel : une bande de 2 px (comme la progression de l’onboarding) glisse sous l’onglet choisi,
+   les contenus défilent côte à côte et la hauteur suit le contenu affiché. */
+.fp-tabs { position:relative; }
+.fp-tab[aria-selected="true"]::after { height:2px; border-radius:2px; }
+.fp-ink { display:none; position:absolute; left:0; bottom:-2px; width:var(--ink-w, 0); height:2px; border-radius:2px; background:var(--ink-color, var(--brand)); transform:translateX(var(--ink-x, 0)); pointer-events:none; }
+.fp-tabs.inked .fp-ink { display:block; transition:transform .4s cubic-bezier(.4,0,.2,1), width .4s cubic-bezier(.4,0,.2,1), background-color .4s ease; }
+.fp-tabs.inked .fp-tab[aria-selected="true"]::after { display:none; }
+.fp-viewport { margin:0 -15px; overflow:hidden; touch-action:pan-y; transition:height .4s cubic-bezier(.4,0,.2,1); }
+.fp-track { display:flex; align-items:flex-start; transition:transform .4s cubic-bezier(.4,0,.2,1); will-change:transform; }
+.fp-track > .fp-panel, .fp-track > .fp-panel[hidden] { display:flex; flex:0 0 100%; min-width:0; padding-left:21px; padding-right:21px; visibility:visible; }
+.fp-track > .fp-panel[hidden] { visibility:hidden; transition:visibility 0s linear .4s; }
+.fp-track > .fp-panel:not([hidden]) { animation:none; }
+.fp-viewport.dragging, .fp-viewport.dragging .fp-track { transition:none; }
+.fp-viewport.dragging .fp-panel[hidden] { visibility:visible; transition:none; }
+.fp-viewport.dragging { -webkit-user-select:none; user-select:none; }
+@media (prefers-reduced-motion:reduce) { .fp-tabs.inked .fp-ink, .fp-viewport, .fp-track, .fp-track > .fp-panel[hidden] { transition:none; } }
+/* Catégories A et A+ : mention du niveau des admis sous « Pour y entrer ». */
+.cat-mention { display:flex; gap:8px; align-items:flex-start; }
+.screen .cat-mention, .fp-panel p.cat-mention, .intro-fold-body p.cat-mention { font-size:.875rem; line-height:1.35; font-weight:400; color:var(--muted); }
+.cat-mention svg { flex:none; width:16px; height:16px; margin-top:2px; color:var(--brand); }

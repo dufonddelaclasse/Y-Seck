@@ -1,0 +1,283 @@
+[
+ {
+  "id": "fpmed010",
+  "name": "Orthoptiste",
+  "domaine": "Médical et paramédical",
+  "famille": "Paramédical",
+  "categories": [
+   "A"
+  ],
+  "versants": "H",
+  "description": "Elaborer un diagnostic, dépister, évaluer, rééduquer, réadapter et explorer les troubles et déficiences de la vision d'une personne.\nRéaliser des bilans orthoptiques, des actes et des techniques d'exploration, de rééducation et de réadaptation orthoptique.",
+  "activites": "Education thérapeutique dans le domaine de l'orthoptie auprès du patient et de son entourage\nFormation et information de nouveaux personnels et de stagiaires\nOrganisation des activités et gestion des ressources\nPrévention et dépistage des troubles visuels\nRéalisation de bilans en vue du diagnostic orthoptique et réalisation d'explorations fonctionnelles\nRéalisation de soins, de traitements orthoptiques individuels et d'actes techniques\nRéalisation de travaux de recherches en orthoptie\nVeille professionnelle et évolution des pratiques professionnelles",
+  "noteActuelle": "Profession réglementée : le diplôme d’État ou le certificat de la profession est obligatoire. Les hôpitaux recrutent ensuite directement, sur titre ou sur contrat, sans concours national."
+ },
+ {
+  "id": "fpmed011",
+  "name": "Orthésiste - orthopédiste",
+  "domaine": "Médical et paramédical",
+  "famille": "Paramédical",
+  "categories": [
+   "B",
+   "C"
+  ],
+  "versants": "H",
+  "description": "Elaborer un bilan corporel, fonctionnel et situationnel auprès de personnes présentant une lésion ou modification corporelle entraînant une limitation fonctionnelle.\nConcevoir, réaliser, conseiller, adapter et délivrer des orthèses sur mesure ou de série et des prothèses externes de sein ainsi que des aides techniques.",
+  "activites": "Adaptation et livraison des orthèses de série, des prothèses externes de sein et des aides techniques\nApport de conseils et d'expertise au sein d'une équipe pluridisciplinaire et auprès de différents professionnels de santé\nConseil et information à la personne et à son entourage\nConstitution des dossiers techniques et réalisation d'appareillage orthétique sur mesure\nEntretien, nettoyage et rangement des matériels spécifiques à son domaine d'activité\nFormation et information de nouveaux personnels et de stagiaires\nGestion des ressources humaines, administratives et comptables\nGestion des stocks",
+  "noteActuelle": "Profession réglementée : le diplôme d’État ou le certificat de la profession est obligatoire. Les hôpitaux recrutent ensuite directement, sur titre ou sur contrat, sans concours national."
+ },
+ {
+  "id": "fpmed015",
+  "name": "Pédicure / Podologue",
+  "domaine": "Médical et paramédical",
+  "famille": "Paramédical",
+  "categories": [
+   "A"
+  ],
+  "versants": "H",
+  "description": "Elaborer un diagnostic, réaliser des actes sur les troubles cutanés, morphostatiques et dynamiques du pied et des affections unguéales du pied.\nPrescrire, confectionner ou adapter des dispositifs médicaux podologiques externes du pied.\nPrescrire et appliquer des topiques et des pansements.",
+  "activites": "Conseil et éducation thérapeutiques, relatifs à son domaine d'activité\nEtablissement du diagnostic dans le domaine de la pédicurie-podologie\nFormation et information de nouveaux personnels et de stagiaires\nGestion des ressources humaines, administratives et comptables\nIdentification, recensement des besoins et des attentes des patients, spécifiques à son domaine\nInformation et conseil sur la santé et l'hygiène du pied, sur la prévention des troubles morphostatiques et des risques podologiques auprès de l'enfant, l'adulte, la personne âgée en individuel ou en groupe\nMise en place de démarches q",
+  "noteActuelle": "Profession réglementée : le diplôme d’État ou le certificat de la profession est obligatoire. Les hôpitaux recrutent ensuite directement, sur titre ou sur contrat, sans concours national."
+ },
+ {
+  "id": "fpmed022",
+  "name": "Audioprothésiste",
+  "domaine": "Médical et paramédical",
+  "famille": "Paramédical",
+  "categories": [
+   "A"
+  ],
+  "versants": "H",
+  "description": "Réaliser un bilan audioprothétique auprès de personnes présentant un trouble de l'audition et/ou de l'intelligibilité nécessitant une correction auditive.\nChoisir, adapter, délivrer la prothèse auditive, en contrôler son efficacité, et réaliser l'éducation prothétique du patient.",
+  "activites": "Adaptation, contrôle d'efficacité immédiate et délivrance de l'appareillage\nConseil et information générale du patient, choix d'une démarche d'appareillage\nEntretien, nettoyage et rangement des matériels spécifiques à son domaine d'activité\nFormation et information de nouveaux personnels et de stagiaires\nGestion des ressources humaines, administratives et comptables\nGestion des stocks de produits, de matériels, dans son domaine (saisie, suivi, contrôle, relance commandes)\nMise en place de démarches qualité / environnement et rédaction de documents requis pour l'activité de l'entreprise\nPrépara",
+  "noteActuelle": "Profession réglementée : le diplôme d’État ou le certificat de la profession est obligatoire. Les hôpitaux recrutent ensuite directement, sur titre ou sur contrat, sans concours national."
+ },
+ {
+  "id": "fpmed023",
+  "name": "Oculariste",
+  "domaine": "Médical et paramédical",
+  "famille": "Paramédical",
+  "categories": [
+   "B",
+   "C"
+  ],
+  "versants": "H",
+  "description": "Concevoir, fabriquer et adapter des appareillages du globe oculaire non fonctionnel ou d'une cavité orbitaire, par prothèse oculaire externe sur mesure.",
+  "activites": "Adaptation et livraison des prothèses oculaires et suivi de la personne\nApport de conseils et d'expertise au sein d'une équipe pluridisciplinaire et auprès de différents professionnels de santé\nConseil et information à la personne et à son entourage\nConstitution des dossiers techniques et réalisation des prothèses oculaires sur mesure\nEntretien, nettoyage et rangement des matériels spécifiques à son domaine d'activité\nFormation et information de nouveaux personnels et de stagiaires\nGestion des ressources humaines, administratives et comptables\nGestion des stocks de produits, de matériels, dans",
+  "noteActuelle": "Profession réglementée : le diplôme d’État ou le certificat de la profession est obligatoire. Les hôpitaux recrutent ensuite directement, sur titre ou sur contrat, sans concours national."
+ },
+ {
+  "id": "fpmed024",
+  "name": "Prothésiste dentaire",
+  "domaine": "Médical et paramédical",
+  "famille": "Paramédical",
+  "categories": [
+   "B",
+   "C"
+  ],
+  "versants": "H",
+  "description": "Concevoir, fabriquer et adapter des prothèses dentaires ou des appareils d'orthodontie sur mesure à partir des empreintes bucco-dentaires.",
+  "activites": "Réceptionner l'empreinte et identifier les données de la commande du praticien dentaire\nEffectuer les opérations préparatoires à la conception de l'élément prothétique (décontamination de l'empreinte négative, fabrication du maître modèle, du socle d'appui, mise en articulation, ...)\nElaborer l'élément prothétique définitif, réaliser le système d'ancrage et effectuer le montage\nProcéder aux opérations de finition de l'appareillage et renseigner la fiche de fabrication, le dossier client, ...\nEffectuer les réparations d'appareillages dentaires (rebasage, contreplaque avec facette, crochet coulé",
+  "noteActuelle": "Profession réglementée : le diplôme d’État ou le certificat de la profession est obligatoire. Les hôpitaux recrutent ensuite directement, sur titre ou sur contrat, sans concours national."
+ },
+ {
+  "id": "fpmed025",
+  "name": "Orthoprothésiste",
+  "domaine": "Médical et paramédical",
+  "famille": "Paramédical",
+  "categories": [
+   "B",
+   "C"
+  ],
+  "versants": "H",
+  "description": "Elaborer un bilan fonctionnel et situationnel auprès de personnes présentant un handicap, des troubles des fonctions, une déficience.\nConcevoir, réaliser et délivrer des orthèses et des prothèses externes sur mesure et sur moulage.\nConseiller, adapter et délivrer des appareillages orthopédiques de série, des prothèses externes non orthopédiques, des aides techniques et des assistances technologiqu",
+  "activites": "Apport de conseils et d'expertise au sein d'une équipe pluridisciplinaire et auprès de différents professionnels de santé\nConseil et information à la personne et à son entourage\nDéfinition, réalisation et adaptation de l'appareillage orthétique et prothétique\nEntretien, nettoyage et rangement des matériels spécifiques à son domaine d'activité\nFormation et information de nouveaux personnels et de stagiaires\nGestion des ressources humaines, administratives et comptables\nGestion des stocks de produits, de matériels, dans son domaine (saisie, suivi, contrôle, relance commandes)\nMise en place de dé",
+  "noteActuelle": "Profession réglementée : le diplôme d’État ou le certificat de la profession est obligatoire. Les hôpitaux recrutent ensuite directement, sur titre ou sur contrat, sans concours national."
+ },
+ {
+  "id": "fpmed026",
+  "name": "Epithésiste",
+  "domaine": "Médical et paramédical",
+  "famille": "Paramédical",
+  "categories": [
+   "B",
+   "C"
+  ],
+  "versants": "H",
+  "description": "Concevoir, fabriquer et adapter des appareillages de la face et/ou des oreilles, par prothèse faciale externe sur mesure.",
+  "activites": "Adaptation et livraison des prothèses faciales externes et suivi de la personne\nApport de conseils et d'expertise au sein d'une équipe pluridisciplinaire et auprès de différents professionnels de santé\nConseil et information à la personne et à son entourage\nConstitution des dossiers techniques et réalisation des prothèses faciales externes sur mesure\nEntretien, nettoyage et rangement des matériels spécifiques à son domaine d'activité\nFormation et information de nouveaux personnels et de stagiaires\nGestion des ressources humaines, administratives et comptables\nGestion des stocks de produits, de",
+  "noteActuelle": "Profession réglementée : le diplôme d’État ou le certificat de la profession est obligatoire. Les hôpitaux recrutent ensuite directement, sur titre ou sur contrat, sans concours national."
+ },
+ {
+  "id": "fpmed027",
+  "name": "Orthopédiste - orthésiste",
+  "domaine": "Médical et paramédical",
+  "famille": "Paramédical",
+  "categories": [
+   "B",
+   "C"
+  ],
+  "versants": "H",
+  "description": "Elaborer un bilan corporel, fonctionnel et situationnel auprès de personnes présentant une lésion ou modification corporelle entraînant une limitation fonctionnelle.\nConcevoir, réaliser, conseiller, adapter et délivrer des orthèses sur mesure ou de série et des prothèses externes de sein ainsi que des aides techniques.",
+  "activites": "Adaptation et livraison des orthèses de série, des prothèses externes de sein et des aides techniques\nApport de conseils et d'expertise au sein d'une équipe pluridisciplinaire et auprès de différents professionnels de santé\nConseil et information à la personne et à son entourage\nConstitution des dossiers techniques et réalisation d'appareillage orthétique sur mesure\nEntretien, nettoyage et rangement des matériels spécifiques à son domaine d'activité\nFormation et information de nouveaux personnels et de stagiaires\nGestion des ressources humaines, administratives et comptables\nGestion des stocks",
+  "noteActuelle": "Profession réglementée : le diplôme d’État ou le certificat de la profession est obligatoire. Les hôpitaux recrutent ensuite directement, sur titre ou sur contrat, sans concours national."
+ },
+ {
+  "id": "fpmed031",
+  "name": "Assistant - Assistante de régulation médicale",
+  "domaine": "Médical et paramédical",
+  "famille": "Secours",
+  "categories": [
+   "B"
+  ],
+  "versants": "H",
+  "description": "Accueillir, localiser et orienter les appels téléphoniques dans un contexte d'urgence et de détresse.\nPrioriser l'orientation vers le médecin régulateur du SAMU centre 15, dans le cadre d'un travail en binôme en fonction du degré d'urgence évalué.\nGérer les flux et moyens définis par le médecin régulateur, en assurant la traçabilité jusqu'à la fin de la prise en charge du patient.",
+  "activites": "Accompagnement du patient et des proches tout au long de la prise en charge téléphonique\nClassement et tenue de la documentation professionnelle\nEntretien, nettoyage et rangement des matériels spécifiques à son domaine d'activité\nGestion des moyens à déployer pour répondre à la prescription médicale\nPréparation et organisation du matériel dans son domaine de compétences et dans le cadre de plan de secours (sur le lieu de travail ou lieu de l'évènement)\nRéception et traitement des appels téléphoniques dans un contexte d'urgence et de détresse\nRecueil et collecte de données ou informations spéci",
+  "noteActuelle": "Profession réglementée : le diplôme d’État ou le certificat de la profession est obligatoire. Les hôpitaux recrutent ensuite directement, sur titre ou sur contrat, sans concours national."
+ },
+ {
+  "id": "fpmed047",
+  "name": "Podo-orthésiste",
+  "domaine": "Médical et paramédical",
+  "famille": "Paramédical",
+  "categories": [
+   "B",
+   "C"
+  ],
+  "versants": "H",
+  "description": "Elaborer un bilan podo-locomoteur auprès de personnes présentant une déficience de la posture, de la marche et du chaussage.\nConcevoir et réaliser un appareillage orthopédique externe du pied ou du couple pied-jambe sur mesure ou sur moulage.\nConseiller, délivrer et adapter des appareillages de série et des aides techniques.",
+  "activites": "Apport de conseils et d'expertise au sein d'une équipe pluridisciplinaire et auprès de différents professionnels de santé\nConception, fabrication et adaptation d'appareillage orthopédique externe du pied et du couple pied-jambe\nConseil et information à la personne et à son entourage\nEntretien, nettoyage et rangement des matériels spécifiques à son domaine d'activité\nFormation et information de nouveaux personnels et de stagiaires\nGestion des ressources humaines, administratives et comptables\nGestion des stocks de produits, de matériels, dans son domaine\nMise en place de démarches qualité / env",
+  "noteActuelle": "Profession réglementée : le diplôme d’État ou le certificat de la profession est obligatoire. Les hôpitaux recrutent ensuite directement, sur titre ou sur contrat, sans concours national."
+ },
+ {
+  "id": "fpsan043",
+  "name": "Technicien - Technicienne de santé environnementale",
+  "domaine": "Prévention, conseil et pilotage en santé",
+  "famille": "Prévention/promotion",
+  "categories": [
+   "B"
+  ],
+  "versants": "EH",
+  "description": "Participe à l'élaboration et à l'application de projets de protection contre les risques environnementaux et sanitaires. Applique les réglementations et conduit des actions de prévention, de mesure et de contrôle",
+  "activites": "Application de la réglementation, organisation et réalisation des contrôles \nAnalyse du risque et choix des mesures préventives et correctives\nFormulation d'avis techniques et conseils à la population sur les risques\nFormulation d’avis techniques et conseils à la population sur les risques\nProposition d’améliorations et/ou d’évolutions dans les domaines de l’environnement et sanitaires et recherche des causes\nFormation et sensibilisation sur l’environnement \nRédaction de tout ou partie d’audits en matière d’environnement interne et externe au regard de la réglementation et des procédures",
+  "noteActuelle": "Profession réglementée : le diplôme d’État ou le certificat de la profession est obligatoire. Les hôpitaux recrutent ensuite directement, sur titre ou sur contrat, sans concours national."
+ },
+ {
+  "id": "fpmed028",
+  "name": "Pharmacien - Pharmacienne",
+  "domaine": "Médical et paramédical",
+  "famille": "Pharmacie",
+  "categories": [
+   "A"
+  ],
+  "versants": "H",
+  "description": "Apporte conseil et expertise, contribue à la conception, au pilotage, à la mise en œuvre des politiques de santé publique ou liés aux produits de santé et propose des axes d’action tenant compte des impératifs législatifs ou réglementaires nationaux et internationaux, de l’état des sujets, de leurs enjeux et de leurs conséquences.",
+  "activites": "Contribuer ou participer à l’élaboration des législations et réglementations nationales et européennes relatives à la politique des produits de santé ;\nRéaliser des études scientifiques et travaux de recherche en matière de santé publique (réglementation, suivi des expertises, gestion des risques).;\nParticipation à la politique du médicament et des produits de santé, à la fixation des prix et aux dispositifs médicaux ; \nPilotage de la stratégie nationale sur des sujets en santé publique en lien avec les acteurs concernés\nPiloter un programme national en santé publique, élaborer des proposition",
+  "noteActuelle": "Le diplôme d’État de docteur en médecine ou en pharmacie est obligatoire. Le recrutement se fait ensuite selon l’employeur : praticien hospitalier, médecin ou pharmacien territorial ou de sapeurs-pompiers sur titres, médecin inspecteur de santé publique ou médecin de prévention."
+ },
+ {
+  "id": "fpmed030",
+  "name": "Médecin-chef - Médecin-cheffe de SDIS",
+  "domaine": "Médical et paramédical",
+  "famille": "Secours",
+  "categories": [
+   "A"
+  ],
+  "versants": "T",
+  "description": "Sous l'autorité du directeur ou de la directrice des services d'incendie et de secours, dirige le service de santé et de secours médical (SSSM), composé de médecins, pharmaciennes ou pharmaciens, infirmières ou infirmiers, vétérinaires ainsi que les personnels affectés au SSSM. Conseille en matière sanitaire le directeur ou la directrice et les autorités responsables de la mise en œuvre des secour",
+  "activites": "Participation à la définition des orientations stratégiques du service de santé et de secours médical \nGestion opérationnelle des secours aux personnes \nSurveillance médicale de l'ensemble du personnel et des postes à risques \nÉvaluation des dispositifs des services de santé et de secours médical \nMise en œuvre d'actions de formation\nToxicologie, risques NRBC-e, prévention du risque infectieux, gestion des risques\nAide à la décision et mise en œuvre des orientations d'une politique publique\nConseil, appui technique et organisationnel\nIngénierie et pilotage d'études\nVeille et observation sector",
+  "noteActuelle": "Le diplôme d’État de docteur en médecine ou en pharmacie est obligatoire. Le recrutement se fait ensuite selon l’employeur : praticien hospitalier, médecin ou pharmacien territorial ou de sapeurs-pompiers sur titres, médecin inspecteur de santé publique ou médecin de prévention."
+ },
+ {
+  "id": "fpmed033",
+  "name": "Médecin de SDIS",
+  "domaine": "Médical et paramédical",
+  "famille": "Secours",
+  "categories": [
+   "A"
+  ],
+  "versants": "T",
+  "description": "Sous l'autorité du médecin-chef ou médecin-cheffe, participe aux missions du service de santé et de secours médical tant dans l'activité opérationnelle que dans le maintien de la santé en service",
+  "activites": "Participation à la définition des orientations stratégiques du service de santé et de secours médical \nGestion opérationnelle des secours aux personnes \nSurveillance médicale de l'ensemble du personnel et des postes à risques \nParticipation à la formation des personnels\nConseil, appui technique et organisationnel\nVeille et observation sectorielle\nManagement de proximité\nMise en œuvre et suivi administratif, juridique, commande publique\nGestion administrative des ressources humaines\nContrôle des règles d'hygiène, de santé et de sécurité au travail\nContrôle de la qualité des services rendus",
+  "noteActuelle": "Le diplôme d’État de docteur en médecine ou en pharmacie est obligatoire. Le recrutement se fait ensuite selon l’employeur : praticien hospitalier, médecin ou pharmacien territorial ou de sapeurs-pompiers sur titres, médecin inspecteur de santé publique ou médecin de prévention."
+ },
+ {
+  "id": "fpmed034",
+  "name": "Pharmacien - Pharmacienne de SDIS",
+  "domaine": "Médical et paramédical",
+  "famille": "Secours",
+  "categories": [
+   "A"
+  ],
+  "versants": "T",
+  "description": "Sous l'autorité hiérarchique du médecin-chef ou cheffe, participe aux missions du service de santé et secours médical du SIS et de manière spécifique. Gère les activités pharmaceutiques et les personnels affectés à ces missions",
+  "activites": "Participation à la définition des orientations stratégiques du service de santé et de secours médical \nAssistance et conseil au médecin-chef ou cheffe \nOrganisation, mise en œuvre et évaluation de la politique du SSSM dans son domaine d'activité \nParticipation aux actions de formation et d'information \nParticipation aux missions de secours d'urgence\nToxicologie, risques NRBC-e, prévention du risque infectieux, gestion des risques\nConseil, appui technique et organisationnel\nVeille et observation sectorielle\nManagement de proximité\nMise en œuvre et suivi administratif, juridique, commande publiq",
+  "noteActuelle": "Le diplôme d’État de docteur en médecine ou en pharmacie est obligatoire. Le recrutement se fait ensuite selon l’employeur : praticien hospitalier, médecin ou pharmacien territorial ou de sapeurs-pompiers sur titres, médecin inspecteur de santé publique ou médecin de prévention."
+ },
+ {
+  "id": "fpmed036",
+  "name": "Médecin",
+  "domaine": "Médical et paramédical",
+  "famille": "Soins",
+  "categories": [
+   "A"
+  ],
+  "versants": "ETH",
+  "description": "Apporte conseil et expertise en santé publique et environnementale et sont en charge des politiques nationales de santé à destination des populations, notamment les publics les plus précaires.",
+  "activites": "Elaboration, suivi, évaluation de stratégies nationales de santé, et de leurs déclinaisons opérationnelles en plans, programmes, projets nationaux et feuilles de route en santé publique et santé environnementale\nGestion des alertes, des crises sanitaires et définition des procédures d’alerte et de sécurité sanitaire.\nPilotage de la mise en œuvre de ces programmes/projets et leurs évaluations, notamment en lien avec les agences régionales de santé et autres acteurs interministériels.\nRéorganisation de l’offre de prévention et de prise en charge de la population pour une meilleure efficience du ",
+  "noteActuelle": "Le diplôme d’État de docteur en médecine ou en pharmacie est obligatoire. Le recrutement se fait ensuite selon l’employeur : praticien hospitalier, médecin ou pharmacien territorial ou de sapeurs-pompiers sur titres, médecin inspecteur de santé publique ou médecin de prévention."
+ },
+ {
+  "id": "fpmed038",
+  "name": "Médecin de santé publique",
+  "domaine": "Médical et paramédical",
+  "famille": "Soins",
+  "categories": [
+   "A"
+  ],
+  "versants": "ETH",
+  "description": "Participe au parcours de santé de la population en lien avec les autres acteurs de santé. Conçoit et met en œuvre des projets de santé publique, de promotion et de prévention sur son territoire d'intervention. Participe à l'élaboration et à l'exécution de la politique départementale, communale ou intercommunale dans son domaine d'intervention (politique de la famille et de l'enfance, personnes âgé",
+  "activites": "Participation à l'élaboration des orientations de la politique de santé\nAccompagnement des parcours de santé\nAppui et conseil technique auprès des équipes pluridisciplinaires\nParticipation à la gestion des crises sanitaires\nRéalisation de consultations médicales générales ou spécialisées\nAgrément et contrôle des structures d'accueil\nOrganisation et coordination de la prévention médico-sociale\nCollecte de données en épidémiologie\nMédecin PMI (loi 89-899 du 18/12/89) : consultation des enfants de 0 à 6 ans. Établissement des bilans des enfants\nde 3 à 4 ans en école maternelle\nProtection de l'enf",
+  "noteActuelle": "Le diplôme d’État de docteur en médecine ou en pharmacie est obligatoire. Le recrutement se fait ensuite selon l’employeur : praticien hospitalier, médecin ou pharmacien territorial ou de sapeurs-pompiers sur titres, médecin inspecteur de santé publique ou médecin de prévention."
+ },
+ {
+  "id": "fpsan010",
+  "name": "Médecin du travail ou de promotion de la santé",
+  "domaine": "Prévention, conseil et pilotage en santé",
+  "famille": "Prévention/promotion",
+  "categories": [
+   "A"
+  ],
+  "versants": "ETH",
+  "description": "Prend en compte la santé des agents, les risques professionnels en rapport avec leur activité et leur environnement professionnel selon les textes et la réglementation en vigueur. Mets en œuvre des actions individuelles et collectives de prévention et d’éducation à la santé, mène des actions sur le milieu professionnel (tiers temps) et agit dans l’intérêt exclusif de la santé et la sécurité des ag",
+  "activites": "Réalise, définit et évalue la surveillance médicale individuelle des agents par des visites médicales \nIntervient sur l’environnement professionnel pour l’amélioration, les changements des conditions de travail, l’hygiène générale des locaux, l’adaptation des postes et des rythmes de travail, les risques d’accident de service ou de maladie professionnelle (tiers temps)\nConseille les agents sur la santé et la sécurité au travail et les décideurs auxquels il reporte des indicateurs sur le sujet.\nAssure la coordination de l’équipe pluridisciplinaire, entretient des relations avec les partenaires ",
+  "noteActuelle": "Le diplôme d’État de docteur en médecine ou en pharmacie est obligatoire. Le recrutement se fait ensuite selon l’employeur : praticien hospitalier, médecin ou pharmacien territorial ou de sapeurs-pompiers sur titres, médecin inspecteur de santé publique ou médecin de prévention."
+ },
+ {
+  "id": "fpsan019",
+  "name": "Médecin de contrôle",
+  "domaine": "Prévention, conseil et pilotage en santé",
+  "famille": "Contrôle",
+  "categories": [
+   "A"
+  ],
+  "versants": "ETH",
+  "description": "Veiller à l’aptitude des personnels actifs de la Police nationale à exercer leurs fonctions",
+  "activites": "Assurer les visites médicales d’aptitude (recrutements, incorporations, titularisations, reprises et maintien en activité) des fonctionnaires actifs de la police\nAssurer les contrôles d’aptitude demandés par voie hiérarchique des fonctionnaires actifs\nMettre en œuvre et effectuer les contrôles médicaux des arrêts de maladie\nTransmettre au médecin inspecteur régional les dossiers nécessitant une décision de réarmement\nDiligenter les demandes d’expertise nécessaires à l’avis d’aptitude des fonctionnaires actifs de police\nAssurer le suivi des personnels en cas de maladie ou d’accident en service ",
+  "noteActuelle": "Le diplôme d’État de docteur en médecine ou en pharmacie est obligatoire. Le recrutement se fait ensuite selon l’employeur : praticien hospitalier, médecin ou pharmacien territorial ou de sapeurs-pompiers sur titres, médecin inspecteur de santé publique ou médecin de prévention."
+ },
+ {
+  "id": "fpsan039",
+  "name": "Conseiller-expert médical - Conseillère-experte médicale ou ondotologique ou pharmaceutique",
+  "domaine": "Prévention, conseil et pilotage en santé",
+  "famille": "Prévention/promotion",
+  "categories": [
+   "A+",
+   "A"
+  ],
+  "versants": "EH",
+  "description": "Apporte conseil et expertise, contribue à la conception, au pilotage, à la mise en œuvre des politiques de santé publique ou liés aux produits de santé et propose au responsable de la structure, dans le respect de sa qualification de médecin, de pharmacien ou de chirurgien-dentiste et de ses compétences professionnelles, des solutions tenant compte des impératifs législatifs ou réglementaires nati",
+  "activites": "Contribue en administration centrale à la politique de santé publique ou des produits de santé (médicaments, dispositifs médicaux…) notamment à l’élaboration de la législation et de la réglementation au niveau national et international\nAnalyse, expertise et exploite les données et informations médicales, de dispositifs, de situations, de pratiques professionnelles ou se rapportant à l’exercice de la médecine, de la pharmacie ou de la biologie médicale, aux activités et produits de santé dont les médicaments vétérinaires, les cosmétiques ou la radioprotection ainsi qu’à leur expérimentation\nAna",
+  "noteActuelle": "Le diplôme d’État de docteur en médecine ou en pharmacie est obligatoire. Le recrutement se fait ensuite selon l’employeur : praticien hospitalier, médecin ou pharmacien territorial ou de sapeurs-pompiers sur titres, médecin inspecteur de santé publique ou médecin de prévention."
+ }
+]
