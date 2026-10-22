@@ -50,9 +50,12 @@ function clean(text) {
 const hasValue = v => v !== null && v !== undefined && String(v).trim() !== '';
 const GENERIC = /choisirleservicepublic|fonction-publique\.gouv\.fr\/?$|service-public\.fr\/?$|onisep\.fr\/?$|concours-territorial\.fr\/?$/;
 const isOfficialLink = u => /^https:\/\//.test(u || '') && !GENERIC.test(u);
+/* Liens lisibles : la recherche par mot-clé de concours-fph (liste des avis ouverts) est gardée, sans encodage des accents. */
+const readable = u => { try { return /%[0-9A-F]{2}/i.test(u || '') ? decodeURI(u) : u; } catch (e) { return u; } };
 for (const r of research.concours) {
+  r.officialUrl = readable(r.officialUrl); r.annalesUrl = readable(r.annalesUrl);
   if (!isOfficialLink(r.officialUrl)) r.officialUrl = (r.sources || []).find(isOfficialLink) || r.officialUrl;
-  for (const s of r.sessions || []) if (!isOfficialLink(s.url)) s.url = r.officialUrl;
+  for (const s of r.sessions || []) { s.url = readable(s.url); if (!isOfficialLink(s.url)) s.url = r.officialUrl; }
 }
 
 /* ---------- Parcours des nouvelles fiches ---------- */
@@ -75,13 +78,39 @@ function studiesFrom(r) {
   const t = m[1].trim().replace(/\.$/, '');
   return t.charAt(0).toUpperCase() + t.slice(1);
 }
+/* Études en langage simple pour les professions de santé (la condition officielle reste dans « Quels diplômes ? »). */
+const STUDIES = {
+  'FPH-MK': 'Diplôme d’État de masseur-kinésithérapeute : une année universitaire (PASS, L.AS ou STAPS) puis 4 ans en institut de formation',
+  'FPH-ORTHOPHONISTE': 'Certificat de capacité d’orthophoniste : 5 ans à l’université, accès par Parcoursup',
+  'MERM-FPH': 'Diplôme d’État de manipulateur d’électroradiologie médicale ou DTS imagerie médicale : 3 ans après le bac, accès par Parcoursup',
+  'TLM-FPH': 'Diplôme d’État de technicien de laboratoire médical, ou autre diplôme permettant d’exercer la profession',
+  'ERGO-FPH': 'Diplôme d’État d’ergothérapeute : 3 ans en institut de formation, accès par Parcoursup',
+  'PSYCHOMOT-FPH': 'Diplôme d’État de psychomotricien : 3 ans en institut de formation, accès par Parcoursup',
+  'IADE-FPH': 'Diplôme d’État d’infirmier anesthésiste : 2 ans de formation après le diplôme d’infirmier et une première expérience professionnelle',
+  'CORPS-dieteticien-fph': 'Diplôme de diététicien (BTS diététique ou BUT génie biologique, parcours diététique)',
+  'CORPS-pph': 'Diplôme de préparateur en pharmacie hospitalière, ou autre titre permettant d’exercer la profession',
+  'CORPS-sage-femme-fph': 'Diplôme d’État de sage-femme : une première année d’études de santé (PASS ou L.AS) puis 4 ans en école de sage-femme',
+  'CORPS-ampa-fph': 'Diplôme d’État d’infirmier en pratique avancée (2 ans de master) après le diplôme d’infirmier, et trois ans d’exercice',
+  'AMBULANCIER-FPH': 'Diplôme d’État d’ambulancier (formation de quelques mois en institut) et permis de conduire',
+  'CRC-CONCOURS-DIRECT': 'Concours ouvert aux agents publics expérimentés (sept ans de services publics, dont trois en catégorie A), aux magistrats judiciaires et à certains diplômés : voir les conditions détaillées',
+  'CORPS-prof-sport-shn': 'Réservé aux sportifs de haut niveau inscrits sur la liste ministérielle depuis au moins trois ans, après une formation suivie à l’INSEP'
+};
+const INTERNAL = /^(?:Concours interne|Interne)\b|^Concours\s*:\s*(?:être\s+)?fonctionnaires?/i;
 function orientation(r, routeId, lvl) {
   const donor = donorFor(r, routeId), o = {};
   for (const k of ORIENTATION) o[k] = donor[k];
   delete o.l1; delete o.l2; delete o.l3; delete o.master;
   const titles = /sur titres/i.test((r.epreuves || '') + ' ' + (r.voies || '') + ' ' + r.name);
   o.studies = studiesFrom(r) || donor.studies;
-  o.afterBac = lvl === null || lvl === undefined ? donor.afterBac : lvl <= 1 ? 'Oui : aucun diplôme exigé pour le concours externe' : lvl === 2 ? 'Oui : le bac suffit pour le concours externe' : 'Non : ' + DIP[lvl] + ' exigé pour le concours externe';
+  o.afterBac = lvl === null || lvl === undefined ? 'Non : voir les conditions du concours' : lvl <= 1 ? 'Oui : aucun diplôme exigé pour le concours externe' : lvl === 2 ? 'Oui : le bac suffit pour le concours externe' : 'Non : ' + DIP[lvl] + ' exigé pour le concours externe';
+  /* Concours réservé aux agents déjà en poste : il vient après une première carrière. */
+  if (INTERNAL.test(r.condition || '')) {
+    const clause = String(r.condition).replace(/^[^:]*:\s*/, '').split(/\s*;\s*/)[0].replace(/\.$/, '');
+    o.studies = 'Concours réservé aux agents publics déjà en poste : ' + clause.charAt(0).toLowerCase() + clause.slice(1);
+    o.afterBac = 'Non : concours réservé aux agents publics déjà en poste';
+  }
+  if (STUDIES[r.ref]) o.studies = STUDIES[r.ref];
+  if (r.ref === 'CORPS-prof-sport-shn') o.afterBac = 'Non : réservé aux sportifs de haut niveau';
   if (RESEARCH_ROUTES.includes(routeId)) {
     o.stage = 'Visiter un laboratoire public lors de la Fête de la science ou d’une journée portes ouvertes. Pour la 3e ou la seconde : entretien métier ou stage uniquement si accueil possible.';
     o.prepa = routeId === 'chercheur' ? 'Doctorat et premières publications, souvent suivis d’un contrat postdoctoral ; candidature aux concours des organismes de recherche' : 'Préparations aux concours ITRF proposées par les universités ; fiches des emplois-types de la branche d’activité (Referens) ; épreuves sur dossier et entretien selon le poste';
@@ -219,8 +248,9 @@ for (const r of research.concours) {
 write(OUT.concours, { concours: created });
 write(OUT.exam, { examDetails });
 write(OUT.calendar, { calendar, calendarExpected }, 1);
-write(OUT.fixes, { concoursCorrections: Object.values(fixes), routeCorrections });
-write(OUT.jobs, { jobCorrections });
+write(OUT.fixes, { concoursCorrections: Object.values(fixes) });
+/* Placées après l’audit (qui gardait les préparateurs en pharmacie hospitalière en B) : la catégorie du décret de 2022 l’emporte. */
+write(OUT.jobs, { jobCorrections, routeCorrections });
 const parts = manifest.parts.filter(p => !outParts.includes(p));
 const at = parts.indexOf('catalogue/audit-01.json');
 parts.splice(at < 0 ? parts.length : at, 0, OUT.concours, OUT.exam, OUT.calendar, OUT.fixes);

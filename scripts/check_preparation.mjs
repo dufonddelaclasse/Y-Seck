@@ -248,6 +248,13 @@ assert(!screens.preparer('magasinier').includes('talents-bourse'),'Pas de bourse
   assert(screens.metier('fpcul019').includes('Garde républicaine')&&screens.metier('fpmed036').includes('Praticien hospitalier'),'Artiste-interprète et médecin affichent leurs concours.');
 }
 {
+  // Corps affichés sans fiche (recherche du 22 octobre 2026) : chaque corps relié à une fiche métier a désormais une fiche concours.
+  const orphans=Object.values(data.accessRoutes).filter(r=>data.jobs.some(j=>!isContractJob(j)&&(j.routeIds||[]).includes(r.id)&&jobCategories(j).includes(r.cat)&&r.fp.split('').some(f=>j.fp.includes(f)))&&!(r.refs||[]).length);
+  assert.equal(orphans.length,0,'Corps sans fiche concours : '+orphans.map(r=>r.id).join(', '));
+  assert(data.accessRoutes.ie.refs.some(c=>/Ingénieur - Ingénieure d’études/.test(c.name))&&data.concours.find(c=>c.id==='É-017').routeIds.includes('corps-78bc2eb29931'),'Ingénieur d’études a sa fiche ; les surveillants à affectation locale rejoignent le concours de surveillant.');
+  assert(data.accessRoutes['corps-0e034401a009'].cat==='A'&&data.accessRoutes['corps-fe7341cee5b3'].cat==='A','Techniciens de laboratoire et préparateurs en pharmacie hospitalière en catégorie A.');
+}
+{
   // « Avec des animaux » : métiers au contact des animaux, sans les mentions en passant (vétérinaires parmi le personnel d’un SDIS).
   const animals=D.jobs.filter(j=>j.traits.includes('animaux')).map(j=>j.id);
   assert(animals.length>=20&&['fprch031','fpagr019','fpenv045','fpdef015','tech-env'].every(id=>animals.includes(id))&&!animals.includes('fpmed030'),'Trait animaux : '+animals.length+' métiers.');
