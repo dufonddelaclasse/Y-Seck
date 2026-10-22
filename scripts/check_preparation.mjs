@@ -218,6 +218,13 @@ assert(!screens.preparer('magasinier').includes('talents-bourse'),'Pas de bourse
   S.region='Toutes';
 }
 {
+  // Stages : lieu annoncé par un repère, sans les conseils annexes (« Comparer deux métiers », « Quelles études diplômantes »).
+  const level=S.level; S.level='Seconde';
+  const stages=screens.preparer('aah');
+  S.level=level;
+  assert(/class="ref-tip stage-tip"[\s\S]*class="small stage-where"><svg[\s\S]*Où : <\/span>/.test(stages)&&!/Comparer deux métiers|Quelles études diplômantes/.test(stages),'Stages : repère de lieu, conseils annexes retirés.');
+}
+{
   // « Avec des animaux » : métiers au contact des animaux, sans les mentions en passant (vétérinaires parmi le personnel d’un SDIS).
   const animals=D.jobs.filter(j=>j.traits.includes('animaux')).map(j=>j.id);
   assert(animals.length>=20&&['fprch031','fpagr019','fpenv045','fpdef015','tech-env'].every(id=>animals.includes(id))&&!animals.includes('fpmed030'),'Trait animaux : '+animals.length+' métiers.');

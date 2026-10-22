@@ -1311,7 +1311,7 @@
     var search=D.stagesAdvice.filter(function(a){return /rechercher/.test(norm(a.domain));})[0];
     var noNetwork=D.stagesAdvice.filter(function(a){return /sans reseau/.test(norm(a.domain));})[0];
     return '<section class="stack mt-m" id="stages"><h2 class="section-heading">'+I.route+'<span>Stage de '+(level==='Troisième'?'3e':'seconde')+'</span></h2>'+
-      [general,themed].filter(Boolean).map(function(a){return '<div class="ref-tip stage-tip"><b>'+esc(a.device)+'</b><p>'+esc(a.advice)+'</p><p class="small">'+esc(a.tip)+'</p><p class="small">Où : '+esc(a.places)+'</p></div>';}).join('')+
+      [general,themed].filter(Boolean).map(function(a){return '<div class="ref-tip stage-tip"><b>'+esc(a.device)+'</b><p>'+esc(a.advice)+'</p><p class="small stage-where">'+I.pin+'<span><span class="sr-only">Où : </span>'+esc(a.places)+'</span></p></div>';}).join('')+
       (noNetwork?'<p class="small">'+esc(noNetwork.advice)+'</p>':'')+(search?ext(search.source,'Chercher un stage sur 1 élève 1 stage','link-plain'):'')+'</section>';
   }
   /* ---------- Fiche concours : frise façon itinéraire de transport, du point de départ au concours ---------- */

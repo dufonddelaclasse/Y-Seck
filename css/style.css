@@ -2267,3 +2267,11 @@ html.crios .profile-footer { bottom:calc(86px + env(safe-area-inset-bottom, 0px)
 .cat-mention { display:flex; gap:8px; align-items:flex-start; }
 .screen .cat-mention, .fp-panel p.cat-mention, .intro-fold-body p.cat-mention { font-size:.875rem; line-height:1.35; font-weight:400; color:var(--muted); }
 .cat-mention svg { flex:none; width:16px; height:16px; margin-top:2px; color:var(--brand); }
+/* Prépas Talents : le compteur est une information, pas un bouton (ni fond ni contour). */
+.talents-counter { padding:0; border:0; border-radius:0; background:none; }
+/* Stages : encadrés blancs et aérés, lieu annoncé par un repère à la couleur de la catégorie. */
+.stack > .ref-tip.stage-tip + .ref-tip.stage-tip { margin-top:6px; }
+.ref-tip.stage-tip { gap:12px; padding:22px 22px 24px; background:#FFF; }
+.ref-tip.stage-tip b { line-height:1.35; }
+.stage-where { display:flex; align-items:flex-start; gap:8px; margin-top:2px; }
+.stage-where svg { flex:none; width:18px; height:18px; margin-top:1px; color:var(--theme, var(--blue)); }
