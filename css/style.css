@@ -2017,7 +2017,8 @@ html[data-contrast="true"] .job-page .job-match { background:none; border:0; col
 .talents-card p, .app .prep.hi.talents-card p { margin:0; font-size:1rem; line-height:1.6; font-weight:300; color:#161616; }
 .talents-card p b { font-weight:500; }
 .talents-perf { flex:none; height:4px; margin:18px calc(10px - var(--talents-pad)); background-image:radial-gradient(circle, #DEDEDE 1.3px, transparent 1.8px); background-size:11.5px 4px; background-position:0 50%; background-repeat:space no-repeat; }
-.app .prep.hi.talents-card .talents-hero { min-height:150px; }
+/* Photo des Prépas Talents dans Se préparer : hauteur au ratio de l’image (900 × 539). */
+.app .prep.hi.talents-card .talents-hero { min-height:0; aspect-ratio:900 / 539; }
 .app .prep.hi.talents-card .talents-body { gap:10px; padding:26px var(--talents-pad) 40px; }
 .app .prep.hi.talents-card .talents-perf { margin:12px calc(10px - var(--talents-pad)) 4px; }
 .app .prep.hi.talents-card .more, .app .prep.hi.talents-card:hover { color:#161616; }
