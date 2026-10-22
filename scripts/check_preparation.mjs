@@ -202,6 +202,17 @@ const hospitalJob=data.jobs.find(j=>j.id==='aah');
 assert(screens.calendrier(hospitalJob.id).includes(examsFor(hospitalJob).length+' sessions'),'Le filtre A doit conserver les sessions liées dont la source ne précisait pas la catégorie.');
 S.boursier='Oui';
 assert(!screens.preparer('magasinier').includes('talents-bourse'),'Pas de bourse Talents recommandée à une préparation de catégorie C.');
+{
+  // Page Prépas Talents : carte des régions, champ qui ouvre la liste par le bas, compteur et ordre d’affichage.
+  const page=screens.prepa('talents','attache');
+  assert(page.includes('class="region-zone"')&&page.includes('>Région</h2>')&&(page.match(/<path [^>]*data-action="pickRegion"/g)||[]).length===13,'Prépas Talents : carte des 13 régions de métropole.');
+  assert(page.includes('data-action="openRegions"')&&page.includes('talents-counter')&&/Afficher les \d+/.test(page),'Prépas Talents : champ région, compteur et lien vers toutes les prépas.');
+  assert(page.includes('Ajouter ma localisation')&&page.includes('talents-flat'),'Prépas Talents : lien de localisation, carte de présentation sans contour.');
+  click('pickRegion','ARA');
+  assert.equal(S.region,'ARA');
+  assert(screens.prepa('talents','attache').includes('class="on" data-action="pickRegion" data-v="ARA"'),'La région choisie est en couleur sur la carte.');
+  S.region='Toutes';
+}
 assert(/\d+ Prépas? Talents<\/b>[\s\S]*Cliquez pour consulter les prépas identifiées pour ce concours[\s\S]*talents-perf[\s\S]*talents-bourse[\s\S]*Découvrir les prépas Talents/.test(screens.preparer('attache')),'La carte Prépas Talents réunit le nombre de prépas, la bourse et le bouton.');
 assert(!screens.preparer('magasinier').includes('href="#/prepa/talents'));
 assert.equal(JSON.stringify(data.crosswalk),JSON.stringify(db.links));

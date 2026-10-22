@@ -784,6 +784,26 @@ html:where(.dark).dark .sheet-content button.chip.category-choice[data-action="m
 :where(html.dark) .app .prep.hi.talents-card .talents-hero .price { background:#E0FA6E; color:#EAEAEA; }
 :where(html.dark) .ref-tip.stage-tip { border:1.5px solid var(--theme, var(--blue)); }
 :where(html.dark) .concours-facts dt { color:var(--muted); }
+:where(html.dark) .talents-flat .talents-body { border:0 !important; }
+:where(html.dark) .region-zone { background:#292929; }
+:where(html.dark) .region-zone .region-title { color:var(--brand); }
+:where(html.dark) .region-map path { fill:#2B2B32; stroke:#292929; }
+:where(html.dark) .region-map.all path { fill:#2A225A; }
+:where(html.dark) .region-map path.on { fill:var(--brand); }
+:where(html.dark) .region-map-om { background:var(--brand); color:#FFF; }
+:where(html.dark) .region-field { border:1.5px solid #373740; background:#292929; color:var(--ink); }
+:where(html.dark) .region-field:hover, :where(html.dark) .region-field:focus-visible { border-color:var(--brand); }
+:where(html.dark) .region-field svg { color:var(--brand); }
+:where(html.dark) .region-option { border:0; border-bottom:1px solid #303030; background:none; color:var(--ink); }
+:where(html.dark) .region-option:last-child { border-bottom:0; }
+:where(html.dark) .region-option.on { color:var(--brand); }
+:where(html.dark) .region-option-count { background:#252525; color:#C2C2C6; }
+:where(html.dark) .region-option.on .region-option-count { background:var(--brand); color:#FFF; }
+:where(html.dark) .talents-counter { border:1px solid var(--lilac); background:#31312C; }
+:where(html.dark) .talents-counter-copy span { color:#C2C2C6; }
+:where(html.dark) .install-icon { box-shadow:0 4px 14px rgba(37,0,186,.25); }
+:where(html.dark) .install-steps li::marker { color:var(--brand); }
+:where(html.dark) .install-share { color:var(--brand); }
 
 /* Retouches */
 html.dark { --brand:#8F7BFF; --blue:#A493FF; --accent:#7C66FF; --accent-hover:#9785FF; --theme-btn:var(--brand); --red:#FF6B6B; --surface:#1E1E22; }

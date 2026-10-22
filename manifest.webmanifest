@@ -1,0 +1,18 @@
+{
+  "name": "Y-Seck · les métiers de la fonction publique",
+  "short_name": "Y-Seck",
+  "description": "Métiers, concours, études et prépas de la fonction publique, pour les jeunes et leurs parents.",
+  "lang": "fr",
+  "id": "./",
+  "start_url": "./index.html#/accueil",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F4F4F2",
+  "theme_color": "#2500BA",
+  "icons": [
+    { "src": "assets/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "assets/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "assets/icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

@@ -19,7 +19,7 @@
     name: '', location: null, favorites: [], children: [], activeChild: null, personalProfiles: {},
     metMode: 'mine', jobLimit: 60, calFp: 'Tous', calView: 'upcoming', calLimit: 40, calQ: '',
     contrast: false, largeText: false, dysFont: false, colorMode: 'auto', cq: '', filterHintSeen: false, bookQ: '', bookSubject: 'Toutes', bookCategory: 'A', bookFp: 'Tous',
-    resQ: '', resCat: 'Toutes', resFp: 'Tous', resKind: 'Tous', resYear: 'Toutes', resLimit: 40
+    resQ: '', resCat: 'Toutes', resFp: 'Tous', resKind: 'Tous', resYear: 'Toutes', resLimit: 40, installOffered: false
   };
   var PERSON_FIELDS = ['name', 'level', 'domains', 'traits', 'boursier', 'budget', 'done', 'location', 'favorites', 'pendingChanges', 'validated'];
   var PROFILE_SCREENS = ['moi', 'profil', 'niveau', 'interets', 'traits', 'situation'];
@@ -292,6 +292,25 @@
       '</select></label>';
   }
   function inRegion(code) { return S.region === 'Toutes' || regionOf(code) === S.region; }
+  function regionName(k) { return k === 'Toutes' ? 'Toute la France' : REG[k]; }
+  /* Prépas Talents : carte des régions de métropole (la région choisie en couleur, toutes pour la France entière),
+     puis un champ qui ouvre la liste des régions par le bas de l’écran. */
+  function regionMap() {
+    var m = D.regionMap; if (!m) return '';
+    return '<svg class="region-map' + (S.region === 'Toutes' ? ' all' : '') + '" viewBox="' + m.viewBox + '" aria-hidden="true" focusable="false">' + Object.keys(m.paths).map(function (k) {
+      return '<path d="' + m.paths[k] + '"' + (S.region === k ? ' class="on"' : '') + ' data-action="pickRegion"' + attr('v', k) + '></path>';
+    }).join('') + '</svg>' + (S.region === 'OM' ? '<span class="region-map-om">Outre-mer</span>' : '');
+  }
+  function regionField() {
+    return '<button type="button" class="region-field" data-action="openRegions" aria-haspopup="dialog" aria-label="Région : ' + esc(regionName(S.region)) + '. Choisir une autre région"><span>' + esc(regionName(S.region)) + '</span>' + I.down + '</button>';
+  }
+  function regionSheet(counts) {
+    return '<div class="region-options">' + ['Toutes'].concat(Object.keys(REG)).map(function (k) {
+      var on = S.region === k;
+      return '<button type="button" class="region-option' + (on ? ' on' : '') + '" aria-pressed="' + on + '" data-action="pickRegion"' + attr('v', k) + '><span class="region-option-name">' + esc(regionName(k)) + '</span>' +
+        (counts ? '<span class="region-option-count">' + (counts[k] || 0) + '</span>' : '') + '</button>';
+    }).join('') + '</div>';
+  }
   var locationResults = [], locationStatus = '', locationQuery = '', locationSearchId = 0, communes = null;
   function locationForm() {
     return '<section class="stack mt-m"><h2 class="h3">' + (isParent() ? 'Son lieu de vie' : 'Votre lieu de vie') + '</h2><p class="small m0">' + (S.location ? esc(S.location.label) : 'Ajoutez une commune pour classer les Prépas Talents par proximité.') + '</p>' +
@@ -1698,25 +1717,28 @@
   function talentsList(jobFilter) {
     var jobs = jobFilter ? [jobFilter] : myJobs();
     var keys = prepKeys(jobs);
-    var all = D.talents.map(function (t) { return { t: t, m: keys.length ? talentMatches(t, keys) : [] }; })
-      .filter(function (x) { return inRegion(x.t.cp); });
+    var everywhere = D.talents.map(function (t) { return { t: t, m: keys.length ? talentMatches(t, keys) : [] }; });
+    /* Prépas par région (celles du concours, ou toutes) : nombres affichés dans la liste des régions. */
+    var byRegion = { Toutes: 0 };
+    everywhere.forEach(function (x) { if (S.talentsAll || !keys.length || x.m.length) { var k = regionOf(x.t.cp); byRegion[k] = (byRegion[k] || 0) + 1; byRegion.Toutes++; } });
+    var all = everywhere.filter(function (x) { return inRegion(x.t.cp); });
     var matched = all.filter(function (x) { return x.m.length; }).sort(function (a, b) { return b.m.length - a.m.length; });
     var shown = (S.talentsAll || !keys.length) ? all : matched;
     if (S.location) shown.sort(function (a, b) {
       var da = distanceTo(a.t), db = distanceTo(b.t);
       return da === db ? a.t.name.localeCompare(b.t.name, 'fr') : da - db;
     });
-    return { shown: shown, matched: matched.length, total: all.length, hasKeys: keys.length > 0 };
+    return { shown: shown, matched: matched.length, total: all.length, hasKeys: keys.length > 0, byRegion: byRegion };
   }
 
-  /* Nombre de prépas affichées, présenté comme un résultat (« 156 métiers ») ; un lien bascule entre la sélection et toute la région. */
-  function talentsCount(r, scope) {
-    function count(n) { return n + ' Prépa' + (n > 1 ? 's' : '') + ' Talents'; }
-    var label = scope || 'pour ' + (isParent() ? 'ses' : 'vos') + ' métiers';
-    if (!r.hasKeys || r.matched === r.total) return '<p class="small talents-count">' + count(r.hasKeys ? r.matched : r.total) + (r.hasKeys ? ' ' + esc(label) : '') + '</p>';
-    return '<p class="small talents-count">' + (S.talentsAll
-      ? count(r.total) + ' · <button type="button" class="text-btn"' + attr('action', 'talentsAll') + attr('v', 'mine') + '>Seulement ' + esc(label) + ' (' + r.matched + ')</button>'
-      : count(r.matched) + ' ' + esc(label) + ' · <button type="button" class="text-btn"' + attr('action', 'talentsAll') + attr('v', 'all') + '>Voir les ' + r.total + '</button>') + '</p>';
+  /* Mini compteur, comme dans l’espace personnel : prépas du concours dans la région, et un lien vers toutes les prépas. */
+  function talentsCounter(r, scope) {
+    var mine = r.hasKeys && !S.talentsAll, n = mine ? r.matched : r.total;
+    var link = !r.hasKeys || r.matched === r.total ? '' : S.talentsAll
+      ? '<button type="button" class="text-btn talents-all"' + attr('action', 'talentsAll') + attr('v', 'mine') + '>Afficher seulement celles ' + esc(scope) + ' (' + r.matched + ')</button>'
+      : '<button type="button" class="text-btn talents-all"' + attr('action', 'talentsAll') + attr('v', 'all') + '>Afficher les ' + r.total + '</button>';
+    return '<div class="talents-counter"><span class="home-tile home-count' + countSize(n) + '">' + n + '</span><span class="talents-counter-copy"><b>' + (n > 1 ? 'Prépas Talents' : 'Prépa Talents') + '</b><span>' +
+      esc((mine ? scope : 'au total') + (S.region === 'Toutes' ? ', dans toute la France' : ', ' + regionName(S.region))) + '</span></span></div>' + link;
   }
   function talentsRows(r) {
     if (!r.shown.length) return '<p class="empty">Aucune Prépa Talents dans cette région pour ces concours.</p>';
@@ -1745,11 +1767,13 @@
     if (id === 'talents') {
       var job = arg2 ? D.jobs.filter(function (j) { return j.id === arg2; })[0] : null;
       var r = talentsList(job);
-      var scope = job ? 'pour ' + job.name : (S.domains.length ? 'pour ' + (isParent() ? 'ses' : 'vos') + ' choix' : '');
+      var scope = job ? 'pour ce concours' : (S.domains.length ? 'pour ' + (isParent() ? 'ses' : 'vos') + ' choix' : '');
       return '<main class="screen top-tight">'+back(contextJob?prepHref(contextJob):'#/concours',contextJob?'Se préparer':'Concours et prépas')+
-        talentsFeature('Prépas Talents','<p>Préparations gratuites, avec tutorat, aux concours A, A+ et B.</p>','h1') +
-        (S.location ? '<p class="small m0">Du plus proche au plus éloigné de ' + esc(S.location.label) + '. Distances entre centres des communes.</p>' : '<a class="link-plain" href="#/moi" data-action="addLocation">Ajouter un lieu de vie pour classer par proximité</a>') +
-        regionSelect() + talentsCount(r, scope) +
+        talentsFeature('Prépas Talents','<p>Préparations gratuites, avec tutorat, aux concours A, A+ et B.</p>','h1','talents-flat') +
+        '<section class="region-zone" aria-labelledby="region-title"><h2 class="region-title no-icon" id="region-title">Région</h2>' + regionMap() + regionField() + '</section>' +
+        talentsCounter(r, scope || 'pour ' + (isParent() ? 'ses' : 'vos') + ' choix') +
+        (r.shown.length ? '<div class="talents-order"><p>' + (S.location ? 'Affichage de la prépa la plus proche à la plus éloignée.' : 'Ajoutez votre localisation pour afficher les prépas de la plus proche à la plus éloignée.') + '</p>' +
+          '<a class="talents-locate" href="#/moi" data-action="addLocation">' + (S.location ? 'Modifier ma localisation' : 'Ajouter ma localisation') + '</a></div>' : '') +
         '<div class="list" id="talents">' + talentsRows(r) + '</div>' +
         '<p class="small m0">Source : fonction-publique.gouv.fr, liste consultée le 15/10/2026.</p>' + foot;
     }
@@ -2173,6 +2197,26 @@
     });
   }
 
+  /* Raccourci sur le téléphone : proposé une seule fois, après un premier métier ou concours mis en favori.
+     Android : le bouton déclenche l’installation du navigateur ; iPhone : les deux gestes de Safari. */
+  function standaloneApp() { return (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) || (window.navigator || {}).standalone === true; }
+  function offerInstall(trigger) {
+    var nav = window.navigator || {}, ua = nav.userAgent || '', ios = /iPhone|iPad|iPod/.test(ua) || (nav.platform === 'MacIntel' && nav.maxTouchPoints > 1);
+    var phone = ios || /Android/i.test(ua) || !!(window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
+    if (S.installOffered || standaloneApp() || !phone) return;
+    S.installOffered = true; save();
+    setTimeout(function () { UI.open('install', 'Installer Y-Seck', installSheet(ios, /CriOS|FxiOS|EdgiOS/.test(ua)), trigger); }, 450);
+  }
+  var SHARE_ICON = '<svg class="install-share" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V3"/><path d="M8 7l4-4 4 4"/><path d="M6 11H5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-8a1 1 0 0 0-1-1h-1"/></svg>';
+  function installSheet(ios, otherIosBrowser) {
+    var intro = '<div class="install-offer"><img class="install-icon" src="assets/icons/icon-192.png" alt="" width="64" height="64"><p class="body">Ajoutez Y-Seck à l’écran d’accueil de votre téléphone : l’icône ouvre directement ' + (isParent() ? 'la page d’accueil' : 'votre page d’accueil') + ', avec ' + (isParent() ? 'ses' : 'vos') + ' favoris.</p></div>';
+    if (window.YSECK_INSTALL) return intro + '<div class="sheet-actions"><button type="button" class="btn" data-action="installApp">Installer le raccourci</button><button type="button" class="btn outline" data-ui="close">Plus tard</button></div>';
+    var steps = ios
+      ? ['Touchez le bouton Partager ' + SHARE_ICON + (otherIosBrowser ? ' de votre navigateur, à côté de l’adresse.' : ' en bas de l’écran, dans Safari.'), 'Choisissez « Sur l’écran d’accueil ».', 'Touchez « Ajouter » : l’icône Y-Seck apparaît avec vos applications.']
+      : ['Ouvrez le menu de votre navigateur (les trois points ⋮).', 'Choisissez « Ajouter à l’écran d’accueil » ou « Installer l’application ».', 'Confirmez : l’icône Y-Seck apparaît avec vos applications.'];
+    return intro + '<ol class="install-steps">' + steps.map(function (t) { return '<li>' + t + '</li>'; }).join('') + '</ol><div class="sheet-actions"><button type="button" class="btn" data-ui="close">J’ai compris</button></div>';
+  }
+
   function countAnnounce(sel) {
     var n = root.querySelectorAll(sel || '#jobs .list-row, .calendar-list .list-row, #talents .list-row').length;
     announce(n === 0 ? 'Aucun résultat' : (n === 1 ? '1 résultat' : n + ' résultats'));
@@ -2301,7 +2345,16 @@
         next = S.favorites.slice(); i = next.indexOf(v);
         if (i > -1) next.splice(i, 1); else next.push(v);
         var what = String(v).indexOf('concours:') === 0 ? 'Concours' : 'Métier';
-        set({ favorites: next }); announce(what + (i > -1 ? ' retiré des favoris' : ' ajouté aux favoris')); break;
+        set({ favorites: next }); announce(what + (i > -1 ? ' retiré des favoris' : ' ajouté aux favoris'));
+        if (i < 0) offerInstall(el);
+        break;
+      }
+      case 'installApp': {
+        var installEvent = window.YSECK_INSTALL;
+        if (!installEvent) { UI.close(); break; }
+        installEvent.prompt();
+        installEvent.userChoice.then(function (choice) { window.YSECK_INSTALL = null; UI.close(); announce(choice.outcome === 'accepted' ? 'Raccourci ajouté à l’écran d’accueil' : 'Installation annulée'); });
+        break;
       }
       case 'colorMode': set({ colorMode: v }); announce(v==='dark'?'Mode sombre activé':v==='light'?'Mode clair activé':'L’apparence suit celle de l’appareil'); break;
       case 'level': set({ level: v }); break;
@@ -2371,6 +2424,9 @@
       case 'moreResources': set({resLimit:S.resLimit+40}); break;
       case 'resetResources': set({resCat:'Toutes',resFp:'Tous',resKind:'Tous',resYear:'Toutes',resQ:'',resLimit:40}); break;
       case 'talentsAll': set({ talentsAll: v === 'all' }); countAnnounce('#talents .list-row'); break;
+      case 'openRegions': { var regionRoute = route(), regionJob = regionRoute.name === 'prepa' && regionRoute.arg2 ? jobById(regionRoute.arg2) : null;
+        UI.open('regions', 'Choisir une région', regionSheet(regionRoute.name === 'prepa' && regionRoute.arg === 'talents' ? talentsList(regionJob).byRegion : null), el); break; }
+      case 'pickRegion': if (UI.current() === 'regions') UI.close(); set({ region: v }); countAnnounce('#talents .list-row'); break;
       case 'toggleBoursier': var becomesBoursier=v?v==='Oui':S.boursier!=='Oui'; if(becomesBoursier===(S.boursier==='Oui'))break; set(becomesBoursier?{ boursier: 'Oui', prepBudget: '0' }:{ boursier: 'Non' }); break;
       case 'alert': set({ alert: !S.alert }); announce(S.alert ? 'Alerte activée' : 'Alerte désactivée'); break;
       case 'deleteChild': {

@@ -2212,3 +2212,38 @@ html.crios .profile-footer { bottom:calc(86px + env(safe-area-inset-bottom, 0px)
 .concours-facts { display:grid; grid-template-columns:auto 1fr; gap:6px 12px; margin:12px 0; font-size:.875rem; }
 .concours-facts dt { color:var(--muted); }
 .concours-facts dd { margin:0; }
+/* Page Prépas Talents : carte de présentation sans contour, zone « Région » (carte, champ, liste par le bas),
+   mini compteur comme dans l’espace personnel, puis l’ordre d’affichage et le lien de localisation. */
+.talents-flat .talents-body { border:0 !important; }
+.region-zone { display:flex; flex-direction:column; gap:14px; margin-top:6px; padding:20px 18px 18px; border-radius:24px; background:#FFF; }
+.region-zone .region-title { margin:0; font-size:1.75rem; line-height:1.15; font-weight:600; letter-spacing:-.02em; color:var(--brand); }
+.region-map { display:block; width:100%; max-width:260px; height:auto; margin:0 auto; }
+.region-map path { fill:#E1E1E8; stroke:#FFF; stroke-width:1.2; stroke-linejoin:round; cursor:pointer; transition:fill .2s ease; }
+.region-map.all path { fill:#CFC8F7; }
+.region-map path.on { fill:var(--brand); }
+.region-map-om { align-self:center; padding:4px 12px; border-radius:999px; background:var(--brand); color:#FFF; font-size:.8125rem; font-weight:500; }
+.region-field { display:flex; align-items:center; justify-content:space-between; gap:10px; width:100%; min-height:54px; padding:0 18px 0 20px; border:1.5px solid #D6D6DC; border-radius:999px; background:#FFF; color:var(--ink); font:inherit; font-size:1.0625rem; font-weight:500; text-align:left; cursor:pointer; }
+.region-field:hover, .region-field:focus-visible { border-color:var(--brand); }
+.region-field svg { flex:none; width:22px; height:22px; color:var(--brand); }
+.region-options { display:flex; flex-direction:column; }
+.region-option { display:flex; align-items:center; justify-content:space-between; gap:12px; min-height:54px; padding:0 4px; border:0; border-bottom:1px solid #E3E3E3; background:none; color:var(--ink); font:inherit; font-size:1rem; text-align:left; cursor:pointer; }
+.region-option:last-child { border-bottom:0; }
+.region-option.on { color:var(--brand); font-weight:600; }
+.region-option-count { flex:none; min-width:34px; padding:3px 10px; border-radius:999px; background:#EDEDED; color:#55555C; font-size:.8125rem; font-weight:500; text-align:center; }
+.region-option.on .region-option-count { background:var(--brand); color:#FFF; }
+.talents-counter { display:flex; align-items:center; gap:12px; margin-top:4px; padding:12px; border:1px solid var(--lilac); border-radius:24px; background:#E6E6E3; }
+.talents-counter .home-tile { width:56px; height:56px; border-radius:12px; }
+.talents-counter-copy { display:flex; flex-direction:column; gap:2px; min-width:0; }
+.talents-counter-copy b { font-size:1.0625rem; font-weight:500; }
+.talents-counter-copy span { font-size:.875rem; line-height:1.35; color:#55555C; }
+.talents-all { align-self:flex-start; }
+.talents-order { display:flex; flex-direction:column; align-items:flex-start; gap:4px; margin-top:8px; }
+.talents-order p { margin:0; font-size:.9375rem; font-weight:500; line-height:1.4; }
+.talents-locate { font-size:.8125rem; }
+/* Popup d’installation du raccourci : icône de l’app, explication, puis le bouton ou les gestes à faire. */
+.install-offer { display:flex; align-items:center; gap:14px; }
+.install-icon { flex:none; width:64px; height:64px; border-radius:15px; box-shadow:0 4px 14px rgba(37,0,186,.25); }
+.install-offer .body { margin:0; }
+.install-steps { display:flex; flex-direction:column; gap:10px; margin:18px 0 6px; padding-left:22px; font-size:.9375rem; line-height:1.45; }
+.install-steps li::marker { font-weight:600; color:var(--brand); }
+.install-share { display:inline-block; width:20px; height:20px; margin:0 2px; vertical-align:-4px; color:var(--brand); }
