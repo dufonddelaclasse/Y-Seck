@@ -227,9 +227,23 @@ assert(!screens.preparer('magasinier').includes('talents-bourse'),'Pas de bourse
 {
   // Métier A sans concours ni niveau connu : la frise passe quand même par les études supérieures (bac+3 minimum, bac+5 recommandé).
   const level=S.level; S.level='Seconde';
-  const artistic=screens.metier('fpens003');
+  const audio=screens.metier('fpmed022');
   S.level=level;
-  assert(/trip-name">Études supérieures<\/p><p class="trip-meta">Bac\+3 minimum<span aria-hidden="true"> \| <\/span><span class="sr-only">, <\/span>Bac\+5 recommandé/.test(artistic),'Catégorie A : étape des études supérieures toujours présente.');
+  assert(audio.includes('>Recrutement<')&&/trip-name">Études supérieures<\/p><p class="trip-meta">Bac\+3 minimum<span aria-hidden="true"> \| <\/span><span class="sr-only">, <\/span>Bac\+5 recommandé/.test(audio),'Catégorie A : étape des études supérieures toujours présente.');
+}
+{
+  // Fiches métiers sans concours (recherche du 22 octobre 2026) : chacune affiche un concours ou une explication précise avec un lien officiel direct.
+  const lots=['S1','S2','S3'].flatMap(l=>JSON.parse(fs.readFileSync(new URL('data/research/2026-10-22-metiers/lots/lot-'+l+'.json',root),'utf8')).map(j=>j.id));
+  const routesOf=j=>(j.routeIds||[]).map(id=>data.accessRoutes[id]).filter(r=>r&&jobCategories(j).includes(r.cat)&&r.fp.split('').some(f=>j.fp.includes(f)));
+  let linked=0;
+  for(const id of lots){
+    const j=data.jobs.find(x=>x.id===id);
+    if(routesOf(j).length){linked++;continue;}
+    assert(j.recruitment&&/^https:\/\//.test(j.recruitment.url)&&!/choisirleservicepublic|absent pour l/.test(j.recruitment.url+j.recruitment.text),'Explication précise pour '+id);
+  }
+  assert(lots.length===57&&linked>=30,'Fiches rattachées : '+linked+' / '+lots.length);
+  assert(!data.jobs.some(j=>j.recruitment&&/choisirleservicepublic/.test(j.recruitment.url)),'Aucune note ne renvoie vers choisirleservicepublic.gouv.fr.');
+  assert(screens.metier('fpcul019').includes('Garde républicaine')&&screens.metier('fpmed036').includes('Praticien hospitalier'),'Artiste-interprète et médecin affichent leurs concours.');
 }
 {
   // « Avec des animaux » : métiers au contact des animaux, sans les mentions en passant (vétérinaires parmi le personnel d’un SDIS).

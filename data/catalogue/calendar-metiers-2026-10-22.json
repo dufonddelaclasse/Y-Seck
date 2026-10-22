@@ -71,6 +71,342 @@
    ],
    "provisional": true,
    "employer": "Ministère de la Transition écologique (bureau des recrutements par concours)"
+  },
+  {
+   "id": "metier-h-111-concours-national-de-praticien-hospitalier-2026 (épreuves 2027)-cng",
+   "name": "Praticien hospitalier - Praticienne hospitalière (concours national de praticien hospitalier, CNPH)",
+   "rawName": "Praticien hospitalier - Praticienne hospitalière (concours national de praticien hospitalier, CNPH) · Concours national de praticien hospitalier · session 2026 (épreuves 2027)",
+   "cat": "A",
+   "fp": "H",
+   "voie": "Concours national de praticien hospitalier",
+   "url": "https://www.cng.sante.fr/candidats/concours/internats/concours-medicaux/concours-medicaux-cnph-evc/concours-national-praticien-hospitalier-cnph",
+   "source": "Centre national de gestion (CNG), avec les agences régionales de santé (ARS) ; recherche du 22 octobre 2026",
+   "checked": "2026-10-22",
+   "open": "2026-10-21",
+   "date": "2026-11-16",
+   "openLabel": "21 octobre 2026 à 10 h (heure de Paris)",
+   "closeLabel": "16 novembre 2026 à 17 h (heure de Paris)",
+   "written": null,
+   "writtenLabel": "Pas d’écrit : le dossier « parcours et projet professionnel » est déposé avec l’inscription",
+   "oral": "2027-02-22",
+   "oralLabel": "Auditions de la semaine du 22 février à celle du 26 avril 2027 selon la spécialité, à Rungis (Val-de-Marne), visioconférence en ARS pour l’outre-mer",
+   "routeIds": [
+    "praticien-hospitalier"
+   ],
+   "provisional": false,
+   "employer": "Centre national de gestion (CNG)"
+  },
+  {
+   "id": "metier-t-112-concours-externe-sur-titres-avec-epreuve-medecin-ou-pharmacien-cdg-du-puy-de",
+   "name": "Médecin ou pharmacien - Médecin ou pharmacienne de sapeurs-pompiers professionnels de classe normale",
+   "rawName": "Médecin ou pharmacien - Médecin ou pharmacienne de sapeurs-pompiers professionnels de classe normale · Concours externe sur titres avec épreuve (médecin ou pharmacien), CDG du Puy-de-Dôme pour toute la France · session 2027",
+   "cat": "A",
+   "fp": "T",
+   "voie": "Concours externe sur titres avec épreuve (médecin ou pharmacien), CDG du Puy-de-Dôme pour toute la France",
+   "url": "https://www.cig929394.fr/wp-content/uploads/2026/09/Calendrier_2027_concours_01_09_26.pdf",
+   "source": "Centre de gestion du Puy-de-Dôme (CDG 63), pour tous les SDIS de France, en convention avec les centres de gestion coordonnateurs ; recherche du 22 octobre 2026",
+   "checked": "2026-10-22",
+   "open": "2027-01-12",
+   "date": "2027-02-25",
+   "openLabel": "Préinscription en ligne à partir du 12 janvier 2027",
+   "closeLabel": "Préinscription jusqu’au 17 février 2027, dépôt des dossiers jusqu’au 25 février 2027",
+   "written": null,
+   "writtenLabel": "Pas d’écrit",
+   "oral": "2027-05-10",
+   "oralLabel": "Entretiens à partir du 10 mai 2027",
+   "routeIds": [
+    "medecin-pharmacien-spp"
+   ],
+   "provisional": true,
+   "employer": "Centre de gestion du Puy-de-Dôme (CDG 63)"
+  },
+  {
+   "id": "metier-t-113-concours-externe-sur-titres-avec-epreuve-cdg-d-eure-et-loir-centre-val-de-loi",
+   "name": "Médecin territorial - Médecin territoriale de 2e classe",
+   "rawName": "Médecin territorial - Médecin territoriale de 2e classe · Concours externe sur titres avec épreuve, CDG d’Eure-et-Loir (Centre-Val de Loire et Île-de-France), 190 postes · session 2027",
+   "cat": "A",
+   "fp": "T",
+   "voie": "Concours externe sur titres avec épreuve, CDG d’Eure-et-Loir (Centre-Val de Loire et Île-de-France), 190 postes",
+   "url": "https://www.agirhe-concours.fr/?dep=28",
+   "source": "Centres de gestion de la fonction publique territoriale (organisation régionale ou interrégionale, par exemple CDG d’Eure-et-Loir ou CDG du Puy-de-Dôme) ; recherche du 22 octobre 2026",
+   "checked": "2026-10-22",
+   "open": "2026-09-29",
+   "date": "2026-11-12",
+   "openLabel": "Préinscription en ligne à partir du 29 septembre 2026",
+   "closeLabel": "Préinscription jusqu’au 4 novembre 2026, dossier à renvoyer avant le 12 novembre 2026",
+   "written": null,
+   "writtenLabel": "Pas d’écrit",
+   "oral": "2027-02-08",
+   "oralLabel": "Épreuve orale à partir du 8 février 2027",
+   "routeIds": [
+    "medecin-terr"
+   ],
+   "provisional": false,
+   "employer": "Centre de gestion d’Eure-et-Loir (CDG 28)"
+  },
+  {
+   "id": "metier-t-113-concours-externe-sur-titres-avec-epreuve-cdg-du-puy-de-dome-auvergne-rhone-al",
+   "name": "Médecin territorial - Médecin territoriale de 2e classe",
+   "rawName": "Médecin territorial - Médecin territoriale de 2e classe · Concours externe sur titres avec épreuve, CDG du Puy-de-Dôme (Auvergne-Rhône-Alpes), 15 postes · session 2027",
+   "cat": "A",
+   "fp": "T",
+   "voie": "Concours externe sur titres avec épreuve, CDG du Puy-de-Dôme (Auvergne-Rhône-Alpes), 15 postes",
+   "url": "https://www.agirhe-concours.fr/docs/63/pdf/arreteOuverture/Arrete_douverture_medecin_territorial_2027.pdf",
+   "source": "Centres de gestion de la fonction publique territoriale (organisation régionale ou interrégionale, par exemple CDG d’Eure-et-Loir ou CDG du Puy-de-Dôme) ; recherche du 22 octobre 2026",
+   "checked": "2026-10-22",
+   "open": "2026-09-29",
+   "date": "2026-11-12",
+   "openLabel": "Préinscription du 29 septembre 2026",
+   "closeLabel": "Préinscription jusqu’au 4 novembre 2026 à 23 h 59, validation de l’inscription jusqu’au 12 novembre 2026 à 23 h 59",
+   "written": null,
+   "writtenLabel": "Pas d’écrit",
+   "oral": "2027-02-08",
+   "oralLabel": "Épreuve orale à partir du 8 février 2027 (date nationale), à Clermont-Ferrand",
+   "routeIds": [
+    "medecin-terr"
+   ],
+   "provisional": false,
+   "employer": "Centre de gestion du Puy-de-Dôme (CDG 63)"
+  },
+  {
+   "id": "metier-e-116-concours-externe-sur-titres-et-epreuve-2027-ehesp",
+   "name": "Médecin de l’Éducation nationale",
+   "rawName": "Médecin de l’Éducation nationale · Concours externe sur titres et épreuve · session 2027",
+   "cat": "A",
+   "fp": "E",
+   "voie": "Concours externe sur titres et épreuve",
+   "url": "https://www.education.gouv.fr/le-concours-de-medecin-de-l-education-nationale-2801",
+   "source": "Ministère de l’Éducation nationale (inscriptions auprès des rectorats et du SIEC) ; recherche du 22 octobre 2026",
+   "checked": "2026-10-22",
+   "open": "2026-10-01",
+   "date": "2026-11-25",
+   "openLabel": "1er octobre 2026 à 12 h (heure de Paris)",
+   "closeLabel": "25 novembre 2026 à 12 h (heure de Paris)",
+   "written": null,
+   "writtenLabel": "Pas d’écrit : dossier à déposer sur Cyclades",
+   "oral": "2027-03-09",
+   "oralLabel": "Épreuve orale d’admission à partir du 9 mars 2027, à Paris",
+   "routeIds": [
+    "corps-e8169521ead8"
+   ],
+   "provisional": false,
+   "employer": "Ministère de l’Éducation nationale"
+  },
+  {
+   "id": "metier-e-119-concours-externe-plusieurs-specialites-dont-langues-et-civilisations-2027-dgs",
+   "name": "Attaché - Attachée de la direction générale de la sécurité extérieure (DGSE)",
+   "rawName": "Attaché - Attachée de la direction générale de la sécurité extérieure (DGSE) · Concours externe (plusieurs spécialités, dont langues et civilisations) · session 2027",
+   "cat": "A",
+   "fp": "E",
+   "voie": "Concours externe (plusieurs spécialités, dont langues et civilisations)",
+   "url": "https://www.dgse.gouv.fr/sites/default/files/2026-03/Calendrier%20pr%C3%A9visionnel%20des%20concours%20et%20examens%20professionnels%202025-2026%20-%20mars%202026.pdf",
+   "source": "Ministère des Armées, direction générale de la sécurité extérieure (DGSE) ; recherche du 22 octobre 2026",
+   "checked": "2026-10-22",
+   "open": "2026-08-17",
+   "date": "2026-09-25",
+   "openLabel": "17 août 2026",
+   "closeLabel": "25 septembre 2026 (inscriptions closes)",
+   "written": "2027-02-03",
+   "writtenLabel": "3 février 2027",
+   "oral": null,
+   "oralLabel": "",
+   "routeIds": [
+    "attache-dgse"
+   ],
+   "provisional": false,
+   "employer": "DGSE (ministère des Armées)"
+  },
+  {
+   "id": "metier-e-120-concours-externe-sections-maritimes-navigation-et-technique-du-navire-mecaniq",
+   "name": "Professeur - Professeure de lycée professionnel agricole (PLPA), sections maritimes",
+   "rawName": "Professeur - Professeure de lycée professionnel agricole (PLPA), sections maritimes · Concours externe, sections maritimes (navigation et technique du navire, mécanique navale, électrotechnique et électronique maritimes, pêches maritimes et biologie marine) · session 2027",
+   "cat": "A",
+   "fp": "E",
+   "voie": "Concours externe, sections maritimes (navigation et technique du navire, mécanique navale, électrotechnique et électronique maritimes, pêches maritimes et biologie marine)",
+   "url": "https://recrutement.agriculture.gouv.fr/nos-concours/professeur-e-de-lycee-professionnel-agricole-plpa-concours-externe-public-navigation-et-technique-du-navire/",
+   "source": "Ministère de l’Agriculture (bureau des concours), jury présidé par l’inspection générale de l’enseignement maritime ; recherche du 22 octobre 2026",
+   "checked": "2026-10-22",
+   "open": "2026-09-28",
+   "date": "2026-11-19",
+   "openLabel": "28 septembre 2026 à 12 h",
+   "closeLabel": "19 novembre 2026 à 12 h",
+   "written": "2027-01-12",
+   "writtenLabel": "12 janvier 2027",
+   "oral": "2027-03-30",
+   "oralLabel": "À partir du 30 mars 2027 (résultats d’admissibilité à partir du 5 mars 2027)",
+   "routeIds": [
+    "plpa"
+   ],
+   "provisional": false,
+   "employer": "Ministère de l’Agriculture"
+  },
+  {
+   "id": "metier-e-120-concours-interne-section-navigation-et-technique-du-navire-2027-ensfea",
+   "name": "Professeur - Professeure de lycée professionnel agricole (PLPA), sections maritimes",
+   "rawName": "Professeur - Professeure de lycée professionnel agricole (PLPA), sections maritimes · Concours interne, section navigation et technique du navire · session 2027",
+   "cat": "A",
+   "fp": "E",
+   "voie": "Concours interne, section navigation et technique du navire",
+   "url": "https://recrutement.agriculture.gouv.fr/nos-concours/professeur-e-de-lycee-professionnel-agricole-plpa-concours-interne-public-navigation-et-technique-du-navire/",
+   "source": "Ministère de l’Agriculture (bureau des concours), jury présidé par l’inspection générale de l’enseignement maritime ; recherche du 22 octobre 2026",
+   "checked": "2026-10-22",
+   "open": "2026-11-10",
+   "date": "2026-12-15",
+   "openLabel": "10 novembre 2026 à 12 h",
+   "closeLabel": "15 décembre 2026 à 12 h (dossier RAEP à déposer avant le 22 décembre 2026)",
+   "written": "2027-01-18",
+   "writtenLabel": "Étude des dossiers RAEP à partir du 18 janvier 2027 (résultats d’admissibilité à partir du 12 février 2027)",
+   "oral": "2027-03-08",
+   "oralLabel": "À partir du 8 mars 2027",
+   "routeIds": [
+    "plpa"
+   ],
+   "provisional": false,
+   "employer": "Ministère de l’Agriculture"
+  },
+  {
+   "id": "metier-t-122-concours-externe-et-interne-toutes-specialites-avis-national-des-centres-de-g",
+   "name": "Professeur territorial - Professeure territoriale d’enseignement artistique",
+   "rawName": "Professeur territorial - Professeure territoriale d’enseignement artistique · Concours externe et interne, toutes spécialités (avis national des centres de gestion) · session 2027",
+   "cat": "A",
+   "fp": "T",
+   "voie": "Concours externe et interne, toutes spécialités (avis national des centres de gestion)",
+   "url": "https://www.agirhe-concours.fr/docs/35/brochures/AVIS_CONCOURS_PEA_2027_COMMUN.pdf",
+   "source": "Centres de gestion de la fonction publique territoriale (chaque discipline est confiée à un centre de gestion, inscription par concours-territorial.fr) ; recherche du 22 octobre 2026",
+   "checked": "2026-10-22",
+   "open": "2026-09-15",
+   "date": "2026-10-29",
+   "openLabel": "15 septembre 2026",
+   "closeLabel": "29 octobre 2026 (dépôt ou validation du dossier ; préinscriptions jusqu’au 21 octobre 2026)",
+   "written": "2027-02-01",
+   "writtenLabel": "Premières épreuves à partir du 1er février 2027 (date nationale)",
+   "oral": null,
+   "oralLabel": "",
+   "routeIds": [
+    "pea-terr"
+   ],
+   "provisional": false,
+   "employer": "Centres de gestion de la fonction publique territoriale"
+  },
+  {
+   "id": "metier-t-122-concours-externe-et-interne-musique-ecriture-musicale-culture-musicale-musiqu",
+   "name": "Professeur territorial - Professeure territoriale d’enseignement artistique",
+   "rawName": "Professeur territorial - Professeure territoriale d’enseignement artistique · Concours externe et interne, musique (écriture musicale, culture musicale, musique ancienne), CIG Petite Couronne · session 2027",
+   "cat": "A",
+   "fp": "T",
+   "voie": "Concours externe et interne, musique (écriture musicale, culture musicale, musique ancienne), CIG Petite Couronne",
+   "url": "https://www.cig929394.fr/wp-content/uploads/2026/07/Avis_ouverture_PEA_2027.pdf",
+   "source": "Centres de gestion de la fonction publique territoriale (chaque discipline est confiée à un centre de gestion, inscription par concours-territorial.fr) ; recherche du 22 octobre 2026",
+   "checked": "2026-10-22",
+   "open": "2026-09-15",
+   "date": "2026-10-29",
+   "openLabel": "15 septembre 2026",
+   "closeLabel": "29 octobre 2026 à 23 h 59",
+   "written": "2027-02-17",
+   "writtenLabel": "Examen des dossiers du concours interne à partir du 17 février 2027",
+   "oral": "2027-03-22",
+   "oralLabel": "Oraux du concours externe à partir du 22 mars 2027 ; concours interne : épreuves pédagogiques à partir d’avril et oraux à partir du 7 juin 2027",
+   "routeIds": [
+    "pea-terr"
+   ],
+   "provisional": false,
+   "employer": "CIG Petite Couronne (Hauts-de-Seine, Seine-Saint-Denis, Val-de-Marne)"
+  },
+  {
+   "id": "metier-t-124-concours-de-directeur-de-1re-categorie-voies-et-specialites-precisees-dans-l",
+   "name": "Directeur - Directrice d’établissement territorial d’enseignement artistique (1re et 2e catégorie)",
+   "rawName": "Directeur - Directrice d’établissement territorial d’enseignement artistique (1re et 2e catégorie) · Concours de directeur de 1re catégorie (voies et spécialités précisées dans l’avis d’ouverture) · session 2027",
+   "cat": "A",
+   "fp": "T",
+   "voie": "Concours de directeur de 1re catégorie (voies et spécialités précisées dans l’avis d’ouverture)",
+   "url": "https://www.concours-territorial.fr/calendrier.aspx",
+   "source": "Centres de gestion de la fonction publique territoriale (session 2027 organisée par le centre de gestion de Meurthe-et-Moselle pour toute la France) ; recherche du 22 octobre 2026",
+   "checked": "2026-10-22",
+   "open": "2027-01-05",
+   "date": "2027-02-10",
+   "openLabel": "5 janvier 2027",
+   "closeLabel": "10 février 2027",
+   "written": "2027-05-19",
+   "writtenLabel": "Premières épreuves le 19 mai 2027 (calendrier prévisionnel des centres de gestion)",
+   "oral": null,
+   "oralLabel": "",
+   "routeIds": [
+    "deea"
+   ],
+   "provisional": true,
+   "employer": "Centre de gestion de Meurthe-et-Moselle"
+  },
+  {
+   "id": "metier-t-124-concours-de-directeur-de-2e-categorie-voies-et-specialites-precisees-dans-l-a",
+   "name": "Directeur - Directrice d’établissement territorial d’enseignement artistique (1re et 2e catégorie)",
+   "rawName": "Directeur - Directrice d’établissement territorial d’enseignement artistique (1re et 2e catégorie) · Concours de directeur de 2e catégorie (voies et spécialités précisées dans l’avis d’ouverture) · session 2027",
+   "cat": "A",
+   "fp": "T",
+   "voie": "Concours de directeur de 2e catégorie (voies et spécialités précisées dans l’avis d’ouverture)",
+   "url": "https://www.concours-territorial.fr/calendrier.aspx",
+   "source": "Centres de gestion de la fonction publique territoriale (session 2027 organisée par le centre de gestion de Meurthe-et-Moselle pour toute la France) ; recherche du 22 octobre 2026",
+   "checked": "2026-10-22",
+   "open": "2027-01-05",
+   "date": "2027-02-10",
+   "openLabel": "5 janvier 2027",
+   "closeLabel": "10 février 2027",
+   "written": "2027-05-19",
+   "writtenLabel": "Premières épreuves le 19 mai 2027 (calendrier prévisionnel des centres de gestion)",
+   "oral": null,
+   "oralLabel": "",
+   "routeIds": [
+    "deea"
+   ],
+   "provisional": true,
+   "employer": "Centre de gestion de Meurthe-et-Moselle"
+  },
+  {
+   "id": "metier-e-125-etape-1-qualification-par-le-cnu-2027-cnu",
+   "name": "Maître - Maîtresse de conférences (qualification CNU puis concours sur poste)",
+   "rawName": "Maître - Maîtresse de conférences (qualification CNU puis concours sur poste) · Étape 1 : qualification par le CNU · session 2027",
+   "cat": "A",
+   "fp": "E",
+   "voie": "Étape 1 : qualification par le CNU",
+   "url": "https://www.galaxie.enseignementsup-recherche.gouv.fr/ensup/qualification/calendrier_qualification_2027.pdf",
+   "source": "Universités et établissements d’enseignement supérieur (comités de sélection), après qualification par le Conseil national des universités (CNU) ; candidatures sur l’application ODYSSEE du portail Galaxie du ministère de l’Enseignement supérieur ; recherche du 22 octobre 2026",
+   "checked": "2026-10-22",
+   "open": "2026-11-02",
+   "date": "2026-12-11",
+   "openLabel": "2 novembre 2026 à 10 h (application ODYSSEE)",
+   "closeLabel": "11 décembre 2026 à 16 h (inscription et dépôt des pièces)",
+   "written": null,
+   "writtenLabel": "Examen des dossiers par les sections du CNU du 25 janvier au 19 mars 2027",
+   "oral": null,
+   "oralLabel": "",
+   "routeIds": [
+    "mcf"
+   ],
+   "provisional": false,
+   "employer": "Ministère de l’Enseignement supérieur et de la Recherche (CNU)"
+  },
+  {
+   "id": "metier-e-125-etape-2-concours-de-recrutement-sur-poste-campagne-synchronisee-2027-cnu",
+   "name": "Maître - Maîtresse de conférences (qualification CNU puis concours sur poste)",
+   "rawName": "Maître - Maîtresse de conférences (qualification CNU puis concours sur poste) · Étape 2 : concours de recrutement sur poste (campagne synchronisée) · session 2027",
+   "cat": "A",
+   "fp": "E",
+   "voie": "Étape 2 : concours de recrutement sur poste (campagne synchronisée)",
+   "url": "https://www.galaxie.enseignementsup-recherche.gouv.fr/ensup/calendrier_etablissement/Calendrier_gestion_2026_2027.pdf",
+   "source": "Universités et établissements d’enseignement supérieur (comités de sélection), après qualification par le Conseil national des universités (CNU) ; candidatures sur l’application ODYSSEE du portail Galaxie du ministère de l’Enseignement supérieur ; recherche du 22 octobre 2026",
+   "checked": "2026-10-22",
+   "open": "2027-03-02",
+   "date": "2027-04-02",
+   "openLabel": "2 mars 2027 (candidatures sur ODYSSEE)",
+   "closeLabel": "2 avril 2027",
+   "written": null,
+   "writtenLabel": "",
+   "oral": null,
+   "oralLabel": "Auditions par les comités de sélection, à des dates fixées par chaque établissement",
+   "routeIds": [
+    "mcf"
+   ],
+   "provisional": false,
+   "employer": "Universités et établissements d’enseignement supérieur"
   }
  ],
  "calendarExpected": [
@@ -86,6 +422,69 @@
    "voie": "Toutes les voies",
    "expected": "Concours sur titres : avis publié au Journal officiel au printemps (JO du 10 avril 2025 pour la session 2025) et dossiers à envoyer à la DGA début juillet (4 juillet 2025). Session 2027 attendue sur le même calendrier, avec dépôt des dossiers vers début juillet 2027.",
    "url": "https://www.defense.gouv.fr/dga/nous-rejoindre/profil-ingenieur",
+   "checked": "2026-10-22"
+  },
+  {
+   "concours": "H-109",
+   "voie": "Toutes les voies",
+   "expected": "Pas de calendrier fixe : chaque hôpital publie un avis quand un poste d’orthoptiste est vacant, avec en général environ un mois pour candidater. Aucun avis d’orthoptiste n’était ouvert sur concours-fph.ars.sante.fr au 22 octobre 2026.",
+   "url": "https://concours-fph.ars.sante.fr/concours/orthoptiste",
+   "checked": "2026-10-22"
+  },
+  {
+   "concours": "H-110",
+   "voie": "Toutes les voies",
+   "expected": "Pas de calendrier fixe : chaque hôpital publie un avis quand un poste de pédicure-podologue est vacant, avec en général environ un mois pour candidater. Aucun avis n’était ouvert sur concours-fph.ars.sante.fr au 22 octobre 2026.",
+   "url": "https://concours-fph.ars.sante.fr/concours/pedicure-podologue",
+   "checked": "2026-10-22"
+  },
+  {
+   "concours": "É-114",
+   "voie": "Toutes les voies",
+   "expected": "Aucune session annoncée : aucun arrêté d’ouverture de concours de MISP n’a été publié au Journal officiel entre juillet 2025 et le 22 octobre 2026. Une éventuelle session serait ouverte par arrêté du ministère chargé de la santé, avec une formation à l’EHESP de janvier à décembre de l’année suivante.",
+   "url": "https://www.ehesp.fr/formation/formations-fonction-publique/medecin-inspecteur-de-sante-publique-misp/",
+   "checked": "2026-10-22"
+  },
+  {
+   "concours": "É-115",
+   "voie": "Toutes les voies",
+   "expected": "Aucune session 2026 ni 2027 annoncée au 22 octobre 2026. Les dernières sessions ont été ouvertes par un arrêté publié en fin d’année précédente (arrêté du 4 décembre 2024 pour 2025), le nombre de postes étant fixé au printemps ; la formation à l’EHESP se déroule de janvier à décembre de l’année suivante.",
+   "url": "https://www.ehesp.fr/formation/formations-fonction-publique/pharmacien-inspecteur-de-sante-publique-phisp/",
+   "checked": "2026-10-22"
+  },
+  {
+   "concours": "É-117",
+   "voie": "Toutes les voies",
+   "expected": "Session 2027 non encore ouverte au 22 octobre 2026. Sur la base de la session 2026 (arrêté du 24 novembre 2025) : arrêté attendu vers la fin novembre 2026, inscriptions de mi-janvier à mi-février 2027, écrit en mai et oraux à partir de fin septembre 2027.",
+   "url": "https://www.ehesp.fr/formation/formations-fonction-publique/technicien-sanitaire/",
+   "checked": "2026-10-22"
+  },
+  {
+   "concours": "É-118",
+   "voie": "Toutes les voies",
+   "expected": "Concours non annuel : sessions 2022 (hôtellerie-restauration), 2023 et 2026 (culture et savoirs de base). En 2026 : inscriptions du 27 février au 30 mars, écrits le 12 mai, oraux à partir du 12 octobre, lauréats nommés au 1er janvier 2027. Aucune session 2027 n’était annoncée au 22 octobre 2026.",
+   "url": "https://lajusticerecrute.fr/actualites/professeur-technique-de-la-protection-judiciaire-de-la-jeunesse",
+   "checked": "2026-10-22"
+  },
+  {
+   "concours": "É-121",
+   "voie": "Toutes les voies",
+   "expected": "Session 2026 terminée (inscriptions du 1er décembre 2025 au 2 février 2026, écrits le 18 mars 2026, oral à partir du 1er juin 2026). Aucune session 2027 annoncée au 22 octobre 2026 ; quand une session est ouverte, l’arrêté paraît plusieurs mois avant les écrits (novembre 2025 pour 2026, août 2023 pour 2024).",
+   "url": "https://www.interieur.gouv.fr/ministere/metiers-du-ministere/je-veux-devenir-agent-public/delegue-au-permis-de-conduire-et-a-securite-routiere",
+   "checked": "2026-10-22"
+  },
+  {
+   "concours": "T-123",
+   "voie": "Toutes les voies",
+   "expected": "Dernière session : 2026 (inscriptions du 16 septembre au 30 octobre 2025, épreuves à partir du 9 février 2026). Aucune session 2027 n’apparaît sur le calendrier national des centres de gestion au 22 octobre 2026.",
+   "url": "https://agirhe-concours.fr/docs/13/brochures/AVIS_CONCOURS_NATIONAL.pdf",
+   "checked": "2026-10-22"
+  },
+  {
+   "concours": "É-126",
+   "voie": "Toutes les voies",
+   "expected": "Pas de calendrier fixe : un avis est publié à chaque poste vacant (Journal officiel et site de recrutement de la gendarmerie), avec un délai de candidature de trente jours.",
+   "url": "https://www.gendarmerie.interieur.gouv.fr/garde-republicaine/recrutement-et-formation/militaire/musicien-de-l-orchestre",
    "checked": "2026-10-22"
   }
  ]

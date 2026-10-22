@@ -1370,7 +1370,7 @@
     }
     if (p.kind === 'sup') { meta = 'jusqu’à un ' + DIP[lvl]; qa = [['Quelles études ?', c.studies], ['Comment se préparer ?', prepa]]; }
     /* Catégories A et A+ : niveau minimum et niveau recommandé, à la place de la durée. */
-    var levelNote = p.kind === 'sup' && (c.cat === 'A' || c.cat === 'A+') && lvl >= 4 ? (lvl >= 5 ? ['Bac+5 minimum'] : ['Bac+3 minimum', 'Bac+5 recommandé']) : null;
+    var levelNote = p.kind === 'sup' && (c.cat === 'A' || c.cat === 'A+') && lvl >= 4 ? (lvl >= 6 ? ['Doctorat exigé'] : lvl >= 5 ? ['Bac+5 minimum'] : ['Bac+3 minimum', 'Bac+5 recommandé']) : null;
     var sep = '<span aria-hidden="true"> | </span><span class="sr-only">, </span>';
     return '<p class="trip-meta">' + (levelNote ? levelNote.map(esc).join(sep) : yearsLabel(p.years) + sep + esc(meta)) + '</p>' +
       qa.filter(function (x) { return x[1]; }).map(function (x) { return tripFold(x[0], tripAnswer(x[1]) + (x[2] || '')); }).join('');
