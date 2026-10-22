@@ -2197,6 +2197,11 @@ html.crios .profile-footer { bottom:calc(86px + env(safe-area-inset-bottom, 0px)
 .talents-bourse b { font-size:1.375rem; font-weight:500; letter-spacing:-0.02em; }
 .talents-bourse span { font-size:.875rem; line-height:1.4; color:#55555C; }
 .app .prep.hi.talents-card .talents-cta { margin-top:8px; }
+.app .prep.hi.talents-card .talents-count b { display:block; font-size:1.375rem; line-height:1.3; font-weight:500; letter-spacing:-0.02em; }
+.app .prep.hi.talents-card .talents-hero .talents-logo { width:84px; }
+.app .prep.hi.talents-card .talents-hero .price { background:#E0FA6E; color:#141414; }
+.app .prep.hi.talents-card .talents-perf { height:3px; margin:8px calc(10px - var(--talents-pad)) 0; background-image:radial-gradient(circle, #DEDEDE 1px, transparent 1.4px); background-size:8px 3px; }
+.app .prep.hi.talents-card .talents-bourse { margin-top:4px; }
 /* Stages : encadrés bordés de la couleur du concours. */
 .ref-tip.stage-tip { border:1.5px solid var(--theme, var(--blue)); }
 /* Fiche concours : bouton Information (feuille avec la description du concours). */

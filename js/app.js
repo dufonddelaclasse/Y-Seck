@@ -1677,14 +1677,18 @@
       '<div class="row" role="group" aria-label="Budget">' + opts.map(function (o) { return chip('prepBudget', o[0], o[1], b === o[0], 'blue'); }).join('') + '</div>' +
       (list.length?'':'<p class="empty">Aucune préparation pour ce métier avec ce budget.</p>') + '<div class="stack">' + list.map(function (p) {
         var hi = p.talents && on;
-        var extra = p.id === 'talents' && (job||S.domains.length) ? '<span class="fit on">' + nbT + (nbT > 1 ? ' Prépas Talents identifiées' : ' Prépa Talents identifiée') + (job?' pour ce métier':' pour '+(isParent()?'ses':'vos')+' choix') + '</span>' : '';
-        /* Prépas Talents : nombre de prépas pour le métier, bourse, puis le bouton qui ouvre la liste. */
-        if (hi) return '<div class="prep hi talents-card">' + talentsHero('<span class="price">' + esc(p.price) + '</span>') + '<div class="talents-body"><h2 class="sr-only">' + sig(p.t) + '</h2>' +
-          '<p>' + esc(p.d) + '</p><div class="talents-perf" aria-hidden="true"></div>' + (extra ? '<span class="prep-foot">' + extra + '</span>' : '') +
-          '<div class="talents-bourse"><b>' + esc(D.talentsGrantLabel || '5 000 €') + ' / an</b><span>Bourse Talents ' + esc(D.talentsGrantYear || '2026-2027') + ', pour les élèves des Prépas Talents.</span></div>' +
-          '<a class="btn theme talents-cta" href="#/prepa/' + p.id + (job?'/'+job.id:'') + '">Découvrir les prépas Talents</a></div></div>';
+        /* Prépas Talents : nombre de prépas pour le concours, conditions, filet pointillé, bourse, puis le bouton qui ouvre la liste. */
+        if (hi) {
+          var count = job || S.domains.length ? nbT : D.talents.length;
+          return '<div class="prep hi talents-card">' + talentsHero('<span class="price">' + esc(p.price) + '</span>') + '<div class="talents-body"><h2 class="sr-only">' + sig(p.t) + '</h2>' +
+            '<p class="talents-count"><b>' + count + (count > 1 ? ' Prépas Talents' : ' Prépa Talents') + '</b></p>' +
+            '<p>Cliquez pour consulter les prépas identifiées' + (job ? ' pour ce concours' : S.domains.length ? ' pour ' + (isParent() ? 'ses' : 'vos') + ' choix' : '') + '. Sur dossier et entretien, sous conditions de ressources.</p>' +
+            '<div class="talents-perf" aria-hidden="true"></div>' +
+            '<div class="talents-bourse"><b>' + esc(D.talentsGrantLabel || '5 000 €') + ' / an</b><span>Bourse Talents ' + esc(D.talentsGrantYear || '2026-2027') + ', pour les élèves des Prépas Talents.</span></div>' +
+            '<a class="btn theme talents-cta" href="#/prepa/' + p.id + (job?'/'+job.id:'') + '">Découvrir les prépas Talents</a></div></div>';
+        }
         return '<a class="prep" href="#/prepa/' + p.id + (job?'/'+job.id:'') + '"><div class="prep-top"><span class="prep-ico" aria-hidden="true">' + I.book + '</span><span class="price">' + esc(p.price) + '</span></div><h2 class="h3 no-icon">' + sig(p.t) + '</h2>' +
-          '<p>' + esc(p.d) + '</p><span class="prep-foot">' + extra + '<span class="more">Voir le détail' + I.chev + '</span></span></a>';
+          '<p>' + esc(p.d) + '</p><span class="prep-foot"><span class="more">Voir le détail' + I.chev + '</span></span></a>';
       }).join('') + '</div>' +
       prepaOrganisms(cats) +
       '<a class="link-plain" href="#/handicap'+(job?'/'+job.id:'')+'">Handicap : prévoir les aménagements</a></section>';

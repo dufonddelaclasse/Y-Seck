@@ -202,7 +202,7 @@ const hospitalJob=data.jobs.find(j=>j.id==='aah');
 assert(screens.calendrier(hospitalJob.id).includes(examsFor(hospitalJob).length+' sessions'),'Le filtre A doit conserver les sessions liées dont la source ne précisait pas la catégorie.');
 S.boursier='Oui';
 assert(!screens.preparer('magasinier').includes('talents-bourse'),'Pas de bourse Talents recommandée à une préparation de catégorie C.');
-assert(/Prépas? Talents identifiées? pour ce métier[\s\S]*talents-bourse[\s\S]*Découvrir les prépas Talents/.test(screens.preparer('attache')),'La carte Prépas Talents réunit le nombre de prépas, la bourse et le bouton.');
+assert(/\d+ Prépas? Talents<\/b>[\s\S]*Cliquez pour consulter les prépas identifiées pour ce concours[\s\S]*talents-perf[\s\S]*talents-bourse[\s\S]*Découvrir les prépas Talents/.test(screens.preparer('attache')),'La carte Prépas Talents réunit le nombre de prépas, la bourse et le bouton.');
 assert(!screens.preparer('magasinier').includes('href="#/prepa/talents'));
 assert.equal(JSON.stringify(data.crosswalk),JSON.stringify(db.links));
 const additions=data.books.filter(b=>b.id.startsWith('vp-book-'));
