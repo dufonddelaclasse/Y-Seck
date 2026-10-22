@@ -71,7 +71,8 @@ for (const c of existing) {
   if (r.confidence === 'haute' || r.confidence === 'moyenne') {
     for (const k of ['voies', 'condition', 'epreuves', 'metiers']) {
       const v = clean(r[k], r.ref);
-      if (hasValue(v) && v.length > String(c[k] || '').length) { c[k] = v; replaced++; }
+      /* Vérifiée sur les pages officielles (tâche A), la valeur fait foi ; sinon seulement si elle est plus précise. */
+      if (hasValue(v) && v !== c[k] && (r._verified || v.length > String(c[k] || '').length)) { c[k] = v; replaced++; }
     }
   }
   if (!c.annales && hasValue(r.annalesUrl)) c.annales = { kind: 'Sujets et rapports de jury', years: '', url: r.annalesUrl, scope: c.name, caution: 'Vérifier la session et la voie.' };
