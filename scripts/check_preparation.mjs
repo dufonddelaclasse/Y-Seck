@@ -370,6 +370,6 @@ console.log('Ressources vérifiées :',data.studyResources.length,'liens uniques
   const soldier=screens.metier('fpdef019');
   assert(soldier.includes('recruitment-note')&&soldier.includes('sengager.fr')&&screens.fiche('fpdef019').includes('recruitment-note')&&screens.fiche('fpdef019').includes('data-fp="E"'),'Un métier militaire explique le recrutement par les armées, même avec les concours des écoles d’officiers.');
   assert(data.jobs.find(j=>j.id==='fpdef019').routeIds.every(id=>data.accessRoutes[id].military),'Aucun concours civil n’est proposé à un métier militaire.');
-  assert(screens.metier('fpdef022').includes('>Recrutement<')&&screens.metier('fpdef022').includes('sengager.fr'),'Sans école militaire rattachée, la frise présente le recrutement par engagement.');
+  assert(screens.metier('fpdef022').includes('>Recrutement<')&&screens.metier('fpdef022').includes('devenir-aviateur.fr/devenir/nos-metiers/equipier-fusilier-de-lair'),'Sans école militaire rattachée, la frise présente le recrutement par engagement, avec la page officielle du métier.');
   console.log('Audit vérifié : corrections appliquées, métiers sans concours expliqués.');
 }

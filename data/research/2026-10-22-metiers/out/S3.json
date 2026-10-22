@@ -1,0 +1,253 @@
+{
+  "concours": [
+    {
+      "ref": "NEW2-ieta",
+      "jobs": ["fpdef001"],
+      "route": { "new": { "id": "ieta", "name": "Ingénieur - Ingénieure des études et techniques de l'armement", "cat": "A", "lvl": 3, "fp": "E" } },
+      "name": "Ingénieur - Ingénieure des études et techniques de l'armement (IETA)",
+      "school": "Formation d'ingénieur Défense et sécurité de l'ENSTA et de l'ISAE-SUPAERO (1re année au campus ENSTA de Brest, puis Brest, Paris-Saclay ou Toulouse), après une année 0 de formation militaire",
+      "organizer": "Ministère des Armées, Direction générale de l'armement (DGA), avec l'ENSTA et le concours Mines-Télécom",
+      "cat": "A",
+      "fp": "E",
+      "description": "Les ingénieurs des études et techniques de l'armement (IETA) sont des officiers ingénieurs de la Direction générale de l'armement, avec un statut militaire. On y entre surtout après une classe préparatoire scientifique, par le concours Mines-Télécom, en choisissant le statut d'élève militaire de la formation d'ingénieur Défense et sécurité de l'ENSTA et de l'ISAE-SUPAERO. La scolarité dure quatre ans : une année 0 de formation militaire dans une armée, puis trois ans d'école d'ingénieur. Les élèves sont payés dès l'admission, environ 1 560 euros par mois au début, et signent un contrat de 12 ans dont au moins 8 ans en poste après l'école. Ensuite, ils conduisent des programmes d'armement, font de l'expertise et des essais et vérifient les équipements livrés par les industriels.",
+      "voies": "Concours Mines-Télécom (filière ENSTA Défense et sécurité, statut IETA), Concours externe sur titres, Concours interne, Officier sous contrat",
+      "condition": "Concours Mines-Télécom : être en classe préparatoire scientifique (MP, MPI, PC, PSI ou PT), être de nationalité française, avoir 22 ans au plus au 1er janvier de l'année du concours, avoir un casier judiciaire compatible, être en règle avec la journée défense et citoyenneté et être déclaré apte par un médecin des armées ; Concours externe sur titres : être ingénieur diplômé ou élève ingénieur d'une école reconnue par la Commission des titres d'ingénieur, aux conditions fixées chaque année par un avis au Journal officiel ; Concours interne : être déjà en poste au ministère des Armées ; Officier sous contrat : répondre aux offres publiées par la DGA.",
+      "epreuves": "Admissibilité : épreuves écrites de la banque Mines-Ponts (filières MP, MPI, PC, PSI) ou de la banque PT (filière PT). Admission : épreuves orales du concours Mines-Télécom sur une journée (ou oraux du concours commun Mines-Ponts pour les candidats admissibles aux deux), puis visite médicale d'aptitude à l'engagement militaire.",
+      "metiers": "Architecte de systèmes de forces, d'armes ou d'équipements ; Ingénieur de programme d'armement ; Expert technique ; Ingénieur d'essais ; Contrôleur de la conformité des équipements livrés par l'industrie",
+      "domain": "Défense",
+      "officialUrl": "https://www.ensta.fr/formations/ingenieurs/ingenieur-defense-securite/formation-des-ingenieurs-des-etudes-et-techniques-de-larmement-statut-militaire",
+      "trainingMonths": 48,
+      "paidTraining": "Oui, rémunéré dès l'admission : environ 1 560 euros par mois en année 0 et en 1re année, puis environ 1 820 euros et 1 950 euros (grille au 1er octobre 2023 publiée par l'ENSTA), frais de scolarité pris en charge.",
+      "places": "45 places sous statut IETA au concours Mines-Télécom 2026 (chiffre indicatif publié par l'ENSTA)",
+      "sessions": [],
+      "expected": "Session 2027 du concours Mines-Télécom : inscriptions attendues de début décembre 2026 à mi-janvier 2027 sur le site du SCEI, écrits fin avril 2027, admissibilité début juin et admission mi-juillet 2027, d'après la session 2026 (inscriptions du 8 décembre 2025 au 12 janvier 2026, admissibilité à partir du 4 juin 2026, admission à partir du 16 juillet 2026). Le concours externe sur titres et le concours interne IETA font l'objet d'un avis annuel au Journal officiel.",
+      "annalesUrl": null,
+      "evolution": "Accès possible au corps des ingénieurs de l'armement par concours interne, responsabilités de direction de programmes ou de centres d'expertise, affectations temporaires dans l'industrie ou en interministériel.",
+      "checked": "2026-10-22",
+      "sources": [
+        "https://www.ensta.fr/formations/ingenieurs/ingenieur-defense-securite/formation-des-ingenieurs-des-etudes-et-techniques-de-larmement-statut-militaire",
+        "https://www.ensta.fr/en/node/577",
+        "https://www.ensta.fr/formations/formation-dingenieur-defense-securite",
+        "https://www.ensta.fr/sites/default/files/content/article/pdf/offres-ing%C3%A9nieur-ENSTA_rentree2026.pdf",
+        "https://www.defense.gouv.fr/dga/nous-rejoindre/profil-ingenieur",
+        "https://www.concours-mines-telecom.fr/",
+        "https://www.defense.gouv.fr/cnd/nous-rejoindre/nos-statuts-au-commissariat-au-numerique-defense/ingenieur-larmement-du-numerique-du-ministere"
+      ],
+      "confidence": "haute",
+      "notes": "ENSTA Bretagne a fusionné dans l'ENSTA (avec ENSTA Paris) au 1er janvier 2025 : le recrutement des élèves IETA passe désormais par le concours Mines-Télécom (formation FIDS ENSTA / ISAE-SUPAERO), et non plus par un concours propre à ENSTA Bretagne. Dates 2027 non publiées au 22/10/2026 (ni sur le site du concours ni sur celui du SCEI). Le concours externe sur titres compterait 5 places en 2026 d'après l'avis au JO reproduit par un site non officiel (Légifrance inaccessible aux robots), à vérifier. Places 2026 par filière (statut IETA) : MP 14, MPI 4, PC 7, PSI 15, PT 5. Le corps IETA convient aussi en partie aux métiers de radioprotection et d'assurance qualité, mais l'ICD est retenu pour ces fiches."
+    },
+    {
+      "ref": "NEW2-ingenieur-armement",
+      "jobs": ["fpdef001"],
+      "route": { "new": { "id": "ia", "name": "Ingénieur - Ingénieure de l'armement", "cat": "A+", "lvl": 5, "fp": "E" } },
+      "name": "Ingénieur - Ingénieure de l'armement (IA)",
+      "school": "École polytechnique (Palaiseau) pour la voie principale, puis formation complémentaire au ministère des Armées",
+      "organizer": "Ministère des Armées, Direction générale de l'armement (DRH)",
+      "cat": "A+",
+      "fp": "E",
+      "description": "Le corps des ingénieurs de l'armement est un grand corps technique de l'État à statut militaire, placé sous l'autorité du ministère des Armées. La plupart de ses membres sont recrutés à la sortie de l'École polytechnique, selon leur classement final, et d'autres entrent par un concours sur titres réservé aux jeunes ingénieurs diplômés de certaines écoles, ou par concours interne. Les lauréats deviennent officiers ingénieurs et suivent une formation complémentaire au sein du ministère avant leur première affectation. Ils dirigent ensuite des programmes d'armement, conçoivent l'architecture de grands systèmes de défense, contrôlent et inspectent les activités d'armement et peuvent accéder aux plus hautes responsabilités de l'État.",
+      "voies": "Sortie de l'École polytechnique, Concours externe sur titres, Concours interne",
+      "condition": "Sortie de l'École polytechnique : être élève français et choisir le corps de l'armement selon son classement de sortie ; Concours externe sur titres : être de nationalité française, avoir 27 ans au plus au 1er janvier de l'année du concours et être titulaire (ou en dernière année de préparation) d'un diplôme d'ingénieur figurant sur la liste fixée par arrêté ; Concours interne : être fonctionnaire, militaire ou ingénieur déjà en poste au ministère des Armées, par exemple IETA.",
+      "epreuves": "Concours sur titres : sélection sur dossier de candidature, suivie des épreuves d'admission précisées dans l'avis publié chaque année au Journal officiel. Sortie de l'École polytechnique : choix du corps selon le classement final, sans épreuve supplémentaire.",
+      "metiers": "Architecte de systèmes de forces ; Directeur ou directrice de programme d'armement ; Expert technique de haut niveau ; Responsable de la politique d'innovation de défense ; Inspecteur ou inspectrice de l'armement",
+      "domain": "Défense",
+      "officialUrl": "https://www.defense.gouv.fr/dga/nous-rejoindre/profil-ingenieur",
+      "trainingMonths": null,
+      "paidTraining": null,
+      "places": null,
+      "sessions": [],
+      "expected": "Concours sur titres : avis publié au Journal officiel au printemps (JO du 10 avril 2025 pour la session 2025) et dossiers à envoyer à la DGA début juillet (4 juillet 2025). Session 2027 attendue sur le même calendrier, avec dépôt des dossiers vers début juillet 2027.",
+      "annalesUrl": null,
+      "evolution": "Postes de direction à la DGA, dans les états-majors, dans d'autres ministères ou dans des organisations internationales ; accès aux plus hauts emplois de l'État.",
+      "checked": "2026-10-22",
+      "sources": [
+        "https://www.defense.gouv.fr/dga/nous-rejoindre/profil-ingenieur",
+        "https://www.defense.gouv.fr/cnd/nous-rejoindre/nos-statuts-au-commissariat-au-numerique-defense/ingenieur-larmement-du-numerique-du-ministere"
+      ],
+      "confidence": "moyenne",
+      "notes": "Corps de catégorie A+ alors que la fiche fpdef001 n'affiche que la catégorie A : ce concours ne s'affichera pas tant que A+ n'est pas ajouté à la fiche. Proposé car c'est la voie principale vers les fonctions d'architecte de systèmes de forces à la DGA. Un concours externe réservé aux docteurs (limite d'âge plus haute) aurait été ouvert pour 2026 selon un site non officiel reproduisant le JO ; non retenu faute de source officielle lisible (Légifrance bloque les robots). Âge et date limite de dossier relevés sur la page officielle du Commissariat au numérique de défense pour la session 2025 (27 ans au plus au 1er janvier 2025, dossiers au plus tard le 4 juillet 2025). Pas de chiffre officiel de places trouvé."
+    },
+    {
+      "ref": "NEW2-icd",
+      "jobs": ["fpdef001", "fpdef025", "fpdef027"],
+      "route": { "new": { "id": "icd", "name": "Ingénieur civil - Ingénieure civile de la défense", "cat": "A", "lvl": 5, "fp": "E" } },
+      "name": "Ingénieur civil - Ingénieure civile de la défense (ICD)",
+      "school": null,
+      "organizer": "Ministère des Armées et des Anciens combattants (centre ministériel de gestion de Lyon)",
+      "cat": "A",
+      "fp": "E",
+      "description": "Les ingénieurs civils de la défense sont des fonctionnaires civils de catégorie A du ministère des Armées. Ils dirigent des équipes, font de l'expertise et des études techniques pour concevoir, moderniser et sécuriser les équipements, les systèmes et les infrastructures des armées. Le concours se passe dans une spécialité parmi onze, par exemple l'aéronautique, la mécanique, les systèmes d'information ou la physique nucléaire et radioprotection. Il ne comporte qu'une sélection sur dossier et un entretien oral, ce qui permet une prise de poste rapide après les résultats. On travaille ensuite à la DGA, dans les services de soutien des armées ou dans d'autres directions du ministère, avec des possibilités d'évolution vers l'encadrement.",
+      "voies": "Concours externe, Concours interne",
+      "condition": "Externe : être titulaire d'un diplôme de niveau bac+5 ou équivalent dans l'une des spécialités proposées et remplir les conditions générales d'accès à la fonction publique ; Interne : justifier d'au moins trois années de services publics.",
+      "epreuves": "Admissibilité : sélection sur dossier, dans lequel le candidat présente une réalisation professionnelle ou scolaire. Admission : entretien oral de 45 minutes avec le jury. Spécialités de la session 2027 : achats, aéronautique, BTP, électronique et électrotechnique, mécanique, mesures physiques, organisation et gestion de la production, réseaux et télécommunications, santé sécurité environnement travail, systèmes d'information, physique nucléaire et radioprotection.",
+      "metiers": "Spécialiste en radioprotection ; Ingénieur d'études en aéronautique, mécanique ou électronique ; Ingénieur qualité et organisation de la production ; Chef de projet systèmes d'information ; Responsable santé, sécurité et environnement au travail",
+      "domain": "Défense",
+      "officialUrl": "https://choisirleservicepublic.gouv.fr/faconnez-la-defense-de-demain-en-tant-quingenieur-au-ministere-des-armees/",
+      "trainingMonths": null,
+      "paidTraining": null,
+      "places": "138 postes pour la session 2027 (62 au concours externe, 76 au concours interne)",
+      "sessions": [
+        {
+          "session": "2027",
+          "voie": "Concours externe et interne (11 spécialités)",
+          "open": "2026-06-03",
+          "openLabel": "3 juin 2026 à 10 h, sur admissio.defense.gouv.fr",
+          "close": "2026-07-07",
+          "closeLabel": "7 juillet 2026 à 12 h",
+          "written": "2026-09-02",
+          "writtenLabel": "Sélection des dossiers (admissibilité) à partir du 2 septembre 2026",
+          "oral": "2026-11-02",
+          "oralLabel": "Entretiens oraux à partir du 2 novembre 2026",
+          "results": "2026-12-04",
+          "resultsLabel": "Résultats d'admission dès le 4 décembre 2026",
+          "url": "https://choisirleservicepublic.gouv.fr/faconnez-la-defense-de-demain-en-tant-quingenieur-au-ministere-des-armees/",
+          "provisional": false,
+          "employer": "Ministère des Armées et des Anciens combattants (CMG de Lyon)"
+        }
+      ],
+      "expected": "Session 2028 : inscriptions attendues en juin et juillet 2027 sur Admissio, sélection des dossiers à partir de septembre et oraux à partir de novembre 2027, d'après les sessions 2025 (inscriptions du 4 juin au 9 juillet 2024) et 2027 (du 3 juin au 7 juillet 2026).",
+      "annalesUrl": null,
+      "evolution": "Évolution vers des fonctions d'encadrement et de direction technique, mobilité au sein du ministère des Armées ou vers d'autres administrations techniques de l'État.",
+      "checked": "2026-10-22",
+      "sources": [
+        "https://choisirleservicepublic.gouv.fr/faconnez-la-defense-de-demain-en-tant-quingenieur-au-ministere-des-armees/",
+        "https://www.defense.gouv.fr/dga/nous-rejoindre/profil-ingenieur",
+        "https://www.defense.gouv.fr/sga/actualites/concours-dingenieur-civil-defense-calendrier-revise-epreuves-renovees",
+        "https://www.defense.gouv.fr/sga/travailler-au-ministere/recrutement-militaire-civil/offres-recrutement-personnels-civils/cloture-devenez"
+      ],
+      "confidence": "haute",
+      "notes": "Ancien corps des ingénieurs d'études et de fabrications (IEF), renommé ICD en 2020 (information de source tierce). La spécialité « Physique nucléaire et radioprotection », ouverte pour la session 2027, correspond directement à la fiche fpdef025 (le Service de protection radiologique des armées emploie aussi des militaires du service de santé). Pour fpdef001, la DGA emploie surtout des IA, des IETA et des ingénieurs civils, dont des ICD. Rattachement de fpdef027 (assurance qualité des fournitures d'habillement ou alimentaires, Service du commissariat des armées) plausible via les spécialités « Organisation et gestion de la production » ou « Achats », mais non confirmé par une fiche de poste ; les techniciens supérieurs d'études et de fabrications (TSEF, catégorie B, route tsef) et les commissaires des armées interviennent aussi dans ce domaine. Pas d'information officielle trouvée sur la durée du stage ni sur la rémunération de début. La page officielle d'avis 2027 (JO, JORFTEXT000053586453) est liée depuis la page DGA mais Légifrance n'a pas pu être lu."
+    },
+    {
+      "ref": "NEW2-aam",
+      "jobs": ["fpsec057"],
+      "route": { "new": { "id": "aam", "name": "Administrateur - Administratrice des affaires maritimes", "cat": "A+", "lvl": 4, "fp": "E" } },
+      "name": "Administrateur - Administratrice des affaires maritimes (AAM)",
+      "school": "École d'administration des affaires maritimes (EAAM), au sein de l'École nationale de la sécurité et de l'administration de la mer (ENSAM), Le Havre",
+      "organizer": "Ministère de la Transition écologique, direction des ressources humaines (bureau des recrutements par concours), pour le ministère chargé de la mer",
+      "cat": "A+",
+      "fp": "E",
+      "description": "Les administrateurs des affaires maritimes forment un corps d'officiers à statut militaire, au service du ministère chargé de la mer. Après le concours, on suit deux ans de formation à l'École d'administration des affaires maritimes, au sein de l'ENSAM au Havre. On travaille ensuite pour le sauvetage et la sécurité en mer, le contrôle des navires et des pêches, la protection du milieu marin et la gestion des espaces maritimes. Les premiers postes sont souvent en CROSS, comme coordinateur de missions de sauvetage, avant de pouvoir diriger un CROSS ou un service de l'État chargé de la mer. Le concours externe est ouvert aux titulaires d'une licence âgés de 26 ans au plus et comprend des épreuves sportives et une visite médicale militaire.",
+      "voies": "Concours externe (article 4.1), Concours externe et interne (article 4.2), Concours d'administrateur de 1re classe stagiaire (article 6.1)",
+      "condition": "Externe (article 4.1) : être titulaire d'un diplôme sanctionnant au moins trois années d'études supérieures (licence ou équivalent) et avoir 26 ans au plus au 1er janvier de l'année du concours, sauf dérogations ; Article 4.2 : être militaire non officier, fonctionnaire de catégorie B ou contractuel de niveau équivalent avec au moins cinq ans de services et le baccalauréat, ou officier de la marine marchande titulaire du baccalauréat, du brevet d'officier chef de quart et de 30 mois de service en mer ; Article 6.1 : être officier, fonctionnaire de catégorie A ou officier de la marine marchande expérimenté, dans les conditions de l'avis annuel (40 ans au plus en 2024) ; Toutes voies : aptitude médicale vérifiée par un médecin des armées (profil SIGYCOP exigé), trois candidatures au plus au même concours.",
+      "epreuves": "Admissibilité : quatre écrits pour l'article 4.1, une composition sur l'évolution des idées et des faits politiques, économiques et sociaux depuis le début du XXe siècle (5 h), une composition de droit public, droit privé, sciences économiques ou sciences de la vie et de l'environnement au choix (5 h), une note de synthèse sur dossier (5 h) et une version anglaise (2 h). Admission : entretien avec le jury (50 minutes), conversation en anglais (20 minutes) et épreuves sportives obligatoires.",
+      "metiers": "Directeur ou directrice de CROSS ; Coordinateur ou coordinatrice de missions de sauvetage en mer ; Inspecteur ou inspectrice de la sécurité des navires et des risques professionnels maritimes ; Responsable du contrôle des pêches ; Cadre des directions de la mer",
+      "domain": "Sécurité",
+      "officialUrl": "https://recrutement.ecologie.gouv.fr/concours/eleve-administrateur-trice-affaires-maritimes-2e-classe-article-41-aam-concours-externe",
+      "trainingMonths": 24,
+      "paidTraining": null,
+      "places": "6 postes en 2026 (5 au concours externe article 4.1, 1 au concours article 4.2)",
+      "sessions": [
+        {
+          "session": "2027",
+          "voie": "Concours externe (article 4.1), élève administrateur de 2e classe",
+          "open": "2026-12-14",
+          "openLabel": "14 décembre 2026",
+          "close": "2027-01-29",
+          "closeLabel": "29 janvier 2027",
+          "written": "2027-03-01",
+          "writtenLabel": "Écrits à partir du 1er mars 2027",
+          "oral": "2027-06-14",
+          "oralLabel": "Épreuves sportives le 11 juin 2027, oraux du 14 au 18 juin 2027",
+          "results": null,
+          "resultsLabel": "",
+          "url": "https://recrutement.ecologie.gouv.fr/sites/default/files/fichiers/Concours%20externes_internes_MTE_calendrier%202027_0.pdf",
+          "provisional": true,
+          "employer": "Ministère de la Transition écologique (bureau des recrutements par concours)"
+        },
+        {
+          "session": "2027",
+          "voie": "Concours externe et interne (article 4.2), élève administrateur",
+          "open": "2026-12-14",
+          "openLabel": "14 décembre 2026",
+          "close": "2027-01-29",
+          "closeLabel": "29 janvier 2027",
+          "written": "2027-03-01",
+          "writtenLabel": "Écrits à partir du 1er mars 2027",
+          "oral": "2027-06-14",
+          "oralLabel": "Épreuves sportives le 11 juin 2027, oraux du 14 au 18 juin 2027",
+          "results": null,
+          "resultsLabel": "",
+          "url": "https://recrutement.ecologie.gouv.fr/sites/default/files/fichiers/Concours%20externes_internes_MTE_calendrier%202027_0.pdf",
+          "provisional": true,
+          "employer": "Ministère de la Transition écologique (bureau des recrutements par concours)"
+        }
+      ],
+      "expected": null,
+      "annalesUrl": "https://recrutement.ecologie.gouv.fr/concours/eleve-administrateur-trice-affaires-maritimes-2e-classe-article-41-aam-concours-externe",
+      "evolution": "Avancement dans les grades d'officier du corps, direction d'un CROSS ou d'un service de l'État chargé de la mer, postes en administration centrale et enseignement dans les établissements d'enseignement supérieur maritime.",
+      "checked": "2026-10-22",
+      "sources": [
+        "https://recrutement.ecologie.gouv.fr/concours/eleve-administrateur-trice-affaires-maritimes-2e-classe-article-41-aam-concours-externe",
+        "https://recrutement.ecologie.gouv.fr/concours/eleve-administrateur-affaires-maritimes-article-42-aam-concours-externe-interne",
+        "https://recrutement.ecologie.gouv.fr/calendrier-concours",
+        "https://recrutement.ecologie.gouv.fr/sites/default/files/fichiers/Concours%20externes_internes_MTE_calendrier%202027_0.pdf",
+        "https://recrutement.ecologie.gouv.fr/sites/default/files/fichiers/2025-AAM-Rapport%20du%20jury_0.pdf",
+        "https://www.igam.developpement-durable.gouv.fr/IMG/pdf/20231123_arrete_concours_a1am.pdf",
+        "https://www.mer.gouv.fr/inauguration-de-lensam-et-1er-bapteme-de-promotion-au-havre"
+      ],
+      "confidence": "haute",
+      "notes": "Dates 2027 lues sur le calendrier officiel du ministère, qui les qualifie de prévisionnelles : marquées provisional. Le rapport du jury 2025 cite les postes de coordinateur de mission de sauvetage en CROSS parmi les premières affectations et insiste sur le caractère militaire du corps. Aucun concours d'officier du corps technique et administratif des affaires maritimes (OCTAAM) n'apparaît dans les calendriers 2026 et 2027 : les profils expérimentés entrent par les articles 4.2 et 6.1 du corps des AAM (statut de 2012 cité par un site syndical, non relu sur Légifrance). Le concours article 6.1 est marqué « non communiqué » pour 2027. Rémunération pendant la scolarité non indiquée sur les pages consultées. Ce concours (A+) ne convient pas à la fiche opérateur de CROSS (catégories B et C)."
+    }
+  ],
+  "jobs": [
+    {
+      "jobId": "fpsec021",
+      "existingConcours": ["T-092", "T-093", "É-095", "É-098"],
+      "explanation": "Les unités de sécurité civile sont encadrées soit par des officiers de sapeurs-pompiers professionnels (lieutenants, capitaines) recrutés par concours puis par les SDIS, soit par les cadres militaires des formations militaires de la sécurité civile : officiers de l'armée de Terre (notamment issus de Saint-Cyr) et sous-officiers (chef de groupe sécurité civile, recruté au niveau bac)."
+    },
+    {
+      "jobId": "fpsec028",
+      "existingConcours": ["É-002", "É-081", "É-014"],
+      "explanation": "Les postes d'expertise des risques majeurs (services interministériels de défense et de protection civiles des préfectures, états-majors de zone, DGSCGC) sont tenus par des attachés, des ingénieurs des travaux publics et des secrétaires administratifs de l'État, ainsi que par des officiers de sapeurs-pompiers en détachement."
+    },
+    {
+      "jobId": "fpsec034",
+      "existingConcours": ["T-092", "T-093", "T-035"],
+      "explanation": "Les prévisionnistes de SDIS sont des officiers de sapeurs-pompiers professionnels (lieutenants, capitaines) ou des techniciens territoriaux recrutés par concours puis par le SDIS. La prévision météorologique de Météo-France est un autre métier (concours ITM et TSM)."
+    },
+    {
+      "jobId": "fpsec058",
+      "existingConcours": ["É-098"],
+      "explanation": "Les opérateurs de CROSS sont en majorité des marins de la Marine nationale, encadrés par des administrateurs des affaires maritimes : officiers mariniers formés à l'École de maistrance (la spécialité sémaphoriste peut être affectée en CROSS) ou matelots recrutés par engagement sans concours, auxquels s'ajoutent quelques agents civils du ministère chargé de la mer."
+    }
+  ],
+  "noConcours": [
+    {
+      "jobId": "fpdef022",
+      "text": "Métier de militaire du rang, exercé surtout dans l'armée de l'Air et de l'Espace (équipier fusilier de l'air, qui défend les bases et sécurise les sites sensibles) ou dans la Marine (fusilier marin) : on y entre par un engagement sous contrat, sans concours, après des tests de sélection (moins de 30 ans, niveau 3e, contrat initial de 4 ans et formation rémunérée de 11 semaines à Orange pour le fusilier de l'air).",
+      "url": "https://devenir-aviateur.fr/devenir/nos-metiers/equipier-fusilier-de-lair",
+      "label": "Devenir équipier fusilier de l'air (armée de l'Air et de l'Espace)"
+    },
+    {
+      "jobId": "fpdef029",
+      "text": "Métier de militaire du rang du génie de l'armée de Terre (combattant du génie : déminage et dépollution des itinéraires, franchissement, engins protégés) : recrutement par engagement sous contrat auprès d'un CIRFA, sans diplôme ni concours, avec 9 semaines de formation initiale rémunérée à Saint-Maixent puis 2 mois de formation de spécialité en régiment.",
+      "url": "https://www.sengager.fr/tous-nos-postes/combattant-du-genie",
+      "label": "Combattant du génie (armée de Terre)"
+    },
+    {
+      "jobId": "fpsec036",
+      "text": "Les sapeurs-sauveteurs sont des militaires de l'armée de Terre servant dans les unités d'instruction et d'intervention de la sécurité civile (Nogent-le-Rotrou, Brignoles, Corte) : on y entre par un engagement sous contrat comme combattant sécurité civile, sans diplôme ni concours, après des tests en CIRFA, avec une formation initiale puis de spécialité d'environ trois mois et demi, rémunérée.",
+      "url": "https://www.sengager.fr/tous-nos-postes/combattant-securite-civile",
+      "label": "Combattant sécurité civile (armée de Terre)"
+    },
+    {
+      "jobId": "fpsec023",
+      "text": "Les pilotes et copilotes d'avions et d'hélicoptères de la Sécurité civile sont des agents contractuels de l'État (personnels navigants contractuels du groupement des moyens aériens), recrutés sans concours par une commission sur dossier, à condition d'avoir la licence professionnelle et l'expérience exigées (par exemple 1 500 heures de vol dont 150 de nuit et 8 ans d'activité pour un pilote d'hélicoptère).",
+      "url": "https://www.securite-civile.interieur.gouv.fr/sengager/devenir-personnel-des-moyens-aeriens",
+      "label": "Devenir personnel des moyens aériens (Sécurité civile)"
+    },
+    {
+      "jobId": "fpsec024",
+      "text": "Les mécaniciens opérateurs de bord des hélicoptères de la Sécurité civile sont recrutés sans concours comme personnels navigants contractuels du groupement des moyens aériens : il faut notamment une licence de maintenance PART 66 hélicoptères à turbine (ou un brevet supérieur de maintenance), 5 ans d'expérience sur hélicoptères, le PSC1 et l'aptitude médicale du personnel navigant.",
+      "url": "https://www.securite-civile.interieur.gouv.fr/sengager/devenir-personnel-des-moyens-aeriens/mecanicien-operateur-de-bord",
+      "label": "Mécanicien opérateur de bord (Sécurité civile)"
+    },
+    {
+      "jobId": "fpsec060",
+      "text": "Les techniciens du centre de maintenance des hélicoptères de la Sécurité civile (Nîmes-Garons) sont recrutés sans concours, sur contrat, par le groupement des moyens aériens : il faut un bac pro, une mention complémentaire ou un BTS et, pour les postes techniques, une licence de maintenance aéronautique PART 66 ou EMAR 66.",
+      "url": "https://www.securite-civile.interieur.gouv.fr/sengager/devenir-personnel-des-moyens-aeriens/metiers-du-centre-de-maintenance-du-groupement-dhelicopteres",
+      "label": "Métiers du centre de maintenance du groupement d'hélicoptères"
+    }
+  ]
+}

@@ -33,11 +33,12 @@ const jobCats = j => (auditFix[j.id] && auditFix[j.id].categories) || (j.categor
 const jobFp = j => (auditFix[j.id] && auditFix[j.id].fp) || j.fp;
 
 /* ---------- Recherches ---------- */
-const LOTS = ['S1', 'S2', 'S3'];
+const exists = p => fs.existsSync(new URL(p, root));
+const LOTS = ['S1', 'S2', 'S3'].filter(lot => exists(RESEARCH + 'out/' + lot + '.json') || (note('Lot ' + lot + ' non encore livré.'), false));
 const lots = {}, research = { concours: [], jobs: [], noConcours: [] };
 for (const lot of LOTS) {
   lots[lot] = read(RESEARCH + 'lots/lot-' + lot + '.json').map(j => j.id);
-  const verified = fs.existsSync(new URL(RESEARCH + 'out/' + lot + '.verified.json', root));
+  const verified = exists(RESEARCH + 'out/' + lot + '.verified.json');
   const out = read(RESEARCH + 'out/' + lot + (verified ? '.verified.json' : '.json'));
   for (const k of Object.keys(research)) (out[k] || []).forEach(x => research[k].push(Object.assign(x, { _lot: lot })));
 }
@@ -54,7 +55,28 @@ const isOfficialLink = u => /^https:\/\//.test(u || '') && !/calendrier-general-
 /* ---------- Orientation des nouveaux concours ---------- */
 /* Champs du parcours (collège, lycée, études, préparation) copiés d’un concours proche, puis adaptés (o). */
 const ORIENTATION = ['college', 'collegeOption', 'lyceeGeneral', 'lyceeTechno', 'lyceePro', 'lyceeWhy', 'stage', 'optionSeconde', 'optionTerminale', 'studies', 'l1', 'l2', 'l3', 'master', 'prepa', 'afterBac', 'vigilance'];
-const SPEC = {};
+const ARMY_STAGE = 'Rencontrer un centre d’information et de recrutement des forces armées (CIRFA) ; préparation militaire ou cadets de la Défense selon l’âge. Pour la 3e ou la seconde : entretien métier ou stage uniquement si accueil possible.';
+const SPEC = {
+  /* S3 : défense et sécurité civile. */
+  'NEW2-ieta': { donor: 'É-097', domain: 'Sécurité, police, défense', military: true, cardTitle: 'Concours Mines-Télécom (statut IETA)',
+    o: { lyceeWhy: 'Mathématiques, physique, informatique, anglais', studies: 'Classe préparatoire scientifique (MP, MPI, PC, PSI ou PT), deux ans', l1: 'Classe préparatoire scientifique, première année', l2: 'Classe préparatoire, deuxième année et concours Mines-Télécom', l3: 'Concours externe sur titres possible après un diplôme scientifique', master: 'Non requis pour la voie du concours Mines-Télécom', prepa: 'Classes préparatoires scientifiques, notamment dans les lycées de la Défense ; préparation militaire', afterBac: 'Non : deux années de classe préparatoire scientifique' } },
+  'NEW2-ingenieur-armement': { donor: 'É-089', domain: 'Sécurité, police, défense', military: true, cardTitle: 'Corps des ingénieurs de l’armement',
+    o: { stage: ARMY_STAGE, lyceeWhy: 'Mathématiques, physique, informatique, anglais', studies: 'Classe préparatoire scientifique puis École polytechnique ; doctorat ou diplôme d’ingénieur pour le concours sur titres', l1: 'Classe préparatoire scientifique, première année', l2: 'Classe préparatoire, deuxième année et concours de l’École polytechnique', l3: 'École polytechnique', master: 'Fin de l’École polytechnique, choix du corps selon le classement', prepa: 'Classes préparatoires scientifiques (MP, PC, PSI) ; concours de l’École polytechnique', afterBac: 'Non : classe préparatoire puis École polytechnique, ou bac+5 pour le concours sur titres' } },
+  'NEW2-icd': { donor: 'É-081', domain: 'Sécurité, police, défense', cardTitle: 'Concours d’ingénieur civil de la défense',
+    o: { stage: ARMY_STAGE, studies: 'Diplôme d’ingénieur ou master scientifique (bac+5) dans l’une des spécialités ouvertes', l1: 'Licence scientifique ou classe préparatoire, première année', l2: 'Licence scientifique ou classe préparatoire, deuxième année', l3: 'Licence ou première année d’école d’ingénieurs', master: 'Master ou diplôme d’ingénieur exigé (bac+5)', prepa: 'Aucune préparation particulière : sélection sur dossier puis entretien ; écoles d’ingénieurs et masters scientifiques', afterBac: 'Non : bac+5 exigé pour le concours externe' } },
+  'NEW2-aam': { donor: 'É-096', domain: 'Sécurité, police, défense', military: true, cardTitle: 'Concours des affaires maritimes',
+    o: { lyceeGeneral: 'Histoire-géographie, géopolitique et sciences politiques (HGGSP) ; Sciences économiques et sociales (SES) ; Mathématiques', lyceeTechno: 'Sciences et technologies du management et de la gestion (STMG)', lyceeWhy: 'Droit, économie, culture maritime, anglais, condition physique', studies: 'Licence de droit, d’économie, de science politique ou de sciences (bac+3)', l1: 'Licence, première année', l2: 'Licence, deuxième année', l3: 'Licence et préparation du concours', master: 'Utile mais non exigé : la licence suffit pour le concours externe', prepa: 'Instituts d’études politiques (IEP), préparations universitaires aux concours administratifs ; préparation physique', afterBac: 'Non : licence exigée pour le concours externe' } }
+};
+/* Liens remplacés : jamais choisirleservicepublic.gouv.fr, la page du ministère et l’avis au Journal officiel à la place. */
+const URL_FIXES = {
+  'NEW2-icd': { officialUrl: 'https://www.defense.gouv.fr/dga/nous-rejoindre/profil-ingenieur', sessions: 'https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000053586453' }
+};
+for (const r of research.concours) {
+  const fix = URL_FIXES[r.ref] || {};
+  if (fix.officialUrl) r.officialUrl = fix.officialUrl;
+  else if (!isOfficialLink(r.officialUrl)) r.officialUrl = (r.sources || []).find(isOfficialLink) || r.officialUrl;
+  for (const ses of r.sessions || []) if (!isOfficialLink(ses.url)) ses.url = fix.sessions || r.officialUrl;
+}
 
 /* ---------- Nouveaux corps ---------- */
 const newRoutes = [], routeOfRef = {};
@@ -107,7 +129,7 @@ const examDetails = newRoutes.map(route => {
   const r = research.concours.find(x => routeOfRef[x.ref] === route.id);
   const url = [r.officialUrl].concat(r.sources || []).find(isOfficialLink);
   return {
-    id: route.id + '__' + route.fp, routeId: route.id, fp: route.fp, name: (route.military ? 'Recrutement : ' : 'Concours : ') + route.name,
+    id: route.id + '__' + route.fp, routeId: route.id, fp: route.fp, name: (route.military && route.cat === 'B' ? 'Recrutement : ' : 'Concours : ') + route.name,
     org: clean(r.organizer), metro: 'Lieux précisés dans l’avis de chaque session.', om: 'Centres d’outre-mer précisés dans l’avis lorsque le concours en ouvre.',
     source: url, checked: CHECKED, cardTitle: route.cardTitle, officialLinks: [{ label: 'Page officielle du concours', url }]
   };
@@ -131,7 +153,8 @@ function link(jobId, c, why) {
   const id = jobId + '__' + routeId;
   if (rejected.has(jobId + '|' + routeId)) { note('Lien rejeté par l’audit, ignoré : ' + id); return; }
   linkedJobs.add(jobId);
-  if (!routesById[routeId].military) correction(jobId).recruitment = null;
+  /* L’ancienne note générale disparaît : la fiche affiche désormais le concours. */
+  correction(jobId).recruitment = null;
   if (present.has(id) || links.some(l => l.id === id)) return;
   links.push({ id, jobId, routeId, status: 'proposé', source: c.source || routesById[routeId].source, note: NOTE });
 }

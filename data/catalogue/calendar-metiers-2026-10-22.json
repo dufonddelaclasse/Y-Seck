@@ -1,0 +1,92 @@
+{
+ "calendar": [
+  {
+   "id": "metier-e-107-concours-externe-et-interne-11-specialites-2027-ministere-des-armees-et-des-a",
+   "name": "Ingénieur civil - Ingénieure civile de la défense (ICD)",
+   "rawName": "Ingénieur civil - Ingénieure civile de la défense (ICD) · Concours externe et interne (11 spécialités) · session 2027",
+   "cat": "A",
+   "fp": "E",
+   "voie": "Concours externe et interne (11 spécialités)",
+   "url": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000053586453",
+   "source": "Ministère des Armées et des Anciens combattants (centre ministériel de gestion de Lyon) ; recherche du 22 octobre 2026",
+   "checked": "2026-10-22",
+   "open": "2026-06-03",
+   "date": "2026-07-07",
+   "openLabel": "3 juin 2026 à 10 h, sur admissio.defense.gouv.fr",
+   "closeLabel": "7 juillet 2026 à 12 h",
+   "written": "2026-09-02",
+   "writtenLabel": "Sélection des dossiers (admissibilité) à partir du 2 septembre 2026",
+   "oral": "2026-11-02",
+   "oralLabel": "Entretiens oraux à partir du 2 novembre 2026",
+   "routeIds": [
+    "icd"
+   ],
+   "provisional": false,
+   "employer": "Ministère des Armées et des Anciens combattants (CMG de Lyon)"
+  },
+  {
+   "id": "metier-e-108-concours-externe-article-4-1-eleve-administrateur-de-2e-classe-2027-eaam",
+   "name": "Administrateur - Administratrice des affaires maritimes (AAM)",
+   "rawName": "Administrateur - Administratrice des affaires maritimes (AAM) · Concours externe (article 4.1), élève administrateur de 2e classe · session 2027",
+   "cat": "A+",
+   "fp": "E",
+   "voie": "Concours externe (article 4.1), élève administrateur de 2e classe",
+   "url": "https://recrutement.ecologie.gouv.fr/sites/default/files/fichiers/Concours%20externes_internes_MTE_calendrier%202027_0.pdf",
+   "source": "Ministère de la Transition écologique, direction des ressources humaines (bureau des recrutements par concours), pour le ministère chargé de la mer ; recherche du 22 octobre 2026",
+   "checked": "2026-10-22",
+   "open": "2026-12-14",
+   "date": "2027-01-29",
+   "openLabel": "14 décembre 2026",
+   "closeLabel": "29 janvier 2027",
+   "written": "2027-03-01",
+   "writtenLabel": "Écrits à partir du 1er mars 2027",
+   "oral": "2027-06-14",
+   "oralLabel": "Épreuves sportives le 11 juin 2027, oraux du 14 au 18 juin 2027",
+   "routeIds": [
+    "aam"
+   ],
+   "provisional": true,
+   "employer": "Ministère de la Transition écologique (bureau des recrutements par concours)"
+  },
+  {
+   "id": "metier-e-108-concours-externe-et-interne-article-4-2-eleve-administrateur-2027-eaam",
+   "name": "Administrateur - Administratrice des affaires maritimes (AAM)",
+   "rawName": "Administrateur - Administratrice des affaires maritimes (AAM) · Concours externe et interne (article 4.2), élève administrateur · session 2027",
+   "cat": "A+",
+   "fp": "E",
+   "voie": "Concours externe et interne (article 4.2), élève administrateur",
+   "url": "https://recrutement.ecologie.gouv.fr/sites/default/files/fichiers/Concours%20externes_internes_MTE_calendrier%202027_0.pdf",
+   "source": "Ministère de la Transition écologique, direction des ressources humaines (bureau des recrutements par concours), pour le ministère chargé de la mer ; recherche du 22 octobre 2026",
+   "checked": "2026-10-22",
+   "open": "2026-12-14",
+   "date": "2027-01-29",
+   "openLabel": "14 décembre 2026",
+   "closeLabel": "29 janvier 2027",
+   "written": "2027-03-01",
+   "writtenLabel": "Écrits à partir du 1er mars 2027",
+   "oral": "2027-06-14",
+   "oralLabel": "Épreuves sportives le 11 juin 2027, oraux du 14 au 18 juin 2027",
+   "routeIds": [
+    "aam"
+   ],
+   "provisional": true,
+   "employer": "Ministère de la Transition écologique (bureau des recrutements par concours)"
+  }
+ ],
+ "calendarExpected": [
+  {
+   "concours": "É-105",
+   "voie": "Toutes les voies",
+   "expected": "Session 2027 du concours Mines-Télécom : inscriptions attendues de début décembre 2026 à mi-janvier 2027 sur le site du SCEI, écrits fin avril 2027, admissibilité début juin et admission mi-juillet 2027, d’après la session 2026 (inscriptions du 8 décembre 2025 au 12 janvier 2026, admissibilité à partir du 4 juin 2026, admission à partir du 16 juillet 2026). Le concours externe sur titres et le concours interne IETA font l’objet d’un avis annuel au Journal officiel.",
+   "url": "https://www.ensta.fr/formations/ingenieurs/ingenieur-defense-securite/formation-des-ingenieurs-des-etudes-et-techniques-de-larmement-statut-militaire",
+   "checked": "2026-10-22"
+  },
+  {
+   "concours": "É-106",
+   "voie": "Toutes les voies",
+   "expected": "Concours sur titres : avis publié au Journal officiel au printemps (JO du 10 avril 2025 pour la session 2025) et dossiers à envoyer à la DGA début juillet (4 juillet 2025). Session 2027 attendue sur le même calendrier, avec dépôt des dossiers vers début juillet 2027.",
+   "url": "https://www.defense.gouv.fr/dga/nous-rejoindre/profil-ingenieur",
+   "checked": "2026-10-22"
+  }
+ ]
+}
