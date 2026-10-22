@@ -222,7 +222,7 @@ html.dark .app.themed .prep .prep-ico { color:var(--lt); }
 html.dark :is(.personal-home .home-name-enter, .screen.loading-screen .loading-text) { -webkit-background-clip:text; background-clip:text; }
 html.dark .talents-perf { background-image:radial-gradient(circle, #DEDEDE 1.3px, transparent 1.8px) !important; }
 html.dark .app .prep.hi.talents-card .talents-perf { background-image:radial-gradient(circle, #DEDEDE 1px, transparent 1.4px) !important; }
-html.dark .ref-tip.stage-tip { background:#1C1C1E !important; border-color:var(--theme, var(--blue)) !important; }
+html.dark .ref-tip.stage-tip { background:transparent !important; border-color:var(--theme, var(--blue)) !important; }
 html.dark .ref-tip.stage-tip .stage-where svg { color:var(--theme, var(--blue)) !important; }
 html.dark .talents-counter { border:0 !important; background:none !important; }
 """
