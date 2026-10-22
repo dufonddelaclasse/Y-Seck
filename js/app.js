@@ -1501,7 +1501,7 @@
     var facts = [];
     if (c.school) facts.push(['École, formation', c.school]);
     if (c.organizer) facts.push(['Organisateur', c.organizer]);
-    if (c.trainingMonths) facts.push(['Durée de la formation', c.trainingMonths + ' mois' + (c.paidTraining && /^oui/i.test(c.paidTraining) ? ', rémunérée' : '')]);
+    if (c.trainingMonths) facts.push(['Durée de la formation', String(c.trainingMonths).replace('.', ',') + ' mois' + (c.paidTraining && /^oui/i.test(c.paidTraining) ? ', rémunérée' : '')]);
     if (c.places) facts.push(['Postes', c.places]);
     if (c.evolution) facts.push(['Et après', c.evolution]);
     return '<div class="concours-info"><p class="eyebrow">' + catBadge(c.cat, 'sm') + ' ' + esc(D.fps[c.fp] || '') + '</p><h3 class="no-icon">' + sig(c.name) + '</h3>' +

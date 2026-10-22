@@ -81,6 +81,8 @@
   });
   var routeFix = {}; (P.routeCorrections || []).forEach(function (f) { routeFix[f.id] = f; });
   P.routes.forEach(function (r) { if (routeFix[r.id]) r.cat = routeFix[r.id].cat; });
+  /* Une session publiée sous l’ancienne catégorie d’un corps rectifié suit la catégorie du corps. */
+  (P.calendar || []).forEach(function (x) { var ids = x.routeIds || []; if (ids.length && ids.every(function (id) { return routeFix[id]; })) x.cat = routeFix[ids[0]].cat; });
   var byRoute = {};
   P.routes.forEach(function (r) { byRoute[r.id] = r; });
   (P.examDetails || []).forEach(function(e){var r=byRoute[e.routeId];if(r)(r.examInfo||(r.examInfo={}))[e.fp]=e;});

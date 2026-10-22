@@ -125,7 +125,12 @@
     "catalogue/ref-exam-details-03.json",
     "catalogue/ref-links-10.json",
     "catalogue/calendar-metiers-2026-10-22.json",
+    "catalogue/ref-concours-06.json",
+    "catalogue/ref-exam-details-04.json",
+    "catalogue/calendar-corps-2026-10-22.json",
+    "catalogue/concours-corrections-01.json",
     "catalogue/audit-01.json",
-    "catalogue/job-recruitment-01.json"
+    "catalogue/job-recruitment-01.json",
+    "catalogue/job-recruitment-02.json"
   ]
 }

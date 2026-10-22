@@ -1,0 +1,597 @@
+{
+  "updates": [
+    {
+      "id": "É-014",
+      "school": null,
+      "trainingMonths": null,
+      "paidTraining": "Oui, rémunéré en tant que secrétaire administratif stagiaire dès l’affectation dans un service (pas d’école ; année de stage avant titularisation)",
+      "sources": [
+        "https://www.education.gouv.fr/concours-de-secretaire-administratif-de-classe-normale-5324"
+      ],
+      "confidence": "faible",
+      "notes": "Pas d’école après le concours commun de secrétaire administratif : le lauréat est affecté directement dans un service (rectorat, établissement, administration) comme stagiaire payé, puis titularisé après son stage, d’où school et trainingMonths à null. La page officielle (education.gouv.fr) et les sites des académies et du SIEC ont été bloqués (Cloudflare 403 ou coupure de connexion) le 22 octobre 2026 : aucun texte n’a pu être relu dans cette passe, la valeur reprend la description existante de la fiche et la règle générale du stage d’un an des fonctionnaires stagiaires de l’État (décret n° 2010-302, texte non relu). Aucune formation statutaire nationale en école n’a été trouvée pour ce corps."
+    },
+    {
+      "id": "É-019",
+      "school": null,
+      "sources": [
+        "https://www.univ-tlse3.fr/concours-itrf"
+      ],
+      "confidence": "haute",
+      "notes": "Pas d’école : pour les concours ITRF de catégories B et C, les lauréats sont affectés directement dans l’établissement au 1er septembre (session 2026 : « Affectation des lauréats au 1er septembre 2026 », université de Toulouse) et font leur année de stage en poste, ce que reflète déjà trainingMonths = 12. Aucune formation en école n’est prévue pour le corps des techniciens de recherche et de formation."
+    },
+    {
+      "id": "É-020",
+      "trainingMonths": 2.5,
+      "sources": [
+        "https://www.economie.gouv.fr/rejoignez-nous/decouvrir-nos-ecoles",
+        "https://www.economie.gouv.fr/files/files/directions_services/rejoignez-nous/DGFiP/recrutement-sans-concours/PACTE/750_AAFP_2026_.pdf"
+      ],
+      "confidence": "faible",
+      "notes": "Durée de la scolarité en école de l’ENFiP pour les agents administratifs principaux : environ 10 à 11 semaines (soit 2,5 mois), suivies d’un stage pratique sur le poste. Chiffres lus seulement par extraits du moteur de recherche, car economie.gouv.fr (Cloudflare 403) et impots.gouv.fr (maintenance) étaient inaccessibles le 22 octobre 2026 : l’avis officiel PACTE 2026 de la DGFiP pour le même grade annonce « une formation spécifique de 10 semaines » (Clermont-Ferrand, Lyon ou Noisy-le-Grand) et un dépliant de l’ENFiP (chiffres de janvier 2024) une « formation rémunérée de 11 semaines » dans un établissement de l’ENFiP, puis un stage pratique. Des documents plus anciens (2013 à 2018) donnaient 5 à 6 semaines. Si l’application n’accepte que des entiers, arrondir à 3 en précisant « environ »."
+    },
+    {
+      "id": "É-021",
+      "school": null,
+      "trainingMonths": null,
+      "sources": [
+        "https://www.herault.gouv.fr/contenu/telechargement/41538/270889/file/GUIDE%20concours%202022.pdf"
+      ],
+      "confidence": "faible",
+      "notes": "Pas d’école : les lauréats du concours d’adjoint administratif principal de 2e classe de l’Intérieur sont nommés stagiaires et accomplissent un stage d’un an directement en préfecture, en SGAMI ou en service de police ou de gendarmerie, avant titularisation (stage d’un an pour le concours externe, possibilité de stage complémentaire d’un an au plus). Ces règles ont été lues seulement par extraits du moteur de recherche (guides des concours des préfectures) : interieur.gouv.fr et les sites des préfectures étaient bloqués ou en maintenance le 22 octobre 2026. Aucune formation initiale en école n’a été trouvée."
+    },
+    {
+      "id": "É-023",
+      "school": null,
+      "trainingMonths": null,
+      "paidTraining": "Oui, rémunéré en tant que fonctionnaire stagiaire dès l’affectation en administration centrale (pas d’école ; année de stage avant titularisation)",
+      "sources": [
+        "https://www.diplomatie.gouv.fr/fr/concours/adjointe-adjoint-administratif-principal-de-2eme-classe-de-chancellerie"
+      ],
+      "confidence": "faible",
+      "notes": "Pas d’école après le concours : les lauréats sont affectés directement à Paris ou à Nantes et font une année de stage payée avant titularisation, comme l’indique déjà la description de la fiche. diplomatie.gouv.fr était en maintenance le 22 octobre 2026 (page du concours et PDF du ministère) : rien n’a pu être relu dans cette passe. D’après les extraits de recherche d’une fiche de poste officielle, l’Académie diplomatique et consulaire, créée en mai 2024, assure la formation initiale et continue des agents du ministère ; la durée d’une éventuelle formation de prise de poste des adjoints de chancellerie n’a pas été trouvée."
+    },
+    {
+      "id": "T-026",
+      "school": null,
+      "trainingMonths": null,
+      "sources": [
+        "https://www.cnfpt.fr/sites/default/files/15308-plaq_fia_20-v7.pdf",
+        "https://www.maisondescommunes85.fr/emploi/formation/a-formations-statutaires-obligatoires",
+        "https://www.concours-territorial.fr/Faq.aspx"
+      ],
+      "confidence": "haute",
+      "notes": "Pas d’école : le lauréat est inscrit sur une liste d’aptitude nationale (valable deux ans, renouvelable jusqu’à quatre ans) et doit être recruté par une collectivité, qui le nomme stagiaire pour un an. La seule formation obligatoire est la formation d’intégration du CNFPT de 10 jours pour la catégorie A (deux périodes de 5 jours), à suivre dans l’année qui suit la nomination et indispensable à la titularisation : trop courte pour être comptée comme une école ou en mois, d’où school et trainingMonths à null."
+    },
+    {
+      "id": "T-027",
+      "school": null,
+      "trainingMonths": null,
+      "paidTraining": "Oui, rémunéré en tant qu’ingénieur stagiaire dès le recrutement par une collectivité (pas d’école ; formation d’intégration de 10 jours au CNFPT pendant l’année de stage)",
+      "sources": [
+        "https://www.cnfpt.fr/sites/default/files/15308-plaq_fia_20-v7.pdf",
+        "https://www.maisondescommunes85.fr/emploi/formation/a-formations-statutaires-obligatoires",
+        "https://www.concours-territorial.fr/Faq.aspx"
+      ],
+      "confidence": "haute",
+      "notes": "Pas d’école : liste d’aptitude nationale, recherche de poste, puis nomination comme stagiaire pour un an par la collectivité. Seule formation obligatoire : la formation d’intégration du CNFPT de 10 jours pour la catégorie A, dans l’année qui suit la nomination, condition de la titularisation ; elle n’est pas comptée en mois. Les ingénieurs en chef (A+) suivent eux une formation à l’INET, ce qui ne concerne pas ce concours."
+    },
+    {
+      "id": "T-028",
+      "school": null,
+      "trainingMonths": null,
+      "sources": [
+        "https://www.cnfpt.fr/sites/default/files/15308-plaq_fia_20-v7.pdf",
+        "https://www.maisondescommunes85.fr/emploi/formation/a-formations-statutaires-obligatoires",
+        "https://www.concours-territorial.fr/Faq.aspx"
+      ],
+      "confidence": "haute",
+      "notes": "Pas d’école : liste d’aptitude nationale, recrutement par une collectivité, puis un an de stage payé. Seule formation obligatoire : la formation d’intégration du CNFPT de 10 jours (catégorie A), dans l’année qui suit la nomination et nécessaire à la titularisation, trop courte pour être comptée en mois."
+    },
+    {
+      "id": "T-029",
+      "school": null,
+      "trainingMonths": null,
+      "paidTraining": "Oui, rémunéré en tant que bibliothécaire stagiaire dès le recrutement par une collectivité (pas d’école ; formation d’intégration de 10 jours au CNFPT pendant l’année de stage)",
+      "sources": [
+        "https://www.cnfpt.fr/sites/default/files/15308-plaq_fia_20-v7.pdf",
+        "https://www.maisondescommunes85.fr/emploi/formation/a-formations-statutaires-obligatoires",
+        "https://www.concours-territorial.fr/Faq.aspx"
+      ],
+      "confidence": "haute",
+      "notes": "Pas d’école : contrairement au bibliothécaire d’État (formation à l’Enssib), le bibliothécaire territorial est inscrit sur liste d’aptitude, recruté par une collectivité et nommé stagiaire pour un an. Seule formation obligatoire : la formation d’intégration du CNFPT de 10 jours (catégorie A), dans l’année qui suit la nomination, condition de la titularisation."
+    },
+    {
+      "id": "T-030",
+      "school": null,
+      "trainingMonths": null,
+      "paidTraining": "Oui, rémunéré en tant qu’assistant socio-éducatif stagiaire dès le recrutement par une collectivité (pas d’école ; formation d’intégration de 10 jours au CNFPT pendant l’année de stage)",
+      "sources": [
+        "https://www.cnfpt.fr/sites/default/files/15308-plaq_fia_20-v7.pdf",
+        "https://www.maisondescommunes85.fr/emploi/formation/a-formations-statutaires-obligatoires",
+        "https://www.concours-territorial.fr/Faq.aspx"
+      ],
+      "confidence": "haute",
+      "notes": "Pas d’école après le concours : le diplôme d’État du travail social est obtenu avant. Le lauréat est inscrit sur liste d’aptitude, recruté par une collectivité et nommé stagiaire pour un an. Seule formation obligatoire : la formation d’intégration du CNFPT de 10 jours (catégorie A, durée identique en B), dans l’année qui suit la nomination."
+    },
+    {
+      "id": "T-031",
+      "school": null,
+      "trainingMonths": null,
+      "sources": [
+        "https://www.cnfpt.fr/sites/default/files/15308-plaq_fia_20-v7.pdf",
+        "https://www.maisondescommunes85.fr/emploi/formation/a-formations-statutaires-obligatoires",
+        "https://www.concours-territorial.fr/Faq.aspx"
+      ],
+      "confidence": "haute",
+      "notes": "Pas d’école après le concours : le diplôme d’État d’éducateur de jeunes enfants (trois ans) est obtenu avant. Le lauréat est recruté par une collectivité et nommé stagiaire pour un an ; seule formation obligatoire, la formation d’intégration du CNFPT de 10 jours (catégorie A), dans l’année qui suit la nomination. Remarque : la valeur existante paidTraining « Non » signifie seulement qu’il n’y a pas de formation en école ; le stagiaire est bien payé dès son recrutement."
+    },
+    {
+      "id": "T-033",
+      "school": null,
+      "trainingMonths": null,
+      "sources": [
+        "https://www.cnfpt.fr/sites/default/files/plaquette_fib.pdf",
+        "https://www.maisondescommunes85.fr/emploi/formation/a-formations-statutaires-obligatoires",
+        "https://www.concours-territorial.fr/Faq.aspx"
+      ],
+      "confidence": "haute",
+      "notes": "Pas d’école : liste d’aptitude nationale, recrutement par une collectivité, puis un an de stage payé. Seule formation obligatoire : la formation d’intégration du CNFPT de 10 jours pour la catégorie B (proposée aussi en classe virtuelle en 20 demi-journées), dans l’année qui suit la nomination et nécessaire à la titularisation."
+    },
+    {
+      "id": "T-034",
+      "school": null,
+      "trainingMonths": null,
+      "paidTraining": "Oui, rémunéré en tant que rédacteur principal stagiaire dès le recrutement par une collectivité (pas d’école ; formation d’intégration de 10 jours au CNFPT pendant l’année de stage)",
+      "sources": [
+        "https://www.cnfpt.fr/sites/default/files/plaquette_fib.pdf",
+        "https://www.maisondescommunes85.fr/emploi/formation/a-formations-statutaires-obligatoires",
+        "https://www.concours-territorial.fr/Faq.aspx"
+      ],
+      "confidence": "haute",
+      "notes": "Pas d’école : liste d’aptitude nationale, recrutement par une collectivité, puis un an de stage payé. Seule formation obligatoire : la formation d’intégration du CNFPT de 10 jours (catégorie B), dans l’année qui suit la nomination, condition de la titularisation."
+    },
+    {
+      "id": "T-035",
+      "school": null,
+      "trainingMonths": null,
+      "paidTraining": "Oui, rémunéré en tant que technicien stagiaire dès le recrutement par une collectivité (pas d’école ; formation d’intégration de 10 jours au CNFPT pendant l’année de stage)",
+      "sources": [
+        "https://www.cnfpt.fr/sites/default/files/plaquette_fib.pdf",
+        "https://www.maisondescommunes85.fr/emploi/formation/a-formations-statutaires-obligatoires",
+        "https://www.concours-territorial.fr/Faq.aspx"
+      ],
+      "confidence": "haute",
+      "notes": "Pas d’école : liste d’aptitude nationale, recrutement par une collectivité, puis un an de stage payé. Seule formation obligatoire : la formation d’intégration du CNFPT de 10 jours (catégorie B), dans l’année qui suit la nomination."
+    },
+    {
+      "id": "T-036",
+      "school": null,
+      "trainingMonths": null,
+      "paidTraining": "Oui, rémunéré en tant qu’animateur stagiaire dès le recrutement par une collectivité (pas d’école ; formation d’intégration de 10 jours au CNFPT pendant l’année de stage)",
+      "sources": [
+        "https://www.cnfpt.fr/sites/default/files/plaquette_fib.pdf",
+        "https://www.maisondescommunes85.fr/emploi/formation/a-formations-statutaires-obligatoires",
+        "https://www.concours-territorial.fr/Faq.aspx"
+      ],
+      "confidence": "haute",
+      "notes": "Pas d’école : liste d’aptitude nationale, recrutement par une collectivité, puis un an de stage payé. Seule formation obligatoire : la formation d’intégration du CNFPT de 10 jours (catégorie B), dans l’année qui suit la nomination."
+    },
+    {
+      "id": "T-038",
+      "school": null,
+      "trainingMonths": null,
+      "sources": [
+        "https://www.cnfpt.fr/sites/default/files/plaquette_fib.pdf",
+        "https://www.maisondescommunes85.fr/emploi/formation/a-formations-statutaires-obligatoires",
+        "https://www.concours-territorial.fr/Faq.aspx"
+      ],
+      "confidence": "haute",
+      "notes": "Pas d’école : liste d’aptitude nationale, recrutement par une collectivité, puis un an de stage. Seule formation obligatoire : la formation d’intégration du CNFPT de 10 jours (catégorie B), dans l’année qui suit la nomination. La valeur existante paidTraining « Non » signifie seulement l’absence d’école ; le stagiaire est payé dès son recrutement."
+    },
+    {
+      "id": "T-039",
+      "school": null,
+      "trainingMonths": null,
+      "paidTraining": "Oui, rémunéré en tant qu’éducateur des activités physiques et sportives stagiaire dès le recrutement par une collectivité (pas d’école ; formation d’intégration de 10 jours au CNFPT pendant l’année de stage)",
+      "sources": [
+        "https://www.cnfpt.fr/sites/default/files/plaquette_fib.pdf",
+        "https://www.maisondescommunes85.fr/emploi/formation/a-formations-statutaires-obligatoires",
+        "https://www.concours-territorial.fr/Faq.aspx"
+      ],
+      "confidence": "haute",
+      "notes": "Pas d’école : le diplôme sportif est obtenu avant le concours ; le lauréat est recruté par une collectivité et nommé stagiaire pour un an. Seule formation obligatoire : la formation d’intégration du CNFPT de 10 jours (catégorie B), dans l’année qui suit la nomination."
+    },
+    {
+      "id": "T-040",
+      "school": null,
+      "trainingMonths": null,
+      "paidTraining": "Oui, rémunéré en tant qu’adjoint administratif principal stagiaire dès le recrutement par une collectivité (pas d’école ; formation d’intégration de 5 jours au CNFPT pendant l’année de stage)",
+      "sources": [
+        "https://www.cnfpt.fr/sites/default/files/document/1706262260/plaquette-fic-2024.pdf",
+        "https://www.maisondescommunes85.fr/emploi/formation/a-formations-statutaires-obligatoires",
+        "https://www.concours-territorial.fr/Faq.aspx"
+      ],
+      "confidence": "haute",
+      "notes": "Pas d’école : liste d’aptitude nationale, recrutement par une collectivité, puis un an de stage payé. Seule formation obligatoire : la formation d’intégration du CNFPT de 5 jours pour la catégorie C, dans l’année qui suit la nomination et nécessaire à la titularisation."
+    },
+    {
+      "id": "T-041",
+      "school": null,
+      "trainingMonths": null,
+      "sources": [
+        "https://www.cnfpt.fr/sites/default/files/document/1706262260/plaquette-fic-2024.pdf",
+        "https://www.maisondescommunes85.fr/emploi/formation/a-formations-statutaires-obligatoires",
+        "https://www.concours-territorial.fr/Faq.aspx"
+      ],
+      "confidence": "haute",
+      "notes": "Pas d’école : liste d’aptitude nationale, recrutement par une collectivité, puis un an de stage. Seule formation obligatoire : la formation d’intégration du CNFPT de 5 jours (catégorie C), dans l’année qui suit la nomination. La valeur existante paidTraining « Non » signifie seulement l’absence d’école ; le stagiaire est payé dès son recrutement."
+    },
+    {
+      "id": "T-042",
+      "school": null,
+      "trainingMonths": null,
+      "sources": [
+        "https://www.cnfpt.fr/sites/default/files/document/1706262260/plaquette-fic-2024.pdf",
+        "https://www.maisondescommunes85.fr/emploi/formation/a-formations-statutaires-obligatoires",
+        "https://www.concours-territorial.fr/Faq.aspx"
+      ],
+      "confidence": "haute",
+      "notes": "Pas d’école : le CAP accompagnant éducatif petite enfance est obtenu avant ; le lauréat est recruté par une commune et nommé stagiaire pour un an. Seule formation obligatoire : la formation d’intégration du CNFPT de 5 jours (catégorie C), dans l’année qui suit la nomination."
+    },
+    {
+      "id": "T-043",
+      "school": null,
+      "trainingMonths": null,
+      "paidTraining": "Oui, rémunéré en tant qu’agent de maîtrise stagiaire dès le recrutement par une collectivité (pas d’école ; formation d’intégration de 5 jours au CNFPT pendant l’année de stage)",
+      "sources": [
+        "https://www.cnfpt.fr/sites/default/files/document/1706262260/plaquette-fic-2024.pdf",
+        "https://www.maisondescommunes85.fr/emploi/formation/a-formations-statutaires-obligatoires",
+        "https://www.concours-territorial.fr/Faq.aspx"
+      ],
+      "confidence": "haute",
+      "notes": "Pas d’école : liste d’aptitude nationale, recrutement par une collectivité, puis un an de stage payé. Seule formation obligatoire : la formation d’intégration du CNFPT de 5 jours (catégorie C), dans l’année qui suit la nomination."
+    },
+    {
+      "id": "T-045",
+      "school": null,
+      "trainingMonths": null,
+      "sources": [
+        "https://www.cnfpt.fr/sites/default/files/document/1706262260/plaquette-fic-2024.pdf",
+        "https://www.maisondescommunes85.fr/emploi/formation/a-formations-statutaires-obligatoires",
+        "https://www.concours-territorial.fr/Faq.aspx"
+      ],
+      "confidence": "haute",
+      "notes": "Pas d’école : liste d’aptitude nationale, recrutement par une collectivité, puis un an de stage payé. Seule formation obligatoire : la formation d’intégration du CNFPT de 5 jours (catégorie C), dans l’année qui suit la nomination."
+    },
+    {
+      "id": "T-046",
+      "school": null,
+      "trainingMonths": null,
+      "paidTraining": "Oui, rémunéré en tant qu’adjoint du patrimoine principal stagiaire dès le recrutement par une collectivité (pas d’école ; formation d’intégration de 5 jours au CNFPT pendant l’année de stage)",
+      "sources": [
+        "https://www.cnfpt.fr/sites/default/files/document/1706262260/plaquette-fic-2024.pdf",
+        "https://www.maisondescommunes85.fr/emploi/formation/a-formations-statutaires-obligatoires",
+        "https://www.concours-territorial.fr/Faq.aspx"
+      ],
+      "confidence": "haute",
+      "notes": "Pas d’école : liste d’aptitude nationale, recrutement par une collectivité, puis un an de stage payé. Seule formation obligatoire : la formation d’intégration du CNFPT de 5 jours (catégorie C), dans l’année qui suit la nomination. La description existante mentionne une formation d’intégration au CNFPT sans en donner la durée : elle est de 5 jours en catégorie C."
+    },
+    {
+      "id": "H-051",
+      "trainingMonths": null,
+      "sources": [
+        "https://concours-fph.ars.sante.fr/home?keywords=infirmier"
+      ],
+      "confidence": "moyenne",
+      "notes": "Aucune formation après le recrutement : le lauréat du concours sur titres organisé par l’établissement est nommé infirmier stagiaire en poste, payé, pendant un an. La formation en IFSI décrite dans school (trois ans, soit 36 mois, non rémunérée) se fait avant le concours ; elle n’est pas reprise dans trainingMonths, qui doit décrire la formation suivie après le concours. Si l’application veut afficher la durée des études préalables, la valeur serait 36, avec paidTraining « Non » déjà cohérent."
+    },
+    {
+      "id": "H-052",
+      "school": null,
+      "trainingMonths": null,
+      "sources": [
+        "https://concours-fph.ars.sante.fr/home?keywords=psychologue"
+      ],
+      "confidence": "moyenne",
+      "notes": "Pas d’école : le master de psychologie est obtenu avant ; le lauréat du concours sur titres est nommé psychologue stagiaire directement dans l’établissement qui recrute (neuf avis en ligne le 22 octobre 2026 sur le portail officiel), puis titularisé. Aucune formation statutaire après le concours n’a été trouvée pour ce corps."
+    },
+    {
+      "id": "H-053",
+      "school": null,
+      "trainingMonths": null,
+      "paidTraining": "Oui, rémunéré en tant que cadre de santé stagiaire dès la prise de poste (pas d’école après le concours ; le diplôme de cadre de santé est préparé avant, en IFCS)",
+      "sources": [
+        "https://concours-fph.ars.sante.fr/consulter/concours/21256",
+        "https://concours-fph.ars.sante.fr/home?keywords=cadre+de+sant%C3%A9"
+      ],
+      "confidence": "moyenne",
+      "notes": "Pas d’école après le concours : celui-ci est réservé aux titulaires du diplôme de cadre de santé (avis de l’EHPAD de Brantôme publié le 19 octobre 2026 : concours sur titres interne ouvert aux fonctionnaires hospitaliers titulaires du diplôme de cadre de santé et comptant au moins cinq ans de services). La formation en institut de formation des cadres de santé (environ dix mois selon la description existante, non revérifiée) a lieu avant le concours, souvent financée par l’employeur ; elle n’est pas comptée dans trainingMonths."
+    },
+    {
+      "id": "H-054",
+      "school": null,
+      "trainingMonths": null,
+      "sources": [
+        "https://concours-fph.ars.sante.fr/home?keywords=adjoint+des+cadres",
+        "https://affairesjuridiques.aphp.fr/textes/arrete-du-24-octobre-2014-fixant-lorganisation-et-le-contenu-de-la-formation-dadaptation-a-lemploi-des-membres-du-corps-des-adjoints-des-cadres-hospitaliers/"
+      ],
+      "confidence": "moyenne",
+      "notes": "Pas d’école : le lauréat est recruté directement par l’établissement et fait un an de stage payé. Il suit une formation d’adaptation à l’emploi (FAE) obligatoire, fixée par l’arrêté du 24 octobre 2014, applicable à tous les agents nommés dans le corps après concours ou liste d’aptitude ; elle se fait pendant l’emploi et sa durée actuelle n’a pas pu être relue (site juridique de l’AP-HP injoignable, Légifrance bloqué ; titre et champ de l’arrêté lus par extraits de recherche). L’ancien arrêté du 1er octobre 1991, abrogé au 1er janvier 2015, prévoyait trois mois ; ce chiffre n’est pas repris."
+    },
+    {
+      "id": "H-055",
+      "school": null,
+      "trainingMonths": null,
+      "paidTraining": "Oui, rémunéré en tant que fonctionnaire stagiaire dès la prise de poste à l’hôpital (pas d’école ; formation d’adaptation à l’emploi suivie pendant le stage)",
+      "sources": [
+        "https://concours-fph.ars.sante.fr/home?keywords=assistant+m%C3%A9dico-administratif",
+        "https://affairesjuridiques.aphp.fr/textes/arrete-du-24-octobre-2014-fixant-lorganisation-et-le-contenu-de-la-formation-dadaptation-a-lemploi-des-assistants-medico-administratifs-de-la-branche-secretariat-medical-relevant-de-la-fonction/"
+      ],
+      "confidence": "moyenne",
+      "notes": "Pas d’école : chaque hôpital recrute et nomme le lauréat stagiaire pour un an (17 avis en ligne sur le portail officiel le 22 octobre 2026). Une formation d’adaptation à l’emploi est prévue par l’arrêté du 24 octobre 2014 pour la branche secrétariat médical et par un arrêté du 4 juin 2013 pour la branche assistance de régulation médicale ; textes connus seulement par leurs titres et extraits de recherche (site juridique de l’AP-HP injoignable, Légifrance bloqué), durée non trouvée. La formation d’assistant de régulation médicale exigée pour cette branche se fait avant le concours."
+    },
+    {
+      "id": "H-056",
+      "school": null,
+      "trainingMonths": null,
+      "paidTraining": "Oui, rémunéré en tant que technicien supérieur hospitalier stagiaire dès la prise de poste (pas d’école ; formation d’adaptation à l’emploi suivie pendant le stage)",
+      "sources": [
+        "https://concours-fph.ars.sante.fr/home?keywords=technicien+sup%C3%A9rieur",
+        "https://affairesjuridiques.aphp.fr/textes/arrete-du-21-aout-2013-fixant-lorganisation-et-le-contenu-de-la-formation-dadaptation-a-lemploi-des-membres-du-corps-des-techniciens-et-techniciens-superieurs-hospitaliers/"
+      ],
+      "confidence": "moyenne",
+      "notes": "Pas d’école : chaque hôpital recrute et nomme le lauréat stagiaire pour un an (21 avis en ligne sur le portail officiel le 22 octobre 2026). L’arrêté du 21 août 2013 organise une formation d’adaptation à l’emploi des techniciens et techniciens supérieurs hospitaliers en trois modules (cadre d’exercice en établissement de santé, management et communication, connaissances techniques), suivie pendant l’emploi ; durée non relue (texte lu par extraits de recherche seulement)."
+    },
+    {
+      "id": "H-057",
+      "trainingMonths": null,
+      "sources": [
+        "https://concours-fph.ars.sante.fr/home?keywords=aide-soignant"
+      ],
+      "confidence": "moyenne",
+      "notes": "Aucune formation après le recrutement : le lauréat du concours sur titres est nommé aide-soignant stagiaire en poste, payé, pendant un an. La formation en IFAS décrite dans school (environ un an, selon la fiche existante) se fait avant le concours ; elle n’est pas reprise dans trainingMonths, qui décrit la formation suivie après le concours."
+    },
+    {
+      "id": "H-058",
+      "trainingMonths": null,
+      "sources": [
+        "https://concours-fph.ars.sante.fr/home?corpsIds=35"
+      ],
+      "confidence": "moyenne",
+      "notes": "Aucune formation après le recrutement : le lauréat est nommé stagiaire en poste et payé (le portail officiel listait 45 avis du corps « aide-soignant et auxiliaire de puériculture » le 22 octobre 2026). La formation au diplôme d’État en IFAP (11 mois selon la fiche existante) se fait avant le concours et n’est pas reprise dans trainingMonths."
+    },
+    {
+      "id": "H-059",
+      "school": null,
+      "trainingMonths": null,
+      "paidTraining": "Oui, rémunéré en tant que fonctionnaire stagiaire dès la prise de poste à l’hôpital (pas d’école ; année de stage avant titularisation)",
+      "sources": [
+        "https://concours-fph.ars.sante.fr/home?keywords=adjoint+administratif"
+      ],
+      "confidence": "moyenne",
+      "notes": "Pas d’école, ni pour le recrutement sans concours du premier grade ni pour le concours d’adjoint administratif principal de 2e classe : l’agent est recruté par l’établissement (16 avis en ligne sur le portail officiel le 22 octobre 2026) et formé sur son poste pendant un an de stage. Aucune formation statutaire d’adaptation à l’emploi n’a été trouvée pour ce corps."
+    },
+    {
+      "id": "H-060",
+      "school": null,
+      "trainingMonths": null,
+      "sources": [
+        "https://concours-fph.ars.sante.fr/home?keywords=agent+des+services+hospitaliers"
+      ],
+      "confidence": "moyenne",
+      "notes": "Pas d’école : recrutement sans concours par chaque établissement (39 avis en ligne sur le portail officiel le 22 octobre 2026), formation sur place pendant l’année de stage payée. Aucune formation statutaire n’a été trouvée pour ce corps."
+    },
+    {
+      "id": "H-061",
+      "school": null,
+      "trainingMonths": null,
+      "paidTraining": "Oui, rémunéré en tant qu’ouvrier principal stagiaire dès la prise de poste dans l’établissement (pas d’école ; année de stage avant titularisation)",
+      "sources": [
+        "https://concours-fph.ars.sante.fr/home?keywords=ouvrier+principal"
+      ],
+      "confidence": "moyenne",
+      "notes": "Pas d’école : chaque établissement organise ses concours par spécialité (31 avis en ligne sur le portail officiel le 22 octobre 2026), puis nomme le lauréat stagiaire pour un an. Aucune formation statutaire d’adaptation à l’emploi n’a été trouvée pour les ouvriers principaux."
+    },
+    {
+      "id": "É-070",
+      "trainingMonths": null,
+      "sources": [
+        "https://questions.assemblee-nationale.fr/dyn/15/questions/QANR5L15QE34519.pdf",
+        "https://www.onisep.fr/formation/les-principaux-domaines-de-formation/les-ecoles-de-police"
+      ],
+      "confidence": "faible",
+      "notes": "Durée actuelle non établie. Réponse ministérielle publiée au JO du 2 mars 2021 : les techniciens de police technique et scientifique suivent un tronc commun de 8 semaines à l’école nationale de police de Nîmes (dont 2 semaines de découverte en services opérationnels), puis des modules variables selon l’affectation, dispositif alors « en cours de refonte ». Onisep : plusieurs semaines à l’ENP de Nîmes, un stage d’immersion et plusieurs modules au service national de police scientifique d’Écully. Depuis, l’arrêté du 20 juin 2022 (formation d’adaptation au premier emploi des techniciens et techniciens principaux de PTS, modifié en 2025) fixe la formation, mais son texte n’a pas pu être lu (Légifrance et police-nationale.interieur.gouv.fr bloqués) et les extraits trouvés se contredisent (socle de 10 semaines plus 2 semaines d’immersion, ou 6 semaines). Pour le champ school, Onisep permet de préciser « École nationale de police de Nîmes, puis modules à l’École nationale de police scientifique d’Écully »."
+    },
+    {
+      "id": "T-076",
+      "school": null,
+      "trainingMonths": null,
+      "sources": [
+        "https://www.cnfpt.fr/sites/default/files/15308-plaq_fia_20-v7.pdf",
+        "https://www.maisondescommunes85.fr/emploi/formation/a-formations-statutaires-obligatoires",
+        "https://www.concours-territorial.fr/Faq.aspx"
+      ],
+      "confidence": "haute",
+      "notes": "Pas d’école, à la différence des conservateurs du patrimoine (INP) : liste d’aptitude nationale, recrutement par une collectivité, puis un an de stage. Seule formation obligatoire : la formation d’intégration du CNFPT de 10 jours (catégorie A), dans l’année qui suit la nomination, condition de la titularisation. La valeur existante paidTraining « Non » signifie seulement l’absence d’école ; le stagiaire est payé dès son recrutement."
+    },
+    {
+      "id": "É-106",
+      "trainingMonths": null,
+      "paidTraining": "Oui, rémunéré : élève de l’École polytechnique sous statut militaire, puis officier ingénieur de l’armement pendant la formation complémentaire (montant non publié)",
+      "sources": [
+        "https://www.onisep.fr/formation/les-principaux-domaines-de-formation/les-ecoles-de-la-defense/l-armement",
+        "https://www.defense.gouv.fr/cnd/nous-rejoindre/nos-statuts-au-commissariat-au-numerique-defense/ingenieur-larmement-du-numerique-du-ministere",
+        "https://www.defense.gouv.fr/dga/nous-rejoindre/profil-ingenieur"
+      ],
+      "confidence": "moyenne",
+      "notes": "Onisep : les formations de l’armement (École polytechnique, ENSTA, ISAE-Supaéro) sont sans frais d’inscription et les élèves sont rémunérés ; Polytechnique dure 4 ans. Le Commissariat au numérique de défense précise que les polytechniciens qui choisissent le corps obtiennent un grade d’officier ingénieur à statut militaire puis effectuent une formation complémentaire au sein du ministère des Armées. trainingMonths laissé à null : la durée de cette formation complémentaire varie selon le parcours (spécialisation de 2 à 4 semestres à l’ENSTA Paris avec stages, ou formation par la recherche, d’après des extraits de recherche, le site de l’ENSTA étant inaccessible) et n’est publiée sur aucune page officielle lisible ; compter les 48 mois de Polytechnique serait trompeur pour les lauréats du concours sur titres."
+    },
+    {
+      "id": "É-107",
+      "school": null,
+      "trainingMonths": null,
+      "paidTraining": "Oui, rémunéré dès la prise de poste en tant qu’ingénieur civil de la défense (pas d’école ; formation initiale à la prise de poste au centre de formation de la défense, pendant le service)",
+      "sources": [
+        "https://www.defense.gouv.fr/dga/nous-rejoindre/profil-ingenieur"
+      ],
+      "confidence": "moyenne",
+      "notes": "Pas d’école : le concours sur dossier et entretien mène à une prise de poste directe (DGA ou autre direction du ministère). L’arrêté du 19 novembre 2020 relatif à la formation initiale à la prise de poste des ingénieurs civils de la défense (NOR ARMH2030635A, JO du 26 novembre 2020) prévoit une formation initiale commencée dans les douze mois suivant la nomination, composée d’un tronc commun et de modules complémentaires selon le parcours, définie par le centre de formation de la défense, pendant laquelle l’agent est libéré de son service et placé en mission ; il ne fixe aucune durée. Texte lu dans le fac-similé du JO reproduit sur le site d’une fédération syndicale (fnte.cgt.fr), Légifrance étant bloqué."
+    },
+    {
+      "id": "É-108",
+      "paidTraining": "Oui, rémunéré en tant qu’élève officier militaire, nommé aspirant du corps des administrateurs des affaires maritimes dès l’entrée à l’école (montant non publié)",
+      "sources": [
+        "https://espmer.fr/entrez-dans-ladministration-de-la-mer/les-concours-dentree",
+        "https://espmer.fr/entrez-dans-ladministration-de-la-mer/les-parcours-de-formation-des-aam",
+        "https://www.bulletin-officiel.developpement-durable.gouv.fr/documents/Bulletinofficiel-0027252/met_20130023_0100_0002.pdf",
+        "https://recrutement.ecologie.gouv.fr/concours/eleve-administrateur-trice-affaires-maritimes-2e-classe-article-41-aam-concours-externe"
+      ],
+      "confidence": "moyenne",
+      "notes": "L’École du service public de la mer (ESPMER, Le Havre) indique que le concours externe et le concours interne « au grade d’aspirant » mènent à un parcours de 2 ans, avec formation militaire à l’École navale. Un arrêté du 4 novembre 2013 (Bulletin officiel du ministère) nomme les élèves administrateurs admis au concours « aspirants du corps des administrateurs des affaires maritimes », en visant le décret sur les élèves militaires des écoles d’officiers de carrière : ils sont donc militaires et payés pendant la scolarité ; aucune page officielle ne publie le montant. À signaler : l’école s’appelle désormais École du service public de la mer (ESPMER), qui comprend l’École d’administration des affaires maritimes ; le champ school (« au sein de l’ENSAM ») mériterait d’être actualisé."
+    },
+    {
+      "id": "H-109",
+      "school": null,
+      "trainingMonths": null,
+      "paidTraining": "Oui, rémunéré en tant qu’orthoptiste stagiaire dès la prise de poste dans l’établissement (pas d’école ; année de stage avant titularisation)",
+      "sources": [
+        "https://concours-fph.ars.sante.fr/home?keywords=orthoptiste"
+      ],
+      "confidence": "moyenne",
+      "notes": "Pas d’école : le certificat de capacité d’orthoptiste est obtenu avant ; le lauréat du concours sur titres organisé par l’établissement est nommé stagiaire puis titularisé. Aucune formation statutaire après le concours n’a été trouvée. Aucun avis d’orthoptiste n’était en ligne sur le portail officiel le 22 octobre 2026 (0 résultat)."
+    },
+    {
+      "id": "H-110",
+      "school": null,
+      "trainingMonths": null,
+      "paidTraining": "Oui, rémunéré en tant que pédicure-podologue stagiaire dès la prise de poste dans l’établissement (pas d’école ; année de stage avant titularisation)",
+      "sources": [
+        "https://concours-fph.ars.sante.fr/home?keywords=podologue"
+      ],
+      "confidence": "moyenne",
+      "notes": "Pas d’école : le diplôme d’État de pédicure-podologue est obtenu avant ; le lauréat du concours sur titres est nommé stagiaire dans l’établissement puis titularisé. Aucune formation statutaire après le concours n’a été trouvée. Aucun avis n’était en ligne sur le portail officiel le 22 octobre 2026 (0 résultat)."
+    },
+    {
+      "id": "H-111",
+      "school": null,
+      "trainingMonths": null,
+      "paidTraining": "Oui, rémunéré en tant que praticien hospitalier pendant la période probatoire de douze mois (pas d’école)",
+      "sources": [
+        "https://www.cng.sante.fr/sites/default/files/media/2022-04/2022_02_28_DGOS%20RH5%202022%2058.pdf",
+        "https://www.cng.sante.fr/candidats/concours/internats/concours-medicaux/concours-medicaux-cnph-evc/concours-national-praticien-hospitalier-cnph"
+      ],
+      "confidence": "haute",
+      "notes": "Pas d’école : après inscription sur la liste d’aptitude du CNPH, le praticien est nommé sur un poste publié par le CNG et accomplit une période probatoire de douze mois d’exercice effectif, avec un entretien à six mois et un entretien final (instruction DGOS/RH5/2022/58 du 28 février 2022, publiée par le CNG). Pendant cette période, il est payé et peut percevoir l’indemnité d’engagement de service public exclusif. Il n’y a pas de formation organisée après le concours."
+    },
+    {
+      "id": "T-112",
+      "school": "École nationale supérieure des officiers de sapeurs-pompiers (ENSOSP), Aix-en-Provence : formation d’intégration des professionnels de santé, pendant l’année de stage",
+      "trainingMonths": 3,
+      "paidTraining": "Oui, rémunéré en tant que médecin ou pharmacien de sapeurs-pompiers professionnels stagiaire par le SDIS employeur pendant l’année de stage, qui comprend la formation d’intégration à l’ENSOSP",
+      "sources": [
+        "https://www.ensosp.fr/une-ecole-qui-forme/catalogue-des-formations/stage?id=24146&yeaId=20",
+        "https://www.ensosp.fr/une-ecole-qui-forme/la-formation-des-officiers-de-sapeurs-pompiers/les-formations-de-sante",
+        "https://www.cnfpt.fr/sites/default/files/15308-plaq_fia_20-v7.pdf"
+      ],
+      "confidence": "moyenne",
+      "notes": "Fiche ENSOSP « Formation d’intégration des professionnels de santé » (code F-SAN-FIPS) : réservée notamment aux lauréats du concours de médecin ou de pharmacien de SPP recrutés par un SDIS, d’une durée de 65 jours en formation hybride (présentiel à Aix-en-Provence et à distance) ; la session 2026 s’étalait du 3 mars au 8 octobre 2026. La page santé de l’ENSOSP précise qu’elle doit être réalisée pendant l’année de stage pour les lauréats du concours. trainingMonths = 3 correspond aux 65 jours de formation (environ 13 semaines), répartis sur environ sept mois ; le CNFPT exclut la filière pompiers de sa propre formation d’intégration. Montant de la rémunération non publié."
+    },
+    {
+      "id": "T-113",
+      "school": null,
+      "trainingMonths": null,
+      "paidTraining": "Oui, rémunéré en tant que médecin territorial stagiaire dès le recrutement par une collectivité (pas d’école ; formation d’intégration de 10 jours au CNFPT pendant l’année de stage)",
+      "sources": [
+        "https://www.cnfpt.fr/sites/default/files/15308-plaq_fia_20-v7.pdf",
+        "https://www.maisondescommunes85.fr/emploi/formation/a-formations-statutaires-obligatoires",
+        "https://www.concours-territorial.fr/Faq.aspx"
+      ],
+      "confidence": "moyenne",
+      "notes": "Pas d’école : le médecin, déjà diplômé, est inscrit sur liste d’aptitude, recruté par une collectivité et nommé stagiaire. Le CNFPT soumet à sa formation d’intégration de 10 jours tous les fonctionnaires de catégorie A nommés après concours, hors filières police et pompiers ; le statut particulier des médecins territoriaux n’a pas été relu pour confirmer l’absence de dispense, d’où une confiance moyenne."
+    },
+    {
+      "id": "É-119",
+      "school": null,
+      "trainingMonths": null,
+      "paidTraining": "Oui, rémunéré en tant qu’attaché stagiaire dès la nomination, à partir de novembre (pas d’école ; période de formation interne à la DGSE dont la durée n’est pas publiée)",
+      "sources": [
+        "https://www.dgse.gouv.fr/fr/le-recrutement/nous-rejoindre/les-concours/concours-categorie-a",
+        "https://www.dgse.gouv.fr/fr/le-recrutement/nous-rejoindre/questions-frequentes?field_thematique_target_id=16"
+      ],
+      "confidence": "moyenne",
+      "notes": "Aucune école n’est mentionnée : la DGSE annonce, après les études psychologique et de sécurité de juillet à octobre, la « nomination et prise de fonction » à compter de novembre, avec une première affectation à Paris ou en région parisienne et un salaire fixé selon la grille du corps. Un témoignage officiel d’un attaché parle d’« une période de formation » avant la première mission, sans durée ni lieu publiés : school et trainingMonths restent à null."
+    },
+    {
+      "id": "É-121",
+      "school": "Institut national de sécurité routière et de recherches (INSERR), Nevers",
+      "trainingMonths": 12,
+      "paidTraining": "Oui, rémunéré en tant que délégué stagiaire pendant l’année de formation",
+      "sources": [
+        "https://www.inserr.fr/agents-publics/delegue/"
+      ],
+      "confidence": "haute",
+      "notes": "Page de l’INSERR : les délégués stagiaires reçus sont en position de stagiaires pendant un an pour suivre leur formation, à l’INSERR à Nevers, qui alterne enseignements théoriques et pratiques et périodes de stage dans le département d’affectation et dans d’autres départements ; durée : « 1 an à compter de l’entrée en scolarité (nomination en qualité de DPCSR stagiaire) », avec formation au permis A2 pour ceux qui ne l’ont pas. L’affectation est connue avant l’entrée en formation. Montant non publié."
+    },
+    {
+      "id": "T-122",
+      "school": null,
+      "trainingMonths": null,
+      "paidTraining": "Oui, rémunéré en tant que professeur d’enseignement artistique stagiaire dès le recrutement par une collectivité (pas d’école ; formation d’intégration de 10 jours au CNFPT pendant l’année de stage)",
+      "sources": [
+        "https://www.cnfpt.fr/sites/default/files/15308-plaq_fia_20-v7.pdf",
+        "https://www.maisondescommunes85.fr/emploi/formation/a-formations-statutaires-obligatoires",
+        "https://www.concours-territorial.fr/Faq.aspx"
+      ],
+      "confidence": "haute",
+      "notes": "Pas d’école après le concours : le certificat d’aptitude (musique, danse, art dramatique) ou le diplôme d’arts plastiques est obtenu avant. Liste d’aptitude nationale, recrutement par une collectivité, puis un an de stage ; seule formation obligatoire, la formation d’intégration du CNFPT de 10 jours (catégorie A), dans l’année qui suit la nomination."
+    },
+    {
+      "id": "T-123",
+      "school": null,
+      "trainingMonths": null,
+      "paidTraining": "Oui, rémunéré en tant qu’assistant d’enseignement artistique principal stagiaire dès le recrutement par une collectivité (pas d’école ; formation d’intégration de 10 jours au CNFPT pendant l’année de stage)",
+      "sources": [
+        "https://www.cnfpt.fr/sites/default/files/plaquette_fib.pdf",
+        "https://www.maisondescommunes85.fr/emploi/formation/a-formations-statutaires-obligatoires",
+        "https://www.concours-territorial.fr/Faq.aspx"
+      ],
+      "confidence": "haute",
+      "notes": "Pas d’école après le concours : le diplôme d’État de professeur de musique, de danse ou de théâtre (ou le DUMI) est obtenu avant. Liste d’aptitude nationale, recrutement par une collectivité, puis un an de stage ; seule formation obligatoire, la formation d’intégration du CNFPT de 10 jours (catégorie B), dans l’année qui suit la nomination."
+    },
+    {
+      "id": "T-124",
+      "school": null,
+      "trainingMonths": null,
+      "paidTraining": "Oui, rémunéré en tant que directeur d’établissement d’enseignement artistique stagiaire dès le recrutement par une collectivité (pas d’école ; formation d’intégration de 10 jours au CNFPT pendant l’année de stage)",
+      "sources": [
+        "https://www.cnfpt.fr/sites/default/files/15308-plaq_fia_20-v7.pdf",
+        "https://www.maisondescommunes85.fr/emploi/formation/a-formations-statutaires-obligatoires",
+        "https://www.concours-territorial.fr/Faq.aspx"
+      ],
+      "confidence": "haute",
+      "notes": "Pas d’école après le concours : le certificat d’aptitude aux fonctions de directeur (ou l’expérience de professeur titulaire pour l’interne) est requis avant. Liste d’aptitude nationale, recrutement par une collectivité, puis stage ; seule formation obligatoire, la formation d’intégration du CNFPT de 10 jours (catégorie A), dans l’année qui suit la nomination."
+    },
+    {
+      "id": "É-125",
+      "school": null,
+      "sources": [
+        "https://sup.univ-lorraine.fr/dispositif-de-formation-maitre-de-conferences-stagiaires/"
+      ],
+      "confidence": "haute",
+      "notes": "Pas d’école : le maître de conférences stagiaire prend son poste dans l’université qui l’a recruté. Le décret du 9 mai 2017 et l’arrêté du 8 février 2018 lui imposent pendant l’année de stage une formation à la pédagogie, organisée par chaque université, avec une décharge de 32 heures d’enseignement (un sixième du service) la première année (Université de Lorraine) ; ce n’est pas une école, d’où school à null, la durée de 12 mois et la rémunération étant déjà renseignées."
+    },
+    {
+      "id": "É-126",
+      "school": null,
+      "trainingMonths": null,
+      "paidTraining": "Oui, rémunéré dès le recrutement en tant que sous-officier commissionné de la gendarmerie (contrat initial de 3 ans au grade de gendarme selon les avis consultés ; pas d’école annoncée)",
+      "sources": [
+        "https://www.gendarmerie.interieur.gouv.fr/recrutement/offres-d-emploi/violoniste",
+        "https://www.gendarmerie.interieur.gouv.fr/garde-republicaine/recrutement-et-formation/militaire/musicien-de-l-orchestre"
+      ],
+      "confidence": "faible",
+      "notes": "Les avis de recrutement de musiciens de l’orchestre de la Garde républicaine décrivent un recrutement direct sur poste comme sous-officier commissionné, avec un contrat initial de 3 ans au grade de gendarme (1er échelon en principe), dans la limite de 17 ans de services ; aucune école ni formation initiale n’y est mentionnée. Le site de la gendarmerie bloque les robots (Cloudflare) : ces informations n’ont été lues que par extraits du moteur de recherche. Une courte formation militaire d’intégration est possible mais n’a été trouvée sur aucune page officielle."
+    }
+  ]
+}
