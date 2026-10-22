@@ -332,6 +332,8 @@ const monthOnly = (iso, label) => !!iso && hasValue(label) && !MONTHS.test(label
 const slug = s => String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 const orgSlug = r => { const m = String(r.organizer || '').match(/\(([A-Z][A-Za-z0-9-]{1,9})\)/) || String(r.school || '').match(/\(([A-Z][A-Za-z0-9-]{1,9})/); return m ? slug(m[1]) : slug(r.organizer).slice(0, 30).replace(/-$/, ''); };
 const NOT_CONCOURS = /examens? professionnels?|tour extérieur|liste d.aptitude/i;
+/* Une date que la page officielle dit prévisionnelle reste un calendrier prévisionnel. */
+const TENTATIVE = /prévision|provisoire|à confirmer|indicati|sous réserve/i;
 const ALL_VOIES = /^toutes les voies/i;
 const baseCalendar = base.calendar.filter(x => !x.duplicateOf);
 const sameVoie = (a, b) => String(a || '').trim().toLowerCase() === String(b || '').trim().toLowerCase() || ALL_VOIES.test(a || '') || ALL_VOIES.test(b || '');
@@ -360,7 +362,7 @@ for (const r of research) {
     while (ids.has(id)) id = id.replace(/-\d+$/, '') + '-' + (++n);
     ids.add(id);
     const past = !future(s);
-    const provisional = !past && (!!s.provisional || r.confidence === 'faible' || !datesOf(s).length || [['open', 'openLabel'], ['close', 'closeLabel'], ['written', 'writtenLabel'], ['oral', 'oralLabel']].some(([d, l]) => monthOnly(s[d], s[l])));
+    const provisional = !past && (!!s.provisional || r.confidence === 'faible' || !datesOf(s).length || TENTATIVE.test([s.voie, s.openLabel, s.closeLabel, s.writtenLabel, s.oralLabel].join(' ')) || [['open', 'openLabel'], ['close', 'closeLabel'], ['written', 'writtenLabel'], ['oral', 'oralLabel']].some(([d, l]) => monthOnly(s[d], s[l])));
     calendar.push({
       id, name: c.name, rawName: c.name + ' · ' + voie + ' · session ' + year, cat: c.cat, fp: c.fp, voie, url: s.url || r.officialUrl,
       source: clean(r.organizer, r.ref) + ' ; recherche du 22 octobre 2026', checked: r._verified && r.checked ? r.checked : CHECKED,
