@@ -1,0 +1,225 @@
+[
+ {
+  "ref": "É-011",
+  "name": "Inspecteur - Inspectrice de l’action sanitaire et sociale",
+  "cat": "A",
+  "fp": "E",
+  "priorite_dates": true,
+  "officialUrl": "https://www.ehesp.fr/formation/formations-fonction-publique/preparation-aux-concours/classe-prepa-talents/",
+  "sessionLinks": [],
+  "annalesLinks": [],
+  "current": {
+   "voies": "Externe — selon concours",
+   "condition": "Diplôme, âge et autres conditions selon corps",
+   "epreuves": "Écrits, oraux et éventuelles épreuves physiques selon le concours ; liste fixée par l’arrêté d’ouverture",
+   "metiers": "Inspecteur de l’action sanitaire et sociale",
+   "domain": "Santé, soins, prévention",
+   "source": "https://www.ehesp.fr/formation/formations-fonction-publique/preparation-aux-concours/classe-prepa-talents/"
+  }
+ },
+ {
+  "ref": "T-029",
+  "name": "Bibliothécaire territorial - Bibliothécaire territoriale",
+  "cat": "A",
+  "fp": "T",
+  "priorite_dates": true,
+  "officialUrl": "https://www.concours-territorial.fr/",
+  "sessionLinks": [],
+  "annalesLinks": [],
+  "current": {
+   "voies": "Concours sur épreuves ou titres",
+   "condition": "Diplômes professionnels éventuellement réglementés",
+   "epreuves": "Épreuves selon la voie et la spécialité ; recrutement sur titres possible",
+   "metiers": "Bibliothécaire territorial",
+   "domain": "Culture, bibliothèque, patrimoine",
+   "source": "https://www.concours-territorial.fr/"
+  }
+ },
+ {
+  "ref": "T-039",
+  "name": "Éducateur - Éducatrice des activités physiques et sportives",
+  "cat": "B",
+  "fp": "T",
+  "priorite_dates": true,
+  "officialUrl": "https://www.concours-territorial.fr/",
+  "sessionLinks": [],
+  "annalesLinks": [],
+  "current": {
+   "voies": "Externe",
+   "condition": "Diplôme/qualifications selon concours",
+   "epreuves": "Épreuves variables selon spécialité et voie",
+   "metiers": "Éducateur territorial des activités physiques et sportives",
+   "domain": "Animation, sport, jeunesse",
+   "source": "https://www.concours-territorial.fr/"
+  }
+ },
+ {
+  "ref": "H-050",
+  "name": "Directeur - Directrice des soins",
+  "cat": "A",
+  "fp": "H",
+  "priorite_dates": true,
+  "officialUrl": "https://www.cng.sante.fr/candidats/concours/devenir-dh-d3s-ds/annales-rapports-jurys",
+  "sessionLinks": [],
+  "annalesLinks": [
+   [
+    "Annales (2021 à 2026)",
+    "https://www.cng.sante.fr/candidats/concours/devenir-dh-d3s-ds/annales-rapports-jurys"
+   ]
+  ],
+  "current": {
+   "voies": "Concours selon expérience",
+   "condition": "Profession et expérience requises ; pas une voie pour néobachelier",
+   "epreuves": "Épreuves d’admission et sélection professionnelles selon arrêté",
+   "metiers": "Directeur des soins",
+   "domain": "Santé, soins, prévention",
+   "source": "https://www.cng.sante.fr/candidats/concours/devenir-dh-d3s-ds/annales-rapports-jurys"
+  }
+ },
+ {
+  "ref": "É-006",
+  "name": "Professeur certifié - Professeure certifiée (CAPES)",
+  "cat": "A",
+  "fp": "E",
+  "priorite_dates": false,
+  "officialUrl": "https://www.education.gouv.fr/la-reforme-de-la-formation-initiale-des-professeurs-462747",
+  "sessionLinks": [],
+  "annalesLinks": [
+   [
+    "Annales (Selon discipline et voie; vérifier session)",
+    "https://www.devenirenseignant.gouv.fr/ressources"
+   ]
+  ],
+  "current": {
+   "voies": "Externe par discipline",
+   "condition": "Licence bac+3 pour nouvelle voie ; transitoire bac+5",
+   "epreuves": "Épreuves écrites et orales propres à chaque discipline",
+   "metiers": "Professeur certifié (discipline à sélectionner)",
+   "domain": "Enseignement, éducation",
+   "source": "https://www.education.gouv.fr/la-reforme-de-la-formation-initiale-des-professeurs-462747"
+  }
+ },
+ {
+  "ref": "É-014",
+  "name": "Secrétaire administratif - Secrétaire administrative",
+  "cat": "B",
+  "fp": "E",
+  "priorite_dates": false,
+  "officialUrl": "https://www.education.gouv.fr/concours-de-secretaire-administratif-de-classe-normale-5324",
+  "sessionLinks": [],
+  "annalesLinks": [
+   [
+    "Annales (2026, 2025, 2024)",
+    "https://www.education.gouv.fr/concours-de-secretaire-administratif-de-classe-normale-5324"
+   ]
+  ],
+  "current": {
+   "voies": "Externe",
+   "condition": "Baccalauréat ou équivalence selon corps",
+   "epreuves": "Épreuves écrites et orales définies par ministère organisateur",
+   "metiers": "Secrétaire administratif ; gestion administrative, finances, ressources humaines",
+   "domain": "Administration, droit, politiques publiques",
+   "source": "https://www.education.gouv.fr/concours-de-secretaire-administratif-de-classe-normale-5324"
+  }
+ },
+ {
+  "ref": "É-022",
+  "name": "Agent - Agente de constatation des douanes",
+  "cat": "C",
+  "fp": "E",
+  "priorite_dates": false,
+  "officialUrl": "https://www.douane.gouv.fr/recrutement",
+  "sessionLinks": [],
+  "annalesLinks": [],
+  "current": {
+   "voies": "Externe",
+   "condition": "Selon branche, grade, conditions médicales",
+   "epreuves": "Épreuves variables selon la branche : surveillance ou opérations commerciales",
+   "metiers": "Agent de constatation des douanes",
+   "domain": "Économie, finances, contrôle",
+   "source": "https://www.douane.gouv.fr/recrutement"
+  }
+ },
+ {
+  "ref": "T-034",
+  "name": "Rédacteur principal - Rédactrice principale de 2e classe",
+  "cat": "B",
+  "fp": "T",
+  "priorite_dates": false,
+  "officialUrl": "https://www.concours-territorial.fr/epreuves.aspx?id=236",
+  "sessionLinks": [
+   [
+    "Session 2025",
+    "https://www.concours-territorial.fr/epreuves.aspx?id=236"
+   ]
+  ],
+  "annalesLinks": [
+   [
+    "Annales (2025, 2023, 2021)",
+    "https://www.concours-territorial.fr/preparation.aspx?id=236"
+   ]
+  ],
+  "current": {
+   "voies": "Externe",
+   "condition": "Conditions particulières à vérifier",
+   "epreuves": "Questions droit public/finances ; rapport avec propositions ; entretien",
+   "metiers": "Rédacteur territorial principal de 2e classe",
+   "domain": "Administration, droit, politiques publiques",
+   "source": "https://www.concours-territorial.fr/epreuves.aspx?id=236"
+  }
+ },
+ {
+  "ref": "T-046",
+  "name": "Adjoint territorial du patrimoine principal - Adjointe territoriale du patrimoine principale de 2e classe",
+  "cat": "C",
+  "fp": "T",
+  "priorite_dates": false,
+  "officialUrl": "https://concours-territorial.fr/calendrier.aspx?annee=2026&type=concours",
+  "sessionLinks": [],
+  "annalesLinks": [],
+  "current": {
+   "voies": "Externe",
+   "condition": "Conditions/diplômes selon statut et avis",
+   "epreuves": "Épreuves propres à la spécialité et à la voie",
+   "metiers": "Adjoint territorial du patrimoine",
+   "domain": "Culture, bibliothèque, patrimoine",
+   "source": "https://concours-territorial.fr/calendrier.aspx?annee=2026&type=concours"
+  }
+ },
+ {
+  "ref": "H-055",
+  "name": "Assistant médico-administratif - Assistante médico-administrative (AMA)",
+  "cat": "B",
+  "fp": "H",
+  "priorite_dates": false,
+  "officialUrl": "https://concours.aphp.fr/informations-candidats/",
+  "sessionLinks": [],
+  "annalesLinks": [],
+  "current": {
+   "voies": "Concours selon établissement",
+   "condition": "Conditions statutaires et spécialité",
+   "epreuves": "Épreuves spécialité/entretien selon avis ; service de régulation spécifique",
+   "metiers": "Assistant médico-administratif",
+   "domain": "Administration, droit, politiques publiques",
+   "source": "https://concours.aphp.fr/informations-candidats/"
+  }
+ },
+ {
+  "ref": "H-061",
+  "name": "Personnel ouvrier hospitalier qualifié",
+  "cat": "C",
+  "fp": "H",
+  "priorite_dates": false,
+  "officialUrl": "https://concours.aphp.fr/informations-candidats/",
+  "sessionLinks": [],
+  "annalesLinks": [],
+  "current": {
+   "voies": "Recrutement selon grade / spécialité",
+   "condition": "Formation professionnelle liée au métier",
+   "epreuves": "Tests pratiques/entretien selon avis éventuel",
+   "metiers": "Personnel ouvrier hospitalier qualifié",
+   "domain": "Technique, urbanisme, infrastructures",
+   "source": "https://concours.aphp.fr/informations-candidats/"
+  }
+ }
+]

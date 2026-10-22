@@ -1,0 +1,124 @@
+[
+ {
+  "ref": "NEW-enm",
+  "hints": {
+   "name": "Magistrat - Magistrate (concours de l’École nationale de la magistrature)",
+   "school": "École nationale de la magistrature (ENM), Bordeaux",
+   "cat": "A+",
+   "fp": "E",
+   "questions": "Trois concours (1er étudiants, 2e fonctionnaires, 3e professionnels) ; formation d’auditeur de justice de 31 mois, rémunérée ; dates 2026 et 2027 ; nombre de postes.",
+   "sites": [
+    "https://www.enm.justice.fr",
+    "https://lajusticerecrute.fr"
+   ]
+  }
+ },
+ {
+  "ref": "NEW-dsgj",
+  "hints": {
+   "name": "Directeur - Directrice des services de greffe judiciaires",
+   "school": "École nationale des greffes (ENG), Dijon",
+   "cat": "A",
+   "fp": "E",
+   "questions": "Concours externe, interne, 3e ; formation à l’ENG (durée) ; dates 2026/2027.",
+   "sites": [
+    "https://www.eng.justice.fr",
+    "https://lajusticerecrute.fr"
+   ]
+  }
+ },
+ {
+  "ref": "NEW-cpip",
+  "hints": {
+   "name": "Conseiller pénitentiaire - Conseillère pénitentiaire d’insertion et de probation (CPIP)",
+   "school": "École nationale d’administration pénitentiaire (ENAP), Agen",
+   "cat": "A",
+   "fp": "E",
+   "questions": "Voies, formation ENAP (durée, statut d’élève rémunéré), dates 2026/2027, postes.",
+   "sites": [
+    "https://www.enap.justice.fr",
+    "https://lajusticerecrute.fr"
+   ]
+  }
+ },
+ {
+  "ref": "NEW-lieutenant-pen",
+  "hints": {
+   "name": "Lieutenant pénitentiaire - Lieutenante pénitentiaire (officier pénitentiaire)",
+   "school": "ENAP, Agen",
+   "cat": "B",
+   "fp": "E",
+   "questions": "Vérifier l’intitulé actuel du corps des officiers pénitentiaires et la catégorie ; voies ; dates.",
+   "sites": [
+    "https://lajusticerecrute.fr",
+    "https://www.enap.justice.fr"
+   ]
+  }
+ },
+ {
+  "ref": "NEW-educ-pjj",
+  "hints": {
+   "name": "Éducateur - Éducatrice de la protection judiciaire de la jeunesse",
+   "school": "École nationale de protection judiciaire de la jeunesse (ENPJJ), Roubaix",
+   "cat": "A",
+   "fp": "E",
+   "questions": "Catégorie A depuis 2019 ; voies ; formation (durée) ; dates 2026/2027.",
+   "sites": [
+    "https://www.enpjj.justice.fr",
+    "https://lajusticerecrute.fr"
+   ]
+  }
+ },
+ {
+  "ref": "NEW-dir-pjj",
+  "hints": {
+   "name": "Directeur - Directrice des services de la protection judiciaire de la jeunesse",
+   "school": "ENPJJ, Roubaix",
+   "cat": "A",
+   "fp": "E",
+   "questions": "Voies, conditions, dates.",
+   "sites": [
+    "https://lajusticerecrute.fr"
+   ]
+  }
+ },
+ {
+  "ref": "NEW-sog",
+  "hints": {
+   "name": "Sous-officier - Sous-officière de gendarmerie",
+   "school": "Écoles de gendarmerie (Montluçon, Chaumont, Châteauroux, Tulle, Dijon, Rochefort…)",
+   "cat": "B",
+   "fp": "E",
+   "questions": "Statut militaire ; conditions (âge, bac) ; sélection (épreuves) ; sessions 2026/2027 ; formation (durée).",
+   "sites": [
+    "https://www.gendarmerie.interieur.gouv.fr/recrutement"
+   ]
+  }
+ },
+ {
+  "ref": "NEW-eogn",
+  "hints": {
+   "name": "Officier - Officière de gendarmerie",
+   "school": "École des officiers de la gendarmerie nationale (EOGN), Melun",
+   "cat": "A",
+   "fp": "E",
+   "questions": "Concours universitaire (master), concours interne, voie officier sous contrat ; sessions 2026/2027.",
+   "sites": [
+    "https://www.gendarmerie.interieur.gouv.fr/recrutement"
+   ]
+  }
+ },
+ {
+  "ref": "NEW-pts",
+  "hints": {
+   "name": "Technicien - Technicienne de police technique et scientifique",
+   "school": "Police nationale (formation en école de police)",
+   "cat": "B",
+   "fp": "E",
+   "questions": "Corps des techniciens de PTS ; voies ; conditions ; sessions 2026/2027.",
+   "sites": [
+    "https://www.police-nationale.interieur.gouv.fr/nous-rejoindre"
+   ]
+  }
+ }
+]

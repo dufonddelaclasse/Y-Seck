@@ -1,0 +1,111 @@
+[
+ {
+  "ref": "NEW-inp",
+  "hints": {
+   "name": "Conservateur - Conservatrice du patrimoine (État)",
+   "school": "Institut national du patrimoine (INP), Paris",
+   "cat": "A",
+   "fp": "E",
+   "questions": "Spécialités (archéologie, archives, monuments historiques, musées, PSTN) ; voies ; formation INP 18 mois rémunérée ; sessions 2026/2027.",
+   "sites": [
+    "https://www.inp.fr/concours",
+    "https://www.culture.gouv.fr"
+   ]
+  }
+ },
+ {
+  "ref": "NEW-cons-terr-pat",
+  "hints": {
+   "name": "Conservateur territorial - Conservatrice territoriale du patrimoine",
+   "school": "INET (CNFPT) et INP",
+   "cat": "A",
+   "fp": "T",
+   "questions": "Concours organisé par le CNFPT ; sessions 2026/2027 ; formation.",
+   "sites": [
+    "https://www.cnfpt.fr",
+    "https://www.inp.fr/concours"
+   ]
+  }
+ },
+ {
+  "ref": "NEW-enssib",
+  "hints": {
+   "name": "Conservateur - Conservatrice des bibliothèques (État)",
+   "school": "École nationale supérieure des sciences de l’information et des bibliothèques (Enssib), Villeurbanne",
+   "cat": "A",
+   "fp": "E",
+   "questions": "Voies ; formation Enssib 18 mois ; sessions 2026/2027.",
+   "sites": [
+    "https://www.enssib.fr",
+    "https://www.enseignementsup-recherche.gouv.fr"
+   ]
+  }
+ },
+ {
+  "ref": "NEW-biblio-etat",
+  "hints": {
+   "name": "Bibliothécaire d’État",
+   "school": "Enssib",
+   "cat": "A",
+   "fp": "E",
+   "questions": "Concours de bibliothécaire (externe, interne) ; sessions 2026/2027.",
+   "sites": [
+    "https://www.enseignementsup-recherche.gouv.fr/fr/recrutements/bibliotheques"
+   ]
+  }
+ },
+ {
+  "ref": "NEW-cons-terr-bib",
+  "hints": {
+   "name": "Conservateur territorial - Conservatrice territoriale des bibliothèques",
+   "school": "INET et Enssib",
+   "cat": "A",
+   "fp": "T",
+   "questions": "Concours CNFPT ; sessions.",
+   "sites": [
+    "https://www.cnfpt.fr"
+   ]
+  }
+ },
+ {
+  "ref": "NEW-attache-conservation",
+  "hints": {
+   "name": "Attaché territorial - Attachée territoriale de conservation du patrimoine",
+   "school": "Centres de gestion (concours sur titres)",
+   "cat": "A",
+   "fp": "T",
+   "questions": "Spécialités ; voies ; sessions 2026/2027 (centres de gestion).",
+   "sites": [
+    "https://www.concours-territorial.fr"
+   ]
+  }
+ },
+ {
+  "ref": "NEW-ensai",
+  "hints": {
+   "name": "Attaché statisticien - Attachée statisticienne de l’INSEE",
+   "school": "École nationale de la statistique et de l’analyse de l’information (ENSAI), Bruz",
+   "cat": "A",
+   "fp": "E",
+   "questions": "Voies (externe sur épreuves, interne) ; formation ENSAI ; sessions 2026/2027 ; postes.",
+   "sites": [
+    "https://www.insee.fr/fr/information/1302182",
+    "https://ensai.fr"
+   ]
+  }
+ },
+ {
+  "ref": "NEW-ensae",
+  "hints": {
+   "name": "Administrateur - Administratrice de l’INSEE",
+   "school": "École nationale de la statistique et de l’administration économique (ENSAE), Palaiseau",
+   "cat": "A+",
+   "fp": "E",
+   "questions": "Voies ; formation ENSAE ; sessions 2026/2027.",
+   "sites": [
+    "https://www.insee.fr",
+    "https://www.ensae.fr"
+   ]
+  }
+ }
+]

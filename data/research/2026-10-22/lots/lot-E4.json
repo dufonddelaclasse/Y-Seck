@@ -1,0 +1,212 @@
+[
+ {
+  "ref": "É-021",
+  "name": "Adjoint administratif - Adjointe administrative du ministère de l’Intérieur",
+  "cat": "C",
+  "fp": "E",
+  "priorite_dates": true,
+  "officialUrl": "https://concours.aphp.fr/informations-candidats/",
+  "sessionLinks": [],
+  "annalesLinks": [],
+  "current": {
+   "voies": "Concours externe",
+   "condition": "Conditions propres au grade",
+   "epreuves": "Épreuves écrites et entretien selon avis organisateur",
+   "metiers": "Adjoint administratif de l’État",
+   "domain": "Transversal / parcours ouvert",
+   "source": "https://www.interieur.gouv.fr/recrutement"
+  }
+ },
+ {
+  "ref": "T-032",
+  "name": "Directeur - Directrice de police municipale",
+  "cat": "A",
+  "fp": "T",
+  "priorite_dates": true,
+  "officialUrl": "https://www.concours-territorial.fr/",
+  "sessionLinks": [],
+  "annalesLinks": [],
+  "current": {
+   "voies": "Concours sur épreuves ou titres",
+   "condition": "Diplômes professionnels éventuellement réglementés",
+   "epreuves": "Épreuves selon la voie et la spécialité ; recrutement sur titres possible",
+   "metiers": "Directeur de police municipale",
+   "domain": "Sécurité, police, défense",
+   "source": "https://www.concours-territorial.fr/"
+  }
+ },
+ {
+  "ref": "T-045",
+  "name": "Adjoint territorial d’animation principal - Adjointe territoriale d’animation principale de 2e classe",
+  "cat": "C",
+  "fp": "T",
+  "priorite_dates": true,
+  "officialUrl": "https://concours-territorial.fr/calendrier.aspx?annee=2026&type=concours",
+  "sessionLinks": [],
+  "annalesLinks": [],
+  "current": {
+   "voies": "Externe",
+   "condition": "Conditions/diplômes selon statut et avis",
+   "epreuves": "Épreuves propres à la spécialité et à la voie",
+   "metiers": "Adjoint territorial d’animation",
+   "domain": "Animation, sport, jeunesse",
+   "source": "https://concours-territorial.fr/calendrier.aspx?annee=2026&type=concours"
+  }
+ },
+ {
+  "ref": "É-003",
+  "name": "Inspecteur - Inspectrice des finances publiques",
+  "cat": "A",
+  "fp": "E",
+  "priorite_dates": false,
+  "officialUrl": "https://www.economie.gouv.fr/rejoignez-nous/inspecteur-des-finances-publiques-externe-dgfip",
+  "sessionLinks": [
+   [
+    "Session 2026",
+    "https://www.economie.gouv.fr/rejoignez-nous/inspecteur-des-finances-publiques-externe-dgfip?language=fr"
+   ]
+  ],
+  "annalesLinks": [
+   [
+    "Annales (2026)",
+    "https://rejoindrelesfinancespubliques.economie.gouv.fr/rejoindre-les-finances-publiquesdes-concours-pour-tous-les-niveaux-detudes/devenez-inspecteur-des"
+   ]
+  ],
+  "current": {
+   "voies": "Concours externe",
+   "condition": "Vérifier les conditions précises de la session",
+   "epreuves": "Note de synthèse + avis argumenté ; QCM/QRC avec domaine au choix ; épreuve orale",
+   "metiers": "Inspecteur des finances publiques ; contrôleur fiscal ; gestionnaire fiscal",
+   "domain": "Économie, finances, contrôle",
+   "source": "https://www.economie.gouv.fr/rejoignez-nous/inspecteur-des-finances-publiques-externe-dgfip"
+  }
+ },
+ {
+  "ref": "É-009",
+  "name": "Commissaire de police",
+  "cat": "A",
+  "fp": "E",
+  "priorite_dates": false,
+  "officialUrl": "https://www.police-nationale.interieur.gouv.fr/nous-rejoindre",
+  "sessionLinks": [],
+  "annalesLinks": [
+   [
+    "Annales (2026, 2025, 2024, 2023)",
+    "https://www.police-nationale.interieur.gouv.fr/nous-rejoindre/nos-voies-dacces/devenir-policier/CRE/commissaire-de-police-premier-concours-interne"
+   ]
+  ],
+  "current": {
+   "voies": "Externe — selon concours",
+   "condition": "Diplôme, âge et autres conditions selon corps",
+   "epreuves": "Écrits, oraux et éventuelles épreuves physiques selon le concours ; liste fixée par l’arrêté d’ouverture",
+   "metiers": "Commissaire de police ; direction de services",
+   "domain": "Sécurité, police, défense",
+   "source": "https://www.police-nationale.interieur.gouv.fr/nous-rejoindre"
+  }
+ },
+ {
+  "ref": "É-017",
+  "name": "Surveillant - Surveillante pénitentiaire",
+  "cat": "B",
+  "fp": "E",
+  "priorite_dates": false,
+  "officialUrl": "https://lajusticerecrute.fr/",
+  "sessionLinks": [],
+  "annalesLinks": [],
+  "current": {
+   "voies": "Externe",
+   "condition": "Vérifier niveau et conditions session 2026",
+   "epreuves": "Épreuves de sélection, aptitude et entretien selon session ; réforme récente",
+   "metiers": "Surveillant pénitentiaire",
+   "domain": "Sécurité, police, défense",
+   "source": "https://lajusticerecrute.fr/"
+  }
+ },
+ {
+  "ref": "T-026",
+  "name": "Attaché territorial - Attachée territoriale",
+  "cat": "A",
+  "fp": "T",
+  "priorite_dates": false,
+  "officialUrl": "https://www.concours-territorial.fr/epreuves.aspx?id=275",
+  "sessionLinks": [
+   [
+    "Session 2026",
+    "https://www.concours-territorial.fr/epreuves.aspx?id=275"
+   ]
+  ],
+  "annalesLinks": [
+   [
+    "Annales (2024, 2022)",
+    "https://www.concours-territorial.fr/preparation.aspx?id=275&spe=102"
+   ]
+  ],
+  "current": {
+   "voies": "Externe",
+   "condition": "Licence ou équivalence selon texte",
+   "epreuves": "Composition territoriale ; note sur dossier spécialité ; entretien, langue selon voie",
+   "metiers": "Attaché territorial ; responsable administratif ; cadre en collectivité",
+   "domain": "Administration, droit, politiques publiques",
+   "source": "https://www.concours-territorial.fr/epreuves.aspx?id=275"
+  }
+ },
+ {
+  "ref": "T-042",
+  "name": "ATSEM principal - ATSEM principale de 2e classe",
+  "cat": "C",
+  "fp": "T",
+  "priorite_dates": false,
+  "officialUrl": "https://www.concours-territorial.fr/epreuves.aspx?id=363",
+  "sessionLinks": [
+   [
+    "Session 2027",
+    "https://www.concours-territorial.fr/epreuves.aspx?id=363"
+   ]
+  ],
+  "annalesLinks": [],
+  "current": {
+   "voies": "Externe",
+   "condition": "CAP AEPE ou équivalence/dispenses selon réglementation",
+   "epreuves": "QCM 20 questions situations métiers ; entretien 15 min",
+   "metiers": "Agent territorial spécialisé des écoles maternelles (ATSEM)",
+   "domain": "Solidarité, enfance, social",
+   "source": "https://www.concours-territorial.fr/epreuves.aspx?id=363"
+  }
+ },
+ {
+  "ref": "H-052",
+  "name": "Psychologue hospitalier - Psychologue hospitalière",
+  "cat": "A",
+  "fp": "H",
+  "priorite_dates": false,
+  "officialUrl": "https://concours.aphp.fr/informations-candidats/",
+  "sessionLinks": [],
+  "annalesLinks": [],
+  "current": {
+   "voies": "Recrutement sur titres/concours spécifique",
+   "condition": "Diplômes de psychologie habilitants selon réglementation",
+   "epreuves": "Dossier, entretien/épreuve selon statut et organisateur",
+   "metiers": "Psychologue hospitalier (diplôme requis)",
+   "domain": "Solidarité, enfance, social",
+   "source": "https://concours.aphp.fr/informations-candidats/"
+  }
+ },
+ {
+  "ref": "H-058",
+  "name": "Auxiliaire de puériculture",
+  "cat": "B",
+  "fp": "H",
+  "priorite_dates": false,
+  "officialUrl": "https://www.onisep.fr/",
+  "sessionLinks": [],
+  "annalesLinks": [],
+  "current": {
+   "voies": "Diplôme d’État / recrutement sur titres",
+   "condition": "DEAP (diplôme d’État d’auxiliaire de puériculture)",
+   "epreuves": "Accès IFAP selon sélection ; recrutement après diplôme",
+   "metiers": "Auxiliaire de puériculture (diplôme d’État)",
+   "domain": "Solidarité, enfance, social",
+   "source": "https://www.onisep.fr/"
+  }
+ }
+]

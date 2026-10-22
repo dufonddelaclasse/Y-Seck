@@ -1,0 +1,111 @@
+[
+ {
+  "ref": "NEW-insp-orient",
+  "hints": {
+   "name": "INSP — voie Orient (concours d’Orient, affaires étrangères)",
+   "school": "Institut national du service public (INSP), Strasbourg",
+   "cat": "A+",
+   "fp": "E",
+   "questions": "QUESTION CLÉ : depuis la réforme de 2023 (fin du corps des conseillers des affaires étrangères, intégration aux administrateurs de l’État), sous quelle forme existe le « concours d’Orient » ? Est-ce une voie ou spécialité du concours de l’INSP, ou un concours du ministère de l’Europe et des Affaires étrangères avec formation INSP ? Intitulé exact, langues exigées, dates 2026/2027.",
+   "sites": [
+    "https://www.insp.gouv.fr/concours",
+    "https://www.diplomatie.gouv.fr/fr/emplois-stages-concours/"
+   ]
+  }
+ },
+ {
+  "ref": "NEW-sae",
+  "hints": {
+   "name": "Secrétaire des affaires étrangères (cadre général et cadre d’Orient)",
+   "school": "Ministère de l’Europe et des Affaires étrangères",
+   "cat": "A",
+   "fp": "E",
+   "questions": "Deux cadres (général, Orient) ; langues ; voies ; sessions 2026/2027.",
+   "sites": [
+    "https://www.diplomatie.gouv.fr/fr/emplois-stages-concours/"
+   ]
+  }
+ },
+ {
+  "ref": "NEW-itpe",
+  "hints": {
+   "name": "Ingénieur - Ingénieure des travaux publics de l’État (ITPE)",
+   "school": "École nationale des travaux publics de l’État (ENTPE), Vaulx-en-Velin",
+   "cat": "A",
+   "fp": "E",
+   "questions": "Concours externe sur titres/épreuves, interne ; statut d’élève ingénieur fonctionnaire rémunéré 3 ans ; sessions 2026/2027.",
+   "sites": [
+    "https://www.entpe.fr",
+    "https://www.ecologie.gouv.fr/recrutement"
+   ]
+  }
+ },
+ {
+  "ref": "NEW-itm",
+  "hints": {
+   "name": "Ingénieur - Ingénieure des travaux de la météorologie",
+   "school": "École nationale de la météorologie (ENM), Toulouse",
+   "cat": "A",
+   "fp": "E",
+   "questions": "Voies ; formation ENM 3 ans rémunérée ; sessions.",
+   "sites": [
+    "https://www.ecole.meteo.fr",
+    "https://meteofrance.com"
+   ]
+  }
+ },
+ {
+  "ref": "NEW-tsm",
+  "hints": {
+   "name": "Technicien supérieur - Technicienne supérieure de la météorologie",
+   "school": "ENM, Toulouse",
+   "cat": "B",
+   "fp": "E",
+   "questions": "Voies ; formation ; sessions.",
+   "sites": [
+    "https://www.ecole.meteo.fr"
+   ]
+  }
+ },
+ {
+  "ref": "NEW-itgce",
+  "hints": {
+   "name": "Ingénieur - Ingénieure des travaux géographiques et cartographiques de l’État",
+   "school": "École nationale des sciences géographiques (ENSG-Géomatique, IGN), Champs-sur-Marne",
+   "cat": "A",
+   "fp": "E",
+   "questions": "Voies ; formation ; sessions.",
+   "sites": [
+    "https://ensg.eu",
+    "https://www.ign.fr"
+   ]
+  }
+ },
+ {
+  "ref": "NEW-icna",
+  "hints": {
+   "name": "Ingénieur - Ingénieure du contrôle de la navigation aérienne (contrôleur aérien)",
+   "school": "École nationale de l’aviation civile (ENAC), Toulouse",
+   "cat": "A",
+   "fp": "E",
+   "questions": "Conditions (âge limite, bac+2 scientifique ou prépa) ; épreuves ; formation 3 ans rémunérée ; sessions 2026/2027.",
+   "sites": [
+    "https://www.enac.fr",
+    "https://www.ecologie.gouv.fr/aviation-civile"
+   ]
+  }
+ },
+ {
+  "ref": "NEW-tseeac",
+  "hints": {
+   "name": "Technicien supérieur - Technicienne supérieure des études et de l’exploitation de l’aviation civile (TSEEAC)",
+   "school": "ENAC, Toulouse",
+   "cat": "B",
+   "fp": "E",
+   "questions": "Voies ; formation ; sessions.",
+   "sites": [
+    "https://www.enac.fr"
+   ]
+  }
+ }
+]

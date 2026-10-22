@@ -1,0 +1,833 @@
+{
+ "INSP — voie générale": {
+  "cat": "A+",
+  "fp": "État",
+  "official": "https://www.insp.gouv.fr/concours/ressources-utiles/sujets-meilleures-copies-et-rapports-des-jurys/voie-generale",
+  "sessions": [],
+  "annales": [
+   [
+    "Annales (2026, 2025, 2024, 2023, 2022)",
+    "https://www.insp.gouv.fr/concours/ressources-utiles/sujets-meilleures-copies-et-rapports-des-jurys/voie-generale"
+   ]
+  ],
+  "evoluer": []
+ },
+ "IRA — attaché d’administration de l’État": {
+  "cat": "A",
+  "fp": "État",
+  "official": "https://www.fonction-publique.gouv.fr/devenir-agent-public/concours-et-formation-des-ira",
+  "sessions": [
+   [
+    "Session 2026",
+    "https://ira-inscription.fonction-publique.gouv.fr/presentation.html"
+   ],
+   [
+    "Session 2027",
+    "https://www.fonction-publique.gouv.fr/toutes-les-actualites/une-nouvelle-epreuve-ecrite-dadmissibilite-pour-les-concours-dacces-aux-instituts-du-service-public-ex-ira"
+   ]
+  ],
+  "annales": [
+   [
+    "Annales (Sessions antérieures, année à sélectionner)",
+    "https://www.fonction-publique.gouv.fr/devenir-agent-public/concours-et-formation-des-ira"
+   ]
+  ],
+  "evoluer": [
+   [
+    "Évoluer : Administrateur de l'État",
+    "https://www.insp.gouv.fr/concours/concours-de-la-voie-generale/concours-interne"
+   ]
+  ]
+ },
+ "Inspecteur des finances publiques": {
+  "cat": "A",
+  "fp": "État",
+  "official": "https://www.economie.gouv.fr/rejoignez-nous/inspecteur-des-finances-publiques-externe-dgfip",
+  "sessions": [
+   [
+    "Session 2026",
+    "https://www.economie.gouv.fr/rejoignez-nous/inspecteur-des-finances-publiques-externe-dgfip?language=fr"
+   ]
+  ],
+  "annales": [
+   [
+    "Annales (2026)",
+    "https://rejoindrelesfinancespubliques.economie.gouv.fr/rejoindre-les-finances-publiquesdes-concours-pour-tous-les-niveaux-detudes/devenez-inspecteur-des"
+   ]
+  ],
+  "evoluer": []
+ },
+ "Inspecteur du travail": {
+  "cat": "A",
+  "fp": "État",
+  "official": "https://travail-emploi.gouv.fr/calendrier-et-modalites-dinscription-aux-concours-du-ministere-du-travail",
+  "sessions": [
+   [
+    "Session 2026",
+    "https://travail-emploi.gouv.fr/annales-du-concours-de-linspection-du-travail-2026"
+   ]
+  ],
+  "annales": [
+   [
+    "Annales (2026)",
+    "https://travail-emploi.gouv.fr/annales-du-concours-de-linspection-du-travail-2026"
+   ]
+  ],
+  "evoluer": []
+ },
+ "Professeur des écoles (CRPE externe bac+3)": {
+  "cat": "A",
+  "fp": "État",
+  "official": "https://www.education.gouv.fr/la-reforme-de-la-formation-initiale-des-professeurs-462747",
+  "sessions": [
+   [
+    "Session 2026",
+    "https://www.devenirenseignant.gouv.fr/les-epreuves-du-concours-externe-bac3-de-recrutement-de-professeurs-des-ecoles-1380"
+   ],
+   [
+    "Session 2027",
+    "https://www.devenirenseignant.gouv.fr/crpe-bac-3-epreuve-orale-de-francais-ou-de-mathematiques-1661"
+   ]
+  ],
+  "annales": [
+   [
+    "Annales (Selon discipline et voie; vérifier session)",
+    "https://www.devenirenseignant.gouv.fr/ressources"
+   ]
+  ],
+  "evoluer": []
+ },
+ "Professeur certifié (CAPES)": {
+  "cat": "A",
+  "fp": "État",
+  "official": "https://www.education.gouv.fr/la-reforme-de-la-formation-initiale-des-professeurs-462747",
+  "sessions": [],
+  "annales": [
+   [
+    "Annales (Selon discipline et voie; vérifier session)",
+    "https://www.devenirenseignant.gouv.fr/ressources"
+   ]
+  ],
+  "evoluer": []
+ },
+ "Conseiller principal d’éducation (CPE)": {
+  "cat": "A",
+  "fp": "État",
+  "official": "https://www.education.gouv.fr/les-epreuves-du-concours-externe-bac-3-de-cpe-450225",
+  "sessions": [
+   [
+    "Session 2026",
+    "https://www.education.gouv.fr/les-epreuves-du-concours-externe-bac-3-de-cpe-450225"
+   ]
+  ],
+  "annales": [
+   [
+    "Annales (2026 (bac+3 et bac+5 transitoire) ; archives)",
+    "https://www.education.gouv.fr/les-sujets-et-rapports-des-jurys-des-concours-de-cpe-7580"
+   ]
+  ],
+  "evoluer": []
+ },
+ "Officier de police": {
+  "cat": "A",
+  "fp": "État",
+  "official": "https://www.police-nationale.interieur.gouv.fr/nous-rejoindre",
+  "sessions": [],
+  "annales": [
+   [
+    "Annales (2026, 2025, 2024, 2023, 2022)",
+    "https://www.police-nationale.interieur.gouv.fr/nous-rejoindre/nos-voies-dacces/devenir-policier/off/ext"
+   ]
+  ],
+  "evoluer": [
+   [
+    "Évoluer : Commissaire de police",
+    "https://www.police-nationale.interieur.gouv.fr/nous-rejoindre/nos-voies-dacces/devenir-policier/CRE/commissaire-de-police-premier-concours-interne"
+   ]
+  ]
+ },
+ "Commissaire de police": {
+  "cat": "A",
+  "fp": "État",
+  "official": "https://www.police-nationale.interieur.gouv.fr/nous-rejoindre",
+  "sessions": [],
+  "annales": [
+   [
+    "Annales (2026, 2025, 2024, 2023)",
+    "https://www.police-nationale.interieur.gouv.fr/nous-rejoindre/nos-voies-dacces/devenir-policier/CRE/commissaire-de-police-premier-concours-interne"
+   ]
+  ],
+  "evoluer": []
+ },
+ "Inspecteur des douanes": {
+  "cat": "A",
+  "fp": "État",
+  "official": "https://www.douane.gouv.fr/recrutement",
+  "sessions": [],
+  "annales": [],
+  "evoluer": []
+ },
+ "Inspecteur de l’action sanitaire et sociale": {
+  "cat": "A",
+  "fp": "État",
+  "official": "https://www.ehesp.fr/formation/formations-fonction-publique/preparation-aux-concours/classe-prepa-talents/",
+  "sessions": [],
+  "annales": [],
+  "evoluer": []
+ },
+ "Directeur des services pénitentiaires": {
+  "cat": "A",
+  "fp": "État",
+  "official": "https://www.justice.gouv.fr/metiers",
+  "sessions": [],
+  "annales": [],
+  "evoluer": []
+ },
+ "Contrôleur des finances publiques": {
+  "cat": "B",
+  "fp": "État",
+  "official": "https://www.economie.gouv.fr/rejoignez-nous/controleur-des-finances-publiques-de-2eme-classe-externe-dgfip?language=fr",
+  "sessions": [
+   [
+    "Session 2026",
+    "https://www.economie.gouv.fr/rejoignez-nous/controleur-des-finances-publiques-de-2eme-classe-externe-dgfip?language=fr"
+   ]
+  ],
+  "annales": [
+   [
+    "Annales (2026)",
+    "https://www.economie.gouv.fr/rejoignez-nous/controleur-des-finances-publiques-de-2eme-classe-externe-dgfip?language=fr"
+   ]
+  ],
+  "evoluer": []
+ },
+ "Secrétaire administratif": {
+  "cat": "B",
+  "fp": "État",
+  "official": "https://www.education.gouv.fr/concours-de-secretaire-administratif-de-classe-normale-5324",
+  "sessions": [],
+  "annales": [
+   [
+    "Annales (2026, 2025, 2024)",
+    "https://www.education.gouv.fr/concours-de-secretaire-administratif-de-classe-normale-5324"
+   ]
+  ],
+  "evoluer": [
+   [
+    "Évoluer : Attaché d'administration de l'État (IRA ou concours ministériel)",
+    "https://www.fonction-publique.gouv.fr/devenir-agent-public/concours-et-formation-des-ira"
+   ]
+  ]
+ },
+ "Greffier des services judiciaires": {
+  "cat": "B",
+  "fp": "État",
+  "official": "https://www.justice.gouv.fr/metiers/greffier",
+  "sessions": [],
+  "annales": [],
+  "evoluer": [
+   [
+    "Évoluer : Directeur des services de greffe judiciaires",
+    "https://www.eng.justice.fr/"
+   ]
+  ]
+ },
+ "Gardien de la paix": {
+  "cat": "B",
+  "fp": "État",
+  "official": "https://www.police-nationale.interieur.gouv.fr/nous-rejoindre/nos-voies-dacces/devenir-policier/gpx",
+  "sessions": [],
+  "annales": [
+   [
+    "Annales (2026, 2025, 2024, 2023)",
+    "https://www.police-nationale.interieur.gouv.fr/nous-rejoindre/nos-voies-dacces/devenir-policier/gpx/ext"
+   ]
+  ],
+  "evoluer": [
+   [
+    "Évoluer : Officier de police",
+    "https://www.police-nationale.interieur.gouv.fr/nous-rejoindre/nos-voies-dacces/devenir-policier/off/1int"
+   ]
+  ]
+ },
+ "Surveillant pénitentiaire": {
+  "cat": "B",
+  "fp": "État",
+  "official": "https://lajusticerecrute.fr/",
+  "sessions": [],
+  "annales": [],
+  "evoluer": []
+ },
+ "Contrôleur des douanes": {
+  "cat": "B",
+  "fp": "État",
+  "official": "https://www.douane.gouv.fr/recrutement",
+  "sessions": [],
+  "annales": [],
+  "evoluer": []
+ },
+ "Technicien de recherche et formation": {
+  "cat": "B",
+  "fp": "État",
+  "official": "https://www.enseignementsup-recherche.gouv.fr/fr/recrutements/itrf",
+  "sessions": [],
+  "annales": [],
+  "evoluer": []
+ },
+ "Agent administratif principal DGFiP": {
+  "cat": "C",
+  "fp": "État",
+  "official": "https://www.economie.gouv.fr/rejoignez-nous/agent-administratif-principal-des-finances-publiques-de-2eme-classe-externe-dgfip",
+  "sessions": [],
+  "annales": [
+   [
+    "Annales (Non confirmée)",
+    "https://www.economie.gouv.fr/rejoignez-nous"
+   ]
+  ],
+  "evoluer": []
+ },
+ "Adjoint administratif — ministère de l’Intérieur": {
+  "cat": "C",
+  "fp": "État",
+  "official": "https://www.interieur.gouv.fr/recrutement",
+  "sessions": [],
+  "annales": [
+   [
+    "Annales (Non déterminée)",
+    "https://www.education.gouv.fr/concours-d-adjoint-administratif-7349"
+   ]
+  ],
+  "evoluer": [
+   [
+    "Évoluer : Secrétaire administratif de classe normale",
+    "https://www.education.gouv.fr/concours-de-secretaire-administratif-de-classe-normale-5324"
+   ]
+  ]
+ },
+ "Agent de constatation des douanes": {
+  "cat": "C",
+  "fp": "État",
+  "official": "https://www.douane.gouv.fr/recrutement",
+  "sessions": [],
+  "annales": [],
+  "evoluer": []
+ },
+ "Adjoint administratif de chancellerie": {
+  "cat": "C",
+  "fp": "État",
+  "official": "https://www.diplomatie.gouv.fr/fr/le-ministere/publications-programmes-et-documentation-institutionnelle/publications/annales-et-meilleures-copies/",
+  "sessions": [],
+  "annales": [
+   [
+    "Annales (Sessions récentes)",
+    "https://www.diplomatie.gouv.fr/fr/le-ministere/publications-programmes-et-documentation-institutionnelle/publications/annales-et-meilleures-copies/"
+   ]
+  ],
+  "evoluer": []
+ },
+ "Administrateur territorial": {
+  "cat": "A+",
+  "fp": "Territoriale",
+  "official": "https://www.cnfpt.fr/evoluer/preparations-aux-concours-examens-professionnels/decouvrir-concours-examens-professionnels/concours-dadministrateur-ou-administratrice-territorial/sujets-meilleures-copies-du-concours-dadministrateur-territorial/session-2025-sujets-concours",
+  "sessions": [],
+  "annales": [
+   [
+    "Annales (2025, 2024 et années antérieures)",
+    "https://www.cnfpt.fr/evoluer/concours-examens-professionnels/concours-dadministrateurrice-territoriale/sujets-meilleures-copies/national"
+   ]
+  ],
+  "evoluer": []
+ },
+ "Ingénieur en chef territorial": {
+  "cat": "A+",
+  "fp": "Territoriale",
+  "official": "https://www.concours-territorial.fr/epreuves.aspx?id=395",
+  "sessions": [],
+  "annales": [],
+  "evoluer": []
+ },
+ "Attaché territorial": {
+  "cat": "A",
+  "fp": "Territoriale",
+  "official": "https://www.concours-territorial.fr/epreuves.aspx?id=275",
+  "sessions": [
+   [
+    "Session 2026",
+    "https://www.concours-territorial.fr/epreuves.aspx?id=275"
+   ]
+  ],
+  "annales": [
+   [
+    "Annales (2024, 2022)",
+    "https://www.concours-territorial.fr/preparation.aspx?id=275&spe=102"
+   ]
+  ],
+  "evoluer": [
+   [
+    "Évoluer : Administrateur territorial",
+    "https://www.cnfpt.fr/evoluer/preparations-aux-concours-examens-professionnels/decouvrir-concours-examens-professionnels/concours-dadministrateur-ou-administratrice-territorial/sujets-meilleures-copies-du-concours-dadministrateur-territorial/sujets-session-2025-du-concours"
+   ]
+  ]
+ },
+ "Ingénieur territorial": {
+  "cat": "A",
+  "fp": "Territoriale",
+  "official": "https://www.concours-territorial.fr/epreuves.aspx?id=327&spe=118",
+  "sessions": [
+   [
+    "Session 2027",
+    "https://www.concours-territorial.fr/epreuves.aspx?id=327&spe=118"
+   ]
+  ],
+  "annales": [],
+  "evoluer": [
+   [
+    "Évoluer : Ingénieur en chef territorial",
+    "https://www.cnfpt.fr/"
+   ]
+  ]
+ },
+ "Conseiller territorial socio-éducatif": {
+  "cat": "A",
+  "fp": "Territoriale",
+  "official": "https://www.concours-territorial.fr/epreuves.aspx?id=254",
+  "sessions": [],
+  "annales": [],
+  "evoluer": []
+ },
+ "Bibliothécaire territorial": {
+  "cat": "A",
+  "fp": "Territoriale",
+  "official": "https://www.concours-territorial.fr/",
+  "sessions": [],
+  "annales": [],
+  "evoluer": []
+ },
+ "Assistant socio-éducatif territorial": {
+  "cat": "A",
+  "fp": "Territoriale",
+  "official": "https://www.concours-territorial.fr/",
+  "sessions": [],
+  "annales": [],
+  "evoluer": []
+ },
+ "Éducateur territorial de jeunes enfants": {
+  "cat": "A",
+  "fp": "Territoriale",
+  "official": "https://www.concours-territorial.fr/",
+  "sessions": [],
+  "annales": [],
+  "evoluer": []
+ },
+ "Directeur de police municipale": {
+  "cat": "A",
+  "fp": "Territoriale",
+  "official": "https://www.concours-territorial.fr/",
+  "sessions": [],
+  "annales": [],
+  "evoluer": []
+ },
+ "Rédacteur territorial": {
+  "cat": "B",
+  "fp": "Territoriale",
+  "official": "https://www.concours-territorial.fr/epreuves.aspx?id=235",
+  "sessions": [
+   [
+    "Session 2025",
+    "https://www.concours-territorial.fr/epreuves.aspx?id=235"
+   ]
+  ],
+  "annales": [
+   [
+    "Annales (2025, 2023, 2021)",
+    "https://www.concours-territorial.fr/preparation.aspx?id=324"
+   ]
+  ],
+  "evoluer": [
+   [
+    "Évoluer : Attaché territorial",
+    "https://www.concours-territorial.fr/preparation.aspx?id=275&spe=102"
+   ]
+  ]
+ },
+ "Rédacteur principal de 2e classe": {
+  "cat": "B",
+  "fp": "Territoriale",
+  "official": "https://www.concours-territorial.fr/epreuves.aspx?id=236",
+  "sessions": [
+   [
+    "Session 2025",
+    "https://www.concours-territorial.fr/epreuves.aspx?id=236"
+   ]
+  ],
+  "annales": [
+   [
+    "Annales (2025, 2023, 2021)",
+    "https://www.concours-territorial.fr/preparation.aspx?id=236"
+   ]
+  ],
+  "evoluer": []
+ },
+ "Technicien territorial": {
+  "cat": "B",
+  "fp": "Territoriale",
+  "official": "https://www.concours-territorial.fr/epreuves.aspx?id=281&spe=190",
+  "sessions": [
+   [
+    "Session 2026",
+    "https://www.concours-territorial.fr/epreuves.aspx?id=281&spe=190"
+   ]
+  ],
+  "annales": [],
+  "evoluer": [
+   [
+    "Évoluer : Ingénieur territorial",
+    "https://www.concours-territorial.fr/"
+   ]
+  ]
+ },
+ "Animateur territorial": {
+  "cat": "B",
+  "fp": "Territoriale",
+  "official": "https://www.concours-territorial.fr/epreuves.aspx?id=263",
+  "sessions": [
+   [
+    "Session 2025",
+    "https://www.concours-territorial.fr/epreuves.aspx?id=263"
+   ]
+  ],
+  "annales": [],
+  "evoluer": []
+ },
+ "Chef de service de police municipale": {
+  "cat": "B",
+  "fp": "Territoriale",
+  "official": "https://www.concours-territorial.fr/epreuves.aspx?id=314",
+  "sessions": [
+   [
+    "Session 2026",
+    "https://www.concours-territorial.fr/epreuves.aspx?id=314"
+   ]
+  ],
+  "annales": [],
+  "evoluer": [
+   [
+    "Évoluer : Directeur de police municipale",
+    "https://www.concours-territorial.fr/"
+   ]
+  ]
+ },
+ "Assistant de conservation du patrimoine et des bibliothèques": {
+  "cat": "B",
+  "fp": "Territoriale",
+  "official": "https://www.concours-territorial.fr/",
+  "sessions": [],
+  "annales": [],
+  "evoluer": [
+   [
+    "Évoluer : Bibliothécaire territorial",
+    "https://www.concours-territorial.fr/"
+   ]
+  ]
+ },
+ "Éducateur des activités physiques et sportives": {
+  "cat": "B",
+  "fp": "Territoriale",
+  "official": "https://www.concours-territorial.fr/",
+  "sessions": [],
+  "annales": [],
+  "evoluer": []
+ },
+ "Adjoint administratif principal de 2e classe": {
+  "cat": "C",
+  "fp": "Territoriale",
+  "official": "https://www.concours-territorial.fr/epreuves.aspx?id=279",
+  "sessions": [
+   [
+    "Session 2026",
+    "https://www.concours-territorial.fr/epreuves.aspx?id=279"
+   ]
+  ],
+  "annales": [],
+  "evoluer": [
+   [
+    "Évoluer : Rédacteur territorial",
+    "https://www.cdg69.fr/statut/carriere-fonctionnaire/promotion-interne"
+   ]
+  ]
+ },
+ "Adjoint technique principal de 2e classe": {
+  "cat": "C",
+  "fp": "Territoriale",
+  "official": "https://www.concours-territorial.fr/epreuves.aspx?id=283",
+  "sessions": [
+   [
+    "Session 2026",
+    "https://www.concours-territorial.fr/epreuves.aspx?id=283"
+   ]
+  ],
+  "annales": [],
+  "evoluer": [
+   [
+    "Évoluer : Technicien territorial",
+    "https://www.concours-territorial.fr/"
+   ]
+  ]
+ },
+ "ATSEM principal de 2e classe": {
+  "cat": "C",
+  "fp": "Territoriale",
+  "official": "https://www.concours-territorial.fr/epreuves.aspx?id=363",
+  "sessions": [
+   [
+    "Session 2027",
+    "https://www.concours-territorial.fr/epreuves.aspx?id=363"
+   ]
+  ],
+  "annales": [],
+  "evoluer": []
+ },
+ "Agent de maîtrise territorial": {
+  "cat": "C",
+  "fp": "Territoriale",
+  "official": "https://www.concours-territorial.fr/epreuves.aspx?id=331&spe=24",
+  "sessions": [
+   [
+    "Session 2027",
+    "https://www.concours-territorial.fr/epreuves.aspx?id=331&spe=24"
+   ]
+  ],
+  "annales": [],
+  "evoluer": []
+ },
+ "Gardien-brigadier de police municipale": {
+  "cat": "C",
+  "fp": "Territoriale",
+  "official": "https://concours-territorial.fr/calendrier.aspx?annee=2026&type=concours",
+  "sessions": [],
+  "annales": [],
+  "evoluer": [
+   [
+    "Évoluer : Chef de service de police municipale",
+    "https://www.concours-territorial.fr/"
+   ]
+  ]
+ },
+ "Adjoint territorial d’animation principal de 2e classe": {
+  "cat": "C",
+  "fp": "Territoriale",
+  "official": "https://concours-territorial.fr/calendrier.aspx?annee=2026&type=concours",
+  "sessions": [],
+  "annales": [],
+  "evoluer": [
+   [
+    "Évoluer : Animateur territorial",
+    "https://www.cdg69.fr/statut/carriere-fonctionnaire/promotion-interne"
+   ]
+  ]
+ },
+ "Adjoint territorial du patrimoine principal de 2e classe": {
+  "cat": "C",
+  "fp": "Territoriale",
+  "official": "https://concours-territorial.fr/calendrier.aspx?annee=2026&type=concours",
+  "sessions": [],
+  "annales": [],
+  "evoluer": [
+   [
+    "Évoluer : Assistant de conservation du patrimoine et des bibliothèques",
+    "https://www.concours-territorial.fr/"
+   ]
+  ]
+ },
+ "Directeur d’hôpital (DH)": {
+  "cat": "A+",
+  "fp": "Hospitalière",
+  "official": "https://www.cng.sante.fr/candidats/concours/devenir-dh-d3s-ds/annales-rapports-jurys",
+  "sessions": [
+   [
+    "Session 2026",
+    "https://www.cng.sante.fr/candidats/concours/devenir-dh-d3s-ds/annales-rapports-jurys"
+   ]
+  ],
+  "annales": [
+   [
+    "Annales (2021 à 2026)",
+    "https://www.cng.sante.fr/candidats/concours/devenir-dh-d3s-ds/annales-rapports-jurys"
+   ]
+  ],
+  "evoluer": []
+ },
+ "Directeur établissement sanitaire, social et médico-social (D3S)": {
+  "cat": "A+",
+  "fp": "Hospitalière",
+  "official": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000049757827/2026-03-14",
+  "sessions": [
+   [
+    "Session 2024-2026",
+    "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000049757827/2026-03-14"
+   ]
+  ],
+  "annales": [
+   [
+    "Annales (2021 à 2026)",
+    "https://www.cng.sante.fr/candidats/concours/devenir-dh-d3s-ds/annales-rapports-jurys"
+   ]
+  ],
+  "evoluer": []
+ },
+ "Attaché d’administration hospitalière (AAH)": {
+  "cat": "A",
+  "fp": "Hospitalière",
+  "official": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000053403352",
+  "sessions": [
+   [
+    "Session 2026",
+    "https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000050396673/2026-05-25"
+   ]
+  ],
+  "annales": [],
+  "evoluer": [
+   [
+    "Évoluer : Directeur d'hôpital",
+    "https://www.cng.sante.fr/"
+   ]
+  ]
+ },
+ "Directeur des soins": {
+  "cat": "A",
+  "fp": "Hospitalière",
+  "official": "https://www.cng.sante.fr/candidats/concours/devenir-dh-d3s-ds/annales-rapports-jurys",
+  "sessions": [],
+  "annales": [
+   [
+    "Annales (2021 à 2026)",
+    "https://www.cng.sante.fr/candidats/concours/devenir-dh-d3s-ds/annales-rapports-jurys"
+   ]
+  ],
+  "evoluer": []
+ },
+ "Infirmier en soins généraux": {
+  "cat": "A",
+  "fp": "Hospitalière",
+  "official": "https://www.onisep.fr/formation/comment-devenir-infirmier-ou-infirmiere",
+  "sessions": [
+   [
+    "Session 2026",
+    "https://www.onisep.fr/formation/comment-devenir-infirmier-ou-infirmiere"
+   ]
+  ],
+  "annales": [],
+  "evoluer": [
+   [
+    "Évoluer : Cadre de santé paramédical",
+    "https://www.concours-fph.ars.sante.fr/"
+   ]
+  ]
+ },
+ "Psychologue hospitalier": {
+  "cat": "A",
+  "fp": "Hospitalière",
+  "official": "https://concours.aphp.fr/informations-candidats/",
+  "sessions": [],
+  "annales": [],
+  "evoluer": []
+ },
+ "Cadre de santé paramédical": {
+  "cat": "A",
+  "fp": "Hospitalière",
+  "official": "https://concours.aphp.fr/informations-candidats/",
+  "sessions": [],
+  "annales": [],
+  "evoluer": [
+   [
+    "Évoluer : Directeur des soins",
+    "https://www.cng.sante.fr/"
+   ]
+  ]
+ },
+ "Adjoint des cadres hospitaliers (ACH)": {
+  "cat": "B",
+  "fp": "Hospitalière",
+  "official": "https://concours.aphp.fr/informations-candidats/",
+  "sessions": [],
+  "annales": [],
+  "evoluer": [
+   [
+    "Évoluer : Attaché d'administration hospitalière",
+    "https://www.cng.sante.fr/"
+   ]
+  ]
+ },
+ "Assistant médico-administratif (AMA)": {
+  "cat": "B",
+  "fp": "Hospitalière",
+  "official": "https://concours.aphp.fr/informations-candidats/",
+  "sessions": [],
+  "annales": [],
+  "evoluer": []
+ },
+ "Technicien supérieur hospitalier": {
+  "cat": "B",
+  "fp": "Hospitalière",
+  "official": "https://concours.aphp.fr/informations-candidats/",
+  "sessions": [],
+  "annales": [],
+  "evoluer": []
+ },
+ "Aide-soignant": {
+  "cat": "B",
+  "fp": "Hospitalière",
+  "official": "https://www.onisep.fr/",
+  "sessions": [],
+  "annales": [],
+  "evoluer": [
+   [
+    "Évoluer : Infirmier en soins généraux",
+    "https://www.parcoursup.gouv.fr/"
+   ]
+  ]
+ },
+ "Auxiliaire de puériculture": {
+  "cat": "B",
+  "fp": "Hospitalière",
+  "official": "https://www.onisep.fr/",
+  "sessions": [],
+  "annales": [],
+  "evoluer": []
+ },
+ "Adjoint administratif hospitalier": {
+  "cat": "C",
+  "fp": "Hospitalière",
+  "official": "https://concours.aphp.fr/informations-candidats/",
+  "sessions": [],
+  "annales": [],
+  "evoluer": [
+   [
+    "Évoluer : Adjoint des cadres hospitaliers",
+    "https://www.concours-fph.ars.sante.fr/"
+   ]
+  ]
+ },
+ "Agent des services hospitaliers qualifié (ASHQ)": {
+  "cat": "C",
+  "fp": "Hospitalière",
+  "official": "https://concours.aphp.fr/informations-candidats/",
+  "sessions": [],
+  "annales": [],
+  "evoluer": [
+   [
+    "Évoluer : Aide-soignant",
+    "https://www.service-public.fr/"
+   ]
+  ]
+ },
+ "Personnel ouvrier hospitalier qualifié": {
+  "cat": "C",
+  "fp": "Hospitalière",
+  "official": "https://concours.aphp.fr/informations-candidats/",
+  "sessions": [],
+  "annales": [],
+  "evoluer": []
+ }
+}

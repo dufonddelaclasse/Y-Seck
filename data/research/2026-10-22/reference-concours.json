@@ -1,0 +1,675 @@
+[
+{
+"id": "É-001",
+"name": "INSP — voie générale",
+"cat": "A+",
+"fp": "E",
+"routeIds": [
+"admin-etat"
+],
+"domain": "Administration, droit, politiques publiques",
+"source": "https://www.insp.gouv.fr/concours/ressources-utiles/sujets-meilleures-copies-et-rapports-des-jurys/voie-generale"
+},
+{
+"id": "É-002",
+"name": "IRA — attaché - attachée d’administration de l’État",
+"cat": "A",
+"fp": "E",
+"routeIds": [
+"attache"
+],
+"domain": "Administration, droit, politiques publiques",
+"source": "https://www.fonction-publique.gouv.fr/devenir-agent-public/concours-et-formation-des-ira"
+},
+{
+"id": "É-003",
+"name": "Inspecteur - Inspectrice des finances publiques",
+"cat": "A",
+"fp": "E",
+"routeIds": [
+"insp-fip"
+],
+"domain": "Économie, finances, contrôle",
+"source": "https://www.economie.gouv.fr/rejoignez-nous/inspecteur-des-finances-publiques-externe-dgfip"
+},
+{
+"id": "É-004",
+"name": "Inspecteur - Inspectrice du travail",
+"cat": "A",
+"fp": "E",
+"routeIds": [
+"insp-travail"
+],
+"domain": "Administration, droit, politiques publiques",
+"source": "https://travail-emploi.gouv.fr/calendrier-et-modalites-dinscription-aux-concours-du-ministere-du-travail"
+},
+{
+"id": "É-005",
+"name": "Professeur - Professeure des écoles (CRPE externe bac+3)",
+"cat": "A",
+"fp": "E",
+"routeIds": [
+"pe",
+"capes"
+],
+"domain": "Enseignement, éducation",
+"source": "https://www.education.gouv.fr/la-reforme-de-la-formation-initiale-des-professeurs-462747"
+},
+{
+"id": "É-006",
+"name": "Professeur certifié - Professeure certifiée (CAPES)",
+"cat": "A",
+"fp": "E",
+"routeIds": [
+"capes"
+],
+"domain": "Enseignement, éducation",
+"source": "https://www.education.gouv.fr/la-reforme-de-la-formation-initiale-des-professeurs-462747"
+},
+{
+"id": "É-007",
+"name": "Conseiller principal - Conseillère principale d’éducation (CPE)",
+"cat": "A",
+"fp": "E",
+"routeIds": [
+"cpe"
+],
+"domain": "Enseignement, éducation",
+"source": "https://www.education.gouv.fr/les-epreuves-du-concours-externe-bac-3-de-cpe-450225"
+},
+{
+"id": "É-008",
+"name": "Officier - Officière de police",
+"cat": "A",
+"fp": "E",
+"routeIds": [
+"officier-police"
+],
+"domain": "Sécurité, police, défense",
+"source": "https://www.police-nationale.interieur.gouv.fr/nous-rejoindre"
+},
+{
+"id": "É-009",
+"name": "Commissaire de police",
+"cat": "A",
+"fp": "E",
+"routeIds": [
+"commissaire"
+],
+"domain": "Sécurité, police, défense",
+"source": "https://www.police-nationale.interieur.gouv.fr/nous-rejoindre"
+},
+{
+"id": "É-010",
+"name": "Inspecteur - Inspectrice des douanes",
+"cat": "A",
+"fp": "E",
+"routeIds": [
+"insp-douane"
+],
+"domain": "Économie, finances, contrôle",
+"source": "https://www.douane.gouv.fr/recrutement"
+},
+{
+"id": "É-011",
+"name": "Inspecteur - Inspectrice de l’action sanitaire et sociale",
+"cat": "A",
+"fp": "E",
+"routeIds": [
+"iass"
+],
+"domain": "Santé, soins, prévention",
+"source": "https://www.ehesp.fr/formation/formations-fonction-publique/preparation-aux-concours/classe-prepa-talents/"
+},
+{
+"id": "É-012",
+"name": "Directeur - Directrice des services pénitentiaires",
+"cat": "A",
+"fp": "E",
+"routeIds": [
+"dsp"
+],
+"domain": "Justice, droit, greffe",
+"source": "https://www.justice.gouv.fr/metiers"
+},
+{
+"id": "É-013",
+"name": "Contrôleur - Contrôleuse des finances publiques",
+"cat": "B",
+"fp": "E",
+"routeIds": [
+"ctrl-fip"
+],
+"domain": "Économie, finances, contrôle",
+"source": "https://www.economie.gouv.fr/rejoignez-nous/controleur-des-finances-publiques-de-2eme-classe-externe-dgfip?language=fr"
+},
+{
+"id": "É-014",
+"name": "Secrétaire administratif - Secrétaire administrative",
+"cat": "B",
+"fp": "E",
+"routeIds": [
+"sa"
+],
+"domain": "Administration, droit, politiques publiques",
+"source": "https://www.education.gouv.fr/concours-de-secretaire-administratif-de-classe-normale-5324"
+},
+{
+"id": "É-015",
+"name": "Greffier - Greffière des services judiciaires",
+"cat": "B",
+"fp": "E",
+"routeIds": [
+"greffier"
+],
+"domain": "Justice, droit, greffe",
+"source": "https://www.justice.gouv.fr/metiers/greffier"
+},
+{
+"id": "É-016",
+"name": "Gardien - Gardienne de la paix",
+"cat": "B",
+"fp": "E",
+"routeIds": [
+"gpx"
+],
+"domain": "Sécurité, police, défense",
+"source": "https://www.police-nationale.interieur.gouv.fr/nous-rejoindre/nos-voies-dacces/devenir-policier/gpx"
+},
+{
+"id": "É-017",
+"name": "Surveillant - Surveillante pénitentiaire",
+"cat": "B",
+"fp": "E",
+"routeIds": [
+"surveillant"
+],
+"domain": "Sécurité, police, défense",
+"source": "https://lajusticerecrute.fr/"
+},
+{
+"id": "É-018",
+"name": "Contrôleur - Contrôleuse des douanes",
+"cat": "B",
+"fp": "E",
+"routeIds": [
+"ctrl-douane"
+],
+"domain": "Économie, finances, contrôle",
+"source": "https://www.douane.gouv.fr/recrutement"
+},
+{
+"id": "É-019",
+"name": "Technicien - Technicienne de recherche et de formation",
+"cat": "B",
+"fp": "E",
+"routeIds": [
+"trf"
+],
+"domain": "Numérique, informatique",
+"source": "https://www.enseignementsup-recherche.gouv.fr/fr/recrutements/itrf"
+},
+{
+"id": "É-020",
+"name": "Agent administratif principal - Agente administrative principale DGFiP",
+"cat": "C",
+"fp": "E",
+"routeIds": [
+"agent-fip"
+],
+"domain": "Transversal / parcours ouvert",
+"source": "https://www.economie.gouv.fr/rejoignez-nous/agent-administratif-principal-des-finances-publiques-de-2eme-classe-externe-dgfip"
+},
+{
+"id": "É-021",
+"name": "Adjoint administratif - Adjointe administrative du ministère de l’Intérieur",
+"cat": "C",
+"fp": "E",
+"routeIds": [
+"adjoint-adm"
+],
+"domain": "Transversal / parcours ouvert",
+"source": "https://www.interieur.gouv.fr/recrutement"
+},
+{
+"id": "É-022",
+"name": "Agent - Agente de constatation des douanes",
+"cat": "C",
+"fp": "E",
+"routeIds": [
+"acd"
+],
+"domain": "Économie, finances, contrôle",
+"source": "https://www.douane.gouv.fr/recrutement"
+},
+{
+"id": "É-023",
+"name": "Adjoint administratif - Adjointe administrative de chancellerie",
+"cat": "C",
+"fp": "E",
+"routeIds": [
+"adj-chancellerie"
+],
+"domain": "Diplomatie et international",
+"source": "https://www.diplomatie.gouv.fr/fr/le-ministere/publications-programmes-et-documentation-institutionnelle/publications/annales-et-meilleures-copies/"
+},
+{
+"id": "T-024",
+"name": "Administrateur territorial - Administratrice territoriale",
+"cat": "A+",
+"fp": "T",
+"routeIds": [
+"admin-terr"
+],
+"domain": "Administration, droit, politiques publiques",
+"source": "https://www.cnfpt.fr/evoluer/preparations-aux-concours-examens-professionnels/decouvrir-concours-examens-professionnels/concours-dadministrateur-ou-administratrice-territorial/sujets-meilleures-copies-du-concours-dadministrateur-territorial/session-2025-sujets-concours"
+},
+{
+"id": "T-025",
+"name": "Ingénieur en chef territorial - Ingénieure en chef territoriale",
+"cat": "A+",
+"fp": "T",
+"routeIds": [
+"ingenieur-chef"
+],
+"domain": "Technique, urbanisme, infrastructures",
+"source": "https://www.concours-territorial.fr/epreuves.aspx?id=395"
+},
+{
+"id": "T-026",
+"name": "Attaché territorial - Attachée territoriale",
+"cat": "A",
+"fp": "T",
+"routeIds": [
+"attache-terr"
+],
+"domain": "Administration, droit, politiques publiques",
+"source": "https://www.concours-territorial.fr/epreuves.aspx?id=275"
+},
+{
+"id": "T-027",
+"name": "Ingénieur territorial - Ingénieure territoriale",
+"cat": "A",
+"fp": "T",
+"routeIds": [
+"ingenieur-terr"
+],
+"domain": "Technique, urbanisme, infrastructures",
+"source": "https://www.concours-territorial.fr/epreuves.aspx?id=327&spe=118"
+},
+{
+"id": "T-028",
+"name": "Conseiller territorial socio-éducatif - Conseillère territoriale socio-éducative",
+"cat": "A",
+"fp": "T",
+"routeIds": [
+"ctse"
+],
+"domain": "Solidarité, enfance, social",
+"source": "https://www.concours-territorial.fr/epreuves.aspx?id=254"
+},
+{
+"id": "T-029",
+"name": "Bibliothécaire territorial - Bibliothécaire territoriale",
+"cat": "A",
+"fp": "T",
+"routeIds": [
+"biblio-terr"
+],
+"domain": "Culture, bibliothèque, patrimoine",
+"source": "https://www.concours-territorial.fr/"
+},
+{
+"id": "T-030",
+"name": "Assistant socio-éducatif territorial - Assistante socio-éducative territoriale",
+"cat": "A",
+"fp": "T",
+"routeIds": [
+"ass",
+"educ"
+],
+"domain": "Solidarité, enfance, social",
+"source": "https://www.concours-territorial.fr/"
+},
+{
+"id": "T-031",
+"name": "Éducateur territorial - Éducatrice territoriale de jeunes enfants",
+"cat": "A",
+"fp": "T",
+"routeIds": [
+"eje-terr"
+],
+"domain": "Solidarité, enfance, social",
+"source": "https://www.concours-territorial.fr/"
+},
+{
+"id": "T-032",
+"name": "Directeur - Directrice de police municipale",
+"cat": "A",
+"fp": "T",
+"routeIds": [
+"dpm"
+],
+"domain": "Sécurité, police, défense",
+"source": "https://www.concours-territorial.fr/"
+},
+{
+"id": "T-033",
+"name": "Rédacteur territorial - Rédactrice territoriale",
+"cat": "B",
+"fp": "T",
+"routeIds": [
+"redacteur"
+],
+"domain": "Administration, droit, politiques publiques",
+"source": "https://www.concours-territorial.fr/epreuves.aspx?id=235"
+},
+{
+"id": "T-034",
+"name": "Rédacteur principal - Rédactrice principale de 2e classe",
+"cat": "B",
+"fp": "T",
+"routeIds": [
+"redacteur"
+],
+"domain": "Administration, droit, politiques publiques",
+"source": "https://www.concours-territorial.fr/epreuves.aspx?id=236"
+},
+{
+"id": "T-035",
+"name": "Technicien territorial - Technicienne territoriale",
+"cat": "B",
+"fp": "T",
+"routeIds": [
+"tech-terr"
+],
+"domain": "Technique, urbanisme, infrastructures",
+"source": "https://www.concours-territorial.fr/epreuves.aspx?id=281&spe=190"
+},
+{
+"id": "T-036",
+"name": "Animateur territorial - Animatrice territoriale",
+"cat": "B",
+"fp": "T",
+"routeIds": [
+"animateur"
+],
+"domain": "Animation, sport, jeunesse",
+"source": "https://www.concours-territorial.fr/epreuves.aspx?id=263"
+},
+{
+"id": "T-037",
+"name": "Chef - Cheffe de service de police municipale",
+"cat": "B",
+"fp": "T",
+"routeIds": [
+"csmp"
+],
+"domain": "Sécurité, police, défense",
+"source": "https://www.concours-territorial.fr/epreuves.aspx?id=314"
+},
+{
+"id": "T-038",
+"name": "Assistant - Assistante de conservation du patrimoine et des bibliothèques",
+"cat": "B",
+"fp": "T",
+"routeIds": [
+"acp"
+],
+"domain": "Culture, bibliothèque, patrimoine",
+"source": "https://www.concours-territorial.fr/"
+},
+{
+"id": "T-039",
+"name": "Éducateur - Éducatrice des activités physiques et sportives",
+"cat": "B",
+"fp": "T",
+"routeIds": [
+"etaps"
+],
+"domain": "Animation, sport, jeunesse",
+"source": "https://www.concours-territorial.fr/"
+},
+{
+"id": "T-040",
+"name": "Adjoint administratif principal - Adjointe administrative principale de 2e classe",
+"cat": "C",
+"fp": "T",
+"routeIds": [
+"adjoint-adm"
+],
+"domain": "Transversal / parcours ouvert",
+"source": "https://www.concours-territorial.fr/epreuves.aspx?id=279"
+},
+{
+"id": "T-041",
+"name": "Adjoint technique principal - Adjointe technique principale de 2e classe",
+"cat": "C",
+"fp": "T",
+"routeIds": [
+"adj-tech-terr"
+],
+"domain": "Technique, urbanisme, infrastructures",
+"source": "https://www.concours-territorial.fr/epreuves.aspx?id=283"
+},
+{
+"id": "T-042",
+"name": "ATSEM principal - ATSEM principale de 2e classe",
+"cat": "C",
+"fp": "T",
+"routeIds": [
+"atsem"
+],
+"domain": "Solidarité, enfance, social",
+"source": "https://www.concours-territorial.fr/epreuves.aspx?id=363"
+},
+{
+"id": "T-043",
+"name": "Agent de maîtrise territorial - Agente de maîtrise territoriale",
+"cat": "C",
+"fp": "T",
+"routeIds": [
+"agent-maitrise"
+],
+"domain": "Technique, urbanisme, infrastructures",
+"source": "https://www.concours-territorial.fr/epreuves.aspx?id=331&spe=24"
+},
+{
+"id": "T-044",
+"name": "Gardien-brigadier - Gardienne-brigadière de police municipale",
+"cat": "C",
+"fp": "T",
+"routeIds": [
+"police-mun"
+],
+"domain": "Sécurité, police, défense",
+"source": "https://concours-territorial.fr/calendrier.aspx?annee=2026&type=concours"
+},
+{
+"id": "T-045",
+"name": "Adjoint territorial d’animation principal - Adjointe territoriale d’animation principale de 2e classe",
+"cat": "C",
+"fp": "T",
+"routeIds": [
+"adj-anim"
+],
+"domain": "Animation, sport, jeunesse",
+"source": "https://concours-territorial.fr/calendrier.aspx?annee=2026&type=concours"
+},
+{
+"id": "T-046",
+"name": "Adjoint territorial du patrimoine principal - Adjointe territoriale du patrimoine principale de 2e classe",
+"cat": "C",
+"fp": "T",
+"routeIds": [
+"adj-patrimoine"
+],
+"domain": "Culture, bibliothèque, patrimoine",
+"source": "https://concours-territorial.fr/calendrier.aspx?annee=2026&type=concours"
+},
+{
+"id": "H-047",
+"name": "Directeur - Directrice d’hôpital (DH)",
+"cat": "A+",
+"fp": "H",
+"routeIds": [
+"dh"
+],
+"domain": "Administration, droit, politiques publiques",
+"source": "https://www.cng.sante.fr/candidats/concours/devenir-dh-d3s-ds/annales-rapports-jurys"
+},
+{
+"id": "H-048",
+"name": "Directeur - Directrice d’établissement sanitaire, social et médico-social (D3S)",
+"cat": "A+",
+"fp": "H",
+"routeIds": [
+"d3s"
+],
+"domain": "Solidarité, enfance, social",
+"source": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000049757827/2026-03-14"
+},
+{
+"id": "H-049",
+"name": "Attaché - Attachée d’administration hospitalière (AAH)",
+"cat": "A",
+"fp": "H",
+"routeIds": [
+"aah"
+],
+"domain": "Administration, droit, politiques publiques",
+"source": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000053403352"
+},
+{
+"id": "H-050",
+"name": "Directeur - Directrice des soins",
+"cat": "A",
+"fp": "H",
+"routeIds": [
+"dir-soins"
+],
+"domain": "Santé, soins, prévention",
+"source": "https://www.cng.sante.fr/candidats/concours/devenir-dh-d3s-ds/annales-rapports-jurys"
+},
+{
+"id": "H-051",
+"name": "Infirmier - Infirmière en soins généraux",
+"cat": "A",
+"fp": "H",
+"routeIds": [
+"ide"
+],
+"domain": "Santé, soins, prévention",
+"source": "https://www.onisep.fr/formation/comment-devenir-infirmier-ou-infirmiere"
+},
+{
+"id": "H-052",
+"name": "Psychologue hospitalier - Psychologue hospitalière",
+"cat": "A",
+"fp": "H",
+"routeIds": [
+"psy"
+],
+"domain": "Solidarité, enfance, social",
+"source": "https://concours.aphp.fr/informations-candidats/"
+},
+{
+"id": "H-053",
+"name": "Cadre de santé paramédical",
+"cat": "A",
+"fp": "H",
+"routeIds": [
+"cadre-sante"
+],
+"domain": "Santé, soins, prévention",
+"source": "https://concours.aphp.fr/informations-candidats/"
+},
+{
+"id": "H-054",
+"name": "Adjoint - Adjointe des cadres hospitaliers (ACH)",
+"cat": "B",
+"fp": "H",
+"routeIds": [
+"corps-9eeb8a61a6a9"
+],
+"domain": "Administration, droit, politiques publiques",
+"source": "https://concours.aphp.fr/informations-candidats/"
+},
+{
+"id": "H-055",
+"name": "Assistant médico-administratif - Assistante médico-administrative (AMA)",
+"cat": "B",
+"fp": "H",
+"routeIds": [
+"ama"
+],
+"domain": "Administration, droit, politiques publiques",
+"source": "https://concours.aphp.fr/informations-candidats/"
+},
+{
+"id": "H-056",
+"name": "Technicien supérieur hospitalier - Technicienne supérieure hospitalière",
+"cat": "B",
+"fp": "H",
+"routeIds": [
+"corps-5476869dee76"
+],
+"domain": "Technique, urbanisme, infrastructures",
+"source": "https://concours.aphp.fr/informations-candidats/"
+},
+{
+"id": "H-057",
+"name": "Aide-soignant - Aide-soignante",
+"cat": "B",
+"fp": "H",
+"routeIds": [
+"as"
+],
+"domain": "Santé, soins, prévention",
+"source": "https://www.onisep.fr/"
+},
+{
+"id": "H-058",
+"name": "Auxiliaire de puériculture",
+"cat": "B",
+"fp": "H",
+"routeIds": [
+"auxpuer"
+],
+"domain": "Solidarité, enfance, social",
+"source": "https://www.onisep.fr/"
+},
+{
+"id": "H-059",
+"name": "Adjoint administratif hospitalier - Adjointe administrative hospitalière",
+"cat": "C",
+"fp": "H",
+"routeIds": [
+"adjoint-adm"
+],
+"domain": "Transversal / parcours ouvert",
+"source": "https://concours.aphp.fr/informations-candidats/"
+},
+{
+"id": "H-060",
+"name": "Agent des services hospitaliers qualifié - Agente des services hospitaliers qualifiée (ASHQ)",
+"cat": "C",
+"fp": "H",
+"routeIds": [
+"ash"
+],
+"domain": "Transversal / parcours ouvert",
+"source": "https://concours.aphp.fr/informations-candidats/"
+},
+{
+"id": "H-061",
+"name": "Personnel ouvrier hospitalier qualifié",
+"cat": "C",
+"fp": "H",
+"routeIds": [
+"corps-3bcfcbcc7eb5"
+],
+"domain": "Technique, urbanisme, infrastructures",
+"source": "https://concours.aphp.fr/informations-candidats/"
+}
+]

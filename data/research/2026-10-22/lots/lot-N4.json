@@ -1,0 +1,111 @@
+[
+ {
+  "ref": "NEW-ispv",
+  "hints": {
+   "name": "Inspecteur - Inspectrice de santé publique vétérinaire (ISPV)",
+   "school": "École nationale des services vétérinaires (ENSV-FVI), Marcy-l’Étoile",
+   "cat": "A+",
+   "fp": "E",
+   "questions": "Voies (vétérinaires diplômés, internes) ; formation ; sessions.",
+   "sites": [
+    "https://www.ensv.vetagro-sup.fr",
+    "https://agriculture.gouv.fr/concours-et-examens-professionnels"
+   ]
+  }
+ },
+ {
+  "ref": "NEW-iae",
+  "hints": {
+   "name": "Ingénieur - Ingénieure de l’agriculture et de l’environnement (IAE)",
+   "school": "AgroParisTech / ENGEES (selon spécialité)",
+   "cat": "A",
+   "fp": "E",
+   "questions": "Voies ; formation ; sessions 2026/2027.",
+   "sites": [
+    "https://agriculture.gouv.fr/concours-et-examens-professionnels"
+   ]
+  }
+ },
+ {
+  "ref": "NEW-ipef",
+  "hints": {
+   "name": "Ingénieur - Ingénieure des ponts, des eaux et des forêts (IPEF)",
+   "school": "AgroParisTech et École des Ponts ParisTech",
+   "cat": "A+",
+   "fp": "E",
+   "questions": "Voies (X, écoles d’ingénieurs, concours externe docteurs, interne) ; sessions.",
+   "sites": [
+    "https://www.ecologie.gouv.fr",
+    "https://agriculture.gouv.fr"
+   ]
+  }
+ },
+ {
+  "ref": "NEW-enccrf",
+  "hints": {
+   "name": "Inspecteur - Inspectrice de la concurrence, de la consommation et de la répression des fraudes",
+   "school": "École nationale de la concurrence, de la consommation et de la répression des fraudes (ENCCRF), Montpellier",
+   "cat": "A",
+   "fp": "E",
+   "questions": "Voies ; formation ; sessions 2026/2027 ; postes.",
+   "sites": [
+    "https://www.economie.gouv.fr/dgccrf/recrutement"
+   ]
+  }
+ },
+ {
+  "ref": "NEW-spp",
+  "hints": {
+   "name": "Sapeur-pompier professionnel - Sapeuse-pompière professionnelle (caporal)",
+   "school": "SDIS (services départementaux d’incendie et de secours), formation en SDIS",
+   "cat": "C",
+   "fp": "T",
+   "questions": "Concours externe (SPP non officier) : conditions (18 ans, diplôme niveau 3, aptitude physique), épreuves, sessions 2026/2027 (organisés par les SDIS et centres de gestion).",
+   "sites": [
+    "https://www.concours-territorial.fr",
+    "https://www.pompiers.fr",
+    "https://www.interieur.gouv.fr"
+   ]
+  }
+ },
+ {
+  "ref": "NEW-lieutenant-spp",
+  "hints": {
+   "name": "Lieutenant - Lieutenante de sapeurs-pompiers professionnels",
+   "school": "École nationale supérieure des officiers de sapeurs-pompiers (ENSOSP), Aix-en-Provence",
+   "cat": "B",
+   "fp": "T",
+   "questions": "Voies ; conditions ; sessions ; formation ENSOSP.",
+   "sites": [
+    "https://www.ensosp.fr",
+    "https://www.concours-territorial.fr"
+   ]
+  }
+ },
+ {
+  "ref": "NEW-capitaine-spp",
+  "hints": {
+   "name": "Capitaine de sapeurs-pompiers professionnels",
+   "school": "ENSOSP, Aix-en-Provence",
+   "cat": "A",
+   "fp": "T",
+   "questions": "Voies ; conditions (bac+3) ; sessions ; formation.",
+   "sites": [
+    "https://www.ensosp.fr"
+   ]
+  }
+ },
+ {
+  "ref": "NEW-en3s",
+  "hints": {
+   "name": "Dirigeant - Dirigeante de la Sécurité sociale (concours de l’EN3S)",
+   "school": "École nationale supérieure de sécurité sociale (EN3S), Saint-Étienne",
+   "cat": "A+",
+   "fp": "E",
+   "questions": "Hors fonction publique (organismes de sécurité sociale, droit privé) mais service public : le préciser dans notes ; voies ; formation 18 mois rémunérée ; sessions 2026/2027.",
+   "sites": [
+    "https://www.en3s.fr"
+   ]
+  }
+ }
+]

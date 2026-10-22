@@ -1,0 +1,1096 @@
+[
+{
+"id": "greffier",
+"name": "Greffier·ère",
+"domain": "Justice",
+"fp": "E",
+"cat": "B",
+"lvl": 3,
+"prep": "Greffier",
+"cal": "greffier",
+"traits": [
+"equipe",
+"dedans",
+"droit",
+"ecrire",
+"organise",
+"meticuleux",
+"accueil"
+]
+},
+{
+"id": "cpip",
+"name": "Conseiller·ère pénitentiaire d’insertion et de probation",
+"domain": "Justice",
+"fp": "E",
+"cat": "A",
+"lvl": 4,
+"prep": "Conseiller pénitentiaire",
+"cal": "pénitentiaire",
+"traits": [
+"aider",
+"vulnerables",
+"ecrire",
+"droit",
+"sangfroid",
+"equipe"
+]
+},
+{
+"id": "dsg",
+"name": "Directeur·rice des services de greffe",
+"domain": "Justice",
+"fp": "E",
+"cat": "A",
+"lvl": 4,
+"prep": "Directeur des services de greffe",
+"cal": "greffe",
+"traits": [
+"manager",
+"organise",
+"droit",
+"chiffres"
+]
+},
+{
+"id": "educ-pjj",
+"name": "Éducateur·rice de la protection judiciaire de la jeunesse",
+"domain": "Justice",
+"fp": "E",
+"cat": "A",
+"lvl": 4,
+"prep": "Éducateur de la protection judiciaire",
+"cal": "protection judiciaire",
+"traits": [
+"enfants",
+"vulnerables",
+"aider",
+"equipe",
+"sangfroid",
+"horaires"
+]
+},
+{
+"id": "magistrat",
+"name": "Magistrat·e",
+"domain": "Justice",
+"fp": "E",
+"cat": "A+",
+"lvl": 5,
+"prep": "Magistrat",
+"cal": "magistrat",
+"traits": [
+"droit",
+"ecrire",
+"intellect",
+"public_parler",
+"sangfroid"
+]
+},
+{
+"id": "adjoint-adm",
+"name": "Adjoint·e administratif·ve",
+"domain": "Administration",
+"fp": "ETH",
+"cat": "C",
+"lvl": 0,
+"prep": null,
+"cal": "adjoint administratif",
+"traits": [
+"accueil",
+"organise",
+"dedans",
+"meticuleux",
+"equipe"
+]
+},
+{
+"id": "sa",
+"name": "Secrétaire administratif·ve",
+"domain": "Administration",
+"fp": "E",
+"cat": "B",
+"lvl": 2,
+"prep": "Secrétaire administratif",
+"cal": "secrétaire administratif",
+"traits": [
+"organise",
+"ecrire",
+"meticuleux",
+"teletravail",
+"dedans"
+]
+},
+{
+"id": "redacteur",
+"name": "Rédacteur·rice territorial·e",
+"domain": "Administration",
+"fp": "T",
+"cat": "B",
+"lvl": 2,
+"prep": "Rédacteur territorial",
+"cal": "rédacteur",
+"traits": [
+"organise",
+"ecrire",
+"droit",
+"accueil"
+]
+},
+{
+"id": "attache",
+"name": "Attaché·e d’administration de l’État",
+"domain": "Administration",
+"fp": "E",
+"cat": "A",
+"lvl": 4,
+"prep": "Attaché d’administration de l’État",
+"cal": "attaché",
+"traits": [
+"organise",
+"ecrire",
+"manager",
+"intellect",
+"teletravail"
+]
+},
+{
+"id": "attache-terr",
+"name": "Attaché·e territorial·e",
+"domain": "Administration",
+"fp": "T",
+"cat": "A",
+"lvl": 4,
+"prep": "Attaché territorial",
+"cal": "attaché territorial",
+"traits": [
+"manager",
+"organise",
+"ecrire",
+"public_parler",
+"pragmatique"
+]
+},
+{
+"id": "aah",
+"name": "Attaché·e d’administration hospitalière",
+"domain": "Santé",
+"fp": "H",
+"cat": "A",
+"lvl": 4,
+"prep": "Attaché d’administration hospitalière",
+"cal": "administration hospitalière",
+"traits": [
+"organise",
+"chiffres",
+"manager",
+"dedans"
+]
+},
+{
+"id": "admin-etat",
+"name": "Administrateur·rice de l’État",
+"domain": "Administration",
+"fp": "E",
+"cat": "A+",
+"lvl": 4,
+"prep": "Administrateur de l’État",
+"cal": "INSP",
+"traits": [
+"manager",
+"intellect",
+"ecrire",
+"public_parler",
+"mobilite"
+]
+},
+{
+"id": "admin-terr",
+"name": "Administrateur·rice territorial·e",
+"domain": "Administration",
+"fp": "T",
+"cat": "A+",
+"lvl": 4,
+"prep": "Administrateur territorial",
+"cal": "administrateur territorial",
+"traits": [
+"manager",
+"intellect",
+"public_parler",
+"pragmatique"
+]
+},
+{
+"id": "chancellerie",
+"name": "Secrétaire de chancellerie",
+"domain": "Administration",
+"fp": "E",
+"cat": "B",
+"lvl": 2,
+"prep": "Secrétaire de chancellerie",
+"cal": "chancellerie",
+"traits": [
+"langues",
+"mobilite",
+"organise",
+"accueil"
+]
+},
+{
+"id": "ctrl-fip",
+"name": "Contrôleur·se des finances publiques",
+"domain": "Finances",
+"fp": "E",
+"cat": "B",
+"lvl": 2,
+"prep": "Contrôleur des finances publiques",
+"cal": "contrôleurs des finances publiques",
+"traits": [
+"chiffres",
+"meticuleux",
+"droit",
+"accueil"
+]
+},
+{
+"id": "insp-fip",
+"name": "Inspecteur·rice des finances publiques",
+"domain": "Finances",
+"fp": "E",
+"cat": "A",
+"lvl": 4,
+"prep": "Inspecteur des finances publiques",
+"cal": "inspecteur des finances publiques",
+"traits": [
+"chiffres",
+"droit",
+"intellect",
+"manager"
+]
+},
+{
+"id": "ctrl-douane",
+"name": "Contrôleur·se des douanes",
+"domain": "Finances",
+"fp": "E",
+"cat": "B",
+"lvl": 2,
+"prep": "Contrôleur de la DGDDI",
+"cal": "douanes",
+"traits": [
+"dehors",
+"uniforme",
+"horaires",
+"mobilite",
+"sangfroid"
+]
+},
+{
+"id": "dgccrf",
+"name": "Inspecteur·rice de la concurrence et des fraudes (DGCCRF)",
+"domain": "Finances",
+"fp": "E",
+"cat": "A",
+"lvl": 4,
+"prep": "Inspecteur de la DGCCRF",
+"cal": "DGCCRF",
+"traits": [
+"droit",
+"meticuleux",
+"dehors",
+"sciences"
+]
+},
+{
+"id": "gpx",
+"name": "Gardien·ne de la paix",
+"domain": "Sécurité",
+"fp": "E",
+"cat": "B",
+"lvl": 2,
+"prep": "Gardien de la paix",
+"cal": "gardien de la paix",
+"traits": [
+"equipe",
+"dehors",
+"uniforme",
+"sangfroid",
+"horaires",
+"sport",
+"conduire"
+]
+},
+{
+"id": "pol-adj",
+"name": "Policier·ère adjoint·e",
+"domain": "Sécurité",
+"fp": "E",
+"cat": "X",
+"lvl": 0,
+"prep": null,
+"cal": null,
+"traits": [
+"equipe",
+"dehors",
+"uniforme",
+"sport",
+"accueil"
+]
+},
+{
+"id": "officier-police",
+"name": "Officier·ère de police",
+"domain": "Sécurité",
+"fp": "E",
+"cat": "A",
+"lvl": 4,
+"prep": "Officier de police",
+"cal": "officier de police",
+"traits": [
+"manager",
+"sangfroid",
+"droit",
+"uniforme",
+"horaires"
+]
+},
+{
+"id": "commissaire",
+"name": "Commissaire de police",
+"domain": "Sécurité",
+"fp": "E",
+"cat": "A+",
+"lvl": 5,
+"prep": "Commissaire de police",
+"cal": "commissaire de police",
+"traits": [
+"manager",
+"sangfroid",
+"droit",
+"public_parler",
+"uniforme"
+]
+},
+{
+"id": "sous-off-gend",
+"name": "Sous-officier·ère de gendarmerie",
+"domain": "Sécurité",
+"fp": "E",
+"cat": "B",
+"lvl": 2,
+"prep": "Sous-officier de gendarmerie",
+"cal": "gendarmerie",
+"traits": [
+"uniforme",
+"sport",
+"dehors",
+"equipe",
+"conduire",
+"horaires"
+]
+},
+{
+"id": "police-mun",
+"name": "Policier·ère municipal·e",
+"domain": "Sécurité",
+"fp": "T",
+"cat": "C",
+"lvl": 1,
+"prep": "police municipale",
+"cal": "police municipale",
+"traits": [
+"dehors",
+"uniforme",
+"accueil",
+"sangfroid",
+"conduire",
+"horaires"
+]
+},
+{
+"id": "spp",
+"name": "Sapeur·se-pompier·ère professionnel·le",
+"domain": "Sécurité",
+"fp": "T",
+"cat": "C",
+"lvl": 0,
+"prep": "sapeur-pompier",
+"cal": "sapeur",
+"traits": [
+"sport",
+"sangfroid",
+"equipe",
+"dehors",
+"horaires",
+"uniforme",
+"aider",
+"conduire"
+]
+},
+{
+"id": "tsef",
+"name": "Technicien·ne supérieur·e d’études et de fabrications",
+"domain": "Défense",
+"fp": "E",
+"cat": "B",
+"lvl": 3,
+"prep": null,
+"cal": "techniciens supérieurs d’études",
+"traits": [
+"sciences",
+"manuel",
+"meticuleux",
+"chiffres"
+]
+},
+{
+"id": "militaire",
+"name": "Militaire du rang",
+"domain": "Défense",
+"fp": "E",
+"cat": "X",
+"lvl": 0,
+"prep": null,
+"cal": null,
+"traits": [
+"sport",
+"uniforme",
+"equipe",
+"dehors",
+"mobilite",
+"charges"
+]
+},
+{
+"id": "tech-si",
+"name": "Technicien·ne des systèmes d’information",
+"domain": "Numérique",
+"fp": "ET",
+"cat": "B",
+"lvl": 2,
+"prep": null,
+"cal": "systèmes d’information",
+"traits": [
+"numerique",
+"manuel",
+"pragmatique",
+"accueil"
+]
+},
+{
+"id": "dev",
+"name": "Développeur·se",
+"domain": "Numérique",
+"fp": "ETH",
+"cat": "X",
+"lvl": 4,
+"prep": null,
+"cal": null,
+"traits": [
+"numerique",
+"intellect",
+"teletravail",
+"seul",
+"creer"
+]
+},
+{
+"id": "data",
+"name": "Data scientist, chef·fe de projet numérique",
+"domain": "Numérique",
+"fp": "ETH",
+"cat": "X",
+"lvl": 5,
+"prep": null,
+"cal": null,
+"traits": [
+"numerique",
+"chiffres",
+"intellect",
+"teletravail",
+"sciences"
+]
+},
+{
+"id": "tech-env",
+"name": "Technicien·ne de l’environnement",
+"domain": "Environnement",
+"fp": "E",
+"cat": "B",
+"lvl": 2,
+"prep": null,
+"cal": "environnement",
+"traits": [
+"dehors",
+"nature",
+"conduire",
+"sciences",
+"seul"
+]
+},
+{
+"id": "tsdd",
+"name": "Technicien·ne supérieur·e du développement durable",
+"domain": "Transports",
+"fp": "E",
+"cat": "B",
+"lvl": 2,
+"prep": "développement durable",
+"cal": "développement durable",
+"traits": [
+"dehors",
+"sciences",
+"chiffres",
+"conduire"
+]
+},
+{
+"id": "ipef",
+"name": "Ingénieur·e des ponts, des eaux et des forêts",
+"domain": "Environnement",
+"fp": "E",
+"cat": "A+",
+"lvl": 5,
+"prep": null,
+"cal": null,
+"traits": [
+"sciences",
+"intellect",
+"manager",
+"nature"
+]
+},
+{
+"id": "espaces-verts",
+"name": "Agent·e des espaces verts",
+"domain": "Environnement",
+"fp": "T",
+"cat": "C",
+"lvl": 0,
+"prep": null,
+"cal": null,
+"traits": [
+"dehors",
+"manuel",
+"nature",
+"charges",
+"equipe"
+]
+},
+{
+"id": "ingenieur-terr",
+"name": "Ingénieur·e territorial·e",
+"domain": "Transports",
+"fp": "T",
+"cat": "A",
+"lvl": 5,
+"prep": null,
+"cal": "ingénieur territorial",
+"traits": [
+"sciences",
+"manager",
+"chiffres",
+"dehors"
+]
+},
+{
+"id": "tech-terr",
+"name": "Technicien·ne territorial·e",
+"domain": "Transports",
+"fp": "T",
+"cat": "B",
+"lvl": 2,
+"prep": null,
+"cal": "technicien territorial",
+"traits": [
+"dehors",
+"sciences",
+"conduire",
+"manuel",
+"pragmatique"
+]
+},
+{
+"id": "collecte",
+"name": "Conducteur·rice de poids lourd, agent·e de collecte",
+"domain": "Transports",
+"fp": "T",
+"cat": "C",
+"lvl": 0,
+"prep": null,
+"cal": null,
+"traits": [
+"conduire",
+"dehors",
+"charges",
+"horaires",
+"equipe"
+]
+},
+{
+"id": "pe",
+"name": "Professeur·e des écoles",
+"domain": "Éducation",
+"fp": "E",
+"cat": "A",
+"lvl": 4,
+"prep": "Professeur des écoles",
+"cal": "professeur des écoles",
+"traits": [
+"enfants",
+"public_parler",
+"creer",
+"organise",
+"souplesse"
+]
+},
+{
+"id": "capes",
+"name": "Professeur·e de collège et lycée",
+"domain": "Éducation",
+"fp": "E",
+"cat": "A",
+"lvl": 4,
+"prep": null,
+"cal": "CAPES",
+"traits": [
+"public_parler",
+"intellect",
+"enfants",
+"ecrire"
+]
+},
+{
+"id": "cpe",
+"name": "Conseiller·ère principal·e d’éducation",
+"domain": "Éducation",
+"fp": "E",
+"cat": "A",
+"lvl": 4,
+"prep": null,
+"cal": "conseiller principal d’éducation",
+"traits": [
+"enfants",
+"manager",
+"sangfroid",
+"organise",
+"accueil"
+]
+},
+{
+"id": "aesh",
+"name": "Accompagnant·e d’élèves en situation de handicap (AESH)",
+"domain": "Éducation",
+"fp": "E",
+"cat": "X",
+"lvl": 0,
+"prep": null,
+"cal": null,
+"traits": [
+"enfants",
+"vulnerables",
+"aider",
+"souplesse"
+]
+},
+{
+"id": "atsem",
+"name": "Agent·e spécialisé·e des écoles maternelles (ATSEM)",
+"domain": "Éducation",
+"fp": "T",
+"cat": "C",
+"lvl": 1,
+"prep": null,
+"cal": "ATSEM",
+"traits": [
+"enfants",
+"aider",
+"equipe",
+"manuel",
+"souplesse"
+]
+},
+{
+"id": "cuisine",
+"name": "Cuisinier·ère en restauration collective",
+"domain": "Éducation",
+"fp": "TH",
+"cat": "C",
+"lvl": 1,
+"prep": null,
+"cal": null,
+"traits": [
+"cuisine",
+"manuel",
+"equipe",
+"organise",
+"horaires"
+]
+},
+{
+"id": "ide",
+"name": "Infirmier·ère",
+"domain": "Santé",
+"fp": "HT",
+"cat": "A",
+"lvl": 4,
+"prep": null,
+"cal": null,
+"traits": [
+"aider",
+"vulnerables",
+"equipe",
+"horaires",
+"sangfroid"
+]
+},
+{
+"id": "as",
+"name": "Aide-soignant·e",
+"domain": "Santé",
+"fp": "H",
+"cat": "B",
+"lvl": 1,
+"prep": null,
+"cal": null,
+"traits": [
+"aider",
+"vulnerables",
+"equipe",
+"horaires",
+"manuel",
+"charges"
+]
+},
+{
+"id": "auxpuer",
+"name": "Auxiliaire de puériculture",
+"domain": "Santé",
+"fp": "HT",
+"cat": "B",
+"lvl": 1,
+"prep": null,
+"cal": null,
+"traits": [
+"enfants",
+"aider",
+"equipe",
+"horaires"
+]
+},
+{
+"id": "ash",
+"name": "Agent·e des services hospitaliers",
+"domain": "Santé",
+"fp": "H",
+"cat": "C",
+"lvl": 0,
+"prep": null,
+"cal": null,
+"traits": [
+"aider",
+"manuel",
+"equipe",
+"horaires",
+"charges"
+]
+},
+{
+"id": "manip",
+"name": "Manipulateur·rice en électroradiologie médicale",
+"domain": "Santé",
+"fp": "H",
+"cat": "A",
+"lvl": 4,
+"prep": null,
+"cal": null,
+"traits": [
+"sciences",
+"numerique",
+"aider",
+"meticuleux"
+]
+},
+{
+"id": "ama",
+"name": "Assistant·e médico-administratif·ve",
+"domain": "Santé",
+"fp": "H",
+"cat": "B",
+"lvl": 2,
+"prep": "Secrétaire médical",
+"cal": null,
+"traits": [
+"organise",
+"accueil",
+"ecrire",
+"numerique",
+"dedans"
+]
+},
+{
+"id": "psy",
+"name": "Psychologue",
+"domain": "Santé",
+"fp": "HTE",
+"cat": "A",
+"lvl": 5,
+"prep": null,
+"cal": null,
+"traits": [
+"aider",
+"vulnerables",
+"intellect",
+"seul"
+]
+},
+{
+"id": "dh",
+"name": "Directeur·rice d’hôpital",
+"domain": "Santé",
+"fp": "H",
+"cat": "A+",
+"lvl": 4,
+"prep": "Directeur d’hôpital",
+"cal": "directeur d’hôpital",
+"traits": [
+"manager",
+"chiffres",
+"public_parler",
+"sangfroid"
+]
+},
+{
+"id": "d3s",
+"name": "Directeur·rice d’établissement sanitaire, social et médico-social (D3S)",
+"domain": "Social",
+"fp": "H",
+"cat": "A+",
+"lvl": 4,
+"prep": "Directeur d’établissement sanitaire",
+"cal": "D3S",
+"traits": [
+"manager",
+"vulnerables",
+"organise",
+"aider"
+]
+},
+{
+"id": "ass",
+"name": "Assistant·e de service social",
+"domain": "Social",
+"fp": "ETH",
+"cat": "A",
+"lvl": 4,
+"prep": null,
+"cal": null,
+"traits": [
+"aider",
+"vulnerables",
+"ecrire",
+"accueil",
+"seul"
+]
+},
+{
+"id": "educ",
+"name": "Éducateur·rice spécialisé·e",
+"domain": "Social",
+"fp": "TH",
+"cat": "A",
+"lvl": 4,
+"prep": null,
+"cal": null,
+"traits": [
+"aider",
+"vulnerables",
+"enfants",
+"equipe",
+"horaires"
+]
+},
+{
+"id": "animateur",
+"name": "Animateur·rice territorial·e",
+"domain": "Social",
+"fp": "T",
+"cat": "B",
+"lvl": 2,
+"prep": null,
+"cal": "animateur",
+"traits": [
+"enfants",
+"creer",
+"public_parler",
+"equipe",
+"souplesse"
+]
+},
+{
+"id": "agent-social",
+"name": "Agent·e social·e",
+"domain": "Social",
+"fp": "T",
+"cat": "C",
+"lvl": 0,
+"prep": null,
+"cal": null,
+"traits": [
+"aider",
+"vulnerables",
+"manuel",
+"souplesse"
+]
+},
+{
+"id": "insp-travail",
+"name": "Inspecteur·rice du travail",
+"domain": "Social",
+"fp": "E",
+"cat": "A",
+"lvl": 4,
+"prep": "Inspecteur du travail",
+"cal": "inspecteur du travail",
+"traits": [
+"droit",
+"dehors",
+"public_parler",
+"sangfroid",
+"mobilite"
+]
+},
+{
+"id": "acp",
+"name": "Assistant·e de conservation du patrimoine",
+"domain": "Culture",
+"fp": "T",
+"cat": "B",
+"lvl": 2,
+"prep": null,
+"cal": "conservation du patrimoine",
+"traits": [
+"creer",
+"accueil",
+"meticuleux",
+"dedans"
+]
+},
+{
+"id": "magasinier",
+"name": "Magasinier·ère des bibliothèques",
+"domain": "Culture",
+"fp": "E",
+"cat": "C",
+"lvl": 0,
+"prep": null,
+"cal": null,
+"traits": [
+"organise",
+"meticuleux",
+"charges",
+"dedans",
+"accueil"
+]
+},
+{
+"id": "conservateur",
+"name": "Conservateur·rice du patrimoine",
+"domain": "Culture",
+"fp": "ET",
+"cat": "A+",
+"lvl": 4,
+"prep": "Conservateur du patrimoine",
+"cal": "conservateur",
+"traits": [
+"intellect",
+"creer",
+"ecrire",
+"meticuleux",
+"manager"
+]
+},
+{
+"id": "etaps",
+"name": "Éducateur·rice des activités physiques et sportives",
+"domain": "Sport",
+"fp": "T",
+"cat": "B",
+"lvl": 2,
+"prep": null,
+"cal": "activités physiques",
+"traits": [
+"sport",
+"enfants",
+"dehors",
+"public_parler",
+"equipe"
+]
+},
+{
+"id": "atrf",
+"name": "Adjoint·e technique de recherche et de formation",
+"domain": "Recherche",
+"fp": "E",
+"cat": "C",
+"lvl": 0,
+"prep": null,
+"cal": null,
+"traits": [
+"manuel",
+"sciences",
+"meticuleux",
+"equipe"
+]
+},
+{
+"id": "trf",
+"name": "Technicien·ne de recherche et de formation",
+"domain": "Recherche",
+"fp": "E",
+"cat": "B",
+"lvl": 2,
+"prep": null,
+"cal": null,
+"traits": [
+"sciences",
+"manuel",
+"meticuleux",
+"numerique"
+]
+},
+{
+"id": "ie",
+"name": "Ingénieur·e d’études",
+"domain": "Recherche",
+"fp": "E",
+"cat": "A",
+"lvl": 4,
+"prep": null,
+"cal": null,
+"traits": [
+"sciences",
+"intellect",
+"numerique",
+"chiffres"
+]
+},
+{
+"id": "chercheur",
+"name": "Chercheur·se",
+"domain": "Recherche",
+"fp": "E",
+"cat": "A+",
+"lvl": 6,
+"prep": null,
+"cal": null,
+"traits": [
+"sciences",
+"intellect",
+"langues",
+"mobilite",
+"seul",
+"ecrire"
+]
+}
+]

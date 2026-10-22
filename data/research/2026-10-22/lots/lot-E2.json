@@ -1,0 +1,212 @@
+[
+ {
+  "ref": "É-012",
+  "name": "Directeur - Directrice des services pénitentiaires",
+  "cat": "A",
+  "fp": "E",
+  "priorite_dates": true,
+  "officialUrl": "https://www.justice.gouv.fr/metiers",
+  "sessionLinks": [],
+  "annalesLinks": [],
+  "current": {
+   "voies": "Externe — selon concours",
+   "condition": "Diplôme, âge et autres conditions selon corps",
+   "epreuves": "Écrits, oraux et éventuelles épreuves physiques selon le concours ; liste fixée par l’arrêté d’ouverture",
+   "metiers": "Directeur des services pénitentiaires",
+   "domain": "Justice, droit, greffe",
+   "source": "https://www.justice.gouv.fr/metiers"
+  }
+ },
+ {
+  "ref": "T-030",
+  "name": "Assistant socio-éducatif territorial - Assistante socio-éducative territoriale",
+  "cat": "A",
+  "fp": "T",
+  "priorite_dates": true,
+  "officialUrl": "https://www.concours-territorial.fr/",
+  "sessionLinks": [],
+  "annalesLinks": [],
+  "current": {
+   "voies": "Concours sur épreuves ou titres",
+   "condition": "Diplômes professionnels éventuellement réglementés",
+   "epreuves": "Épreuves selon la voie et la spécialité ; recrutement sur titres possible",
+   "metiers": "Assistant socio-éducatif territorial",
+   "domain": "Solidarité, enfance, social",
+   "source": "https://www.concours-territorial.fr/"
+  }
+ },
+ {
+  "ref": "T-040",
+  "name": "Adjoint administratif principal - Adjointe administrative principale de 2e classe",
+  "cat": "C",
+  "fp": "T",
+  "priorite_dates": true,
+  "officialUrl": "https://concours.aphp.fr/informations-candidats/",
+  "sessionLinks": [],
+  "annalesLinks": [],
+  "current": {
+   "voies": "Externe",
+   "condition": "Conditions fixées par avis",
+   "epreuves": "Voie externe : écrit français (1 h 30) et tableau numérique (1 h) ; admission : entretien (15 min) et bureautique (15 min) ; facultatif : langue écrite OU interrogation de droit/finances.",
+   "metiers": "Adjoint administratif territorial",
+   "domain": "Transversal / parcours ouvert",
+   "source": "https://www.concours-territorial.fr/epreuves.aspx?id=279"
+  }
+ },
+ {
+  "ref": "É-001",
+  "name": "INSP — voie générale",
+  "cat": "A+",
+  "fp": "E",
+  "priorite_dates": false,
+  "officialUrl": "https://www.insp.gouv.fr/concours/ressources-utiles/sujets-meilleures-copies-et-rapports-des-jurys/voie-generale",
+  "sessionLinks": [],
+  "annalesLinks": [
+   [
+    "Annales (2026, 2025, 2024, 2023, 2022)",
+    "https://www.insp.gouv.fr/concours/ressources-utiles/sujets-meilleures-copies-et-rapports-des-jurys/voie-generale"
+   ]
+  ],
+  "current": {
+   "voies": "Externe, interne, 3e, docteurs",
+   "condition": "Conditions différentes selon voie ; concours de haut niveau",
+   "epreuves": "Épreuves écrites et orales selon voie et réforme ; voir annales et arrêté",
+   "metiers": "Administrateur de l’État ; direction et pilotage des politiques publiques",
+   "domain": "Administration, droit, politiques publiques",
+   "source": "https://www.insp.gouv.fr/concours/ressources-utiles/sujets-meilleures-copies-et-rapports-des-jurys/voie-generale"
+  }
+ },
+ {
+  "ref": "É-007",
+  "name": "Conseiller principal - Conseillère principale d’éducation (CPE)",
+  "cat": "A",
+  "fp": "E",
+  "priorite_dates": false,
+  "officialUrl": "https://www.education.gouv.fr/les-epreuves-du-concours-externe-bac-3-de-cpe-450225",
+  "sessionLinks": [
+   [
+    "Session 2026",
+    "https://www.education.gouv.fr/les-epreuves-du-concours-externe-bac-3-de-cpe-450225"
+   ]
+  ],
+  "annalesLinks": [
+   [
+    "Annales (2026 (bac+3 et bac+5 transitoire) ; archives)",
+    "https://www.education.gouv.fr/les-sujets-et-rapports-des-jurys-des-concours-de-cpe-7580"
+   ]
+  ],
+  "current": {
+   "voies": "Concours externe bac+3",
+   "condition": "Licence bac+3 pour nouvelle voie",
+   "epreuves": "Deux écrits (dissertation et analyse dossier politique éducative), deux oraux",
+   "metiers": "Conseiller principal d’éducation",
+   "domain": "Enseignement, éducation",
+   "source": "https://www.education.gouv.fr/les-epreuves-du-concours-externe-bac-3-de-cpe-450225"
+  }
+ },
+ {
+  "ref": "É-015",
+  "name": "Greffier - Greffière des services judiciaires",
+  "cat": "B",
+  "fp": "E",
+  "priorite_dates": false,
+  "officialUrl": "https://www.justice.gouv.fr/metiers/greffier",
+  "sessionLinks": [],
+  "annalesLinks": [],
+  "current": {
+   "voies": "Externe",
+   "condition": "Vérifier le diplôme exigé pour la voie ouverte",
+   "epreuves": "Épreuves écrites et orales selon arrêté session",
+   "metiers": "Greffier - Greffière des services judiciaires",
+   "domain": "Justice, droit, greffe",
+   "source": "https://www.justice.gouv.fr/metiers/greffier"
+  }
+ },
+ {
+  "ref": "T-024",
+  "name": "Administrateur territorial - Administratrice territoriale",
+  "cat": "A+",
+  "fp": "T",
+  "priorite_dates": false,
+  "officialUrl": "https://www.cnfpt.fr/evoluer/preparations-aux-concours-examens-professionnels/decouvrir-concours-examens-professionnels/concours-dadministrateur-ou-administratrice-territorial/sujets-meilleures-copies-du-concours-dadministrateur-territorial/session-2025-sujets-concours",
+  "sessionLinks": [],
+  "annalesLinks": [
+   [
+    "Annales (2025, 2024 et années antérieures)",
+    "https://www.cnfpt.fr/evoluer/concours-examens-professionnels/concours-dadministrateurrice-territoriale/sujets-meilleures-copies/national"
+   ]
+  ],
+  "current": {
+   "voies": "Externe, interne, 3e",
+   "condition": "Conditions spécifiques du concours CNFPT",
+   "epreuves": "Compositions droit public, économie, finances ; note de synthèse/propositions ; oraux",
+   "metiers": "Administrateur territorial ; direction générale des services (selon nomination)",
+   "domain": "Administration, droit, politiques publiques",
+   "source": "https://www.cnfpt.fr/evoluer/preparations-aux-concours-examens-professionnels/decouvrir-concours-examens-professionnels/concours-dadministrateur-ou-administratrice-territorial/sujets-meilleures-copies-du-concours-dadministrateur-territorial/session-2025-sujets-concours"
+  }
+ },
+ {
+  "ref": "T-036",
+  "name": "Animateur territorial - Animatrice territoriale",
+  "cat": "B",
+  "fp": "T",
+  "priorite_dates": false,
+  "officialUrl": "https://www.concours-territorial.fr/epreuves.aspx?id=263",
+  "sessionLinks": [
+   [
+    "Session 2025",
+    "https://www.concours-territorial.fr/epreuves.aspx?id=263"
+   ]
+  ],
+  "annalesLinks": [],
+  "current": {
+   "voies": "Externe",
+   "condition": "Diplôme/qualification selon grade",
+   "epreuves": "3 à 5 questions à partir d’un dossier ; entretien",
+   "metiers": "Animateur territorial",
+   "domain": "Animation, sport, jeunesse",
+   "source": "https://www.concours-territorial.fr/epreuves.aspx?id=263"
+  }
+ },
+ {
+  "ref": "H-049",
+  "name": "Attaché - Attachée d’administration hospitalière (AAH)",
+  "cat": "A",
+  "fp": "H",
+  "priorite_dates": false,
+  "officialUrl": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000053403352",
+  "sessionLinks": [
+   [
+    "Session 2026",
+    "https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000050396673/2026-05-25"
+   ]
+  ],
+  "annalesLinks": [],
+  "current": {
+   "voies": "Externe / interne / 3e",
+   "condition": "Conditions CNG selon voie",
+   "epreuves": "Note rédigée sur dossier et questions à réponse courte ; oraux précisés dans l’avis du concours",
+   "metiers": "Attaché d’administration hospitalière",
+   "domain": "Administration, droit, politiques publiques",
+   "source": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000053403352"
+  }
+ },
+ {
+  "ref": "H-056",
+  "name": "Technicien supérieur hospitalier - Technicienne supérieure hospitalière",
+  "cat": "B",
+  "fp": "H",
+  "priorite_dates": false,
+  "officialUrl": "https://concours.aphp.fr/informations-candidats/",
+  "sessionLinks": [],
+  "annalesLinks": [],
+  "current": {
+   "voies": "Concours selon spécialité",
+   "condition": "Diplôme technique selon spécialité",
+   "epreuves": "Épreuves techniques/entretien selon session",
+   "metiers": "Technicien supérieur hospitalier",
+   "domain": "Technique, urbanisme, infrastructures",
+   "source": "https://concours.aphp.fr/informations-candidats/"
+  }
+ }
+]

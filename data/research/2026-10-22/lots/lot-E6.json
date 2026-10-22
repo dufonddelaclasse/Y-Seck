@@ -1,0 +1,236 @@
+[
+ {
+  "ref": "T-028",
+  "name": "Conseiller territorial socio-éducatif - Conseillère territoriale socio-éducative",
+  "cat": "A",
+  "fp": "T",
+  "priorite_dates": true,
+  "officialUrl": "https://www.concours-territorial.fr/epreuves.aspx?id=254",
+  "sessionLinks": [],
+  "annalesLinks": [],
+  "current": {
+   "voies": "Externe",
+   "condition": "Diplôme/expérience professionnels selon voie",
+   "epreuves": "Note sur dossier en action sociale + entretien ; se référer au texte",
+   "metiers": "Conseiller territorial socio-éducatif",
+   "domain": "Solidarité, enfance, social",
+   "source": "https://www.concours-territorial.fr/epreuves.aspx?id=254"
+  }
+ },
+ {
+  "ref": "T-037",
+  "name": "Chef - Cheffe de service de police municipale",
+  "cat": "B",
+  "fp": "T",
+  "priorite_dates": true,
+  "officialUrl": "https://www.concours-territorial.fr/epreuves.aspx?id=314",
+  "sessionLinks": [
+   [
+    "Session 2026",
+    "https://www.concours-territorial.fr/epreuves.aspx?id=314"
+   ]
+  ],
+  "annalesLinks": [],
+  "current": {
+   "voies": "Externe",
+   "condition": "Bac ou équivalence ; nationalité française",
+   "epreuves": "Note dossier ; questions droit public et pénal ; entretien selon avis",
+   "metiers": "Chef de service de police municipale",
+   "domain": "Sécurité, police, défense",
+   "source": "https://www.concours-territorial.fr/epreuves.aspx?id=314"
+  }
+ },
+ {
+  "ref": "H-048",
+  "name": "Directeur - Directrice d’établissement sanitaire, social et médico-social (D3S)",
+  "cat": "A+",
+  "fp": "H",
+  "priorite_dates": true,
+  "officialUrl": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000049757827/2026-03-14",
+  "sessionLinks": [
+   [
+    "Session 2024-2026",
+    "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000049757827/2026-03-14"
+   ]
+  ],
+  "annalesLinks": [
+   [
+    "Annales (2021 à 2026)",
+    "https://www.cng.sante.fr/candidats/concours/devenir-dh-d3s-ds/annales-rapports-jurys"
+   ]
+  ],
+  "current": {
+   "voies": "Concours externe / interne / 3e",
+   "condition": "Conditions CNG selon voie",
+   "epreuves": "Note organisation/gestion ; compositions droit/finances/économie/santé ; oraux selon voie",
+   "metiers": "Directeur d’établissement sanitaire, social et médico-social",
+   "domain": "Solidarité, enfance, social",
+   "source": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000049757827/2026-03-14"
+  }
+ },
+ {
+  "ref": "É-005",
+  "name": "Professeur - Professeure des écoles (CRPE externe bac+3)",
+  "cat": "A",
+  "fp": "E",
+  "priorite_dates": false,
+  "officialUrl": "https://www.education.gouv.fr/la-reforme-de-la-formation-initiale-des-professeurs-462747",
+  "sessionLinks": [
+   [
+    "Session 2026",
+    "https://www.devenirenseignant.gouv.fr/les-epreuves-du-concours-externe-bac3-de-recrutement-de-professeurs-des-ecoles-1380"
+   ],
+   [
+    "Session 2027",
+    "https://www.devenirenseignant.gouv.fr/crpe-bac-3-epreuve-orale-de-francais-ou-de-mathematiques-1661"
+   ]
+  ],
+  "annalesLinks": [
+   [
+    "Annales (Selon discipline et voie; vérifier session)",
+    "https://www.devenirenseignant.gouv.fr/ressources"
+   ]
+  ],
+  "current": {
+   "voies": "Concours externe",
+   "condition": "Licence : voie externe bac+3 ouverte depuis 2026",
+   "epreuves": "2 écrits disciplinaires/applications + 2 oraux ; consulter session bac+3",
+   "metiers": "Professeur des écoles",
+   "domain": "Enseignement, éducation",
+   "source": "https://www.education.gouv.fr/la-reforme-de-la-formation-initiale-des-professeurs-462747"
+  }
+ },
+ {
+  "ref": "É-013",
+  "name": "Contrôleur - Contrôleuse des finances publiques",
+  "cat": "B",
+  "fp": "E",
+  "priorite_dates": false,
+  "officialUrl": "https://www.economie.gouv.fr/rejoignez-nous/controleur-des-finances-publiques-de-2eme-classe-externe-dgfip?language=fr",
+  "sessionLinks": [
+   [
+    "Session 2026",
+    "https://www.economie.gouv.fr/rejoignez-nous/controleur-des-finances-publiques-de-2eme-classe-externe-dgfip?language=fr"
+   ]
+  ],
+  "annalesLinks": [
+   [
+    "Annales (2026)",
+    "https://www.economie.gouv.fr/rejoignez-nous/controleur-des-finances-publiques-de-2eme-classe-externe-dgfip?language=fr"
+   ]
+  ],
+  "current": {
+   "voies": "Externe",
+   "condition": "Baccalauréat ou équivalence selon arrêté",
+   "epreuves": "Analyse de dossier ; QCM/QRC option (droit, maths, comptabilité, géopolitique) ; oral",
+   "metiers": "Contrôleur des finances publiques",
+   "domain": "Économie, finances, contrôle",
+   "source": "https://www.economie.gouv.fr/rejoignez-nous/controleur-des-finances-publiques-de-2eme-classe-externe-dgfip?language=fr"
+  }
+ },
+ {
+  "ref": "É-020",
+  "name": "Agent administratif principal - Agente administrative principale DGFiP",
+  "cat": "C",
+  "fp": "E",
+  "priorite_dates": false,
+  "officialUrl": "https://www.economie.gouv.fr/rejoignez-nous/agent-administratif-principal-des-finances-publiques-de-2eme-classe-externe-dgfip",
+  "sessionLinks": [],
+  "annalesLinks": [
+   [
+    "Annales (Non confirmée)",
+    "https://www.economie.gouv.fr/rejoignez-nous"
+   ]
+  ],
+  "current": {
+   "voies": "Externe",
+   "condition": "Conditions de diplôme selon grade et recrutement",
+   "epreuves": "QCM, tests/épreuves et oral selon arrêté ; sujets officiels disponibles",
+   "metiers": "Agent administratif principal des finances publiques",
+   "domain": "Transversal / parcours ouvert",
+   "source": "https://www.economie.gouv.fr/rejoignez-nous/agent-administratif-principal-des-finances-publiques-de-2eme-classe-externe-dgfip"
+  }
+ },
+ {
+  "ref": "T-033",
+  "name": "Rédacteur territorial - Rédactrice territoriale",
+  "cat": "B",
+  "fp": "T",
+  "priorite_dates": false,
+  "officialUrl": "https://www.concours-territorial.fr/epreuves.aspx?id=235",
+  "sessionLinks": [
+   [
+    "Session 2025",
+    "https://www.concours-territorial.fr/epreuves.aspx?id=235"
+   ]
+  ],
+  "annalesLinks": [
+   [
+    "Annales (2025, 2023, 2021)",
+    "https://www.concours-territorial.fr/preparation.aspx?id=324"
+   ]
+  ],
+  "current": {
+   "voies": "Externe",
+   "condition": "Bac ou équivalence",
+   "epreuves": "Questions domaine au choix ; note dossier ; entretien formation/projet",
+   "metiers": "Rédacteur territorial ; gestionnaire administratif de collectivité",
+   "domain": "Administration, droit, politiques publiques",
+   "source": "https://www.concours-territorial.fr/epreuves.aspx?id=235"
+  }
+ },
+ {
+  "ref": "T-044",
+  "name": "Gardien-brigadier - Gardienne-brigadière de police municipale",
+  "cat": "C",
+  "fp": "T",
+  "priorite_dates": false,
+  "officialUrl": "https://concours-territorial.fr/calendrier.aspx?annee=2026&type=concours",
+  "sessionLinks": [],
+  "annalesLinks": [],
+  "current": {
+   "voies": "Externe",
+   "condition": "Conditions/diplômes selon statut et avis",
+   "epreuves": "Épreuves propres à la spécialité et à la voie",
+   "metiers": "Gardien-brigadier de police municipale",
+   "domain": "Sécurité, police, défense",
+   "source": "https://concours-territorial.fr/calendrier.aspx?annee=2026&type=concours"
+  }
+ },
+ {
+  "ref": "H-054",
+  "name": "Adjoint - Adjointe des cadres hospitaliers (ACH)",
+  "cat": "B",
+  "fp": "H",
+  "priorite_dates": false,
+  "officialUrl": "https://concours.aphp.fr/informations-candidats/",
+  "sessionLinks": [],
+  "annalesLinks": [],
+  "current": {
+   "voies": "Concours selon établissement",
+   "condition": "Conditions de diplôme selon grade, concours",
+   "epreuves": "Écrits et oral spécifiques à l’avis d’ouverture ; pas de tronc commun national garanti",
+   "metiers": "Adjoint des cadres hospitaliers",
+   "domain": "Administration, droit, politiques publiques",
+   "source": "https://concours.aphp.fr/informations-candidats/"
+  }
+ },
+ {
+  "ref": "H-060",
+  "name": "Agent des services hospitaliers qualifié - Agente des services hospitaliers qualifiée (ASHQ)",
+  "cat": "C",
+  "fp": "H",
+  "priorite_dates": false,
+  "officialUrl": "https://concours.aphp.fr/informations-candidats/",
+  "sessionLinks": [],
+  "annalesLinks": [],
+  "current": {
+   "voies": "Recrutement sans concours fréquent",
+   "condition": "Selon poste et établissement",
+   "epreuves": "Sélection sur dossier / entretien selon offre",
+   "metiers": "Agent des services hospitaliers qualifié",
+   "domain": "Transversal / parcours ouvert",
+   "source": "https://concours.aphp.fr/informations-candidats/"
+  }
+ }
+]

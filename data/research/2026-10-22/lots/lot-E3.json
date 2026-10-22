@@ -1,0 +1,216 @@
+[
+ {
+  "ref": "É-019",
+  "name": "Technicien - Technicienne de recherche et de formation",
+  "cat": "B",
+  "fp": "E",
+  "priorite_dates": true,
+  "officialUrl": "https://www.enseignementsup-recherche.gouv.fr/fr/recrutements/itrf",
+  "sessionLinks": [],
+  "annalesLinks": [],
+  "current": {
+   "voies": "Externe selon branche",
+   "condition": "Titre/diplôme selon emploi-type",
+   "epreuves": "Épreuves techniques ou sélection selon emploi-type et session",
+   "metiers": "Technicien de recherche et de formation",
+   "domain": "Numérique, informatique",
+   "source": "https://www.enseignementsup-recherche.gouv.fr/fr/recrutements/itrf"
+  }
+ },
+ {
+  "ref": "T-031",
+  "name": "Éducateur territorial - Éducatrice territoriale de jeunes enfants",
+  "cat": "A",
+  "fp": "T",
+  "priorite_dates": true,
+  "officialUrl": "https://www.concours-territorial.fr/",
+  "sessionLinks": [],
+  "annalesLinks": [],
+  "current": {
+   "voies": "Concours sur épreuves ou titres",
+   "condition": "Diplômes professionnels éventuellement réglementés",
+   "epreuves": "Épreuves selon la voie et la spécialité ; recrutement sur titres possible",
+   "metiers": "Éducateur territorial de jeunes enfants",
+   "domain": "Solidarité, enfance, social",
+   "source": "https://www.concours-territorial.fr/"
+  }
+ },
+ {
+  "ref": "T-041",
+  "name": "Adjoint technique principal - Adjointe technique principale de 2e classe",
+  "cat": "C",
+  "fp": "T",
+  "priorite_dates": true,
+  "officialUrl": "https://www.concours-territorial.fr/epreuves.aspx?id=283",
+  "sessionLinks": [
+   [
+    "Session 2026",
+    "https://www.concours-territorial.fr/epreuves.aspx?id=283"
+   ]
+  ],
+  "annalesLinks": [],
+  "current": {
+   "voies": "Externe",
+   "condition": "Diplôme professionnel/équivalence selon spécialité",
+   "epreuves": "Questions pratiques et techniques ; entretien dans option choisie",
+   "metiers": "Adjoint technique territorial",
+   "domain": "Technique, urbanisme, infrastructures",
+   "source": "https://www.concours-territorial.fr/epreuves.aspx?id=283"
+  }
+ },
+ {
+  "ref": "É-002",
+  "name": "IRA — attaché - attachée d’administration de l’État",
+  "cat": "A",
+  "fp": "E",
+  "priorite_dates": false,
+  "officialUrl": "https://www.fonction-publique.gouv.fr/devenir-agent-public/concours-et-formation-des-ira",
+  "sessionLinks": [
+   [
+    "Session 2026",
+    "https://ira-inscription.fonction-publique.gouv.fr/presentation.html"
+   ],
+   [
+    "Session 2027",
+    "https://www.fonction-publique.gouv.fr/toutes-les-actualites/une-nouvelle-epreuve-ecrite-dadmissibilite-pour-les-concours-dacces-aux-instituts-du-service-public-ex-ira"
+   ]
+  ],
+  "annalesLinks": [
+   [
+    "Annales (Sessions antérieures, année à sélectionner)",
+    "https://www.fonction-publique.gouv.fr/devenir-agent-public/concours-et-formation-des-ira"
+   ]
+  ],
+  "current": {
+   "voies": "Externe / interne / 3e",
+   "condition": "Externe : diplôme niveau licence (bac+3) ou équivalence",
+   "epreuves": "Session 2026 : un écrit (cas pratique) et un entretien. À partir de 2027 : deux écrits (cas pratique + épreuve mixte QCM/QRC) et entretien",
+   "metiers": "Attaché d’administration de l’État ; gestionnaire public ; responsable de politique publique",
+   "domain": "Administration, droit, politiques publiques",
+   "source": "https://www.fonction-publique.gouv.fr/devenir-agent-public/concours-et-formation-des-ira"
+  }
+ },
+ {
+  "ref": "É-008",
+  "name": "Officier - Officière de police",
+  "cat": "A",
+  "fp": "E",
+  "priorite_dates": false,
+  "officialUrl": "https://www.police-nationale.interieur.gouv.fr/nous-rejoindre",
+  "sessionLinks": [],
+  "annalesLinks": [
+   [
+    "Annales (2026, 2025, 2024, 2023, 2022)",
+    "https://www.police-nationale.interieur.gouv.fr/nous-rejoindre/nos-voies-dacces/devenir-policier/off/ext"
+   ]
+  ],
+  "current": {
+   "voies": "Externe — selon concours",
+   "condition": "Diplôme, âge et autres conditions selon corps",
+   "epreuves": "Écrits, oraux et éventuelles épreuves physiques selon le concours ; liste fixée par l’arrêté d’ouverture",
+   "metiers": "Officier de police ; enquête ; commandement",
+   "domain": "Sécurité, police, défense",
+   "source": "https://www.police-nationale.interieur.gouv.fr/nous-rejoindre"
+  }
+ },
+ {
+  "ref": "É-016",
+  "name": "Gardien - Gardienne de la paix",
+  "cat": "B",
+  "fp": "E",
+  "priorite_dates": false,
+  "officialUrl": "https://www.police-nationale.interieur.gouv.fr/nous-rejoindre/nos-voies-dacces/devenir-policier/gpx",
+  "sessionLinks": [],
+  "annalesLinks": [
+   [
+    "Annales (2026, 2025, 2024, 2023)",
+    "https://www.police-nationale.interieur.gouv.fr/nous-rejoindre/nos-voies-dacces/devenir-policier/gpx/ext"
+   ]
+  ],
+  "current": {
+   "voies": "Externe",
+   "condition": "Baccalauréat et conditions propres au concours",
+   "epreuves": "Cas pratiques écrits, évaluations/épreuves physiques et orales ; vérifier modalités 2026",
+   "metiers": "Gardien de la paix",
+   "domain": "Sécurité, police, défense",
+   "source": "https://www.police-nationale.interieur.gouv.fr/nous-rejoindre/nos-voies-dacces/devenir-policier/gpx"
+  }
+ },
+ {
+  "ref": "T-025",
+  "name": "Ingénieur en chef territorial - Ingénieure en chef territoriale",
+  "cat": "A+",
+  "fp": "T",
+  "priorite_dates": false,
+  "officialUrl": "https://www.concours-territorial.fr/epreuves.aspx?id=395",
+  "sessionLinks": [],
+  "annalesLinks": [],
+  "current": {
+   "voies": "Externe / interne",
+   "condition": "Diplôme technique réglementaire / équivalence",
+   "epreuves": "Notes de synthèse et propositions, projet, entretien ; options techniques selon voie",
+   "metiers": "Ingénieur en chef territorial ; direction technique",
+   "domain": "Technique, urbanisme, infrastructures",
+   "source": "https://www.concours-territorial.fr/epreuves.aspx?id=395"
+  }
+ },
+ {
+  "ref": "T-038",
+  "name": "Assistant - Assistante de conservation du patrimoine et des bibliothèques",
+  "cat": "B",
+  "fp": "T",
+  "priorite_dates": false,
+  "officialUrl": "https://www.concours-territorial.fr/",
+  "sessionLinks": [],
+  "annalesLinks": [],
+  "current": {
+   "voies": "Externe",
+   "condition": "Diplôme/qualifications selon concours",
+   "epreuves": "Épreuves variables selon spécialité et voie",
+   "metiers": "Assistant de conservation du patrimoine et des bibliothèques",
+   "domain": "Culture, bibliothèque, patrimoine",
+   "source": "https://www.concours-territorial.fr/"
+  }
+ },
+ {
+  "ref": "H-051",
+  "name": "Infirmier - Infirmière en soins généraux",
+  "cat": "A",
+  "fp": "H",
+  "priorite_dates": false,
+  "officialUrl": "https://www.onisep.fr/formation/comment-devenir-infirmier-ou-infirmiere",
+  "sessionLinks": [
+   [
+    "Session 2026",
+    "https://www.onisep.fr/formation/comment-devenir-infirmier-ou-infirmiere"
+   ]
+  ],
+  "annalesLinks": [],
+  "current": {
+   "voies": "Diplôme d’État / recrutement sur titres",
+   "condition": "Diplôme d’État d’infirmier (DEI)",
+   "epreuves": "Admission IFSI sur dossier pour bacheliers ; ensuite recrutement selon modalités employeur",
+   "metiers": "Infirmier en soins généraux (diplôme d’État obligatoire)",
+   "domain": "Santé, soins, prévention",
+   "source": "https://www.onisep.fr/formation/comment-devenir-infirmier-ou-infirmiere"
+  }
+ },
+ {
+  "ref": "H-057",
+  "name": "Aide-soignant - Aide-soignante",
+  "cat": "B",
+  "fp": "H",
+  "priorite_dates": false,
+  "officialUrl": "https://www.onisep.fr/",
+  "sessionLinks": [],
+  "annalesLinks": [],
+  "current": {
+   "voies": "Diplôme d’État / recrutement sur titres",
+   "condition": "DEAS (diplôme d’État d’aide-soignant)",
+   "epreuves": "Accès IFAS selon sélection ; recrutement après diplôme, sans annales de concours généraliste",
+   "metiers": "Aide-soignant (diplôme d’État)",
+   "domain": "Santé, soins, prévention",
+   "source": "https://www.onisep.fr/"
+  }
+ }
+]

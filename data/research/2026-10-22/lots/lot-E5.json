@@ -1,0 +1,217 @@
+[
+ {
+  "ref": "É-023",
+  "name": "Adjoint administratif - Adjointe administrative de chancellerie",
+  "cat": "C",
+  "fp": "E",
+  "priorite_dates": true,
+  "officialUrl": "https://concours.aphp.fr/informations-candidats/",
+  "sessionLinks": [],
+  "annalesLinks": [],
+  "current": {
+   "voies": "Externe",
+   "condition": "Conditions fixées par arrêté",
+   "epreuves": "Épreuves écrites/orales selon session ; annales MEAE",
+   "metiers": "Adjoint administratif de chancellerie",
+   "domain": "Diplomatie et international",
+   "source": "https://www.diplomatie.gouv.fr/fr/le-ministere/publications-programmes-et-documentation-institutionnelle/publications/annales-et-meilleures-copies/"
+  }
+ },
+ {
+  "ref": "T-035",
+  "name": "Technicien territorial - Technicienne territoriale",
+  "cat": "B",
+  "fp": "T",
+  "priorite_dates": true,
+  "officialUrl": "https://www.concours-territorial.fr/epreuves.aspx?id=281&spe=190",
+  "sessionLinks": [
+   [
+    "Session 2026",
+    "https://www.concours-territorial.fr/epreuves.aspx?id=281&spe=190"
+   ]
+  ],
+  "annalesLinks": [],
+  "current": {
+   "voies": "Externe",
+   "condition": "Diplôme scientifique/technique selon spécialité ou équivalence",
+   "epreuves": "Questions techniques sur dossier ; entretien spécialité",
+   "metiers": "Technicien territorial",
+   "domain": "Technique, urbanisme, infrastructures",
+   "source": "https://www.concours-territorial.fr/epreuves.aspx?id=281&spe=190"
+  }
+ },
+ {
+  "ref": "H-047",
+  "name": "Directeur - Directrice d’hôpital (DH)",
+  "cat": "A+",
+  "fp": "H",
+  "priorite_dates": true,
+  "officialUrl": "https://www.cng.sante.fr/candidats/concours/devenir-dh-d3s-ds/annales-rapports-jurys",
+  "sessionLinks": [
+   [
+    "Session 2026",
+    "https://www.cng.sante.fr/candidats/concours/devenir-dh-d3s-ds/annales-rapports-jurys"
+   ]
+  ],
+  "annalesLinks": [
+   [
+    "Annales (2021 à 2026)",
+    "https://www.cng.sante.fr/candidats/concours/devenir-dh-d3s-ds/annales-rapports-jurys"
+   ]
+  ],
+  "current": {
+   "voies": "Concours externe / interne / 3e",
+   "condition": "Conditions du concours CNG",
+   "epreuves": "Compositions, notes et entretiens selon arrêté en vigueur ; annales CNG",
+   "metiers": "Directeur d’hôpital ; direction d’établissement public",
+   "domain": "Administration, droit, politiques publiques",
+   "source": "https://www.cng.sante.fr/candidats/concours/devenir-dh-d3s-ds/annales-rapports-jurys"
+  }
+ },
+ {
+  "ref": "É-004",
+  "name": "Inspecteur - Inspectrice du travail",
+  "cat": "A",
+  "fp": "E",
+  "priorite_dates": false,
+  "officialUrl": "https://travail-emploi.gouv.fr/calendrier-et-modalites-dinscription-aux-concours-du-ministere-du-travail",
+  "sessionLinks": [
+   [
+    "Session 2026",
+    "https://travail-emploi.gouv.fr/annales-du-concours-de-linspection-du-travail-2026"
+   ]
+  ],
+  "annalesLinks": [
+   [
+    "Annales (2026)",
+    "https://travail-emploi.gouv.fr/annales-du-concours-de-linspection-du-travail-2026"
+   ]
+  ],
+  "current": {
+   "voies": "Concours externe",
+   "condition": "Licence (bac+3) selon la notice 2026",
+   "epreuves": "Composition intervention publique ; QRC/cas pratiques droit travail/UE ; composition optionnelle ; oraux",
+   "metiers": "Inspecteur du travail ; contrôleur du respect du droit du travail",
+   "domain": "Administration, droit, politiques publiques",
+   "source": "https://travail-emploi.gouv.fr/calendrier-et-modalites-dinscription-aux-concours-du-ministere-du-travail"
+  }
+ },
+ {
+  "ref": "É-010",
+  "name": "Inspecteur - Inspectrice des douanes",
+  "cat": "A",
+  "fp": "E",
+  "priorite_dates": false,
+  "officialUrl": "https://www.douane.gouv.fr/recrutement",
+  "sessionLinks": [],
+  "annalesLinks": [],
+  "current": {
+   "voies": "Externe — selon concours",
+   "condition": "Diplôme, âge et autres conditions selon corps",
+   "epreuves": "Écrits, oraux et éventuelles épreuves physiques selon le concours ; liste fixée par l’arrêté d’ouverture",
+   "metiers": "Inspecteur des douanes ; contrôle ; enquête douanière",
+   "domain": "Économie, finances, contrôle",
+   "source": "https://www.douane.gouv.fr/recrutement"
+  }
+ },
+ {
+  "ref": "É-018",
+  "name": "Contrôleur - Contrôleuse des douanes",
+  "cat": "B",
+  "fp": "E",
+  "priorite_dates": false,
+  "officialUrl": "https://www.douane.gouv.fr/recrutement",
+  "sessionLinks": [],
+  "annalesLinks": [],
+  "current": {
+   "voies": "Externe",
+   "condition": "Conditions et spécialités selon branche",
+   "epreuves": "Écrits, oraux et éventuels tests physiques selon branche et concours",
+   "metiers": "Contrôleur des douanes",
+   "domain": "Économie, finances, contrôle",
+   "source": "https://www.douane.gouv.fr/recrutement"
+  }
+ },
+ {
+  "ref": "T-027",
+  "name": "Ingénieur territorial - Ingénieure territoriale",
+  "cat": "A",
+  "fp": "T",
+  "priorite_dates": false,
+  "officialUrl": "https://www.concours-territorial.fr/epreuves.aspx?id=327&spe=118",
+  "sessionLinks": [
+   [
+    "Session 2027",
+    "https://www.concours-territorial.fr/epreuves.aspx?id=327&spe=118"
+   ]
+  ],
+  "annalesLinks": [],
+  "current": {
+   "voies": "Externe",
+   "condition": "Titre/diplôme scientifique ou technique / équivalence selon texte",
+   "epreuves": "Note sur dossier dans la spécialité ; entretien technique ; langue facultative",
+   "metiers": "Ingénieur territorial ; responsable technique ; chargé d’opérations",
+   "domain": "Technique, urbanisme, infrastructures",
+   "source": "https://www.concours-territorial.fr/epreuves.aspx?id=327&spe=118"
+  }
+ },
+ {
+  "ref": "T-043",
+  "name": "Agent de maîtrise territorial - Agente de maîtrise territoriale",
+  "cat": "C",
+  "fp": "T",
+  "priorite_dates": false,
+  "officialUrl": "https://www.concours-territorial.fr/epreuves.aspx?id=331&spe=24",
+  "sessionLinks": [
+   [
+    "Session 2027",
+    "https://www.concours-territorial.fr/epreuves.aspx?id=331&spe=24"
+   ]
+  ],
+  "annalesLinks": [],
+  "current": {
+   "voies": "Externe",
+   "condition": "Qualification ou diplôme professionnel selon voies",
+   "epreuves": "Problèmes de mathématiques ; cas pratique ; entretien",
+   "metiers": "Agent de maîtrise territorial",
+   "domain": "Technique, urbanisme, infrastructures",
+   "source": "https://www.concours-territorial.fr/epreuves.aspx?id=331&spe=24"
+  }
+ },
+ {
+  "ref": "H-053",
+  "name": "Cadre de santé paramédical",
+  "cat": "A",
+  "fp": "H",
+  "priorite_dates": false,
+  "officialUrl": "https://concours.aphp.fr/informations-candidats/",
+  "sessionLinks": [],
+  "annalesLinks": [],
+  "current": {
+   "voies": "Concours/recrutement après qualification",
+   "condition": "Qualification et expérience professionnelle requises",
+   "epreuves": "Parcours professionnel et sélection selon IFCS/établissement",
+   "metiers": "Cadre de santé paramédical (qualification et expérience requises)",
+   "domain": "Santé, soins, prévention",
+   "source": "https://concours.aphp.fr/informations-candidats/"
+  }
+ },
+ {
+  "ref": "H-059",
+  "name": "Adjoint administratif hospitalier - Adjointe administrative hospitalière",
+  "cat": "C",
+  "fp": "H",
+  "priorite_dates": false,
+  "officialUrl": "https://concours.aphp.fr/informations-candidats/",
+  "sessionLinks": [],
+  "annalesLinks": [],
+  "current": {
+   "voies": "Sans concours selon grade / concours éventuel",
+   "condition": "Conditions selon grade et avis",
+   "epreuves": "Étude du dossier/entretien selon recrutement ; pas d’annales systématiques",
+   "metiers": "Adjoint administratif hospitalier",
+   "domain": "Transversal / parcours ouvert",
+   "source": "https://concours.aphp.fr/informations-candidats/"
+  }
+ }
+]

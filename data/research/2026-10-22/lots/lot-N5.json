@@ -1,0 +1,137 @@
+[
+ {
+  "ref": "NEW-saint-cyr",
+  "hints": {
+   "name": "Officier - Officière de l’armée de Terre",
+   "school": "Académie militaire de Saint-Cyr Coëtquidan",
+   "cat": "A",
+   "fp": "E",
+   "questions": "Voies d’accès (concours après classes préparatoires, sur titres, officiers sous contrat) ; conditions d’âge ; sessions 2026/2027 ; statut militaire : le préciser.",
+   "sites": [
+    "https://www.sengager.fr",
+    "https://www.saint-cyr.terre.defense.gouv.fr"
+   ]
+  }
+ },
+ {
+  "ref": "NEW-navale",
+  "hints": {
+   "name": "Officier - Officière de marine",
+   "school": "École navale, Lanvéoc-Poulmic",
+   "cat": "A",
+   "fp": "E",
+   "questions": "Voies ; conditions ; sessions.",
+   "sites": [
+    "https://www.ecole-navale.fr",
+    "https://www.lamarinerecrute.fr"
+   ]
+  }
+ },
+ {
+  "ref": "NEW-air",
+  "hints": {
+   "name": "Officier - Officière de l’armée de l’Air et de l’Espace",
+   "school": "École de l’air et de l’espace, Salon-de-Provence",
+   "cat": "A",
+   "fp": "E",
+   "questions": "Voies ; conditions ; sessions.",
+   "sites": [
+    "https://www.ecole-air-espace.fr",
+    "https://devenir-aviateur.fr"
+   ]
+  }
+ },
+ {
+  "ref": "NEW-sous-officier-armees",
+  "hints": {
+   "name": "Sous-officier - Sous-officière des armées",
+   "school": "ENSOA (Saint-Maixent), École de maistrance (Brest), EFSOAA (Rochefort)",
+   "cat": "B",
+   "fp": "E",
+   "questions": "Recrutement sur dossier et tests plutôt que concours : le préciser ; conditions (bac) ; sessions ou recrutement continu.",
+   "sites": [
+    "https://www.sengager.fr",
+    "https://www.lamarinerecrute.fr",
+    "https://devenir-aviateur.fr"
+   ]
+  }
+ },
+ {
+  "ref": "NEW-commissaire-armees",
+  "hints": {
+   "name": "Commissaire des armées",
+   "school": "École des commissaires des armées (ECA), Salon-de-Provence",
+   "cat": "A",
+   "fp": "E",
+   "questions": "Voies (concours sur titres master, interne) ; sessions.",
+   "sites": [
+    "https://www.defense.gouv.fr/sca"
+   ]
+  }
+ },
+ {
+  "ref": "NEW-esa",
+  "hints": {
+   "name": "Médecin des armées (élève officier médecin)",
+   "school": "École de santé des armées (ESA), Lyon-Bron",
+   "cat": "A",
+   "fp": "E",
+   "questions": "Concours après le bac (accès PASS/LAS militaire) ; conditions ; sessions.",
+   "sites": [
+    "https://www.defense.gouv.fr/sante"
+   ]
+  }
+ },
+ {
+  "ref": "NEW-agregation",
+  "hints": {
+   "name": "Professeur agrégé - Professeure agrégée (agrégation)",
+   "school": "Ministère de l’Éducation nationale (formation en INSPE / stage)",
+   "cat": "A",
+   "fp": "E",
+   "questions": "Voies (externe, interne, spéciale docteurs) ; disciplines ; conditions (master) ; sessions 2026/2027 avec dates d’inscription et d’écrits ; sujets.",
+   "sites": [
+    "https://www.devenirenseignant.gouv.fr"
+   ]
+  }
+ },
+ {
+  "ref": "NEW-caplp",
+  "hints": {
+   "name": "Professeur - Professeure de lycée professionnel (CAPLP)",
+   "school": "Ministère de l’Éducation nationale",
+   "cat": "A",
+   "fp": "E",
+   "questions": "Voies ; conditions (bac+3 réforme 2025) ; sessions.",
+   "sites": [
+    "https://www.devenirenseignant.gouv.fr"
+   ]
+  }
+ },
+ {
+  "ref": "NEW-capeps",
+  "hints": {
+   "name": "Professeur - Professeure d’éducation physique et sportive (CAPEPS)",
+   "school": "Ministère de l’Éducation nationale",
+   "cat": "A",
+   "fp": "E",
+   "questions": "Voies ; conditions ; sessions.",
+   "sites": [
+    "https://www.devenirenseignant.gouv.fr"
+   ]
+  }
+ },
+ {
+  "ref": "NEW-psyen",
+  "hints": {
+   "name": "Psychologue de l’Éducation nationale (PsyEN)",
+   "school": "Ministère de l’Éducation nationale",
+   "cat": "A",
+   "fp": "E",
+   "questions": "Spécialités (EDA, EDO) ; conditions (master de psychologie) ; sessions.",
+   "sites": [
+    "https://www.devenirenseignant.gouv.fr"
+   ]
+  }
+ }
+]
