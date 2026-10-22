@@ -193,8 +193,10 @@ assert(!tabbar('accueil').includes('href="#/concours"'));
 assert(screens.accueil().includes('href="#/concours"'),'Le tableau de bord conserve l’accès concours.');
 assert(screens.etudes('greffier').includes('École nationale des greffes'));
 assert(screens.etudes('greffier').includes('href="#/preparer/greffier"'));
-assert(screens.prepa('privees','greffier').includes('href="#/preparer/greffier"'));
-assert(!screens.prepa('privees','greffier').includes('Ipesup'));
+// Préparations privées : simple information, sans liste d’organismes payants (partenariats à venir).
+assert(!screens.prepa('privees','greffier').includes('Ipesup')&&screens.prepa('privees','greffier')===screens.preparer('greffier'));
+S.prepBudget='2';
+assert(screens.preparer('greffier').includes('<div class="prep prep-static">')&&screens.preparer('greffier').includes('Des préparations privées existent à distance ou en présentiel. Les coûts varient en fonction des écoles.')&&!screens.preparer('greffier').includes('href="#/prepa/privees'));
 assert(screens.bibliographie('greffier').includes('href="#/ressources-biblio/greffier"'));
 assert(screens.handicap('dev').includes('href="#/sans-concours/dev"'));
 Object.assign(S,{calCat:'A',calFp:'Tous',calQ:'',calView:'upcoming'});

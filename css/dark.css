@@ -814,6 +814,8 @@ html:where(.dark).dark .sheet-content button.chip.category-choice[data-action="m
   html:where(.dark) .btn.outline:hover { background:var(--surface); border-color:var(--lilac); color:var(--blue); }
   html:where(.dark) .prep-page .btn.outline:hover, html:where(.dark) .prep-page button.chip:not(.on):hover { background:transparent; border-color:var(--theme-btn,var(--blue)); color:var(--ink); }
 }
+:where(html.dark) .prep.prep-static:hover { border-color:var(--line); }
+:where(html.dark) .prep-page .prep.prep-static:hover { border-color:var(--theme-tint,var(--lilac)); }
 
 /* Retouches */
 html.dark { --brand:#8F7BFF; --blue:#A493FF; --accent:#7C66FF; --accent-hover:#9785FF; --theme-btn:var(--brand); --red:#FF6B6B; --surface:#1E1E22; }

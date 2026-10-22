@@ -1757,6 +1757,8 @@
             '<div class="talents-bourse"><b>' + esc(D.talentsGrantLabel || '5 000 €') + ' / an</b><span>Bourse Talents ' + esc(D.talentsGrantYear || '2026-2027') + ', pour les élèves des Prépas Talents.</span></div>' +
             '<a class="btn theme talents-cta" href="#/prepa/' + p.id + (job?'/'+job.id:'') + '">Découvrir les prépas Talents</a></div></div>';
         }
+        /* Préparations privées : simple information, sans lien vers une liste d’organismes. */
+        if (p.id === 'privees') return '<div class="prep prep-static"><div class="prep-top"><span class="prep-ico" aria-hidden="true">' + I.book + '</span><span class="price">' + esc(p.price) + '</span></div><h2 class="h3 no-icon">' + sig(p.t) + '</h2><p>' + esc(p.d) + '</p></div>';
         return '<a class="prep" href="#/prepa/' + p.id + (job?'/'+job.id:'') + '"><div class="prep-top"><span class="prep-ico" aria-hidden="true">' + I.book + '</span><span class="price">' + esc(p.price) + '</span></div><h2 class="h3 no-icon">' + sig(p.t) + '</h2>' +
           '<p>' + esc(p.d) + '</p><span class="prep-foot"><span class="more">Voir le détail' + I.chev + '</span></span></a>';
       }).join('') + '</div>' +
@@ -1811,7 +1813,8 @@
   screens.prepa = function (id, arg2) {
     var contextJob=jobById(arg2);
     var p = D.preps.filter(function (x) { return x.id === id; })[0];
-    if (!p || (id==='talents' && S.boursier!=='Oui')) return contextJob?screens.preparer(contextJob.id):screens.prepas();
+    /* Préparations privées : pas de liste d’organismes payants pour l’instant (partenariats à venir), la page renvoie vers Se préparer. */
+    if (!p || id==='privees' || (id==='talents' && S.boursier!=='Oui')) return contextJob?screens.preparer(contextJob.id):screens.prepas();
     var head = '<main class="screen top-tight">' + back(contextJob?prepHref(contextJob):'#/prepas',contextJob?'Se préparer':'Prépas') +
       '<span class="eyebrow">' + esc(p.price) + '</span><h1 class="sm">' + sig(p.t) + '</h1>';
     var foot = '</main>' + tabbar(contextJob?'metiers':'prepas');
@@ -1850,17 +1853,6 @@
           return '<div class="list-row static top"><span class="pin-ico" aria-hidden="true">' + I.pin + '</span><div class="main"><span class="name sm">' + esc(x.name) + '</span><span class="meta">' + esc(x.city + ' · ' + REG[regionOf(x.dep)]) + '</span><span class="meta long">' + esc(x.note) + '</span></div></div>';
         }).join('') : '<p class="empty">Aucun établissement listé dans cette région.</p>') + '</div>' + foot;
     }
-    /* privées */
-    var cats = {};
-    (contextJob?[contextJob]:myJobs()).forEach(function (j) { jobCategories(j).forEach(function(c){cats[c]=true;}); });
-    return head +
-      '<p class="body">Payantes, à distance ou en présentiel. Elles ne remplacent pas l’inscription au concours. Comparez les tarifs et demandez les taux de réussite.</p>' +
-      '<div class="list">' + D.privees.filter(function(x){return !contextJob||x.tags.split(' ').some(function(c){return cats[c];});}).map(function (x) {
-        var fit = x.tags.split(' ').some(function (t) { return cats[t]; }) && S.domains.length;
-        return '<div class="list-row static top"><div class="main"><span class="name sm">' + esc(x.name) + '</span><span class="meta">' + esc(x.mode + ' · concours ' + x.tags) + '</span><span class="meta long">' + esc(x.note) + '</span>' +
-          (fit ? '<span class="fits"><span class="fit on">' + (contextJob?'Préparation de catégorie '+jobCategories(contextJob).join(', '):'Prépare à des concours de '+(isParent()?'ses':'vos')+' choix') + '</span></span>' : '') + '</div></div>';
-      }).join('') + '</div>' +
-      '<p class="small m0">Liste non exhaustive, sans classement ni partenariat.</p>' + foot;
   };
 
   var RESOURCE_KINDS = {annales:'Annales officielles',sujet:'Sujet',rapport:'Rapport de jury',copie:'Meilleure copie',entrainement:'Entraînement',annuaire:'Collection d’annales',bibliographie:'Bibliographie'};

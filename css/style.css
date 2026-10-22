@@ -2280,3 +2280,7 @@ html.crios .profile-footer { bottom:calc(86px + env(safe-area-inset-bottom, 0px)
   html .btn.outline:hover { background:var(--surface); border-color:var(--lilac); color:var(--blue); }
   html .prep-page .btn.outline:hover, html .prep-page button.chip:not(.on):hover { background:transparent; border-color:var(--theme-btn,var(--blue)); color:var(--ink); }
 }
+/* Préparations privées : bloc d’information, sans lien. */
+.prep.prep-static { cursor:default; }
+.prep.prep-static:hover { border-color:var(--line); }
+.prep-page .prep.prep-static:hover { border-color:var(--theme-tint,var(--lilac)); }
