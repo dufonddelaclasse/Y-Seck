@@ -2192,10 +2192,11 @@ html.crios .profile-footer { bottom:calc(86px + env(safe-area-inset-bottom, 0px)
 .explore-switch button { flex:1; display:flex; align-items:center; justify-content:center; min-height:40px; padding:0 8px; border:0; border-radius:999px; background:transparent; color:#55555C; font:inherit; font-size:.9375rem; font-weight:500; cursor:pointer; }
 .explore-switch button.on { background:var(--brand); color:#FFF; }
 .bourse-switch { margin:0 0 4px; }
-/* Prépas Talents : le bouton de découverte ferme le bloc de la bourse. */
-.bourse { flex-wrap:wrap; }
-.bourse > div { flex:1 1 0; min-width:0; }
-.bourse .bourse-cta { flex:1 1 100%; margin-top:6px; }
+/* Prépas Talents : la bourse et le bouton de découverte ferment la carte. */
+.talents-bourse { display:flex; flex-direction:column; gap:2px; margin-top:10px; }
+.talents-bourse b { font-size:1.375rem; font-weight:500; letter-spacing:-0.02em; }
+.talents-bourse span { font-size:.875rem; line-height:1.4; color:#55555C; }
+.app .prep.hi.talents-card .talents-cta { margin-top:8px; }
 /* Stages : encadrés bordés de la couleur du concours. */
 .ref-tip.stage-tip { border:1.5px solid var(--theme, var(--blue)); }
 /* Fiche concours : bouton Information (feuille avec la description du concours). */
