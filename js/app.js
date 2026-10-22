@@ -1269,7 +1269,7 @@
     var search=D.stagesAdvice.filter(function(a){return /rechercher/.test(norm(a.domain));})[0];
     var noNetwork=D.stagesAdvice.filter(function(a){return /sans reseau/.test(norm(a.domain));})[0];
     return '<section class="stack mt-m" id="stages"><h2 class="section-heading">'+I.route+'<span>Stage de '+(level==='Troisième'?'3e':'seconde')+'</span></h2>'+
-      [general,themed].filter(Boolean).map(function(a){return '<div class="ref-tip"><b>'+esc(a.device)+'</b><p>'+esc(a.advice)+'</p><p class="small">'+esc(a.tip)+'</p><p class="small">Où : '+esc(a.places)+'</p></div>';}).join('')+
+      [general,themed].filter(Boolean).map(function(a){return '<div class="ref-tip stage-tip"><b>'+esc(a.device)+'</b><p>'+esc(a.advice)+'</p><p class="small">'+esc(a.tip)+'</p><p class="small">Où : '+esc(a.places)+'</p></div>';}).join('')+
       (noNetwork?'<p class="small">'+esc(noNetwork.advice)+'</p>':'')+(search?ext(search.source,'Chercher un stage sur 1 élève 1 stage','link-plain'):'')+'</section>';
   }
   /* ---------- Fiche concours : frise façon itinéraire de transport, du point de départ au concours ---------- */
@@ -1670,17 +1670,21 @@
     return '<section class="stack mt-l" id="aides"><h2 class="section-heading no-icon">'+I.book+'Aides</h2>' +
       '<a class="btn outline" href="#/annales'+(job?'/'+job.id:'')+'">'+I.book+'Annales et rapports de jury</a>' +
       '<a class="btn outline" href="#/bibliographie'+(job?'/'+job.id:'')+'">Recommandations bibliographiques</a></section><section class="stack mt-l" id="preparations"><h2 class="section-heading no-icon" id="prep-title" tabindex="-1">'+I.pin+'Prépas</h2>' +
-      '<button type="button" class="switch-row" role="switch" aria-checked="' + on + '" data-action="toggleBoursier"><span>' + (isParent() ? 'Mon enfant est boursier·e' : 'Je suis boursier·e') + '</span><span class="switch" aria-hidden="true"></span></button>' +
+      '<div class="explore-switch bourse-switch" role="group" aria-label="' + (isParent() ? 'Mon enfant est-il boursier ?' : 'Êtes-vous boursier ?') + '">' + [['Oui', 'Boursier·e'], ['Non', 'Non boursier·e']].map(function (o) {
+        var pressed = (o[0] === 'Oui') === on;
+        return '<button type="button" class="' + (pressed ? 'on' : '') + '" aria-pressed="' + pressed + '" data-action="toggleBoursier"' + attr('v', o[0]) + '>' + esc(o[1]) + '</button>';
+      }).join('') + '</div>' +
       '<div class="row" role="group" aria-label="Budget">' + opts.map(function (o) { return chip('prepBudget', o[0], o[1], b === o[0], 'blue'); }).join('') + '</div>' +
       (list.length?'':'<p class="empty">Aucune préparation pour ce métier avec ce budget.</p>') + '<div class="stack">' + list.map(function (p) {
         var hi = p.talents && on;
         var extra = p.id === 'talents' && (job||S.domains.length) ? '<span class="fit on">' + nbT + (job?' pour ce métier':' pour '+(isParent()?'ses':'vos')+' choix') + '</span>' : '';
         if (hi) return '<a class="prep hi talents-card" href="#/prepa/' + p.id + (job?'/'+job.id:'') + '">' + talentsHero('<span class="price">' + esc(p.price) + '</span>') + '<div class="talents-body"><h2 class="sr-only">' + sig(p.t) + '</h2>' +
-          '<p>' + esc(p.d) + '</p><div class="talents-perf" aria-hidden="true"></div><span class="prep-foot">' + extra + '<span class="more">Voir le détail' + I.chev + '</span></span></div></a>';
+          '<p>' + esc(p.d) + '</p><div class="talents-perf" aria-hidden="true"></div>' + (extra ? '<span class="prep-foot">' + extra + '</span>' : '') + '</div></a>';
         return '<a class="prep" href="#/prepa/' + p.id + (job?'/'+job.id:'') + '"><div class="prep-top"><span class="prep-ico" aria-hidden="true">' + I.book + '</span><span class="price">' + esc(p.price) + '</span></div><h2 class="h3 no-icon">' + sig(p.t) + '</h2>' +
           '<p>' + esc(p.d) + '</p><span class="prep-foot">' + extra + '<span class="more">Voir le détail' + I.chev + '</span></span></a>';
       }).join('') + '</div>' +
-      (on && list.some(function(p){return p.talents;}) ? '<div class="bourse"><div><b>' + esc(D.talentsGrantLabel || '5 000 €') + ' / an</b><span>Bourse Talents ' + esc(D.talentsGrantYear || '2026-2027') + ', pour les élèves des Prépas Talents.</span></div><span class="dot big" aria-hidden="true"></span></div>' : '') +
+      (on && list.some(function(p){return p.talents;}) ? '<div class="bourse"><div><b>' + esc(D.talentsGrantLabel || '5 000 €') + ' / an</b><span>Bourse Talents ' + esc(D.talentsGrantYear || '2026-2027') + ', pour les élèves des Prépas Talents.</span></div><span class="dot big" aria-hidden="true"></span>' +
+        '<a class="btn theme bourse-cta" href="#/prepa/' + list.filter(function(p){return p.talents;})[0].id + (job?'/'+job.id:'') + '">Découvrir les prépas Talents</a></div>' : '') +
       prepaOrganisms(cats) +
       '<a class="link-plain" href="#/handicap'+(job?'/'+job.id:'')+'">Handicap : prévoir les aménagements</a></section>';
    }
@@ -2362,7 +2366,7 @@
       case 'moreResources': set({resLimit:S.resLimit+40}); break;
       case 'resetResources': set({resCat:'Toutes',resFp:'Tous',resKind:'Tous',resYear:'Toutes',resQ:'',resLimit:40}); break;
       case 'talentsAll': set({ talentsAll: v === 'all' }); countAnnounce('#talents .list-row'); break;
-      case 'toggleBoursier': var becomesBoursier=S.boursier!=='Oui'; set(becomesBoursier?{ boursier: 'Oui', prepBudget: '0' }:{ boursier: 'Non' }); break;
+      case 'toggleBoursier': var becomesBoursier=v?v==='Oui':S.boursier!=='Oui'; if(becomesBoursier===(S.boursier==='Oui'))break; set(becomesBoursier?{ boursier: 'Oui', prepBudget: '0' }:{ boursier: 'Non' }); break;
       case 'alert': set({ alert: !S.alert }); announce(S.alert ? 'Alerte activée' : 'Alerte désactivée'); break;
       case 'deleteChild': {
         var removed=activeChild();

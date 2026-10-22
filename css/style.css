@@ -2188,6 +2188,16 @@ html.crios .profile-footer { bottom:calc(86px + env(safe-area-inset-bottom, 0px)
 .explore-switch { display:flex; gap:4px; margin:2px 0 10px; padding:4px; border-radius:999px; background:#E3E3E3; }
 .explore-switch a { flex:1; display:flex; align-items:center; justify-content:center; min-height:40px; border-radius:999px; color:#55555C; font-size:.9375rem; font-weight:500; text-decoration:none; }
 .explore-switch a.on { background:var(--brand); color:#FFF; }
+/* Se préparer : boursier ou non, même pilule que Métiers / Concours. */
+.explore-switch button { flex:1; display:flex; align-items:center; justify-content:center; min-height:40px; padding:0 8px; border:0; border-radius:999px; background:transparent; color:#55555C; font:inherit; font-size:.9375rem; font-weight:500; cursor:pointer; }
+.explore-switch button.on { background:var(--brand); color:#FFF; }
+.bourse-switch { margin:0 0 4px; }
+/* Prépas Talents : le bouton de découverte ferme le bloc de la bourse. */
+.bourse { flex-wrap:wrap; }
+.bourse > div { flex:1 1 0; min-width:0; }
+.bourse .bourse-cta { flex:1 1 100%; margin-top:6px; }
+/* Stages : encadrés bordés de la couleur du concours. */
+.ref-tip.stage-tip { border:1.5px solid var(--theme, var(--blue)); }
 /* Fiche concours : bouton Information (feuille avec la description du concours). */
 .concours-info .eyebrow { display:flex; align-items:center; gap:8px; margin-bottom:6px; }
 .concours-info h3 { margin:0 0 10px; font-size:1.125rem; line-height:1.3; }

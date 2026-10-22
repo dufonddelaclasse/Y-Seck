@@ -778,6 +778,9 @@ html:where(.dark).dark .sheet-content button.chip.category-choice[data-action="m
 :where(html.dark) .explore-switch { background:#303030; }
 :where(html.dark) .explore-switch a { color:#C2C2C6; }
 :where(html.dark) .explore-switch a.on { background:var(--brand); color:#FFF; }
+:where(html.dark) .explore-switch button { border:0; background:transparent; color:#C2C2C6; }
+:where(html.dark) .explore-switch button.on { background:var(--brand); color:#FFF; }
+:where(html.dark) .ref-tip.stage-tip { border:1.5px solid var(--theme, var(--blue)); }
 :where(html.dark) .concours-facts dt { color:var(--muted); }
 
 /* Retouches */
