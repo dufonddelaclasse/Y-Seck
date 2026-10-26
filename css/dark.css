@@ -593,6 +593,7 @@ html:where(.dark).dark body .update-notice .update-notice-action { background:va
 :where(html.dark) .job-action, :where(html.dark) .job-action:hover, :where(html.dark) .job-action:active { background:transparent; }
 :where(html.dark) .search-go { border:0; background:var(--brand); color:#FFF; }
 :where(html.dark) .search-go svg { color:#FFF; }
+:where(html.dark) .search-go:not(.ready) { background:#393942; }
 :where(html.dark) .search-go:focus-visible { outline:2px solid var(--brand); }
 :where(html.dark) .sheet-content button.chip.category-choice[data-action="metCat"]:not(.on), :where(html.dark) .sheet-content button.chip.category-choice[data-action="metCat"]:not(.on):hover { background:#292929; color:var(--cat-fill); box-shadow:inset 0 0 0 2px var(--cat-fill); }
 :where(html.dark) .sheet-content button.chip.category-choice.cat-CDD[data-action="metCat"]:not(.on) { color:var(--ink); box-shadow:inset 0 0 0 1.5px #606059; }

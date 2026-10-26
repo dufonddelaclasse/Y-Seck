@@ -274,7 +274,7 @@
     return '<div class="search">' + I.search + '<label class="sr-only" for="' + id + '">' + esc(label) + '</label>' +
       '<input type="search" id="' + id + '" placeholder="' + esc(placeholder) + '" value="' + esc(value || '') + '" autocomplete="off" enterkeyhint="search">' +
       '<button type="button" class="search-clear" data-action="clearSearch"' + attr('v',id) + ' aria-label="Effacer la recherche"' + (value ? '' : ' hidden') + '>' + I.close + '</button>' +
-      '<button type="button" class="search-go" data-action="submitSearch"' + attr('v',id) + ' aria-label="Valider la recherche">' + I.arrow + '</button></div>';
+      '<button type="button" class="search-go' + (value ? ' ready' : '') + '" data-action="submitSearch"' + attr('v',id) + ' aria-label="Valider la recherche">' + I.arrow + '</button></div>';
   }
 
   /* ---------- Régions (code postal) ---------- */
@@ -2617,7 +2617,7 @@
 
   var searchTimer = null;
   root.addEventListener('input', function (e) {
-    if(e.target.matches('.search input')){var clear=e.target.closest('.search').querySelector('.search-clear');if(clear)clear.hidden=!e.target.value;}
+    if(e.target.matches('.search input')){var clear=e.target.closest('.search').querySelector('.search-clear');if(clear)clear.hidden=!e.target.value;var go=e.target.closest('.search').querySelector('.search-go');if(go)go.classList.toggle('ready',!!e.target.value);}
     if(e.target.id==='location-query'){locationQuery=e.target.value;locationSearchId++;return;}
     if(e.target.id==='res-q'){S.resQ=e.target.value;S.resLimit=40;save();document.getElementById('study-results').innerHTML=studyResults(jobById(route().arg),route().name==='ressources-biblio');return;}
     if (e.target.id === 'book-q') { S.bookQ=e.target.value;save();document.getElementById('books').innerHTML=bookList(jobById(route().arg));return; }
