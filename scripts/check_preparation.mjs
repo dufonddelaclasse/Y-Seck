@@ -127,8 +127,8 @@ for(const r of Object.values(data.accessRoutes))for(const e of Object.values(r.e
   assert(e.officialLinks.every(l=>l.url.startsWith('https://')&&!l.url.includes('calendrier-general-concours')),'Liens directs école ou organisateur : '+e.id);
 }
 const magistrate=data.jobs.find(j=>j.id==='fpjus016');assert(magistrate.routeIds.includes('magistrat-administratif')&&!magistrate.routeIds.includes('magistrat'));
-S.prepBudget='1';
-const fees=screens.preparer('aah');assert(fees.includes('Avec frais d’inscription')&&!fees.includes('Moins de 1 000')&&!fees.includes('Frais d’université'));
+S.prepBudget='1';S.boursier='Non';
+const fees=screens.preparer('aah');assert(fees.includes('Frais d’inscription')&&!fees.includes('Moins de 1 000')&&!fees.includes('Frais d’université'));
 assert(fees.includes('href="#/prepa/ipag/')&&!fees.includes('href="#/prepa/privees/'));
 S.prepBudget='2';
 const contracts=data.jobs.filter(isContractJob);

@@ -75,7 +75,13 @@ for (const profile of ['etu','par','rec']) {
   assert(t.screens.interets().includes('Étape 3 / 5')&&t.screens.interets().includes('href="#/niveau"'));
   assert(t.screens.traits().includes('Étape 4 / 5'));
   const situation=t.screens.situation();
-  assert(situation.includes('Étape 5 / 5')&&situation.includes('Avec frais d’inscription')&&!situation.includes('Moins de 1 000'));
+  /* Le budget n’apparaît qu’après la réponse boursier·e, avec des choix propres à chaque réponse. */
+  assert(situation.includes('Étape 5 / 5')&&!situation.includes('data-action="budget"')&&!situation.includes('Moins de 1 000'));
+  t.click('boursier','Non');const nonBoursier=t.screens.situation();
+  assert(nonBoursier.includes('Frais d’inscription uniquement')&&nonBoursier.includes('Plus de 1 000 €')&&nonBoursier.includes('Je ne sais pas')&&!nonBoursier.includes('Gratuit uniquement'));
+  t.click('budget','Frais d’inscription uniquement');t.click('boursier','Oui');const boursier=t.screens.situation();
+  assert(boursier.includes('Gratuit uniquement')&&!boursier.includes('Frais d’inscription uniquement'));
+  assert.equal(t.S.budget,'Gratuit uniquement','Le budget suit le changement de réponse boursier·e.');
   for(const html of [first,second,t.screens.interets(),t.screens.traits(),situation])assert(!/>Passer<|>passer</.test(html));
 }
 
@@ -98,10 +104,11 @@ assert.equal(family.S.children.find(child=>child.id==='enfant-1').name,'Ariane')
 
 // Les réponses historiques restent sélectionnées sous le nouveau libellé, y compris après changement de profil.
 const old=start({profile:'etu',name:'Alexis',level:'Seconde',budget:'Moins de 1 000 €',personalProfiles:{rec:{name:'Léa',level:'Bac',budget:'Moins de 1 000 €'}}});
-assert.equal(old.S.budget,'Avec frais d’inscription');
-assert(old.screens.situation().includes('aria-pressed="true" data-action="budget" data-v="Avec frais d’inscription"'));
-old.click('profile','rec');assert.equal(old.S.budget,'Avec frais d’inscription');
-assert.equal(old.saved().budget,'Avec frais d’inscription');
+assert.equal(old.S.budget,'Frais d’inscription uniquement');
+old.click('boursier','Non');
+assert(old.screens.situation().includes('aria-pressed="true" data-action="budget" data-v="Frais d’inscription uniquement"'));
+old.click('profile','rec');assert.equal(old.S.budget,'Frais d’inscription uniquement');
+assert.equal(old.saved().budget,'Frais d’inscription uniquement');
 const guard=start();guard.location.hash='#/situation';guard.render();assert.equal(guard.location.hash,'#/choix-profil');
 guard.S.profile='etu';guard.location.hash='#/niveau';guard.render();assert.equal(guard.location.hash,'#/profil');
 // Écrans d'introduction en carrousel (bande glissante et rail des contenus), mention bac+5 des catégories A et A+, trait « Avec des animaux ».

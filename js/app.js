@@ -36,7 +36,19 @@
     out.budget = normalizeBudget(out.budget);
     return out;
   }
-  function normalizeBudget(value) { return value === 'Moins de 1 000 €' ? 'Avec frais d’inscription' : value; }
+  function normalizeBudget(value) { return value === 'Moins de 1 000 €' || value === 'Avec frais d’inscription' ? 'Frais d’inscription uniquement' : value; }
+  /* Budget pour se préparer : un profil boursier a « Gratuit uniquement » (les droits universitaires lui sont remis),
+     un profil non boursier « Frais d’inscription uniquement ». Les deux gardent « Plus de 1 000 € » et « Je ne sais pas ». */
+  function budgetOptions(boursier) { return [boursier === 'Oui' ? 'Gratuit uniquement' : 'Frais d’inscription uniquement', 'Plus de 1 000 €', 'Je ne sais pas']; }
+  function budgetFor(boursier, budget) {
+    if (!boursier || !budget) return budget;
+    if (budget === 'Gratuit uniquement' || budget === 'Frais d’inscription uniquement') return budgetOptions(boursier)[0];
+    return budget;
+  }
+  /* IPAG, CPAG, IEP et universités : gratuits pour un profil boursier (droits universitaires remis), avec frais d’inscription sinon. */
+  var UNI_PREPS = ['ipag', 'iep'];
+  function prepPrice(p) { return UNI_PREPS.indexOf(p.id) > -1 ? (S.boursier === 'Oui' ? 'Gratuit' : 'Frais d’inscription') : p.price; }
+  function prepBudget(p) { return UNI_PREPS.indexOf(p.id) > -1 ? (S.boursier === 'Oui' ? 0 : 1) : p.budget; }
   function blankPerson(name) { return { name: name || '', level: null, domains: [], traits: [], boursier: null, budget: null, done: false, location: null, favorites: [], pendingChanges: false, validated: null }; }
   function profileSignature() { return JSON.stringify(EDITABLE_FIELDS.map(function(k){return S[k];})); }
   function profileNeedsValidation() { return !!(S.done && S.pendingChanges); }
@@ -678,7 +690,7 @@
 
   screens.situation = function () {
     var q = isParent() ? 'Votre enfant est-il boursier·e ?' : 'Êtes-vous boursier·e ?';
-    var budgets = ['Gratuit uniquement', 'Avec frais d’inscription', 'Plus de 1 000 €', 'Je ne sais pas'];
+    var budgets = budgetOptions(S.boursier);
     return '<main class="screen">' +
       '<div class="topbar">' + back('#/traits', 'Retour') + '<span class="eyebrow">Étape 5 / ' + STEPS + '</span></div>' +
       progress(5, STEPS) +
@@ -688,11 +700,12 @@
         var on = S.boursier === v;
         return '<button type="button" class="opt sm center' + (on ? ' on' : '') + '" aria-pressed="' + on + '"' + attr('action', 'boursier') + attr('v', v) + '>' + v + '</button>';
       }).join('') + '</div>' +
-      '<h2 class="h3 mt-m">Budget pour se préparer</h2>' +
+      /* Les choix de budget dépendent de la réponse boursier·e : ils n’apparaissent qu’une fois celle-ci donnée. */
+      (S.boursier ? '<h2 class="h3 mt-m">Budget pour se préparer</h2>' +
       '<div class="stack">' + budgets.map(function (b) {
         var on = S.budget === b;
         return '<button type="button" class="opt sm' + (on ? ' on' : '') + '" aria-pressed="' + on + '"' + attr('action', 'budget') + attr('v', b) + '><span>' + b + '</span>' + (on ? I.check : '') + '</button>';
-      }).join('') + '</div>' +
+      }).join('') + '</div>' : '') +
       (S.boursier==='Oui'?talentsFeature('C’est quoi, une Prépa Talents ?',
       '<p>Une préparation <b>gratuite</b> aux concours de catégorie A, A+ et B, dans une université, un IEP (institut d’études politiques, c’est-à-dire un Sciences Po) ou une école du service public. Plus de 100 en France, outre-mer compris.</p>' +
       '<p>Au programme : cours, entraînements aux épreuves et un·e tuteur·rice qui vous suit toute l’année.</p>','h2',talentIntroAnimate?'talents-enter':''):'') +
@@ -1725,17 +1738,17 @@
     return '<div class="ref-orgs"><h3 class="no-icon">Organismes de préparation</h3>'+list.map(function(o){return ext(o.url,o.name+' · '+o.scope,'link-plain');}).join('')+'<p class="small">Liste indicative, sans classement : les résultats publiés par chaque organisme ne sont pas comparables entre eux.</p></div>';
   }
   function preparationContent(job, focus) {
-    var opts = [['0', 'Gratuit'], ['1', 'Avec frais d’inscription'], ['2', 'Tous budgets']];
-    var b = S.prepBudget;
-    /* Un profil boursier part des préparations gratuites. */
-    if (b === null) b = S.boursier === 'Oui' || S.budget === 'Gratuit uniquement' ? '0' : (['Moins de 1 000 €','Avec frais d’inscription'].indexOf(S.budget)>-1 ? '1' : '2');
     var on = S.boursier === 'Oui';
+    /* Boursier·e : gratuit ou tous budgets ; non boursier·e : frais d’inscription ou tous budgets. */
+    var opts = on ? [['0', 'Gratuit'], ['2', 'Tous budgets']] : [['1', 'Frais d’inscription'], ['2', 'Tous budgets']];
+    var b = S.prepBudget;
+    if (b === null || !opts.some(function (o) { return o[0] === b; })) b = S.budget === 'Gratuit uniquement' || S.budget === 'Frais d’inscription uniquement' ? opts[0][0] : '2';
     var keys = prepKeys(job?[job]:myJobs());
     var nbT = D.talents.filter(function (t) { return talentMatches(t, keys).length; }).length;
     var cats=focus?[focus.cat]:job?jobCategories(job):myJobs().reduce(function(a,j){return a.concat(jobCategories(j));},[]);
     var administrative=!job||/administr|attache|greff|directeur|direction|conservat/.test(norm(job.name))||['Administration','Finances','Diplomatie','Justice','Renseignement','Communication','Citoyens','Inspection'].indexOf(job.domain)>-1;
     var list = D.preps.filter(function (p) {
-      if((b!=='2'&&p.budget!==parseInt(b,10))||p.talents&&!on)return false;
+      if((b!=='2'&&prepBudget(p)!==parseInt(b,10))||p.talents&&!on)return false;
       if(!job)return true;
       if(p.id==='talents')return nbT>0&&cats.some(function(c){return ['A+','A','B'].indexOf(c)>-1;});
       if(p.id==='ipag')return administrative;
@@ -1764,7 +1777,7 @@
         }
         /* Préparations privées : simple information, sans lien vers une liste d’organismes. */
         if (p.id === 'privees') return '<div class="prep prep-static"><div class="prep-top"><span class="prep-ico" aria-hidden="true">' + I.book + '</span><span class="price">' + esc(p.price) + '</span></div><h2 class="h3 no-icon">' + sig(p.t) + '</h2><p>' + esc(p.d) + '</p></div>';
-        return '<a class="prep" href="#/prepa/' + p.id + (job?'/'+job.id:'') + '"><div class="prep-top"><span class="prep-ico" aria-hidden="true">' + I.book + '</span><span class="price">' + esc(p.price) + '</span></div><h2 class="h3 no-icon">' + sig(p.t) + '</h2>' +
+        return '<a class="prep" href="#/prepa/' + p.id + (job?'/'+job.id:'') + '"><div class="prep-top"><span class="prep-ico" aria-hidden="true">' + I.book + '</span><span class="price">' + esc(prepPrice(p)) + '</span></div><h2 class="h3 no-icon">' + sig(p.t) + '</h2>' +
           '<p>' + esc(p.d) + '</p><span class="prep-foot"><span class="more">Voir le détail' + I.chev + '</span></span></a>';
       }).join('') + '</div>' +
       prepaOrganisms(cats) +
@@ -1851,7 +1864,7 @@
     /* Préparations privées : pas de liste d’organismes payants pour l’instant (partenariats à venir), la page renvoie vers Se préparer. */
     if (!p || id==='privees' || (id==='talents' && S.boursier!=='Oui')) return contextJob?screens.preparer(contextJob.id):screens.prepas();
     var head = '<main class="screen top-tight">' + back(contextJob?prepHref(contextJob):'#/prepas',contextJob?'Se préparer':'Prépas') +
-      '<span class="eyebrow">' + esc(p.price) + '</span><h1 class="sm">' + sig(p.t) + '</h1>';
+      '<span class="eyebrow">' + esc(prepPrice(p)) + '</span><h1 class="sm">' + sig(p.t) + '</h1>';
     var foot = '</main>' + tabbar(contextJob?'metiers':'prepas');
 
     if (id === 'talents') {
@@ -2006,7 +2019,7 @@
     if (field === 'domains') body = '<div class="grid-2 interest-grid">' + D.domains.map(function (d) { var on = S.domains.indexOf(d) > -1; return '<button type="button" class="interest-option' + (on ? ' on' : '') + '" aria-pressed="' + on + '"' + attr('action', 'domain') + attr('v', d) + '><span class="interest-name">' + esc(domainLabel(d)) + '</span><span class="interest-check" aria-hidden="true">' + (on ? I.check : '') + '</span></button>'; }).join('') + '</div>';
     if (field === 'traits') body = D.traitGroups.map(function (g) { return '<section class="stack mt-s"><h3 class="no-icon">' + esc(g.title) + '</h3><div class="row">' + g.items.map(function (t) { return chip('trait', t[0], t[1], S.traits.indexOf(t[0]) > -1); }).join('') + '</div></section>'; }).join('');
     if (field === 'boursier') body = '<div class="grid-2">' + ['Oui', 'Non'].map(function (v) { var on = S.boursier === v; return '<button type="button" class="opt sm center' + (on ? ' on' : '') + '" aria-pressed="' + on + '"' + attr('action', 'boursier') + attr('v', v) + '>' + v + '</button>'; }).join('') + '</div>';
-    if (field === 'budget') body = '<div class="stack">' + ['Gratuit uniquement', 'Avec frais d’inscription', 'Plus de 1 000 €', 'Je ne sais pas'].map(function (b) { var on = S.budget === b; return '<button type="button" class="opt sm' + (on ? ' on' : '') + '" aria-pressed="' + on + '"' + attr('action', 'budget') + attr('v', b) + '><span>' + b + '</span>' + (on ? I.check : '') + '</button>'; }).join('') + '</div>';
+    if (field === 'budget') body = '<div class="stack">' + budgetOptions(S.boursier).map(function (b) { var on = S.budget === b; return '<button type="button" class="opt sm' + (on ? ' on' : '') + '" aria-pressed="' + on + '"' + attr('action', 'budget') + attr('v', b) + '><span>' + b + '</span>' + (on ? I.check : '') + '</button>'; }).join('') + '</div>';
     return body + '<div class="sheet-actions"><button type="button" class="btn" data-ui="close">Fermer</button></div>';
   }
   screens.moi = function () {
@@ -2508,7 +2521,7 @@
         i = S.traits.indexOf(v); next = S.traits.slice();
         if (i > -1) next.splice(i, 1); else next.push(v);
         set({ traits: next }); break;
-      case 'boursier': talentIntroAnimate=v==='Oui'&&S.boursier!=='Oui'; set({ boursier: v }); break;
+      case 'boursier': talentIntroAnimate=v==='Oui'&&S.boursier!=='Oui'; set({ boursier: v, budget: budgetFor(v, S.budget), prepBudget: null }); break;
       case 'budget': set({ budget: v, prepBudget: null }); break;
       case 'go': location.hash = '#/' + v; break;
       case 'startProfile': S.introSeen = true; save(); navigate(familyEstablished()?'#/profil':'#/choix-profil'); break;
@@ -2568,7 +2581,7 @@
       case 'openRegions': { var regionRoute = route(), regionJob = regionRoute.name === 'prepa' && regionRoute.arg2 ? jobById(regionRoute.arg2) : null;
         UI.open('regions', 'Choisir une région', regionSheet(regionRoute.name === 'prepa' && regionRoute.arg === 'talents' ? talentsList(regionJob).byRegion : regionRoute.name === 'prepa' && (regionRoute.arg === 'ipag' || regionRoute.arg === 'iep') ? schoolList(regionRoute.arg).byRegion : null), el); break; }
       case 'pickRegion': if (UI.current() === 'regions') UI.close(); set({ region: v }); countAnnounce('#talents .list-row, #schools .list-row'); break;
-      case 'toggleBoursier': var becomesBoursier=v?v==='Oui':S.boursier!=='Oui'; if(becomesBoursier===(S.boursier==='Oui'))break; set(becomesBoursier?{ boursier: 'Oui', prepBudget: '0' }:{ boursier: 'Non' }); break;
+      case 'toggleBoursier': var becomesBoursier=v?v==='Oui':S.boursier!=='Oui'; if(becomesBoursier===(S.boursier==='Oui'))break; set(becomesBoursier?{ boursier: 'Oui', budget: budgetFor('Oui', S.budget), prepBudget: null }:{ boursier: 'Non', budget: budgetFor('Non', S.budget), prepBudget: null }); break;
       case 'alert': set({ alert: !S.alert }); announce(S.alert ? 'Alerte activée' : 'Alerte désactivée'); break;
       case 'deleteChild': {
         var removed=activeChild();
