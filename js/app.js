@@ -1770,7 +1770,7 @@
         /* Prépas Talents : nombre de prépas pour le concours, conditions, filet pointillé, bourse, puis le bouton qui ouvre la liste. */
         if (hi) {
           var count = job || S.domains.length ? nbT : D.talents.length;
-          return '<div class="prep hi talents-card">' + talentsHero('<span class="price">' + esc(p.price) + '</span>') + '<div class="talents-body"><h2 class="sr-only">' + sig(p.t) + '</h2>' +
+          return '<div class="prep hi talents-card">' + talentsHero('<span class="talents-pills"><span class="price">' + esc(p.price) + '</span><span class="price talents-pill-alt">Recrutement sur dossier</span></span>') + '<div class="talents-body"><h2 class="sr-only">' + sig(p.t) + '</h2>' +
             '<p class="talents-count"><b>' + count + (count > 1 ? ' Prépas Talents' : ' Prépa Talents') + '</b></p>' +
             '<p>Cliquez pour consulter les prépas identifiées' + (job ? ' pour ce concours' : S.domains.length ? ' pour ' + (isParent() ? 'ses' : 'vos') + ' choix' : '') + '. Sur dossier et entretien, sous conditions de ressources.</p>' +
             '<div class="talents-perf" aria-hidden="true"></div>' +
