@@ -144,6 +144,12 @@ def build():
             + PREFIX + ' { color-scheme:dark; }\n' + '\n'.join(out) + '\n\n/* Retouches */\n' + MANUAL.strip() + '\n')
 
 MANUAL = """
+/* Cartes des régions : régions bien visibles sur le fond sombre, frontières de la couleur du bloc. */
+:where(html.dark) .region-map path { fill:#4A4A55; stroke:#292929; stroke-width:1.6; }
+:where(html.dark) .region-map path:hover { fill:#5A5A66; }
+:where(html.dark) .region-map.all path { fill:#5C50C2; }
+:where(html.dark) .region-map path.on, :where(html.dark) .region-map path.on:hover { fill:var(--brand); }
+
 html.dark { --brand:#8F7BFF; --blue:#A493FF; --accent:#7C66FF; --accent-hover:#9785FF; --theme-btn:var(--brand); --red:#FF6B6B; --surface:#1E1E22; }
 html.dark, html.dark body { background:var(--bg); color:var(--ink); }
 html.dark body::before { display:none; }
