@@ -2227,6 +2227,9 @@ html.crios .profile-footer { bottom:calc(86px + env(safe-area-inset-bottom, 0px)
 .app .prep.hi.talents-card .talents-hero .price { background:#E0FA6E; color:#141414; }
 /* Pastilles empilées à droite : « Gratuit », puis « Recrutement sur dossier ». */
 .talents-pills { display:flex; flex-direction:column; align-items:flex-end; gap:6px; }
+/* Mention en bas à gauche de la photo, dans la police de l’appli. */
+.talents-hero { position:relative; }
+.talents-hero-note { position:absolute; left:24px; right:40%; bottom:18px; color:#E0FA6E; font-size:.9375rem; font-weight:500; line-height:1.25; text-shadow:0 1px 8px rgba(0,0,40,.45); }
 .app .prep.hi.talents-card .talents-perf { height:3px; margin:8px calc(10px - var(--talents-pad)) 0; background-image:radial-gradient(circle, #DEDEDE 1px, transparent 1.4px); background-size:8px 3px; }
 .app .prep.hi.talents-card .talents-bourse { margin-top:4px; }
 /* Stages : encadrés bordés de la couleur du concours. */

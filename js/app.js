@@ -1770,12 +1770,12 @@
         /* Prépas Talents : nombre de prépas pour le concours, conditions, filet pointillé, bourse, puis le bouton qui ouvre la liste. */
         if (hi) {
           var count = job || S.domains.length ? nbT : D.talents.length;
-          return '<div class="prep hi talents-card">' + talentsHero('<span class="talents-pills"><span class="price">' + esc(p.price) + '</span><span class="price talents-pill-alt">Recrutement sur dossier</span></span>') + '<div class="talents-body"><h2 class="sr-only">' + sig(p.t) + '</h2>' +
+          return '<div class="prep hi talents-card">' + talentsHero('<span class="talents-pills"><span class="price talents-pill-alt">Recrutement sur dossier</span></span><span class="talents-hero-note">Sous condition de ressources et de mérite</span>') + '<div class="talents-body"><h2 class="sr-only">' + sig(p.t) + '</h2>' +
             '<p class="talents-count"><b>' + count + (count > 1 ? ' Prépas Talents' : ' Prépa Talents') + '</b></p>' +
             /* Conditions vérifiées sur service-public.gouv.fr (A19065) et la fiche d’admission de la DGAFP. */
             '<p>Gratuites. Accès sous conditions de ressources, les mêmes que pour une bourse sur critères sociaux, et de mérite : examen du dossier, puis entretien. Touchez le bouton pour voir les prépas identifiées' + (job ? ' pour ce concours' : S.domains.length ? ' pour ' + (isParent() ? 'ses' : 'vos') + ' choix' : '') + '.</p>' +
             '<div class="talents-perf" aria-hidden="true"></div>' +
-            '<div class="talents-bourse"><b>' + esc(D.talentsGrantLabel || '5 000 €') + ' / an</b><span>Bourse Talents ' + esc(D.talentsGrantYear || '2026-2027') + ' : une fois admis en Prépa Talents, ' + (isParent() ? 'votre enfant la reçoit en plus de sa' : 'vous la recevez en plus de votre') + ' bourse sur critères sociaux. Versée en deux fois, sans démarche.</span></div>' +
+            '<div class="talents-bourse"><b>' + (isParent() ? 'Votre enfant reçoit ' : 'Recevez ') + esc(D.talentsGrantLabel || '5 000 €') + ' / an</b><span>Bourse Talents ' + esc(D.talentsGrantYear || '2026-2027') + ', une fois admis en Prépa Talents, en plus de ' + (isParent() ? 'sa' : 'votre') + ' bourse sur critères sociaux. Versée en deux fois, sans démarche.</span></div>' +
             '<a class="btn theme talents-cta" href="#/prepa/' + p.id + (job?'/'+job.id:'') + '">Découvrir les prépas Talents</a></div></div>';
         }
         /* Préparations privées : simple information, sans lien vers une liste d’organismes. */

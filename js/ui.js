@@ -82,7 +82,8 @@
     }
   }
   /* Écriture inclusive affichée avec une barre oblique : « Administrateur/rice ». */
-  function inclusive(text) { return String(text).replace(/([A-Za-zÀ-ÖØ-öø-ÿ])·(?=[a-zà-öø-ÿ])/g, '$1/'); }
+  /* Typographie française : espace insécable avant « : ; ? ! » et à l’intérieur des guillemets, pour que la ponctuation ne passe jamais seule à la ligne. */
+  function inclusive(text) { return String(text).replace(/([A-Za-zÀ-ÖØ-öø-ÿ])·(?=[a-zà-öø-ÿ])/g, '$1/').replace(/ ([:;?!»])/g, '\u00a0$1').replace(/« /g, '«\u00a0'); }
   function open(type, title, html, trigger) {
     title = inclusive(title); html = inclusive(html);
     if (!dialog) return;

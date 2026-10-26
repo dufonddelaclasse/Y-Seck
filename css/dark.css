@@ -792,6 +792,7 @@ html:where(.dark).dark .sheet-content button.chip.category-choice[data-action="m
 :where(html.dark) .bourse-switch button.on { background:var(--theme-btn, var(--brand)); color:#FFF; }
 :where(html.dark) .talents-bourse span { color:#C2C2C6; }
 :where(html.dark) .app .prep.hi.talents-card .talents-hero .price { background:#E0FA6E; color:#EAEAEA; }
+:where(html.dark) .talents-hero-note { color:#E0FA6E; }
 :where(html.dark) .ref-tip.stage-tip { border:1.5px solid var(--theme, var(--blue)); }
 :where(html.dark) .concours-facts dt { color:var(--muted); }
 :where(html.dark) .talents-flat .talents-body { border:0 !important; }
