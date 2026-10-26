@@ -1570,6 +1570,8 @@
   function selectTripTab(scope, v) {
     scope.querySelectorAll('[data-tab]').forEach(function (panel) { panel.hidden = panel.getAttribute('data-tab') !== v; });
     scope.querySelectorAll('.trip-tab').forEach(function (tab) { tab.setAttribute('aria-selected', String(tab.getAttribute('data-v') === v)); });
+    /* La frise change de longueur : le bouton flottant se recale sans attendre un défilement. */
+    schedulePrepFloat();
   }
   /* Fiche métier en frise : un onglet par concours possible ; Évoluer suit l’onglet choisi.
      Un niveau dans l’adresse (#/metier/<id>/<niveau>) permet de vérifier la frise sans modifier le profil. */
@@ -1606,6 +1608,7 @@
       }).join('') + '</div>' : '';
       return '<div data-tab="' + i + '"' + (i === sel ? '' : ' hidden') + '>' + jobLadder(j, c, alt) + '</div>';
     }).join('');
+    var prepLabel = isContractJob(j) ? I.route + 'Entrer sans concours' : I.book + 'Se préparer';
     return '<main class="screen top-tight job-page concours-trip job-trip">' + back('#/metiers', 'Métiers') +
       '<div class="job-hero trip-head"><div class="trip-summary"><span class="trip-modes">' + I.walk + tripSeps(themeCategory(j)) + jobBadges(j) + '</span></div>' +
         '<h1>' + esc(j.name) + '</h1>' + (shared.length ? '<p class="job-match">' + (isParent() ? 'Lui ressemble' : 'Vous ressemble') + ' : ' + esc(shared.map(traitLabel).join(', ').toLowerCase()) + '</p>' : '') +
@@ -1616,8 +1619,10 @@
         '<button type="button" class="job-action" data-action="share"' + attr('v', j.id) + '>' + I.send + '<span>Partager</span></button>' +
       '</div>' +
       tabs + '<section class="trip-wrap" aria-label="Parcours jusqu’au métier">' + panels + '</section>' + (refs[0].recruit ? '' : recruitmentNote(j)) + ladders +
-      '<a class="btn theme mt-m" href="' + prepHref(j) + '">' + (isContractJob(j) ? I.route + 'Entrer sans concours' : I.book + 'Se préparer') + '</a>' +
-      ext('https://www.fonction-publique.gouv.fr/toutes-les-publications/repertoire-commun-des-metiers-de-la-fonction-publique', 'Consulter la source métier sur fonction-publique.gouv.fr', 'link-plain') + '</main>' + tabbar('metiers');
+      '<a class="btn theme mt-m prep-cta" href="' + prepHref(j) + '">' + prepLabel + '</a>' +
+      ext('https://www.fonction-publique.gouv.fr/toutes-les-publications/repertoire-commun-des-metiers-de-la-fonction-publique', 'Consulter la source métier sur fonction-publique.gouv.fr', 'link-plain') + '</main>' +
+      /* Comme sur la fiche concours : copie réduite qui flotte dès la fin de la frise, réservée à la vue. */
+      '<a class="btn theme prep-float" href="' + prepHref(j) + '" tabindex="-1" aria-hidden="true">' + prepLabel + '</a>' + tabbar('metiers');
   };
   screens.preparer = function(id, key) {
     var job=jobById(id);
@@ -2077,15 +2082,18 @@
   var lastRoute = null;
   var booted = false;
   /* Fiche concours : dès qu’on arrive aux métiers liés, « Se préparer » flotte en petit au-dessus du menu ; quand le vrai
-     bouton atteint cette place en fin de liste, la copie s’efface et lui grossit jusqu’à sa taille réelle. */
+     bouton atteint cette place en fin de liste, la copie s’efface et lui grossit jusqu’à sa taille réelle.
+     Fiche métier : même comportement, à partir de la fin de la frise. */
   var prepFloatFrame = null;
   function updatePrepFloat() {
     prepFloatFrame = null;
-    var fl = root.querySelector('.prep-float'), real = root.querySelector('.prep-cta'), sec = root.querySelector('.trip-next');
-    if (!fl || !real || !sec) return;
+    var fl = root.querySelector('.prep-float'), real = root.querySelector('.prep-cta');
+    var sec = root.querySelector('.trip-next'), frise = sec ? null : root.querySelector('.trip-wrap');
+    if (!fl || !real || (!sec && !frise)) return;
     var bar = root.querySelector('.tabbar'), gap = (bar ? bar.offsetHeight : 0) + 12, limit = window.innerHeight - gap;
     fl.style.bottom = gap + 'px';
-    var reached = real.getBoundingClientRect().bottom <= limit, started = sec.getBoundingClientRect().top < limit;
+    var reached = real.getBoundingClientRect().bottom <= limit;
+    var started = sec ? sec.getBoundingClientRect().top < limit : frise.getBoundingClientRect().bottom < limit;
     var wasShown = fl.classList.contains('show'), floating = started && !reached;
     fl.classList.toggle('show', floating);
     /* Le grand bouton reste invisible tant que le petit flotte : il n’apparaît qu’au moment où le petit s’efface. */
@@ -2096,6 +2104,8 @@
   function schedulePrepFloat() { if (!prepFloatFrame && root.querySelector('.prep-float')) prepFloatFrame = window.requestAnimationFrame ? requestAnimationFrame(updatePrepFloat) : setTimeout(updatePrepFloat, 16); }
   window.addEventListener('scroll', schedulePrepFloat, { passive: true });
   window.addEventListener('resize', schedulePrepFloat);
+  /* Une rubrique de frise dépliée ou repliée déplace la fin de la frise. */
+  document.addEventListener('toggle', schedulePrepFloat, true);
   /* Mode sombre : « auto » suit le réglage clair ou sombre de l’appareil, en direct. */
   var darkQuery = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
   function applyColorMode() {
