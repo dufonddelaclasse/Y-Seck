@@ -2195,8 +2195,8 @@ html.crios .profile-footer { bottom:calc(86px + env(safe-area-inset-bottom, 0px)
 .tip-pop[open] { animation:tip-in .28s cubic-bezier(.2,.8,.2,1); }
 .tip-pop[open]::backdrop { animation:sheet-shade .2s ease-out; }
 @keyframes tip-in { from { opacity:0; transform:scale(.92); } to { opacity:1; transform:scale(1); } }
-.tip-pop-icon { width:64px; height:64px; margin:0 auto 14px; display:grid; place-items:center; color:var(--ink); }
-.tip-pop-icon svg { width:52px; height:auto; }
+.tip-pop-icon { width:54px; height:54px; margin:0 auto 12px; display:grid; place-items:center; color:var(--ink); }
+.tip-pop-icon svg { width:42px; height:auto; }
 .tip-pop-title { margin:0 0 22px; font-size:1.1875rem; line-height:1.35; font-weight:500; }
 .tip-pop-text { margin:0 0 22px; color:var(--muted); font-size:1rem; line-height:1.45; }
 .tip-pop { outline:none; }
