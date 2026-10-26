@@ -25,7 +25,7 @@
   --cat-a: #0055FF;
   --cat-b: #006B50;
   --cat-c: #FFD600;
-  --radius-card: 24px;
+  --radius-card: 28px;
   --font: 'DM Sans', system-ui, sans-serif;
 }
 
@@ -2310,3 +2310,14 @@ html.crios .profile-footer { bottom:calc(86px + env(safe-area-inset-bottom, 0px)
 .prep-page .prep.prep-static:hover { border-color:var(--theme-tint,var(--lilac)); }
 /* Accueil (essai) : titres en Geologica Regular, la graisse sous le Medium du reste de l’app. */
 .screen.personal-home > h1, .personal-home > h1 .home-name, .personal-home .home-feature b, .personal-home .home-shortcuts b { font-weight:400; }
+
+/* Rayon unique des cartes : tous les blocs qui encadrent un contenu prennent le même arrondi (28 px, relevé sur les cartes d'apple.com).
+   En fin de feuille pour l'emporter sur les réglages précédents ; boutons, pastilles, champs et icônes gardent les leurs. */
+:is(.catcard, .catcard-wrap, .explain, .callout, .rung, .prep, .bourse, .exam, .filter-hint, .intro-employer, .talents-feature,
+  .home-feature, .home-shortcuts a, .update-notice, .parcours-card, .preparation-card, .family-card, .study-card, .ref-card, .ref-tip, .ref-panel,
+  #jobs .job-row, .job-cards .job-row, #jobs .concours-row, .intro-fold, .date-summary, .swipe-item, .swipe-delete, .profile-row,
+  .book-card, .book-card.external-link, .suggest, .ladder-alt-row, .region-zone, .talents-counter, .school-uni, .school-fees, .tip-pop) { border-radius:var(--radius-card) !important; }
+.preparation-card .exam.exam-route { border-radius:0 !important; }
+.talents-hero, .app .prep.hi.talents-card .talents-hero { border-radius:var(--radius-card) var(--radius-card) 0 0 !important; }
+.talents-body { border-radius:0 0 var(--radius-card) var(--radius-card) !important; }
+.sheet { border-radius:var(--radius-card) var(--radius-card) 0 0 !important; }
