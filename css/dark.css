@@ -778,8 +778,11 @@ html:where(.dark).dark .sheet-content button.chip.category-choice[data-action="m
 :where(html.dark) .btn.prep-float { box-shadow:0 8px 24px rgba(76,76,76,0.22); }
 :where(html.dark) .tip-pop { border:0; background:#292929; color:var(--ink); box-shadow:0 20px 60px rgba(76,76,76,0.25); }
 :where(html.dark) .tip-pop::backdrop { background:rgba(70,70,83,0.5); }
-:where(html.dark) .tip-pop-icon { background:var(--soft); color:var(--blue); }
+:where(html.dark) .tip-pop-icon { color:var(--ink); }
 :where(html.dark) .tip-pop-text { color:var(--muted); }
+:where(html.dark) .tip-pop { outline:none; }
+:where(html.dark) .btn.tip-pop-btn { border:0; box-shadow:none; }
+:where(html.dark) .btn.tip-pop-btn:focus:not(:focus-visible) { outline:none; }
 :where(html.dark) .explore-switch { background:#303030; }
 :where(html.dark) .explore-switch a { color:#C2C2C6; }
 :where(html.dark) .explore-switch a.on { background:var(--brand); color:#FFF; }

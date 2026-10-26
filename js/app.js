@@ -2165,24 +2165,27 @@
   }
   /* Première visite des listes Métiers et Concours : une fenêtre centrale explique qu’on peut ouvrir chaque fiche. Une seule fois par liste. */
   var LIST_TIPS = {
-    metiers: { title: 'Appuyez sur un métier pour découvrir son parcours', text: 'Études, concours et préparations : tout le chemin jusqu’au poste.' },
-    'concours-liste': { title: 'Appuyez sur un concours pour découvrir son parcours', text: 'Études conseillées, épreuves, dates et métiers accessibles.' }
+    metiers: 'Appuyez sur un métier pour découvrir les études conseillées, les épreuves, les dates et comment s’y préparer.',
+    'concours-liste': 'Appuyez sur un concours pour découvrir les études conseillées, les épreuves, les dates et comment s’y préparer.'
   };
+  /* Main qui appuie, fournie par l’équipe (tracée en vecteur). */
+  var TAP_ICON = '<svg viewBox="0 0 500 573" fill="currentColor" fill-rule="evenodd" aria-hidden="true"><path d="M267.8 566.5C247.3 562.6 226.2 551.0 198.3 528.1C165.8 501.5 144.4 472.4 136.8 444.2C133.5 432.1 133.8 414.1 137.3 403.3C142.5 387.9 155.0 372.9 168.6 365.8C172.1 364.0 175.0 362.3 175.0 362.0C175.0 361.7 162.6 323.4 147.4 277.0C117.2 184.7 117.0 183.8 119.9 169.8C127.6 133.0 173.0 119.8 199.7 146.6C208.1 154.9 209.4 157.9 223.9 203.0L236.4 241.6L245.0 237.2C252.9 233.2 254.5 232.7 262.7 232.3C275.1 231.5 285.7 234.4 295.2 241.2C296.6 242.2 297.6 241.7 301.5 238.1C311.0 229.3 326.1 224.9 339.6 227.0C351.4 228.8 365.4 237.1 371.2 245.9L372.8 248.2L377.3 245.1C390.8 235.9 409.6 234.5 424.8 241.7C432.1 245.1 442.0 254.6 445.7 261.7C449.1 268.0 487.1 384.7 489.8 396.9C492.2 407.7 492.1 433.5 489.7 445.0C481.5 483.2 457.4 514.7 424.7 530.0C415.4 534.3 330.9 562.2 318.0 565.2C306.5 567.8 278.7 568.6 267.8 566.5ZM311.0 535.0C326.4 531.6 409.8 503.4 416.9 499.3C440.0 485.6 454.2 464.8 459.5 436.7C461.4 426.9 461.4 412.6 459.6 404.0C458.1 396.8 420.5 280.1 418.4 275.8C412.2 263.6 392.0 266.3 387.9 279.8C386.5 284.5 386.4 283.7 391.4 300.5C394.6 311.2 394.2 315.5 389.8 320.6C384.3 326.8 374.8 327.4 368.4 321.8C365.3 319.1 364.2 316.3 356.9 293.6C352.4 279.8 347.7 266.8 346.3 264.7C339.7 254.3 323.5 255.1 318.0 266.1C315.0 271.9 315.5 275.6 322.0 295.9C329.4 319.0 329.6 322.3 324.1 328.2C320.6 332.0 319.8 332.4 314.2 332.8C309.2 333.2 307.5 332.8 304.7 331.1C300.3 328.4 299.9 327.6 289.6 296.3C280.0 267.4 278.7 265.2 270.6 263.1C262.1 261.0 252.5 266.9 250.1 275.7C249.0 279.6 249.4 281.3 256.0 301.7C259.8 313.7 263.0 324.6 263.0 326.0C263.0 327.4 262.0 330.6 260.8 333.0C255.5 343.2 241.9 343.7 234.9 334.0C233.9 332.6 221.6 295.9 207.5 252.5C193.4 209.1 181.1 172.2 180.2 170.6C175.8 163.0 163.7 160.9 156.4 166.5C152.8 169.3 149.1 175.8 149.0 179.5C149.0 180.6 165.7 232.8 186.0 295.4C213.2 379.0 223.0 410.6 223.0 414.0C223.0 426.5 208.7 433.3 198.6 425.7C195.6 423.3 194.6 421.3 190.0 407.5L184.8 392.0L182.1 393.4C178.0 395.6 170.1 404.5 167.8 409.8C157.9 431.8 174.9 467.0 210.1 497.7C228.7 513.9 248.6 527.5 259.8 531.9C266.5 534.4 270.0 535.3 282.0 537.4C286.6 538.2 302.4 536.9 311.0 535.0ZM39.5 179.5C16.7 177.1 13.3 176.1 9.9 170.7C8.3 168.2 8.0 166.2 8.3 161.6C8.6 156.2 9.0 155.4 12.8 151.9C17.9 147.1 19.2 147.1 51.8 150.4C70.1 152.2 74.5 153.0 76.7 154.6C86.0 161.6 85.6 175.0 76.0 180.1C71.6 182.5 66.7 182.4 39.5 179.5ZM86.3 114.2C83.5 112.7 57.3 81.9 51.5 73.3C46.5 66.1 49.1 56.3 57.0 52.2C67.0 47.2 70.8 49.5 89.6 72.5C107.3 94.2 108.0 95.2 108.0 101.1C108.0 112.1 95.7 119.5 86.3 114.2ZM217.0 109.2C209.6 105.5 206.6 95.4 210.9 88.4C212.6 85.6 248.3 55.5 252.8 53.1C256.1 51.3 264.1 51.8 267.4 53.9C273.5 57.9 275.9 66.7 272.8 73.5C271.5 76.4 235.6 106.6 230.3 109.3C226.2 111.5 221.4 111.4 217.0 109.2ZM149.3 84.0C142.1 79.7 141.8 76.8 144.9 44.5C147.3 20.1 147.8 18.3 152.7 14.0C155.6 11.4 156.8 11.0 162.2 11.0C167.9 11.0 168.5 11.2 172.1 14.8C174.2 16.9 176.2 19.8 176.5 21.2C177.6 25.4 172.4 75.4 170.5 79.0C168.2 83.4 163.5 86.0 157.5 86.0C154.3 86.0 151.3 85.3 149.3 84.0Z"/></svg>';
   function listTipDue(name) { return !!(LIST_TIPS[name] && S.done && !(S.tipSeen || {})[name]); }
   var tipDialog = null, tipTimer = null, tipPending = null;
   function openListTip(name) {
     var tip = LIST_TIPS[name];
     S.tipSeen = S.tipSeen || {}; S.tipSeen[name] = true; save();
     if (!tipDialog) {
-      tipDialog = document.createElement('dialog'); tipDialog.className = 'tip-pop'; tipDialog.setAttribute('aria-labelledby', 'tip-title'); tipDialog.setAttribute('aria-describedby', 'tip-text');
+      tipDialog = document.createElement('dialog'); tipDialog.className = 'tip-pop'; tipDialog.setAttribute('aria-labelledby', 'tip-title'); tipDialog.setAttribute('tabindex', '-1');
       document.body.appendChild(tipDialog);
       tipDialog.addEventListener('click', function (e) { if (e.target.closest('[data-tip-close]')) tipDialog.close(); });
     }
-    tipDialog.innerHTML = '<div class="tip-pop-icon" aria-hidden="true">' + I.route + '</div><h2 class="tip-pop-title" id="tip-title">' + esc(tip.title) + '</h2>' +
-      '<p class="tip-pop-text" id="tip-text">' + esc(tip.text) + '</p><button type="button" class="btn tip-pop-btn" data-tip-close>J’ai compris</button>';
+    tipDialog.innerHTML = '<div class="tip-pop-icon" aria-hidden="true">' + TAP_ICON + '</div><h2 class="tip-pop-title" id="tip-title">' + esc(tip) + '</h2>' +
+      '<button type="button" class="btn tip-pop-btn" data-tip-close>J’ai compris</button>';
     if (tipDialog.open) return;
     if (tipDialog.showModal) tipDialog.showModal(); else tipDialog.setAttribute('open', '');
-    tipDialog.querySelector('[data-tip-close]').focus({ preventScroll: true });
+    /* Le focus va sur la fenêtre elle-même : le bouton n’affiche son contour qu’à la navigation au clavier. */
+    tipDialog.focus({ preventScroll: true });
   }
   function render() {
     document.documentElement.dataset.contrast = String(!!S.contrast);
