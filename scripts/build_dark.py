@@ -144,6 +144,17 @@ def build():
             + PREFIX + ' { color-scheme:dark; }\n' + '\n'.join(out) + '\n\n/* Retouches */\n' + MANUAL.strip() + '\n')
 
 MANUAL = """
+/* Switch boursier / non boursier : fond noir, choix actif dans la couleur de la catégorie. */
+html.dark .bourse-switch { background:#000 !important; }
+html.dark .bourse-switch button.on { background:var(--theme-btn, var(--brand)) !important; color:#FFF !important; }
+
+/* Encadrés d'information : bloc noir en mode sombre, plutôt que des teintes délavées (jaune olive, vert, cyan). */
+html.dark :is(.school-uni, .school-fees, .bourse, .filter-hint, .todo, .callout, .trip-access, .ref-tip:not(.stage-tip), .intro-employer) { background:#000 !important; border-color:#000 !important; color:var(--ink) !important; }
+html.dark :is(.school-uni, .bourse, .filter-hint, .todo, .callout, .trip-access, .ref-tip:not(.stage-tip), .intro-employer) :is(p, b, span, li, small) { color:inherit; }
+/* Carte Prépas Talents : le corps passe en noir, le texte en clair. */
+html.dark .talents-body, html.dark .app .prep.hi.talents-card .talents-body { background:#000 !important; }
+html.dark .talents-card :is(h1, h2, p, b, .talents-count, .talents-bourse span), html.dark .app .prep.hi.talents-card p { color:#E9E9E9 !important; }
+
 /* Cartes des régions : régions bien visibles sur le fond sombre, frontières de la couleur du bloc. */
 :where(html.dark) .region-map path { fill:#4A4A55; stroke:#292929; stroke-width:1.6; }
 :where(html.dark) .region-map path:hover { fill:#5A5A66; }
