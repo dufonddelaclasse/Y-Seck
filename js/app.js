@@ -18,7 +18,7 @@
     prepBudget: null, alert: false, openCat: null, region: 'Toutes', talentsAll: false,
     name: '', location: null, favorites: [], children: [], activeChild: null, personalProfiles: {},
     metMode: 'mine', jobLimit: 60, calFp: 'Tous', calView: 'upcoming', calLimit: 40, calQ: '',
-    contrast: false, largeText: false, dysFont: false, colorMode: 'auto', cq: '', filterHintSeen: false, bookQ: '', bookSubject: 'Toutes', bookCategory: 'A', bookFp: 'Tous',
+    contrast: false, largeText: false, dysFont: false, colorMode: 'auto', cq: '', filterHintSeen: false, tipSeen: {}, bookQ: '', bookSubject: 'Toutes', bookCategory: 'A', bookFp: 'Tous',
     resQ: '', resCat: 'Toutes', resFp: 'Tous', resKind: 'Tous', resYear: 'Toutes', resLimit: 40, installOffered: false
   };
   var PERSON_FIELDS = ['name', 'level', 'domains', 'traits', 'boursier', 'budget', 'done', 'location', 'favorites', 'pendingChanges', 'validated'];
@@ -2120,6 +2120,32 @@
   /* Page à retrouver après « Terminer les modifications » quand on vient compléter son profil depuis une autre page
      (lieu de vie ajouté depuis les Prépas Talents) : l'usager ne perd pas le fil. Oubliée dès qu'on quitte le profil. */
   var profileReturn = null;
+  function startHintTimer() {
+    clearTimeout(hintTimer);
+    hintTimer = setTimeout(function () { var n = root.querySelector('.top-notice'); if (n) n.classList.add('leave'); var b = root.querySelector('#filters-open'); if (b) b.classList.remove('pulse'); showFilterNotice = false; }, 5000);
+  }
+  /* Première visite des listes Métiers et Concours : une fenêtre centrale explique qu’on peut ouvrir chaque fiche. Une seule fois par liste. */
+  var LIST_TIPS = {
+    metiers: { title: 'Appuyez sur un métier pour découvrir son parcours', text: 'Études, concours et préparations : tout le chemin jusqu’au poste.' },
+    'concours-liste': { title: 'Appuyez sur un concours pour découvrir son parcours', text: 'Études conseillées, épreuves, dates et métiers accessibles.' }
+  };
+  function listTipDue(name) { return !!(LIST_TIPS[name] && S.done && !(S.tipSeen || {})[name]); }
+  var tipDialog = null;
+  function openListTip(name) {
+    var tip = LIST_TIPS[name];
+    S.tipSeen = S.tipSeen || {}; S.tipSeen[name] = true; save();
+    if (!tipDialog) {
+      tipDialog = document.createElement('dialog'); tipDialog.className = 'tip-pop'; tipDialog.setAttribute('aria-labelledby', 'tip-title'); tipDialog.setAttribute('aria-describedby', 'tip-text');
+      document.body.appendChild(tipDialog);
+      tipDialog.addEventListener('close', function () { if (showFilterNotice) startHintTimer(); });
+      tipDialog.addEventListener('click', function (e) { if (e.target.closest('[data-tip-close]')) tipDialog.close(); });
+    }
+    tipDialog.innerHTML = '<div class="tip-pop-icon" aria-hidden="true">' + I.route + '</div><h2 class="tip-pop-title" id="tip-title">' + esc(tip.title) + '</h2>' +
+      '<p class="tip-pop-text" id="tip-text">' + esc(tip.text) + '</p><button type="button" class="btn tip-pop-btn" data-tip-close>J’ai compris</button>';
+    if (tipDialog.open) return;
+    if (tipDialog.showModal) tipDialog.showModal(); else tipDialog.setAttribute('open', '');
+    tipDialog.querySelector('[data-tip-close]').focus({ preventScroll: true });
+  }
   function render() {
     document.documentElement.dataset.contrast = String(!!S.contrast);
     document.documentElement.dataset.colorMode = S.colorMode || 'auto';
@@ -2156,8 +2182,8 @@
     showFilterNotice = changed && r.name === 'metiers' && !S.filterHintSeen;
     if (showFilterNotice) {
       S.filterHintSeen = true; try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) { /* stockage indisponible */ }
-      clearTimeout(hintTimer);
-      hintTimer = setTimeout(function () { var n = root.querySelector('.top-notice'); if (n) n.classList.add('leave'); var b = root.querySelector('#filters-open'); if (b) b.classList.remove('pulse'); showFilterNotice = false; }, 5000);
+      /* Si la fenêtre d’aide s’ouvre par-dessus, la notification attend sa fermeture pour lancer son compte à rebours. */
+      if (!listTipDue(r.name)) startHintTimer();
     }
 
     var a = document.activeElement;
@@ -2221,6 +2247,7 @@
     var contextCategories=contextJob?jobCategories(contextJob).filter(function(c){return ['A+','A','B','C','CDD'].indexOf(c)>-1;}):[];
     UI.afterRender({root:root,noBar:r.name==='fiche'||((r.name==='concours-fiche'||r.name==='concours-test')&&!S.done),title:t?t.textContent:'Y-Seck',topLevel:['accueil','enfant','famille','metiers','concours-liste','favoris','moi'].indexOf(r.name)>-1,profileField:r.name==='moi'&&editingField?profileFieldContent(editingField):'',profileFieldTitle:editingField?PROFILE_FIELDS[editingField]:'',isJobs:r.name==='metiers'||r.name==='concours-liste',category:contextCategories.length===1?{label:contextCategories[0],className:catClass(contextCategories[0])}:null,categories:contextCategories.length>1?contextCategories.map(function(c){return {label:c,className:catClass(c)};}):[],summary:r.name==='metiers'||r.name==='concours-liste'?filterSummary():'',filters:r.name==='metiers'||r.name==='concours-liste'?jobFilters():'',filtersTitle:r.name==='concours-liste'?'Filtrer les concours':'Filtrer les métiers',resourceFilters:['annales','ressources-biblio'].indexOf(r.name)>-1?studyFilters(jobById(r.arg),r.name==='ressources-biblio'):'',changed:changed});
 
+    if (changed && listTipDue(r.name)) openListTip(r.name);
     if (changed) {
       if (t && booted) t.focus({ preventScroll: true });
       if (r.name === 'prepas' || (r.name === 'concours' && r.arg === 'prepas')) {

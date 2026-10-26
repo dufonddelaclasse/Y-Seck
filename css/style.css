@@ -2185,6 +2185,19 @@ html.crios .profile-footer { bottom:calc(86px + env(safe-area-inset-bottom, 0px)
 .btn.prep-cta.grow { animation:prep-grow .35s cubic-bezier(.2,.8,.2,1) both; }
 @keyframes prep-grow { from { transform:scale(.6); opacity:.6; } to { transform:scale(1); opacity:1; } }
 @media (prefers-reduced-motion:reduce) { .btn.prep-float, .btn.prep-float.show { transition:none; } .btn.prep-cta.grow { animation:none; } }
+/* Première visite des listes Métiers et Concours : fenêtre centrale « J’ai compris ». */
+.tip-pop { position:fixed; inset:0; margin:auto; width:calc(100% - 48px); max-width:360px; height:fit-content; padding:28px 24px 24px; border:0; border-radius:var(--radius-card);
+  background:#FFF; color:var(--ink); box-shadow:0 20px 60px rgba(0,0,0,.25); text-align:center; }
+.tip-pop::backdrop { background:rgba(20,20,24,.5); }
+.tip-pop[open] { animation:tip-in .28s cubic-bezier(.2,.8,.2,1); }
+.tip-pop[open]::backdrop { animation:sheet-shade .2s ease-out; }
+@keyframes tip-in { from { opacity:0; transform:scale(.92); } to { opacity:1; transform:scale(1); } }
+.tip-pop-icon { width:56px; height:56px; margin:0 auto 16px; border-radius:50%; display:grid; place-items:center; background:var(--soft); color:var(--blue); }
+.tip-pop-icon svg { width:28px; height:28px; }
+.tip-pop-title { margin:0 0 10px; font-size:1.5rem; line-height:1.2; font-weight:600; }
+.tip-pop-text { margin:0 0 22px; color:var(--muted); font-size:1rem; line-height:1.45; }
+.tip-pop-btn { width:100%; }
+@media (prefers-reduced-motion:reduce) { .tip-pop[open], .tip-pop[open]::backdrop { animation:none; } }
 /* Explorer : bascule Métiers / Concours sous le titre, dans une pilule. */
 .explore-switch { display:flex; gap:4px; margin:2px 0 10px; padding:4px; border-radius:999px; background:#E3E3E3; }
 .explore-switch a { flex:1; display:flex; align-items:center; justify-content:center; min-height:40px; border-radius:999px; color:#55555C; font-size:.9375rem; font-weight:500; text-decoration:none; }
