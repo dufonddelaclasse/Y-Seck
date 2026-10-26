@@ -2194,7 +2194,7 @@ html.crios .profile-footer { bottom:calc(86px + env(safe-area-inset-bottom, 0px)
 @keyframes tip-in { from { opacity:0; transform:scale(.92); } to { opacity:1; transform:scale(1); } }
 .tip-pop-icon { width:56px; height:56px; margin:0 auto 16px; border-radius:50%; display:grid; place-items:center; background:var(--soft); color:var(--blue); }
 .tip-pop-icon svg { width:28px; height:28px; }
-.tip-pop-title { margin:0 0 10px; font-size:1.5rem; line-height:1.2; font-weight:600; }
+.tip-pop-title { margin:0 0 10px; font-size:1.1875rem; line-height:1.3; font-weight:500; }
 .tip-pop-text { margin:0 0 22px; color:var(--muted); font-size:1rem; line-height:1.45; }
 .tip-pop-btn { width:100%; }
 @media (prefers-reduced-motion:reduce) { .tip-pop[open], .tip-pop[open]::backdrop { animation:none; } }

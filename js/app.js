@@ -2130,14 +2130,13 @@
     'concours-liste': { title: 'Appuyez sur un concours pour découvrir son parcours', text: 'Études conseillées, épreuves, dates et métiers accessibles.' }
   };
   function listTipDue(name) { return !!(LIST_TIPS[name] && S.done && !(S.tipSeen || {})[name]); }
-  var tipDialog = null;
+  var tipDialog = null, tipTimer = null, tipPending = null;
   function openListTip(name) {
     var tip = LIST_TIPS[name];
     S.tipSeen = S.tipSeen || {}; S.tipSeen[name] = true; save();
     if (!tipDialog) {
       tipDialog = document.createElement('dialog'); tipDialog.className = 'tip-pop'; tipDialog.setAttribute('aria-labelledby', 'tip-title'); tipDialog.setAttribute('aria-describedby', 'tip-text');
       document.body.appendChild(tipDialog);
-      tipDialog.addEventListener('close', function () { if (showFilterNotice) startHintTimer(); });
       tipDialog.addEventListener('click', function (e) { if (e.target.closest('[data-tip-close]')) tipDialog.close(); });
     }
     tipDialog.innerHTML = '<div class="tip-pop-icon" aria-hidden="true">' + I.route + '</div><h2 class="tip-pop-title" id="tip-title">' + esc(tip.title) + '</h2>' +
@@ -2182,8 +2181,7 @@
     showFilterNotice = changed && r.name === 'metiers' && !S.filterHintSeen;
     if (showFilterNotice) {
       S.filterHintSeen = true; try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) { /* stockage indisponible */ }
-      /* Si la fenêtre d’aide s’ouvre par-dessus, la notification attend sa fermeture pour lancer son compte à rebours. */
-      if (!listTipDue(r.name)) startHintTimer();
+      startHintTimer();
     }
 
     var a = document.activeElement;
@@ -2247,7 +2245,13 @@
     var contextCategories=contextJob?jobCategories(contextJob).filter(function(c){return ['A+','A','B','C','CDD'].indexOf(c)>-1;}):[];
     UI.afterRender({root:root,noBar:r.name==='fiche'||((r.name==='concours-fiche'||r.name==='concours-test')&&!S.done),title:t?t.textContent:'Y-Seck',topLevel:['accueil','enfant','famille','metiers','concours-liste','favoris','moi'].indexOf(r.name)>-1,profileField:r.name==='moi'&&editingField?profileFieldContent(editingField):'',profileFieldTitle:editingField?PROFILE_FIELDS[editingField]:'',isJobs:r.name==='metiers'||r.name==='concours-liste',category:contextCategories.length===1?{label:contextCategories[0],className:catClass(contextCategories[0])}:null,categories:contextCategories.length>1?contextCategories.map(function(c){return {label:c,className:catClass(c)};}):[],summary:r.name==='metiers'||r.name==='concours-liste'?filterSummary():'',filters:r.name==='metiers'||r.name==='concours-liste'?jobFilters():'',filtersTitle:r.name==='concours-liste'?'Filtrer les concours':'Filtrer les métiers',resourceFilters:['annales','ressources-biblio'].indexOf(r.name)>-1?studyFilters(jobById(r.arg),r.name==='ressources-biblio'):'',changed:changed});
 
-    if (changed && listTipDue(r.name)) openListTip(r.name);
+    /* Fenêtre d’aide : 5 secondes après l’arrivée sur la liste, annulée si on la quitte avant. Ouvrir une fiche suffit à montrer qu’on a compris. */
+    if (changed) {
+      clearTimeout(tipTimer);
+      if (tipPending && (r.name === 'metier' || r.name === 'concours-fiche')) { S.tipSeen = S.tipSeen || {}; S.tipSeen[tipPending] = true; save(); }
+      tipPending = null;
+      if (listTipDue(r.name)) { tipPending = r.name; tipTimer = setTimeout(function () { if (route().name === tipPending && !document.querySelector('dialog[open]')) openListTip(tipPending); tipPending = null; }, 5000); }
+    }
     if (changed) {
       if (t && booted) t.focus({ preventScroll: true });
       if (r.name === 'prepas' || (r.name === 'concours' && r.arg === 'prepas')) {
