@@ -815,8 +815,10 @@ html:where(.dark).dark .sheet-content button.chip.category-choice[data-action="m
 :where(html.dark) .school-fees-note { color:var(--muted); }
 :where(html.dark) .school-uni { background:var(--yellow-tint); }
 :where(html.dark) .install-icon { box-shadow:0 4px 14px rgba(37,0,186,.25); }
-:where(html.dark) .install-steps li::marker { color:var(--brand); }
-:where(html.dark) .install-share { color:var(--brand); }
+:where(html.dark) .install-steps li:not(:last-child)::before { background:var(--brand); }
+:where(html.dark) .install-num { background:var(--brand); color:#FFF; }
+:where(html.dark) .install-ico { color:var(--brand); }
+:where(html.dark) .install-steps p { color:var(--ink); }
 :where(html.dark) .fp-ink { background:var(--ink-color, var(--brand)); }
 :where(html.dark) .screen .cat-mention, :where(html.dark) .fp-panel p.cat-mention, :where(html.dark) .intro-fold-body p.cat-mention { color:var(--muted); }
 :where(html.dark) .cat-mention svg { color:var(--brand); }
