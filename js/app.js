@@ -522,7 +522,7 @@
      (un écran chacun, titre h1) et par la page du profil (une seule page, titres h2). */
   var FPS_INTRO = [
     { k: 'E', short: 'État', t: 'La fonction publique d’État', d: 'Elle fait tourner les services de l’État, partout en France.', ex: 'Ministères, préfectures, écoles et lycées, tribunaux, impôts, police, armées.', tint: 'tint-blue', dot: 'var(--blue)' },
-    { k: 'T', short: 'Territoriale', t: 'La fonction publique territoriale', d: 'Elle travaille au plus près des habitant·es, dans leur ville, leur département, leur région.', ex: 'Mairies, intercommunalités, conseils départementaux et régionaux.', tint: 'tint-mint', dot: 'var(--mint)' },
+    { k: 'T', short: 'Territoriale', t: 'La fonction publique territoriale', d: 'Elle travaille au plus près des habitants et habitantes, dans leur ville, leur département, leur région.', ex: 'Mairies, intercommunalités, conseils départementaux et régionaux.', tint: 'tint-mint', dot: 'var(--mint)' },
     { k: 'H', short: 'Hospitalière', t: 'La fonction publique hospitalière', d: 'Elle soigne et accompagne, dans les établissements publics de santé.', ex: 'Hôpitaux publics, EHPAD publics, établissements sociaux et médico-sociaux.', tint: 'tint-cyan', dot: '#22C7E0' }
   ];
   function versantsBlocks(h, fold) {
@@ -538,10 +538,10 @@
       '<div class="callout tint-yellow"><span class="pin"></span><p>Bon à savoir : un même métier existe souvent dans les trois. Et au cours d’une carrière, on peut passer de l’une à l’autre.</p></div>';
   }
   var CATS_INTRO = [
-    { id: 'A+', t: 'Les cadres supérieurs', d: 'Ils dirigent les grandes administrations et pilotent les politiques publiques.', dip: 'Bac+3 minimum, Bac+5 recommandé', mention: 'La très grande majorité des admis ont un bac+5.', ex: 'Directeur·rice d’hôpital, magistrat·e, commissaire', tint: 'tint-blue' },
-    { id: 'A', t: 'Concevoir, élaborer, manager', d: 'Ils imaginent les projets, préparent les décisions et encadrent des équipes.', dip: 'Bac+3 minimum, Bac+5 recommandé', mention: 'La très grande majorité des admis ont un bac+5.', ex: 'Attaché·e, inspecteur·rice, professeur·e, infirmier·ère', tint: 'tint-mint' },
-    { id: 'B', t: 'Appliquer, rédiger, gérer', d: 'Ils mettent en œuvre les décisions, suivent les dossiers et peuvent encadrer une petite équipe.', dip: 'Bac minimum', ex: 'Greffier·ère, technicien·ne, gardien·ne de la paix', tint: 'tint-cyan' },
-    { id: 'C', t: 'Exécuter, accueillir, assurer', d: 'Ils font tourner le service au quotidien, sur le terrain et au contact du public.', dip: 'Brevet, CAP, BEP, ou sans diplôme', ex: 'Adjoint·e administratif·ve, agent·e technique, ATSEM', tint: 'tint-yellow' }
+    { id: 'A+', t: 'Les cadres supérieurs', d: 'Ils dirigent les grandes administrations et pilotent les politiques publiques.', dip: 'Bac+3 minimum, Bac+5 recommandé', mention: 'La très grande majorité des admis ont un bac+5.', ex: 'Directeur ou directrice d’hôpital, magistrat ou magistrate, commissaire', tint: 'tint-blue' },
+    { id: 'A', t: 'Concevoir, élaborer, manager', d: 'Ils imaginent les projets, préparent les décisions et encadrent des équipes.', dip: 'Bac+3 minimum, Bac+5 recommandé', mention: 'La très grande majorité des admis ont un bac+5.', ex: 'Attaché ou attachée, inspecteur ou inspectrice, professeur ou professeure, infirmier ou infirmière', tint: 'tint-mint' },
+    { id: 'B', t: 'Appliquer, rédiger, gérer', d: 'Ils mettent en œuvre les décisions, suivent les dossiers et peuvent encadrer une petite équipe.', dip: 'Bac minimum', ex: 'Greffier ou greffière, technicien ou technicienne, gardien ou gardienne de la paix', tint: 'tint-cyan' },
+    { id: 'C', t: 'Exécuter, accueillir, assurer', d: 'Ils font tourner le service au quotidien, sur le terrain et au contact du public.', dip: 'Brevet, CAP, BEP, ou sans diplôme', ex: 'Adjoint administratif ou adjointe administrative, agent ou agente technique, ATSEM', tint: 'tint-yellow' }
   ];
   /* Catégories A et A+ : le bac+3 suffit pour s’inscrire, mais la plupart des lauréats ont un bac+5. */
   function catMention(c) { return c.mention ? '<p class="cat-mention">' + I.info + '<span>' + esc(c.mention) + '</span></p>' : ''; }
@@ -630,7 +630,7 @@
 
   screens['choix-profil'] = function () {
     if(familyEstablished())return screens.profil();
-    var profiles = [['etu', 'Étudiant·e'], ['par', 'Parent'], ['rec', 'En reconversion']];
+    var profiles = [['etu', 'Étudiant ou étudiante'], ['par', 'Parent'], ['rec', 'En reconversion']];
     return '<main class="screen profile-choice">' + back('#/categories-intro','Retour') +
       '<h1 class="mt-l">Vous êtes</h1><p class="lead">Le parcours s’adapte à votre profil.</p><div class="stack mt-s">' + profiles.map(function (p) {
         var on = S.profile === p[0];
@@ -689,7 +689,7 @@
   };
 
   screens.situation = function () {
-    var q = isParent() ? 'Votre enfant est-il boursier·e ?' : 'Êtes-vous boursier·e ?';
+    var q = isParent() ? 'Votre enfant est-il boursier ou boursière ?' : 'Êtes-vous boursier ou boursière ?';
     var budgets = budgetOptions(S.boursier);
     return '<main class="screen">' +
       '<div class="topbar">' + back('#/traits', 'Retour') + '<span class="eyebrow">Étape 5 / ' + STEPS + '</span></div>' +
@@ -708,7 +708,7 @@
       }).join('') + '</div>' : '') +
       (S.boursier==='Oui'?talentsFeature('C’est quoi, une Prépa Talents ?',
       '<p>Une préparation <b>gratuite</b> aux concours de catégorie A, A+ et B, dans une université, un IEP (institut d’études politiques, c’est-à-dire un Sciences Po) ou une école du service public. Plus de 100 en France, outre-mer compris.</p>' +
-      '<p>Au programme : cours, entraînements aux épreuves et un·e tuteur·rice qui vous suit toute l’année.</p>','h2',talentIntroAnimate?'talents-enter':''):'') +
+      '<p>Au programme : cours, entraînements aux épreuves et un tuteur ou une tutrice qui vous suit toute l’année.</p>','h2',talentIntroAnimate?'talents-enter':''):'') +
       '</main><div class="footer">'+(profileNeedsValidation()?profileContinuation('#/accueil',''):(S.boursier&&S.budget?'<a class="btn" href="#/accueil" data-action="finish">':'<span class="small center">Répondez aux deux questions pour continuer.</span><button type="button" class="btn" disabled>')+'Voir '+(isParent()?'son parcours':'mon parcours')+(S.boursier&&S.budget?'</a>':'</button>'))+'</div>';
   };
 
@@ -939,13 +939,13 @@
     Finances: { lycee:'Bac général (maths, SES) ou STMG', sup2:'BTS ou BUT (gestion, GEA)', lic:'Licence d’économie, de gestion ou de droit', master:'Master finances publiques, IEP ou IPAG', pro:'Bac pro AGORA' },
     Justice: { lycee:'Bac général (HGGSP, SES, HLP)', sup2:'BUT carrières juridiques ou BTS', lic:'Licence de droit', master:'Master de droit, puis préparation en IEJ', pro:'CAP ou bac pro (accueil, sécurité)' },
     Sécurité: { lycee:'Bac général, technologique ou professionnel', sup2:'BTS ou BUT', lic:'Licence de droit ou de sciences criminelles', master:'Master de droit ou de sécurité, ou IEP', pro:'CAP ou bac pro métiers de la sécurité' },
-    Défense: { lycee:'Bac général, technologique ou professionnel', sup2:'BTS ou BUT', lic:'Licence (droit, sciences, langues)', master:'Master ou école d’ingénieur·es', pro:'CAP ou bac pro' },
-    Santé: { lycee:'Bac général (SVT, physique-chimie) ou ST2S', sup2:'Diplôme d’État paramédical (aide-soignant·e, auxiliaire de puériculture)', lic:'Diplôme d’État en 3 ans (IFSI ou école paramédicale)', master:'Master de santé publique ou études de santé', pro:'CAP AEPE ou bac pro ASSP' },
-    Social: { lycee:'Bac général ou ST2S', sup2:'BTS ou diplôme d’État de moniteur·rice-éducateur·rice', lic:'Diplôme d’État du travail social en 3 ans', master:'Master d’intervention sociale ou CAFDES', pro:'CAP AEPE ou bac pro ASSP' },
+    Défense: { lycee:'Bac général, technologique ou professionnel', sup2:'BTS ou BUT', lic:'Licence (droit, sciences, langues)', master:'Master ou école d’ingénieurs', pro:'CAP ou bac pro' },
+    Santé: { lycee:'Bac général (SVT, physique-chimie) ou ST2S', sup2:'Diplôme d’État paramédical (aide-soignant ou aide-soignante, auxiliaire de puériculture)', lic:'Diplôme d’État en 3 ans (IFSI ou école paramédicale)', master:'Master de santé publique ou études de santé', pro:'CAP AEPE ou bac pro ASSP' },
+    Social: { lycee:'Bac général ou ST2S', sup2:'BTS ou diplôme d’État de moniteur-éducateur ou monitrice-éducatrice', lic:'Diplôme d’État du travail social en 3 ans', master:'Master d’intervention sociale ou CAFDES', pro:'CAP AEPE ou bac pro ASSP' },
     Éducation: { lycee:'Bac général', sup2:'BUT carrières sociales', lic:'Licence dans la discipline enseignée', master:'Master MEEF (INSPÉ)', pro:'CAP AEPE' },
-    Environnement: { lycee:'Bac général (SVT, maths), STAV ou STI2D', sup2:'BTS ou BUT (gestion de l’eau, forêt, génie civil)', lic:'Licence ou licence pro en environnement', master:'Master en environnement ou école d’ingénieur·es', pro:'CAP ou bac pro aménagements paysagers' },
-    Transports: { lycee:'Bac général (maths, physique) ou STI2D', sup2:'BTS ou BUT (génie civil, logistique)', lic:'Licence pro ou licence de sciences', master:'École d’ingénieur·es ou master', pro:'CAP ou bac pro (conduite, logistique, maintenance)' },
-    Numérique: { lycee:'Bac général (NSI, maths) ou STI2D', sup2:'BTS SIO ou BUT informatique', lic:'Licence ou BUT informatique', master:'Master informatique ou école d’ingénieur·es', pro:'Bac pro CIEL' },
+    Environnement: { lycee:'Bac général (SVT, maths), STAV ou STI2D', sup2:'BTS ou BUT (gestion de l’eau, forêt, génie civil)', lic:'Licence ou licence pro en environnement', master:'Master en environnement ou école d’ingénieurs', pro:'CAP ou bac pro aménagements paysagers' },
+    Transports: { lycee:'Bac général (maths, physique) ou STI2D', sup2:'BTS ou BUT (génie civil, logistique)', lic:'Licence pro ou licence de sciences', master:'École d’ingénieurs ou master', pro:'CAP ou bac pro (conduite, logistique, maintenance)' },
+    Numérique: { lycee:'Bac général (NSI, maths) ou STI2D', sup2:'BTS SIO ou BUT informatique', lic:'Licence ou BUT informatique', master:'Master informatique ou école d’ingénieurs', pro:'Bac pro CIEL' },
     Culture: { lycee:'Bac général (HLP, HGGSP, arts)', sup2:'BTS ou BUT (métiers du livre, information-communication)', lic:'Licence d’histoire, d’histoire de l’art ou de lettres', master:'Master patrimoine, archives ou bibliothèques', pro:'CAP ou bac pro' },
     Recherche: { lycee:'Bac général (spécialités scientifiques ou humanités)', sup2:'BTS ou BUT (analyses de laboratoire, mesures physiques)', lic:'Licence dans la discipline', master:'Master de recherche', pro:'Bac pro laboratoire' },
     Sport: { lycee:'Bac général ou technologique', sup2:'BPJEPS ou BTS', lic:'Licence STAPS', master:'Master STAPS', pro:'CAP ou bac pro' }
@@ -1575,7 +1575,7 @@
   function recruitConcours(j) {
     /* Sans niveau connu, un métier A ou A+ passe quand même par les études supérieures : bac+3 minimum, bac+5 recommandé. */
     var contract = isContractJob(j), cat = contract ? 'CDD' : themeCategory(j) || 'CDD', lvl = typeof j.lvl === 'number' ? j.lvl : cat === 'A' || cat === 'A+' ? 4 : 2;
-    var body = contract ? '<p class="trip-a">' + esc('Recruté·e sur CV et entretien, en CDD. Un CDI est possible après 6 ans.') + '</p>'
+    var body = contract ? '<p class="trip-a">' + esc('Recruté ou recrutée sur CV et entretien, en CDD. Un CDI est possible après 6 ans.') + '</p>'
       : '<p class="trip-a">' + sig(j.recruitment ? j.recruitment.text : 'Recrutement selon l’employeur : consulter les offres.') + '</p>' + (j.recruitment ? ext(j.recruitment.url, j.recruitment.label, 'link-plain') : '');
     return Object.assign({ id: 'recruit-' + j.id, routeIds: [], cat: cat, fp: j.fp.charAt(0), lvl: lvl, recruit: { title: contract ? 'Recrutement sans concours' : 'Recrutement', body: body } }, studyFields(j, lvl));
   }
@@ -1691,16 +1691,16 @@
     var data = {
       'Administratif': { tip: 'Les IPAG et CPAG sont les instituts des universités dédiés aux concours administratifs.', steps: [
         ['Bac général ou techno', 'Toutes les spécialités ouvrent la voie'], ['Licence', 'Droit, AES, économie, science politique'],
-        ['Master ou IPAG', 'Administration publique, droit public'], ['Concours de catégorie A ou A+', 'IRA, attaché·e territorial·e, INSP, INET']] },
+        ['Master ou IPAG', 'Administration publique, droit public'], ['Concours de catégorie A ou A+', 'IRA, attaché territorial ou attachée territoriale, INSP, INET']] },
       'Technique': { tip: 'Un BTS ou un BUT suffit pour viser la catégorie B technique.', steps: [
         ['Bac général, techno ou pro', 'Sciences, industrie, numérique'], ['BTS ou BUT', 'Informatique, génie civil, électronique'],
-        ['Concours de catégorie B', 'Technicien·ne'], ['Évoluer en catégorie A', 'Ingénieur·e, par concours interne']] },
+        ['Concours de catégorie B', 'Technicien ou technicienne'], ['Évoluer en catégorie A', 'Ingénieur ou ingénieure, par concours interne']] },
       'Social': { tip: 'Les diplômes d’État du social se préparent en 3 ans, après le bac.', steps: [
-        ['Bac', 'Toutes séries'], ['Diplôme d’État en 3 ans', 'Assistant·e de service social, éducateur·rice spécialisé·e'],
+        ['Bac', 'Toutes séries'], ['Diplôme d’État en 3 ans', 'Assistant ou assistante de service social, éducateur spécialisé ou éducatrice spécialisée'],
         ['Concours ou recrutement', 'Catégorie A, État, collectivités ou hôpitaux']] },
       'Dès le brevet': { tip: 'Le brevet suffit pour certains concours de catégorie C. Ensuite, on progresse par concours interne.', steps: [
         ['Brevet', 'Diplôme national du brevet'], ['CAP ou BEP', 'Utile pour certains concours, pas obligatoire partout'],
-        ['Concours de catégorie C', 'Adjoint·e administratif·ve ou technique, ATSEM'], ['Évoluer en catégorie B', 'Par concours interne ou promotion']] }
+        ['Concours de catégorie C', 'Adjoint administratif ou adjointe administrative ou technique, ATSEM'], ['Évoluer en catégorie B', 'Par concours interne ou promotion']] }
     };
     data = D.tracks || data; tracks = data;
     var cfg = data[S.track] || data.Administratif;
@@ -1760,7 +1760,7 @@
     return '<section class="stack mt-l" id="aides"><h2 class="section-heading no-icon">'+I.book+'Aides</h2>' +
       '<a class="btn outline" href="#/annales'+(job?'/'+job.id:'')+'">'+I.book+'Annales et rapports de jury</a>' +
       '<a class="btn outline" href="#/bibliographie'+(job?'/'+job.id:'')+'">Recommandations bibliographiques</a></section><section class="stack mt-l" id="preparations"><h2 class="section-heading no-icon" id="prep-title" tabindex="-1">'+I.pin+'Prépas</h2>' +
-      '<div class="explore-switch bourse-switch" role="group" aria-label="' + (isParent() ? 'Mon enfant est-il boursier ?' : 'Êtes-vous boursier ?') + '">' + [['Oui', 'Boursier·e'], ['Non', 'Non boursier·e']].map(function (o) {
+      '<div class="explore-switch bourse-switch" role="group" aria-label="' + (isParent() ? 'Mon enfant est-il boursier ?' : 'Êtes-vous boursier ?') + '">' + [['Oui', 'Boursier ou boursière'], ['Non', 'Non boursier ou boursière']].map(function (o) {
         var pressed = (o[0] === 'Oui') === on;
         return '<button type="button" class="' + (pressed ? 'on' : '') + '" aria-pressed="' + pressed + '" data-action="toggleBoursier"' + attr('v', o[0]) + '>' + esc(o[1]) + '</button>';
       }).join('') + '</div>' +
@@ -1997,7 +1997,7 @@
   screens.handicap = function (jobId) {
     var job=jobById(jobId);
     return '<main class="screen top-tight">' + back(job?prepHref(job):'#/concours',job?(isContractJob(job)?'Entrer sans concours':'Se préparer'):'Concours') +
-      '<span class="eyebrow">Être accompagné·e</span><h1 class="sm">Handicap : accès et aménagements</h1>' +
+      '<span class="eyebrow">Être accompagné ou accompagnée</span><h1 class="sm">Handicap : accès et aménagements</h1>' +
       '<div class="prose"><p>Vous pouvez demander des adaptations des épreuves. Il existe aussi une voie de recrutement spécifique, sous conditions.</p>' +
       '<h2>Adapter les épreuves</h2><p>Du temps supplémentaire, des pauses ou une aide humaine ou technique peuvent être prévus selon vos besoins.</p>' +
       '<p>Contactez le service qui organise le concours avant la date limite indiquée dans l’avis. Le certificat d’un médecin agréé doit être établi moins de six mois avant les épreuves.</p>' +
@@ -2010,13 +2010,13 @@
 
 
   /* ---------- Profil et informations légales ---------- */
-  var PROFILE_LABEL = { etu: 'Étudiant·e', par: 'Parent', rec: 'En reconversion' };
+  var PROFILE_LABEL = { etu: 'Étudiant ou étudiante', par: 'Parent', rec: 'En reconversion' };
 
-  var PROFILE_FIELDS = { profile: 'Profil', level: 'Niveau d’études', domains: 'Domaines', traits: 'Ce qui vous ressemble', boursier: 'Boursier·e', budget: 'Budget pour se préparer' };
+  var PROFILE_FIELDS = { profile: 'Profil', level: 'Niveau d’études', domains: 'Domaines', traits: 'Ce qui vous ressemble', boursier: 'Boursier ou boursière', budget: 'Budget pour se préparer' };
   /* Fenêtre de modification : uniquement les options du point choisi. */
   function profileFieldContent(field) {
     var body = '';
-    if (field === 'profile') body = '<div class="stack">' + [['etu', 'Étudiant·e'], ['par', 'Parent'], ['rec', 'En reconversion']].map(function (p) { var on = S.profile === p[0]; return '<button type="button" class="opt' + (on ? ' on' : '') + '" aria-pressed="' + on + '"' + attr('action', 'profile') + attr('v', p[0]) + '><span>' + p[1] + '</span>' + (on ? I.check : '') + '</button>'; }).join('') + '</div>';
+    if (field === 'profile') body = '<div class="stack">' + [['etu', 'Étudiant ou étudiante'], ['par', 'Parent'], ['rec', 'En reconversion']].map(function (p) { var on = S.profile === p[0]; return '<button type="button" class="opt' + (on ? ' on' : '') + '" aria-pressed="' + on + '"' + attr('action', 'profile') + attr('v', p[0]) + '><span>' + p[1] + '</span>' + (on ? I.check : '') + '</button>'; }).join('') + '</div>';
     if (field === 'level') body = '<div class="row">' + (S.profile === 'rec' ? D.levels.adult : D.levels.school).map(function (l) { return chip('level', l, l, S.level === l); }).join('') + '</div>';
     if (field === 'domains') body = '<div class="grid-2 interest-grid">' + D.domains.map(function (d) { var on = S.domains.indexOf(d) > -1; return '<button type="button" class="interest-option' + (on ? ' on' : '') + '" aria-pressed="' + on + '"' + attr('action', 'domain') + attr('v', d) + '><span class="interest-name">' + esc(domainLabel(d)) + '</span><span class="interest-check" aria-hidden="true">' + (on ? I.check : '') + '</span></button>'; }).join('') + '</div>';
     if (field === 'traits') body = D.traitGroups.map(function (g) { return '<section class="stack mt-s"><h3 class="no-icon">' + esc(g.title) + '</h3><div class="row">' + g.items.map(function (t) { return chip('trait', t[0], t[1], S.traits.indexOf(t[0]) > -1); }).join('') + '</div></section>'; }).join('');
@@ -2031,7 +2031,7 @@
       [isParent() ? 'Niveau de votre enfant' : 'Niveau', S.level || 'Non renseigné'],
       ['Domaines', S.domains.length ? S.domains.map(domainLabel).join(', ') : 'Tous'],
       [isParent() ? 'Ce qui lui ressemble' : 'Ce qui vous ressemble', S.traits.length ? S.traits.map(traitLabel).join(', ') : 'Non renseigné'],
-      ['Boursier·e', S.boursier || 'Non renseigné'],
+      ['Boursier ou boursière', S.boursier || 'Non renseigné'],
       ['Budget', S.budget || 'Non renseigné']
     ];
     return '<main class="screen pt">' +
@@ -2062,14 +2062,14 @@
       '<p><strong>En bref : vos réponses restent sur votre appareil.</strong> Pas de compte, pas de cookie, pas de mesure d’audience, pas de publicité.</p>' +
       '<h2>Responsable du traitement</h2><p>' + esc(L.publisher) + '. Contact : ' + mail(L.contact) + '.</p>' +
       '<h2>Ce qui est enregistré</h2><ul>' +
-      '<li>Le profil (étudiant·e, parent, reconversion) et le niveau d’étude.</li>' +
+      '<li>Le profil (étudiant ou étudiante, parent, reconversion) et le niveau d’étude.</li>' +
       '<li>Les domaines et les traits choisis (« Ce qui vous ressemble »), la situation de bourse et le budget indiqués.</li>' +
       '<li>Les réglages d’affichage (filtres, région, confort de lecture).</li>' +
       '<li>Le prénom ou pseudo, les profils enfants, la commune choisie et les métiers favoris.</li></ul>' +
       '<p>Aucune adresse e-mail ni adresse postale précise n’est demandée. Chaque enfant conserve un profil indépendant dans ce navigateur.</p>' +
       '<h2>Où et combien de temps</h2><p>Dans le stockage local de votre navigateur (localStorage), jamais sur un serveur. Ces données restent jusqu’à ce que vous les effaciez, depuis l’onglet Profil ou les réglages de votre navigateur.</p>' +
       '<h2>Pourquoi</h2><p>Uniquement pour adapter les contenus à votre situation. Ce stockage est nécessaire au service demandé : il ne demande pas de consentement.</p>' +
-      '<h2>Hébergement</h2><p>L’application est hébergée par ' + esc(L.host) + '. Comme tout hébergeur, il peut enregistrer l’adresse IP des visiteur·ses dans ses journaux techniques, pour la sécurité du service.</p>' +
+      '<h2>Hébergement</h2><p>L’application est hébergée par ' + esc(L.host) + '. Comme tout hébergeur, il peut enregistrer l’adresse IP des visiteurs et visiteuses dans ses journaux techniques, pour la sécurité du service.</p>' +
       '<h2>Liens externes</h2><p>Les liens vers des sites publics (calendrier des concours, offres d’emploi, cartes des prépas) ouvrent ces sites, qui ont leur propre politique de confidentialité.</p>' +
       '<h2>Vos droits</h2><p>Vous pouvez à tout moment consulter, modifier ou effacer vos données depuis l’onglet Profil. Pour toute question, écrivez à ' + mail(L.contact) + '. Vous pouvez aussi saisir la CNIL : ' + ext('https://www.cnil.fr/fr/plaintes', 'cnil.fr', '') + '.</p>' +
       '<p class="small">Mise à jour : ' + esc(L.updated) + '</p>' +
@@ -2094,7 +2094,7 @@
       '<li>Informations jamais portées par la couleur seule, liens externes signalés.</li>' +
       '<li>Zoom et agrandissement du texte autorisés, animations réduites si demandé.</li></ul>' +
       '<h2>Établissement de cette déclaration</h2><p>Déclaration établie le ' + esc(L.updated) + ', sur la base d’une auto-évaluation. Technologies : HTML, CSS, JavaScript.</p>' +
-      '<h2>Retour d’information et contact</h2><p>Si vous n’arrivez pas à accéder à un contenu ou à un service, écrivez à ' + mail(L.contact) + ' pour être orienté·e vers une alternative accessible.</p>' +
+      '<h2>Retour d’information et contact</h2><p>Si vous n’arrivez pas à accéder à un contenu ou à un service, écrivez à ' + mail(L.contact) + ' pour être orienté ou orientée vers une alternative accessible.</p>' +
       '<h2>Voies de recours</h2><p>Si vous n’obtenez pas de réponse satisfaisante, vous pouvez saisir le Défenseur des droits : ' + ext('https://formulaire.defenseurdesdroits.fr/', 'formulaire en ligne', '') + ', ou par courrier gratuit, sans affranchissement : Défenseur des droits, Libre réponse 71120, 75342 Paris CEDEX 07.</p>' +
       '</div></main>' + tabbar('moi');
   };
