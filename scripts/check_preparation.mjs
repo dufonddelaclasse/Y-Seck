@@ -259,7 +259,7 @@ assert(!screens.preparer('magasinier').includes('talents-bourse'),'Pas de bourse
   const animals=D.jobs.filter(j=>j.traits.includes('animaux')).map(j=>j.id);
   assert(animals.length>=20&&['fprch031','fpagr019','fpenv045','fpdef015','tech-env'].every(id=>animals.includes(id))&&!animals.includes('fpmed030'),'Trait animaux : '+animals.length+' métiers.');
 }
-assert(/\d+ Prépas? Talents<\/b>[\s\S]*Cliquez pour consulter les prépas identifiées pour ce concours[\s\S]*talents-perf[\s\S]*talents-bourse[\s\S]*Découvrir les prépas Talents/.test(screens.preparer('attache')),'La carte Prépas Talents réunit le nombre de prépas, la bourse et le bouton.');
+assert(/\d+ Prépas? Talents<\/b>[\s\S]*Touchez le bouton pour voir les prépas identifiées pour ce concours[\s\S]*talents-perf[\s\S]*talents-bourse[\s\S]*Découvrir les prépas Talents/.test(screens.preparer('attache')),'La carte Prépas Talents réunit le nombre de prépas, la bourse et le bouton.');
 assert(!screens.preparer('magasinier').includes('href="#/prepa/talents'));
 assert.equal(JSON.stringify(data.crosswalk),JSON.stringify(db.links));
 const additions=data.books.filter(b=>b.id.startsWith('vp-book-'));

@@ -508,7 +508,7 @@
   function talentsFeature(title,body,heading,extraClass) {
     heading=heading||'h2';
     return '<section class="talents-card'+(extraClass?' '+extraClass:'')+'">'+talentsHero()+'<div class="talents-body"><'+heading+' class="no-icon'+(heading==='h1'?' sr-only':'')+'">'+title+'</'+heading+'>'+body +
-      '<div class="talents-perf" aria-hidden="true"></div><p><b>Une bourse de ' + esc(D.talentsGrantLabel || '5 000 €') + ' par an</b> est versée aux élèves. L’entrée se fait sur dossier et entretien, selon les ressources et la motivation.</p></div></section>';
+      '<div class="talents-perf" aria-hidden="true"></div><p>L’entrée se fait sous conditions de ressources, les mêmes que pour une bourse sur critères sociaux, et de mérite : examen du dossier, puis entretien. Priorité aux candidats qui vivent et ont étudié dans un quartier prioritaire, une zone rurale ou en outre-mer.</p><p>Une fois admis, <b>une bourse Talents de ' + esc(D.talentsGrantLabel || '5 000 €') + ' par an</b> s’ajoute à la bourse sur critères sociaux.</p></div></section>';
   }
 
   screens.bienvenue = function () {
@@ -1772,9 +1772,10 @@
           var count = job || S.domains.length ? nbT : D.talents.length;
           return '<div class="prep hi talents-card">' + talentsHero('<span class="talents-pills"><span class="price">' + esc(p.price) + '</span><span class="price talents-pill-alt">Recrutement sur dossier</span></span>') + '<div class="talents-body"><h2 class="sr-only">' + sig(p.t) + '</h2>' +
             '<p class="talents-count"><b>' + count + (count > 1 ? ' Prépas Talents' : ' Prépa Talents') + '</b></p>' +
-            '<p>Cliquez pour consulter les prépas identifiées' + (job ? ' pour ce concours' : S.domains.length ? ' pour ' + (isParent() ? 'ses' : 'vos') + ' choix' : '') + '. Sur dossier et entretien, sous conditions de ressources.</p>' +
+            /* Conditions vérifiées sur service-public.gouv.fr (A19065) et la fiche d’admission de la DGAFP. */
+            '<p>Gratuites. Accès sous conditions de ressources, les mêmes que pour une bourse sur critères sociaux, et de mérite : examen du dossier, puis entretien. Touchez le bouton pour voir les prépas identifiées' + (job ? ' pour ce concours' : S.domains.length ? ' pour ' + (isParent() ? 'ses' : 'vos') + ' choix' : '') + '.</p>' +
             '<div class="talents-perf" aria-hidden="true"></div>' +
-            '<div class="talents-bourse"><b>' + esc(D.talentsGrantLabel || '5 000 €') + ' / an</b><span>Bourse Talents ' + esc(D.talentsGrantYear || '2026-2027') + ', pour les élèves des Prépas Talents.</span></div>' +
+            '<div class="talents-bourse"><b>' + esc(D.talentsGrantLabel || '5 000 €') + ' / an</b><span>Bourse Talents ' + esc(D.talentsGrantYear || '2026-2027') + ' : une fois admis en Prépa Talents, ' + (isParent() ? 'votre enfant la reçoit en plus de sa' : 'vous la recevez en plus de votre') + ' bourse sur critères sociaux. Versée en deux fois, sans démarche.</span></div>' +
             '<a class="btn theme talents-cta" href="#/prepa/' + p.id + (job?'/'+job.id:'') + '">Découvrir les prépas Talents</a></div></div>';
         }
         /* Préparations privées : simple information, sans lien vers une liste d’organismes. */
