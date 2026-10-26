@@ -733,6 +733,7 @@ html:where(.dark).dark .ladder-alt-row, html:where(.dark).dark .ladder-alt-row:h
 :where(html.dark) a.rung.rung-link { color:var(--ink); }
 :where(html.dark) a.rung.rung-link:hover { color:var(--ink); }
 :where(html.dark) a.rung.rung-link > .chev { color:var(--muted); }
+:where(html.dark) .row-chev { color:var(--muted); }
 html:where(.dark) { background:#28272E; }
 :where(html.dark) body, :where(html.dark) .app { background:transparent; }
 :where(html.dark) body::before { background:linear-gradient(180deg, #171714 0, #28272E 860px); }

@@ -2052,6 +2052,9 @@ html[data-contrast="true"] .job-page .job-match { background:none; border:0; col
 a.rung.rung-link { color:var(--ink); text-decoration:none; }
 a.rung.rung-link:hover { color:var(--ink); }
 a.rung.rung-link > .chev { flex:none; width:18px; height:18px; margin-right:-4px; color:var(--muted); }
+/* Même petite flèche sur les métiers liés et les évolutions des autres concours. */
+.row-chev { flex:none; display:flex; align-self:center; margin-left:auto; padding-left:6px; color:var(--muted); }
+.row-chev svg { width:18px; height:18px; }
 /* Fond des écrans : dégradé vertical, #F6F7F2 en haut de l’écran et #E3E1EF en bas. Il est posé sur un calque fixe
    (et non en « background-attachment: fixed », ignoré par Safari sur iPhone) : il ne bouge pas quand on fait défiler.
    Les zones blanches (en-tête des fiches métier et concours, pages blanches) restent blanches. */
@@ -2276,7 +2279,7 @@ html.crios .profile-footer { bottom:calc(86px + env(safe-area-inset-bottom, 0px)
 .install-offer .body { margin:0; }
 /* Étapes d’installation : pastilles numérotées reliées par un trait, pictogramme au-dessus de chaque consigne. */
 .install-steps { list-style:none; margin:22px 0 8px; padding:0; display:flex; flex-direction:column; }
-.install-steps li { position:relative; display:grid; grid-template-columns:30px minmax(0,1fr); column-gap:14px; row-gap:10px; align-items:center; padding-bottom:26px; }
+.install-steps li { position:relative; display:grid; grid-template-columns:30px minmax(0,1fr); column-gap:14px; row-gap:8px; align-items:center; padding-bottom:16px; }
 .install-steps li:last-child { padding-bottom:0; }
 .install-steps li:not(:last-child)::before { content:''; position:absolute; left:14px; top:30px; bottom:0; width:2.5px; border-radius:2px; background:var(--brand); }
 .install-num { grid-column:1; grid-row:1; display:grid; place-items:center; width:30px; height:30px; border-radius:50%; background:var(--brand); color:#FFF; font-size:.9375rem; font-weight:600; }
@@ -2284,6 +2287,9 @@ html.crios .profile-footer { bottom:calc(86px + env(safe-area-inset-bottom, 0px)
 .install-ico svg { display:block; height:26px; width:auto; }
 .install-ico-add svg { height:34px; }
 .install-steps p { grid-column:2; grid-row:2; margin:0; font-size:1rem; line-height:1.4; color:var(--ink); }
+.install-steps li.inline { grid-template-columns:30px auto minmax(0,1fr); }
+.install-steps li.inline p { grid-column:3; grid-row:1; }
+.install-steps li.inline .install-ico { width:30px; justify-content:center; }
 /* Écrans d’introduction en carrousel : une bande de 2 px (comme la progression de l’onboarding) glisse sous l’onglet choisi,
    les contenus défilent côte à côte et la hauteur suit le contenu affiché. */
 .fp-tabs { position:relative; }

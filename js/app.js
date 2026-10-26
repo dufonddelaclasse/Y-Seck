@@ -801,7 +801,7 @@
     /* Une recherche garde l’ordre de pertinence : le métier cherché reste en tête, même contractuel. */
     return words.length ? list : contractsLater(list);
   }
-  function jobRow(j) {
+  function jobRow(j, chevron) {
       var ranked = userRank() !== null;
       var shared = sharedTraits(j);
       var badges = '';
@@ -812,7 +812,7 @@
       if (shared.length) badges += '<span class="fit like">' + (isParent() ? 'Ce qui lui ressemble' : 'Ce qui vous ressemble') + ' : ' + esc(shared.slice(0, 2).map(traitLabel).join(', ').toLowerCase()) + '</span>';
       return '<a class="list-row job-row job-' + catClass(displayCategory(j)) + '" href="#/metier/' + j.id + '">' + jobBadges(j) +
         '<div class="main"><span class="name">' + esc(j.name) + '</span><span class="meta">' + esc(j.domain + ' · ' + fpNames(j.fp).join(', ')) + '</span>' +
-        (badges ? '<span class="fits">' + badges + '</span>' : '') + '</div></a>';
+        (badges ? '<span class="fits">' + badges + '</span>' : '') + '</div>' + (chevron === true ? '<span class="row-chev" aria-hidden="true">' + I.chev + '</span>' : '') + '</a>';
   }
   /* Concours du référentiel : mêmes filtres de catégorie, de versant et de recherche que les métiers. */
   function concoursKey(c) { return c.id.replace('É','E'); }
@@ -1506,9 +1506,11 @@
     var only = jobs.filter(function (j) { var k = jobCategories(j); return k.length === 1 && k[0] === c.cat; });
     var others = jobs.filter(function (j) { return only.indexOf(j) < 0; });
     only = only.slice(0, 40); others = others.slice(0, Math.max(0, 40 - only.length));
-    return (only.length ? '<div class="list job-cards">' + only.map(jobRow).join('') + '</div>' : '') +
+    /* Petite flèche à droite de chaque métier lié, comme pour les évolutions : la carte s’ouvre. */
+    var row = function (j) { return jobRow(j, true); };
+    return (only.length ? '<div class="list job-cards">' + only.map(row).join('') + '</div>' : '') +
       (others.length ? '<p class="related-note">Ces métiers sont aussi accessibles par d’autres concours, d’une autre catégorie ou d’un autre versant de la fonction publique.</p>' +
-        '<div class="list job-cards">' + others.map(jobRow).join('') + '</div>' : '');
+        '<div class="list job-cards">' + others.map(row).join('') + '</div>' : '');
   }
   function concoursInfo(c) {
     var facts = [];
@@ -1617,7 +1619,7 @@
       var others = refs.filter(function (o) { return o !== c && o.next && o.next.length && D.concoursById[o.next[0].to]; });
       var alt = others.length ? '<div class="ladder-alt"><p class="ladder-alt-title">Avec les autres concours</p>' + others.map(function (o) {
         var p = o.next[0], to = D.concoursById[p.to];
-        return '<a class="ladder-alt-row" href="#/concours-fiche/' + concoursKey(to) + '">' + catBadge(p.toCat, 'sm') + '<span><b>' + esc(p.toName) + '</b><small>Après le concours ' + { E: 'de l’État', T: 'territorial', H: 'hospitalier' }[o.fp] + '</small></span></a>';
+        return '<a class="ladder-alt-row" href="#/concours-fiche/' + concoursKey(to) + '">' + catBadge(p.toCat, 'sm') + '<span><b>' + esc(p.toName) + '</b><small>Après le concours ' + { E: 'de l’État', T: 'territorial', H: 'hospitalier' }[o.fp] + '</small></span><span class="row-chev" aria-hidden="true">' + I.chev + '</span></a>';
       }).join('') + '</div>' : '';
       return '<div data-tab="' + i + '"' + (i === sel ? '' : ' hidden') + '>' + jobLadder(j, c, alt) + '</div>';
     }).join('');
@@ -2351,7 +2353,8 @@
       ? [[SHARE_ICON, 'share', 'Touchez le bouton partager' + (otherIosBrowser ? ', à côté de l’adresse' : '')], [PLUS_ICON, 'plus', 'Choisissez « Sur l’écran d’accueil »'], [ADD_ICON, 'add', 'Touchez « Ajouter » : l’icône Y-Seck apparaît avec vos applications']]
       : [[MENU_ICON, 'menu', 'Ouvrez le menu de votre navigateur'], [PLUS_ICON, 'plus', 'Choisissez « Ajouter à l’écran d’accueil » ou « Installer l’application »'], [ADD_ICON, 'add', 'Confirmez : l’icône Y-Seck apparaît avec vos applications']];
     return intro + '<ol class="install-steps">' + steps.map(function (t, k) {
-      return '<li><span class="install-num" aria-hidden="true">' + (k + 1) + '</span><span class="install-ico install-ico-' + t[1] + '">' + t[0] + '</span><p>' + t[2] + '</p></li>';
+      /* Pictogrammes simples : la consigne se place à droite ; le bouton « Ajouter », plus large, garde la consigne dessous. */
+      return '<li' + (t[1] === 'add' ? '' : ' class="inline"') + '><span class="install-num" aria-hidden="true">' + (k + 1) + '</span><span class="install-ico install-ico-' + t[1] + '">' + t[0] + '</span><p>' + t[2] + '</p></li>';
     }).join('') + '</ol><div class="sheet-actions"><button type="button" class="btn" data-ui="close">J’ai compris</button></div>';
   }
 
