@@ -2253,6 +2253,17 @@ html.crios .profile-footer { bottom:calc(86px + env(safe-area-inset-bottom, 0px)
 .talents-order { display:flex; flex-direction:column; align-items:flex-start; gap:4px; margin-top:8px; }
 .talents-order p { margin:0; font-size:.9375rem; font-weight:500; line-height:1.4; }
 .talents-locate { font-size:.8125rem; }
+/* IPAG, CPAG et IEP : tarifs sous chaque établissement, et rappel des droits universitaires. */
+.school-fees { margin-top:8px; padding:10px 12px; border-radius:14px; background:var(--soft); }
+.school-fees-title { margin:0 0 6px; font-size:.8125rem; font-weight:600; color:var(--ink-2); }
+.school-fees ul { margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:6px; }
+.school-fees li { display:grid; grid-template-columns:minmax(0,1fr) auto; column-gap:10px; font-size:.875rem; line-height:1.35; }
+.school-fees li b { font-weight:600; text-align:right; }
+.school-fees li small { grid-column:1 / -1; color:var(--muted); font-size:.8125rem; }
+.school-fees-note { margin:6px 0 0; font-size:.8125rem; line-height:1.4; color:var(--muted); }
+.school-fees .link-plain { margin-top:6px; font-size:.8125rem; }
+.school-uni { display:flex; flex-direction:column; gap:6px; margin-top:12px; padding:14px 16px; border-radius:18px; background:var(--yellow-tint); }
+.school-uni p { margin:0; font-size:.9375rem; line-height:1.45; }
 /* Popup d’installation du raccourci : icône de l’app, explication, puis le bouton ou les gestes à faire. */
 .install-offer { display:flex; align-items:center; gap:14px; }
 .install-icon { flex:none; width:64px; height:64px; border-radius:15px; box-shadow:0 4px 14px rgba(37,0,186,.25); }

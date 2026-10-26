@@ -805,6 +805,11 @@ html:where(.dark).dark .sheet-content button.chip.category-choice[data-action="m
 :where(html.dark) .region-option.on .region-option-count { background:var(--brand); color:#FFF; }
 :where(html.dark) .talents-counter { border:1px solid var(--lilac); background:#31312C; }
 :where(html.dark) .talents-counter-copy span { color:#C2C2C6; }
+:where(html.dark) .school-fees { background:var(--soft); }
+:where(html.dark) .school-fees-title { color:var(--ink-2); }
+:where(html.dark) .school-fees li small { color:var(--muted); }
+:where(html.dark) .school-fees-note { color:var(--muted); }
+:where(html.dark) .school-uni { background:var(--yellow-tint); }
 :where(html.dark) .install-icon { box-shadow:0 4px 14px rgba(37,0,186,.25); }
 :where(html.dark) .install-steps li::marker { color:var(--brand); }
 :where(html.dark) .install-share { color:var(--brand); }

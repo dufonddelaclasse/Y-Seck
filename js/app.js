@@ -1815,6 +1815,36 @@
     }).join('');
   }
 
+  /* IPAG, CPAG et IEP : même présentation que les Prépas Talents (carte, compteur, tri par distance), avec les tarifs. */
+  function schoolList(kind) {
+    var all = D[kind] || [], byRegion = { Toutes: all.length };
+    all.forEach(function (x) { var k = regionOf(x.dep); byRegion[k] = (byRegion[k] || 0) + 1; });
+    var shown = all.filter(function (x) { return inRegion(x.dep); });
+    if (S.location) shown = shown.slice().sort(function (a, b) { var da = distanceTo(a), db = distanceTo(b); return da === db ? a.name.localeCompare(b.name, 'fr') : da - db; });
+    return { shown: shown, byRegion: byRegion };
+  }
+  function schoolRow(x) {
+    var online = /en ligne|à distance/i.test(x.name + ' ' + (x.note || '')), distance = online ? Infinity : distanceTo(x), fees = x.fees || [];
+    return '<div class="list-row static top"><span class="pin-ico" aria-hidden="true">' + I.pin + '</span><div class="main">' +
+      '<span class="name sm">' + esc(x.name) + '</span>' +
+      '<span class="meta">' + esc(x.city + ' · ' + REG[regionOf(x.dep)]) + (online ? ' · en ligne' : '') + '</span>' +
+      (S.location ? '<span class="meta">' + (online ? 'À distance' : (Number.isFinite(distance) ? 'Environ ' + Math.round(distance) + ' km à vol d’oiseau' : 'Distance indisponible')) + '</span>' : '') +
+      (x.note ? '<span class="meta long">' + esc(x.note) + '</span>' : '') +
+      '<div class="school-fees">' + (fees.length
+        ? '<p class="school-fees-title">Tarifs' + (x.feesYear ? ' ' + esc(x.feesYear) : '') + '</p><ul>' + fees.map(function (f) {
+            return '<li><span>' + esc(f.offer) + '</span><b>' + esc(f.amount) + '</b>' + (f.note ? '<small>' + esc(f.note) + '</small>' : '') + '</li>';
+          }).join('') + '</ul>' + (x.boursiers ? '<p class="school-fees-note">Boursiers et boursières : ' + esc(x.boursiers) + '</p>' : '')
+        : '<p class="school-fees-note">Tarif non publié en ligne : à demander à l’établissement.</p>') +
+      (x.feesSource ? ext(x.feesSource, 'Voir les tarifs sur le site', 'link-plain') : '') + '</div>' +
+      '</div></div>';
+  }
+  /* Droits nationaux des universités : le socle des IPAG ; les boursiers en sont exonérés. */
+  function uniFeesNote() {
+    var u = D.uniFees; if (!u) return '';
+    var parts = []; if (u.licence) parts.push('licence ' + u.licence + ' €'); if (u.master) parts.push('master ' + u.master + ' €');
+    return '<div class="school-uni"><p><b>À l’université, en ' + esc(u.year) + ' :</b> ' + esc(parts.join(', ')) + ' par an' + (u.cvec ? ', plus ' + u.cvec + ' € de contribution vie étudiante (CVEC)' : '') + '.</p>' +
+      '<p>Les boursiers et boursières sont exonérés de ces droits et de la CVEC. Certaines préparations aux concours ajoutent un tarif propre, indiqué pour chaque établissement.</p></div>';
+  }
   screens.prepa = function (id, arg2) {
     var contextJob=jobById(arg2);
     var p = D.preps.filter(function (x) { return x.id === id; })[0];
@@ -1837,26 +1867,22 @@
         '<div class="list" id="talents">' + talentsRows(r) + '</div>' +
         '<p class="small m0">Source : fonction-publique.gouv.fr, liste consultée le 15/10/2026.</p>' + foot;
     }
-    if (id === 'ipag') {
-      var rows = D.ipag.filter(function (x) { return inRegion(x.dep); });
+    if (id === 'ipag' || id === 'iep') {
+      var sl = schoolList(id), what = id === 'ipag' ? ['IPAG ou CPAG', 'IPAG et CPAG'] : ['établissement', 'établissements'];
       return head +
-        '<p class="body">Rattachés aux universités (IPAG) ou aux IEP (CPAG). Ils préparent aux concours A+, A, B et C, et délivrent la licence et le master d’administration publique.</p>' +
-        '<div class="checks"><div>' + I.check + '<span>Licence d’administration publique : accès avec un Bac+2</span></div><div>' + I.check + '<span>Master 1 avec un Bac+3, master 2 avec un Bac+4</span></div><div>' + I.check + '<span>Préparations aux concours, y compris internes</span></div></div>' +
-        regionSelect() +
-        '<div class="list">' + (rows.length ? rows.map(function (x) {
-          return '<div class="list-row static"><span class="pin-ico" aria-hidden="true">' + I.pin + '</span><div class="main"><span class="name sm">' + esc(x.name) + '</span><span class="meta">' + esc(x.city + ' · ' + REG[regionOf(x.dep)]) + '</span></div></div>';
-        }).join('') : '<p class="empty">Aucun IPAG ou CPAG dans cette région. Pensez à la formation à distance.</p>') + '</div>' +
-        ext(D.ipagUrl, 'Trouver un IPAG ou un CPAG') +
-        ext(D.ipagDistanceUrl, 'Licence et master à distance (CNED et IPAG de Poitiers)', 'btn outline') + foot;
-    }
-    if (id === 'iep') {
-      var list = D.iep.filter(function (x) { return inRegion(x.dep); });
-      return head +
-        '<p class="body">Les Instituts d’études politiques et les universités délivrent des masters d’administration publique et préparent aux concours A et A+.</p>' +
-        regionSelect() +
-        '<div class="list">' + (list.length ? list.map(function (x) {
-          return '<div class="list-row static top"><span class="pin-ico" aria-hidden="true">' + I.pin + '</span><div class="main"><span class="name sm">' + esc(x.name) + '</span><span class="meta">' + esc(x.city + ' · ' + REG[regionOf(x.dep)]) + '</span><span class="meta long">' + esc(x.note) + '</span></div></div>';
-        }).join('') : '<p class="empty">Aucun établissement listé dans cette région.</p>') + '</div>' + foot;
+        (id === 'ipag'
+          ? '<p class="body">Rattachés aux universités (IPAG) ou aux IEP (CPAG). Ils préparent aux concours A+, A, B et C, et délivrent la licence et le master d’administration publique.</p>' +
+            '<div class="checks"><div>' + I.check + '<span>Licence d’administration publique : accès avec un Bac+2</span></div><div>' + I.check + '<span>Master 1 avec un Bac+3, master 2 avec un Bac+4</span></div><div>' + I.check + '<span>Préparations aux concours, y compris internes</span></div></div>'
+          : '<p class="body">Les Instituts d’études politiques et les universités délivrent des masters d’administration publique et préparent aux concours A et A+.</p>') +
+        uniFeesNote() +
+        '<section class="region-zone" aria-labelledby="region-title"><h2 class="region-title no-icon" id="region-title">Région</h2>' + regionMap() + regionField() + '</section>' +
+        '<div class="talents-counter"><span class="home-tile home-count' + countSize(sl.shown.length) + '">' + sl.shown.length + '</span><span class="talents-counter-copy"><b>' + esc(sl.shown.length > 1 ? what[1] : what[0]) + '</b><span>' +
+          esc(S.region === 'Toutes' ? 'Dans toute la France' : regionName(S.region)) + '</span></span></div>' +
+        (sl.shown.length ? '<div class="talents-order"><p>' + (S.location ? 'Affichage du plus proche au plus éloigné.' : 'Ajoutez votre localisation pour afficher les établissements du plus proche au plus éloigné.') + '</p>' +
+          '<a class="talents-locate" href="#/moi" data-action="addLocation">' + (S.location ? 'Modifier ma localisation' : 'Ajouter ma localisation') + '</a></div>' : '') +
+        '<div class="list" id="schools">' + (sl.shown.length ? sl.shown.map(schoolRow).join('') : '<p class="empty">' + (id === 'ipag' ? 'Aucun IPAG ou CPAG dans cette région. Pensez à la formation à distance.' : 'Aucun établissement listé dans cette région.') + '</p>') + '</div>' +
+        (id === 'ipag' ? ext(D.ipagUrl, 'Trouver un IPAG ou un CPAG') + ext(D.ipagDistanceUrl, 'Licence et master à distance (CNED et IPAG de Poitiers)', 'btn outline') : '') +
+        '<p class="small m0">Tarifs relevés sur le site de chaque établissement' + (D.feesChecked ? ' le ' + esc(D.feesChecked) : '') + ' : l’établissement fait foi.</p>' + foot;
     }
   };
 
@@ -2540,8 +2566,8 @@
       case 'resetResources': set({resCat:'Toutes',resFp:'Tous',resKind:'Tous',resYear:'Toutes',resQ:'',resLimit:40}); break;
       case 'talentsAll': set({ talentsAll: v === 'all' }); countAnnounce('#talents .list-row'); break;
       case 'openRegions': { var regionRoute = route(), regionJob = regionRoute.name === 'prepa' && regionRoute.arg2 ? jobById(regionRoute.arg2) : null;
-        UI.open('regions', 'Choisir une région', regionSheet(regionRoute.name === 'prepa' && regionRoute.arg === 'talents' ? talentsList(regionJob).byRegion : null), el); break; }
-      case 'pickRegion': if (UI.current() === 'regions') UI.close(); set({ region: v }); countAnnounce('#talents .list-row'); break;
+        UI.open('regions', 'Choisir une région', regionSheet(regionRoute.name === 'prepa' && regionRoute.arg === 'talents' ? talentsList(regionJob).byRegion : regionRoute.name === 'prepa' && (regionRoute.arg === 'ipag' || regionRoute.arg === 'iep') ? schoolList(regionRoute.arg).byRegion : null), el); break; }
+      case 'pickRegion': if (UI.current() === 'regions') UI.close(); set({ region: v }); countAnnounce('#talents .list-row, #schools .list-row'); break;
       case 'toggleBoursier': var becomesBoursier=v?v==='Oui':S.boursier!=='Oui'; if(becomesBoursier===(S.boursier==='Oui'))break; set(becomesBoursier?{ boursier: 'Oui', prepBudget: '0' }:{ boursier: 'Non' }); break;
       case 'alert': set({ alert: !S.alert }); announce(S.alert ? 'Alerte activée' : 'Alerte désactivée'); break;
       case 'deleteChild': {

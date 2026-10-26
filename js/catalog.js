@@ -103,6 +103,8 @@
   D.catalogSources = P.sources;
   D.rmfpCount = P.rmfp.length;
   D.talents = P.talents.map(function (t) { return Object.assign({}, t, { coords: t.coords || P.talentsGeo[t.city] || null }); });
+  /* IPAG, CPAG et IEP : mêmes coordonnées de ville que les Prépas Talents, pour le tri par distance. */
+  ['ipag', 'iep'].forEach(function (k) { D[k] = (D[k] || []).map(function (x) { return Object.assign({}, x, { coords: x.coords || P.talentsGeo[x.city] || null }); }); });
   D.jobs.forEach(function (j) {
     var r = byRoute[j.id];
     j.routeIds = linkedRoutes(j.id);
