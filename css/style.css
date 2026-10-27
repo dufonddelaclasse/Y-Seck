@@ -2379,13 +2379,17 @@ html.crios .profile-footer { bottom:calc(86px + env(safe-area-inset-bottom, 0px)
 .job-page a.rung.rung-link > .chev { margin-right:-12px; }
 .ladder-alt-row > .row-chev { margin-right:-8px; }
 .list-row.profile-row > .chev { margin-right:-6px; }
-/* Switch Explorer : curseur animé et contenu qui coulisse. */
-.explore-switch[role="tablist"] { position:relative; }
-.explore-switch[role="tablist"]::before { content:''; position:absolute; top:4px; bottom:4px; left:4px; width:calc(50% - 6px); border-radius:999px; background:var(--brand); }
-.explore-switch[role="tablist"][data-active="concours"]::before { transform:translateX(calc(100% + 4px)); }
-.explore-switch[role="tablist"].slide::before { transition:transform .34s cubic-bezier(.3,.7,.2,1); }
-.explore-switch[role="tablist"] a { position:relative; z-index:1; background:transparent !important; }
-.explore-switch[role="tablist"].slide a { transition:color .34s; }
+/* Switchs à deux options (Métiers/Concours, Boursier/Non boursier) : un curseur qui glisse d’une option à l’autre. */
+.explore-switch[data-on] { position:relative; }
+.explore-switch[data-on]::before { content:''; position:absolute; top:4px; bottom:4px; left:4px; width:calc(50% - 6px); border-radius:999px; background:var(--brand); }
+.explore-switch.bourse-switch[data-on]::before { background:var(--theme-btn, var(--brand)); }
+.explore-switch[data-on="1"]::before { transform:translateX(calc(100% + 4px)); }
+.explore-switch[data-on].slide::before { transition:transform .34s cubic-bezier(.3,.7,.2,1); }
+.explore-switch[data-on] :is(a, button) { position:relative; z-index:1; background:transparent !important; }
+.explore-switch[data-on].slide :is(a, button) { transition:color .34s; }
+/* Interrupteurs (accessibilité) : la pastille glisse aussi quand l’écran se redessine. */
+.switch-row.slide .switch { transition:background .3s; }
+.switch-row.slide .switch::after { transition:transform .3s cubic-bezier(.3,.7,.2,1); }
 .explore-in-right { animation:explore-in-right .34s cubic-bezier(.3,.7,.2,1) both; }
 .explore-in-left { animation:explore-in-left .34s cubic-bezier(.3,.7,.2,1) both; }
 @keyframes explore-in-right { from { transform:translateX(100%); } to { transform:none; } }

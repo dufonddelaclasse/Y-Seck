@@ -244,7 +244,7 @@
   /* Métiers et concours partagent l’onglet Explorer : il rouvre la dernière liste consultée. */
   function exploreHref() { return S.explore === 'concours' ? '#/concours-liste' : '#/metiers'; }
   function exploreSwitch(active) {
-    return '<div class="explore-switch" role="tablist" aria-label="Métiers ou concours" data-active="' + active + '">' + [['metiers', 'Métiers'], ['concours', 'Concours']].map(function (t) {
+    return '<div class="explore-switch" role="tablist" aria-label="Métiers ou concours" data-on="' + (active === 'concours' ? 1 : 0) + '">' + [['metiers', 'Métiers'], ['concours', 'Concours']].map(function (t) {
       var on = t[0] === active;
       return '<a role="tab" href="' + (t[0] === 'concours' ? '#/concours-liste' : '#/metiers') + '" class="' + (on ? 'on' : '') + '" aria-selected="' + on + '">' + esc(t[1]) + '</a>';
     }).join('') + '</div>';
@@ -1773,7 +1773,7 @@
     return '<section class="stack mt-l" id="aides"><h2 class="section-heading no-icon">'+I.book+'Aides</h2>' +
       '<a class="btn outline" href="#/annales'+(job?'/'+job.id:'')+'">'+I.book+'Annales et rapports de jury</a>' +
       '<a class="btn outline" href="#/bibliographie'+(job?'/'+job.id:'')+'">Recommandations bibliographiques</a></section><section class="stack mt-l" id="preparations"><h2 class="section-heading no-icon" id="prep-title" tabindex="-1">'+I.pin+'Prépas</h2>' +
-      '<div class="explore-switch bourse-switch" role="group" aria-label="' + (isParent() ? 'Mon enfant est-il boursier ?' : 'Êtes-vous boursier ?') + '">' + [['Oui', 'Boursier·e'], ['Non', 'Non boursier·e']].map(function (o) {
+      '<div class="explore-switch bourse-switch" role="group" aria-label="' + (isParent() ? 'Mon enfant est-il boursier ?' : 'Êtes-vous boursier ?') + '" data-on="' + (on ? 0 : 1) + '">' + [['Oui', 'Boursier·e'], ['Non', 'Non boursier·e']].map(function (o) {
         var pressed = (o[0] === 'Oui') === on;
         return '<button type="button" class="' + (pressed ? 'on' : '') + '" aria-pressed="' + pressed + '" data-action="toggleBoursier"' + attr('v', o[0]) + '>' + esc(o[1]) + '</button>';
       }).join('') + '</div>' +
@@ -2220,6 +2220,28 @@
     /* Le focus va sur la fenêtre elle-même : le bouton n’affiche son contour qu’à la navigation au clavier. */
     tipDialog.focus({ preventScroll: true });
   }
+  /* Tous les switchs gardent leur position d’avant le rendu : le curseur (ou la pastille d’un interrupteur) glisse alors jusqu’à la nouvelle. */
+  function switchStates() {
+    var out = {};
+    [].forEach.call(root.querySelectorAll('.explore-switch[data-on]'), function (el) { out['seg:' + el.getAttribute('aria-label')] = el.getAttribute('data-on'); });
+    [].forEach.call(root.querySelectorAll('.switch-row[role="switch"]'), function (el) { out['sw:' + el.getAttribute('data-action')] = el.getAttribute('aria-checked'); });
+    return out;
+  }
+  function animateSwitches(before) {
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var moved = [];
+    [].forEach.call(root.querySelectorAll('.explore-switch[data-on]'), function (el) {
+      var was = before['seg:' + el.getAttribute('aria-label')], now = el.getAttribute('data-on');
+      if (was != null && was !== now) { el.setAttribute('data-on', was); moved.push([el, 'data-on', now]); }
+    });
+    [].forEach.call(root.querySelectorAll('.switch-row[role="switch"]'), function (el) {
+      var was = before['sw:' + el.getAttribute('data-action')], now = el.getAttribute('aria-checked');
+      if (was != null && was !== now) { el.setAttribute('aria-checked', was); moved.push([el, 'aria-checked', now]); }
+    });
+    if (!moved.length) return;
+    void root.offsetWidth;
+    moved.forEach(function (m) { m[0].classList.add('slide'); m[0].setAttribute(m[1], m[2]); });
+  }
   /* Switch Métiers / Concours : le curseur glisse vers l’onglet touché. Le haut de l’écran (titre, switch, pastilles de filtres) reste en place ;
      la recherche et la liste coulissent dans le sens du mouvement : vers la gauche pour aller aux concours, vers la droite pour revenir aux métiers. */
   var exploreSlide = null, EXPLORE_MS = 340;
@@ -2231,8 +2253,6 @@
   function explorePaneIn(main, name) {
     var dir = exploreSlide; exploreSlide = null;
     if (name !== 'metiers' && name !== 'concours-liste') return;
-    var sw = main.querySelector('.explore-switch[role="tablist"]');
-    if (sw) { var to = sw.dataset.active; sw.dataset.active = to === 'concours' ? 'metiers' : 'concours'; void sw.offsetWidth; sw.classList.add('slide'); sw.dataset.active = to; }
     explorePane(main).forEach(function (el) { el.classList.add('explore-in-' + dir); });
     setTimeout(function () { explorePane(main).forEach(function (el) { el.classList.remove('explore-in-' + dir); }); }, EXPLORE_MS + 40);
   }
@@ -2312,7 +2332,9 @@
     var fn = screens[r.name] || screens[S.done ? 'accueil' : 'profil'];
     if(changed&&r.name==='situation'&&S.boursier==='Oui')talentIntroAnimate=true;
     if(changed&&(r.name==='accueil'||r.name==='enfant'))nameAnimate=true;
+    var switchesBefore = switchStates();
     root.innerHTML = UI.inclusive(fn(r.arg, r.arg2));
+    animateSwitches(switchesBefore);
     talentIntroAnimate=false; nameAnimate=false;
     var main = root.querySelector('main');
     root.classList.toggle('job-transition',animateJob);

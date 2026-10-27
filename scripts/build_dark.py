@@ -149,8 +149,9 @@ html.dark .app .prep.prep-static { background:#292929 !important; }
 html.dark .talents-body, html.dark .app .prep.hi.talents-card .talents-body { border:0 !important; }
 html.dark .talents-card .talents-bourse span { color:#BCBCC2 !important; }
 /* Switch boursier / non boursier : fond noir, choix actif dans la couleur de la catégorie. */
-html.dark .bourse-switch { background:#000 !important; }
-html.dark .bourse-switch button.on { background:var(--theme-btn, var(--brand)) !important; color:#FFF !important; }
+html.dark .explore-switch, html.dark .bourse-switch { background:#000 !important; }
+html.dark .bourse-switch button.on { color:#FFF !important; }
+html.dark .explore-switch.bourse-switch[data-on]::before { background:var(--theme-btn, var(--brand)); }
 
 /* Encadrés d'information : bloc noir en mode sombre, plutôt que des teintes délavées (jaune olive, vert, cyan). */
 html.dark :is(.school-uni, .school-fees, .bourse, .filter-hint, .todo, .callout, .trip-access, .ref-tip:not(.stage-tip), .intro-employer) { background:#000 !important; border-color:#000 !important; color:var(--ink) !important; }
