@@ -1403,7 +1403,7 @@
     if (!marks.length) return t ? [{ label: '', text: t }] : [];
     var out = marks[0].start > 0 ? [{ label: '', text: t.slice(0, marks[0].start).trim() }] : [];
     marks.forEach(function (mk, i) {
-      var body = t.slice(mk.from, i + 1 < marks.length ? marks[i + 1].start : t.length).trim().replace(/[;,]$/, ''), head = mk.label;
+      var body = t.slice(mk.from, i + 1 < marks.length ? marks[i + 1].start : t.length).trim().replace(/\s*[;,]$/, '').trim(), head = mk.label;
       /* « Admission, à Paris : … » ou « Admissibilité (écrits sur deux jours) : … » : le titre garde l’essentiel. */
       var cut = head.search(/,\s|\s\(/);
       if (cut > 0) { body = head.slice(cut).replace(/^,\s*/, '').replace(/^\s*\((.*)\)$/, '$1').trim() + ' : ' + body; head = head.slice(0, cut); }
@@ -1521,8 +1521,8 @@
     if (c.evolution) facts.push(['Et après', c.evolution]);
     return '<div class="concours-info"><p class="eyebrow">' + catBadge(c.cat, 'sm') + ' ' + esc(D.fps[c.fp] || '') + '</p><h3 class="no-icon">' + sig(c.name) + '</h3>' +
       String(c.description).split(/\n+/).map(function (t) { return '<p class="body">' + sig(t.trim()) + '</p>'; }).join('') +
-      (facts.length ? '<dl class="concours-facts">' + facts.map(function (f) { return '<dt>' + esc(f[0]) + '</dt><dd>' + sig(f[1]) + '</dd>'; }).join('') + '</dl>' : '') +
-      (c.metiers ? '<p class="small"><b>Métiers après le concours :</b> ' + sig(c.metiers) + '</p>' : '') +
+      /* Même lecture que les accordéons : un intitulé gris, puis le texte. */
+      (facts.length ? '<div class="concours-facts">' + facts.map(function (f) { return '<p class="trip-q">' + esc(f[0]) + '</p><p class="trip-a">' + sig((function (t) { return /[.!?)]$/.test(t) && !/\)$/.test(t) ? t : t + '.'; })(capFirst(String(f[1]).trim()))) + '</p>'; }).join('') + '</div>' : '') +
       (c.source ? ext(c.source, 'Page officielle du concours', 'link-plain') : '') + '</div>';
   }
   screens['concours-fiche'] = function (key, testLevel) {

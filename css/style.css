@@ -2240,9 +2240,8 @@ html.crios .profile-footer { bottom:calc(86px + env(safe-area-inset-bottom, 0px)
 .concours-info .eyebrow { display:flex; align-items:center; gap:8px; margin-bottom:6px; }
 .concours-info h3 { margin:0 0 10px; font-size:1.125rem; line-height:1.3; }
 .concours-info .body { margin:0 0 10px; }
-.concours-facts { display:grid; grid-template-columns:auto 1fr; gap:6px 12px; margin:12px 0; font-size:.875rem; }
-.concours-facts dt { color:var(--muted); }
-.concours-facts dd { margin:0; }
+.concours-facts { margin:4px 0 18px; }
+.concours-facts .trip-q:first-child { margin-top:16px; }
 /* Page Prépas Talents : carte de présentation sans contour, zone « Région » (carte, champ, liste par le bas),
    mini compteur comme dans l’espace personnel, puis l’ordre d’affichage et le lien de localisation. */
 .talents-flat .talents-body { border:0 !important; }

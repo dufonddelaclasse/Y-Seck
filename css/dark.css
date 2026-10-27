@@ -795,7 +795,6 @@ html:where(.dark).dark .sheet-content button.chip.category-choice[data-action="m
 :where(html.dark) .app .prep.hi.talents-card .talents-hero .price { background:#E0FA6E; color:#EAEAEA; }
 :where(html.dark) .talents-hero-note { color:#FFF; }
 :where(html.dark) .ref-tip.stage-tip { border:1.5px solid var(--theme, var(--blue)); }
-:where(html.dark) .concours-facts dt { color:var(--muted); }
 :where(html.dark) .talents-flat .talents-body { border:0 !important; }
 :where(html.dark) .region-zone { background:#292929; }
 :where(html.dark) .region-zone .region-title { color:var(--brand); }
