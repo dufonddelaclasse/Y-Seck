@@ -1779,7 +1779,7 @@
             '<a class="btn theme talents-cta" href="#/prepa/' + p.id + (job?'/'+job.id:'') + '">Découvrir les prépas Talents</a></div></div>';
         }
         /* Préparations privées : simple information, sans lien vers une liste d’organismes. */
-        if (p.id === 'privees') return '<div class="prep prep-static"><div class="prep-top"><span class="prep-ico" aria-hidden="true">' + I.book + '</span><span class="price">' + esc(p.price) + '</span></div><h2 class="h3 no-icon">' + sig(p.t) + '</h2><p>' + esc(p.d) + '</p></div>';
+        if (p.id === 'privees') return '<div class="prep prep-static"><div class="prep-top"><span class="prep-ico" aria-hidden="true">' + I.book + '</span><span class="price price-neutral">' + esc(p.price) + '</span></div><h2 class="h3 no-icon">' + sig(p.t) + '</h2><p>' + esc(p.d) + '</p></div>';
         return '<a class="prep" href="#/prepa/' + p.id + (job?'/'+job.id:'') + '"><div class="prep-top"><span class="prep-ico" aria-hidden="true">' + I.book + '</span><span class="price">' + esc(prepPrice(p)) + '</span></div><h2 class="h3 no-icon">' + sig(p.t) + '</h2>' +
           '<p>' + esc(p.d) + '</p><span class="prep-foot"><span class="more">Voir le détail' + I.chev + '</span></span></a>';
       }).join('') + '</div>' +

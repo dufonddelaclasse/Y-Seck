@@ -2179,6 +2179,8 @@ html.crios .profile-footer { bottom:calc(86px + env(safe-area-inset-bottom, 0px)
 .prep .prep-ico { display:inline-flex; flex:none; color:var(--theme-btn, var(--brand)); }
 .prep .prep-ico svg { width:24px; height:24px; }
 .prep .price { background:#E0FA6E; color:#141414; }
+/* Préparations privées : pastille « Payant » dans la couleur générique de l’appli, pas le vert des solutions mises en avant. */
+.prep .price.price-neutral { background:var(--brand); color:#FFF; }
 /* Fiche concours : « Se préparer » flotte en taille réduite au-dessus du menu pendant les métiers liés, puis le vrai bouton
    grossit à sa place en fin de liste (position calculée dans app.js selon la hauteur du menu). */
 .btn.prep-float { position:fixed; z-index:6; left:50%; bottom:100px; width:auto; min-height:44px; padding:0 20px; gap:8px; font-size:.9375rem; white-space:nowrap;

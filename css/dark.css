@@ -776,6 +776,7 @@ html:where(.dark).dark .sheet-content button.chip.category-choice[data-action="m
 :where(html.dark) .app:not(.onboarding) .screen.personal-home .lead { color:var(--muted); }
 :where(html.dark) .prep .prep-ico { color:var(--theme-ink, var(--brand)); }
 :where(html.dark) .prep .price { background:#E0FA6E; color:#EAEAEA; }
+:where(html.dark) .prep .price.price-neutral { background:var(--brand); color:#FFF; }
 :where(html.dark) .btn.prep-float { box-shadow:0 8px 24px rgba(76,76,76,0.22); }
 :where(html.dark) .tip-pop { border:0; background:#292929; color:var(--ink); box-shadow:0 20px 60px rgba(76,76,76,0.25); }
 :where(html.dark) .tip-pop::backdrop { background:rgba(70,70,83,0.5); }
