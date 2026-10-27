@@ -2373,3 +2373,5 @@ html.crios .profile-footer { bottom:calc(86px + env(safe-area-inset-bottom, 0px)
 
 /* « N concours possibles pour ce métier » : même taille que « Mon niveau », en noir et plus gras. */
 .trip-tabs-label { font-size:1rem; font-weight:500; color:var(--ink); }
+/* Flèche des cards métiers et concours : rapprochée du bord droit. */
+.app:not(.onboarding) :is(#jobs, .job-cards) :is(.job-row, .concours-row) > .row-chev { margin-right:-14px; padding-left:0; }
