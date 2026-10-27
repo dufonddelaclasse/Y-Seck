@@ -801,7 +801,8 @@
     /* Une recherche garde l’ordre de pertinence : le métier cherché reste en tête, même contractuel. */
     return words.length ? list : contractsLater(list);
   }
-  function jobRow(j, chevron) {
+  /* Chaque card de métier ou de concours porte une petite flèche : elle s’ouvre. */
+  function jobRow(j) {
       var ranked = userRank() !== null;
       var shared = sharedTraits(j);
       var badges = '';
@@ -812,7 +813,7 @@
       if (shared.length) badges += '<span class="fit like">' + (isParent() ? 'Ce qui lui ressemble' : 'Ce qui vous ressemble') + ' : ' + esc(shared.slice(0, 2).map(traitLabel).join(', ').toLowerCase()) + '</span>';
       return '<a class="list-row job-row job-' + catClass(displayCategory(j)) + '" href="#/metier/' + j.id + '">' + jobBadges(j) +
         '<div class="main"><span class="name">' + esc(j.name) + '</span><span class="meta">' + esc(j.domain + ' · ' + fpNames(j.fp).join(', ')) + '</span>' +
-        (badges ? '<span class="fits">' + badges + '</span>' : '') + '</div>' + (chevron === true ? '<span class="row-chev" aria-hidden="true">' + I.chev + '</span>' : '') + '</a>';
+        (badges ? '<span class="fits">' + badges + '</span>' : '') + '</div>' + '<span class="row-chev" aria-hidden="true">' + I.chev + '</span></a>';
   }
   /* Concours du référentiel : mêmes filtres de catégorie, de versant et de recherche que les métiers. */
   function concoursKey(c) { return c.id.replace('É','E'); }
@@ -863,7 +864,7 @@
   function concoursRow(c) {
     var rank = userRank(), lvl = concoursLevel(c), fit = '';
     if (rank !== null) fit = '<span class="fits">' + (rank >= lvl ? '<span class="fit on"><span class="job-fit-check" aria-hidden="true">' + I.check + '</span>Niveau d’études compatible<br>Conditions à vérifier</span>' : '<span class="fit">' + esc(NEED[lvl] || 'Conditions à vérifier') + '</span>') + '</span>';
-    return '<a class="list-row job-row concours-row job-' + catClass(c.cat) + '" href="#/concours-fiche/' + concoursKey(c) + '">' + catBadge(c.cat) + '<div class="main"><span class="name">' + sig(c.name) + '</span><span class="meta">' + esc(D.fps[c.fp] + (c.voies ? ' · ' + c.voies : '')) + '</span>' + fit + '</div></a>';
+    return '<a class="list-row job-row concours-row job-' + catClass(c.cat) + '" href="#/concours-fiche/' + concoursKey(c) + '">' + catBadge(c.cat) + '<div class="main"><span class="name">' + sig(c.name) + '</span><span class="meta">' + esc(D.fps[c.fp] + (c.voies ? ' · ' + c.voies : '')) + '</span>' + fit + '</div><span class="row-chev" aria-hidden="true">' + I.chev + '</span></a>';
   }
   function concoursRows() {
     var list = filteredConcours();
@@ -1507,7 +1508,7 @@
     var others = jobs.filter(function (j) { return only.indexOf(j) < 0; });
     only = only.slice(0, 40); others = others.slice(0, Math.max(0, 40 - only.length));
     /* Petite flèche à droite de chaque métier lié, comme pour les évolutions : la carte s’ouvre. */
-    var row = function (j) { return jobRow(j, true); };
+    var row = function (j) { return jobRow(j); };
     return (only.length ? '<div class="list job-cards">' + only.map(row).join('') + '</div>' : '') +
       (others.length ? '<p class="related-note">Ces métiers sont aussi accessibles par d’autres concours, d’une autre catégorie ou d’un autre versant de la fonction publique.</p>' +
         '<div class="list job-cards">' + others.map(row).join('') + '</div>' : '');
