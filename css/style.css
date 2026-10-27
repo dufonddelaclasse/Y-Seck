@@ -2375,3 +2375,7 @@ html.crios .profile-footer { bottom:calc(86px + env(safe-area-inset-bottom, 0px)
 .trip-tabs-label { font-size:1rem; font-weight:500; color:var(--ink); }
 /* Flèche des cards métiers et concours : rapprochée du bord droit. */
 .app:not(.onboarding) :is(#jobs, .job-cards) :is(.job-row, .concours-row) > .row-chev { margin-right:-14px; padding-left:0; }
+/* Même position de flèche sur toutes les cards cliquables : environ 17 px entre la pointe et le bord droit. */
+.job-page a.rung.rung-link > .chev { margin-right:-12px; }
+.ladder-alt-row > .row-chev { margin-right:-8px; }
+.list-row.profile-row > .chev { margin-right:-6px; }
