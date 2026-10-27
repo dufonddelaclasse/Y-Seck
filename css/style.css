@@ -2359,4 +2359,4 @@ html.crios .profile-footer { bottom:calc(86px + env(safe-area-inset-bottom, 0px)
 .talents-body, .app .prep.hi.talents-card .talents-body { border:0 !important; }
 .app .prep.hi.talents-card { border:0 !important; outline:0; }
 /* « Voir le détail » un peu plus bas dans les cartes d'écoles. */
-.app .prep .prep-foot { margin-top:8px; }
+.app .prep .prep-foot { margin-top:36px; }
