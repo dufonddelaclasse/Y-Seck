@@ -2360,3 +2360,6 @@ html.crios .profile-footer { bottom:calc(86px + env(safe-area-inset-bottom, 0px)
 .app .prep.hi.talents-card { border:0 !important; outline:0; }
 /* « Voir le détail » un peu plus bas dans les cartes d'écoles. */
 .app .prep .prep-foot { margin-top:36px; }
+
+/* Actions des fiches (En savoir +, Favori, Partager) : texte un peu plus grand. */
+.job-action { font-size:.8125rem; }
