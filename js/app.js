@@ -1867,7 +1867,7 @@
     /* Préparations privées : pas de liste d’organismes payants pour l’instant (partenariats à venir), la page renvoie vers Se préparer. */
     if (!p || id==='privees' || (id==='talents' && S.boursier!=='Oui')) return contextJob?screens.preparer(contextJob.id):screens.prepas();
     var head = '<main class="screen top-tight">' + back(contextJob?prepHref(contextJob):'#/prepas',contextJob?'Se préparer':'Prépas') +
-      '<span class="eyebrow">' + esc(prepPrice(p)) + '</span><h1 class="sm">' + sig(p.t) + '</h1>';
+      '<h1 class="sm">' + sig(p.t) + '</h1>';
     var foot = '</main>' + tabbar(contextJob?'metiers':'prepas');
 
     if (id === 'talents') {
