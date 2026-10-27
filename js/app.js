@@ -1758,12 +1758,15 @@
     var nbT = D.talents.filter(function (t) { return talentMatches(t, keys).length; }).length;
     var cats=focus?[focus.cat]:job?jobCategories(job):myJobs().reduce(function(a,j){return a.concat(jobCategories(j));},[]);
     var administrative=!job||/administr|attache|greff|directeur|direction|conservat/.test(norm(job.name))||['Administration','Finances','Diplomatie','Justice','Renseignement','Communication','Citoyens','Inspection'].indexOf(job.domain)>-1;
+    /* La préparation conseillée du concours compte aussi : un concours qui cite les IPAG/CPAG ou les IEP les affiche, quel que soit l’intitulé du métier. */
+    var refText=(focus?[focus]:job?jobRefs(job):[]).map(prepaText).join(' ');
+    var citesIpag=/\bIPAG\b|\bCPAG\b|préparation à l’administration générale/i.test(refText), citesIep=/\bIEP\b|instituts? d’études politiques/i.test(refText);
     var list = D.preps.filter(function (p) {
       if((b!=='2'&&prepBudget(p)!==parseInt(b,10))||p.talents&&!on)return false;
       if(!job)return true;
       if(p.id==='talents')return nbT>0&&cats.some(function(c){return ['A+','A','B'].indexOf(c)>-1;});
-      if(p.id==='ipag')return administrative;
-      if(p.id==='iep')return administrative&&cats.some(function(c){return c==='A'||c==='A+';});
+      if(p.id==='ipag')return administrative||citesIpag;
+      if(p.id==='iep')return citesIep||administrative&&cats.some(function(c){return c==='A'||c==='A+';});
       return true;
     });
     return '<section class="stack mt-l" id="aides"><h2 class="section-heading no-icon">'+I.book+'Aides</h2>' +
