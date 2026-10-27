@@ -1876,8 +1876,8 @@
       var scope = job ? 'pour ce concours' : (S.domains.length ? 'pour ' + (isParent() ? 'ses' : 'vos') + ' choix' : '');
       return '<main class="screen top-tight">'+back(contextJob?prepHref(contextJob):'#/concours',contextJob?'Se préparer':'Concours et prépas')+
         talentsFeature('Prépas Talents','<p>Préparations gratuites, avec tutorat, aux concours A, A+ et B. Elles ont lieu dans des universités, des écoles du service public et des IEP, les instituts d’études politiques (Sciences Po).</p>','h1','talents-flat') +
-        '<section class="region-zone" aria-labelledby="region-title"><h2 class="region-title no-icon" id="region-title">Région</h2>' + regionMap() + regionField() + '</section>' +
-        talentsCounter(r, scope || 'pour ' + (isParent() ? 'ses' : 'vos') + ' choix') +
+        '<section class="region-zone" aria-labelledby="region-title"><h2 class="region-title no-icon" id="region-title">Région</h2>' + regionMap() + regionField() +
+        talentsCounter(r, scope || 'pour ' + (isParent() ? 'ses' : 'vos') + ' choix') + '</section>' +
         (r.shown.length ? '<div class="talents-order"><p>' + (S.location ? 'Affichage de la prépa la plus proche à la plus éloignée.' : 'Ajoutez votre localisation pour afficher les prépas de la plus proche à la plus éloignée.') + '</p>' +
           '<a class="talents-locate" href="#/moi" data-action="addLocation">' + (S.location ? 'Modifier ma localisation' : 'Ajouter ma localisation') + '</a></div>' : '') +
         '<div class="list" id="talents">' + talentsRows(r) + '</div>' +
@@ -1891,9 +1891,9 @@
             '<div class="checks"><div>' + I.check + '<span>Licence d’administration publique : accès avec un Bac+2</span></div><div>' + I.check + '<span>Master 1 avec un Bac+3, master 2 avec un Bac+4</span></div><div>' + I.check + '<span>Préparations aux concours, y compris internes</span></div></div>'
           : '<p class="body">Les Instituts d’études politiques et les universités délivrent des masters d’administration publique et préparent aux concours A et A+.</p>') +
         uniFeesNote() +
-        '<section class="region-zone" aria-labelledby="region-title"><h2 class="region-title no-icon" id="region-title">Région</h2>' + regionMap() + regionField() + '</section>' +
+        '<section class="region-zone" aria-labelledby="region-title"><h2 class="region-title no-icon" id="region-title">Région</h2>' + regionMap() + regionField() +
         '<div class="talents-counter"><span class="home-tile home-count' + countSize(sl.shown.length) + '">' + sl.shown.length + '</span><span class="talents-counter-copy"><b>' + esc(sl.shown.length > 1 ? what[1] : what[0]) + '</b><span>' +
-          esc(S.region === 'Toutes' ? 'Dans toute la France' : regionName(S.region)) + '</span></span></div>' +
+          esc(S.region === 'Toutes' ? 'Dans toute la France' : regionName(S.region)) + '</span></span></div></section>' +
         (sl.shown.length ? '<div class="talents-order"><p>' + (S.location ? 'Affichage du plus proche au plus éloigné.' : 'Ajoutez votre localisation pour afficher les établissements du plus proche au plus éloigné.') + '</p>' +
           '<a class="talents-locate" href="#/moi" data-action="addLocation">' + (S.location ? 'Modifier ma localisation' : 'Ajouter ma localisation') + '</a></div>' : '') +
         '<div class="list" id="schools">' + (sl.shown.length ? sl.shown.map(schoolRow).join('') : '<p class="empty">' + (id === 'ipag' ? 'Aucun IPAG ou CPAG dans cette région. Pensez à la formation à distance.' : 'Aucun établissement listé dans cette région.') + '</p>') + '</div>' +

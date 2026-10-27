@@ -835,6 +835,7 @@ html:where(.dark).dark .sheet-content button.chip.category-choice[data-action="m
 }
 :where(html.dark) .prep.prep-static:hover { border-color:var(--line); }
 :where(html.dark) .prep-page .prep.prep-static:hover { border-color:var(--theme-tint,var(--lilac)); }
+:where(html.dark) .region-zone .talents-counter { border:0; background:none; }
 
 /* Retouches */
 html.dark .talents-card .talents-bourse span { color:#BCBCC2 !important; }
