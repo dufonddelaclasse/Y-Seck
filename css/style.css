@@ -2352,6 +2352,11 @@ html.crios .profile-footer { bottom:calc(86px + env(safe-area-inset-bottom, 0px)
 /* Compteur intégré au bloc « Région », sous le choix de la région : sans cadre, sur le fond du bloc. */
 .region-zone .talents-counter { margin-top:2px; padding:0; border:0; background:none; }
 .region-zone .talents-all { align-self:flex-start; }
-/* Prépas : écoles gratuites ou à frais d'inscription sur fond blanc partout ; préparations payantes en gris. */
+/* Prépas : toutes les cartes sur fond blanc. */
 .app .prep:not(.prep-static):not(.talents-card):not(.talents-feature) { background:#FFF; }
-.app .prep.prep-static { background:#E6E6E3; }
+.app .prep.prep-static { background:#FFF; }
+/* Carte Prépas Talents sans contour. */
+.talents-body, .app .prep.hi.talents-card .talents-body { border:0 !important; }
+.app .prep.hi.talents-card { border:0 !important; outline:0; }
+/* « Voir le détail » un peu plus bas dans les cartes d'écoles. */
+.app .prep .prep-foot { margin-top:8px; }

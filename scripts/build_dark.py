@@ -145,7 +145,8 @@ def build():
 
 MANUAL = """
 html.dark .app .prep:not(.prep-static):not(.talents-card):not(.talents-feature) { background:#292929 !important; }
-html.dark .app .prep.prep-static { background:#3A3A3E !important; }
+html.dark .app .prep.prep-static { background:#292929 !important; }
+html.dark .talents-body, html.dark .app .prep.hi.talents-card .talents-body { border:0 !important; }
 html.dark .talents-card .talents-bourse span { color:#BCBCC2 !important; }
 /* Switch boursier / non boursier : fond noir, choix actif dans la couleur de la catégorie. */
 html.dark .bourse-switch { background:#000 !important; }
