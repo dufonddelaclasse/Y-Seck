@@ -2288,7 +2288,7 @@ html.crios .profile-footer { bottom:calc(86px + env(safe-area-inset-bottom, 0px)
 .install-offer .body { margin:0; }
 /* Étapes d’installation : pastilles numérotées reliées par un trait, pictogramme au-dessus de chaque consigne. */
 .install-steps { list-style:none; margin:22px 0 8px; padding:0; display:flex; flex-direction:column; }
-.install-steps li { position:relative; display:grid; grid-template-columns:30px minmax(0,1fr); column-gap:14px; row-gap:8px; align-items:center; padding-bottom:16px; }
+.install-steps li { position:relative; display:grid; grid-template-columns:30px minmax(0,1fr); column-gap:14px; row-gap:10px; align-items:center; padding-bottom:30px; }
 .install-steps li:last-child { padding-bottom:0; }
 .install-steps li:not(:last-child)::before { content:''; position:absolute; left:14px; top:30px; bottom:0; width:2.5px; border-radius:2px; background:var(--brand); }
 .install-num { grid-column:1; grid-row:1; display:grid; place-items:center; width:30px; height:30px; border-radius:50%; background:var(--brand); color:#FFF; font-size:.9375rem; font-weight:600; }

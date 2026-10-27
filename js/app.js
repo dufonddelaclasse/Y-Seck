@@ -2354,8 +2354,7 @@
       ? [[SHARE_ICON, 'share', 'Touchez le bouton partager' + (otherIosBrowser ? ', à côté de l’adresse' : '')], [PLUS_ICON, 'plus', 'Choisissez « Sur l’écran d’accueil »'], [ADD_ICON, 'add', 'Touchez « Ajouter » : l’icône Y-Seck apparaît avec vos applications']]
       : [[MENU_ICON, 'menu', 'Ouvrez le menu de votre navigateur'], [PLUS_ICON, 'plus', 'Choisissez « Ajouter à l’écran d’accueil » ou « Installer l’application »'], [ADD_ICON, 'add', 'Confirmez : l’icône Y-Seck apparaît avec vos applications']];
     return intro + '<ol class="install-steps">' + steps.map(function (t, k) {
-      /* Pictogrammes simples : la consigne se place à droite ; le bouton « Ajouter », plus large, garde la consigne dessous. */
-      return '<li' + (t[1] === 'add' ? '' : ' class="inline"') + '><span class="install-num" aria-hidden="true">' + (k + 1) + '</span><span class="install-ico install-ico-' + t[1] + '">' + t[0] + '</span><p>' + t[2] + '</p></li>';
+      return '<li><span class="install-num" aria-hidden="true">' + (k + 1) + '</span><span class="install-ico install-ico-' + t[1] + '">' + t[0] + '</span><p>' + t[2] + '</p></li>';
     }).join('') + '</ol><div class="sheet-actions"><button type="button" class="btn" data-ui="close">J’ai compris</button></div>';
   }
 
