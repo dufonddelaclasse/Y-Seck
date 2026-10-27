@@ -244,7 +244,7 @@
   /* Métiers et concours partagent l’onglet Explorer : il rouvre la dernière liste consultée. */
   function exploreHref() { return S.explore === 'concours' ? '#/concours-liste' : '#/metiers'; }
   function exploreSwitch(active) {
-    return '<div class="explore-switch" role="tablist" aria-label="Métiers ou concours">' + [['metiers', 'Métiers'], ['concours', 'Concours']].map(function (t) {
+    return '<div class="explore-switch" role="tablist" aria-label="Métiers ou concours" data-active="' + active + '">' + [['metiers', 'Métiers'], ['concours', 'Concours']].map(function (t) {
       var on = t[0] === active;
       return '<a role="tab" href="' + (t[0] === 'concours' ? '#/concours-liste' : '#/metiers') + '" class="' + (on ? 'on' : '') + '" aria-selected="' + on + '">' + esc(t[1]) + '</a>';
     }).join('') + '</div>';
@@ -2220,6 +2220,46 @@
     /* Le focus va sur la fenêtre elle-même : le bouton n’affiche son contour qu’à la navigation au clavier. */
     tipDialog.focus({ preventScroll: true });
   }
+  /* Switch Métiers / Concours : le curseur glisse vers l’onglet touché. Le haut de l’écran (titre, switch, pastilles de filtres) reste en place ;
+     la recherche et la liste coulissent dans le sens du mouvement : vers la gauche pour aller aux concours, vers la droite pour revenir aux métiers. */
+  var exploreSlide = null, EXPLORE_MS = 340;
+  function explorePane(main) {
+    var pills = main.querySelector('.filter-summary'), out = [], on = false;
+    [].slice.call(main.children).forEach(function (el) { if (on && !el.classList.contains('a11y-link')) out.push(el); if (el === pills) on = true; });
+    return out;
+  }
+  function explorePaneIn(main, name) {
+    var dir = exploreSlide; exploreSlide = null;
+    if (name !== 'metiers' && name !== 'concours-liste') return;
+    var sw = main.querySelector('.explore-switch[role="tablist"]');
+    if (sw) { var to = sw.dataset.active; sw.dataset.active = to === 'concours' ? 'metiers' : 'concours'; void sw.offsetWidth; sw.classList.add('slide'); sw.dataset.active = to; }
+    explorePane(main).forEach(function (el) { el.classList.add('explore-in-' + dir); });
+    setTimeout(function () { explorePane(main).forEach(function (el) { el.classList.remove('explore-in-' + dir); }); }, EXPLORE_MS + 40);
+  }
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('.explore-switch[role="tablist"] a');
+    if (!a || a.classList.contains('on') || e.metaKey || e.ctrlKey || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var main = a.closest('main'); if (!main) return;
+    e.preventDefault();
+    var toConcours = a === a.parentNode.lastElementChild, pane = explorePane(main);
+    if (pane.length) {
+      /* Copie fixe de l’ancien contenu, qui sort pendant que le nouveau entre. */
+      var top = pane[0].getBoundingClientRect().top, box = main.getBoundingClientRect();
+      var ghost = document.createElement('div');
+      ghost.className = 'explore-ghost ' + (toConcours ? 'out-left' : 'out-right');
+      ghost.setAttribute('aria-hidden', 'true');
+      ghost.style.cssText = 'top:' + Math.max(0, top) + 'px;left:' + box.left + 'px;width:' + box.width + 'px;';
+      var inner = document.createElement('div');
+      inner.className = 'screen pt explore-ghost-inner';
+      inner.style.marginTop = Math.min(0, top) + 'px';
+      pane.forEach(function (el) { inner.appendChild(el.cloneNode(true)); });
+      ghost.appendChild(inner);
+      document.body.appendChild(ghost);
+      setTimeout(function () { ghost.remove(); }, EXPLORE_MS + 40);
+    }
+    exploreSlide = toConcours ? 'right' : 'left';
+    location.hash = a.getAttribute('href');
+  }, true);
   function render() {
     document.documentElement.dataset.contrast = String(!!S.contrast);
     document.documentElement.dataset.colorMode = S.colorMode || 'auto';
@@ -2278,6 +2318,7 @@
     root.classList.toggle('job-transition',animateJob);
     if (main) {
       main.id = 'contenu';
+      if (exploreSlide) explorePaneIn(main, r.name);
       if(animateJob){
         var slideClass=slide==='right'?'slide-from-left':'job-slide-in';
         main.classList.add(slideClass);

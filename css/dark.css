@@ -841,6 +841,9 @@ html:where(.dark).dark .sheet-content button.chip.category-choice[data-action="m
 :where(html.dark) .app .prep.hi.talents-card { border:0 !important; outline:0; }
 :where(html.dark) .theme-sweep { background:linear-gradient(90deg, var(--sweep) 0%, var(--sweep) 72%, transparent 100%); }
 :where(html.dark) .trip-tabs-label { color:var(--ink); }
+:where(html.dark) .explore-switch[role="tablist"]::before { background:var(--brand); }
+:where(html.dark) .explore-switch[role="tablist"] a { background:transparent !important; }
+:where(html.dark) .explore-ghost-inner { background:none !important; }
 
 /* Retouches */
 html.dark .app .prep:not(.prep-static):not(.talents-card):not(.talents-feature) { background:#292929 !important; }
