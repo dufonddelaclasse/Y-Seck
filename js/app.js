@@ -1584,7 +1584,11 @@
   /* Onglet de concours : sa frise et son « Évoluer » s’affichent, les autres se masquent. */
   function selectTripTab(scope, v) {
     scope.querySelectorAll('[data-tab]').forEach(function (panel) { panel.hidden = panel.getAttribute('data-tab') !== v; });
-    scope.querySelectorAll('.trip-tab').forEach(function (tab) { tab.setAttribute('aria-selected', String(tab.getAttribute('data-v') === v)); });
+    scope.querySelectorAll('.trip-tab').forEach(function (tab) {
+      var on = tab.getAttribute('data-v') === v; tab.setAttribute('aria-selected', String(on));
+      var prep = on && tab.getAttribute('data-prep');
+      if (prep) root.querySelectorAll('.prep-cta, .prep-float').forEach(function (a) { a.setAttribute('href', prep); });
+    });
     /* La frise change de longueur : le bouton flottant se recale sans attendre un défilement. */
     schedulePrepFloat();
   }
@@ -1597,6 +1601,8 @@
     if (!refs.length && !isContractJob(j)) refs = routeConcours(j);
     if (!refs.length) refs = [recruitConcours(j)];
     var main = jobRef(j), sel = Math.max(0, refs.indexOf(main));
+    /* « Se préparer » n’ouvre que le concours de l’onglet choisi. */
+    var prepFor = function (c) { return !isContractJob(j) && c && c.id && concoursByKey(concoursKey(c)) ? '#/preparer/' + j.id + '/' + concoursKey(c) : prepHref(j); };
     var level = testLevel ? decodeURIComponent(testLevel) : S.level || null, who = tripWho(level, testLevel);
     var fpLabel = FP_FULL;
     var shared = sharedTraits(j), fav = S.favorites.indexOf(j.id) > -1;
@@ -1608,7 +1614,7 @@
       return '<button type="button" class="trip-cat" data-action="tripCat"' + attr('v', k) + ' aria-pressed="' + (k === selCat) + '">' + catBadge(k, 'sm') + '<span>Catégorie ' + esc(k) + '</span></button>';
     }).join('') + '</div>' : '';
     var tabs = refs.length > 1 ? '<div class="trip-tabs-wrap"><p class="trip-tabs-label">' + refs.length + ' concours possibles pour ce métier</p>' + catRow + '<div class="trip-tabs" role="tablist" aria-label="Concours possibles">' + refs.map(function (c, i) {
-      return '<button type="button" class="trip-tab" role="tab" id="trip-tab-' + i + '" aria-controls="trip-panel-' + i + '" aria-selected="' + (i === sel) + '" data-action="tripTab"' + attr('v', i) + attr('cat', c.cat) + (multi && c.cat !== selCat ? ' hidden' : '') + '>' + (multi ? '' : catBadge(c.cat, 'sm')) + '<span>' + esc(label(c)) + '</span></button>';
+      return '<button type="button" class="trip-tab" role="tab" id="trip-tab-' + i + '" aria-controls="trip-panel-' + i + '" aria-selected="' + (i === sel) + '" data-action="tripTab"' + attr('v', i) + attr('cat', c.cat) + attr('prep', prepFor(c)) + (multi && c.cat !== selCat ? ' hidden' : '') + '>' + (multi ? '' : catBadge(c.cat, 'sm')) + '<span>' + esc(label(c)) + '</span></button>';
     }).join('') + '</div></div>' : '';
     var panels = refs.map(function (c, i) {
       return '<div class="trip-panel" id="trip-panel-' + i + '" role="tabpanel" aria-labelledby="trip-tab-' + i + '" data-tab="' + i + '"' + (i === sel ? '' : ' hidden') + '><ol class="trip">' +
@@ -1634,10 +1640,10 @@
         '<button type="button" class="job-action" data-action="share"' + attr('v', j.id) + '>' + I.send + '<span>Partager</span></button>' +
       '</div>' +
       tabs + '<section class="trip-wrap" aria-label="Parcours jusqu’au métier">' + panels + '</section>' + (refs[0].recruit ? '' : recruitmentNote(j)) + ladders +
-      '<a class="btn theme mt-m prep-cta" href="' + prepHref(j) + '">' + prepLabel + '</a>' +
+      '<a class="btn theme mt-m prep-cta" href="' + prepFor(refs[sel]) + '">' + prepLabel + '</a>' +
       ext('https://www.fonction-publique.gouv.fr/toutes-les-publications/repertoire-commun-des-metiers-de-la-fonction-publique', 'Consulter la source métier sur fonction-publique.gouv.fr', 'link-plain') + '</main>' +
       /* Comme sur la fiche concours : copie réduite qui flotte dès la fin de la frise, réservée à la vue. */
-      '<a class="btn theme prep-float" href="' + prepHref(j) + '" tabindex="-1" aria-hidden="true">' + prepLabel + '</a>' + tabbar('metiers');
+      '<a class="btn theme prep-float" href="' + prepFor(refs[sel]) + '" tabindex="-1" aria-hidden="true">' + prepLabel + '</a>' + tabbar('metiers');
   };
   screens.preparer = function(id, key) {
     var job=jobById(id);
@@ -1645,7 +1651,8 @@
     if(isContractJob(job))return screens['sans-concours'](id);
     var focus=key&&concoursByKey(key)||null;
     var theme=focus?focus.cat:themeCategory(job);
-    return '<main class="screen top-tight prep-page">' + (focus?back('#/concours-fiche/'+concoursKey(focus),'Concours'):back('#/metier/'+job.id,job.name)) + (theme?'<span class="prep-page-cat">'+catBadge(theme,'lg')+'</span>':'') + '<h1>Se préparer</h1><p class="sr-only">' + (focus?sig(focus.name):esc(job.name)) + '</p>' +
+    var fromJob=(visitedRoutes[visitedRoutes.length-2]||'').indexOf('#/metier/'+job.id)===0;
+    return '<main class="screen top-tight prep-page">' + (focus&&!fromJob?back('#/concours-fiche/'+concoursKey(focus),'Concours'):back('#/metier/'+job.id,job.name)) + (theme?'<span class="prep-page-cat">'+catBadge(theme,'lg')+'</span>':'') + '<h1>Se préparer</h1><p class="sr-only">' + (focus?sig(focus.name):esc(job.name)) + '</p>' +
       concoursPrep(job, focus) + stagesPrep(job) + preparationContent(job, focus) + '</main>' + tabbar('metiers');
   };
 
