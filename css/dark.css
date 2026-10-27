@@ -840,6 +840,7 @@ html:where(.dark).dark .sheet-content button.chip.category-choice[data-action="m
 :where(html.dark) .app .prep.prep-static { background:#292929; }
 :where(html.dark) .talents-body, :where(html.dark) .app .prep.hi.talents-card .talents-body { border:0 !important; }
 :where(html.dark) .app .prep.hi.talents-card { border:0 !important; outline:0; }
+:where(html.dark) .theme-sweep { background:linear-gradient(90deg, var(--sweep) 0%, var(--sweep) 72%, transparent 100%); }
 
 /* Retouches */
 html.dark .app .prep:not(.prep-static):not(.talents-card):not(.talents-feature) { background:#292929 !important; }

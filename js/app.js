@@ -4,7 +4,7 @@
   var D = window.DATA;
   var root = document.getElementById('app');
   var UI = window.YSECK_UI;
-  var expandedDatesJob = null, jobSlideRequested = false, expandedPrepCategories = {}, visitedRoutes = [];
+  var expandedDatesJob = null, jobSlideRequested = false, expandedPrepCategories = {}, visitedRoutes = [], tripCatPick = null;
   var talentIntroAnimate = false, nameAnimate = false, interestGesture = null;
   /* Premier passage : seul l’onboarding est chargé ; le catalogue complet arrive à la fin de la création du profil. */
   var catalogReady = !window.YSECK_CATALOG || window.YSECK_CATALOG.full, catalogLoading = false, dashboardEnter = false, profileFinished = false;
@@ -1609,6 +1609,8 @@
     var label = function (c) { var twin = refs.some(function (o) { return o !== c && o.cat === c.cat && o.fp === c.fp; }); return twin ? c.name : D.fps[c.fp]; };
     /* Métier sur plusieurs catégories : on choisit d’abord la catégorie, puis le versant. */
     var cats = []; refs.forEach(function (c) { if (cats.indexOf(c.cat) === -1) cats.push(c.cat); });
+    /* Catégorie choisie plus tôt sur cette fiche : elle reste sélectionnée si la page se redessine (favori, retour). */
+    if (tripCatPick && tripCatPick.job === j.id && refs[sel].cat !== tripCatPick.cat) { var picked = refs.map(function (c) { return c.cat; }).indexOf(tripCatPick.cat); if (picked > -1) sel = picked; }
     var selCat = refs[sel].cat, multi = cats.length > 1;
     var catRow = multi ? '<div class="trip-cats" role="group" aria-label="Catégorie du concours">' + cats.map(function (k) {
       return '<button type="button" class="trip-cat" data-action="tripCat"' + attr('v', k) + ' aria-pressed="' + (k === selCat) + '">' + catBadge(k, 'sm') + '<span>Catégorie ' + esc(k) + '</span></button>';
@@ -2169,6 +2171,23 @@
   /* Page à retrouver après « Terminer les modifications » quand on vient compléter son profil depuis une autre page
      (lieu de vie ajouté depuis les Prépas Talents) : l'usager ne perd pas le fil. Oubliée dès qu'on quitte le profil. */
   var profileReturn = null;
+  /* Changement de catégorie sur une fiche métier : la page prend les couleurs de la nouvelle catégorie.
+     La barre du haut est balayée une seule fois de gauche à droite ; le reste passe en fondu. */
+  function switchTheme(cat) {
+    var key = catClass(cat).slice(4), keys = ['Ap', 'A', 'B', 'C', 'CDD'];
+    if (root.classList.contains('theme-' + key)) return;
+    var bar = document.querySelector('.context-bar'), reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var oldColor = bar && !bar.hidden ? getComputedStyle(bar).backgroundColor : '';
+    keys.forEach(function (k) { root.classList.toggle('theme-' + k, k === key); document.body.classList.toggle('theme-' + k, k === key); });
+    if (!bar || bar.hidden || reduce || !oldColor) return;
+    var newColor = getComputedStyle(bar).backgroundColor;
+    if (newColor === oldColor) return;
+    var old = bar.querySelector('.theme-sweep'); if (old) old.remove();
+    bar.style.backgroundColor = oldColor;
+    var sweep = document.createElement('span'); sweep.className = 'theme-sweep'; sweep.setAttribute('aria-hidden', 'true'); sweep.style.setProperty('--sweep', newColor);
+    bar.insertBefore(sweep, bar.firstChild);
+    sweep.addEventListener('animationend', function () { bar.style.backgroundColor = ''; sweep.remove(); });
+  }
   function startHintTimer() {
     clearTimeout(hintTimer);
     hintTimer = setTimeout(function () { var n = root.querySelector('.top-notice'); if (n) n.classList.add('leave'); var b = root.querySelector('#filters-open'); if (b) b.classList.remove('pulse'); showFilterNotice = false; }, 5000);
@@ -2282,6 +2301,8 @@
     var themedJob=['metier','metier-test','fiche','preparer','sans-concours','etudes','calendrier','annales','ressources-biblio','handicap'].indexOf(r.name)>-1&&r.arg&&jobById(r.arg);
     var theme=themedJob&&themeCategory(themedJob);
     if(themedJob&&prepFocus&&prepFocus.job===themedJob.id)theme=concoursByKey(prepFocus.key).cat;
+    if(tripCatPick&&!(r.name==='metier'&&r.arg===tripCatPick.job))tripCatPick=null;
+    if(themedJob&&tripCatPick&&tripCatPick.job===themedJob.id)theme=tripCatPick.cat;
     if((r.name==='concours-fiche'||r.name==='concours-test')&&r.arg){var shownConcours=concoursByKey(r.arg);if(shownConcours)theme=shownConcours.cat;}
     if(r.name==='calendrier'&&r.arg==='concours'&&r.arg2){var datedConcours=concoursByKey(r.arg2);if(datedConcours)theme=datedConcours.cat;}
     var themeKey=theme?catClass(theme).slice(4):null;
@@ -2472,7 +2493,8 @@
       case 'tripCat': var catMain = el.closest('main') || document, firstTab = null;
         catMain.querySelectorAll('.trip-cat').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-v') === v)); });
         catMain.querySelectorAll('.trip-tab').forEach(function (t) { var on = t.getAttribute('data-cat') === v; t.hidden = !on; if (on && !firstTab) firstTab = t; });
-        if (firstTab) selectTripTab(catMain, firstTab.getAttribute('data-v')); break;
+        if (firstTab) selectTripTab(catMain, firstTab.getAttribute('data-v'));
+        tripCatPick = { job: route().arg, cat: v }; switchTheme(v); break;
       case 'openPrepCat': var prepJob=el.getAttribute('data-job'); (expandedPrepCategories[prepJob]||(expandedPrepCategories[prepJob]={}))[v]=el.getAttribute('aria-expanded')!=='true'; render(); break;
       case 'openFilters': UI.open('filters',onConcoursPage()?'Filtrer les concours':'Filtrer les métiers',jobFilters(),el); break;
       case 'jobDetails': UI.open('details','Plus de détails',jobDetails(v),el); break;

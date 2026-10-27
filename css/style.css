@@ -2363,3 +2363,11 @@ html.crios .profile-footer { bottom:calc(86px + env(safe-area-inset-bottom, 0px)
 
 /* Actions des fiches (En savoir +, Favori, Partager) : texte un peu plus grand. */
 .job-action { font-size:.8125rem; }
+/* Changement de catégorie sur une fiche métier : balayage unique de la barre du haut, de gauche à droite, puis fondu des couleurs de la page. */
+.context-bar { isolation:isolate; overflow:hidden; }
+.theme-sweep { position:absolute; top:0; bottom:0; left:0; width:140%; z-index:-1; pointer-events:none;
+  background:linear-gradient(90deg, var(--sweep) 0%, var(--sweep) 72%, transparent 100%); transform:translateX(-100%); animation:theme-sweep .7s cubic-bezier(.4,0,.2,1) forwards; }
+@keyframes theme-sweep { to { transform:translateX(0); } }
+.app.themed main :is(.btn, .trip-cat, .trip-tab, .rung, .ladder-alt-row, .back, .job-action svg, .trip-track, .trip-dot, .section-heading svg, .link-plain, .prep-float),
+.app.themed .job-actions .job-action svg { transition:background-color .6s ease, color .6s ease, border-color .6s ease, fill .6s ease; }
+@media (prefers-reduced-motion:reduce) { .theme-sweep { animation:none; transform:none; } }
