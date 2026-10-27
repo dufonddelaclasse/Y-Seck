@@ -2371,3 +2371,6 @@ html.crios .profile-footer { bottom:calc(86px + env(safe-area-inset-bottom, 0px)
 .app.themed main :is(.btn, .trip-cat, .trip-tab, .rung, .ladder-alt-row, .back, .job-action svg, .trip-track, .trip-dot, .section-heading svg, .link-plain, .prep-float),
 .app.themed .job-actions .job-action svg { transition:background-color .6s ease, color .6s ease, border-color .6s ease, fill .6s ease; }
 @media (prefers-reduced-motion:reduce) { .theme-sweep { animation:none; transform:none; } }
+
+/* « N concours possibles pour ce métier » : même taille que « Mon niveau », en noir et plus gras. */
+.trip-tabs-label { font-size:1rem; font-weight:500; color:var(--ink); }
