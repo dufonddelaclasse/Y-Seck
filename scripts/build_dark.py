@@ -156,8 +156,9 @@ html.dark .bourse-switch button.on { background:var(--theme-btn, var(--brand)) !
 html.dark :is(.school-uni, .school-fees, .bourse, .filter-hint, .todo, .callout, .trip-access, .ref-tip:not(.stage-tip), .intro-employer) { background:#000 !important; border-color:#000 !important; color:var(--ink) !important; }
 html.dark :is(.school-uni, .bourse, .filter-hint, .todo, .callout, .trip-access, .ref-tip:not(.stage-tip), .intro-employer) :is(p, b, span, li, small) { color:inherit; }
 /* Carte Prépas Talents : le corps passe en noir, le texte en clair. */
-html.dark .talents-body, html.dark .app .prep.hi.talents-card .talents-body { background:#000 !important; }
-html.dark .talents-card :is(h1, h2, p, b, .talents-count), html.dark .app .prep.hi.talents-card p { color:#E9E9E9 !important; }
+html.dark .talents-body, html.dark .app .prep.hi.talents-card .talents-body { background:#292929 !important; }
+html.dark .talents-card :is(h1, h2, b, .talents-count, .talents-count b, .talents-bourse b) { color:#F2F2F2 !important; }
+html.dark .talents-card p, html.dark .app .prep.hi.talents-card p { color:#D6D6DB !important; }
 
 /* Cartes des régions : régions bien visibles sur le fond sombre, frontières de la couleur du bloc. */
 :where(html.dark) .region-map path { fill:#4A4A55; stroke:#292929; stroke-width:1.6; }
@@ -228,14 +229,10 @@ html.dark .personal-home .home-concours :is(.home-feature-copy b, .home-feature-
 html.dark .personal-home .home-concours .home-go { background:#FFF; color:#161616; }
 /* Ovale d’arrivée clair en mode sombre : le pictogramme passe en sombre. */
 html.dark .trip-pill svg { color:#161616; }
-/* Prépa Talents : la carte reste blanche, avec son logo et un texte sombre. */
-html.dark .talents-card, html.dark .talents-card :is(h1,h2,p,b,.more,.chev) { color:#161616 !important; }
 html.dark .talents-card .talents-hero .price { background:#FFF !important; color:#1129AD !important; }
 html.dark .app .prep.hi.talents-card .talents-hero .price { background:#E0FA6E !important; color:#141414 !important; }
-html.dark .talents-card .talents-bourse span { color:#55555C !important; }
 /* Prénom de l’accueil et écran de chargement : vague partant du texte clair, passant par le vert anis puis le lavande, sans bleu sombre peu lisible sur fond sombre. */
 html.dark { --name-sweep:linear-gradient(180deg, var(--ink) 0%, var(--ink) 25%, #E8F2C6 27%, #E4F69E 29.5%, #E0FA6E 32%, #E0FA6E 34%, #D9EA97 36.5%, #D2D8C8 38.5%, #CCC5FA 40.5%, #BFB6FE 43%, #B3A6FF 45.5%, #A898FE 48%, #9E8CFB 50.5%, #917DF4 53%, #8C78F0 55%, #917DF4 57.5%, #9E8CFB 60%, #B3A6FF 63%, #CCC5FA 66.5%, #E1DFEF 70%, #E7E6EB 72.5%, var(--ink) 75%, var(--ink) 100%); }
-html.dark .talents-body { background:#FFF; }
 html.dark .home-tile { background:#E0FA6E !important; color:#141414 !important; }
 html.dark .prep .price { background:#E0FA6E !important; color:#141414 !important; }
 html.dark .app.themed .prep .prep-ico { color:var(--lt); }
