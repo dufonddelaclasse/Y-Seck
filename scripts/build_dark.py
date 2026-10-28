@@ -362,6 +362,11 @@ html.dark #app.onboarding :is(.opt, .interest-option):not(.on) { background:tran
 html.dark #app.onboarding :is(.opt, .interest-option).on { border:1.5px solid #FFF !important; }
 html.dark #app .opt .defi-cats .cat, html.dark #app .opt .defi-cats .cat *, html.dark .sheet .opt .defi-cats .cat, html.dark .sheet .opt .defi-cats .cat * { color:#FFF !important; }
 html.dark #app .opt:not(.on) .defi-cats > span:not(.cat) { color:#A8A8AD !important; }
+/* Pastilles de choix (pages et fenêtres) : sélectionnées en blanc plein, texte noir ; sélectionnables cerclées de blanc, texte blanc. */
+html.dark :is(#app, .sheet) button.chip:not(.category-choice):not(.on) { background:transparent !important; border:1.5px solid #FFF !important; color:#FFF !important; box-shadow:none !important; }
+html.dark :is(#app, .sheet) button.chip.on:not(.category-choice), html.dark :is(#app, .sheet) button.chip.on:not(.category-choice):hover { background:#FFF !important; border:1.5px solid #FFF !important; color:#000 !important; box-shadow:none !important; }
+html.dark :is(#app, .sheet) button.chip.on:not(.category-choice) :is(svg, span) { color:#000 !important; }
+html.dark :is(#app, .sheet) button.chip:not(.category-choice):not(.on) :is(svg, span) { color:#FFF !important; }
 """
 
 if __name__ == '__main__':
