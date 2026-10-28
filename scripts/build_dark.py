@@ -261,11 +261,8 @@ html.dark .app.theme-B { --theme-tint:#CCFFED; --pill-on:#CCFFED; }
 html.dark .app.theme-C { --theme-tint:#FFE8D9; --pill-on:#FFE8D9; }
 
 /* ---------- Fond noir partout ---------- */
-/* Fond de l’appli : dégradé vertical fixe, noir à 97 % en haut (#080808) vers noir à 93 % en bas (#121212). */
-html.dark { background:#121212 !important; }
-html.dark body, html.dark .app, html.dark .app main { background:transparent !important; }
-html.dark body::before { display:block !important; content:''; position:fixed; top:0; left:0; right:0; bottom:0; height:auto; z-index:-1; background:linear-gradient(180deg, #080808 0%, #121212 100%) !important; pointer-events:none; }
-html.dark .footer { background:#121212 !important; }
+html.dark, html.dark body, html.dark .app, html.dark .app main, html.dark .footer { background:#000 !important; }
+html.dark body::before { display:none !important; }
 html.dark body:not(.themed) .context-bar:not([style*="background"]) { background:rgba(0,0,0,.94); border-bottom-color:#1C1C1E; }
 html.dark #app .job-page .job-hero, html.dark #app .job-page .trip-head, html.dark #app .job-actions, html.dark #app .job-page .job-actions { background:#000 !important; border-color:#1C1C1E !important; }
 html.dark .tabbar { background:#000 !important; border-top-color:#1C1C1E !important; }
@@ -389,8 +386,7 @@ html.dark #app .status-ok { background:#173D22; color:#9FE8B4; }
 html.dark #app .status-closed { background:#4A1818; color:#FFB3B3; }
 html.dark #app .status-plan { background:#2C2C2F; color:#C2C2C6; }
 /* Fiche métier : la zone de la frise en dégradé, gris foncé sous la barre d’actions vers presque noir en bas. */
-/* Fiches métier et concours : elles gardent leur propre fond (haut noir, frise en dégradé), sans le dégradé général. */
-html.dark #app main.job-page.concours-page { background:#000 !important; }
+/* Fiche métier : zone de la frise en dégradé de gris. */
 html.dark #app main.job-page:not(.concours-page) { background:linear-gradient(180deg, #171719 0, #121214 600px, #0A0A0B 100%) !important; }
 """
 
