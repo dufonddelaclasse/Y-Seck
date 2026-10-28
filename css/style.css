@@ -2431,3 +2431,7 @@ html.dark .study-card h3 { color:#F2F2F2; }
 /* Menu du bas : onglet actif en noir (texte, pictogramme plein et trait). */
 .tabbar a.on, .tabbar a.on svg { color:#141414; }
 .tabbar a.on::before { background:#141414; }
+/* Explorer : curseur du switch Métiers / Concours en noir. */
+.explore-switch[role="tablist"][data-on]::before { background:#141414; }
+/* Barre du haut : titres en noir sur les pages sans catégorie (les pages d’une catégorie gardent leur barre colorée, texte blanc). */
+body:not(.themed) .context-bar .context-title, body:not(.themed) .context-bar.top-level .context-title { color:#141414; }

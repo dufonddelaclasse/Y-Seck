@@ -856,6 +856,8 @@ html:where(.dark).dark .study-card h3 { color:#F2F2F2; }
 :where(html.dark) .trip-more { background:var(--block-gray); }
 :where(html.dark) .tabbar a.on, :where(html.dark) .tabbar a.on svg { color:#EAEAEA; }
 :where(html.dark) .tabbar a.on::before { background:#4C4C4C; }
+:where(html.dark) .explore-switch[role="tablist"][data-on]::before { background:#4C4C4C; }
+:where(html.dark) body:not(.themed) .context-bar .context-title, :where(html.dark) body:not(.themed) .context-bar.top-level .context-title { color:#EAEAEA; }
 
 /* Retouches */
 html.dark .app .prep:not(.prep-static):not(.talents-card):not(.talents-feature) { background:#292929 !important; }
