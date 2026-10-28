@@ -1084,3 +1084,13 @@ html.dark .icon-btn[data-action$="ilters"], html.dark .icon-btn[data-action$="il
 /* Arrivée sur une fiche métier (sombre) : barre noire, puis la couleur de la catégorie descend du haut vers le bas. */
 html.dark body.themed .context-bar.bar-enter { background:#000 !important; }
 html.dark body.themed .context-bar.bar-enter :is(.context-title, .icon-btn, .icon-btn svg) { animation:none; }
+/* Choix en cards (profil, ambition, boursier, budget, reconversion, domaines) : encadrés anthracite, textes blancs, plus d’air.
+   Sélection : card blanche, texte noir. */
+html.dark #app :is(.opt, .interest-option), html.dark .sheet :is(.opt, .interest-option) { border:0 !important; border-radius:20px !important; background:#1C1C1E !important; color:#FFF !important; box-shadow:none !important; }
+html.dark #app .opt:not(.sm), html.dark .sheet .opt:not(.sm) { padding:18px 20px !important; }
+html.dark #app .opt.ambition-opt { min-height:72px; }
+html.dark #app :is(.opt, .interest-option) :is(span, svg, .ambition-t, .interest-name), html.dark .sheet :is(.opt, .interest-option) :is(span, svg, .ambition-t, .interest-name) { color:#FFF !important; }
+html.dark #app .opt .ambition-d, html.dark .sheet .opt .ambition-d { color:#A8A8AD !important; opacity:1; }
+html.dark #app :is(.opt, .interest-option).on, html.dark .sheet :is(.opt, .interest-option).on { background:#FFF !important; color:#000 !important; }
+html.dark #app :is(.opt, .interest-option).on :is(span, svg, .ambition-t, .interest-name), html.dark .sheet :is(.opt, .interest-option).on :is(span, svg, .ambition-t, .interest-name) { color:#000 !important; }
+html.dark #app :is(.opt, .interest-option).on .ambition-d, html.dark .sheet .opt.on .ambition-d { color:#55555C !important; }
