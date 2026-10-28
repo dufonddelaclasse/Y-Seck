@@ -882,6 +882,7 @@ html:where(.dark).dark #app .also-title { color:#FFF !important; }
 :where(html.dark) .intro-fold-desc { color:var(--ink-2); }
 html:where(.dark).dark #app .intro-fold-desc { color:#D6D6DB; }
 :where(html.dark) .defi-cats .cat.sm { box-shadow:none; }
+html:where(.dark).dark #app .opt:not(.on) .defi-cats .defi-label { color:#A8A8AD !important; }
 
 /* Retouches */
 html.dark .app .prep:not(.prep-static):not(.talents-card):not(.talents-feature) { background:#292929 !important; }

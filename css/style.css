@@ -2536,3 +2536,5 @@ html.dark #app .intro-fold-desc { color:#D6D6DB; }
 .defi-cats .cat.sm { width:24px; height:24px; font-size:.6875rem; box-shadow:none; }
 .defi-cats .cat.sm svg { width:14px; height:14px; }
 .defi-cats > span:not(.cat) { margin-left:4px; }
+.defi-cats .defi-label { margin:0 4px 0 0 !important; font-size:.8125rem; font-weight:300; opacity:.85; }
+html.dark #app .opt:not(.on) .defi-cats .defi-label { color:#A8A8AD !important; }

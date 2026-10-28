@@ -801,7 +801,7 @@
       var on = S.defis.indexOf(d[0]) > -1;
       /* Sous le titre : les pastilles des catégories retenues (ou le pictogramme des contractuels). */
       var sub = d[2] ? (d[2][0] === 'CDD' ? '<span class="defi-cats"><span class="cat sm cat-CDD" aria-hidden="true">' + I.contract + '</span><span>Ajoute les emplois contractuels</span></span>'
-        : '<span class="defi-cats" aria-label="Catégories ' + esc(d[2].join(', ')) + '">' + d[2].map(function (c) { return '<span class="cat sm ' + catClass(c) + '" aria-hidden="true">' + c + '</span>'; }).join('') + '</span>') : '';
+        : '<span class="defi-cats" aria-label="Concours de catégorie ' + esc(d[2].join(', ')) + '"><span class="defi-label" aria-hidden="true">Concours</span>' + d[2].map(function (c) { return '<span class="cat sm ' + catClass(c) + '" aria-hidden="true">' + c + '</span>'; }).join('') + '</span>') : '';
       return '<button type="button" class="opt ambition-opt' + (on ? ' on' : '') + '" aria-pressed="' + on + '"' + attr('action', 'defi') + attr('v', d[0]) + '><span class="ambition-copy"><span class="ambition-t">' + esc(d[1]) + '</span>' + sub + '</span>' + (on ? I.check : '') + '</button>';
     }).join('') + '</div>';
   }
