@@ -1237,7 +1237,7 @@
         '<a class="btn outline" href="#/etudes">Quelles études choisir ?</a>' + preparationContent()
       : infoConcours();
     return '<main class="screen top-tight intro-screen category-screen understand-page info-page">' + back('#/concours', 'Informations générales') +
-      '<span class="eyebrow">' + (INFO_AXES.indexOf(x) + 1) + ' / 3</span><h1 class="mt-s understand-title">' + esc(x[1]) + '</h1>' + body + '</main>' + tabbar('accueil');
+      '<h1 class="mt-m understand-title">' + esc(x[1]) + '</h1>' + body + '</main>' + tabbar('accueil');
   };
 
   /* ---------- Référentiel des concours ---------- */
