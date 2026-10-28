@@ -1481,12 +1481,14 @@
         stop('end', '<span class="trip-pill">' + (end.icon || '') + '</span>', end.name, end.body, end.track || '', catStyle);
     };
     /* Départ : « Mon niveau » puis la pastille du niveau actuel, comme sur l’accueil. */
+    /* Niveau suffisant : « Concours accessible » dans le même style que « Mon niveau », avec sa pastille. */
+    var accessLine = '<p class="trip-sub trip-level">Concours accessible<span class="study-level">' + I.check + '<span>Maintenant</span></span></p>';
     var head = stop('start', I.pin, 'Départ', '<p class="trip-sub' + (level ? ' trip-level' : '') + '">' + esc(who) + (level ? '<span class="study-level">' + I.graduation + '<span>' + esc(level) + '</span></span>' : '') + '</p>', '') +
       (first ? stop('leg', '<span class="trip-walk">' + I.walk + '</span>', '', '<p class="trip-lead">' + esc(TRIP_TITLES[first.kind]) + '</p>' + tripPhase(c, first, trip.lvl, prepaText(c)), 'line c-' + first.kind)
         /* Bac+3 face à un concours A+ ou A : accessible, mais la plupart des admis ont un Bac+5. */
         : stop('leg', '<span class="trip-walk">' + I.walk + '</span>', '', level === 'Bac+3' && (c.cat === 'A+' || c.cat === 'A')
-          ? '<p class="trip-meta">Concours accessible.<br>Pour information, la grande majorité des admis à ce concours ont un Bac+5 minimum.</p>'
-          : '<p class="trip-meta">Votre niveau suffit<span aria-hidden="true"> | </span><span class="sr-only">, </span>concours accessible dès maintenant</p>', 'line c-none')) +
+          ? accessLine + '<p class="trip-meta">Pour information, la grande majorité des admis à ce concours ont un Bac+5 minimum.</p>'
+          : accessLine, 'line c-none')) +
       trip.phases.slice(1).map(function (p) { return stop('mid', '<span class="trip-dot c-' + p.kind + '"></span>', esc(TRIP_TITLES[p.kind]), tripPhase(c, p, trip.lvl, prepaText(c)), 'line c-' + p.kind); }).join('');
     /* Métier recruté sans concours : l’étape du recrutement remplace celle du concours. */
     if (c.recruit) return head + stop('trip-exam', catBadge(c.cat), esc(c.recruit.title), c.recruit.body, 'line', catStyle) + arrival();
