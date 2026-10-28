@@ -367,6 +367,14 @@ html.dark :is(#app, .sheet) button.chip:not(.category-choice):not(.on) { backgro
 html.dark :is(#app, .sheet) button.chip.on:not(.category-choice), html.dark :is(#app, .sheet) button.chip.on:not(.category-choice):hover { background:#FFF !important; border:1.5px solid #FFF !important; color:#000 !important; box-shadow:none !important; }
 html.dark :is(#app, .sheet) button.chip.on:not(.category-choice) :is(svg, span) { color:#000 !important; }
 html.dark :is(#app, .sheet) button.chip:not(.category-choice):not(.on) :is(svg, span) { color:#FFF !important; }
+/* Coche de « Niveau d’études compatible » : pastille verte, coche noire bien visible. */
+html.dark #app .fit .job-fit-check, html.dark #app .fit .job-fit-check svg { background:#C8FFB2 !important; color:#000 !important; }
+html.dark #app .fit .job-fit-check svg { background:none !important; stroke:#000 !important; }
+/* Catégories des fiches métier : active en blanc plein (texte noir), sélectionnable cerclée de blanc. */
+html.dark #app .trip-cat { background:transparent !important; color:#FFF !important; box-shadow:inset 0 0 0 1.5px #FFF !important; }
+html.dark #app .trip-cat > span:not(.cat) { color:#FFF !important; }
+html.dark #app .trip-cat[aria-pressed="true"] { background:#FFF !important; color:#000 !important; box-shadow:none !important; }
+html.dark #app .trip-cat[aria-pressed="true"] > span:not(.cat) { color:#000 !important; }
 """
 
 if __name__ == '__main__':
