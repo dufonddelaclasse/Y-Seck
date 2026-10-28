@@ -2451,13 +2451,13 @@ html:not(.dark):not([data-contrast="true"]) .explore-switch[role="tablist"][data
    pour que la liste ne se voie plus en dessous pendant le défilement. */
 .sheet-actions { bottom:calc(-1 * max(24px, env(safe-area-inset-bottom, 0px))); margin-bottom:calc(-1 * max(24px, env(safe-area-inset-bottom, 0px))); }
 /* Arrivée sur une fiche métier : barre du haut blanche à texte noir, puis la couleur de la catégorie descend du haut vers le bas et le texte passe au blanc. */
-@keyframes bar-fill { from { transform:translateY(-100%); } to { transform:translateY(0); } }
+@keyframes bar-fill { from { transform:translateX(-100%); } to { transform:translateX(0); } }
 @keyframes bar-ink { from { color:#141414; } to { color:#FFF; } }
 @keyframes bar-ring { from { box-shadow:0 0 0 2px #141414; } to { box-shadow:0 0 0 2px #FFF; } }
 body.themed .context-bar.bar-enter { background:#FFF !important; }
-/* Le remplissage descend avec un bord fondu : couleur pleine en haut, qui s’efface vers le bas. */
+/* Le remplissage avance de gauche à droite avec un bord fondu : couleur pleine à gauche, qui s’efface vers la droite. */
 body.themed .context-bar.bar-enter { overflow:hidden; }
-body.themed .context-bar.bar-enter::before { content:''; position:absolute; top:0; left:0; right:0; height:200%; z-index:0; background:linear-gradient(180deg, var(--theme) 0%, var(--theme) 50%, transparent 100%); animation:bar-fill .9s cubic-bezier(.45,0,.25,1) .3s both; pointer-events:none; }
+body.themed .context-bar.bar-enter::before { content:''; position:absolute; top:0; bottom:0; left:0; width:200%; z-index:0; background:linear-gradient(90deg, var(--theme) 0%, var(--theme) 50%, transparent 100%); animation:bar-fill .9s cubic-bezier(.45,0,.25,1) .3s both; pointer-events:none; }
 body.themed .context-bar.bar-enter > * { position:relative; z-index:1; }
 body.themed .context-bar.bar-enter :is(.context-title, .icon-btn, .icon-btn svg) { animation:bar-ink .45s ease .55s both; }
 body.themed .context-bar.bar-enter .cat { animation:bar-ring .45s ease .55s both; }
