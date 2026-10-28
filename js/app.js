@@ -14,7 +14,7 @@
   /* ---------- État ---------- */
   var defaults = {
     profile: null, level: null, domains: [], traits: [], boursier: null, budget: null, done: false, pendingChanges: false,
-    metDomains: null, metCats: null, metFps: null, q: '', calCat: 'Toutes', track: 'Administratif',
+    metDomains: null, metCats: null, metFps: null, q: '', calCat: 'Toutes', calCats: null, calFps: null, track: 'Administratif',
     prepBudget: null, alert: false, openCat: null, region: 'Toutes', talentsAll: false,
     name: '', location: null, favorites: [], children: [], activeChild: null, personalProfiles: {},
     metMode: 'mine', jobLimit: 60, calFp: 'Tous', calView: 'upcoming', calLimit: 40, calQ: '',
@@ -84,7 +84,7 @@
     syncPending();
     profileSnapshot=profileSignature();
     S.metDomains = null; S.metMode = 'mine'; S.metCats = null; S.metFps = null; S.q = ''; S.cq = ''; S.jobLimit = 60; S.region = 'Toutes';
-    S.prepBudget = null; S.talentsAll = false; S.calCat = 'Toutes'; S.calFp = 'Tous'; S.calQ = ''; S.calLimit = 40;
+    S.prepBudget = null; S.talentsAll = false; S.calCat = 'Toutes'; S.calFp = 'Tous'; S.calCats = null; S.calFps = null; S.calQ = ''; S.calLimit = 40;
     locationResults = []; locationStatus = ''; locationQuery = ''; locationSearchId++;
   }
   function ensureFamily() {
@@ -192,6 +192,11 @@
   I.layers = UI.icons.book;
 
   /* ---------- Outils ---------- */
+  /* « 2026-10-17 » devient « 17 octobre 2026 ». */
+  function frDate(iso) {
+    var m = /^(\d{4})-(\d{2})-(\d{2})/.exec(String(iso || '')); if (!m) return String(iso || '');
+    return parseInt(m[3], 10) + (m[3] === '01' ? 'er' : '') + ' ' + ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'][parseInt(m[2], 10) - 1] + ' ' + m[1];
+  }
   var MONTHS = ['janv.', 'févr.', 'mars', 'avr.', 'mai', 'juin', 'juil.', 'août', 'sept.', 'oct.', 'nov.', 'déc.'];
   function fmtDate(iso) {
     var p = iso.split('-');
@@ -259,7 +264,7 @@
     }).join('') + '</nav>';
   }
   function chip(action, value, label, on, extraCls) {
-    return '<button type="button" class="chip' + (extraCls ? ' ' + extraCls : '') + ((action === 'metCat' || action === 'calCat') && value !== 'Toutes' ? ' category-choice ' + catClass(value) : '') + (on ? ' on' : '') + '" aria-pressed="' + on + '"' + attr('action', action) + attr('v', value) + '>' + (action === 'metCat' && value === 'CDD' ? '<span>Contractuels</span>' + I.contract : esc(label)) + '</button>';
+    return '<button type="button" class="chip' + (extraCls ? ' ' + extraCls : '') + ((action === 'metCat' || action === 'calCat' || action === 'calCats') && value !== 'Toutes' ? ' category-choice ' + catClass(value) : '') + (on ? ' on' : '') + '" aria-pressed="' + on + '"' + attr('action', action) + attr('v', value) + '>' + (action === 'metCat' && value === 'CDD' ? '<span>Contractuels</span>' + I.contract : esc(label)) + '</button>';
   }
   /* Valider une recherche ferme le clavier ; les résultats se mettent déjà à jour pendant la saisie. */
   function submitSearch(id) {
@@ -486,15 +491,20 @@
     var cats=[];(session.routeIds||[]).forEach(function(id){var r=D.accessRoutes[id];if((!job||(job.routeIds||[]).indexOf(id)>-1)&&r&&r.fp.indexOf(session.fp)>-1&&['A+','A','B','C'].indexOf(r.cat)>-1&&cats.indexOf(r.cat)===-1)cats.push(r.cat);});
     return cats.length===1?cats[0]:session.cat;
   }
+  /* Dates brutes (« 2026-10-17 » ou « 17-10-2026 ») écrites en toutes lettres ; les libellés rédigés restent tels quels. */
+  function calDay(t) {
+    t = String(t || '').trim(); var m = /^(\d{2})[-\/](\d{2})[-\/](\d{4})$/.exec(t);
+    return m ? frDate(m[3] + '-' + m[2] + '-' + m[1]) : /^\d{4}-\d{2}-\d{2}$/.test(t) ? frDate(t) : t;
+  }
   function calendarRows(list, limit, job) {
     if (!list.length) return '<p class="empty">Aucune session publiée pour cette sélection.</p>';
     return list.slice().sort(calendarOrder).slice(0, limit || 40).map(function (c) {
       var status = (c.provisional ? 'Calendrier prévisionnel' : 'Session publiée') + (c.date && c.date < todayISO() ? ' · Inscriptions closes' : '');
-      return '<article class="prep"><div class="head"><h3 class="h3">' + sig(c.name) + '</h3>' + catBadge(calendarCategory(c,job), 'sm') + '</div><p>' + esc(D.fps[c.fp] + ' · ' + c.voie) + '</p>' +
+      return '<article class="prep"><div class="head"><h3 class="h3 no-icon">' + sig(c.name) + '</h3>' + catBadge(calendarCategory(c,job), 'sm') + '</div><p>' + esc(D.fps[c.fp] + ' · ' + c.voie) + '</p>' +
         (c.employer ? '<p class="small">Organisé par : '+esc(c.employer)+'</p>' : '') +
         (c.location ? '<p>' + esc(c.location) + '</p>' : '') +
-        '<span class="small">' + status + '</span><dl class="exam-dates"><dt>Ouverture</dt><dd>' + esc(c.openLabel || c.open || 'Non publiée') + '</dd><dt>Clôture</dt><dd>' + esc(c.closeLabel || c.date || 'Non publiée') + '</dd><dt>Écrits ou sélection</dt><dd>' + esc(c.writtenLabel || 'Non publiés') + '</dd><dt>Oraux</dt><dd>' + esc(c.oralLabel || 'Non publiés') + '</dd></dl>' +
-        ext(c.url, 'Voir l’avis officiel', 'link-plain') + '<p class="small m0">Source : ' + esc(c.source) + ' · vérifiée le ' + esc(c.checked) + '</p></article>';
+        '<span class="small">' + status + '</span><dl class="exam-dates"><dt>Ouverture</dt><dd>' + esc(calDay(c.openLabel || c.open) || 'Non publiée') + '</dd><dt>Clôture</dt><dd>' + esc(calDay(c.closeLabel || c.date) || 'Non publiée') + '</dd><dt>Écrits ou sélection</dt><dd>' + esc(calDay(c.writtenLabel) || 'Non publiés') + '</dd><dt>Oraux</dt><dd>' + esc(calDay(c.oralLabel) || 'Non publiés') + '</dd></dl>' +
+        ext(c.url, 'Voir l’avis officiel', 'link-plain') + '<p class="small m0">Source : ' + esc(c.source) + ' · vérifiée le ' + esc(frDate(c.checked)) + '</p></article>';
     }).join('');
   }
 
@@ -1671,20 +1681,82 @@
     var job = D.jobs.find(function (j) { return j.id === jobId; });
     /* Sur la page d’un métier, on arrive déjà filtré : ni recherche ni filtres, toutes ses sessions à venir (ou passées à défaut). */
     var base = job ? (examsFor(job, false).length ? examsFor(job, false) : examsFor(job, true)) : (S.calView === 'all' ? D.calendar : upcoming());
+    var cats = calCats(), fps = calFps();
     var list = base.filter(function (c) {
-      return job || (S.calCat === 'Toutes' || calendarCategory(c,job) === S.calCat) && (S.calFp === 'Tous' || c.fp === S.calFp) && (!S.calQ || norm(c.name + ' ' + (c.location || '')).indexOf(norm(S.calQ)) > -1);
+      return job || (cats.length === 4 || cats.indexOf(calendarCategory(c, job)) > -1) && fps.indexOf(c.fp) > -1 && calMatches(c);
     }).slice().sort(calendarOrder);
-    return '<main class="screen top-tight">' + back(job ? '#/preparer/' + job.id : '#/concours', job ? 'Se préparer' : 'Concours et prépas') +
-      '<span class="eyebrow">Calendrier</span><h1 class="sm">Dates des concours</h1>' + (job ? '<p class="body">' + esc(job.name) + '</p>' : '') +
-      (job ? '' : searchField('cal-q','Rechercher un concours ou une ville','Concours ou ville',S.calQ) +
-      '<div class="row" role="group" aria-label="Sessions">' + chip('calView','upcoming','À venir',S.calView === 'upcoming','blue') + chip('calView','all','Toutes les sessions',S.calView === 'all','blue') + '</div>' +
-      '<div class="row" role="group" aria-label="Catégorie">' + ['Toutes'].concat(job ? jobCategories(job).filter(function(c){return ['A+','A','B','C'].indexOf(c)>-1;}) : ['A+','A','B','C']).map(function(c) { return chip('calCat',c,c,S.calCat===c,'narrow'); }).join('') + '</div>' +
-      '<div class="row" role="group" aria-label="Versant">' + ['Tous'].concat(job ? job.fp.split('') : ['E','T','H']).map(function(f) { return chip('calFp',f,f==='Tous'?(job?'Tous':'3 versants'):D.fps[f],S.calFp===f,'blue'); }).join('') + '</div>') +
-      '<p class="small m0">' + list.length + ' session' + (list.length > 1 ? 's' : '') + ' · sources vérifiées le ' + esc(D.catalogChecked) + '. Certaines dates sont prévisionnelles ; l’avis de l’organisateur fait référence.</p>' +
+    var note = '<p class="small cal-note">Sources vérifiées le ' + esc(frDate(D.catalogChecked)) + '. Certaines dates sont prévisionnelles : l’avis de l’organisateur fait référence.</p>';
+    if (job) return '<main class="screen top-tight">' + back('#/preparer/' + job.id, 'Se préparer') +
+      '<span class="eyebrow">Calendrier</span><h1 class="sm">Dates des concours</h1><p class="body">' + esc(job.name) + '</p>' +
+      '<p class="small m0">' + list.length + ' session' + (list.length > 1 ? 's' : '') + ' · sources vérifiées le ' + esc(frDate(D.catalogChecked)) + '. Certaines dates sont prévisionnelles : l’avis de l’organisateur fait référence.</p>' +
       '<div class="stack calendar-list">' + calendarRows(list, S.calLimit, job) + '</div>' +
       (list.length > S.calLimit ? '<button type="button" class="btn outline" data-action="moreCalendar">Afficher 40 sessions de plus</button>' : '') +
-      '</main>' + tabbar(job?'metiers':'concours');
+      '</main>' + tabbar('metiers');
+    /* Même présentation que l’Explorer : titre et réglages, pastilles grises des filtres, recherche avec suggestions, puis les cards. */
+    return '<main class="screen pt calendar-screen">' + back('#/concours', 'Concours et prépas') +
+      '<div class="title-row"><h1>Dates des concours</h1><button id="filters-open" type="button" class="icon-btn" data-action="openCalFilters" aria-label="Régler les filtres du calendrier">' + I.settings + '</button></div>' +
+      '<div class="row filter-summary" aria-label="Filtres actifs">' + calSummary() + '</div>' +
+      '<div class="search-wrap">' + searchField('cal-q', 'Rechercher un concours ou une ville', 'Rechercher un concours', S.calQ) +
+      '<ul class="suggest" id="cal-suggest" aria-label="Suggestions" hidden></ul></div>' +
+      '<div id="cal-results">' + calResults(list) + '</div>' + note + '</main>' + tabbar('concours');
   };
+  /* ---------- Calendrier : filtres façon Explorer ---------- */
+  var CAL_CATS = ['A+', 'A', 'B', 'C'];
+  function calCats() { return Array.isArray(S.calCats) && S.calCats.length ? CAL_CATS.filter(function (c) { return S.calCats.indexOf(c) > -1; }) : CAL_CATS.slice(); }
+  function calFps() { return Array.isArray(S.calFps) && S.calFps.length ? ALL_FPS.filter(function (f) { return S.calFps.indexOf(f) > -1; }) : ALL_FPS.slice(); }
+  function calMatches(c) { return !S.calQ || norm(c.name + ' ' + (c.location || '') + ' ' + (c.employer || '')).indexOf(norm(S.calQ)) > -1; }
+  function calList() {
+    var cats = calCats(), fps = calFps();
+    return (S.calView === 'all' ? D.calendar : upcoming()).filter(function (c) {
+      return (cats.length === 4 || cats.indexOf(calendarCategory(c, null)) > -1) && fps.indexOf(c.fp) > -1 && calMatches(c);
+    }).slice().sort(calendarOrder);
+  }
+  function calResults(list) {
+    list = list || calList();
+    return '<p class="small" role="status">' + list.length + ' session' + (list.length > 1 ? 's' : '') + (S.calView === 'all' ? '' : ' à venir') + '</p>' +
+      '<div class="stack calendar-list">' + calendarRows(list, S.calLimit, null) + '</div>' +
+      (list.length > S.calLimit ? '<button type="button" class="btn outline mt-s" data-action="moreCalendar">Afficher 40 sessions de plus</button>' : '');
+  }
+  function calSummary() {
+    var cats = calCats(), fps = calFps();
+    function pill(text, cls) { return '<button type="button" class="tag tag-btn' + (cls || '') + '" data-action="openCalFilters" aria-haspopup="dialog" aria-label="' + esc(text) + ' : modifier les filtres">' + esc(text) + '</button>'; }
+    var catLabel = cats.length === 4 ? 'Toutes catégories' : cats.length === 1 ? 'Catégorie ' + cats[0] : cats.slice(0, -1).join(', ') + ' et ' + cats[cats.length - 1];
+    return pill(S.calView === 'all' ? 'Toutes les sessions' : 'À venir') + pill(catLabel, cats.length === 1 ? ' fill ' + catClass(cats[0]) : '') +
+      pill(fps.length === 3 ? '3 versants' : fps.map(function (f) { return D.fps[f]; }).join(', '));
+  }
+  function calFilters() {
+    var n = calList().length;
+    return '<section class="stack"><h3>Sessions</h3><div class="row" role="group" aria-label="Sessions">' + chip('calView', 'upcoming', 'À venir', S.calView !== 'all') + chip('calView', 'all', 'Toutes les sessions', S.calView === 'all') + '</div></section>' +
+      '<section class="stack mt-m"><h3>Catégories</h3><p class="small m0">Choisissez une ou plusieurs catégories.</p><div class="row" role="group" aria-label="Catégories">' + CAL_CATS.map(function (c) { return chip('calCats', c, c, calCats().indexOf(c) > -1); }).join('') + '</div></section>' +
+      '<section class="stack mt-m"><h3>Versants</h3><div class="row" role="group" aria-label="Versants">' + ALL_FPS.map(function (f) { return chip('calFps', f, D.fps[f], calFps().indexOf(f) > -1); }).join('') + '</div></section>' +
+      '<div class="sheet-actions"><button type="button" class="btn" data-ui="close">Afficher ' + (n ? n + ' session' + (n > 1 ? 's' : '') : 'les résultats') + '</button></div>';
+  }
+  /* Suggestions : intitulés de concours et villes du calendrier qui contiennent la saisie. */
+  function calSuggestHtml(q) {
+    q = norm(q || '').trim(); if (q.length < 2) return '';
+    var seen = {}, out = [];
+    (S.calView === 'all' ? D.calendar : upcoming()).forEach(function (c) {
+      [[c.name, calendarCategory(c, null)], [c.location, null]].forEach(function (x) {
+        if (!x[0] || out.length >= 8) return;
+        var label = String(x[0]).split(/\s*[;(]/)[0].trim(), k = norm(label);
+        if (!label || seen[k] || k.indexOf(q) < 0) return;
+        seen[k] = 1; out.push([label, x[1]]);
+      });
+    });
+    return out.map(function (it) {
+      return '<li><button type="button" class="suggest-item" data-action="calSuggest"' + attr('v', it[0]) + '><span class="suggest-cats">' + (it[1] ? catBadge(it[1], 'sm') : '<span class="suggest-pin" aria-hidden="true">' + I.pin + '</span>') + '</span><span class="suggest-label">' + esc(it[0]) + '</span></button></li>';
+    }).join('');
+  }
+  function updateCalSuggest(show) {
+    var box = document.getElementById('cal-suggest'), input = document.getElementById('cal-q');
+    if (!box || !input) return;
+    var html = show ? calSuggestHtml(input.value) : '';
+    box.innerHTML = html; box.hidden = !html; input.setAttribute('aria-expanded', String(!!html));
+  }
+  function refreshCalendar() {
+    var box = document.getElementById('cal-results'); if (box) box.innerHTML = UI.inclusive(calResults());
+    var sum = root.querySelector('.calendar-screen .filter-summary'); if (sum) sum.innerHTML = UI.inclusive(calSummary());
+  }
 
   screens.etudes = function (jobId) {
     var job=jobById(jobId);
@@ -2383,7 +2455,7 @@
     document.title = (t ? t.textContent + ' · ' : '') + 'Y-Seck';
     var contextJob=(r.name==='metier'||r.name==='metier-test')&&D.jobs.find(function(j){return j.id===r.arg;});
     var contextCategories=contextJob?jobCategories(contextJob).filter(function(c){return ['A+','A','B','C','CDD'].indexOf(c)>-1;}):[];
-    UI.afterRender({root:root,noBar:r.name==='fiche'||((r.name==='concours-fiche'||r.name==='concours-test')&&!S.done),title:r.name==='metiers'?'Explorer les métiers':r.name==='concours-liste'?'Explorer les concours':(t?t.textContent:'Y-Seck'),topLevel:['accueil','enfant','famille','metiers','concours-liste','favoris','moi'].indexOf(r.name)>-1,profileField:r.name==='moi'&&editingField?profileFieldContent(editingField):'',profileFieldTitle:editingField?PROFILE_FIELDS[editingField]:'',isJobs:r.name==='metiers'||r.name==='concours-liste',category:contextCategories.length===1?{label:contextCategories[0],className:catClass(contextCategories[0])}:null,categories:contextCategories.length>1?contextCategories.map(function(c){return {label:c,className:catClass(c)};}):[],summary:r.name==='metiers'||r.name==='concours-liste'?filterSummary():'',filters:r.name==='metiers'||r.name==='concours-liste'?jobFilters():'',filtersTitle:r.name==='concours-liste'?'Filtrer les concours':'Filtrer les métiers',resourceFilters:['annales','ressources-biblio'].indexOf(r.name)>-1?studyFilters(jobById(r.arg),r.name==='ressources-biblio'):'',changed:changed});
+    UI.afterRender({root:root,noBar:r.name==='fiche'||((r.name==='concours-fiche'||r.name==='concours-test')&&!S.done),title:r.name==='metiers'?'Explorer les métiers':r.name==='concours-liste'?'Explorer les concours':(t?t.textContent:'Y-Seck'),topLevel:['accueil','enfant','famille','metiers','concours-liste','favoris','moi'].indexOf(r.name)>-1,profileField:r.name==='moi'&&editingField?profileFieldContent(editingField):'',profileFieldTitle:editingField?PROFILE_FIELDS[editingField]:'',isJobs:r.name==='metiers'||r.name==='concours-liste',category:contextCategories.length===1?{label:contextCategories[0],className:catClass(contextCategories[0])}:null,categories:contextCategories.length>1?contextCategories.map(function(c){return {label:c,className:catClass(c)};}):[],summary:r.name==='metiers'||r.name==='concours-liste'?filterSummary():'',filters:r.name==='metiers'||r.name==='concours-liste'?jobFilters():r.name==='calendrier'&&!r.arg?calFilters():'',filtersTitle:r.name==='concours-liste'?'Filtrer les concours':r.name==='calendrier'?'Filtrer les dates':'Filtrer les métiers',resourceFilters:['annales','ressources-biblio'].indexOf(r.name)>-1?studyFilters(jobById(r.arg),r.name==='ressources-biblio'):'',changed:changed});
 
     /* Fenêtre d’aide : 5 secondes après l’arrivée sur la liste, annulée si on la quitte avant. Ouvrir une fiche suffit à montrer qu’on a compris. */
     if (changed) {
@@ -2639,7 +2711,7 @@
       case 'clearSearch': {
         e.preventDefault(); clearTimeout(searchTimer);
         if(v==='q'){if(onConcoursPage())S.cq='';else{S.q='';S.jobLimit=60;}}
-        else if(v==='cal-q'){S.calQ='';S.calLimit=40;}
+        else if(v==='cal-q'){S.calQ='';S.calLimit=40;updateCalSuggest(false);}
         else if(v==='book-q')S.bookQ='';
         else if(v==='res-q'){S.resQ='';S.resLimit=40;}
         else if(v==='location-query'){locationQuery='';locationResults=[];locationStatus='';locationSearchId++;}
@@ -2661,7 +2733,11 @@
       case 'metFp': { var nf = toggled(selFps(), v, ALL_FPS); if (!nf.length) { announce('Gardez au moins un versant.'); break; } set({ metFps: nf, jobLimit: 60 }); countAnnounce(); break; }
       case 'calCat': set({ calCat: v }); countAnnounce(); break;
       case 'calFp': set({ calFp: v, calLimit: 40 }); break;
-      case 'calView': set({ calView: v, calLimit: 40 }); break;
+      case 'openCalFilters': UI.open('filters', 'Filtrer les dates', calFilters(), el); break;
+      case 'calView': S.calView = v; S.calLimit = 40; save(); render(); break;
+      case 'calCats': { var cc = toggled(calCats(), v, CAL_CATS); if (!cc.length) { announce('Gardez au moins une catégorie.'); break; } S.calCats = cc; S.calLimit = 40; save(); render(); break; }
+      case 'calFps': { var cf = toggled(calFps(), v, ALL_FPS); if (!cf.length) { announce('Gardez au moins un versant.'); break; } S.calFps = cf; S.calLimit = 40; save(); render(); break; }
+      case 'calSuggest': { S.calQ = v; S.calLimit = 40; save(); var ci = document.getElementById('cal-q'); if (ci) { ci.value = v; ci.blur(); var cg = ci.closest('.search').querySelector('.search-go'); if (cg) cg.classList.add('ready'); var cx = ci.closest('.search').querySelector('.search-clear'); if (cx) cx.hidden = false; } updateCalSuggest(false); refreshCalendar(); countAnnounce('.calendar-list .prep'); break; }
       case 'moreCalendar': set({ calLimit: S.calLimit + 40 }); break;
       case 'addLocation': {
         e.preventDefault(); profileReturn = location.hash; navigate('#/moi');
@@ -2733,7 +2809,7 @@
     if (e.target.id === 'book-q') { S.bookQ=e.target.value;save();document.getElementById('books').innerHTML=bookList(jobById(route().arg));return; }
     if (e.target.id === 'cal-q') {
       S.calQ = e.target.value; S.calLimit = 40; save();
-      clearTimeout(searchTimer); searchTimer = setTimeout(render, 350); return;
+      updateCalSuggest(true); refreshCalendar(); return;
     }
     if (e.target.id === 'person-name') {
       S.name = e.target.value; save();
@@ -2761,6 +2837,7 @@
     var screen=e.target.closest('.identity-screen');if(screen)screen.classList.remove('typing');
   });
   root.addEventListener('focusin',function(e){ if(e.target.id==='q'&&e.target.value)updateSuggest(true); });
+  root.addEventListener('focusout',function(e){ if(e.target.id==='cal-q')setTimeout(function(){var a=document.activeElement;if(!a||!a.closest||!a.closest('#cal-suggest'))updateCalSuggest(false);},180); });
   root.addEventListener('focusout',function(e){ if(e.target.id==='q')setTimeout(function(){var a=document.activeElement;if(!a||!a.closest||!a.closest('#q-suggest'))updateSuggest(false);},180); });
   root.addEventListener('keydown',function(e){
     if(e.target.id==='q'&&e.key==='Escape'){updateSuggest(false);return;}
