@@ -2443,3 +2443,10 @@ html:not(.dark) .sheet :is(button.chip, .opt, .interest-option):not(.category-ch
 html:not(.dark)[data-contrast="true"] .sheet :is(button.chip, .opt, .interest-option):not(.category-choice) { --choice:#000; --choice-ink:#000; }
 /* Bouton des filtres (Explorer, calendrier, annales, bibliographie, barre du haut) : pictogramme noir. */
 html:not(.dark) .icon-btn[data-action$="ilters"], html:not(.dark) .icon-btn[data-action$="ilters"] svg { color:#141414; }
+/* Explorer : le curseur noir du switch Métiers / Concours ondule lentement entre noir et gris foncé, comme le bloc métiers de l’accueil. */
+:root { --switch-flow:linear-gradient(90deg,#000 0%,#141414 18%,#2E2E31 35%,#3D3D41 50%,#2E2E31 65%,#141414 82%,#000 100%); }
+html:not(.dark):not([data-contrast="true"]) .explore-switch[role="tablist"][data-on]::before { background:var(--switch-flow) 0 0 / 200% 100% repeat-x; animation:discover-flow 7s linear infinite; }
+@media (prefers-reduced-motion:reduce) { html:not(.dark) .explore-switch[role="tablist"][data-on]::before { animation:none; background:#141414; } }
+/* Fenêtres : bouton de validation (Afficher…, Fermer, Valider) en noir, avec le même reflet gris qui défile. */
+html:not(.dark):not([data-contrast="true"]) .sheet .sheet-actions .btn:not(.outline), html:not(.dark):not([data-contrast="true"]) .sheet .sheet-actions .btn:not(.outline):hover { border-color:#141414 !important; color:#FFF !important; background:var(--switch-flow) 0 0 / 200% 100% repeat-x !important; animation:discover-flow 7s linear infinite; }
+@media (prefers-reduced-motion:reduce) { html:not(.dark) .sheet .sheet-actions .btn:not(.outline) { animation:none; background:#141414 !important; } }
