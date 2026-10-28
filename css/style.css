@@ -2557,3 +2557,8 @@ html.dark #app .also-counter .talents-counter-copy b { color:#FFF; }
 /* « Concours accessible · Maintenant » (clair) : fond vert, texte gris, coche verte saturée. */
 .study-level.access-now { background:#D6F5DE; color:#4A4A50; }
 .study-level.access-now svg { color:#119A3B; }
+/* Swipe favoris : le bloc rouge suit la card jusqu'au bout. */
+.swipe-delete { transition:opacity .15s, width .25s cubic-bezier(.2,.8,.2,1); }
+.swipe-item.swiping .swipe-delete { transition:none; }
+.swipe-delete svg { transition:transform .15s; }
+.swipe-delete.armed svg { transform:scale(1.15); }
