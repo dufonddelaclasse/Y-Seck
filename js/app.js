@@ -799,8 +799,10 @@
   function defiOptions() {
     return '<div class="stack mt-s ambition-options">' + DEFIS.map(function (d) {
       var on = S.defis.indexOf(d[0]) > -1;
-      var sub = d[2] ? (d[2][0] === 'CDD' ? 'Ajoute les emplois contractuels' : 'Catégorie' + (d[2].length > 1 ? 's ' : ' ') + d[2].slice(0, -1).join(', ') + (d[2].length > 1 ? ' et ' : '') + d[2][d[2].length - 1]) : '';
-      return '<button type="button" class="opt ambition-opt' + (on ? ' on' : '') + '" aria-pressed="' + on + '"' + attr('action', 'defi') + attr('v', d[0]) + '><span class="ambition-copy"><span class="ambition-t">' + esc(d[1]) + '</span>' + (sub ? '<span class="ambition-d">' + esc(sub) + '</span>' : '') + '</span>' + (on ? I.check : '') + '</button>';
+      /* Sous le titre : les pastilles des catégories retenues (ou le pictogramme des contractuels). */
+      var sub = d[2] ? (d[2][0] === 'CDD' ? '<span class="defi-cats"><span class="cat sm cat-CDD" aria-hidden="true">' + I.contract + '</span><span>Ajoute les emplois contractuels</span></span>'
+        : '<span class="defi-cats" aria-label="Catégories ' + esc(d[2].join(', ')) + '">' + d[2].map(function (c) { return '<span class="cat sm ' + catClass(c) + '" aria-hidden="true">' + c + '</span>'; }).join('') + '</span>') : '';
+      return '<button type="button" class="opt ambition-opt' + (on ? ' on' : '') + '" aria-pressed="' + on + '"' + attr('action', 'defi') + attr('v', d[0]) + '><span class="ambition-copy"><span class="ambition-t">' + esc(d[1]) + '</span>' + sub + '</span>' + (on ? I.check : '') + '</button>';
     }).join('') + '</div>';
   }
   function ambitionOptions() {

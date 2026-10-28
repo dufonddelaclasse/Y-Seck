@@ -2531,3 +2531,8 @@ html.dark #app .also-title { color:#FFF !important; }
 .intro-category-fold summary .details-toggle { align-self:center; }
 .intro-fold-desc { display:block; margin-top:6px; font-size:.9375rem; line-height:1.4; font-weight:300; color:var(--ink-2); }
 html.dark #app .intro-fold-desc { color:#D6D6DB; }
+/* Défi : pastilles des catégories sous le titre de chaque choix. */
+.defi-cats { display:flex; align-items:center; gap:5px; margin-top:6px; font-size:.8125rem; font-weight:300; }
+.defi-cats .cat.sm { width:24px; height:24px; font-size:.6875rem; box-shadow:none; }
+.defi-cats .cat.sm svg { width:14px; height:14px; }
+.defi-cats > span:not(.cat) { margin-left:4px; }

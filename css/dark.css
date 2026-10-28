@@ -881,6 +881,7 @@ html:where(.dark).dark #app .extra-cat { background:#4A4A4F; color:#A3A3A7; }
 html:where(.dark).dark #app .also-title { color:#FFF !important; }
 :where(html.dark) .intro-fold-desc { color:var(--ink-2); }
 html:where(.dark).dark #app .intro-fold-desc { color:#D6D6DB; }
+:where(html.dark) .defi-cats .cat.sm { box-shadow:none; }
 
 /* Retouches */
 html.dark .app .prep:not(.prep-static):not(.talents-card):not(.talents-feature) { background:#292929 !important; }
@@ -1099,3 +1100,5 @@ html.dark #app :is(.opt, .interest-option).on .ambition-d, html.dark .sheet .opt
 /* Onboarding : choix cerclés de blanc sans fond ; la sélection prend le fond blanc et le texte noir. */
 html.dark #app.onboarding :is(.opt, .interest-option):not(.on) { background:transparent !important; border:1.5px solid #FFF !important; }
 html.dark #app.onboarding :is(.opt, .interest-option).on { border:1.5px solid #FFF !important; }
+html.dark #app .opt .defi-cats .cat, html.dark #app .opt .defi-cats .cat *, html.dark .sheet .opt .defi-cats .cat, html.dark .sheet .opt .defi-cats .cat * { color:#FFF !important; }
+html.dark #app .opt:not(.on) .defi-cats > span:not(.cat) { color:#A8A8AD !important; }

@@ -360,6 +360,8 @@ html.dark #app :is(.opt, .interest-option).on .ambition-d, html.dark .sheet .opt
 /* Onboarding : choix cerclés de blanc sans fond ; la sélection prend le fond blanc et le texte noir. */
 html.dark #app.onboarding :is(.opt, .interest-option):not(.on) { background:transparent !important; border:1.5px solid #FFF !important; }
 html.dark #app.onboarding :is(.opt, .interest-option).on { border:1.5px solid #FFF !important; }
+html.dark #app .opt .defi-cats .cat, html.dark #app .opt .defi-cats .cat *, html.dark .sheet .opt .defi-cats .cat, html.dark .sheet .opt .defi-cats .cat * { color:#FFF !important; }
+html.dark #app .opt:not(.on) .defi-cats > span:not(.cat) { color:#A8A8AD !important; }
 """
 
 if __name__ == '__main__':
