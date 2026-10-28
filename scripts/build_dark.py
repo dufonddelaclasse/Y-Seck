@@ -342,6 +342,8 @@ html.dark #app main.job-page:not(.concours-page) .trip-access { background:#2C2C
 /* Boutons principaux des pages d’une catégorie (Se préparer…) : couleur la plus saturée de la catégorie, texte blanc. */
 html.dark #app.themed .btn:not(.outline):not(.white), html.dark #app.themed .btn.theme { background:var(--theme) !important; border-color:var(--theme) !important; color:#FFF !important; }
 html.dark #app.themed .btn:not(.outline):not(.white) svg { color:#FFF !important; }
+/* Bouton des filtres : pictogramme blanc. */
+html.dark .icon-btn[data-action$="ilters"], html.dark .icon-btn[data-action$="ilters"] svg { color:#FFF !important; }
 """
 
 if __name__ == '__main__':

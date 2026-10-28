@@ -2437,3 +2437,9 @@ html.dark .study-card h3 { color:#F2F2F2; }
 body:not(.themed) .context-bar .context-title, body:not(.themed) .context-bar.top-level .context-title { color:#141414; }
 /* Pictogrammes du menu : boîte fixe, quelle que soit la version (vide ou pleine). */
 .tabbar a svg { display:block; overflow:visible; }
+/* Fenêtres (filtres, profil…) : pastilles et options en noir (sélectionnées pleines, les autres cerclées).
+   Les pastilles de catégorie gardent leurs couleurs. */
+html:not(.dark) .sheet :is(button.chip, .opt, .interest-option):not(.category-choice) { --choice:#141414; --choice-ink:#141414; }
+html:not(.dark)[data-contrast="true"] .sheet :is(button.chip, .opt, .interest-option):not(.category-choice) { --choice:#000; --choice-ink:#000; }
+/* Bouton des filtres (Explorer, calendrier, annales, bibliographie, barre du haut) : pictogramme noir. */
+html:not(.dark) .icon-btn[data-action$="ilters"], html:not(.dark) .icon-btn[data-action$="ilters"] svg { color:#141414; }
