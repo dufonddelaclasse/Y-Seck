@@ -788,16 +788,13 @@
 
   /* Étape « Votre ambition » : deux choix au plus, ou « Je ne sais pas encore ». */
   screens.ambition = function () {
-    var n = S.ambitions.length;
     return '<main class="screen">' +
       '<div class="topbar">' + back('#/interets', 'Retour') + '<span class="eyebrow">Étape 4 / ' + STEPS + '</span></div>' +
       progress(4, STEPS) +
       '<h1 class="mt-l">' + (isParent() ? 'Son ambition' : 'Votre ambition') + '</h1>' +
-      '<p class="lead">' + (isParent() ? 'Qu’aimerait faire votre enfant dans son futur métier ?' : 'Qu’aimeriez-vous faire dans votre futur métier ?') + ' Deux choix au plus.</p>' +
-      ambitionOptions() +
-      '<h2 class="h3 no-icon mt-l">' + (isParent() ? 'Quel défi votre enfant est-il prêt à relever pour accéder à son métier ?' : 'Quel défi êtes-vous prêt·e à relever pour accéder à votre métier ?') + '</h2>' +
-      '<p class="small m0">Trois choix au plus. Vos réponses trient les catégories de concours proposées.</p>' + defiOptions() +
-      '</main><div class="footer">' + profileContinuation('#/traits', 'Continuer', n > 0 || S.defis.length > 0) + (n || S.defis.length ? '' : skipStep('#/traits')) + '</div>';
+      '<p class="lead">' + (isParent() ? 'Quel défi votre enfant est-il prêt à relever pour accéder à son métier ?' : 'Quel défi êtes-vous prêt·e à relever pour accéder à votre métier ?') + ' Trois choix au plus : vos réponses trient les catégories de concours proposées.</p>' +
+      defiOptions() +
+      '</main><div class="footer">' + profileContinuation('#/traits', 'Continuer', S.defis.length > 0) + (S.defis.length ? '' : skipStep('#/traits')) + '</div>';
   };
   function defiOptions() {
     return '<div class="stack mt-s ambition-options">' + DEFIS.map(function (d) {
@@ -2339,7 +2336,7 @@
   /* ---------- Profil et informations légales ---------- */
   var PROFILE_LABEL = { etu: 'Étudiant·e', par: 'Parent', rec: 'En reconversion' };
 
-  var PROFILE_FIELDS = { profile: 'Profil', level: 'Niveau d’études', domains: 'Domaines', ambitions: 'Votre ambition', defis: 'Votre défi', agentPublic: 'Déjà dans la fonction publique', experience: 'Expérience', traits: 'Ce qui vous ressemble', boursier: 'Boursier·e', budget: 'Budget pour se préparer' };
+  var PROFILE_FIELDS = { profile: 'Profil', level: 'Niveau d’études', domains: 'Domaines', defis: 'Votre défi', agentPublic: 'Déjà dans la fonction publique', experience: 'Expérience', traits: 'Ce qui vous ressemble', boursier: 'Boursier·e', budget: 'Budget pour se préparer' };
   /* Fenêtre de modification : uniquement les options du point choisi. */
   function profileFieldContent(field) {
     var body = '';
@@ -2360,13 +2357,12 @@
       ['Profil', S.profile ? PROFILE_LABEL[S.profile] : 'Non renseigné'],
       [isParent() ? 'Niveau de votre enfant' : 'Niveau', S.level || 'Non renseigné'],
       ['Domaines', S.domains.length ? S.domains.map(domainLabel).join(', ') : 'Tous'],
-      [isParent() ? 'Son ambition' : 'Votre ambition', S.ambitions.length ? S.ambitions.map(function (a) { return (AMBITIONS.filter(function (x) { return x[0] === a; })[0] || ['', a])[1]; }).join(', ') : 'Non renseigné'],
       [isParent() ? 'Son défi' : 'Votre défi', S.defis.length ? S.defis.map(function (d) { return (DEFIS.filter(function (x) { return x[0] === d; })[0] || ['', d])[1]; }).join(', ') : 'Non renseigné'],
       [isParent() ? 'Ce qui lui ressemble' : 'Ce qui vous ressemble', S.traits.length ? S.traits.map(traitLabel).join(', ') : 'Non renseigné'],
       ['Boursier·e', S.boursier || 'Non renseigné'],
       ['Budget', S.budget || 'Non renseigné']
     ].concat(S.profile === 'rec' ? [['Déjà dans la fonction publique', S.agentPublic || 'Non renseigné'], ['Expérience professionnelle, associative ou d’élu', S.experience || 'Non renseigné']] : []);
-    var rowFields = ['profile', 'level', 'domains', 'ambitions', 'defis', 'traits', 'boursier', 'budget', 'agentPublic', 'experience'];
+    var rowFields = ['profile', 'level', 'domains', 'defis', 'traits', 'boursier', 'budget', 'agentPublic', 'experience'];
     return '<main class="screen pt">' +
       (profileReturn ? back(profileReturn, 'Prépas Talents') : '') +
       '<h1>' + (isParent() ? 'Le profil de ' + esc(childName()) : 'Votre profil') + '</h1>' + childSelector() +
