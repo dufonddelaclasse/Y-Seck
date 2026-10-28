@@ -336,6 +336,9 @@ html.dark body.themed .context-bar .cat { box-shadow:0 0 0 2px #FFF !important; 
 /* Accordéons du parcours : petits blocs anthracite (un cran plus clair sur la frise grise des fiches métiers). */
 html.dark #app .trip-more { background:#1C1C1E !important; }
 html.dark #app main.job-page:not(.concours-page) .trip-more { background:#2C2C2F !important; }
+/* Encadré « Le concours rend ce poste accessible… » : même couleur que les accordéons. */
+html.dark #app .trip-access { background:#1C1C1E !important; }
+html.dark #app main.job-page:not(.concours-page) .trip-access { background:#2C2C2F !important; }
 /* Boutons principaux des pages d’une catégorie (Se préparer…) : couleur la plus saturée de la catégorie, texte blanc. */
 html.dark #app.themed .btn:not(.outline):not(.white), html.dark #app.themed .btn.theme { background:var(--theme) !important; border-color:var(--theme) !important; color:#FFF !important; }
 html.dark #app.themed .btn:not(.outline):not(.white) svg { color:#FFF !important; }
