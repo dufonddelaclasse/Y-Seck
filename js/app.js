@@ -271,7 +271,7 @@
     }).join('') + '</nav>';
   }
   function chip(action, value, label, on, extraCls) {
-    return '<button type="button" class="chip' + (extraCls ? ' ' + extraCls : '') + ((action === 'metCat' || action === 'calCat' || action === 'calCats' || action === 'resCats' || action === 'bookCategory' || action === 'infoCat') && value !== 'Toutes' ? ' category-choice ' + catClass(value) : '') + (on ? ' on' : '') + '" aria-pressed="' + on + '"' + attr('action', action) + attr('v', value) + '>' + (action === 'metCat' && value === 'CDD' ? '<span>Contractuels</span>' + I.contract : esc(label)) + '</button>';
+    return '<button type="button" class="chip' + (extraCls ? ' ' + extraCls : '') + ((action === 'metCat' || action === 'calCat' || action === 'calCats' || action === 'resCats' || action === 'bookCategory') && value !== 'Toutes' ? ' category-choice ' + catClass(value) : '') + (on ? ' on' : '') + '" aria-pressed="' + on + '"' + attr('action', action) + attr('v', value) + '>' + (action === 'metCat' && value === 'CDD' ? '<span>Contractuels</span>' + I.contract : esc(label)) + '</button>';
   }
   /* Valider une recherche ferme le clavier ; les résultats se mettent déjà à jour pendant la saisie. */
   function submitSearch(id) {
@@ -594,6 +594,7 @@
   var FP_INK = '<span class="fp-ink" aria-hidden="true"></span>';
   function selectFpTab(scope, k) {
     var index = 0;
+    if (scope.querySelector && scope.querySelector('.info-dates')) { S.infoTab = k === 'Ap' ? 'A+' : k; save(); }
     scope.querySelectorAll('.fp-tab').forEach(function (t, i) { var on = t.getAttribute('data-v') === k; t.setAttribute('aria-selected', String(on)); if (on) index = i; });
     scope.querySelectorAll('.fp-panel').forEach(function (p) { p.hidden = p.getAttribute('data-k') !== k; });
     placeFpTabs(scope, index);
@@ -1180,12 +1181,20 @@
   }
   /* Les concours : 1. les catégories (rôle, diplôme, exemples et lieux des épreuves dans un même bloc), 2. les voies d’accès,
      3. les conditions communes, 4. toutes les dates, filtrables par catégorie. */
-  function infoCats() { return Array.isArray(S.infoCats) && S.infoCats.length ? CAL_CATS.filter(function (c) { return S.infoCats.indexOf(c) > -1; }) : CAL_CATS.slice(); }
+  /* Dates des concours : un onglet par catégorie, les sessions défilent latéralement comme les écrans d’introduction. */
   function infoDates() {
-    var cats = infoCats(), list = upcoming().filter(function (c) { return cats.length === 4 || cats.indexOf(calendarCategory(c, null)) > -1; }).slice().sort(calendarOrder);
-    return '<p class="small" role="status">' + list.length + ' session' + (list.length > 1 ? 's' : '') + ' à venir</p>' +
-      '<div class="stack calendar-list">' + calendarRows(list, S.infoLimit || 40, null) + '</div>' +
-      (list.length > (S.infoLimit || 40) ? '<button type="button" class="btn outline mt-s" data-action="moreInfoDates">Afficher 40 sessions de plus</button>' : '');
+    var cur = CAL_CATS.indexOf(S.infoTab) > -1 ? S.infoTab : 'A+', all = upcoming().slice().sort(calendarOrder), lim = S.infoLimits || {};
+    return '<div class="info-dates"><div class="fp-tabs cat-tabs" role="tablist" aria-label="Dates par catégorie">' + CAL_CATS.map(function (c) {
+        var k = catClass(c).slice(4);
+        return '<button type="button" class="fp-tab" role="tab" id="date-tab-' + k + '" aria-controls="date-panel-' + k + '" aria-selected="' + (c === cur) + '"' + attr('action', 'fpTab') + attr('v', k) + ' style="--tab-color:var(--cat-' + k.toLowerCase() + ')">' +
+          '<span class="cat sm ' + catClass(c) + '" aria-hidden="true">' + c + '</span><span class="sr-only">Catégorie ' + c + '</span></button>';
+      }).join('') + FP_INK + '</div><div class="fp-viewport"><div class="fp-track">' + CAL_CATS.map(function (c) {
+        var k = catClass(c).slice(4), list = all.filter(function (x) { return calendarCategory(x, null) === c; }), n = lim[c] || 20;
+        return '<section class="fp-panel" role="tabpanel" id="date-panel-' + k + '" data-k="' + k + '" aria-labelledby="date-tab-' + k + '"' + (c === cur ? '' : ' hidden') + '>' +
+          '<p class="small m0">' + list.length + ' session' + (list.length > 1 ? 's' : '') + ' à venir · catégorie ' + c + '</p>' +
+          '<div class="stack calendar-list">' + calendarRows(list, n, null) + '</div>' +
+          (list.length > n ? '<button type="button" class="btn outline" data-action="moreInfoDates"' + attr('v', c) + '>Afficher 20 sessions de plus</button>' : '') + '</section>';
+      }).join('') + '</div></div></div>';
   }
   function infoConcours() {
     var voies = VOIES.filter(function (v) { return !/titres?/i.test(v[1]); });
@@ -1209,8 +1218,7 @@
       '<div class="checks">' + D.conditions.map(function (k) { return '<div>' + I.check + '<span>' + esc(k) + '</span></div>'; }).join('') + '</div>' +
       '<a class="btn outline mt-s" href="#/handicap">Handicap : accès et aménagements</a>' +
       '<h2 class="mt-l understand-title no-icon" id="info-dates">Dates des concours</h2>' +
-      '<div class="row info-cats" role="group" aria-label="Catégories">' + CAL_CATS.map(function (c) { return chip('infoCat', c, c, infoCats().indexOf(c) > -1); }).join('') + '</div>' +
-      '<div id="info-dates-list">' + infoDates() + '</div>';
+      infoDates();
   }
   screens.concours = function () {
     return '<main class="screen top-tight intro-screen category-screen understand-page info-page">' + back('#/accueil', 'Accueil') +
@@ -2799,8 +2807,7 @@
       case 'metFp': { var nf = toggled(selFps(), v, ALL_FPS); if (!nf.length) { announce('Gardez au moins un versant.'); break; } set({ metFps: nf, jobLimit: 60 }); countAnnounce(); break; }
       case 'calCat': set({ calCat: v }); countAnnounce(); break;
       case 'calFp': set({ calFp: v, calLimit: 40 }); break;
-      case 'infoCat': { var ic = toggled(infoCats(), v, CAL_CATS); if (!ic.length) { announce('Gardez au moins une catégorie.'); break; } S.infoCats = ic; S.infoLimit = 40; save(); render(); break; }
-      case 'moreInfoDates': S.infoLimit = (S.infoLimit || 40) + 40; save(); render(); break;
+      case 'moreInfoDates': S.infoLimits = Object.assign({}, S.infoLimits); S.infoLimits[v] = (S.infoLimits[v] || 20) + 20; save(); render(); break;
       case 'openCalFilters': UI.open('filters', 'Filtrer les dates', calFilters(), el); break;
       case 'calView': S.calView = v; S.calLimit = 40; save(); render(); break;
       case 'calCats': { var cc = toggled(calCats(), v, CAL_CATS); if (!cc.length) { announce('Gardez au moins une catégorie.'); break; } S.calCats = cc; S.calLimit = 40; save(); render(); break; }

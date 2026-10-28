@@ -2481,3 +2481,13 @@ html.dark .info-axis { background:#1C1C1E; color:#FFF; }
 .info-page .intro-fold-body .info-where-fp { font-size:.875rem; }
 .info-page .intro-fold-body .info-where-fp b { font-weight:500; color:var(--ink); }
 .info-page .calendar-list { margin-top:10px; }
+/* Dates des concours (Informations générales) : onglets par catégorie et panneaux qui coulissent. */
+.info-dates { margin:12px 0 0; }
+.info-dates .fp-tabs { margin:0; padding:0; }
+.info-dates .fp-viewport { margin:0 -15px; }
+.info-dates .fp-panel { gap:12px; padding:18px 15px 4px; }
+.info-dates .calendar-list { margin-top:0; }
+.info-dates .fp-track > .fp-panel { padding:18px 15px 4px !important; }
+.info-dates .fp-panel .prep p { font-size:.9375rem; line-height:1.45; }
+.info-dates .fp-panel .prep p.small, .info-dates .fp-panel .prep .small { font-size:.8125rem; }
+.info-dates .fp-panel > p.small { font-size:.875rem; color:var(--muted); }
