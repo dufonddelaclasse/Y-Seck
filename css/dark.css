@@ -862,6 +862,8 @@ html:where(.dark):not(.dark) .icon-btn[data-action$="ilters"], html:where(.dark)
 @media (prefers-reduced-motion:reduce) {
   html:where(.dark):not(.dark) .explore-switch[role="tablist"][data-on]::before { background:#4C4C4C; }
 }
+:where(html.dark) body.themed .context-bar.bar-enter { background:#292929 !important; }
+:where(html.dark) body.themed .context-bar.bar-enter::before { background:var(--theme); }
 
 /* Retouches */
 html.dark .app .prep:not(.prep-static):not(.talents-card):not(.talents-feature) { background:#292929 !important; }
@@ -1064,3 +1066,6 @@ html.dark #app.themed .btn:not(.outline):not(.white), html.dark #app.themed .btn
 html.dark #app.themed .btn:not(.outline):not(.white) svg { color:#FFF !important; }
 /* Bouton des filtres : pictogramme blanc. */
 html.dark .icon-btn[data-action$="ilters"], html.dark .icon-btn[data-action$="ilters"] svg { color:#FFF !important; }
+/* Arrivée sur une fiche métier (sombre) : barre noire, puis la couleur de la catégorie descend du haut vers le bas. */
+html.dark body.themed .context-bar.bar-enter { background:#000 !important; }
+html.dark body.themed .context-bar.bar-enter :is(.context-title, .icon-btn, .icon-btn svg) { animation:none; }

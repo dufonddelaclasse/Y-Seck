@@ -344,6 +344,9 @@ html.dark #app.themed .btn:not(.outline):not(.white), html.dark #app.themed .btn
 html.dark #app.themed .btn:not(.outline):not(.white) svg { color:#FFF !important; }
 /* Bouton des filtres : pictogramme blanc. */
 html.dark .icon-btn[data-action$="ilters"], html.dark .icon-btn[data-action$="ilters"] svg { color:#FFF !important; }
+/* Arrivée sur une fiche métier (sombre) : barre noire, puis la couleur de la catégorie descend du haut vers le bas. */
+html.dark body.themed .context-bar.bar-enter { background:#000 !important; }
+html.dark body.themed .context-bar.bar-enter :is(.context-title, .icon-btn, .icon-btn svg) { animation:none; }
 """
 
 if __name__ == '__main__':

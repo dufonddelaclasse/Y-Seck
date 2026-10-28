@@ -2450,3 +2450,12 @@ html:not(.dark):not([data-contrast="true"]) .explore-switch[role="tablist"][data
 /* Barre du bouton de validation des fenêtres : collée au vrai bas de la fenêtre, y compris avec la zone de la barre d’accueil de l’iPhone,
    pour que la liste ne se voie plus en dessous pendant le défilement. */
 .sheet-actions { bottom:calc(-1 * max(24px, env(safe-area-inset-bottom, 0px))); margin-bottom:calc(-1 * max(24px, env(safe-area-inset-bottom, 0px))); }
+/* Arrivée sur une fiche métier : barre du haut blanche à texte noir, puis la couleur de la catégorie descend du haut vers le bas et le texte passe au blanc. */
+@keyframes bar-fill { from { transform:scaleY(0); } to { transform:scaleY(1); } }
+@keyframes bar-ink { from { color:#141414; } to { color:#FFF; } }
+@keyframes bar-ring { from { box-shadow:0 0 0 2px #141414; } to { box-shadow:0 0 0 2px #FFF; } }
+body.themed .context-bar.bar-enter { background:#FFF !important; }
+body.themed .context-bar.bar-enter::before { content:''; position:absolute; inset:0; z-index:0; background:var(--theme); transform-origin:50% 0; animation:bar-fill .75s cubic-bezier(.65,0,.25,1) .3s both; pointer-events:none; }
+body.themed .context-bar.bar-enter > * { position:relative; z-index:1; }
+body.themed .context-bar.bar-enter :is(.context-title, .icon-btn, .icon-btn svg) { animation:bar-ink .45s ease .55s both; }
+body.themed .context-bar.bar-enter .cat { animation:bar-ring .45s ease .55s both; }
