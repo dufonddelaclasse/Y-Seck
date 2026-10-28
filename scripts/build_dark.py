@@ -306,7 +306,7 @@ html.dark #app .explore-switch[data-on] :is(a, button) { color:#FFF !important; 
 html.dark #app .explore-switch[data-on] :is(a.on, button.on, a[aria-selected="true"]) { color:#000 !important; }
 
 /* ---------- Pastilles de catégorie : couleurs du mode clair ; texte noir quand la couleur le permet ---------- */
-html.dark #app .cat.cat-B, html.dark #app .cat.cat-C { color:#000 !important; }
+html.dark #app .cat, html.dark #app .cat * { color:#FFF !important; }
 
 /* ---------- Espace perso ---------- */
 html.dark #app .personal-home .home-concours, html.dark #app .personal-home .home-concours:hover { background:#DDC7FF !important; }
