@@ -357,6 +357,9 @@ html.dark #app .opt .ambition-d, html.dark .sheet .opt .ambition-d { color:#A8A8
 html.dark #app :is(.opt, .interest-option).on, html.dark .sheet :is(.opt, .interest-option).on { background:#FFF !important; color:#000 !important; }
 html.dark #app :is(.opt, .interest-option).on :is(span, svg, .ambition-t, .interest-name), html.dark .sheet :is(.opt, .interest-option).on :is(span, svg, .ambition-t, .interest-name) { color:#000 !important; }
 html.dark #app :is(.opt, .interest-option).on .ambition-d, html.dark .sheet .opt.on .ambition-d { color:#55555C !important; }
+/* Onboarding : choix cerclés de blanc sans fond ; la sélection prend le fond blanc et le texte noir. */
+html.dark #app.onboarding :is(.opt, .interest-option):not(.on) { background:transparent !important; border:1.5px solid #FFF !important; }
+html.dark #app.onboarding :is(.opt, .interest-option).on { border:1.5px solid #FFF !important; }
 """
 
 if __name__ == '__main__':
