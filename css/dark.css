@@ -435,8 +435,8 @@ html.dark { color-scheme:dark; }
 :where(html.dark) .prep-page .switch-row[aria-checked="true"] .switch { background:var(--blue-hover,#2500BA); background:#2500BA; }
 :where(html.dark) .prep-page :is(button.chip) { color:var(--ink); background:#292929; border:2px solid var(--theme-tint,var(--lilac)); box-shadow:none; }
 :where(html.dark) .prep-page :is(button.chip.on,.chip.blue.on) { color:#FFF; background:var(--theme-btn); border-color:var(--theme-btn); box-shadow:none; }
-:where(html.dark) .prep-page .prep { background:#31312C; border:1px solid var(--theme-tint,var(--lilac)); }
-:where(html.dark) .prep-page .prep.hi.talents-feature { background:#31312C; color:var(--ink); }
+:where(html.dark) .prep-page .prep { background:var(--block-gray); border:1px solid var(--theme-tint,var(--lilac)); }
+:where(html.dark) .prep-page .prep.hi.talents-feature { background:var(--block-gray); color:var(--ink); }
 :where(html.dark) .prep-page .prep.hi.talents-feature :is(h2,p,.more) { color:var(--ink); }
 :where(html.dark) .prep-page .prep .more { color:var(--theme-ink); }
 :where(html.dark) .personal-home .study-level { background:#171714; border:2px solid var(--sun); color:#C2C2C6; }
@@ -447,8 +447,8 @@ html.dark { color-scheme:dark; }
 :where(html.dark) .home-discover, :where(html.dark) .home-discover:hover { background:var(--lilac); color:var(--ink); }
 :where(html.dark) .home-access, :where(html.dark) .home-access:hover { background:#292929; color:var(--ink); }
 :where(html.dark) .home-go { border:0; background:#292929; color:var(--blue); box-shadow:0 1px 4px rgba(76,76,76,0.08); }
-:where(html.dark) .home-shortcuts a { border:1px solid var(--lilac); background:#31312C; }
-:root:where(.dark) { --card-bg:#2E2E27; --card-line:#2C2259; }
+:where(html.dark) .home-shortcuts a { border:1px solid var(--lilac); background:var(--block-gray); }
+:root:where(.dark) { --card-bg:#2A2A2A; --card-line:#2C2259; }
 :where(html.dark) .context-bar { background:var(--bg); border-bottom:0; }
 :where(html.dark) .context-bar .context-title, :where(html.dark) .context-bar .icon-btn { color:var(--ink); background:transparent; }
 :where(html.dark) body.themed .context-bar { background:var(--theme); }
@@ -710,7 +710,7 @@ html:where(.dark).dark .ladder-alt-row, html:where(.dark).dark .ladder-alt-row:h
 :where(html.dark) .app.themed main.job-page .rung, :where(html.dark) .job-page .rung { background:#292929; }
 :where(html.dark) .trip-pill svg { color:#FFF; }
 :where(html.dark) .trip-track.dots { background:radial-gradient(circle, var(--theme, var(--ink)) 1.6px, transparent 2.1px) center top / 4px 9px repeat-y; }
-:where(html.dark) .trip-access { background:#31312C; color:var(--ink); }
+:where(html.dark) .trip-access { background:var(--block-gray); color:var(--ink); }
 :where(html.dark) .job-page .job-match, :where(html.dark) .job-page:not(.concours-page) .job-match { border:0; background:none; color:var(--ink); }
 :where(html.dark) .app.theme-Ap .job-page .job-match { color:var(--cat-ap-ink); }
 :where(html.dark) .app.theme-A .job-page .job-match { color:var(--cat-a-ink); }
@@ -734,11 +734,13 @@ html:where(.dark).dark .ladder-alt-row, html:where(.dark).dark .ladder-alt-row:h
 :where(html.dark) a.rung.rung-link:hover { color:var(--ink); }
 :where(html.dark) a.rung.rung-link > .chev { color:var(--muted); }
 :where(html.dark) .row-chev { color:var(--muted); }
-html:where(.dark) { background:#28272E; }
+:root:where(.dark) { --bg-top:#161616; --bg-bottom:#313131; }
+html:where(.dark) { background:var(--bg-bottom); }
 :where(html.dark) body, :where(html.dark) .app { background:transparent; }
-:where(html.dark) body::before { background:linear-gradient(180deg, #171714 0, #28272E 860px); }
-:where(html.dark) .footer { background:#28272E; }
-:where(html.dark) .context-bar { background:#171714; }
+:where(html.dark) body::before { background:linear-gradient(180deg, var(--bg-top) 0, var(--bg-bottom) 860px); }
+:where(html.dark) .footer { background:var(--bg-bottom); }
+:where(html.dark) .context-bar { background:var(--bg-top); }
+html:where(.dark).fond-teinte { --bg-top:#171714; --bg-bottom:#28272E; --card-bg:#2E2E27; }
 :where(html.dark) .intro-tabs-screen .intro-hero { background:linear-gradient(180deg, rgba(24,44,178,.38) 0%, rgba(24,44,178,.30) 45%, rgba(14,26,120,.55) 100%), var(--hero-photo) 70% 30% / cover no-repeat #23379E; color:#FFF; }
 :where(html.dark) .screen.intro-tabs-screen .intro-hero .topbar > :is(.back, .eyebrow) { color:#FFF; }
 :where(html.dark) .screen.intro-tabs-screen .intro-hero .topbar .back svg { color:#FFF; }
@@ -810,7 +812,7 @@ html:where(.dark).dark .sheet-content button.chip.category-choice:is([data-actio
 :where(html.dark) .region-option.on { color:var(--brand); }
 :where(html.dark) .region-option-count { background:#252525; color:#C2C2C6; }
 :where(html.dark) .region-option.on .region-option-count { background:var(--brand); color:#FFF; }
-:where(html.dark) .talents-counter { border:1px solid var(--lilac); background:#31312C; }
+:where(html.dark) .talents-counter { border:1px solid var(--lilac); background:var(--block-gray); }
 :where(html.dark) .talents-counter-copy span { color:#C2C2C6; }
 :where(html.dark) .school-fees { background:var(--soft); }
 :where(html.dark) .school-fees-title { color:var(--ink-2); }
@@ -851,7 +853,7 @@ html:where(.dark).dark .sheet-content button.chip.category-choice:is([data-actio
 :where(html.dark) .study-card h3 { color:var(--ink); }
 html:where(.dark).dark .study-card.external-link, html:where(.dark).dark .study-card.external-link:hover { background:#4C4C4C !important; color:#BCBCC2; }
 html:where(.dark).dark .study-card h3 { color:#F2F2F2; }
-:where(html.dark) .trip-more { background:#31312C; }
+:where(html.dark) .trip-more { background:var(--block-gray); }
 
 /* Retouches */
 html.dark .app .prep:not(.prep-static):not(.talents-card):not(.talents-feature) { background:#292929 !important; }

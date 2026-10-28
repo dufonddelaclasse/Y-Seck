@@ -1151,8 +1151,8 @@ html[data-contrast="true"]
 .prep-page .switch-row[aria-checked="true"] .switch { background:var(--blue-hover,#2500BA); background:#2500BA; }
 .prep-page :is(button.chip) { color:var(--ink); background:#FFF; border:2px solid var(--theme-tint,var(--lilac)); box-shadow:none; font-weight:400; }
 .prep-page :is(button.chip.on,.chip.blue.on) { color:#FFF; background:var(--theme-btn); border-color:var(--theme-btn); box-shadow:none; }
-.prep-page .prep { background:#E6E6E3; border:1px solid var(--theme-tint,var(--lilac)); border-radius:30px; padding:22px 22px; }
-.prep-page .prep.hi.talents-feature { background:#E6E6E3; color:var(--ink); }
+.prep-page .prep { background:var(--block-gray); border:1px solid var(--theme-tint,var(--lilac)); border-radius:30px; padding:22px 22px; }
+.prep-page .prep.hi.talents-feature { background:var(--block-gray); color:var(--ink); }
 .prep-page .prep.hi.talents-feature :is(h2,p,.more) { color:var(--ink); }
 .prep-page .prep .more { color:var(--theme-btn); }
 
@@ -1171,7 +1171,7 @@ html[data-contrast="true"]
 .home-feature-copy b { font-size:1.1875rem; font-weight:500; line-height:1.2; }
 .home-feature-copy > span { font-weight:300; }
 .home-go { width:40px; height:40px; border:0; background:#FFF; color:var(--blue); box-shadow:0 1px 4px rgba(0,0,0,.08); }
-.home-shortcuts a { flex-direction:row; align-items:center; gap:10px; min-height:84px; padding:12px; overflow-wrap:normal; hyphens:auto; border:1px solid var(--lilac); border-radius:24px; background:#E6E6E3; }
+.home-shortcuts a { flex-direction:row; align-items:center; gap:10px; min-height:84px; padding:12px; overflow-wrap:normal; hyphens:auto; border:1px solid var(--lilac); border-radius:24px; background:var(--block-gray); }
 .home-shortcuts .home-tile { width:46px; height:46px; border-radius:12px; }
 .home-shortcuts .home-tile.home-count { font-size:1.875rem; }
 .home-shortcuts b { display:block; font-weight:500; font-size:.9375rem; line-height:1.2; }
@@ -1186,7 +1186,7 @@ html[data-contrast="true"] :is(.btn.theme,.btn.black) { background:#000; border-
    Retouches d’octobre 2026 : marges de 5 px, tailles des maquettes, cartes,
    barre du haut, onboarding #2B04CC et couleurs exactes des catégories.
    ========================================================================== */
-:root { --brand:#2B04CC; --card-bg:#EAEAE6; --card-line:#D8D2F2; }
+:root { --brand:#2B04CC; --card-bg:#E9E9E9; --card-line:#D8D2F2; --block-gray:#E5E5E5; }
 
 /* Marges latérales de 5 px partout ; les textes gardent un léger retrait. */
 .screen { padding-left:5px; padding-right:5px; }
@@ -1984,7 +1984,7 @@ a.trip-official { display:inline; color:var(--ink); text-decoration:underline; t
 .app:not(.onboarding) .prep-page > h1 + .sr-only + section { margin-top:12px; }
 /* Fiche métier : du concours obtenu au poste, pointillés à la couleur du concours et encadré gris. */
 .trip-track.dots { width:4px; margin-top:6px; background:radial-gradient(circle, var(--theme, var(--ink)) 1.6px, transparent 2.1px) center top / 4px 9px repeat-y; }
-.trip-access { margin:14px 0 0; padding:14px 16px; border-radius:14px; background:#E6E6E3; font-size:.9375rem; line-height:1.45; color:var(--ink); }
+.trip-access { margin:14px 0 0; padding:14px 16px; border-radius:14px; background:var(--block-gray); font-size:.9375rem; line-height:1.45; color:var(--ink); }
 .trip-access b { font-weight:500; }
 /* « Vous ressemble » : simple phrase à la couleur du concours, sans fond, sans pastille ni point. */
 .job-page .job-match, .job-page:not(.concours-page) .job-match { display:block; margin:0; padding:0; border:0; border-radius:0; background:none; font-size:.9375rem; line-height:1.4; font-weight:400; text-align:left; color:var(--ink); }
@@ -2055,18 +2055,24 @@ a.rung.rung-link > .chev { flex:none; width:18px; height:18px; margin-right:-4px
 /* Même petite flèche sur les métiers liés et les évolutions des autres concours. */
 .row-chev { flex:none; display:flex; align-self:center; margin-left:auto; padding-left:6px; color:var(--muted); }
 .row-chev svg { width:18px; height:18px; }
-/* Fond des écrans : dégradé vertical, #F6F7F2 en haut de l’écran et #E3E1EF en bas. Il est posé sur un calque fixe
+/* Fond des écrans : dégradé vertical en niveaux de gris, #F6F6F6 en haut de l’écran et #E2E2E2 en bas
+   (mêmes luminosités que l’ancien dégradé crème vers lilas, saturation retirée). Il est posé sur un calque fixe
    (et non en « background-attachment: fixed », ignoré par Safari sur iPhone) : il ne bouge pas quand on fait défiler.
-   Les zones blanches (en-tête des fiches métier et concours, pages blanches) restent blanches. */
-html { background:#E3E1EF; }
+   Les zones blanches (en-tête des fiches métier et concours, pages blanches) restent blanches.
+   Les couleurs passent par --bg-top et --bg-bottom : le dégradé teinté d’origine est gardé de côté plus bas. */
+:root { --bg-top:#F6F6F6; --bg-bottom:#E2E2E2; }
+html { background:var(--bg-bottom); }
 body, .app { background:transparent; }
 /* Le corps de page isole ses calques : le dégradé (z-index:-1) reste derrière le contenu mais devant le fond de la page, y compris sur Safari iPhone. */
 body { isolation:isolate; }
 /* Calque de fond de taille fixe : quand Chrome sur iPhone agrandit la fenêtre, il se déplace sans être redessiné.
-   Le dégradé atteint #E3E1EF à 860 px, puis se fond dans le fond de la page, de la même couleur. */
-body::before { content:''; position:fixed; top:0; left:0; right:0; height:1100px; z-index:-1; background:linear-gradient(180deg, #F6F7F2 0, #E3E1EF 860px); pointer-events:none; }
-.footer { background:#E3E1EF; }
-.context-bar { background:#F6F7F2; }
+   Le dégradé atteint sa couleur du bas à 860 px, puis se fond dans le fond de la page, de la même couleur. */
+body::before { content:''; position:fixed; top:0; left:0; right:0; height:1100px; z-index:-1; background:linear-gradient(180deg, var(--bg-top) 0, var(--bg-bottom) 860px); pointer-events:none; }
+.footer { background:var(--bg-bottom); }
+.context-bar { background:var(--bg-top); }
+/* Dégradé teinté d’origine (crème #F6F7F2 vers lilas #E3E1EF), gardé de côté : inactif.
+   Pour le ressortir, ajouter la classe « fond-teinte » sur la balise <html> d’index.html. */
+html.fond-teinte { --bg-top:#F6F7F2; --bg-bottom:#E3E1EF; --card-bg:#EAEAE6; --block-gray:#E6E6E3; }
 /* Bandeau d’aide des réglages : le bouton des filtres passe au-dessus du bandeau pour rester visible ; texte un peu plus petit. */
 #filters-open.pulse { position:relative; z-index:21; }
 .top-notice { display:flex; align-items:center; box-sizing:border-box; min-height:calc(66px + env(safe-area-inset-top,0px)); padding-top:calc(env(safe-area-inset-top,0px)); padding-bottom:0; padding-right:76px; font-size:.8125rem; }
@@ -2261,7 +2267,7 @@ html.crios .profile-footer { bottom:calc(86px + env(safe-area-inset-bottom, 0px)
 .region-option.on { color:var(--brand); font-weight:600; }
 .region-option-count { flex:none; min-width:34px; padding:3px 10px; border-radius:999px; background:#EDEDED; color:#55555C; font-size:.8125rem; font-weight:500; text-align:center; }
 .region-option.on .region-option-count { background:var(--brand); color:#FFF; }
-.talents-counter { display:flex; align-items:center; gap:12px; margin-top:4px; padding:12px; border:1px solid var(--lilac); border-radius:24px; background:#E6E6E3; }
+.talents-counter { display:flex; align-items:center; gap:12px; margin-top:4px; padding:12px; border:1px solid var(--lilac); border-radius:24px; background:var(--block-gray); }
 .talents-counter .home-tile { width:56px; height:56px; border-radius:12px; }
 .talents-counter-copy { display:flex; flex-direction:column; gap:2px; min-width:0; }
 .talents-counter-copy b { font-size:1.0625rem; font-weight:500; }
@@ -2414,7 +2420,7 @@ html.crios .profile-footer { bottom:calc(86px + env(safe-area-inset-bottom, 0px)
 html.dark .study-card.external-link, html.dark .study-card.external-link:hover { background:#161616 !important; color:#BCBCC2; }
 html.dark .study-card h3 { color:#F2F2F2; }
 /* Parcours des métiers et concours : chaque accordéon est un petit bloc, titre et chevron sur une ligne, texte dedans à l’ouverture. */
-.trip-more { margin-top:16px; padding:0 14px; border-radius:14px; background:#E6E6E3; }
+.trip-more { margin-top:16px; padding:0 14px; border-radius:14px; background:var(--block-gray); }
 .trip-more summary { display:flex; justify-content:space-between; width:100%; min-height:42px; padding:10px 0; box-sizing:border-box; }
 .trip-more[open] { padding-bottom:14px; }
 .trip-more[open] summary { padding-bottom:4px; }
