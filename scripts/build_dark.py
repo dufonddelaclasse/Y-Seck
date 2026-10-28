@@ -385,6 +385,8 @@ html.dark #app .info-page .callout { background:transparent !important; }
 html.dark #app .status-ok { background:#173D22; color:#9FE8B4; }
 html.dark #app .status-closed { background:#4A1818; color:#FFB3B3; }
 html.dark #app .status-plan { background:#2C2C2F; color:#C2C2C6; }
+/* Fiche métier : la zone de la frise en dégradé, gris foncé sous la barre d’actions vers presque noir en bas. */
+html.dark #app main.job-page:not(.concours-page) { background:linear-gradient(180deg, #171719 0, #121214 600px, #0A0A0B 100%) !important; }
 """
 
 if __name__ == '__main__':
