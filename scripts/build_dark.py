@@ -332,6 +332,9 @@ html.dark #app .ref-card :is(h2, h3) { color:#000 !important; }
 html.dark body.themed .context-bar { background:var(--theme) !important; border-bottom-color:transparent !important; }
 html.dark body.themed .context-bar :is(.context-title, .icon-btn, .icon-btn svg) { color:#FFF !important; }
 html.dark body.themed .context-bar .cat { box-shadow:0 0 0 2px #FFF !important; }
+/* Accordéons du parcours : petits blocs anthracite (un cran plus clair sur la frise grise des fiches métiers). */
+html.dark #app .trip-more { background:#1C1C1E !important; }
+html.dark #app main.job-page:not(.concours-page) .trip-more { background:#2C2C2F !important; }
 """
 
 if __name__ == '__main__':
