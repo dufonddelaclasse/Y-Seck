@@ -254,13 +254,12 @@
       return '<a role="tab" href="' + (t[0] === 'concours' ? '#/concours-liste' : '#/metiers') + '" class="' + (on ? 'on' : '') + '" aria-selected="' + on + '">' + esc(t[1]) + '</a>';
     }).join('') + '</div>';
   }
-  /* Menu du bas : l’onglet actif prend la version pleine de son pictogramme. */
+  /* Menu du bas : l’onglet actif prend la version pleine de son pictogramme, même tracé que la version vide (UI.icons) ;
+     le signet plein est celui du bouton Favori des fiches. La boussole pleine garde son aiguille en creux. */
+  var fillIcon = function (svg) { return svg.replace('fill="none"', 'fill="currentColor"'); };
   var TAB_FILLED = {
-    home: '<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></svg>',
-    compass: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M12 2.7a9.3 9.3 0 1 0 0 18.6 9.3 9.3 0 1 0 0-18.6zM15.5 8.5l-2 5-5 2 2-5z"/></svg>',
-    /* Signet plein : mêmes contours extérieurs que le signet vide (trait compris), sans trait, pour ne rien décaler. */
-    bookmark: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M5.2 2.6a.4.4 0 0 1 .4-.4h12.8a.4.4 0 0 1 .4.4v18.6a.6.6 0 0 1-.94.5L12 17.96l-5.86 3.74a.6.6 0 0 1-.94-.5z"/></svg>',
-    user: '<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6z"/></svg>'
+    home: fillIcon(I.home), bookmark: fillIcon(I.bookmark), user: fillIcon(I.user),
+    compass: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path stroke="none" fill="currentColor" fill-rule="evenodd" d="M12 3.5a8.5 8.5 0 1 0 0 17 8.5 8.5 0 1 0 0-17zM15.5 8.5l-2 5-5 2 2-5z"/></svg>'
   };
   function tabbar(active) {
     if (active === 'prepas' || active === 'concours') active = 'accueil';
