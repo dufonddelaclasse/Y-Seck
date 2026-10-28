@@ -879,6 +879,8 @@ html:where(.dark).dark #app .extra-cats b { color:#FFF; }
 html:where(.dark).dark #app .extra-cat { background:#4A4A4F; color:#A3A3A7; }
 :where(html.dark) .also-title { color:var(--ink); }
 html:where(.dark).dark #app .also-title { color:#FFF !important; }
+:where(html.dark) .intro-fold-desc { color:var(--ink-2); }
+html:where(.dark).dark #app .intro-fold-desc { color:#D6D6DB; }
 
 /* Retouches */
 html.dark .app .prep:not(.prep-static):not(.talents-card):not(.talents-feature) { background:#292929 !important; }

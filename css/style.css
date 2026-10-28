@@ -2525,3 +2525,9 @@ html.dark #app .also-title { color:#FFF !important; }
 .opt.ambition-opt { height:auto; min-height:64px; padding-top:12px; padding-bottom:12px; }
 /* Titres des pages de premier niveau (Explorer, Favoris, Profil) : même graisse que « Bonjour » de l’accueil. */
 .screen.pt > h1, .screen.pt > .title-row > h1 { font-weight:400; }
+/* Blocs catégories : pastille calée en haut à gauche, comme sur les cards métiers et concours ; description visible bloc fermé. */
+.intro-category-fold summary { align-items:flex-start; padding:16px 14px 16px 16px; }
+.intro-category-fold summary > .cat.lg { margin-top:2px; }
+.intro-category-fold summary .details-toggle { align-self:center; }
+.intro-fold-desc { display:block; margin-top:6px; font-size:.9375rem; line-height:1.4; font-weight:300; color:var(--ink-2); }
+html.dark #app .intro-fold-desc { color:#D6D6DB; }
