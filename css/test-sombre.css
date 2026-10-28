@@ -80,3 +80,8 @@ html.dark #app main.job-page:not(.concours-page) :is(.job-hero, .trip-head, .job
 html.dark #app main.job-page:not(.concours-page) :is(.ladder-alt-row, .list-row.job-row, .prep, .callout, .card) { background:#2C2C2F !important; }
 html.dark #app main.job-page:not(.concours-page) .a11y-link { background:transparent; }
 html.dark #app main.job-page:not(.concours-page) .job-hero { box-shadow:0 -80px 0 #000; }
+
+/* Titres de section (Le concours, Aides, Prépas, Évoluer…) : blancs, pictogramme compris, plus de violet clair. */
+html.dark #app :is(h1, h2, h3, .section-heading, .trip-h) { color:#FFF !important; }
+html.dark #app :is(h1, h2, h3, .section-heading) > svg, html.dark #app .section-heading svg { color:#FFF !important; }
+html.dark #app .ref-card :is(h2, h3) { color:#000 !important; }
