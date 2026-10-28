@@ -2428,3 +2428,6 @@ html.dark .study-card h3 { color:#F2F2F2; }
 .trip-more + .trip-more, .trip-note + .trip-more, .trip-meta + .trip-more, .trip-dir + .trip-more { margin-top:6px; }
 .trip-meta + .trip-more, .trip-dir + .trip-more { margin-top:16px; }
 .trip-more + .trip-note { margin-top:16px; }
+/* Menu du bas : onglet actif en noir (texte, pictogramme plein et trait). */
+.tabbar a.on, .tabbar a.on svg { color:#141414; }
+.tabbar a.on::before { background:#141414; }

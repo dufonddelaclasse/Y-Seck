@@ -254,13 +254,20 @@
       return '<a role="tab" href="' + (t[0] === 'concours' ? '#/concours-liste' : '#/metiers') + '" class="' + (on ? 'on' : '') + '" aria-selected="' + on + '">' + esc(t[1]) + '</a>';
     }).join('') + '</div>';
   }
+  /* Menu du bas : l’onglet actif prend la version pleine de son pictogramme. */
+  var TAB_FILLED = {
+    home: '<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></svg>',
+    compass: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M12 2.7a9.3 9.3 0 1 0 0 18.6 9.3 9.3 0 1 0 0-18.6zM15.5 8.5l-2 5-5 2 2-5z"/></svg>',
+    bookmark: '<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4z"/></svg>',
+    user: '<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6z"/></svg>'
+  };
   function tabbar(active) {
     if (active === 'prepas' || active === 'concours') active = 'accueil';
     if (active === 'metiers' || active === 'concours-liste') active = 'explorer';
-    var tabs = [['accueil', isParent() ? 'Famille' : 'Accueil', I.home], ['explorer', 'Explorer', I.compass], ['favoris', 'Favoris', I.bookmark], ['moi', isParent()&&S.children.length>=2?'Profils':'Profil', I.user]];
+    var tabs = [['accueil', isParent() ? 'Famille' : 'Accueil', I.home, TAB_FILLED.home], ['explorer', 'Explorer', I.compass, TAB_FILLED.compass], ['favoris', 'Favoris', I.bookmark, TAB_FILLED.bookmark], ['moi', isParent()&&S.children.length>=2?'Profils':'Profil', I.user, TAB_FILLED.user]];
     return '<nav class="tabbar" aria-label="Navigation principale">' + tabs.map(function (t) {
       var on = t[0] === active;
-      return '<a href="' + (t[0] === 'explorer' ? exploreHref() : '#/' + t[0]) + '" class="' + (on ? 'on' : '') + '"' + (on ? ' aria-current="page"' : '') + '>' + t[2] + esc(t[1]) + '</a>';
+      return '<a href="' + (t[0] === 'explorer' ? exploreHref() : '#/' + t[0]) + '" class="' + (on ? 'on' : '') + '"' + (on ? ' aria-current="page"' : '') + '>' + (on ? t[3] : t[2]) + esc(t[1]) + '</a>';
     }).join('') + '</nav>';
   }
   function chip(action, value, label, on, extraCls) {
