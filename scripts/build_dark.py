@@ -288,9 +288,9 @@ html.dark #app .btn.outline svg { color:#FFF !important; }
 
 /* ---------- Pastilles pleines : couleur de catégorie (ou vert vif hors catégorie), texte noir ---------- */
 html.dark #app button.chip.on:not(.category-choice), html.dark #app .prep-page button.chip.on { background:var(--pill-on) !important; border:1.5px solid var(--pill-on) !important; color:#000 !important; }
-html.dark #app .fit.on { background:#C8FFB2 !important; color:#000 !important; border:0 !important; }
+html.dark #app .fit.on { background:#2C2C2F !important; color:#C8FFB2 !important; border:1.5px solid #C8FFB2 !important; }
 html.dark #app .fit:not(.on):not(.like) { background:transparent !important; border:1.5px solid #FFF !important; color:#FFF !important; }
-html.dark #app .job-row .fit .job-fit-check { background:#000; color:#C8FFB2; }
+html.dark #app .job-row .fit .job-fit-check { background:#C8FFB2; color:#000; }
 html.dark #app .prep .price { color:#000 !important; }
 html.dark #app .prep .price.price-neutral { background:#FFF !important; color:#000 !important; }
 

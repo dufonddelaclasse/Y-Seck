@@ -1667,6 +1667,10 @@
       (name ? '<p class="trip-name">' + name + '</p>' : '') + body + '</div></li>';
   }
   /* Frise d’un concours : départ, études conseillées, concours (à sa couleur), puis l’arrivée. */
+  /* Emplois supérieurs à la décision du gouvernement (ou de l’exécutif local) : nommés au fil de la carrière, jamais à la sortie de l’école. */
+  var SENIOR_IDS = ['fpdir005', 'fpdir010', 'fpdir015', 'fpdir016', 'fpdir017', 'fpdir022', 'fpint001', 'fpint008', 'fpsec056'];
+  var SENIOR_RE = /^(pr[ée]f[eè]te? ?\/|pr[ée]fet|sous-pr[ée]f|rect(rice|eur)|ambassad|directeur \/ directrice d.administration centrale|directrice \/ directeur d.administration centrale|secr[ée]taire g[ée]n[ée]rale? ?\/ ?g[ée]n[ée]rale? d.administration centrale)/i;
+  function isSeniorAppointment(j) { return SENIOR_IDS.indexOf(j.id) > -1 || SENIOR_RE.test(j.name || ''); }
   function tripLine(c, level, who, end) {
     var trip = concoursTrip(c, level), first = trip.phases[0];
     var prepaInStudies = trip.phases.some(function (p) { return p.kind === 'sup'; });
@@ -1685,7 +1689,8 @@
     /* Fiche métier : le concours obtenu (médaille) ouvre l’accès au poste, rejoint à pied en pointillés ; il ne le garantit pas. */
     var arrival = function () {
       return (end.admission ? stop('admit', '<span class="trip-pill">' + I.medal + '</span><span class="trip-walk">' + I.walk + '</span>', 'Obtention du concours' + catBadge(c.cat, 'sm'),
-        '<p class="trip-access"><b>Le concours rend ce poste accessible, sans le garantir.</b> Il s’obtient ensuite selon votre classement à la sortie de l’école, ou après un entretien avec l’employeur.</p>', 'dots', catStyle) : '') +
+        (end.senior ? '<p class="trip-access"><b>Ce poste ne s’obtient pas à la sortie de l’école.</b> Il est confié au fil de la carrière, par nomination du gouvernement, à des cadres expérimentés, le plus souvent passés par une grande école du service public comme l’INSP.</p>'
+          : '<p class="trip-access"><b>Le concours rend ce poste accessible, sans le garantir.</b> À la sortie de l’école, les postes sont attribués selon les besoins des administrations et les vœux des élèves, ou après un entretien avec l’employeur.</p>'), 'dots', catStyle) : '') +
         stop('end', '<span class="trip-pill">' + (end.icon || '') + '</span>', end.name, end.body, end.track || '', catStyle);
     };
     /* Départ : « Mon niveau » puis la pastille du niveau actuel, comme sur l’accueil. */
@@ -1842,7 +1847,7 @@
     tabs += extraCatsNote(j);
     var panels = refs.map(function (c, i) {
       return '<div class="trip-panel" id="trip-panel-' + i + '" role="tabpanel" aria-labelledby="trip-tab-' + i + '" data-tab="' + i + '"' + (i === sel ? '' : ' hidden') + '><ol class="trip">' +
-        tripLine(c, level, who, { name: esc(j.name), icon: I.seal, admission: !c.recruit, body: '<p class="trip-dir">' + catBadge(c.cat, 'sm') + I.arrow + '<span>' + esc(c.recruit ? j.fp.split('').map(function (f) { return fpLabel[f]; }).join(', ') : fpLabel[c.fp]) + '</span></p>' }) + '</ol></div>';
+        tripLine(c, level, who, { name: esc(j.name), icon: I.seal, admission: !c.recruit, senior: isSeniorAppointment(j), body: '<p class="trip-dir">' + catBadge(c.cat, 'sm') + I.arrow + '<span>' + esc(c.recruit ? j.fp.split('').map(function (f) { return fpLabel[f]; }).join(', ') : fpLabel[c.fp]) + '</span></p>' }) + '</ol></div>';
     }).join('');
     /* Évoluer : progression du concours choisi, puis celles des autres concours possibles. */
     var ladders = refs.map(function (c, i) {
