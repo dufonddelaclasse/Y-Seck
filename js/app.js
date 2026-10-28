@@ -1231,8 +1231,10 @@
   screens.infos = function (axis) {
     var x = INFO_AXES.filter(function (a) { return a[0] === axis; })[0];
     if (!x) return screens.concours();
-    var body = axis === 'fonctions' ? versantsBlocks('h2', 'h3').replace('<h2 class="mt-m understand-title no-icon">3 fonctions publiques</h2>', '') +
-        '<div class="stack mt-m"><a class="btn outline" href="#/comprendre">Comprendre la fonction publique</a></div>'
+    /* Fonctions publiques : les trois blocs restent ouverts, sans bouton pour les refermer. */
+    var body = axis === 'fonctions' ? versantsBlocks('h2', 'h3').replace('<h2 class="mt-m understand-title no-icon">3 fonctions publiques</h2>', '')
+        .replace(/<details class="intro-fold intro-employer-fold"><summary>/g, '<div class="intro-fold intro-employer-fold info-open"><div class="info-open-head">')
+        .replace(/<span class="details-toggle" aria-hidden="true">[\s\S]*?<\/span><\/summary>/g, '</div>').replace(/<\/details>/g, '</div>')
       : axis === 'prepas' ? '<p class="lead">Les études qui mènent aux concours, puis les aides et les prépas, gratuites ou au prix d’une inscription à l’université.</p>' +
         '<a class="btn outline" href="#/etudes">Quelles études choisir ?</a>' + preparationContent()
       : infoConcours();
