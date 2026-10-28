@@ -389,10 +389,13 @@ html.dark #app .status-closed { background:#4A1818; color:#FFB3B3; }
 html.dark #app .status-plan { background:#2C2C2F; color:#C2C2C6; }
 /* Fiche métier : la zone de la frise en dégradé, gris foncé sous la barre d’actions vers presque noir en bas. */
 /* Fiche métier : zone de la frise en dégradé de gris. */
-html.dark #app main.job-page:not(.concours-page) { background:linear-gradient(180deg, #171719 0, #121214 600px, #0A0A0B 100%) !important; }
+
 /* Écrans de l’appli (hors fiches métier et concours) : même dégradé que la frise des fiches métier. */
-html.dark, html.dark body, html.dark .app, html.dark .footer { background:#0A0A0B !important; }
-html.dark #app main:not(.job-page) { background:linear-gradient(180deg, #171719 0, #121214 600px, #0A0A0B 100%) !important; }
+/* Fond de tous les écrans, fiches comprises : dégradé figé (calque fixe), comme le gris du mode clair. */
+html.dark { background:#0A0A0B !important; }
+html.dark body, html.dark .app, html.dark #app main, html.dark #app main.job-page:not(.concours-page), html.dark #app main.job-page.concours-page { background:transparent !important; }
+html.dark body::before { display:block !important; content:''; position:fixed; top:0; left:0; right:0; bottom:0; height:auto; z-index:-1; background:linear-gradient(180deg, #171719 0%, #121214 70%, #0A0A0B 100%) !important; pointer-events:none; }
+html.dark .footer { background:#0A0A0B !important; }
 """
 
 if __name__ == '__main__':
