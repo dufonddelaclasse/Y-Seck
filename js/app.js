@@ -2267,7 +2267,7 @@
     var html = document.documentElement;
     if (html.classList) html.classList.toggle('dark', dark && !S.contrast);
     var meta = document.querySelector && document.querySelector('meta[name="theme-color"]');
-    if (meta && meta.setAttribute) meta.setAttribute('content', dark && !S.contrast ? '#121214' : '#2500BA');
+    if (meta && meta.setAttribute) meta.setAttribute('content', dark && !S.contrast ? '#000000' : '#2500BA');
   }
   if (darkQuery) { if (darkQuery.addEventListener) darkQuery.addEventListener('change', applyColorMode); else if (darkQuery.addListener) darkQuery.addListener(applyColorMode); }
   var showFilterNotice = false, hintTimer = null, editingField = null;

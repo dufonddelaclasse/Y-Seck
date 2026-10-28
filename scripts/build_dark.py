@@ -244,6 +244,94 @@ html.dark .app .prep.hi.talents-card .talents-perf { background-image:radial-gra
 html.dark .ref-tip.stage-tip { background:transparent !important; border-color:var(--theme, var(--blue)) !important; }
 html.dark .ref-tip.stage-tip .stage-where svg { color:var(--theme, var(--blue)) !important; }
 html.dark .talents-counter { border:0 !important; background:none !important; }
+/* ---------- Direction sombre : fond noir, blocs anthracite, pastilles cerclées de blanc ou pleines à texte noir,
+   couleurs de catégories du mode clair. ---------- */
+/* ---------- Palette ---------- */
+html.dark {
+  --bg:#000; --surface:#1C1C1E; --card-bg:#1C1C1E; --card-line:transparent; --soft:#2A2A2D;
+  --ink:#FFFFFF; --ink-2:#E6E6E6; --muted:#A8A8AD; --line:#2C2C2F; --line-2:#3A3A3E;
+  /* Couleurs de catégories et teintes : valeurs du mode clair. */
+  --cat-ap:#3C05FF; --cat-a:#0051FF; --cat-b:#0096AD; --cat-c:#FF804A;
+  --cat-ap-tint:#DDC7FF; --cat-a-tint:#BEF1FD; --cat-b-tint:#CCFFED; --cat-c-tint:#FFE8D9; --cat-cdd-tint:#F1F1EE;
+  --lime:#E0FA6E; --pill-on:#E0FA6E;
+}
+html.dark .app.theme-Ap { --theme-tint:#DDC7FF; --pill-on:#DDC7FF; }
+html.dark .app.theme-A { --theme-tint:#BEF1FD; --pill-on:#BEF1FD; }
+html.dark .app.theme-B { --theme-tint:#CCFFED; --pill-on:#CCFFED; }
+html.dark .app.theme-C { --theme-tint:#FFE8D9; --pill-on:#FFE8D9; }
+
+/* ---------- Fond noir partout ---------- */
+html.dark, html.dark body, html.dark .app, html.dark .app main, html.dark .footer { background:#000 !important; }
+html.dark body::before { display:none !important; }
+html.dark body:not(.themed) .context-bar:not([style*="background"]) { background:rgba(0,0,0,.94); border-bottom-color:#1C1C1E; }
+html.dark #app .job-page .job-hero, html.dark #app .job-page .trip-head, html.dark #app .job-actions, html.dark #app .job-page .job-actions { background:#000 !important; border-color:#1C1C1E !important; }
+html.dark .tabbar { background:#000 !important; border-top-color:#1C1C1E !important; }
+
+/* ---------- Blocs : anthracite, sans contour ---------- */
+html.dark #app :is(.prep, .prep.prep-static, .list-row.job-row, .rung, .ladder-alt-row, .study-card, .book-card, .home-feature.home-access, .home-shortcuts a, .ref-panel, .callout, .card, .school-row, .region-zone) { background:#1C1C1E !important; border-color:transparent !important; box-shadow:none !important; }
+html.dark #app .job-page:not(.concours-page) .rung { border:1.5px solid #FFF !important; background:transparent !important; }
+
+/* Blocs aux couleurs de la catégorie (carte du concours, encadré du métier) : teinte claire, texte noir. */
+html.dark #app .ref-card { background:var(--ref-tint, #1C1C1E) !important; border:0 !important; }
+html.dark #app .ref-card, html.dark #app .ref-card :is(h3, p, b, span, summary, a, .meta, small) { color:#000 !important; }
+html.dark #app .ref-card :is(svg) { color:#000; }
+html.dark #app .job-page .job-match { background:var(--theme-tint) !important; color:#000 !important; }
+html.dark #app .job-page .job-match * { color:#000 !important; }
+
+/* ---------- Pastilles neutres : contour blanc, texte blanc ---------- */
+html.dark #app :is(.tag, .tag-btn, .home-profile-meta .tag, .job-page .job-meta .tag, .study-meta .tag, .fit.like, .filter-summary .tag) { background:transparent !important; border:1.5px solid #FFF !important; color:#FFF !important; }
+html.dark #app :is(.tag, .tag-btn) svg { color:#FFF !important; }
+html.dark #app button.chip:not(.on):not(.category-choice), html.dark #app .prep-page button.chip:not(.on) { background:transparent !important; border:1.5px solid #FFF !important; color:#FFF !important; }
+html.dark #app .btn.outline, html.dark #app .prep-page .btn.outline { background:transparent !important; border:1.5px solid #FFF !important; color:#FFF !important; }
+html.dark #app .btn.outline svg { color:#FFF !important; }
+
+/* ---------- Pastilles pleines : couleur de catégorie (ou vert vif hors catégorie), texte noir ---------- */
+html.dark #app button.chip.on:not(.category-choice), html.dark #app .prep-page button.chip.on { background:var(--pill-on) !important; border:1.5px solid var(--pill-on) !important; color:#000 !important; }
+html.dark #app .fit.on { background:#C8FFB2 !important; color:#000 !important; border:0 !important; }
+html.dark #app .fit:not(.on):not(.like) { background:transparent !important; border:1.5px solid #FFF !important; color:#FFF !important; }
+html.dark #app .job-row .fit .job-fit-check { background:#000; color:#C8FFB2; }
+html.dark #app .prep .price { color:#000 !important; }
+html.dark #app .prep .price.price-neutral { background:#FFF !important; color:#000 !important; }
+
+/* Bouton principal : plein, texte noir. */
+html.dark #app .btn:not(.outline):not(.white) { background:var(--pill-on) !important; border-color:var(--pill-on) !important; color:#000 !important; }
+html.dark #app .btn:not(.outline):not(.white) svg { color:#000 !important; }
+html.dark #app .btn.prep-float { box-shadow:0 8px 24px rgba(0,0,0,.6); }
+
+/* Switch boursier : rail anthracite, curseur coloré, texte noir sur le curseur. */
+html.dark #app .explore-switch, html.dark #app .bourse-switch { background:#1C1C1E !important; }
+html.dark #app .explore-switch[data-on]::before, html.dark #app .explore-switch.bourse-switch[data-on]::before { background:var(--pill-on) !important; }
+html.dark #app .explore-switch[data-on] :is(a, button) { color:#FFF !important; }
+html.dark #app .explore-switch[data-on] :is(a.on, button.on, a[aria-selected="true"]) { color:#000 !important; }
+
+/* ---------- Pastilles de catégorie : couleurs du mode clair ; texte noir quand la couleur le permet ---------- */
+html.dark #app .cat.cat-B, html.dark #app .cat.cat-C { color:#000 !important; }
+
+/* ---------- Espace perso ---------- */
+html.dark #app .personal-home .home-concours, html.dark #app .personal-home .home-concours:hover { background:#DDC7FF !important; }
+html.dark #app .personal-home .home-concours :is(.home-feature-copy b, .home-feature-copy > span, .home-count) { color:#000 !important; }
+html.dark #app .home-shortcuts a, html.dark #app .home-feature.home-access { color:#FFF !important; }
+html.dark #app .personal-home .home-feature .home-go { border:0; }
+
+/* Pastille de catégorie dans un bloc de couleur : lettre blanche. */
+html.dark #app .ref-card .cat, html.dark #app .ref-card .cat * { color:#FFF !important; }
+
+/* Fiche métier : la zone de la frise (sous En savoir +, Favori, Partager) en gris foncé ; le haut reste noir. */
+html.dark #app main.job-page:not(.concours-page) { background:#1C1C1E !important; }
+html.dark #app main.job-page:not(.concours-page) :is(.job-hero, .trip-head, .job-actions) { background:#000 !important; }
+html.dark #app main.job-page:not(.concours-page) :is(.ladder-alt-row, .list-row.job-row, .prep, .callout, .card) { background:#2C2C2F !important; }
+html.dark #app main.job-page:not(.concours-page) .a11y-link { background:transparent; }
+html.dark #app main.job-page:not(.concours-page) .job-hero { box-shadow:0 -80px 0 #000; }
+
+/* Titres de section (Le concours, Aides, Prépas, Évoluer…) : blancs, pictogramme compris, plus de violet clair. */
+html.dark #app :is(h1, h2, h3, .section-heading, .trip-h) { color:#FFF !important; }
+html.dark #app :is(h1, h2, h3, .section-heading) > svg, html.dark #app .section-heading svg { color:#FFF !important; }
+html.dark #app .ref-card :is(h2, h3) { color:#000 !important; }
+
+/* Barre du haut aux couleurs de la catégorie : elle reste en couleur, texte et pictogrammes blancs. */
+html.dark body.themed .context-bar { background:var(--theme) !important; border-bottom-color:transparent !important; }
+html.dark body.themed .context-bar :is(.context-title, .icon-btn, .icon-btn svg) { color:#FFF !important; }
+html.dark body.themed .context-bar .cat { box-shadow:0 0 0 2px #FFF !important; }
 """
 
 if __name__ == '__main__':
