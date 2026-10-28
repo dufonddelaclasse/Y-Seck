@@ -871,6 +871,12 @@ html:where(.dark).dark .info-axis { background:#4A4A4F; color:#FFF; }
 :where(html.dark) .info-page .intro-fold-body .info-where-fp b { color:var(--ink); }
 :where(html.dark) .info-dates .fp-panel > p.small { color:var(--muted); }
 :where(html.dark) .info-page h2.understand-title + p.lead { color:var(--muted); }
+:where(html.dark) .extra-cats { background:var(--block-gray, #2E2E2E); color:var(--muted); }
+:where(html.dark) .extra-cats b { color:var(--ink); }
+:where(html.dark) .extra-cat { background:#414146; color:#A3A3A7; }
+html:where(.dark).dark #app .extra-cats { background:#4A4A4F; color:#A8A8AD; }
+html:where(.dark).dark #app .extra-cats b { color:#FFF; }
+html:where(.dark).dark #app .extra-cat { background:#4A4A4F; color:#A3A3A7; }
 
 /* Retouches */
 html.dark .app .prep:not(.prep-static):not(.talents-card):not(.talents-feature) { background:#292929 !important; }

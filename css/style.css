@@ -2506,3 +2506,11 @@ html:not(.dark):not([data-contrast="true"]) :is(.btn.outline, .btn.outline:hover
 /* Les concours : « 4 catégories » et « Dates des concours » gardent la grande taille de titre. */
 .info-page h2.understand-title.info-big { font-size:1.875rem; line-height:1.1; letter-spacing:-.02em; margin-top:36px; }
 .info-page h2.understand-title.info-big:first-of-type { margin-top:16px; }
+/* Fiche métier : catégories sans concours rattaché, en petit encadré gris sous les concours possibles. */
+.extra-cats { display:flex; align-items:center; gap:8px; margin:10px 0 0; padding:7px 11px; border-radius:12px; background:var(--block-gray, #E5E5E5); font-size:.75rem; line-height:1.35; color:var(--muted); }
+.extra-cats b { font-weight:500; color:var(--ink); }
+.extra-cats-pills { display:flex; flex:none; gap:3px; }
+.extra-cat { display:grid; place-items:center; width:20px; height:20px; border-radius:50%; background:#D0D0D3; color:#8E8E93; font-size:.625rem; font-weight:500; }
+html.dark #app .extra-cats { background:#2C2C2F; color:#A8A8AD; }
+html.dark #app .extra-cats b { color:#FFF; }
+html.dark #app .extra-cat { background:#3A3A3E; color:#8E8E93; }

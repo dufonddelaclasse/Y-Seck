@@ -390,8 +390,26 @@
     return rank!==null&&minimum!==undefined&&rank>=minimum?'<span class="category-fit">'+I.check+'<span>Niveau d’étude compatible</span></span>':'';
   }
   function isOpen(j) { var r = userRank(); return j.lvl !== null && r !== null && r >= j.lvl; }
-  function jobCategories(j) { if(isContractJob(j))return ['CDD']; return j.cat==='V'?indicativeCategories(j):(j.categories&&j.categories.length?j.categories:[j.cat]); }
-  function jobRoutes(j) { var cats=jobCategories(j);return (j.routeIds||[]).map(function(id){return D.accessRoutes[id];}).filter(function(r){return r&&cats.indexOf(r.cat)>-1&&r.fp.split('').some(function(f){return j.fp.indexOf(f)>-1;});}); }
+  function rawJobCategories(j) { if(isContractJob(j))return ['CDD']; return j.cat==='V'?indicativeCategories(j):(j.categories&&j.categories.length?j.categories:[j.cat]); }
+  /* Catégorie variable (déduite des offres d’emploi) : on ne garde que les catégories qui ont un concours rattaché ;
+     les autres restent signalées sur la fiche (« aussi sur offre d’emploi »). */
+  var catsMemo = {};
+  function jobCategories(j) {
+    var raw = rawJobCategories(j);
+    if (j.cat !== 'V' || isContractJob(j)) return raw;
+    if (catalogReady && catsMemo[j.id]) return catsMemo[j.id];
+    var rc = jobRefs(j).map(function (c) { return c.cat; }), kept = raw.filter(function (c) { return rc.indexOf(c) > -1; }), out = kept.length ? kept : raw;
+    if (catalogReady) catsMemo[j.id] = out;
+    return out;
+  }
+  function extraJobCategories(j) { var shown = jobCategories(j); return rawJobCategories(j).filter(function (c) { return shown.indexOf(c) < 0; }); }
+  function extraCatsNote(j) {
+    var extra = extraJobCategories(j); if (!extra.length) return '';
+    var names = extra.length === 1 ? 'catégorie ' + extra[0] : 'catégories ' + extra.slice(0, -1).join(', ') + ' et ' + extra[extra.length - 1];
+    return '<p class="extra-cats"><span class="extra-cats-pills" aria-hidden="true">' + extra.map(function (c) { return '<span class="extra-cat">' + c + '</span>'; }).join('') + '</span>' +
+      '<span>Postes aussi proposés en <b>' + names + '</b>, sur offre d’emploi (contrat, détachement ou promotion), sans concours dédié.</span></p>';
+  }
+  function jobRoutes(j) { var cats=rawJobCategories(j);return (j.routeIds||[]).map(function(id){return D.accessRoutes[id];}).filter(function(r){return r&&cats.indexOf(r.cat)>-1&&r.fp.split('').some(function(f){return j.fp.indexOf(f)>-1;});}); }
   function indicativeCategories(j) {
     if (j.cat !== 'V' || isContractJob(j)) return [displayCategory(j)];
     var order=['A+','A','B','C'], counts=j.categoryCounts || {};
@@ -407,7 +425,7 @@
   }
   function jobBadges(j) {
     if(j.cat!=='V'||isContractJob(j))return catBadge(displayCategory(j));
-    var cats=indicativeCategories(j);
+    var cats=jobCategories(j);
     if(cats.length===1)return catBadge(cats[0]);
     return cats.length?'<span class="job-categories" role="img" aria-label="Catégories indicatives '+esc(cats.join(', '))+', selon le corps et le poste">'+cats.map(function(c){return '<span class="cat sm '+catClass(c)+'" aria-hidden="true">'+c+'</span>';}).join('')+'</span>':catBadge('V');
   }
@@ -947,7 +965,7 @@
     /* Description : une ligne de la source par paragraphe, avec un espace entre chacune. */
     return '<div class="source-desc">' + String(j.desc || '').split(/\r?\n+/).map(function (line) { return line.trim() ? '<p class="body">' + esc(line.trim()) + '</p>' : ''; }).join('') + '</div><dl class="profile"><dt>Diplôme</dt><dd>' + esc(j.lvl===null?'Selon le corps et le poste':DIP[j.lvl]) + '</dd><dt>Accès</dt><dd>' + esc(j.access) + '</dd>' +
       (j.qualification ? '<dt>Diplôme spécifique</dt><dd>' + esc(j.qualification) + '</dd>' : '') +
-      (j.rmfpCode ? '<dt>Domaine et famille</dt><dd>' + esc(j.rmfpDomain + ' · ' + j.family) + '</dd>' + (j.categories.length ? (j.categorySource ? '<dt>Catégories indicatives</dt><dd>' + esc(j.categories.join(', ')) + ' · renseignées par l’équipe Y-Seck, à vérifier selon le corps ou le cadre d’emplois.</dd>' : '<dt>Catégories observées</dt><dd>' + esc(j.categories.join(', ')) + ' · selon les offres CSP, à vérifier pour chaque poste.</dd>') : '') : '') + '</dl>' +
+      (j.rmfpCode ? '<dt>Domaine et famille</dt><dd>' + esc(j.rmfpDomain + ' · ' + j.family) + '</dd>' + (j.categories.length ? (j.categorySource ? '<dt>Catégories indicatives</dt><dd>' + esc(j.categories.join(', ')) + ' · renseignées par l’équipe Y-Seck, à vérifier selon le corps ou le cadre d’emplois.</dd>' : '<dt>Catégories observées</dt><dd>' + esc(j.categories.join(', ')) + ' · selon les offres CSP, à vérifier pour chaque poste.' + (extraJobCategories(j).length ? ' Par concours : ' + esc(jobCategories(j).join(', ')) + ' ; ' + esc(extraJobCategories(j).join(', ')) + ' sur offre d’emploi.' : '') + '</dd>') : '') : '') + '</dl>' +
       ['activities','conditions','knowledge','skills','qualities'].map(function(key){return j[key]?'<details class="source-detail"><summary><span>' + ({activities:'Les activités',conditions:'Conditions d’exercice et d’accès',knowledge:'Les connaissances',skills:'Les savoir-faire',qualities:'Les savoir-être'})[key] + '</span><span class="details-toggle" aria-hidden="true">'+I.down+'</span></summary><div class="source-paragraphs">' + j[key].split(/\r?\n+/).map(function(line){return line.trim();}).filter(Boolean).map(function(line){return '<p>'+esc(line)+'</p>';}).join('') + '</div></details>':'';}).join('') +
       (!j.rmfpCode && j.source ? ext(j.source,'Source des conditions d’accès','link-plain mt-s') : '');
   }
@@ -1673,6 +1691,7 @@
     var tabs = refs.length > 1 ? '<div class="trip-tabs-wrap"><p class="trip-tabs-label">' + refs.length + ' concours possibles pour ce métier</p>' + catRow + '<div class="trip-tabs" role="tablist" aria-label="Concours possibles">' + refs.map(function (c, i) {
       return '<button type="button" class="trip-tab" role="tab" id="trip-tab-' + i + '" aria-controls="trip-panel-' + i + '" aria-selected="' + (i === sel) + '" data-action="tripTab"' + attr('v', i) + attr('cat', c.cat) + attr('prep', prepFor(c)) + (multi && c.cat !== selCat ? ' hidden' : '') + '>' + (multi ? '' : catBadge(c.cat, 'sm')) + '<span>' + esc(label(c)) + '</span></button>';
     }).join('') + '</div></div>' : '';
+    tabs += extraCatsNote(j);
     var panels = refs.map(function (c, i) {
       return '<div class="trip-panel" id="trip-panel-' + i + '" role="tabpanel" aria-labelledby="trip-tab-' + i + '" data-tab="' + i + '"' + (i === sel ? '' : ' hidden') + '><ol class="trip">' +
         tripLine(c, level, who, { name: esc(j.name), icon: I.seal, admission: !c.recruit, body: '<p class="trip-dir">' + catBadge(c.cat, 'sm') + I.arrow + '<span>' + esc(c.recruit ? j.fp.split('').map(function (f) { return fpLabel[f]; }).join(', ') : fpLabel[c.fp]) + '</span></p>' }) + '</ol></div>';
