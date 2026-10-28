@@ -2541,3 +2541,11 @@ html.dark #app .opt:not(.on) .defi-cats .defi-label { color:#A8A8AD !important; 
 .also-block { margin:28px 0 8px; }
 .also-counter .talents-counter-copy b { font-size:1.0625rem; line-height:1.3; }
 html.dark #app .also-counter .talents-counter-copy b { color:#FFF; }
+/* Dates des concours : statuts en petites pastilles. */
+.cal-status { display:flex; flex-wrap:wrap; gap:6px; margin:4px 0 2px; }
+.status-pill { display:inline-flex; align-items:center; padding:3px 9px; border-radius:999px; font-size:.75rem; line-height:1.2; font-weight:500; }
+.status-ok { background:#D6F5DE; color:#11632C; }
+.status-closed { background:#FDE0E0; color:#A11616; }
+.status-plan { background:#ECECEC; color:#55555C; }
+/* Informations générales : encadrés « Rien n’est figé » et « Bon à savoir » sans fond. */
+.info-page .callout { background:transparent !important; padding-left:0; padding-right:0; }

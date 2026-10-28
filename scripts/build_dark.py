@@ -379,6 +379,12 @@ html.dark #app .trip-cat[aria-pressed="true"] > span:not(.cat) { color:#000 !imp
 html.dark #app .trip-tab:not([hidden]) { background:transparent !important; color:#8E8E93 !important; box-shadow:inset 0 0 0 1.5px #5A5A60 !important; }
 html.dark #app .trip-tab > span { color:inherit !important; }
 html.dark #app .trip-tab[aria-selected="true"] { background:#4A4A50 !important; color:#FFF !important; box-shadow:none !important; }
+/* Informations générales : entrées au gris des cards ; encadrés « Rien n’est figé » et « Bon à savoir » sans fond. */
+html.dark #app .info-axis, html.dark #app .info-page .intro-employer-fold { background:#1C1C1E !important; }
+html.dark #app .info-page .callout { background:transparent !important; }
+html.dark #app .status-ok { background:#173D22; color:#9FE8B4; }
+html.dark #app .status-closed { background:#4A1818; color:#FFB3B3; }
+html.dark #app .status-plan { background:#2C2C2F; color:#C2C2C6; }
 """
 
 if __name__ == '__main__':
