@@ -2447,6 +2447,6 @@ html:not(.dark) .icon-btn[data-action$="ilters"], html:not(.dark) .icon-btn[data
 :root { --switch-flow:linear-gradient(90deg,#000 0%,#141414 18%,#2E2E31 35%,#3D3D41 50%,#2E2E31 65%,#141414 82%,#000 100%); }
 html:not(.dark):not([data-contrast="true"]) .explore-switch[role="tablist"][data-on]::before { background:var(--switch-flow) 0 0 / 200% 100% repeat-x; animation:discover-flow 7s linear infinite; }
 @media (prefers-reduced-motion:reduce) { html:not(.dark) .explore-switch[role="tablist"][data-on]::before { animation:none; background:#141414; } }
-/* Fenêtres : bouton de validation (Afficher…, Fermer, Valider) en noir, avec le même reflet gris qui défile. */
-html:not(.dark):not([data-contrast="true"]) .sheet .sheet-actions .btn:not(.outline), html:not(.dark):not([data-contrast="true"]) .sheet .sheet-actions .btn:not(.outline):hover { border-color:#141414 !important; color:#FFF !important; background:var(--switch-flow) 0 0 / 200% 100% repeat-x !important; animation:discover-flow 7s linear infinite; }
-@media (prefers-reduced-motion:reduce) { html:not(.dark) .sheet .sheet-actions .btn:not(.outline) { animation:none; background:#141414 !important; } }
+/* Barre du bouton de validation des fenêtres : collée au vrai bas de la fenêtre, y compris avec la zone de la barre d’accueil de l’iPhone,
+   pour que la liste ne se voie plus en dessous pendant le défilement. */
+.sheet-actions { bottom:calc(-1 * max(24px, env(safe-area-inset-bottom, 0px))); margin-bottom:calc(-1 * max(24px, env(safe-area-inset-bottom, 0px))); }
