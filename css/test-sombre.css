@@ -21,7 +21,7 @@ html.dark .app.theme-C { --theme-tint:#FFE8D9; --pill-on:#FFE8D9; }
 /* ---------- Fond noir partout ---------- */
 html.dark, html.dark body, html.dark .app, html.dark .app main, html.dark .footer { background:#000 !important; }
 html.dark body::before { display:none !important; }
-html.dark .context-bar:not([style*="background"]) { background:rgba(0,0,0,.94); border-bottom-color:#1C1C1E; }
+html.dark body:not(.themed) .context-bar:not([style*="background"]) { background:rgba(0,0,0,.94); border-bottom-color:#1C1C1E; }
 html.dark #app .job-page .job-hero, html.dark #app .job-page .trip-head, html.dark #app .job-actions, html.dark #app .job-page .job-actions { background:#000 !important; border-color:#1C1C1E !important; }
 html.dark .tabbar { background:#000 !important; border-top-color:#1C1C1E !important; }
 
@@ -85,3 +85,8 @@ html.dark #app main.job-page:not(.concours-page) .job-hero { box-shadow:0 -80px 
 html.dark #app :is(h1, h2, h3, .section-heading, .trip-h) { color:#FFF !important; }
 html.dark #app :is(h1, h2, h3, .section-heading) > svg, html.dark #app .section-heading svg { color:#FFF !important; }
 html.dark #app .ref-card :is(h2, h3) { color:#000 !important; }
+
+/* Barre du haut aux couleurs de la catégorie : elle reste en couleur, texte et pictogrammes blancs. */
+html.dark body.themed .context-bar { background:var(--theme) !important; border-bottom-color:transparent !important; }
+html.dark body.themed .context-bar :is(.context-title, .icon-btn, .icon-btn svg) { color:#FFF !important; }
+html.dark body.themed .context-bar .cat { box-shadow:0 0 0 2px #FFF !important; }
