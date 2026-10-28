@@ -2551,3 +2551,6 @@ html.dark #app .also-counter .talents-counter-copy b { color:#FFF; }
 .info-page .callout { background:transparent !important; padding-left:0; padding-right:0; }
 /* Onboarding : titres principaux à la même graisse que ceux des écrans de l’appli (Bonjour, Explorer…). */
 .app.onboarding h1, .app.onboarding .intro-hero-text h1, .intro-screen h1, .intro-tabs-screen h1 { font-weight:400; }
+/* Concours aux noms longs : la pastille passe à la ligne et épouse le texte, coins arrondis conservés. */
+.trip-tab { flex:0 1 auto; max-width:100%; min-width:0; height:auto; white-space:normal; text-align:left; line-height:1.3; border-radius:20px; padding-top:7px; padding-bottom:7px; }
+.trip-tab > span { min-width:0; overflow-wrap:anywhere; white-space:normal; }

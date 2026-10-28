@@ -371,8 +371,10 @@ html.dark :is(#app, .sheet) button.chip:not(.category-choice):not(.on) :is(svg, 
 html.dark #app .fit .job-fit-check, html.dark #app .fit .job-fit-check svg { background:#C8FFB2 !important; color:#000 !important; }
 html.dark #app .fit .job-fit-check svg { background:none !important; stroke:#000 !important; }
 /* Catégories des fiches métier : active en blanc plein (texte noir), sélectionnable cerclée de blanc. */
-html.dark #app .trip-cat { background:transparent !important; color:#FFF !important; box-shadow:inset 0 0 0 1.5px #FFF !important; }
-html.dark #app .trip-cat > span:not(.cat) { color:#FFF !important; }
+html.dark #app .trip-cat { background:transparent !important; color:#8E8E93 !important; box-shadow:inset 0 0 0 1.5px #5A5A60 !important; }
+html.dark #app .trip-cat > span:not(.cat) { color:#8E8E93 !important; }
+/* Pastille de la catégorie non choisie : grisée ; sa couleur revient à la sélection. */
+html.dark #app .trip-cat:not([aria-pressed="true"]) .cat { background:#3A3A3E !important; color:#8E8E93 !important; }
 html.dark #app .trip-cat[aria-pressed="true"] { background:#FFF !important; color:#000 !important; box-shadow:none !important; }
 html.dark #app .trip-cat[aria-pressed="true"] > span:not(.cat) { color:#000 !important; }
 /* Versants des fiches métier : choisi en gris plein, texte blanc ; les autres cerclés de gris, texte gris, sans fond. */
