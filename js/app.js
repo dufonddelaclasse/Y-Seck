@@ -1209,7 +1209,7 @@
         '<span class="details-toggle" aria-hidden="true">' + I.down + '</span></summary>' +
         '<div class="intro-fold-body"><p>' + esc(c.d) + '</p><p class="ex"><b>Pour y entrer :</b> ' + esc(c.dip) + '</p>' + catMention(c) + '<p class="ex"><b>Par exemple :</b> ' + esc(c.ex) + '</p>' + where + '</div></details>';
     }).join('');
-    return '<h2 class="mt-m understand-title no-icon">4 catégories</h2><p class="lead">Le niveau de responsabilité, le diplôme demandé et où passer les épreuves.</p>' +
+    return '<h2 class="mt-m understand-title no-icon info-big">4 catégories</h2><p class="lead">Le niveau de responsabilité, le diplôme demandé et où passer les épreuves.</p>' +
       '<div class="stack employer-list">' + cats + '</div>' +
       '<div class="callout tint-blue"><span class="pin"></span><p>Rien n’est figé : on peut monter de catégorie au cours de sa carrière, par concours interne ou par promotion. Les villes exactes figurent dans chaque avis de concours.</p></div>' +
       '<h2 class="mt-m understand-title no-icon">Les voies d’accès</h2><p class="lead">Un même concours s’ouvre souvent par plusieurs voies, selon votre parcours.</p>' +
@@ -1217,7 +1217,7 @@
       '<h2 class="mt-m understand-title no-icon">Pour toutes et tous</h2><p class="lead">Les conditions communes à tous les concours.</p>' +
       '<div class="checks">' + D.conditions.map(function (k) { return '<div>' + I.check + '<span>' + esc(k) + '</span></div>'; }).join('') + '</div>' +
       '<a class="btn outline mt-s" href="#/handicap">Handicap : accès et aménagements</a>' +
-      '<h2 class="mt-l understand-title no-icon" id="info-dates">Dates des concours</h2>' +
+      '<h2 class="mt-l understand-title no-icon info-big" id="info-dates">Dates des concours</h2>' +
       infoDates();
   }
   screens.concours = function () {
@@ -1239,7 +1239,7 @@
         '<a class="btn outline" href="#/etudes">Quelles études choisir ?</a>' + preparationContent()
       : infoConcours();
     return '<main class="screen top-tight intro-screen category-screen understand-page info-page">' + back('#/concours', 'Informations générales') +
-      '<h1 class="mt-m understand-title">' + esc(x[1]) + '</h1>' + body + '</main>' + tabbar('accueil');
+      '<h1 class="' + (axis === 'concours' ? 'sr-only' : 'mt-m understand-title') + '">' + esc(x[1]) + '</h1>' + body + '</main>' + tabbar('accueil');
   };
 
   /* ---------- Référentiel des concours ---------- */

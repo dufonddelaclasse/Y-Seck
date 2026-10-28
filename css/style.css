@@ -2503,3 +2503,6 @@ html.dark .info-axis { background:#1C1C1E; color:#FFF; }
 .update-notice-copy { margin-bottom:2px; }
 /* Boutons blancs secondaires (« Quelles études choisir ? », « Annales et rapports de jury »…) : plus de contour violet. */
 html:not(.dark):not([data-contrast="true"]) :is(.btn.outline, .btn.outline:hover, a.btn.outline, button.btn.outline) { border-color:transparent !important; }
+/* Les concours : « 4 catégories » et « Dates des concours » gardent la grande taille de titre. */
+.info-page h2.understand-title.info-big { font-size:1.875rem; line-height:1.1; margin-top:28px; }
+.info-page h2.understand-title.info-big:first-of-type { margin-top:16px; }
