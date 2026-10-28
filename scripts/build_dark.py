@@ -388,6 +388,9 @@ html.dark #app .status-plan { background:#2C2C2F; color:#C2C2C6; }
 /* Fiche métier : la zone de la frise en dégradé, gris foncé sous la barre d’actions vers presque noir en bas. */
 /* Fiche métier : zone de la frise en dégradé de gris. */
 html.dark #app main.job-page:not(.concours-page) { background:linear-gradient(180deg, #171719 0, #121214 600px, #0A0A0B 100%) !important; }
+/* Écrans de l’appli (hors fiches métier et concours) : même dégradé que la frise des fiches métier. */
+html.dark, html.dark body, html.dark .app, html.dark .footer { background:#0A0A0B !important; }
+html.dark #app main:not(.job-page) { background:linear-gradient(180deg, #171719 0, #121214 600px, #0A0A0B 100%) !important; }
 """
 
 if __name__ == '__main__':
