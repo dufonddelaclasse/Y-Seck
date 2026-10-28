@@ -2467,3 +2467,12 @@ body.themed .context-bar.bar-enter .cat { animation:bar-ring .45s ease .55s both
 html:is([data-large-text="true"], [data-dys-font="true"]) .tabbar a { height:auto; min-height:75px; }
 /* Zone d’annonces pour lecteurs d’écran : posée en haut de page, elle n’allonge plus la page d’1 px. */
 #live.sr-only { position:fixed; top:0; left:0; }
+/* Informations générales : trois entrées numérotées, au style des blocs de « Comprendre la fonction publique ». */
+.info-axis { display:flex; align-items:center; gap:14px; min-height:76px; padding:14px 16px; color:var(--ink); text-decoration:none; }
+.info-axis:hover { color:var(--ink); }
+.info-axis-num { flex:none; width:18px; font-size:.9375rem; font-weight:500; color:var(--muted); text-align:center; }
+.info-axis .employer-title { font-size:1.0625rem; font-weight:500; }
+.info-axis .row-chev { margin-right:-2px; }
+.info-page .checks { margin-top:10px; }
+.info-page #aides { margin-top:28px; }
+html.dark .info-axis { background:#1C1C1E; color:#FFF; }

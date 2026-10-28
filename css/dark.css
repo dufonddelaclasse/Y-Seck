@@ -864,6 +864,10 @@ html:where(.dark):not(.dark) .icon-btn[data-action$="ilters"], html:where(.dark)
 }
 :where(html.dark) body.themed .context-bar.bar-enter { background:#292929 !important; }
 :where(html.dark) body.themed .context-bar.bar-enter::before { background:linear-gradient(90deg, var(--theme) 0%, var(--theme) 50%, transparent 100%); }
+:where(html.dark) .info-axis { color:var(--ink); }
+:where(html.dark) .info-axis:hover { color:var(--ink); }
+:where(html.dark) .info-axis-num { color:var(--muted); }
+html:where(.dark).dark .info-axis { background:#4A4A4F; color:#FFF; }
 
 /* Retouches */
 html.dark .app .prep:not(.prep-static):not(.talents-card):not(.talents-feature) { background:#292929 !important; }

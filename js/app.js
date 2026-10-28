@@ -745,7 +745,7 @@
       (isParent() ? '<a class="link-plain" href="#/accueil">Tous les parcours de la famille</a>' : '') +
       '<div class="home-features mt-s"><a class="home-feature home-discover" href="#/metiers" data-action="discoverJobs"><span class="home-tile home-count' + countSize(jobs.length) + '">' + jobs.length + '</span><span class="home-feature-copy"><b>' + (isParent() ? 'Ses métiers à découvrir' : 'Vos métiers à découvrir') + '</b><span>sélectionnés pour ' + (isParent() ? 'votre enfant' : 'vous') + '.</span></span><span class="home-go">' + I.arrow + '</span></a>' +
       '<a class="home-feature home-concours" href="#/concours-liste" data-action="discoverConcours"><span class="home-tile home-count' + countSize(concours.length) + '">' + concours.length + '</span><span class="home-feature-copy"><b>' + (isParent() ? 'Ses concours' : 'Vos concours') + '</b><span>sélectionnés pour ' + (isParent() ? 'votre enfant' : 'vous') + '.</span></span><span class="home-go">' + I.arrow + '</span></a>' +
-      '<a class="home-feature home-access" href="#/concours"><span class="home-tile home-tile-parcours">' + I.journey + '</span><span class="home-feature-copy"><b>Comment y accéder</b><span>Les concours A+, A, B et C selon le diplôme spécifique et les conditions du concours</span></span><span class="home-go">' + I.arrow + '</span></a></div>' +
+      '<a class="home-feature home-access" href="#/concours"><span class="home-tile home-tile-parcours">' + I.journey + '</span><span class="home-feature-copy"><b>Informations générales</b><span>Les concours, les fonctions publiques et les prépas</span></span><span class="home-go">' + I.arrow + '</span></a></div>' +
       '<div class="grid-2 home-shortcuts"><a href="#/favoris"><span class="home-tile home-count' + countSize(S.favorites.length) + '">' + S.favorites.length + '</span><span><b>' + (isParent() ? 'Ses favoris' : 'Vos favoris') + '</b></span></a><a href="#/interets"><span class="home-tile">' + I.pencil + '</span><span><b>' + (isParent() ? 'Son projet' : 'Votre projet') + '</b></span></a></div>' +
       '</main>' + tabbar('accueil');
   }
@@ -1167,44 +1167,53 @@
   };
 
   /* ---------- Concours : catégories dépliables ---------- */
-  screens.concours = function () {
-    var mine = myJobs();
-    return '<main class="screen pt">' +
-      '<h1>Concours et prépas</h1><p class="lead sm">Les conditions de diplôme varient selon le concours. Touchez une catégorie pour savoir où passer les épreuves.</p>' +
-      '<div class="stack mt-s">' + D.categories.map(function (c) {
-        var open = S.openCat === c.id;
-        var jobs = mine.filter(function (j) { return jobCategories(j).indexOf(c.id)>-1; });
-        var fpCount = { E: 0, T: 0, H: 0 };
-        jobs.forEach(function (j) { j.fp.split('').forEach(function (f) { fpCount[f]++; }); });
-        var fps = ['E', 'T', 'H'].sort(function (a, b) { return fpCount[b] - fpCount[a]; });
-        var panelId = 'cat-panel-' + catClass(c.id);
-        var panel = '';
-        if (open) {
-          panel = '<div class="cat-panel" id="' + panelId + '">' +
-            '<p class="small m0">' + esc(c.note) + '</p>' +
-            (jobs.length ? '<h3 class="h4">Pour ' + (isParent() ? 'ses' : 'vos') + ' choix</h3><div class="row">' + jobs.slice(0, 6).map(function (j) {
-              return '<a class="tag link" href="#/metier/' + j.id + '">' + esc(j.name) + '</a>';
-            }).join('') + '</div>' : '') +
-            '<h3 class="h4">Où passer les épreuves</h3>' +
-            fps.map(function (f) {
-              var e = D.exam[c.id][f];
-              return '<div class="exam">' +
-                '<div class="exam-head"><b>' + esc(D.fps[f]) + '</b>' + (fpCount[f] ? '<span class="fit on">' + (isParent() ? 'Ses' : 'Vos') + ' choix</span>' : '') + '</div>' +
-                '<dl><dt>Organisé par</dt><dd>' + sig(e.org) + '</dd><dt>Métropole</dt><dd>' + esc(e.metro) + '</dd><dt>Outre-mer</dt><dd>' + esc(e.om) + '</dd></dl></div>';
-            }).join('') +
-            '<p class="small m0">Les villes exactes figurent dans chaque avis de concours.</p>' +
-            '</div>';
-        }
-        return '<div class="catcard-wrap ' + c.tint + (open ? ' open' : '') + '">' +
-          '<button type="button" class="catcard" aria-expanded="' + open + '" aria-controls="' + panelId + '"' + attr('action', 'openCat') + attr('v', c.id) + '>' +
-          '<span class="cat lg ' + catClass(c.id) + '" aria-hidden="true">' + c.id + '</span>' +
-          '<span class="txt"><span class="sr-only">Catégorie ' + c.id + ' : </span><b>' + esc(c.dip) + '</b><span class="role">' + esc(c.role) + '</span><span class="ex">' + esc(c.ex) + '</span>' + categoryFit(c.id) + '</span>' +
-          I.down + '</button>' + panel + '</div>';
-      }).join('') + '</div>' +
-      '<h2 class="eyebrow mt-m">Pour toutes et tous</h2>' +
+  /* ---------- Informations générales : trois axes, les concours, les fonctions publiques, les prépas ---------- */
+  var INFO_AXES = [
+    ['concours', 'Les concours', 'Catégories, voies d’accès, conditions et lieux des épreuves', 'exam'],
+    ['fonctions', 'Les fonctions publiques', 'État, territoriale, hospitalière : trois employeurs', 'government'],
+    ['prepas', 'Les prépas', 'Études conseillées, aides, prépas gratuites ou à frais d’inscription', 'book']
+  ];
+  function infoFold(icon, title, sub, body) {
+    return '<details class="intro-fold intro-employer-fold"><summary><span class="employer-icon" aria-hidden="true">' + icon + '</span>' +
+      '<span class="intro-fold-name"><h3 class="employer-title no-icon">' + esc(title) + '</h3>' + (sub ? '<span class="intro-fold-sub">' + esc(sub) + '</span>' : '') + '</span>' +
+      '<span class="details-toggle" aria-hidden="true">' + I.down + '</span></summary><div class="intro-fold-body">' + body + '</div></details>';
+  }
+  function infoConcours() {
+    var voies = VOIES.filter(function (v) { return !/titres?/i.test(v[1]); });
+    return categoriesBlocks('h2', 'h3') +
+      '<h2 class="mt-m understand-title no-icon">Les voies d’accès</h2><p class="lead">Un même concours s’ouvre souvent par plusieurs voies, selon votre parcours.</p>' +
+      '<div class="stack employer-list">' + voies.map(function (v) { return infoFold(I.walk, v[1], '', '<p>' + esc(v[2]) + '</p>'); }).join('') + '</div>' +
+      '<h2 class="mt-m understand-title no-icon">Pour toutes et tous</h2><p class="lead">Les conditions communes à tous les concours.</p>' +
       '<div class="checks">' + D.conditions.map(function (k) { return '<div>' + I.check + '<span>' + esc(k) + '</span></div>'; }).join('') + '</div>' +
-      '<div class="grid-2 mt-m"><a class="btn outline" href="#/calendrier">Calendrier</a><a class="btn outline" href="#/etudes">Quelles études ?</a></div>' +
-      '<a class="btn outline" href="#/handicap">Handicap : accès et aménagements</a>' + preparationContent() + '</main>' + tabbar('concours');
+      '<h2 class="mt-m understand-title no-icon">Où passer les épreuves</h2><p class="lead">Selon la catégorie et la fonction publique. Les villes exactes figurent dans chaque avis de concours.</p>' +
+      '<div class="stack employer-list">' + D.categories.map(function (c) {
+        return '<details class="intro-fold intro-category-fold ' + c.tint + '"><summary><span class="cat lg ' + catClass(c.id) + '" aria-hidden="true">' + c.id + '</span>' +
+          '<span class="intro-fold-name"><h3 class="explain-t no-icon"><span class="sr-only">Catégorie ' + c.id + ' : </span>' + esc(c.dip) + '</h3><span class="intro-fold-sub">Catégorie ' + c.id + '</span></span><span class="details-toggle" aria-hidden="true">' + I.down + '</span></summary>' +
+          '<div class="intro-fold-body">' + ['E', 'T', 'H'].map(function (f) {
+            var e = D.exam[c.id][f];
+            return '<p class="ex"><b>' + esc(FP_FULL[f] || D.fps[f]) + '</b></p><p>Organisé par ' + sig(e.org) + '</p><p>En métropole : ' + esc(e.metro) + '</p><p>En outre-mer : ' + esc(e.om) + '</p>';
+          }).join('') + '</div></details>';
+      }).join('') + '</div>' +
+      '<div class="stack mt-m"><a class="btn outline" href="#/calendrier">' + I.calendar + 'Dates des concours</a><a class="btn outline" href="#/handicap">Handicap : accès et aménagements</a></div>';
+  }
+  screens.concours = function () {
+    return '<main class="screen top-tight intro-screen category-screen understand-page info-page">' + back('#/accueil', 'Accueil') +
+      '<h1 class="mt-m understand-title">Informations générales</h1><p class="lead">Tout ce qu’il faut savoir avant de choisir un métier ou un concours, en trois parties.</p>' +
+      '<div class="stack employer-list">' + INFO_AXES.map(function (x, n) {
+        return '<a class="intro-fold info-axis" href="#/infos/' + x[0] + '"><span class="info-axis-num" aria-hidden="true">' + (n + 1) + '</span><span class="employer-icon" aria-hidden="true">' + I[x[3]] + '</span>' +
+          '<span class="intro-fold-name"><span class="employer-title">' + esc(x[1]) + '</span><span class="intro-fold-sub">' + esc(x[2]) + '</span></span><span class="row-chev" aria-hidden="true">' + I.chev + '</span></a>';
+      }).join('') + '</div></main>' + tabbar('accueil');
+  };
+  screens.infos = function (axis) {
+    var x = INFO_AXES.filter(function (a) { return a[0] === axis; })[0];
+    if (!x) return screens.concours();
+    var body = axis === 'fonctions' ? versantsBlocks('h2', 'h3').replace('<h2 class="mt-m understand-title no-icon">3 fonctions publiques</h2>', '') +
+        '<div class="stack mt-m"><a class="btn outline" href="#/comprendre">Comprendre la fonction publique</a></div>'
+      : axis === 'prepas' ? '<p class="lead">Les études qui mènent aux concours, puis les aides et les prépas, gratuites ou au prix d’une inscription à l’université.</p>' +
+        '<a class="btn outline" href="#/etudes">Quelles études choisir ?</a>' + preparationContent()
+      : infoConcours();
+    return '<main class="screen top-tight intro-screen category-screen understand-page info-page">' + back('#/concours', 'Informations générales') +
+      '<span class="eyebrow">' + (INFO_AXES.indexOf(x) + 1) + ' / 3</span><h1 class="mt-s understand-title">' + esc(x[1]) + '</h1>' + body + '</main>' + tabbar('accueil');
   };
 
   /* ---------- Référentiel des concours ---------- */
@@ -1702,7 +1711,7 @@
       (list.length > S.calLimit ? '<button type="button" class="btn outline" data-action="moreCalendar">Afficher 40 sessions de plus</button>' : '') +
       '</main>' + tabbar('metiers');
     /* Même présentation que l’Explorer : titre et réglages, pastilles grises des filtres, recherche avec suggestions, puis les cards. */
-    return '<main class="screen pt calendar-screen">' + back('#/concours', 'Concours et prépas') +
+    return '<main class="screen pt calendar-screen">' + back('#/concours', 'Informations générales') +
       '<div class="title-row"><h1>Dates des concours</h1><button id="filters-open" type="button" class="icon-btn" data-action="openCalFilters" aria-label="Régler les filtres du calendrier">' + I.settings + '</button></div>' +
       '<div class="row filter-summary" aria-label="Filtres actifs">' + calSummary() + '</div>' +
       '<div class="search-wrap">' + searchField('cal-q', 'Rechercher un concours ou une ville', 'Rechercher un concours', S.calQ) +
@@ -1968,7 +1977,7 @@
       var job = arg2 ? D.jobs.filter(function (j) { return j.id === arg2; })[0] : null;
       var r = talentsList(job);
       var scope = job ? 'pour ce concours' : (S.domains.length ? 'pour ' + (isParent() ? 'ses' : 'vos') + ' choix' : '');
-      return '<main class="screen top-tight">'+back(contextJob?prepHref(contextJob):'#/concours',contextJob?'Se préparer':'Concours et prépas')+
+      return '<main class="screen top-tight">'+back(contextJob?prepHref(contextJob):'#/concours',contextJob?'Se préparer':'Informations générales')+
         talentsFeature('Prépas Talents','<p>Préparations gratuites, avec tutorat, aux concours A, A+ et B. Elles ont lieu dans des universités, des écoles du service public et des IEP, les instituts d’études politiques (Sciences Po).</p>','h1','talents-flat') +
         '<section class="region-zone" aria-labelledby="region-title"><h2 class="region-title no-icon" id="region-title">Région</h2>' + regionMap() + regionField() +
         talentsCounter(r, scope || 'pour ' + (isParent() ? 'ses' : 'vos') + ' choix') + '</section>' +
@@ -2059,7 +2068,7 @@
     var job=jobById(jobId),title=bibliography?'Bibliographies des concours':'Annales et rapports de jury';
     if(job&&isContractJob(job))return screens['sans-concours'](job.id);
     /* Même présentation que l’Explorer : titre et réglages, pastilles grises des filtres, recherche, puis les cards. */
-    return '<main class="screen pt study-screen">'+back(bibliography?'#/bibliographie'+(job?'/'+job.id:''):job?prepHref(job):'#/concours',bibliography?'Bibliographie':job?'Se préparer':'Concours et prépas')+
+    return '<main class="screen pt study-screen">'+back(bibliography?'#/bibliographie'+(job?'/'+job.id:''):job?prepHref(job):'#/concours',bibliography?'Bibliographie':job?'Se préparer':'Informations générales')+
       '<div class="title-row"><h1>'+title+'</h1><button id="filters-open" type="button" class="icon-btn" data-action="resourceFilters" aria-haspopup="dialog" aria-label="Filtrer les ressources">'+I.settings+'</button></div>'+
       (job?'<p class="body m0">'+esc(job.name)+'</p>':'')+
       '<div class="row filter-summary" aria-label="Filtres actifs">'+studySummary(job,bibliography)+'</div>'+
@@ -2105,7 +2114,7 @@
     var filterable=cats.length>1||subjects.length>0;
     function pill(text,cls){return filterable?'<button type="button" class="tag tag-btn'+(cls||'')+'" data-action="openBookFilters" aria-haspopup="dialog" aria-label="'+esc(text)+' : modifier les filtres">'+esc(text)+'</button>':'<span class="tag'+(cls||'')+'">'+esc(text)+'</span>';}
     /* Même présentation que l’Explorer : titre et réglages, pastilles grises, recherche, puis les ouvrages. */
-    return '<main class="screen pt biblio-screen">' + back(job?prepHref(job):'#/concours/prepas',job?'Se préparer':'Concours et prépas') +
+    return '<main class="screen pt biblio-screen">' + back(job?prepHref(job):'#/concours/prepas',job?'Se préparer':'Informations générales') +
       '<div class="title-row"><h1>Bibliographie</h1>'+(filterable?'<button id="filters-open" type="button" class="icon-btn" data-action="openBookFilters" aria-haspopup="dialog" aria-label="Filtrer les ouvrages">'+I.settings+'</button>':'')+'</div>' +
       (job?'<p class="body m0">'+esc(job.name)+'</p>':'') +
       '<div class="row filter-summary" aria-label="Filtres actifs">'+pill(category?'Catégorie '+category:'Catégorie à préciser',category?' fill '+catClass(category):'')+(subjects.length?pill(S.bookSubject==='Toutes'?'Toutes les thématiques':S.bookSubject):'')+'</div>' +
