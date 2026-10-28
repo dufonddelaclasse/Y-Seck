@@ -1669,7 +1669,7 @@ html[data-contrast="true"] .tabbar a.on, html[data-contrast="true"] .tabbar a.on
 /* Espace personnel : « Vos métiers à découvrir » parcouru en continu par un dégradé doux, de gauche à droite.
    Teintes calculées sur une courbe en cosinus (24 paliers) : aucune cassure de pente, donc aucune ligne visible. */
 /* Dégradé dans une variable : le générateur du mode sombre ne l’assombrit pas. */
-:root { --discover-flow:linear-gradient(90deg,#0D033B 0%,#0D033C 2.08%,#0E0340 4.17%,#0F0446 6.25%,#11044D 8.33%,#130558 10.42%,#160563 12.5%,#190671 14.58%,#1C0780 16.67%,#200890 18.75%,#2309A1 20.83%,#270AB3 22.92%,#2B0BC5 25%,#4124CD 27.08%,#573DD4 29.17%,#6C55DB 31.25%,#7F6BE2 33.33%,#9280E8 35.42%,#A393EE 37.5%,#B1A4F3 39.58%,#BDB2F7 41.67%,#C7BDFB 43.75%,#CEC5FD 45.83%,#D3CAFF 47.92%,#D4CCFF 50%,#D3CAFF 52.08%,#CEC5FD 54.17%,#C7BDFB 56.25%,#BDB2F7 58.33%,#B1A4F3 60.42%,#A393EE 62.5%,#9280E8 64.58%,#806CE2 66.67%,#6C55DB 68.75%,#573DD4 70.83%,#4124CD 72.92%,#2B0BC5 75%,#270AB3 77.08%,#2309A1 79.17%,#200890 81.25%,#1C0780 83.33%,#190671 85.42%,#160563 87.5%,#130558 89.58%,#11044D 91.67%,#0F0446 93.75%,#0E0340 95.83%,#0D033C 97.92%,#0D033B 100%); }
+:root { --discover-flow:linear-gradient(90deg,#000000 0%,#000001 2.08%,#020007 4.17%,#030110 6.25%,#06011A 8.33%,#090229 10.42%,#0C0339 12.5%,#11044D 14.58%,#160662 16.67%,#1A0779 18.75%,#200892 20.83%,#250AAB 22.92%,#2B0BC5 25%,#4124CD 27.08%,#573DD4 29.17%,#6C55DB 31.25%,#7F6BE2 33.33%,#9280E8 35.42%,#A393EE 37.5%,#B1A4F3 39.58%,#BDB2F7 41.67%,#C7BDFB 43.75%,#CEC5FD 45.83%,#D3CAFF 47.92%,#D4CCFF 50%,#D3CAFF 52.08%,#CEC5FD 54.17%,#C7BDFB 56.25%,#BDB2F7 58.33%,#B1A4F3 60.42%,#A393EE 62.5%,#9280E8 64.58%,#806CE2 66.67%,#6C55DB 68.75%,#573DD4 70.83%,#4124CD 72.92%,#2B0BC5 75%,#250AAB 77.08%,#200892 79.17%,#1A0779 81.25%,#160662 83.33%,#11044D 85.42%,#0C0339 87.5%,#090229 89.58%,#06011A 91.67%,#030110 93.75%,#020007 95.83%,#000001 97.92%,#000000 100%); }
 @keyframes discover-flow { from { background-position:0 0; } to { background-position:-200% 0; } }
 .personal-home .home-discover, .personal-home .home-discover:hover, html.dark body .personal-home .home-discover { background:var(--discover-flow) 0 0 / 200% 100% repeat-x; animation:discover-flow 7s linear infinite; }
 @media (prefers-reduced-motion:reduce) { .personal-home .home-discover, html.dark body .personal-home .home-discover { animation:none; background:var(--brand); } }
@@ -2435,3 +2435,5 @@ html.dark .study-card h3 { color:#F2F2F2; }
 .explore-switch[role="tablist"][data-on]::before { background:#141414; }
 /* Barre du haut : titres en noir sur les pages sans catégorie (les pages d’une catégorie gardent leur barre colorée, texte blanc). */
 body:not(.themed) .context-bar .context-title, body:not(.themed) .context-bar.top-level .context-title { color:#141414; }
+/* Pictogrammes du menu : boîte fixe, quelle que soit la version (vide ou pleine). */
+.tabbar a svg { display:block; overflow:visible; }
