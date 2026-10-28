@@ -1013,7 +1013,7 @@ html.dark body, html.dark .app, html.dark .app main { background:transparent !im
 html.dark body::before { display:block !important; content:''; position:fixed; top:0; left:0; right:0; bottom:0; height:auto; z-index:-1; background:linear-gradient(180deg, #080808 0%, #121212 100%) !important; pointer-events:none; }
 html.dark .footer { background:#121212 !important; }
 html.dark body:not(.themed) .context-bar:not([style*="background"]) { background:rgba(0,0,0,.94); border-bottom-color:#1C1C1E; }
-html.dark #app .job-page .job-hero, html.dark #app .job-page .trip-head, html.dark #app .job-actions, html.dark #app .job-page .job-actions { background:transparent !important; border-color:#1C1C1E !important; }
+html.dark #app .job-page .job-hero, html.dark #app .job-page .trip-head, html.dark #app .job-actions, html.dark #app .job-page .job-actions { background:#000 !important; border-color:#1C1C1E !important; }
 html.dark .tabbar { background:#000 !important; border-top-color:#1C1C1E !important; }
 
 /* ---------- Blocs : anthracite, sans contour ---------- */
@@ -1067,8 +1067,9 @@ html.dark #app .personal-home .home-feature .home-go { border:0; }
 html.dark #app .ref-card .cat, html.dark #app .ref-card .cat * { color:#FFF !important; }
 
 /* Fiche métier : la zone de la frise (sous En savoir +, Favori, Partager) en gris foncé ; le haut reste noir. */
-html.dark #app main.job-page:not(.concours-page) { background:transparent !important; }
-html.dark #app main.job-page :is(.job-hero, .trip-head, .job-actions) { background:transparent !important; }
+html.dark #app main.job-page:not(.concours-page) { background:#1C1C1E !important; }
+html.dark #app main.job-page:not(.concours-page) :is(.job-hero, .trip-head, .job-actions) { background:#000 !important; }
+html.dark #app main.job-page:not(.concours-page) .job-hero { box-shadow:0 -80px 0 #000; }
 html.dark #app main.job-page:not(.concours-page) :is(.ladder-alt-row, .list-row.job-row, .prep, .callout, .card) { background:#2C2C2F !important; }
 html.dark #app main.job-page:not(.concours-page) .a11y-link { background:transparent; }
 
@@ -1134,5 +1135,6 @@ html.dark #app .status-ok { background:#173D22; color:#9FE8B4; }
 html.dark #app .status-closed { background:#4A1818; color:#FFB3B3; }
 html.dark #app .status-plan { background:#2C2C2F; color:#C2C2C6; }
 /* Fiche métier : la zone de la frise en dégradé, gris foncé sous la barre d’actions vers presque noir en bas. */
-html.dark #app main.job-page:not(.concours-page) { background:transparent !important; }
-html.dark #app main.job-page :is(.job-hero, .trip-head, .job-actions) { background:transparent !important; }
+/* Fiches métier et concours : elles gardent leur propre fond (haut noir, frise en dégradé), sans le dégradé général. */
+html.dark #app main.job-page.concours-page { background:#000 !important; }
+html.dark #app main.job-page:not(.concours-page) { background:linear-gradient(180deg, #171719 0, #121214 600px, #0A0A0B 100%) !important; }
