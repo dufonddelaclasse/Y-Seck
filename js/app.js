@@ -271,7 +271,7 @@
     }).join('') + '</nav>';
   }
   function chip(action, value, label, on, extraCls) {
-    return '<button type="button" class="chip' + (extraCls ? ' ' + extraCls : '') + ((action === 'metCat' || action === 'calCat' || action === 'calCats' || action === 'resCats' || action === 'bookCategory') && value !== 'Toutes' ? ' category-choice ' + catClass(value) : '') + (on ? ' on' : '') + '" aria-pressed="' + on + '"' + attr('action', action) + attr('v', value) + '>' + (action === 'metCat' && value === 'CDD' ? '<span>Contractuels</span>' + I.contract : esc(label)) + '</button>';
+    return '<button type="button" class="chip' + (extraCls ? ' ' + extraCls : '') + ((action === 'metCat' || action === 'calCat' || action === 'calCats' || action === 'resCats' || action === 'bookCategory' || action === 'infoCat') && value !== 'Toutes' ? ' category-choice ' + catClass(value) : '') + (on ? ' on' : '') + '" aria-pressed="' + on + '"' + attr('action', action) + attr('v', value) + '>' + (action === 'metCat' && value === 'CDD' ? '<span>Contractuels</span>' + I.contract : esc(label)) + '</button>';
   }
   /* Valider une recherche ferme le clavier ; les résultats se mettent déjà à jour pendant la saisie. */
   function submitSearch(id) {
@@ -1178,23 +1178,39 @@
       '<span class="intro-fold-name"><h3 class="employer-title no-icon">' + esc(title) + '</h3>' + (sub ? '<span class="intro-fold-sub">' + esc(sub) + '</span>' : '') + '</span>' +
       '<span class="details-toggle" aria-hidden="true">' + I.down + '</span></summary><div class="intro-fold-body">' + body + '</div></details>';
   }
+  /* Les concours : 1. les catégories (rôle, diplôme, exemples et lieux des épreuves dans un même bloc), 2. les voies d’accès,
+     3. les conditions communes, 4. toutes les dates, filtrables par catégorie. */
+  function infoCats() { return Array.isArray(S.infoCats) && S.infoCats.length ? CAL_CATS.filter(function (c) { return S.infoCats.indexOf(c) > -1; }) : CAL_CATS.slice(); }
+  function infoDates() {
+    var cats = infoCats(), list = upcoming().filter(function (c) { return cats.length === 4 || cats.indexOf(calendarCategory(c, null)) > -1; }).slice().sort(calendarOrder);
+    return '<p class="small" role="status">' + list.length + ' session' + (list.length > 1 ? 's' : '') + ' à venir</p>' +
+      '<div class="stack calendar-list">' + calendarRows(list, S.infoLimit || 40, null) + '</div>' +
+      (list.length > (S.infoLimit || 40) ? '<button type="button" class="btn outline mt-s" data-action="moreInfoDates">Afficher 40 sessions de plus</button>' : '');
+  }
   function infoConcours() {
     var voies = VOIES.filter(function (v) { return !/titres?/i.test(v[1]); });
-    return categoriesBlocks('h2', 'h3') +
+    var cats = CATS_INTRO.map(function (c) {
+      var dc = D.categories.filter(function (x) { return x.id === c.id; })[0];
+      var where = dc && D.exam[c.id] ? '<p class="ex info-where"><b>Où passer les épreuves</b></p>' + ['E', 'T', 'H'].map(function (f) {
+        var e = D.exam[c.id][f];
+        return '<p class="info-where-fp"><b>' + esc(D.fps[f]) + '</b> · ' + sig(e.org) + '<br>Métropole : ' + esc(e.metro) + '<br>Outre-mer : ' + esc(e.om) + '</p>';
+      }).join('') : '';
+      return '<details class="intro-fold intro-category-fold ' + c.tint + '"><summary><span class="cat lg ' + catClass(c.id) + '" aria-hidden="true">' + c.id + '</span>' +
+        '<span class="intro-fold-name"><h3 class="explain-t no-icon"><span class="sr-only">Catégorie ' + c.id + ' : </span>' + esc(c.t) + '</h3><span class="intro-fold-sub">Catégorie ' + c.id + ' · ' + esc(c.dip) + '</span></span>' +
+        '<span class="details-toggle" aria-hidden="true">' + I.down + '</span></summary>' +
+        '<div class="intro-fold-body"><p>' + esc(c.d) + '</p><p class="ex"><b>Pour y entrer :</b> ' + esc(c.dip) + '</p>' + catMention(c) + '<p class="ex"><b>Par exemple :</b> ' + esc(c.ex) + '</p>' + where + '</div></details>';
+    }).join('');
+    return '<h2 class="mt-m understand-title no-icon">4 catégories</h2><p class="lead">Le niveau de responsabilité, le diplôme demandé et où passer les épreuves.</p>' +
+      '<div class="stack employer-list">' + cats + '</div>' +
+      '<div class="callout tint-blue"><span class="pin"></span><p>Rien n’est figé : on peut monter de catégorie au cours de sa carrière, par concours interne ou par promotion. Les villes exactes figurent dans chaque avis de concours.</p></div>' +
       '<h2 class="mt-m understand-title no-icon">Les voies d’accès</h2><p class="lead">Un même concours s’ouvre souvent par plusieurs voies, selon votre parcours.</p>' +
       '<div class="stack employer-list">' + voies.map(function (v) { return infoFold(I.walk, v[1], '', '<p>' + esc(v[2]) + '</p>'); }).join('') + '</div>' +
       '<h2 class="mt-m understand-title no-icon">Pour toutes et tous</h2><p class="lead">Les conditions communes à tous les concours.</p>' +
       '<div class="checks">' + D.conditions.map(function (k) { return '<div>' + I.check + '<span>' + esc(k) + '</span></div>'; }).join('') + '</div>' +
-      '<h2 class="mt-m understand-title no-icon">Où passer les épreuves</h2><p class="lead">Selon la catégorie et la fonction publique. Les villes exactes figurent dans chaque avis de concours.</p>' +
-      '<div class="stack employer-list">' + D.categories.map(function (c) {
-        return '<details class="intro-fold intro-category-fold ' + c.tint + '"><summary><span class="cat lg ' + catClass(c.id) + '" aria-hidden="true">' + c.id + '</span>' +
-          '<span class="intro-fold-name"><h3 class="explain-t no-icon"><span class="sr-only">Catégorie ' + c.id + ' : </span>' + esc(c.dip) + '</h3><span class="intro-fold-sub">Catégorie ' + c.id + '</span></span><span class="details-toggle" aria-hidden="true">' + I.down + '</span></summary>' +
-          '<div class="intro-fold-body">' + ['E', 'T', 'H'].map(function (f) {
-            var e = D.exam[c.id][f];
-            return '<p class="ex"><b>' + esc(FP_FULL[f] || D.fps[f]) + '</b></p><p>Organisé par ' + sig(e.org) + '</p><p>En métropole : ' + esc(e.metro) + '</p><p>En outre-mer : ' + esc(e.om) + '</p>';
-          }).join('') + '</div></details>';
-      }).join('') + '</div>' +
-      '<div class="stack mt-m"><a class="btn outline" href="#/calendrier">' + I.calendar + 'Dates des concours</a><a class="btn outline" href="#/handicap">Handicap : accès et aménagements</a></div>';
+      '<a class="btn outline mt-s" href="#/handicap">Handicap : accès et aménagements</a>' +
+      '<h2 class="mt-l understand-title no-icon" id="info-dates">Dates des concours</h2>' +
+      '<div class="row info-cats" role="group" aria-label="Catégories">' + CAL_CATS.map(function (c) { return chip('infoCat', c, c, infoCats().indexOf(c) > -1); }).join('') + '</div>' +
+      '<div id="info-dates-list">' + infoDates() + '</div>';
   }
   screens.concours = function () {
     return '<main class="screen top-tight intro-screen category-screen understand-page info-page">' + back('#/accueil', 'Accueil') +
@@ -2783,6 +2799,8 @@
       case 'metFp': { var nf = toggled(selFps(), v, ALL_FPS); if (!nf.length) { announce('Gardez au moins un versant.'); break; } set({ metFps: nf, jobLimit: 60 }); countAnnounce(); break; }
       case 'calCat': set({ calCat: v }); countAnnounce(); break;
       case 'calFp': set({ calFp: v, calLimit: 40 }); break;
+      case 'infoCat': { var ic = toggled(infoCats(), v, CAL_CATS); if (!ic.length) { announce('Gardez au moins une catégorie.'); break; } S.infoCats = ic; S.infoLimit = 40; save(); render(); break; }
+      case 'moreInfoDates': S.infoLimit = (S.infoLimit || 40) + 40; save(); render(); break;
       case 'openCalFilters': UI.open('filters', 'Filtrer les dates', calFilters(), el); break;
       case 'calView': S.calView = v; S.calLimit = 40; save(); render(); break;
       case 'calCats': { var cc = toggled(calCats(), v, CAL_CATS); if (!cc.length) { announce('Gardez au moins une catégorie.'); break; } S.calCats = cc; S.calLimit = 40; save(); render(); break; }
