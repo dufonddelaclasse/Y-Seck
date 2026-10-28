@@ -2461,3 +2461,9 @@ body.themed .context-bar.bar-enter::before { content:''; position:absolute; top:
 body.themed .context-bar.bar-enter > * { position:relative; z-index:1; }
 body.themed .context-bar.bar-enter :is(.context-title, .icon-btn, .icon-btn svg) { animation:bar-ink .45s ease .55s both; }
 body.themed .context-bar.bar-enter .cat { animation:bar-ring .45s ease .55s both; }
+/* Menu du bas : les onglets tiennent dans la barre (76 px moins son filet du haut). Ils dépassaient d’1 px, ce qui rendait
+   les pages courtes (Favoris) défilables d’1 px et faisait bouger le menu sur iPhone. */
+.tabbar a { height:75px; }
+html:is([data-large-text="true"], [data-dys-font="true"]) .tabbar a { height:auto; min-height:75px; }
+/* Zone d’annonces pour lecteurs d’écran : posée en haut de page, elle n’allonge plus la page d’1 px. */
+#live.sr-only { position:fixed; top:0; left:0; }
