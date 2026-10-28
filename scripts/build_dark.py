@@ -275,8 +275,9 @@ html.dark #app .job-page:not(.concours-page) .rung { border:1.5px solid #FFF !im
 html.dark #app .ref-card { background:var(--ref-tint, #1C1C1E) !important; border:0 !important; }
 html.dark #app .ref-card, html.dark #app .ref-card :is(h3, p, b, span, summary, a, .meta, small) { color:#000 !important; }
 html.dark #app .ref-card :is(svg) { color:#000; }
-html.dark #app .job-page .job-match { background:var(--theme-tint) !important; color:#000 !important; }
-html.dark #app .job-page .job-match * { color:#000 !important; }
+/* « Vous ressemble » : encadré arrondi sans fond, bordure couleur de la catégorie, texte blanc. */
+html.dark #app .job-page .job-match { display:block; margin:14px 0 0; padding:12px 16px; border:1.5px solid var(--theme, #FFF) !important; border-radius:18px; background:transparent !important; color:#FFF !important; }
+html.dark #app .job-page .job-match * { color:#FFF !important; }
 
 /* ---------- Pastilles neutres : contour blanc, texte blanc ---------- */
 html.dark #app :is(.tag, .tag-btn, .home-profile-meta .tag, .job-page .job-meta .tag, .study-meta .tag, .fit.like, .filter-summary .tag) { background:transparent !important; border:1.5px solid #FFF !important; color:#FFF !important; }
@@ -335,6 +336,9 @@ html.dark body.themed .context-bar .cat { box-shadow:0 0 0 2px #FFF !important; 
 /* Accordéons du parcours : petits blocs anthracite (un cran plus clair sur la frise grise des fiches métiers). */
 html.dark #app .trip-more { background:#1C1C1E !important; }
 html.dark #app main.job-page:not(.concours-page) .trip-more { background:#2C2C2F !important; }
+/* Boutons principaux des pages d’une catégorie (Se préparer…) : couleur la plus saturée de la catégorie, texte blanc. */
+html.dark #app.themed .btn:not(.outline):not(.white), html.dark #app.themed .btn.theme { background:var(--theme) !important; border-color:var(--theme) !important; color:#FFF !important; }
+html.dark #app.themed .btn:not(.outline):not(.white) svg { color:#FFF !important; }
 """
 
 if __name__ == '__main__':
