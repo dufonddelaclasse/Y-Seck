@@ -319,8 +319,8 @@ html.dark #app .ref-card .cat, html.dark #app .ref-card .cat * { color:#FFF !imp
 
 /* Fiche métier : la zone de la frise (sous En savoir +, Favori, Partager) en gris foncé ; le haut reste noir. */
 html.dark #app main.job-page:not(.concours-page) { background:#1C1C1E !important; }
-html.dark #app main.job-page:not(.concours-page) :is(.job-hero, .trip-head, .job-actions) { background:#000 !important; }
-html.dark #app main.job-page:not(.concours-page) .job-hero { box-shadow:0 -80px 0 #000; }
+html.dark #app main.job-page :is(.job-hero, .trip-head, .job-actions) { background:#000 !important; }
+html.dark #app main.job-page .job-hero { box-shadow:0 -120px 0 #000; }
 html.dark #app main.job-page:not(.concours-page) :is(.ladder-alt-row, .list-row.job-row, .prep, .callout, .card) { background:#2C2C2F !important; }
 html.dark #app main.job-page:not(.concours-page) .a11y-link { background:transparent; }
 
