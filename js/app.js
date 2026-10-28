@@ -1705,7 +1705,7 @@
     };
     /* Départ : « Mon niveau » puis la pastille du niveau actuel, comme sur l’accueil. */
     /* Niveau suffisant : « Concours accessible » dans le même style que « Mon niveau », avec sa pastille. */
-    var accessLine = '<p class="trip-sub trip-level">Concours accessible<span class="study-level">' + I.check + '<span>Maintenant</span></span></p>';
+    var accessLine = '<p class="trip-sub trip-level">Concours accessible<span class="study-level access-now">' + I.check + '<span>Maintenant</span></span></p>';
     var head = stop('start', I.pin, 'Départ', '<p class="trip-sub' + (level ? ' trip-level' : '') + '">' + esc(who) + (level ? '<span class="study-level">' + I.graduation + '<span>' + esc(level) + '</span></span>' : '') + '</p>', '') +
       (first ? stop('leg', '<span class="trip-walk">' + I.walk + '</span>', '', '<p class="trip-lead">' + esc(TRIP_TITLES[first.kind]) + '</p>' + tripPhase(c, first, trip.lvl, prepaText(c)), 'line c-' + first.kind)
         /* Bac+3 face à un concours A+ ou A : accessible, mais la plupart des admis ont un Bac+5. */

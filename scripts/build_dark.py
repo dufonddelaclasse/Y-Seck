@@ -396,6 +396,9 @@ html.dark { background:#0A0A0B !important; }
 html.dark body, html.dark .app, html.dark #app main, html.dark #app main.job-page:not(.concours-page), html.dark #app main.job-page.concours-page { background:transparent !important; }
 html.dark body::before { display:block !important; content:''; position:fixed; top:0; left:0; right:0; bottom:0; height:auto; z-index:-1; background:linear-gradient(180deg, #171719 0%, #121214 70%, #0A0A0B 100%) !important; pointer-events:none; }
 html.dark .footer { background:#0A0A0B !important; }
+/* « Concours accessible · Maintenant » : contour vert, texte et coche verts, sans fond. */
+html.dark #app .study-level.access-now { background:transparent !important; border:1.5px solid #8EE6A6 !important; color:#8EE6A6 !important; }
+html.dark #app .study-level.access-now :is(span, svg) { color:#8EE6A6 !important; }
 """
 
 if __name__ == '__main__':

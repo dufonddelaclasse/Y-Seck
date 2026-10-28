@@ -888,6 +888,8 @@ html:where(.dark).dark #app .also-counter .talents-counter-copy b { color:#FFF; 
 :where(html.dark) .status-closed { background:#521F1F; color:#EF8A8A; }
 :where(html.dark) .status-plan { background:#262626; color:#C2C2C6; }
 :where(html.dark) .info-page .callout { background:transparent !important; }
+:where(html.dark) .study-level.access-now { background:#21572F; color:#C8C8CC; }
+:where(html.dark) .study-level.access-now svg { color:#88F2A8; }
 
 /* Retouches */
 html.dark .app .prep:not(.prep-static):not(.talents-card):not(.talents-feature) { background:#292929 !important; }
@@ -1142,3 +1144,6 @@ html.dark { background:#0A0A0B !important; }
 html.dark body, html.dark .app, html.dark #app main, html.dark #app main.job-page:not(.concours-page), html.dark #app main.job-page.concours-page { background:transparent !important; }
 html.dark body::before { display:block !important; content:''; position:fixed; top:0; left:0; right:0; bottom:0; height:auto; z-index:-1; background:linear-gradient(180deg, #171719 0%, #121214 70%, #0A0A0B 100%) !important; pointer-events:none; }
 html.dark .footer { background:#0A0A0B !important; }
+/* « Concours accessible · Maintenant » : contour vert, texte et coche verts, sans fond. */
+html.dark #app .study-level.access-now { background:transparent !important; border:1.5px solid #8EE6A6 !important; color:#8EE6A6 !important; }
+html.dark #app .study-level.access-now :is(span, svg) { color:#8EE6A6 !important; }

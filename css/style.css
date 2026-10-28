@@ -2554,3 +2554,6 @@ html.dark #app .also-counter .talents-counter-copy b { color:#FFF; }
 /* Concours aux noms longs : la pastille passe à la ligne et épouse le texte, coins arrondis conservés. */
 .trip-tab { flex:0 1 auto; max-width:100%; min-width:0; height:auto; white-space:normal; text-align:left; line-height:1.3; border-radius:20px; padding-top:7px; padding-bottom:7px; }
 .trip-tab > span { min-width:0; overflow-wrap:anywhere; white-space:normal; }
+/* « Concours accessible · Maintenant » (clair) : fond vert, texte gris, coche verte saturée. */
+.study-level.access-now { background:#D6F5DE; color:#4A4A50; }
+.study-level.access-now svg { color:#119A3B; }
