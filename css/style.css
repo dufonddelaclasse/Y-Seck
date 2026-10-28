@@ -2501,3 +2501,5 @@ html.dark .info-axis { background:#1C1C1E; color:#FFF; }
 /* Fenêtre de mise à jour : plus d’air à l’intérieur, surtout sur les côtés. */
 .update-notice { padding:20px 24px; gap:12px; }
 .update-notice-copy { margin-bottom:2px; }
+/* Boutons blancs secondaires (« Quelles études choisir ? », « Annales et rapports de jury »…) : plus de contour violet. */
+html:not(.dark):not([data-contrast="true"]) :is(.btn.outline, .btn.outline:hover, a.btn.outline, button.btn.outline) { border-color:transparent !important; }
