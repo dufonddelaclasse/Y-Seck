@@ -2414,7 +2414,7 @@ html.crios .profile-footer { bottom:calc(86px + env(safe-area-inset-bottom, 0px)
 html.dark .study-card.external-link, html.dark .study-card.external-link:hover { background:#161616 !important; color:#BCBCC2; }
 html.dark .study-card h3 { color:#F2F2F2; }
 /* Parcours des métiers et concours : chaque accordéon est un petit bloc, titre et chevron sur une ligne, texte dedans à l’ouverture. */
-.trip-more { margin-top:18px; padding:0 18px; border-radius:22px; background:#FFF; }
+.trip-more { margin-top:18px; padding:0 18px; border-radius:22px; background:#E6E6E3; }
 .trip-more summary { display:flex; justify-content:space-between; width:100%; min-height:52px; padding:14px 0; box-sizing:border-box; }
 .trip-more[open] { padding-bottom:18px; }
 .trip-more[open] summary { padding-bottom:6px; }
