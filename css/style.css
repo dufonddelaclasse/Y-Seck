@@ -2514,3 +2514,12 @@ html:not(.dark):not([data-contrast="true"]) :is(.btn.outline, .btn.outline:hover
 html.dark #app .extra-cats { background:#2C2C2F; color:#A8A8AD; }
 html.dark #app .extra-cats b { color:#FFF; }
 html.dark #app .extra-cat { background:#3A3A3E; color:#8E8E93; }
+/* Étape « Votre ambition » : cards à deux lignes (intitulé, précision). */
+.ambition-opt { justify-content:space-between; gap:12px; text-align:left; }
+.ambition-copy { display:flex; flex-direction:column; gap:3px; min-width:0; }
+.ambition-t { font-weight:500; }
+.ambition-d { font-size:.8125rem; line-height:1.35; font-weight:300; opacity:.85; }
+/* Explorer : intertitre avant les pistes de découverte. */
+.also-title { margin:30px 0 6px; font-size:1.125rem; line-height:1.3; font-weight:500; color:var(--ink); }
+html.dark #app .also-title { color:#FFF !important; }
+.opt.ambition-opt { height:auto; min-height:64px; padding-top:12px; padding-bottom:12px; }

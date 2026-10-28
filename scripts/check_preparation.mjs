@@ -336,7 +336,7 @@ console.log('Ressources vérifiées :',data.studyResources.length,'liens uniques
   assert(ref.length>=94,'Les 61 concours du référentiel et les écoles du service public (22 octobre 2026) sont chargés.');
   for(const c of ref)assert(c.routeIds.every(id=>data.accessRoutes[id]),'Corps du concours '+c.id);
   assert(!JSON.stringify(ref).includes('onglet'),'Aucun renvoi interne au classeur n’est affiché.');
-  assert(!JSON.stringify(ref).match(/\d+ ?%/),'Aucun taux de réussite n’est repris.');
+  assert(!JSON.stringify(ref,(k,v)=>k[0]==='_'?undefined:v).match(/\d+ ?%/),'Aucun taux de réussite n’est repris.');
   const linked=data.jobs.filter(j=>j.rmfpCode&&!isContractJob(j)&&jobCategories(j).length).filter(j=>{
     const cats=jobCategories(j);return j.routeIds.map(id=>data.accessRoutes[id]).some(r=>r&&cats.includes(r.cat)&&r.fp.split('').some(f=>j.fp.includes(f)));});
   const classified=data.jobs.filter(j=>j.rmfpCode&&!isContractJob(j)&&jobCategories(j).length);

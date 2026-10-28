@@ -63,7 +63,7 @@ for (const profile of ['etu','par','rec']) {
   assert.equal(t.S.name,'Alexis');assert(input.blurred);
   assert.equal(t.location.hash,'#/niveau');
   const second=t.screens.niveau();
-  assert(second.includes('Étape 2 / 5')&&second.includes('href="#/profil"'));
+  assert(second.includes('Étape 2 / 6')&&second.includes('href="#/profil"'));
   assert(second.includes('data-action="level"')&&!second.includes('id="person-name"'));
   assert(second.includes('data-action="level" data-v="Bac"'),'Le niveau Bac doit être proposé pour chaque type de profil.');
   assert.equal(second.includes('data-v="CAP / BEP"'),profile==='rec');
@@ -72,11 +72,11 @@ for (const profile of ['etu','par','rec']) {
   assert.equal(t.location.hash,'#/niveau','Un lien direct ne doit pas sauter le niveau obligatoire.');
   t.click('level',profile==='rec'?'CAP / BEP':'Seconde');t.submit('study-form');
   assert.equal(t.location.hash,'#/interets');
-  assert(t.screens.interets().includes('Étape 3 / 5')&&t.screens.interets().includes('href="#/niveau"'));
-  assert(t.screens.traits().includes('Étape 4 / 5'));
+  assert(t.screens.interets().includes('Étape 3 / 6')&&t.screens.interets().includes('href="#/niveau"'));
+  assert(t.screens.traits().includes('Étape 5 / 6')&&t.screens.ambition().includes('Étape 4 / 6'));
   const situation=t.screens.situation();
   /* Le budget n’apparaît qu’après la réponse boursier·e, avec des choix propres à chaque réponse. */
-  assert(situation.includes('Étape 5 / 5')&&!situation.includes('data-action="budget"')&&!situation.includes('Moins de 1 000'));
+  assert(situation.includes('Étape 6 / 6')&&!situation.includes('data-action="budget"')&&!situation.includes('Moins de 1 000'));
   t.click('boursier','Non');const nonBoursier=t.screens.situation();
   assert(nonBoursier.includes('Frais d’inscription uniquement')&&nonBoursier.includes('Plus de 1 000 €')&&nonBoursier.includes('Je ne sais pas')&&!nonBoursier.includes('Gratuit uniquement'));
   t.click('budget','Frais d’inscription uniquement');t.click('boursier','Oui');const boursier=t.screens.situation();

@@ -13,7 +13,7 @@
 
   /* ---------- État ---------- */
   var defaults = {
-    profile: null, level: null, domains: [], traits: [], boursier: null, budget: null, done: false, pendingChanges: false,
+    profile: null, level: null, domains: [], traits: [], ambitions: [], agentPublic: null, experience: null, boursier: null, budget: null, done: false, pendingChanges: false,
     metDomains: null, metCats: null, metFps: null, q: '', calCat: 'Toutes', calCats: null, calFps: null, track: 'Administratif',
     prepBudget: null, alert: false, openCat: null, region: 'Toutes', talentsAll: false,
     name: '', location: null, favorites: [], children: [], activeChild: null, personalProfiles: {},
@@ -21,9 +21,9 @@
     contrast: false, largeText: false, dysFont: false, colorMode: 'auto', cq: '', filterHintSeen: false, tipSeen: {}, bookQ: '', bookSubject: 'Toutes', bookCategory: 'A', bookFp: 'Tous',
     resQ: '', resCat: 'Toutes', resFp: 'Tous', resCats: null, resFps: null, resKind: 'Tous', resYear: 'Toutes', resLimit: 40, installOffered: false
   };
-  var PERSON_FIELDS = ['name', 'level', 'domains', 'traits', 'boursier', 'budget', 'done', 'location', 'favorites', 'pendingChanges', 'validated'];
-  var PROFILE_SCREENS = ['moi', 'profil', 'niveau', 'interets', 'traits', 'situation'];
-  var EDITABLE_FIELDS = ['name', 'level', 'domains', 'traits', 'boursier', 'budget', 'location'];
+  var PERSON_FIELDS = ['name', 'level', 'domains', 'traits', 'ambitions', 'agentPublic', 'experience', 'boursier', 'budget', 'done', 'location', 'favorites', 'pendingChanges', 'validated'];
+  var PROFILE_SCREENS = ['moi', 'profil', 'niveau', 'interets', 'ambition', 'traits', 'situation'];
+  var EDITABLE_FIELDS = ['name', 'level', 'domains', 'traits', 'ambitions', 'agentPublic', 'experience', 'boursier', 'budget', 'location'];
   var S = load();
   /* Profil enregistré avant octobre 2026 : sans version validée, aucune modification n’est considérée en attente. */
   if (S.done && !S.validated) S.pendingChanges = false;
@@ -49,7 +49,7 @@
   var UNI_PREPS = ['ipag', 'iep'];
   function prepPrice(p) { return UNI_PREPS.indexOf(p.id) > -1 ? (S.boursier === 'Oui' ? 'Gratuit' : 'Frais d’inscription') : p.price; }
   function prepBudget(p) { return UNI_PREPS.indexOf(p.id) > -1 ? (S.boursier === 'Oui' ? 0 : 1) : p.budget; }
-  function blankPerson(name) { return { name: name || '', level: null, domains: [], traits: [], boursier: null, budget: null, done: false, location: null, favorites: [], pendingChanges: false, validated: null }; }
+  function blankPerson(name) { return { name: name || '', level: null, domains: [], traits: [], ambitions: [], agentPublic: null, experience: null, boursier: null, budget: null, done: false, location: null, favorites: [], pendingChanges: false, validated: null }; }
   function profileSignature() { return JSON.stringify(EDITABLE_FIELDS.map(function(k){return S[k];})); }
   function profileNeedsValidation() { return !!(S.done && S.pendingChanges); }
   /* Les réponses sont comparées à la dernière version validée : revenir en arrière retire le bouton « Terminer les modifications ». */
@@ -124,7 +124,7 @@
       var saved=raw?JSON.parse(raw):{};
       var st = Object.assign({}, defaults, saved);
       st.budget = normalizeBudget(st.budget);
-      ['traits', 'domains', 'favorites', 'children'].forEach(function (k) { if (!Array.isArray(st[k])) st[k] = []; });
+      ['traits', 'domains', 'ambitions', 'favorites', 'children'].forEach(function (k) { if (!Array.isArray(st[k])) st[k] = []; });
       st.personalProfiles = st.personalProfiles || {};
       st.children = st.children.filter(function (c) { return c && c.id; }).map(function (c) { return Object.assign(blankPerson(), c); });
       if (st.profile === 'par' && !st.children.length && !Object.prototype.hasOwnProperty.call(saved,'children') && (st.name||st.level||st.done)) {
@@ -465,8 +465,48 @@
   function sharedTraits(j) { return (j.traits || []).filter(function (t) { return S.traits.indexOf(t) > -1; }); }
   function matchesDomains(job, domains) { return domains.some(function(id){return (job.interests || [job.domain]).indexOf(id)>-1;}); }
   function score(j) { return (matchesDomains(j,S.domains) ? 3 : 0) + sharedTraits(j).length; }
+  /* Correspondance « parfaite » : un domaine choisi au sens strict (domaine, famille ou intitulé du métier), une ambition choisie
+     et un niveau d’études compatible. Les autres métiers restent proposés, à la suite, comme pistes de découverte. */
+  function matchesStrong(job, domains) { return domains.some(function (id) { return (job.strongInterests || job.interests || [job.domain]).indexOf(id) > -1; }); }
+  var AMBITIONS = [
+    ['exigeant', 'Viser les concours les plus exigeants', 'Grandes écoles du service public, concours très sélectifs'],
+    ['diriger', 'Diriger une équipe', 'Encadrer, piloter un service ou un projet'],
+    ['expert', 'Devenir expert d’un domaine', 'Analyser, conseiller, maîtriser un sujet en profondeur'],
+    ['terrain', 'Agir sur le terrain', 'Intervenir, se déplacer, travailler au concret'],
+    ['aider', 'Aider directement les personnes', 'Soigner, accompagner, éduquer, accueillir'],
+    ['nsp', 'Je ne sais pas encore', '']
+  ];
+  var AMB_SHORT = { exigeant: 'concours exigeant', diriger: 'diriger', expert: 'expertise', terrain: 'terrain', aider: 'aider les personnes' };
+  function ambitionNorm(t) { return String(t || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[’']/g, ' ').toLowerCase(); }
+  var AMB_RULES = {
+    diriger: { name: /^(directeur|directrice|chef|cheffe|responsable|cadre|commissaire|commandant|capitaine|officier|administrateur|administratrice|manager|coordonnat|superviseu|encadrant)|\b(directeur|directrice|chef de |cheffe de |responsable d)/, text: /\b(encadr|manag|dirig|pilot(e|er|age) (une|l|des|d) ?(equipe|service|unite|structure|etablissement)|anim(e|er) (une|l|des) equipe)/, traits: ['manager'] },
+    expert: { name: /(expert|experte|ingenieur|ingenieure|chercheu|charge d etudes|chargee d etudes|analyste|juriste|conseill|specialiste|inspect|audit|controleu|statisticien|economiste|architecte|medecin|pharmacien|veterinaire|scientifique|geomaticien|data|actuaire|biologiste|chimiste|archeolog|conservat|magistrat|redacteu)/, text: /\b(expertise|analys|etude(s)? (technique|juridique|economique|scientifique)|conseil(ler)? (technique|juridique)|recherche)/, traits: ['intellect', 'sciences', 'chiffres', 'droit'] },
+    terrain: { name: /(agent|agente|technicien|technicienne|ouvrier|ouvriere|gardien|gardienne|surveillant|sapeur|pompier|policier|policiere|gendarme|douanier|douaniere|jardinier|jardiniere|conducteu|operat|patrouill|pilote|marin|garde|eclusier|bucheron|egoutier|chauffeur|mecanicien|electricien|plombier|maçon|macon|soigneur|guide|maitre-chien|demineu|plongeu|secouriste|ambulanc|brancardier)/, text: /\b(sur le terrain|intervention|interven(ir|tion)s?|patrouill|chantier|tournee|deplacement|en exterieur)/, traits: ['dehors', 'manuel', 'charges', 'uniforme', 'conduire', 'horaires', 'sport'] },
+    aider: { name: /(infirmi|aide-soign|aide soign|educat|assistant(e)? (de service social|social|socio)|accompagn|animat|psycholog|auxiliaire|puericult|sage-femme|ergotherap|kinesither|orthophon|conseiller (d orientation|en insertion|principal d education)|mediat|aidant|accueil|professeur|enseignant|atsem)/, text: /\b(accompagn|soign|soins|aide aux|insertion|ecoute|protection de l enfance|personnes (agees|handicapees|vulnerables)|patients|eleves|usagers)/, traits: ['aider', 'vulnerables', 'enfants', 'accueil'], domains: ['Santé', 'Social', 'Enfance', 'Éducation'] }
+  };
+  var ambMemo = {};
+  function jobAmbitions(j) {
+    if (catalogReady && ambMemo[j.id]) return ambMemo[j.id];
+    var name = ambitionNorm(j.name), text = ambitionNorm((j.activities || '') + ' ' + (j.desc || '')), traits = j.traits || [], out = [];
+    var cats = jobCategories(j), refs = isContractJob(j) ? [] : jobRefs(j);
+    if (cats.indexOf('A+') > -1 || refs.some(function (c) { return c.cat === 'A+' || (c.cat === 'A' && c.school); })) out.push('exigeant');
+    Object.keys(AMB_RULES).forEach(function (k) {
+      var r = AMB_RULES[k];
+      if (r.name.test(name) || r.text.test(text) || r.traits.some(function (t) { return traits.indexOf(t) > -1; }) || (r.domains && r.domains.indexOf(j.domain) > -1)) out.push(k);
+    });
+    if (catalogReady) ambMemo[j.id] = out;
+    return out;
+  }
+  function wantedAmbitions() { return (S.ambitions || []).filter(function (a) { return a !== 'nsp'; }); }
+  function ambitionOk(j) { var w = wantedAmbitions(); if (!w.length) return true; var have = jobAmbitions(j); return w.some(function (a) { return have.indexOf(a) > -1; }); }
+  function matchedAmbitions(j) { var have = jobAmbitions(j); return wantedAmbitions().filter(function (a) { return have.indexOf(a) > -1; }); }
+  function jobFitsCriteria(j, doms) { return (!doms.length || matchesStrong(j, doms)) && ambitionOk(j); }
+  function isPerfectJob(j, doms) { return passesLevelCategory(j) && jobFitsCriteria(j, doms); }
+  function partialScore(j, doms) {
+    return (doms.length && matchesStrong(j, doms) ? 4 : doms.length && matchesDomains(j, doms) ? 2 : 0) + (wantedAmbitions().length && ambitionOk(j) ? 3 : 0) + (passesLevelCategory(j) ? 1 : 0) + sharedTraits(j).length;
+  }
   function myJobs() {
-    var base = D.jobs.filter(function (j) { return passesLevelCategory(j) && (!S.domains.length || matchesDomains(j,S.domains)); });
+    var base = D.jobs.filter(function (j) { return isPerfectJob(j, S.domains); });
     return contractsLater(base.sort(function (a, b) { return score(b) - score(a); }));
   }
   /* Les quatre premières places reviennent aux métiers de catégorie A+, A, B ou C : les contractuels arrivent ensuite. */
@@ -535,7 +575,7 @@
 
   /* ---------- Écrans : introduction ---------- */
   var screens = {};
-  var STEPS = 5;
+  var STEPS = 6;
 
   /* Prépa Talents : bandeau photo teinté de bleu avec le logo blanc, puis carte blanche au liseré bleu
      (coins biseautés en bas) : présentation, pointillés, puis la bourse. En titre de page (h1), le logo tient lieu de titre visible. */
@@ -684,13 +724,24 @@
       '</main><div class="footer"><span class="small center" id="hint-continue"'+(nameReady()?' hidden':'')+'>Renseignez un prénom pour continuer.</span><button type="submit" class="btn" id="identity-continue"'+(nameReady()?'':' disabled')+'>'+profileSubmitLabel('Continuer')+'</button></div></form>';
   };
 
+  /* Reconversion : deux questions qui ouvrent le concours interne et le 3e concours. */
+  var RECO_QUESTIONS = [['agentPublic', 'Travaillez-vous déjà dans la fonction publique ?', 'Fonctionnaire ou contractuel : le concours interne vous est ouvert.'],
+    ['experience', 'Avez-vous une expérience professionnelle, associative ou d’élu ?', 'Le 3e concours s’ouvre sans diplôme, avec quelques années d’expérience.']];
+  function reconversionQuestions() {
+    return RECO_QUESTIONS.map(function (q) {
+      return '<section class="stack mt-m"><h2 class="h3 no-icon">' + esc(q[1]) + '</h2><p class="small m0">' + esc(q[2]) + '</p><div class="grid-2">' + ['Oui', 'Non'].map(function (v) {
+        var on = S[q[0]] === v;
+        return '<button type="button" class="opt sm center' + (on ? ' on' : '') + '" aria-pressed="' + on + '"' + attr('action', q[0]) + attr('v', v) + '>' + v + '</button>';
+      }).join('') + '</div></section>';
+    }).join('');
+  }
   screens.niveau = function () {
     if(!nameReady())return screens.profil();
     var list=S.profile==='rec'?D.levels.adult:D.levels.school;
     var title=isParent()?'Son niveau d’études':'Votre niveau d’études';
     return '<form id="study-form" class="profile-form"><main class="screen"><div class="topbar">'+back('#/profil','Retour')+'<span class="eyebrow">Étape 2 / '+STEPS+'</span></div>'+progress(2,STEPS)+
       '<h1 class="mt-l">'+title+'</h1><p class="lead">'+(isParent()?'Choisissez son niveau actuel ou le dernier diplôme obtenu.':'Choisissez votre niveau actuel ou le dernier diplôme obtenu.')+'</p>'+
-      '<div class="row mt-m" role="group" aria-label="'+title+'">'+list.map(function(l){return chip('level',l,l,S.level===l);}).join('')+'</div></main>'+
+      '<div class="row mt-m" role="group" aria-label="'+title+'">'+list.map(function(l){return chip('level',l,l,S.level===l);}).join('')+'</div>'+(S.profile==='rec'?reconversionQuestions():'')+'</main>'+
       '<div class="footer"><span class="small center"'+(S.level?' hidden':'')+'>Choisissez un niveau pour continuer.</span><button type="submit" class="btn"'+(S.level?'':' disabled')+'>'+profileSubmitLabel('Continuer')+'</button></div></form>';
   };
 
@@ -705,14 +756,30 @@
         var on = S.domains.indexOf(d) > -1;
         return '<button type="button" class="interest-option' + (on ? ' on' : '') + '" aria-pressed="' + on + '"' + attr('action', 'domain') + attr('v', d) + '><span class="interest-name">' + esc(domainLabel(d)) + '</span><span class="interest-check" aria-hidden="true">' + (on ? I.check : '') + '</span></button>';
       }).join('') + '</div></main>' +
-      '<div class="footer">'+profileContinuation('#/traits','Continuer',n>0)+'</div>';
+      '<div class="footer">'+profileContinuation('#/ambition','Continuer',n>0)+'</div>';
   };
 
-  screens.traits = function () {
-    var n = S.traits.length;
+  /* Étape « Votre ambition » : deux choix au plus, ou « Je ne sais pas encore ». */
+  screens.ambition = function () {
+    var n = S.ambitions.length;
     return '<main class="screen">' +
       '<div class="topbar">' + back('#/interets', 'Retour') + '<span class="eyebrow">Étape 4 / ' + STEPS + '</span></div>' +
       progress(4, STEPS) +
+      '<h1 class="mt-l">' + (isParent() ? 'Son ambition' : 'Votre ambition') + '</h1>' +
+      '<p class="lead">' + (isParent() ? 'Qu’aimerait faire votre enfant dans son futur métier ?' : 'Qu’aimeriez-vous faire dans votre futur métier ?') + ' Deux choix au plus.</p>' +
+      ambitionOptions() + '</main><div class="footer">' + profileContinuation('#/traits', 'Continuer', n > 0) + (n ? '' : skipStep('#/traits')) + '</div>';
+  };
+  function ambitionOptions() {
+    return '<div class="stack mt-s ambition-options">' + AMBITIONS.map(function (a) {
+      var on = S.ambitions.indexOf(a[0]) > -1;
+      return '<button type="button" class="opt ambition-opt' + (on ? ' on' : '') + '" aria-pressed="' + on + '"' + attr('action', 'ambition') + attr('v', a[0]) + '><span class="ambition-copy"><span class="ambition-t">' + esc(a[1]) + '</span>' + (a[2] ? '<span class="ambition-d">' + esc(a[2]) + '</span>' : '') + '</span>' + (on ? I.check : '') + '</button>';
+    }).join('') + '</div>';
+  }
+  screens.traits = function () {
+    var n = S.traits.length;
+    return '<main class="screen">' +
+      '<div class="topbar">' + back('#/ambition', 'Retour') + '<span class="eyebrow">Étape 5 / ' + STEPS + '</span></div>' +
+      progress(5, STEPS) +
       '<h1 class="mt-l">' + (isParent() ? 'Ce qui lui ressemble' : 'Ce qui vous ressemble') + '</h1>' +
       '<p class="lead">Choisissez sans limite : il n’y a pas de mauvaise réponse.</p>' +
       D.traitGroups.map(function (g) {
@@ -728,8 +795,8 @@
     var q = isParent() ? 'Votre enfant est-il boursier·e ?' : 'Êtes-vous boursier·e ?';
     var budgets = budgetOptions(S.boursier);
     return '<main class="screen">' +
-      '<div class="topbar">' + back('#/traits', 'Retour') + '<span class="eyebrow">Étape 5 / ' + STEPS + '</span></div>' +
-      progress(5, STEPS) +
+      '<div class="topbar">' + back('#/traits', 'Retour') + '<span class="eyebrow">Étape 6 / ' + STEPS + '</span></div>' +
+      progress(6, STEPS) +
       '<h1 class="mt-l">' + (isParent() ? 'Sa situation' : 'Votre situation') + '</h1>' +
       '<h2 class="h3 mt-s">' + q + '</h2>' +
       '<div class="grid-2">' + ['Oui', 'Non'].map(function (v) {
@@ -837,6 +904,16 @@
     /* Une recherche garde l’ordre de pertinence : le métier cherché reste en tête, même contractuel. */
     return words.length ? list : contractsLater(list);
   }
+  /* Explorer « Pour vous » : d’abord les métiers qui collent à tous les critères, puis tous les autres, des plus proches aux plus éloignés. */
+  function explorerSplit() { return !searchWords(S.q).length && S.metMode !== 'all' && (activeDomains().length > 0 || wantedAmbitions().length > 0); }
+  function splitJobs() {
+    var doms = activeDomains(), cats = selCats(), fps = selFps();
+    var base = D.jobs.filter(function (j) { return passesCats(j, cats) && j.fp.split('').some(function (f) { return fps.indexOf(f) > -1; }); });
+    var perfect = base.filter(function (j) { return isPerfectJob(j, doms); }), others = base.filter(function (j) { return perfect.indexOf(j) < 0; });
+    perfect = contractsLater(perfect.sort(function (a, b) { return score(b) - score(a) || (isOpen(a) ? 0 : 1) - (isOpen(b) ? 0 : 1); }));
+    others = contractsLater(others.sort(function (a, b) { return partialScore(b, doms) - partialScore(a, doms) || score(b) - score(a); }));
+    return { perfect: perfect, others: others };
+  }
   /* Chaque card de métier ou de concours porte une petite flèche : elle s’ouvre. */
   function jobRow(j) {
       var ranked = userRank() !== null;
@@ -847,6 +924,9 @@
         badges += isOpen(j) ? '<span class="fit on">' + (compatible?'<span class="job-fit-check" aria-hidden="true">'+I.check+'</span>':'') + (j.qualification ? 'Diplôme spécifique requis' : 'Niveau d’études compatible<br>Conditions à vérifier') + '</span>' : '<span class="fit">' + esc(NEED[j.lvl] || 'Conditions à vérifier') + '</span>';
       }
       if (shared.length) badges += '<span class="fit like">' + (isParent() ? 'Ce qui lui ressemble' : 'Ce qui vous ressemble') + ' : ' + esc(shared.slice(0, 2).map(traitLabel).join(', ').toLowerCase()) + '</span>';
+      var amb = matchedAmbitions(j);
+      if (amb.length) badges += '<span class="fit like">' + (isParent() ? 'Son ambition' : 'Votre ambition') + ' : ' + esc(amb.map(function (a) { return AMB_SHORT[a]; }).join(', ')) + '</span>';
+      badges += recoFits(isContractJob(j) ? [] : jobRefs(j));
       return '<a class="list-row job-row job-' + catClass(displayCategory(j)) + '" href="#/metier/' + j.id + '">' + jobBadges(j) +
         '<div class="main"><span class="name">' + esc(j.name) + '</span><span class="meta">' + esc(j.domain + ' · ' + fpNames(j.fp).join(', ')) + '</span>' +
         (badges ? '<span class="fits">' + badges + '</span>' : '') + '</div>' + '<span class="row-chev" aria-hidden="true">' + I.chev + '</span></a>';
@@ -868,9 +948,16 @@
       return true;
     }).sort(concoursOrder);
   }
-  function myConcours() {
-    var cats = defaultCats();
-    return D.concours.filter(function (c) { return cats.indexOf(c.cat) > -1 && (!S.domains.length || concoursJobs(c).some(function (j) { return matchesDomains(j, S.domains); })); });
+  function isPerfectConcours(c, doms) { return defaultCats().indexOf(c.cat) > -1 && concoursJobs(c).some(function (j) { return jobFitsCriteria(j, doms); }); }
+  function myConcours() { return D.concours.filter(function (c) { return isPerfectConcours(c, S.domains); }); }
+  function concoursPartial(c, doms) { return concoursJobs(c).reduce(function (m, j) { return Math.max(m, partialScore(j, doms)); }, 0); }
+  function explorerSplitConcours() { return !searchWords(S.cq).length && S.metMode !== 'all' && (activeDomains().length > 0 || wantedAmbitions().length > 0); }
+  function splitConcours() {
+    var doms = activeDomains(), cats = concoursCats(), fps = selFps();
+    var base = D.concours.filter(function (c) { return cats.indexOf(c.cat) > -1 && fps.indexOf(c.fp) > -1; });
+    var perfect = base.filter(function (c) { return isPerfectConcours(c, doms); }).sort(concoursOrder);
+    var others = base.filter(function (c) { return perfect.indexOf(c) < 0; }).sort(function (a, b) { return concoursPartial(b, doms) - concoursPartial(a, doms) || concoursOrder(a, b); });
+    return { perfect: perfect, others: others };
   }
   /* Auto-complétion : métiers et concours dont le nom commence par la saisie d’abord, puis ceux qui la contiennent. */
   function concoursSearchText(c) { if (!c._search) { var raw = c.name + ' ' + c.metiers + ' ' + c.domain + ' ' + (c.school || ''); c._search = ' ' + searchNorm(raw) + ' ' + feminineForms(raw) + ' '; } return c._search; }
@@ -897,18 +984,42 @@
     input.setAttribute('aria-expanded', String(!!html));
   }
   /* Ligne de concours, comme une ligne de métier : niveau d’études requis au regard du profil. */
+  /* Reconversion : concours interne ou 3e concours ouverts selon les réponses du profil. */
+  function recoFits(refs) {
+    if (S.profile !== 'rec' || !refs.length) return '';
+    var v = refs.map(function (c) { return c.voies || ''; }).join(' '), out = '';
+    if (S.experience === 'Oui' && /troisi[eè]me|3e concours/i.test(v)) out += '<span class="fit on">3e concours possible<br>Conditions à vérifier</span>';
+    if (S.agentPublic === 'Oui' && /intern/i.test(v)) out += '<span class="fit on">Concours interne possible<br>Conditions à vérifier</span>';
+    return out;
+  }
   function concoursRow(c) {
     var rank = userRank(), lvl = concoursLevel(c), fit = '';
     if (rank !== null) fit = '<span class="fits">' + (rank >= lvl ? '<span class="fit on"><span class="job-fit-check" aria-hidden="true">' + I.check + '</span>Niveau d’études compatible<br>Conditions à vérifier</span>' : '<span class="fit">' + esc(NEED[lvl] || 'Conditions à vérifier') + '</span>') + '</span>';
     return '<a class="list-row job-row concours-row job-' + catClass(c.cat) + '" href="#/concours-fiche/' + concoursKey(c) + '">' + catBadge(c.cat) + '<div class="main"><span class="name">' + sig(c.name) + '</span><span class="meta">' + esc(D.fps[c.fp] + (c.voies ? ' · ' + c.voies : '')) + '</span>' + fit + '</div><span class="row-chev" aria-hidden="true">' + I.chev + '</span></a>';
   }
   function concoursRows() {
+    if (explorerSplitConcours()) {
+      var sp = splitConcours(), np = sp.perfect.length, lim = S.concoursLimit || 60, all = sp.perfect.concat(sp.others), shown = all.slice(0, Math.max(lim, np));
+      return '<p class="small">' + np + ' concours ' + (isParent() ? 'pour votre enfant' : 'pour vous') + '</p>' +
+        (np ? '' : '<p class="empty">Aucun concours ne correspond à tous ' + (isParent() ? 'ses' : 'vos') + ' critères. Voici des pistes proches.</p>') +
+        shown.slice(0, np).map(concoursRow).join('') +
+        (shown.length > np ? '<h2 class="also-title no-icon">Ces concours peuvent aussi ' + (isParent() ? 'l’' : 'vous ') + 'intéresser</h2>' + shown.slice(np).map(concoursRow).join('') : '') +
+        (shown.length < all.length ? '<button type="button" class="btn outline mt-s" data-action="moreConcours">Afficher 60 concours de plus</button>' : '');
+    }
     var list = filteredConcours();
     if (!list.length) return '<p class="empty">Aucun concours avec ces filtres. <button type="button" class="text-btn" data-action="forYou">Revenir à ' + (isParent() ? 'ses' : 'vos') + ' choix</button></p>';
     return '<p class="small">' + list.length + ' concours</p>' + list.map(concoursRow).join('');
   }
   function jobRows() { return onConcoursPage() ? concoursRows() : jobRowsOnly(); }
   function jobRowsOnly() {
+    if (explorerSplit()) {
+      var sp = splitJobs(), all = sp.perfect.concat(sp.others), shown = all.slice(0, S.jobLimit), np = sp.perfect.length;
+      return '<p class="small">' + np + ' métier' + (np > 1 ? 's' : '') + ' ' + (isParent() ? 'pour votre enfant' : 'pour vous') + '</p>' +
+        (np ? '' : '<p class="empty">Aucun métier ne correspond à tous ' + (isParent() ? 'ses' : 'vos') + ' critères. Voici des pistes proches.</p>') +
+        shown.slice(0, np).map(jobRow).join('') +
+        (shown.length > np ? '<h2 class="also-title no-icon">Ces métiers peuvent aussi ' + (isParent() ? 'l’' : 'vous ') + 'intéresser</h2>' + shown.slice(np).map(jobRow).join('') : '') +
+        (S.jobLimit < all.length ? '<button type="button" class="btn outline mt-s" data-action="moreJobs">Afficher 60 métiers de plus</button>' : '');
+    }
     var list = filteredJobs();
     if (!list.length) return '<p class="empty">Aucun métier avec ces filtres. <button type="button" class="text-btn" data-action="forYou">Revenir à ' + (isParent() ? 'ses' : 'vos') + ' choix</button></p>';
     return '<p class="small">' + list.length + ' métier' + (list.length > 1 ? 's' : '') + ' · ' + Math.min(S.jobLimit, list.length) + ' affiché' + (Math.min(S.jobLimit,list.length)>1?'s':'') + '</p>' + list.slice(0, S.jobLimit).map(jobRow).join('') +
@@ -926,6 +1037,8 @@
       pill(label, cats.length === 1 ? ' fill ' + catClass(cats[0]) : '') + pill(fps.length === 3 ? '3 versants' : fps.map(function (f) { return D.fps[f]; }).join(', '));
   }
   function resultsLabel() {
+    if (onConcoursPage() && explorerSplitConcours()) { var pc = splitConcours().perfect.length; return pc ? pc + ' concours pour ' + (isParent() ? 'votre enfant' : 'vous') : 'les résultats'; }
+    if (!onConcoursPage() && explorerSplit()) { var pj = splitJobs().perfect.length; return pj ? pj + ' métier' + (pj > 1 ? 's' : '') + ' pour ' + (isParent() ? 'votre enfant' : 'vous') : 'les résultats'; }
     if (onConcoursPage()) { var c = filteredConcours().length; return c ? c + ' concours' : 'les résultats'; }
     var n = filteredJobs().length;
     return n ? n + ' métier' + (n > 1 ? 's' : '') : 'les résultats';
@@ -2188,7 +2301,7 @@
   /* ---------- Profil et informations légales ---------- */
   var PROFILE_LABEL = { etu: 'Étudiant·e', par: 'Parent', rec: 'En reconversion' };
 
-  var PROFILE_FIELDS = { profile: 'Profil', level: 'Niveau d’études', domains: 'Domaines', traits: 'Ce qui vous ressemble', boursier: 'Boursier·e', budget: 'Budget pour se préparer' };
+  var PROFILE_FIELDS = { profile: 'Profil', level: 'Niveau d’études', domains: 'Domaines', ambitions: 'Votre ambition', agentPublic: 'Déjà dans la fonction publique', experience: 'Expérience', traits: 'Ce qui vous ressemble', boursier: 'Boursier·e', budget: 'Budget pour se préparer' };
   /* Fenêtre de modification : uniquement les options du point choisi. */
   function profileFieldContent(field) {
     var body = '';
@@ -2196,6 +2309,8 @@
     if (field === 'level') body = '<div class="row">' + (S.profile === 'rec' ? D.levels.adult : D.levels.school).map(function (l) { return chip('level', l, l, S.level === l); }).join('') + '</div>';
     if (field === 'domains') body = '<div class="grid-2 interest-grid">' + D.domains.map(function (d) { var on = S.domains.indexOf(d) > -1; return '<button type="button" class="interest-option' + (on ? ' on' : '') + '" aria-pressed="' + on + '"' + attr('action', 'domain') + attr('v', d) + '><span class="interest-name">' + esc(domainLabel(d)) + '</span><span class="interest-check" aria-hidden="true">' + (on ? I.check : '') + '</span></button>'; }).join('') + '</div>';
     if (field === 'traits') body = D.traitGroups.map(function (g) { return '<section class="stack mt-s"><h3 class="no-icon">' + esc(g.title) + '</h3><div class="row">' + g.items.map(function (t) { return chip('trait', t[0], t[1], S.traits.indexOf(t[0]) > -1); }).join('') + '</div></section>'; }).join('');
+    if (field === 'ambitions') body = '<p class="small m0">Deux choix au plus.</p>' + ambitionOptions();
+    if (field === 'agentPublic' || field === 'experience') { var rq = RECO_QUESTIONS.filter(function (q) { return q[0] === field; })[0]; body = '<p class="body">' + esc(rq[1]) + '</p><p class="small">' + esc(rq[2]) + '</p><div class="grid-2">' + ['Oui', 'Non'].map(function (v) { var on = S[field] === v; return '<button type="button" class="opt sm center' + (on ? ' on' : '') + '" aria-pressed="' + on + '"' + attr('action', field) + attr('v', v) + '>' + v + '</button>'; }).join('') + '</div>'; }
     if (field === 'boursier') body = '<div class="grid-2">' + ['Oui', 'Non'].map(function (v) { var on = S.boursier === v; return '<button type="button" class="opt sm center' + (on ? ' on' : '') + '" aria-pressed="' + on + '"' + attr('action', 'boursier') + attr('v', v) + '>' + v + '</button>'; }).join('') + '</div>';
     if (field === 'budget') body = '<div class="stack">' + budgetOptions(S.boursier).map(function (b) { var on = S.budget === b; return '<button type="button" class="opt sm' + (on ? ' on' : '') + '" aria-pressed="' + on + '"' + attr('action', 'budget') + attr('v', b) + '><span>' + b + '</span>' + (on ? I.check : '') + '</button>'; }).join('') + '</div>';
     return body + '<div class="sheet-actions"><button type="button" class="btn" data-ui="close">Fermer</button></div>';
@@ -2206,16 +2321,18 @@
       ['Profil', S.profile ? PROFILE_LABEL[S.profile] : 'Non renseigné'],
       [isParent() ? 'Niveau de votre enfant' : 'Niveau', S.level || 'Non renseigné'],
       ['Domaines', S.domains.length ? S.domains.map(domainLabel).join(', ') : 'Tous'],
+      [isParent() ? 'Son ambition' : 'Votre ambition', S.ambitions.length ? S.ambitions.map(function (a) { return (AMBITIONS.filter(function (x) { return x[0] === a; })[0] || ['', a])[1]; }).join(', ') : 'Non renseigné'],
       [isParent() ? 'Ce qui lui ressemble' : 'Ce qui vous ressemble', S.traits.length ? S.traits.map(traitLabel).join(', ') : 'Non renseigné'],
       ['Boursier·e', S.boursier || 'Non renseigné'],
       ['Budget', S.budget || 'Non renseigné']
-    ];
+    ].concat(S.profile === 'rec' ? [['Déjà dans la fonction publique', S.agentPublic || 'Non renseigné'], ['Expérience professionnelle, associative ou d’élu', S.experience || 'Non renseigné']] : []);
+    var rowFields = ['profile', 'level', 'domains', 'ambitions', 'traits', 'boursier', 'budget', 'agentPublic', 'experience'];
     return '<main class="screen pt">' +
       (profileReturn ? back(profileReturn, 'Prépas Talents') : '') +
       '<h1>' + (isParent() ? 'Le profil de ' + esc(childName()) : 'Votre profil') + '</h1>' + childSelector() +
       '<p class="small m0">Touchez une ligne pour modifier votre réponse.</p>' +
       '<div class="list m0 profile-rows">' + rows.map(function (r, i) {
-        return '<button type="button" class="list-row profile-row" data-action="editField"' + attr('v', ['profile','level','domains','traits','boursier','budget'][i]) + ' aria-haspopup="dialog"><span class="main"><span class="meta">' + esc(r[0]) + '</span><span class="name sm">' + esc(r[1]) + '</span></span>' + I.chev + '</button>';
+        return '<button type="button" class="list-row profile-row" data-action="editField"' + attr('v', rowFields[i]) + ' aria-haspopup="dialog"><span class="main"><span class="meta">' + esc(r[0]) + '</span><span class="name sm">' + esc(r[1]) + '</span></span>' + I.chev + '</button>';
       }).join('') + '</div>' +
       locationForm() +
       (isParent()?'<button type="button" class="danger-link" data-action="deleteChild">Effacer ce profil</button>':'<button type="button" class="danger-link" data-action="wipe">Effacer mes données</button>') +
@@ -2453,7 +2570,7 @@
     if (profileReturn && r.name !== 'moi') profileReturn = null;
     if (r.name === 'preparer') prepFocus = r.arg2 && concoursByKey(r.arg2) ? { job: r.arg, key: r.arg2 } : null;
     else if (prepFocus && PREP_PAGES.indexOf(r.name) < 0) prepFocus = null;
-    if(['niveau','interets','traits','situation'].indexOf(r.name)>-1){
+    if(['niveau','interets','ambition','traits','situation'].indexOf(r.name)>-1){
       var required=!S.profile?'choix-profil':!nameReady()?'profil':(!S.level&&r.name!=='niveau'?'niveau':null);
       if(required){r={name:required};history.replaceState(null,'','#/'+required);}
     }
@@ -2516,7 +2633,7 @@
       if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { placeFpTabs(root); });
     }
     /* Onboarding : chaque nouvel écran apparaît en fondu simple, sans mouvement, bouton du bas compris. */
-    if (changed && main && ['bienvenue', 'versants', 'categories-intro', 'choix-profil', 'profil', 'niveau', 'interets', 'traits', 'situation'].indexOf(r.name) > -1) {
+    if (changed && main && ['bienvenue', 'versants', 'categories-intro', 'choix-profil', 'profil', 'niveau', 'interets', 'ambition', 'traits', 'situation'].indexOf(r.name) > -1) {
       var entering = [main].concat([].slice.call(root.querySelectorAll(':scope > .footer, :scope > form > .footer')));
       entering.forEach(function (el) { el.classList.add('enter-fade'); });
       setTimeout(function () { entering.forEach(function (el) { el.classList.remove('enter-fade'); }); }, 900);
@@ -2536,7 +2653,7 @@
     if(r.name==='calendrier'&&r.arg==='concours'&&r.arg2){var datedConcours=concoursByKey(r.arg2);if(datedConcours)theme=datedConcours.cat;}
     var themeKey=theme?catClass(theme).slice(4):null;
     ['Ap','A','B','C','CDD'].forEach(function(k){root.classList.toggle('theme-'+k,k===themeKey);if(document.body&&document.body.classList)document.body.classList.toggle('theme-'+k,k===themeKey);});
-    var onboarding=['bienvenue','versants','categories-intro','choix-profil','profil','niveau','interets','traits','situation'].indexOf(r.name)>-1;
+    var onboarding=['bienvenue','versants','categories-intro','choix-profil','profil','niveau','interets','ambition','traits','situation'].indexOf(r.name)>-1;
     root.classList.toggle('onboarding',onboarding);
     if(document.body&&document.body.classList){document.body.classList.toggle('themed',!!themeKey);}
     root.classList.toggle('themed',!!themeKey);
@@ -2794,6 +2911,15 @@
         if (i > -1) next.splice(i, 1); else next.push(v);
         set({ domains: next, metDomains: null, metMode: 'mine', jobLimit: 60 }); break;
       case 'clearDomains': set({domains:[],metDomains:null,metMode:'mine',jobLimit:60}); announce('Les domaines sélectionnés ont été effacés.'); break;
+      case 'ambition': {
+        var amb = S.ambitions.slice(), ai = amb.indexOf(v);
+        if (v === 'nsp') amb = ai > -1 ? [] : ['nsp'];
+        else if (ai > -1) amb.splice(ai, 1);
+        else { amb = amb.filter(function (x) { return x !== 'nsp'; }); if (amb.length >= 2) { announce('Deux choix au plus : retirez-en un pour en ajouter un autre.'); break; } amb.push(v); }
+        set({ ambitions: amb, jobLimit: 60 }); break;
+      }
+      case 'agentPublic': case 'experience': { var rp = {}; rp[a] = S[a] === v ? null : v; set(rp); break; }
+      case 'moreConcours': set({ concoursLimit: (S.concoursLimit || 60) + 60 }); break;
       case 'trait':
         i = S.traits.indexOf(v); next = S.traits.slice();
         if (i > -1) next.splice(i, 1); else next.push(v);

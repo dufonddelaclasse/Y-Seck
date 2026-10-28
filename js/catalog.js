@@ -160,6 +160,10 @@
     job.interests=interests.filter(function(rule){var option=rule.option;return option.id===job.domain||
       (option.rmfpDomains||[]).indexOf(job.rmfpDomain)>-1||(option.families||[]).indexOf(job.family)>-1||
       (rule.namePattern&&rule.namePattern.test(name))||(rule.textPattern&&rule.textPattern.test(text));}).map(function(rule){return rule.option.id;});
+    /* Rattachement strict (domaine, famille ou intitulé) : sert aux correspondances « parfaites » ; le texte seul reste une piste. */
+    job.strongInterests=interests.filter(function(rule){var option=rule.option;return option.id===job.domain||
+      (option.rmfpDomains||[]).indexOf(job.rmfpDomain)>-1||(option.families||[]).indexOf(job.family)>-1||
+      (rule.namePattern&&rule.namePattern.test(name));}).map(function(rule){return rule.option.id;});
   });
   D.calendar = P.calendar.filter(function(c){return !c.duplicateOf;});
   /* Prochaines sessions attendues, quand les dates ne sont pas encore publiées (recherche du 19 octobre 2026). */
