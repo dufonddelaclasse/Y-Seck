@@ -2491,8 +2491,8 @@ html.dark .info-axis { background:#1C1C1E; color:#FFF; }
 .info-dates .fp-panel .prep p { font-size:.9375rem; line-height:1.45; }
 .info-dates .fp-panel .prep p.small, .info-dates .fp-panel .prep .small { font-size:.8125rem; }
 .info-dates .fp-panel > p.small { font-size:.875rem; color:var(--muted); }
-/* Pages Informations générales : titres de section à la taille des titres des cards, sous-titres à la taille de leur texte. */
-.info-page h2.understand-title { margin-top:32px; margin-bottom:0; font-size:1.0625rem; line-height:1.3; font-weight:500; }
+/* Pages Informations générales : grands titres à la taille des h1 (Les prépas), titres de section à celle des h2 (Aides), sous-titres à la taille du texte des cards. */
+.info-page h2.understand-title { margin-top:32px; margin-bottom:0; font-size:1.5rem; line-height:1.15; font-weight:500; letter-spacing:-.015em; }
 .info-page h2.understand-title + p.lead { margin-top:4px !important; font-size:.9375rem !important; line-height:1.45 !important; font-weight:300; color:var(--muted); }
 .info-page h2.understand-title + p.lead + .stack, .info-page h2.understand-title + p.lead + .checks { margin-top:12px; }
 .info-page h2#info-dates + .info-dates { margin-top:10px; }
@@ -2504,5 +2504,5 @@ html.dark .info-axis { background:#1C1C1E; color:#FFF; }
 /* Boutons blancs secondaires (« Quelles études choisir ? », « Annales et rapports de jury »…) : plus de contour violet. */
 html:not(.dark):not([data-contrast="true"]) :is(.btn.outline, .btn.outline:hover, a.btn.outline, button.btn.outline) { border-color:transparent !important; }
 /* Les concours : « 4 catégories » et « Dates des concours » gardent la grande taille de titre. */
-.info-page h2.understand-title.info-big { font-size:1.875rem; line-height:1.1; margin-top:28px; }
+.info-page h2.understand-title.info-big { font-size:1.875rem; line-height:1.1; letter-spacing:-.02em; margin-top:36px; }
 .info-page h2.understand-title.info-big:first-of-type { margin-top:16px; }
