@@ -433,6 +433,12 @@ html.dark #app:not(.themed):not(.onboarding) .screen .btn:not(.outline):not(.whi
 html.dark #app:not(.themed):not(.onboarding) .screen :is(.btn.outline, .btn.white, .btn.btn-bare), html.dark #app:not(.themed):not(.onboarding) .screen :is(.btn.outline, .btn.white, .btn.btn-bare) svg { color:#FFF !important; }
 html.dark #app:not(.themed):not(.onboarding) .bourse-switch[data-on]::before { background:#FFF !important; }
 html.dark #app:not(.themed):not(.onboarding) .bourse-switch button.on { color:#000 !important; }
+/* Fenêtre de mise à jour en sombre : noir et blanc uniquement. */
+html.dark body .update-notice { background:#000 !important; color:#FFF !important; border:1px solid #2C2C2E !important; box-shadow:none !important; }
+html.dark body .update-notice .update-notice-copy b { color:#FFF !important; }
+html.dark body .update-notice .update-notice-copy .update-notice-detail { color:#A8A8AD !important; }
+html.dark body .update-notice .update-notice-action { border:0 !important; background:#FFF !important; color:#000 !important; }
+html.dark body .update-notice .update-notice-dismiss { border:0 !important; background:#2C2C2E !important; color:#FFF !important; }
 """
 
 if __name__ == '__main__':

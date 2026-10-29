@@ -1,7 +1,7 @@
 /* Une nouvelle version est proposée sans interrompre le parcours ni la saisie. */
 (function () {
   'use strict';
-  var currentVersion = '20261029-303';
+  var currentVersion = '20261029-304';
   var latestVersion = null, dismissedVersion = null, notice = null;
   var lastCheck = null, checking = false;
   var onboarding = ['bienvenue', 'versants', 'categories-intro', 'choix-profil', 'profil', 'niveau', 'interets', 'traits', 'situation'];
@@ -27,7 +27,12 @@
       notice.setAttribute('aria-label', 'Mise à jour disponible');
       var message = document.createElement('span');
       message.className = 'update-notice-copy';
-      message.textContent = 'Une nouvelle version est disponible.';
+      var title = document.createElement('b');
+      title.textContent = 'Une nouvelle version est disponible.';
+      var detail = document.createElement('span');
+      detail.className = 'update-notice-detail';
+      detail.textContent = 'Concours, métiers, dates : elle peut aussi apporter des informations mises à jour.';
+      message.appendChild(title); message.appendChild(detail);
       var refresh = document.createElement('button');
       refresh.type = 'button'; refresh.className = 'update-notice-action';
       refresh.textContent = 'Actualiser';
