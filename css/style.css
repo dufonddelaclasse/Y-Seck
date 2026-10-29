@@ -2641,9 +2641,3 @@ html[data-contrast="true"] .intro-tabs-screen .fp-tabs .fp-ink { animation:none;
 /* Onboarding, 4 catégories : curseur de la teinte douce de la catégorie, sans dégradé. */
 html:not([data-contrast="true"]) #app .intro-tabs-screen .cat-tabs .fp-ink { background:var(--ink-tint) !important; animation:none; }
 #app .intro-tabs-screen .cat-tabs .fp-tab[aria-selected="true"] .cat.sm { box-shadow:none; }
-/* Coches des choix sélectionnés (domaines, défis, profil…) : pastille verte comme sur les fiches métiers et concours. */
-#app .interest-option.on .interest-check, .sheet .interest-option.on .interest-check { width:22px; height:22px; border:0 !important; background:#1B9E3E; }
-#app .interest-option.on .interest-check svg, .sheet .interest-option.on .interest-check svg { width:14px; height:14px; color:#FFF !important; }
-#app .opt.on > svg.check, .sheet .opt.on > svg.check { flex:none; box-sizing:border-box; width:24px !important; height:24px !important; padding:5px; border-radius:50%; background:#1B9E3E; color:#FFF !important; }
-html[data-contrast="true"] :is(#app, .sheet) :is(.interest-option.on .interest-check, .opt.on > svg.check) { background:#FFF; }
-html[data-contrast="true"] :is(#app, .sheet) :is(.interest-option.on .interest-check svg, .opt.on > svg.check) { color:#000 !important; }
