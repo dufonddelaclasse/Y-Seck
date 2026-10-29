@@ -2582,3 +2582,10 @@ html:not(.dark):not([data-contrast="true"]) #app .prep-page :is(.btn.outline, bu
 .job-fit-check svg { transform:translate(-0.6px, 0.5px); }
 /* Espace perso : écran fixe quand tout tient (pas de rebond ni de défilement). */
 html.home-locked, html.home-locked body { overflow:hidden; overscroll-behavior:none; height:100%; }
+/* Dates des concours : pastille en haut à gauche, alignée sur le haut du titre. */
+.prep .head.cal-head { justify-content:flex-start; align-items:flex-start; gap:12px; }
+.prep .head.cal-head > .cat { flex:none; margin-top:0; }
+.prep .head.cal-head > h3 { flex:1; min-width:0; }
+/* 4 catégories : pastilles à la taille de celles des dates (30px). */
+#app .intro-category-fold summary > .cat.lg { width:30px; height:30px; font-size:.8125rem; margin-top:0; }
+#app .intro-category-fold .intro-fold-body { padding-left:60px; }

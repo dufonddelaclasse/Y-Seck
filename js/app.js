@@ -609,7 +609,7 @@
       var closed = c.date && c.date < todayISO();
       /* Inscriptions closes : seule la pastille rouge reste. */
       var status = '<span class="cal-status">' + (closed ? '<span class="status-pill status-closed">Inscriptions closes</span>' : c.provisional ? '<span class="status-pill status-plan">Calendrier prévisionnel</span>' : '<span class="status-pill status-ok">Session publiée</span>') + '</span>';
-      return '<article class="prep"><div class="head"><h3 class="h3 no-icon">' + sig(c.name) + '</h3>' + catBadge(calendarCategory(c,job), 'sm') + '</div><p>' + esc(D.fps[c.fp] + ' · ' + c.voie) + '</p>' +
+      return '<article class="prep"><div class="head cal-head">' + catBadge(calendarCategory(c,job), 'sm') + '<h3 class="h3 no-icon">' + sig(c.name) + '</h3></div><p>' + esc(D.fps[c.fp] + ' · ' + c.voie) + '</p>' +
         (c.employer ? '<p class="small">Organisé par : '+esc(c.employer)+'</p>' : '') +
         (c.location ? '<p>' + esc(c.location) + '</p>' : '') +
         status + '<dl class="exam-dates"><dt>Ouverture</dt><dd>' + esc(calDay(c.openLabel || c.open) || 'Non publiée') + '</dd><dt>Clôture</dt><dd>' + esc(calDay(c.closeLabel || c.date) || 'Non publiée') + '</dd><dt>Écrits ou sélection</dt><dd>' + esc(calDay(c.writtenLabel) || 'Non publiés') + '</dd><dt>Oraux</dt><dd>' + esc(calDay(c.oralLabel) || 'Non publiés') + '</dd></dl>' +
