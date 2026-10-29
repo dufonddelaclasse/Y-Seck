@@ -2661,5 +2661,7 @@ html[data-contrast="true"] .info-dates .fp-tabs .fp-ink { animation:none; backgr
 html:not([data-contrast="true"]) #app .info-dates .cat-tabs .fp-ink { background:var(--ink-tint) !important; animation:none; }
 #app .info-dates .cat-tabs .fp-tab[aria-selected="true"] .cat.sm { box-shadow:none; }
 /* Accueil, Informations générales : card et zone jaune un peu plus hautes, pour que le picto du parcours respire. */
-.app:not(.onboarding) .home-feature.home-access { padding-top:28px; padding-bottom:28px; }
+.app:not(.onboarding) .home-feature.home-access { padding-top:20px; padding-bottom:20px; }
+/* Même marge en haut, en bas et à gauche du bloc jaune ; texte centré verticalement dans la card. */
+.home-access .home-feature-copy { align-self:center; }
 .home-access .home-tile { min-height:94px; }
