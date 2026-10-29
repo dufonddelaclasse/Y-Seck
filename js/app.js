@@ -2708,7 +2708,7 @@
         main.classList.add(slideClass);
         main.addEventListener('animationend',function(e){if(e.target===main){main.classList.remove(slideClass);root.classList.remove('job-transition');}});
       }
-      if (r.name !== 'accessibilite') main.insertAdjacentHTML('beforeend', '<a class="a11y-link" href="#/accessibilite">Confort de lecture et accessibilité</a>');
+      if (['accessibilite', 'accueil', 'enfant', 'famille'].indexOf(r.name) < 0) main.insertAdjacentHTML('beforeend', '<a class="a11y-link" href="#/accessibilite">Confort de lecture et accessibilité</a>');
     }
     /* Arrivée sur le tableau de bord après le chargement du catalogue : chaque bloc apparaît du haut vers le bas, menu compris. */
     if (root.querySelector('.fp-track')) {
