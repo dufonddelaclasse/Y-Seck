@@ -722,6 +722,7 @@
       bar.style.setProperty('--ink-x', tab.offsetLeft + 'px');
       bar.style.setProperty('--ink-w', tab.offsetWidth + 'px');
       bar.style.setProperty('--ink-color', tab.style.getPropertyValue('--tab-color') || 'var(--brand)');
+      bar.style.setProperty('--ink-tint', tab.style.getPropertyValue('--tab-tint') || 'var(--lilac)');
       bar.classList.add('inked');
     }
     if (panel && panel.offsetHeight) track.parentNode.style.height = panel.offsetHeight + 'px';
@@ -734,7 +735,7 @@
         '<div class="intro-hero-text"><h1>4 catégories</h1><p class="lead">Chaque poste appartient à une catégorie. Elle dépend du niveau de responsabilité et du diplôme demandé pour y entrer.</p></div></section>' +
       '<div class="fp-tabs cat-tabs" role="tablist" aria-label="Les quatre catégories">' + CATS_INTRO.map(function (c, i) {
         var k = catClass(c.id).slice(4);
-        return '<button type="button" class="fp-tab" role="tab" id="cat-tab-' + k + '" aria-controls="cat-panel-' + k + '" aria-selected="' + (i === 0) + '"' + attr('action', 'fpTab') + attr('v', k) + ' style="--tab-color:var(--cat-' + k.toLowerCase() + ')">' +
+        return '<button type="button" class="fp-tab" role="tab" id="cat-tab-' + k + '" aria-controls="cat-panel-' + k + '" aria-selected="' + (i === 0) + '"' + attr('action', 'fpTab') + attr('v', k) + ' style="--tab-color:var(--cat-' + k.toLowerCase() + ');--tab-tint:var(--cat-' + k.toLowerCase() + '-tint)">' +
           '<span class="cat sm ' + catClass(c.id) + '" aria-hidden="true">' + c.id + '</span><span class="sr-only">Catégorie ' + c.id + '</span></button>';
       }).join('') + FP_INK + '</div><div class="fp-viewport"><div class="fp-track">' +
       CATS_INTRO.map(function (c, i) {

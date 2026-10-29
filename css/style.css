@@ -2638,3 +2638,6 @@ html:not(.dark):not([data-contrast="true"]) :is(#app, .sheet) button.chip.on:not
 .intro-tabs-screen .cat-tabs .fp-tab[aria-selected="true"] .cat.sm { box-shadow:0 0 0 2px #FFF; }
 @media (prefers-reduced-motion:reduce) { .intro-tabs-screen .fp-tabs .fp-ink { animation:none; background:var(--brand); } }
 html[data-contrast="true"] .intro-tabs-screen .fp-tabs .fp-ink { animation:none; background:#000; }
+/* Onboarding, 4 catégories : curseur en dégradé animé de la teinte saturée vers la teinte douce de la catégorie. */
+html:not([data-contrast="true"]) #app .intro-tabs-screen .cat-tabs .fp-ink { background:linear-gradient(90deg, var(--ink-color) 0%, var(--ink-color) 18%, var(--ink-tint) 50%, var(--ink-color) 82%, var(--ink-color) 100%) 0 0 / 200% 100% repeat-x !important; animation:discover-flow 7s linear infinite; }
+@media (prefers-reduced-motion:reduce) { #app .intro-tabs-screen .cat-tabs .fp-ink { animation:none; background:var(--ink-color) !important; } }
