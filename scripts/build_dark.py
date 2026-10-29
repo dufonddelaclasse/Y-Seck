@@ -414,9 +414,9 @@ html.dark #app .intro-tabs-screen .fp-tabs { background:#1C1C1E !important; bord
 html.dark #app .intro-tabs-screen .fp-tab { color:#C2C2C6 !important; }
 html.dark #app .intro-tabs-screen .fp-tab[aria-selected="true"] { color:#FFF !important; }
 html.dark #app .intro-tabs-screen .fp-tabs .fp-ink { background:var(--discover-flow) 0 0 / 200% 100% repeat-x !important; }
-/* 4 catégories : curseur saturé vers doux de la catégorie, aussi en sombre. */
-html.dark #app .intro-tabs-screen .cat-tabs .fp-ink { background:linear-gradient(90deg, var(--ink-color) 0%, var(--ink-color) 18%, var(--ink-tint) 50%, var(--ink-color) 82%, var(--ink-color) 100%) 0 0 / 200% 100% repeat-x !important; }
-html.dark #app .intro-tabs-screen .cat-tabs .fp-tab[aria-selected="true"] .cat.sm { box-shadow:0 0 0 2px #FFF !important; }
+/* 4 catégories : curseur de la teinte douce de la catégorie, aussi en sombre. */
+html.dark #app .intro-tabs-screen .cat-tabs .fp-ink { background:var(--ink-tint) !important; animation:none !important; }
+html.dark #app .intro-tabs-screen .cat-tabs .fp-tab[aria-selected="true"] .cat.sm { box-shadow:none !important; }
 """
 
 if __name__ == '__main__':
