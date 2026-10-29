@@ -397,8 +397,8 @@ html.dark body, html.dark .app, html.dark #app main, html.dark #app main.job-pag
 html.dark body::before { display:block !important; content:''; position:fixed; top:0; left:0; right:0; bottom:0; height:auto; z-index:-1; background:linear-gradient(180deg, #171719 0%, #121214 70%, #0A0A0B 100%) !important; pointer-events:none; }
 html.dark .footer { background:#0A0A0B !important; }
 /* « Concours accessible · Maintenant » : contour vert, texte et coche verts, sans fond. */
-html.dark #app .study-level.access-now { background:transparent !important; border:1.5px solid #8EE6A6 !important; color:#8EE6A6 !important; }
-html.dark #app .study-level.access-now :is(span, svg) { color:#8EE6A6 !important; }
+html.dark #app .study-level.access-now { background:transparent !important; border:1.5px solid #C8FFB2 !important; color:#C8FFB2 !important; }
+html.dark #app .study-level.access-now :is(span, svg) { color:#C8FFB2 !important; }
 """
 
 if __name__ == '__main__':
