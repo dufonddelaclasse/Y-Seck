@@ -41,7 +41,7 @@
   /* Fin de l’onboarding : lecture de tout le catalogue, puis nouvelle préparation des données. */
   function loadAll() {
     if (window.YSECK_CATALOG.full) return Promise.resolve();
-    return readParts(manifest.parts).then(publish).then(function () { return script('js/catalog.js?v=20261029-296'); })
+    return readParts(manifest.parts).then(publish).then(function () { return script('js/catalog.js?v=20261029-297'); })
       .then(function () { window.YSECK_CATALOG.full = true; });
   }
   read('data/catalogue.json').then(function (m) {
@@ -51,7 +51,7 @@
   }).then(function (parts) {
     publish(parts);
     window.YSECK_CATALOG = { full: !onboardingOnly, loadAll: loadAll };
-    return script('js/catalog.js?v=20261029-296').then(function () { return script('js/app.js?v=20261029-296'); });
+    return script('js/catalog.js?v=20261029-297').then(function () { return script('js/app.js?v=20261029-297'); });
   }).catch(function (error) {
     console.error('Chargement du catalogue :', error);
     root.innerHTML = '<main class="screen"><h1>Chargement interrompu</h1><p>Les données n’ont pas pu être chargées. Vérifiez votre connexion puis réessayez.</p><button class="btn" id="retry-data">Réessayer</button></main>';
