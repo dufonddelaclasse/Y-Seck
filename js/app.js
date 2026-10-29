@@ -674,7 +674,7 @@
           '<span class="intro-fold-name"><' + fold + ' class="explain-t no-icon"><span class="sr-only">Catégorie ' + c.id + ' : </span>' + esc(c.t) + '</' + fold + '><span class="intro-fold-sub">Catégorie ' + c.id + ' · ' + esc(c.dip) + '</span></span><span class="details-toggle" aria-hidden="true">' + I.down + '</span></summary>' +
           '<div class="intro-fold-body"><p>' + esc(c.d) + '</p>' + catMention(c) + '<p class="ex"><b>Par exemple :</b> ' + esc(c.ex) + '</p>' + categoryFit(c.id) + '</div></details>';
       }).join('') + '</div>' +
-      '<div class="callout tint-blue"><span class="pin"></span><p>Rien n’est figé : on peut monter de catégorie au cours de sa carrière, par concours interne ou par promotion.</p></div>';
+      '<div class="callout tint-blue"><span class="pin"></span><p>Rien n’est figé : on peut changer de catégorie au cours de sa carrière, par concours interne ou par promotion.</p></div>';
   }
 
   /* Onboarding : bandeau photo teinté de bleu, puis un onglet par fonction publique. */
@@ -744,7 +744,7 @@
           '<div class="fp-panel-head"><h2 class="no-icon">' + esc(c.t) + '</h2><p class="fp-sub">Catégorie ' + c.id + '</p></div>' +
           '<p>' + esc(c.d) + '</p><p><b>Diplôme :</b> ' + esc(c.dip) + '</p>' + catMention(c) + '<p><b>Par exemple :</b> ' + esc(c.ex) + '</p>' + categoryFit(c.id) + '</section>';
       }).join('') + '</div></div>' +
-      '<p class="fp-note">' + I.arrow + '<span>Rien n’est figé : on peut monter de catégorie au cours de sa carrière, par concours interne ou par promotion.</span></p>' +
+      '<p class="fp-note">' + I.arrow + '<span>Rien n’est figé : on peut changer de catégorie au cours de sa carrière, par concours interne ou par promotion.</span></p>' +
       '</main><div class="footer"><button type="button" class="btn" data-action="startProfile">Démarrer mon profil</button></div>';
   };
 
@@ -1427,7 +1427,7 @@
     }).join('');
     return '<h2 class="mt-m understand-title no-icon info-big">4 catégories</h2><p class="lead">Le niveau de responsabilité, le diplôme demandé et où passer les épreuves.</p>' +
       '<div class="stack employer-list">' + cats + '</div>' +
-      '<div class="callout tint-blue"><span class="pin"></span><p>Rien n’est figé : on peut monter de catégorie au cours de sa carrière, par concours interne ou par promotion. Les villes exactes figurent dans chaque avis de concours.</p></div>' +
+      '<div class="callout tint-blue"><span class="pin"></span><p>Rien n’est figé : on peut changer de catégorie au cours de sa carrière, par concours interne ou par promotion. Les villes exactes figurent dans chaque avis de concours.</p></div>' +
       '<h2 class="mt-m understand-title no-icon">Les voies d’accès</h2><p class="lead">Un même concours s’ouvre souvent par plusieurs voies, selon votre parcours.</p>' +
       '<div class="stack employer-list">' + voies.map(function (v) { return infoFold(I.walk, v[1], '', '<p>' + esc(v[2]) + '</p>'); }).join('') + '</div>' +
       '<h2 class="mt-m understand-title no-icon">Pour toutes et tous</h2><p class="lead">Les conditions communes à tous les concours.</p>' +
