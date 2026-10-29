@@ -896,6 +896,9 @@ html:where(.dark).dark #app .also-counter .talents-counter-copy b { color:#FFF; 
 :where(html.dark) .info-page .intro-fold-body > p + p { border-top:1px solid var(--hair); }
 :where(html.dark) .exam-dates :where(dt,dd), :where(html.dark) .trip-dates :where(dt,dd) { border-top:1px solid var(--hair); }
 :where(html.dark) .exam-dates :where(dt:first-of-type, dt:first-of-type + dd), :where(html.dark) .trip-dates :where(dt:first-of-type, dt:first-of-type + dd) { border-top:0; }
+@media (prefers-reduced-motion:reduce) {
+  html:where(.dark) .explore-switch[role="tablist"][data-on]::before { background:var(--brand); }
+}
 
 /* Retouches */
 html.dark .app .prep:not(.prep-static):not(.talents-card):not(.talents-feature) { background:#292929 !important; }
@@ -1157,3 +1160,7 @@ html.dark #app .study-level.access-now :is(span, svg) { color:#C8FFB2 !important
 html.dark { --hair: rgba(255,255,255,.1); }
 /* Popup « Votre défi » en sombre : mêmes coins arrondis, cartes anthracite. */
 html.dark #app .sheet-content .opt.ambition-opt, html.dark .sheet-content .opt.ambition-opt { min-height:0; border-radius:22px !important; }
+/* Switch Métiers / Concours en sombre : flux violet du bloc métiers, texte actif en blanc. */
+html.dark #app .explore-switch[role="tablist"][data-on]::before { background:var(--discover-flow) 0 0 / 200% 100% repeat-x !important; animation:discover-flow 7s linear infinite; }
+html.dark #app .explore-switch[role="tablist"][data-on] :is(a.on, button.on, a[aria-selected="true"]) { color:#FFF !important; }
+@media (prefers-reduced-motion:reduce) { html.dark #app .explore-switch[role="tablist"][data-on]::before { animation:none; background:var(--brand) !important; } }

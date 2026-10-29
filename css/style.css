@@ -2598,3 +2598,7 @@ html.home-locked, html.home-locked body { overflow:hidden; overscroll-behavior:n
 html:not(.dark):not([data-contrast="true"]) .sheet-content .opt.ambition-opt:not(.on) { background:#F3F3F4 !important; border:1.5px solid transparent !important; color:var(--ink) !important; }
 html:not(.dark):not([data-contrast="true"]) .sheet-content .opt.ambition-opt:not(.on):hover { background:#ECECEE !important; }
 html:not(.dark):not([data-contrast="true"]) .sheet-content .opt.ambition-opt.on { background:#141414 !important; border:1.5px solid #141414 !important; color:#FFF !important; }
+/* Switch Métiers / Concours : même flux de couleur que le bloc métiers de l'espace perso. */
+html:not([data-contrast="true"]) .explore-switch[role="tablist"][data-on]::before, html:not(.dark):not([data-contrast="true"]) .explore-switch[role="tablist"][data-on]::before { background:var(--discover-flow) 0 0 / 200% 100% repeat-x; animation:discover-flow 7s linear infinite; }
+@media (prefers-reduced-motion:reduce) { html .explore-switch[role="tablist"][data-on]::before { animation:none; background:var(--brand); } }
+.explore-switch[role="tablist"][data-on] :is(a.on, button.on, a[aria-selected="true"]) { text-shadow:0 1px 10px rgba(13,3,59,.45), 0 0 2px rgba(13,3,59,.25); }

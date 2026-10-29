@@ -403,6 +403,10 @@ html.dark #app .study-level.access-now :is(span, svg) { color:#C8FFB2 !important
 html.dark { --hair: rgba(255,255,255,.1); }
 /* Popup « Votre défi » en sombre : mêmes coins arrondis, cartes anthracite. */
 html.dark #app .sheet-content .opt.ambition-opt, html.dark .sheet-content .opt.ambition-opt { min-height:0; border-radius:22px !important; }
+/* Switch Métiers / Concours en sombre : flux violet du bloc métiers, texte actif en blanc. */
+html.dark #app .explore-switch[role="tablist"][data-on]::before { background:var(--discover-flow) 0 0 / 200% 100% repeat-x !important; animation:discover-flow 7s linear infinite; }
+html.dark #app .explore-switch[role="tablist"][data-on] :is(a.on, button.on, a[aria-selected="true"]) { color:#FFF !important; }
+@media (prefers-reduced-motion:reduce) { html.dark #app .explore-switch[role="tablist"][data-on]::before { animation:none; background:var(--brand) !important; } }
 """
 
 if __name__ == '__main__':
