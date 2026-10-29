@@ -2575,8 +2575,3 @@ html.dark #app .also-counter .talents-counter-copy b { color:#FFF; }
 .exam-dates dt, .trip-dates dt { padding-right:12px; }
 .exam-dates :where(dt,dd), .trip-dates :where(dt,dd) { padding:8px 0; border-top:1px solid var(--hair); }
 .exam-dates :where(dt:first-of-type, dt:first-of-type + dd), .trip-dates :where(dt:first-of-type, dt:first-of-type + dd) { border-top:0; }
-/* Barre Information · Favori · Partager : alignée sur le contenu (15px), étirée sur toute la largeur. */
-#app .job-page .job-actions { justify-content:space-between; padding-left:15px; padding-right:15px; }
-#app .job-page .job-actions .job-action:first-child { padding-left:0; }
-#app .job-page .job-actions .job-action:last-child { padding-right:0; }
-html:is([data-large-text="true"],[data-dys-font="true"]) #app .job-page .job-actions { justify-content:flex-start; column-gap:20px; }
