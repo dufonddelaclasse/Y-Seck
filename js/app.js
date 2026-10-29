@@ -768,7 +768,7 @@
   screens.profil = function () {
     if(!S.profile)return screens['choix-profil']();
     if(isParent()&&!activeChild())return screens.famille();
-    return '<form id="identity-form" class="profile-form"><main class="screen identity-screen"><div class="topbar">' + back(S.done?'#/moi':familyEstablished()?'#/accueil':'#/choix-profil','Retour') + '<span class="eyebrow">Étape 1 / '+STEPS+'</span></div>'+progress(1,STEPS)+
+    return '<form id="identity-form" class="profile-form"><main class="screen identity-screen"><div class="topbar">' + back(S.done?'#/moi':familyEstablished()?'#/accueil':'#/choix-profil','Retour') + '<span class="sr-only">Étape 1 / '+STEPS+'</span></div>'+progress(1,STEPS)+
       '<h1 class="mt-l" id="identity-title">'+(isParent()?'Le prénom de votre enfant':'Votre prénom')+'</h1>'+
       '<div class="name-entry"><input class="name-line" id="person-name" name="first-name" aria-labelledby="identity-title" aria-describedby="name-hint" required maxlength="50" enterkeyhint="done" autocomplete="'+(isParent()?'off':'given-name')+'" placeholder="Prénom ou pseudo" value="'+esc(S.name)+'"><button type="button" class="name-confirm" id="name-confirm" data-action="confirmName" aria-label="Valider le prénom"'+(S.name.trim()?'':' disabled')+'>'+I.check+'</button></div>'+
       '<p class="small m0" id="name-hint">'+(isParent()?'Le prénom ou pseudo qui identifiera son parcours.':'Le prénom ou pseudo affiché dans votre espace.')+'</p>'+
@@ -791,7 +791,7 @@
     if(!nameReady())return screens.profil();
     var list=S.profile==='rec'?D.levels.adult:D.levels.school;
     var title=isParent()?'Son niveau d’études':'Votre niveau d’études';
-    return '<form id="study-form" class="profile-form"><main class="screen"><div class="topbar">'+back('#/profil','Retour')+'<span class="eyebrow">Étape 2 / '+STEPS+'</span></div>'+progress(2,STEPS)+
+    return '<form id="study-form" class="profile-form"><main class="screen"><div class="topbar">'+back('#/profil','Retour')+'<span class="sr-only">Étape 2 / '+STEPS+'</span></div>'+progress(2,STEPS)+
       '<h1 class="mt-l">'+title+'</h1><p class="lead">'+(isParent()?'Choisissez son niveau actuel ou le dernier diplôme obtenu.':'Choisissez votre niveau actuel ou le dernier diplôme obtenu.')+'</p>'+
       '<div class="row mt-m" role="group" aria-label="'+title+'">'+list.map(function(l){return chip('level',l,l,S.level===l);}).join('')+'</div>'+(S.profile==='rec'?reconversionQuestions():'')+'</main>'+
       '<div class="footer"><span class="small center"'+(S.level?' hidden':'')+'>Choisissez un niveau pour continuer.</span><button type="submit" class="btn"'+(S.level?'':' disabled')+'>'+profileSubmitLabel('Continuer')+'</button></div></form>';
@@ -800,7 +800,7 @@
   screens.interets = function () {
     var n = S.domains.length;
     return '<main class="screen">' +
-      '<div class="topbar">' + back('#/niveau', 'Retour') + '<span class="eyebrow">Étape 3 / ' + STEPS + '</span></div>' +
+      '<div class="topbar">' + back('#/niveau', 'Retour') + '<span class="sr-only">Étape 3 / ' + STEPS + '</span></div>' +
       progress(3, STEPS) +
       '<h1 class="mt-l">' + (isParent() ? 'Ce qui attire votre enfant' : 'Ce qui vous attire') + '</h1>' +
       '<p class="lead">Choisissez au moins un domaine pour continuer.</p>' +
@@ -814,7 +814,7 @@
   /* Étape « Votre ambition » : deux choix au plus, ou « Je ne sais pas encore ». */
   screens.ambition = function () {
     return '<main class="screen">' +
-      '<div class="topbar">' + back('#/interets', 'Retour') + '<span class="eyebrow">Étape 4 / ' + STEPS + '</span></div>' +
+      '<div class="topbar">' + back('#/interets', 'Retour') + '<span class="sr-only">Étape 4 / ' + STEPS + '</span></div>' +
       progress(4, STEPS) +
       '<h1 class="mt-l">' + (isParent() ? 'Son ambition' : 'Votre ambition') + '</h1>' +
       '<p class="lead">' + (isParent() ? 'Quel défi votre enfant est-il prêt à relever pour accéder à son métier ?' : 'Quel défi êtes-vous prêt·e à relever pour accéder à votre métier ?') + ' Trois choix au plus : vos réponses trient les catégories de concours proposées.</p>' +
@@ -839,7 +839,7 @@
   screens.traits = function () {
     var n = S.traits.length;
     return '<main class="screen">' +
-      '<div class="topbar">' + back('#/ambition', 'Retour') + '<span class="eyebrow">Étape 5 / ' + STEPS + '</span></div>' +
+      '<div class="topbar">' + back('#/ambition', 'Retour') + '<span class="sr-only">Étape 5 / ' + STEPS + '</span></div>' +
       progress(5, STEPS) +
       '<h1 class="mt-l">' + (isParent() ? 'Ce qui lui ressemble' : 'Ce qui vous ressemble') + '</h1>' +
       '<p class="lead">Choisissez sans limite : il n’y a pas de mauvaise réponse.</p>' +
@@ -856,7 +856,7 @@
     var q = isParent() ? 'Votre enfant est-il boursier·e ?' : 'Êtes-vous boursier·e ?';
     var budgets = budgetOptions(S.boursier);
     return '<main class="screen">' +
-      '<div class="topbar">' + back('#/traits', 'Retour') + '<span class="eyebrow">Étape 6 / ' + STEPS + '</span></div>' +
+      '<div class="topbar">' + back('#/traits', 'Retour') + '<span class="sr-only">Étape 6 / ' + STEPS + '</span></div>' +
       progress(6, STEPS) +
       '<h1 class="mt-l">' + (isParent() ? 'Sa situation' : 'Votre situation') + '</h1>' +
       '<h2 class="h3 mt-s">' + q + '</h2>' +
