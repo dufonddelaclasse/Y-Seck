@@ -1037,6 +1037,22 @@
     return '<a class="list-row job-row concours-row job-' + catClass(c.cat) + '" href="#/concours-fiche/' + concoursKey(c) + '">' + catBadge(c.cat) + '<div class="main"><span class="name">' + sig(c.name) + '</span><span class="meta">' + esc(D.fps[c.fp] + (c.voies ? ' · ' + c.voies : '')) + '</span>' + fit + '</div><span class="row-chev" aria-hidden="true">' + I.chev + '</span></a>';
   }
   /* Après les correspondances : compteur jaune des autres pistes et bouton pour les afficher. */
+  /* À l'ouverture des autres pistes : le compteur remonte sous la barre du haut, la liste démarre juste en dessous. */
+  function anchorAlso() {
+    /* Les cards hors écran ont une hauteur estimée : on recale après coup tant que le compteur n'est pas en place. */
+    var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function go(smooth) {
+      var el = document.querySelector('.also-block'); if (!el) return 0;
+      var bar = document.querySelector('.context-bar'), top = bar ? bar.getBoundingClientRect().bottom : 0;
+      var off = el.getBoundingClientRect().top - top - 16;
+      if (Math.abs(off) > 3) window.scrollTo({ top: Math.max(0, window.scrollY + off), behavior: smooth && !reduce ? 'smooth' : 'auto' });
+      return off;
+    }
+    requestAnimationFrame(function () { requestAnimationFrame(function () {
+      go(true);
+      [450, 800, 1200].forEach(function (t) { setTimeout(function () { go(false); }, t); });
+    }); });
+  }
   function alsoBlock(n, one, many, open, action, label) {
     if (!n) return '';
     return '<div class="also-block"><div class="talents-counter also-counter"><span class="home-tile home-count' + countSize(n) + '">' + n + '</span><span class="talents-counter-copy"><b>' + (n > 1 ? many : one) + ' qui ' + (n > 1 ? 'peuvent' : 'peut') + ' aussi ' + (isParent() ? 'l’' : 'vous ') + 'intéresser</b></span></div>' +
@@ -1044,12 +1060,13 @@
   }
   function concoursRows() {
     if (explorerSplitConcours()) {
-      var sp = splitConcours(), np = sp.perfect.length, lim = S.concoursLimit || 60, all = sp.perfect.concat(sp.others), shown = all.slice(0, Math.max(lim, np));
+      /* Toutes les correspondances parfaites, puis les autres pistes par paquets de 60. */
+      var sp = splitConcours(), np = sp.perfect.length, lim = S.concoursLimit || 60, others = sp.others.slice(0, lim);
       return '<p class="small">' + np + ' concours ' + (isParent() ? 'pour votre enfant' : 'pour vous') + '</p>' +
         (np ? '' : '<p class="empty">Aucun concours ne correspond à tous ' + (isParent() ? 'ses' : 'vos') + ' critères. Voici des pistes proches.</p>') +
-        shown.slice(0, np).map(concoursRow).join('') +
+        sp.perfect.map(concoursRow).join('') +
         alsoBlock(sp.others.length, 'concours', 'concours', S.showOthersConcours, 'showOthersConcours', 'Explorer d’autres concours') +
-        (S.showOthersConcours ? shown.slice(np).map(concoursRow).join('') + (shown.length < all.length ? '<button type="button" class="btn outline mt-s" data-action="moreConcours">Afficher 60 concours de plus</button>' : '') : '');
+        (S.showOthersConcours ? others.map(concoursRow).join('') + (others.length < sp.others.length ? '<button type="button" class="btn outline mt-s" data-action="moreConcours">Afficher 60 concours de plus</button>' : '') : '');
     }
     var list = filteredConcours();
     if (!list.length) return '<p class="empty">Aucun concours avec ces filtres. <button type="button" class="text-btn" data-action="forYou">Revenir à ' + (isParent() ? 'ses' : 'vos') + ' choix</button></p>';
@@ -1058,12 +1075,12 @@
   function jobRows() { return onConcoursPage() ? concoursRows() : jobRowsOnly(); }
   function jobRowsOnly() {
     if (explorerSplit()) {
-      var sp = splitJobs(), all = sp.perfect.concat(sp.others), shown = all.slice(0, S.jobLimit), np = sp.perfect.length;
+      var sp = splitJobs(), np = sp.perfect.length, others = sp.others.slice(0, S.jobLimit || 60);
       return '<p class="small">' + np + ' métier' + (np > 1 ? 's' : '') + ' ' + (isParent() ? 'pour votre enfant' : 'pour vous') + '</p>' +
         (np ? '' : '<p class="empty">Aucun métier ne correspond à tous ' + (isParent() ? 'ses' : 'vos') + ' critères. Voici des pistes proches.</p>') +
-        shown.slice(0, np).map(jobRow).join('') +
+        sp.perfect.map(jobRow).join('') +
         alsoBlock(sp.others.length, 'métier', 'métiers', S.showOthersJobs, 'showOthersJobs', 'Explorer d’autres métiers') +
-        (S.showOthersJobs ? shown.slice(np).map(jobRow).join('') + (S.jobLimit < all.length ? '<button type="button" class="btn outline mt-s" data-action="moreJobs">Afficher 60 métiers de plus</button>' : '') : '');
+        (S.showOthersJobs ? others.map(jobRow).join('') + (others.length < sp.others.length ? '<button type="button" class="btn outline mt-s" data-action="moreJobs">Afficher 60 métiers de plus</button>' : '') : '');
     }
     var list = filteredJobs();
     if (!list.length) return '<p class="empty">Aucun métier avec ces filtres. <button type="button" class="text-btn" data-action="forYou">Revenir à ' + (isParent() ? 'ses' : 'vos') + ' choix</button></p>';
@@ -2994,8 +3011,8 @@
         set({ defis: df, metCats: null, jobLimit: 60 }); break;
       }
       case 'agentPublic': case 'experience': { var rp = {}; rp[a] = S[a] === v ? null : v; set(rp); break; }
-      case 'showOthersJobs': set({ showOthersJobs: true }); break;
-      case 'showOthersConcours': set({ showOthersConcours: true }); break;
+      case 'showOthersJobs': set({ showOthersJobs: true }); anchorAlso(); break;
+      case 'showOthersConcours': set({ showOthersConcours: true }); anchorAlso(); break;
       case 'moreConcours': set({ concoursLimit: (S.concoursLimit || 60) + 60 }); break;
       case 'trait':
         i = S.traits.indexOf(v); next = S.traits.slice();
