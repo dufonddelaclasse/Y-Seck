@@ -427,6 +427,12 @@ html.dark #app .info-dates .fp-tabs .fp-ink { background-color:transparent !impo
 html.dark #app .info-dates .cat-tabs .fp-ink { background:var(--ink-tint) !important; animation:none !important; }
 html.dark #app .info-dates .cat-tabs .fp-tab[aria-selected="true"] .cat.sm { box-shadow:none !important; }
 @media (prefers-reduced-motion:reduce) { html.dark #app :is(.intro-tabs-screen, .info-dates) .fp-tabs .fp-ink, html.dark #app .explore-switch[role="tablist"][data-on]::before { animation:none !important; background-image:none !important; background-color:var(--brand) !important; } }
+/* Pages non liées à un concours : boutons en blanc en sombre (miroir du noir en clair). */
+html.dark #app:not(.themed):not(.onboarding) .screen .btn:not(.outline):not(.white):not(.danger):not(.danger-solid):not(.theme):not(.fav):not(.btn-bare):not([disabled]) { background:#FFF !important; border-color:#FFF !important; color:#000 !important; }
+html.dark #app:not(.themed):not(.onboarding) .screen .btn:not(.outline):not(.white):not(.danger):not(.danger-solid):not(.theme):not(.fav):not(.btn-bare):not([disabled]) svg { color:#000 !important; }
+html.dark #app:not(.themed):not(.onboarding) .screen :is(.btn.outline, .btn.white, .btn.btn-bare), html.dark #app:not(.themed):not(.onboarding) .screen :is(.btn.outline, .btn.white, .btn.btn-bare) svg { color:#FFF !important; }
+html.dark #app:not(.themed):not(.onboarding) .bourse-switch[data-on]::before { background:#FFF !important; }
+html.dark #app:not(.themed):not(.onboarding) .bourse-switch button.on { color:#000 !important; }
 """
 
 if __name__ == '__main__':

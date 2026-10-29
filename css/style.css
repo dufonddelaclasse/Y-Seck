@@ -2672,3 +2672,9 @@ html:not([data-contrast="true"]) #app .info-dates .cat-tabs .fp-ink { background
 #app .info-page .info-open .info-open-head { min-height:0; padding:0 0 10px; }
 #app .info-page .info-open .intro-fold-body { padding:0 0 0 50px; }
 #app .info-page .info-open .intro-fold-body > p + p { padding-top:0; border-top:0; }
+/* Pages non liées à un concours (sans couleur de catégorie) : boutons en noir, texte et fond. Onboarding et pages thémées inchangés. */
+html:not(.dark):not([data-contrast="true"]) #app:not(.themed):not(.onboarding) .screen .btn:not(.outline):not(.white):not(.danger):not(.danger-solid):not(.theme):not(.fav):not(.btn-bare):not([disabled]) { background:#141414 !important; border-color:#141414 !important; color:#FFF !important; }
+html:not(.dark):not([data-contrast="true"]) #app:not(.themed):not(.onboarding) .screen .btn:not(.outline):not(.white):not(.danger):not(.danger-solid):not(.theme):not(.fav):not(.btn-bare):not([disabled]) svg { color:#FFF !important; }
+html:not(.dark):not([data-contrast="true"]) #app:not(.themed):not(.onboarding) .screen :is(.btn.outline, .btn.white, .btn.btn-bare), html:not(.dark):not([data-contrast="true"]) #app:not(.themed):not(.onboarding) .screen :is(.btn.outline, .btn.white, .btn.btn-bare) svg { color:#141414 !important; }
+html:not(.dark):not([data-contrast="true"]) #app:not(.themed):not(.onboarding) .bourse-switch[data-on]::before { background:#141414 !important; }
+html:not(.dark):not([data-contrast="true"]) #app:not(.themed):not(.onboarding) .bourse-switch button.on { color:#FFF !important; }
