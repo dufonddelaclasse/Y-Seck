@@ -2602,3 +2602,6 @@ html:not(.dark):not([data-contrast="true"]) .sheet-content .opt.ambition-opt.on 
 html:not([data-contrast="true"]) .explore-switch[role="tablist"][data-on]::before, html:not(.dark):not([data-contrast="true"]) .explore-switch[role="tablist"][data-on]::before { background:var(--discover-flow) 0 0 / 200% 100% repeat-x; animation:discover-flow 7s linear infinite; }
 @media (prefers-reduced-motion:reduce) { html .explore-switch[role="tablist"][data-on]::before { animation:none; background:var(--brand); } }
 .explore-switch[role="tablist"][data-on] :is(a.on, button.on, a[aria-selected="true"]) { text-shadow:0 1px 10px rgba(13,3,59,.45), 0 0 2px rgba(13,3,59,.25); }
+/* Switch sur Concours : curseur de la couleur du bloc concours de l'espace perso, texte foncé. */
+html:not(.dark):not([data-contrast="true"]) .explore-switch[role="tablist"][data-on="1"]::before { background:#DCD3FF; animation:none; }
+html:not([data-contrast="true"]) .explore-switch[role="tablist"][data-on="1"] :is(a.on, button.on, a[aria-selected="true"]) { color:#161616 !important; text-shadow:none; }
