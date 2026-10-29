@@ -607,7 +607,8 @@
     return list.slice().sort(calendarOrder).slice(0, limit || 40).map(function (c) {
       /* Statut : pastille verte « Session publiée », pastille rouge « Inscriptions closes ». */
       var closed = c.date && c.date < todayISO();
-      var status = '<span class="cal-status">' + (c.provisional ? '<span class="status-pill status-plan">Calendrier prévisionnel</span>' : '<span class="status-pill status-ok">Session publiée</span>') + (closed ? '<span class="status-pill status-closed">Inscriptions closes</span>' : '') + '</span>';
+      /* Inscriptions closes : seule la pastille rouge reste. */
+      var status = '<span class="cal-status">' + (closed ? '<span class="status-pill status-closed">Inscriptions closes</span>' : c.provisional ? '<span class="status-pill status-plan">Calendrier prévisionnel</span>' : '<span class="status-pill status-ok">Session publiée</span>') + '</span>';
       return '<article class="prep"><div class="head"><h3 class="h3 no-icon">' + sig(c.name) + '</h3>' + catBadge(calendarCategory(c,job), 'sm') + '</div><p>' + esc(D.fps[c.fp] + ' · ' + c.voie) + '</p>' +
         (c.employer ? '<p class="small">Organisé par : '+esc(c.employer)+'</p>' : '') +
         (c.location ? '<p>' + esc(c.location) + '</p>' : '') +
