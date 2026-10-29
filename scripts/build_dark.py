@@ -409,6 +409,11 @@ html.dark #app .explore-switch[role="tablist"][data-on] :is(a.on, button.on, a[a
 @media (prefers-reduced-motion:reduce) { html.dark #app .explore-switch[role="tablist"][data-on]::before { animation:none; background:var(--brand) !important; } }
 html.dark #app .explore-switch[role="tablist"][data-on="1"]::before { background:#DDC7FF !important; animation:none; }
 html.dark #app .explore-switch[role="tablist"][data-on="1"] :is(a.on, button.on, a[aria-selected="true"]) { color:#161616 !important; text-shadow:none; }
+/* Onboarding : switch des onglets en sombre. */
+html.dark #app .intro-tabs-screen .fp-tabs { background:#1C1C1E !important; border:0 !important; }
+html.dark #app .intro-tabs-screen .fp-tab { color:#C2C2C6 !important; }
+html.dark #app .intro-tabs-screen .fp-tab[aria-selected="true"] { color:#FFF !important; }
+html.dark #app .intro-tabs-screen .fp-tabs .fp-ink { background:var(--discover-flow) 0 0 / 200% 100% repeat-x !important; }
 """
 
 if __name__ == '__main__':
