@@ -2578,3 +2578,5 @@ html.dark #app .also-counter .talents-counter-copy b { color:#FFF; }
 /* Se préparer (clair) : boutons sans contour, fond blanc (Annales, Recommandations, pastilles non sélectionnées). */
 html:not(.dark):not([data-contrast="true"]) #app .prep-page :is(.btn.outline, button.chip:not(.on)) { background:#FFF !important; border-color:transparent !important; }
 html:not(.dark):not([data-contrast="true"]) #app .prep-page :is(.btn.outline, button.chip:not(.on)):hover { background:#FFF !important; }
+/* Coche « Niveau d'études compatible » : centrage optique dans la pastille. */
+.job-fit-check svg { transform:translate(-0.6px, 0.5px); }
