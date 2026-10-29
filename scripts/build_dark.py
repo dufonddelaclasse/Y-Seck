@@ -417,6 +417,10 @@ html.dark #app .intro-tabs-screen .fp-tabs .fp-ink { background:var(--discover-f
 /* 4 catégories : curseur de la teinte douce de la catégorie, aussi en sombre. */
 html.dark #app .intro-tabs-screen .cat-tabs .fp-ink { background:var(--ink-tint) !important; animation:none !important; }
 html.dark #app .intro-tabs-screen .cat-tabs .fp-tab[aria-selected="true"] .cat.sm { box-shadow:none !important; }
+/* Coches des choix sélectionnés en sombre : la carte choisie est blanche, pastille verte saturée et coche blanche. */
+html.dark :is(#app, .sheet) .interest-option.on .interest-check { background:#1B9E3E !important; border:0 !important; }
+html.dark :is(#app, .sheet) .interest-option.on .interest-check svg { color:#FFF !important; }
+html.dark :is(#app, .sheet) .opt.on > svg.check { background:#1B9E3E !important; color:#FFF !important; }
 """
 
 if __name__ == '__main__':
