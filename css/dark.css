@@ -1220,3 +1220,7 @@ html.dark body .update-notice .update-notice-copy b { color:#FFF !important; }
 html.dark body .update-notice .update-notice-copy .update-notice-detail { color:#A8A8AD !important; }
 html.dark body .update-notice .update-notice-action { border:0 !important; background:#FFF !important; color:#000 !important; }
 html.dark body .update-notice .update-notice-dismiss { border:0 !important; background:#2C2C2E !important; color:#FFF !important; }
+/* Test de teinte de l'espace perso, mode sombre seulement (#/accueil-test/1 sable, /2 pêche) : couleur chaude à la place du jaune des pastilles. */
+html.dark #app .personal-home.tint-test-1 .home-tile { background:#F2DA9C !important; }
+html.dark #app .personal-home.tint-test-2 .home-tile { background:#EFC69A !important; }
+html.dark #app .personal-home.tint-test .home-tile, html.dark #app .personal-home.tint-test .home-tile * { color:#141414 !important; }
