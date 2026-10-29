@@ -399,6 +399,8 @@ html.dark .footer { background:#0A0A0B !important; }
 /* « Concours accessible · Maintenant » : contour vert, texte et coche verts, sans fond. */
 html.dark #app .study-level.access-now { background:transparent !important; border:1.5px solid #C8FFB2 !important; color:#C8FFB2 !important; }
 html.dark #app .study-level.access-now :is(span, svg) { color:#C8FFB2 !important; }
+/* Traits de séparation légers en sombre. */
+html.dark { --hair: rgba(255,255,255,.1); }
 """
 
 if __name__ == '__main__':

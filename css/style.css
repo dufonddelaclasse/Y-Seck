@@ -2562,3 +2562,16 @@ html.dark #app .also-counter .talents-counter-copy b { color:#FFF; }
 .swipe-item.swiping .swipe-delete { transition:none; }
 .swipe-delete svg { transition:transform .15s; }
 .swipe-delete.armed svg { transform:scale(1.15); }
+/* Traits de séparation très légers : popups d'information, 4 catégories, dates de concours. */
+:root { --hair: rgba(0,0,0,.08); }
+.concours-facts .trip-q { margin-top:14px; padding-top:14px; border-top:1px solid var(--hair); }
+.concours-facts .trip-q:first-child { margin-top:18px; }
+.sheet-content .profile { gap:0; }
+.sheet-content .profile dt { padding-right:10px; }
+.sheet-content .profile :where(dt,dd) { padding:10px 0; border-top:1px solid var(--hair); }
+.sheet-content .profile :where(dt:first-of-type, dt:first-of-type + dd) { border-top:0; padding-top:0; }
+.info-page .intro-fold-body > p + p { padding-top:8px; border-top:1px solid var(--hair); }
+.exam-dates, .trip-dates { gap:0; }
+.exam-dates dt, .trip-dates dt { padding-right:12px; }
+.exam-dates :where(dt,dd), .trip-dates :where(dt,dd) { padding:8px 0; border-top:1px solid var(--hair); }
+.exam-dates :where(dt:first-of-type, dt:first-of-type + dd), .trip-dates :where(dt:first-of-type, dt:first-of-type + dd) { border-top:0; }

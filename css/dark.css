@@ -890,6 +890,12 @@ html:where(.dark).dark #app .also-counter .talents-counter-copy b { color:#FFF; 
 :where(html.dark) .info-page .callout { background:transparent !important; }
 :where(html.dark) .study-level.access-now { background:var(--fit-tint,#3C5420); color:#C8C8CC; }
 :where(html.dark) .study-level.access-now svg { color:#8EECA7; }
+:where(html.dark) .concours-facts .trip-q { border-top:1px solid var(--hair); }
+:where(html.dark) .sheet-content .profile :where(dt,dd) { border-top:1px solid var(--hair); }
+:where(html.dark) .sheet-content .profile :where(dt:first-of-type, dt:first-of-type + dd) { border-top:0; }
+:where(html.dark) .info-page .intro-fold-body > p + p { border-top:1px solid var(--hair); }
+:where(html.dark) .exam-dates :where(dt,dd), :where(html.dark) .trip-dates :where(dt,dd) { border-top:1px solid var(--hair); }
+:where(html.dark) .exam-dates :where(dt:first-of-type, dt:first-of-type + dd), :where(html.dark) .trip-dates :where(dt:first-of-type, dt:first-of-type + dd) { border-top:0; }
 
 /* Retouches */
 html.dark .app .prep:not(.prep-static):not(.talents-card):not(.talents-feature) { background:#292929 !important; }
@@ -1147,3 +1153,5 @@ html.dark .footer { background:#0A0A0B !important; }
 /* « Concours accessible · Maintenant » : contour vert, texte et coche verts, sans fond. */
 html.dark #app .study-level.access-now { background:transparent !important; border:1.5px solid #C8FFB2 !important; color:#C8FFB2 !important; }
 html.dark #app .study-level.access-now :is(span, svg) { color:#C8FFB2 !important; }
+/* Traits de séparation légers en sombre. */
+html.dark { --hair: rgba(255,255,255,.1); }
