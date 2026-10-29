@@ -2665,3 +2665,10 @@ html:not([data-contrast="true"]) #app .info-dates .cat-tabs .fp-ink { background
 /* Même marge en haut, en bas et à gauche du bloc jaune ; texte centré verticalement dans la card. */
 .home-access .home-feature-copy { align-self:center; }
 .home-access .home-tile { min-height:94px; }
+/* Informations générales, Les fonctions publiques : plus de cards, les trois blocs à plat, séparés par un trait. */
+#app .info-page .employer-list:has(.info-open) { gap:0; }
+#app .info-page .intro-employer-fold.info-open { background:transparent !important; border:0 !important; border-radius:0 !important; box-shadow:none !important; padding:20px 0; }
+#app .info-page .intro-employer-fold.info-open + .intro-employer-fold.info-open { border-top:1px solid var(--hair) !important; }
+#app .info-page .info-open .info-open-head { min-height:0; padding:0 0 10px; }
+#app .info-page .info-open .intro-fold-body { padding:0 0 0 50px; }
+#app .info-page .info-open .intro-fold-body > p + p { padding-top:0; border-top:0; }

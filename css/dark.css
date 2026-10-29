@@ -917,6 +917,9 @@ html:where(.dark).dark #app .also-counter .talents-counter-copy b { color:#FFF; 
   :where(html.dark) .info-dates .fp-tabs .fp-ink { background:var(--brand); }
 }
 :where(html.dark) #app .info-dates .cat-tabs .fp-tab[aria-selected="true"] .cat.sm { box-shadow:none; }
+:where(html.dark) #app .info-page .intro-employer-fold.info-open { background:transparent !important; border:0 !important; box-shadow:none !important; }
+:where(html.dark) #app .info-page .intro-employer-fold.info-open + .intro-employer-fold.info-open { border-top:1px solid var(--hair) !important; }
+:where(html.dark) #app .info-page .info-open .intro-fold-body > p + p { border-top:0; }
 
 /* Retouches */
 html.dark .app .prep:not(.prep-static):not(.talents-card):not(.talents-feature) { background:#292929 !important; }
@@ -1158,6 +1161,8 @@ html.dark #app .trip-tab > span { color:inherit !important; }
 html.dark #app .trip-tab[aria-selected="true"] { background:#4A4A50 !important; color:#FFF !important; box-shadow:none !important; }
 /* Informations générales : entrées au gris des cards ; encadrés « Rien n’est figé » et « Bon à savoir » sans fond. */
 html.dark #app .info-axis, html.dark #app .info-page .intro-employer-fold { background:#1C1C1E !important; }
+html.dark #app .info-page .intro-employer-fold.info-open { background:transparent !important; }
+html.dark #app .info-page .intro-employer-fold.info-open + .intro-employer-fold.info-open { border-top:1px solid #333336 !important; }
 html.dark #app .info-page .callout { background:transparent !important; }
 html.dark #app .status-ok { background:#173D22; color:#9FE8B4; }
 html.dark #app .status-closed { background:#4A1818; color:#FFB3B3; }
