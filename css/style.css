@@ -2605,3 +2605,24 @@ html:not([data-contrast="true"]) .explore-switch[role="tablist"][data-on]::befor
 /* Switch sur Concours : curseur de la couleur du bloc concours de l'espace perso, texte foncé. */
 html:not(.dark):not([data-contrast="true"]) .explore-switch[role="tablist"][data-on="1"]::before { background:#DCD3FF; animation:none; }
 html:not([data-contrast="true"]) .explore-switch[role="tablist"][data-on="1"] :is(a.on, button.on, a[aria-selected="true"]) { color:#161616 !important; text-shadow:none; }
+
+/* Choix en cards (profil, ambition, boursier, budget, reconversion, domaines), version claire : même forme que le sombre.
+   Pages : encadrés gris clair, texte noir. Onboarding : cerclés de noir sans fond. Sélection : card noire, texte blanc. */
+html:not(.dark):not([data-contrast="true"]) #app :is(.opt, .interest-option), html:not(.dark):not([data-contrast="true"]) .sheet :is(.opt, .interest-option) { border:0 !important; border-radius:20px !important; background:#F3F3F4 !important; color:var(--ink) !important; box-shadow:none !important; }
+html:not(.dark):not([data-contrast="true"]) #app .opt:not(.sm), html:not(.dark):not([data-contrast="true"]) .sheet .opt:not(.sm) { padding:18px 20px !important; }
+html:not(.dark):not([data-contrast="true"]) #app .opt.ambition-opt { min-height:72px; }
+html:not(.dark):not([data-contrast="true"]) #app :is(.opt, .interest-option) :is(span, svg, .ambition-t, .interest-name), html:not(.dark):not([data-contrast="true"]) .sheet :is(.opt, .interest-option) :is(span, svg, .ambition-t, .interest-name) { color:var(--ink) !important; }
+html:not(.dark):not([data-contrast="true"]) #app .opt .ambition-d, html:not(.dark):not([data-contrast="true"]) .sheet .opt .ambition-d { color:#626268 !important; opacity:1; }
+html:not(.dark):not([data-contrast="true"]) #app :is(.opt, .interest-option).on, html:not(.dark):not([data-contrast="true"]) .sheet :is(.opt, .interest-option).on { background:#141414 !important; color:#FFF !important; }
+html:not(.dark):not([data-contrast="true"]) #app :is(.opt, .interest-option).on :is(span, svg, .ambition-t, .interest-name), html:not(.dark):not([data-contrast="true"]) .sheet :is(.opt, .interest-option).on :is(span, svg, .ambition-t, .interest-name) { color:#FFF !important; }
+html:not(.dark):not([data-contrast="true"]) #app :is(.opt, .interest-option).on .ambition-d, html:not(.dark):not([data-contrast="true"]) .sheet .opt.on .ambition-d { color:#A8A8AD !important; }
+html:not(.dark):not([data-contrast="true"]) #app.onboarding :is(.opt, .interest-option):not(.on) { background:transparent !important; border:1.5px solid #141414 !important; }
+html:not(.dark):not([data-contrast="true"]) #app.onboarding :is(.opt, .interest-option).on { border:1.5px solid #141414 !important; }
+html:not(.dark):not([data-contrast="true"]) #app .opt .defi-cats .cat, html:not(.dark):not([data-contrast="true"]) #app .opt .defi-cats .cat *, html:not(.dark):not([data-contrast="true"]) .sheet .opt .defi-cats .cat, html:not(.dark):not([data-contrast="true"]) .sheet .opt .defi-cats .cat * { color:#FFF !important; }
+html:not(.dark):not([data-contrast="true"]) #app .opt:not(.on) .defi-cats > span:not(.cat) { color:#626268 !important; }
+html:not(.dark):not([data-contrast="true"]) .sheet-content .opt.ambition-opt { min-height:0; border-radius:22px !important; }
+/* Pastilles de choix (pages et fenêtres), version claire : sélectionnables cerclées de noir, texte noir ; sélectionnées en noir plein, texte blanc. */
+html:not(.dark):not([data-contrast="true"]) :is(#app, .sheet) button.chip:not(.category-choice):not(.on) { background:transparent !important; border:1.5px solid #141414 !important; color:#141414 !important; box-shadow:none !important; }
+html:not(.dark):not([data-contrast="true"]) :is(#app, .sheet) button.chip:not(.category-choice):not(.on) :is(svg, span) { color:#141414 !important; }
+html:not(.dark):not([data-contrast="true"]) :is(#app, .sheet) button.chip.on:not(.category-choice), html:not(.dark):not([data-contrast="true"]) :is(#app, .sheet) button.chip.on:not(.category-choice):hover { background:#141414 !important; border:1.5px solid #141414 !important; color:#FFF !important; box-shadow:none !important; }
+html:not(.dark):not([data-contrast="true"]) :is(#app, .sheet) button.chip.on:not(.category-choice) :is(svg, span) { color:#FFF !important; }
