@@ -558,7 +558,7 @@
       { id: 'talents', t: 'Prépas Talents', price: 'Gratuit', budget: 0, talents: true, d: '106 prépas en France et outre-mer. Sur dossier et entretien, sous conditions de ressources.' },
       { id: 'ipag', t: 'IPAG et CPAG', price: 'Frais d’inscription', budget: 1, d: '27 instituts dédiés aux concours administratifs, licence et master d’administration publique.' },
       { id: 'iep', t: 'IEP et masters d’administration publique', price: 'Frais d’inscription', budget: 1, d: 'Sciences Po et universités, en métropole et outre-mer.' },
-      { id: 'privees', t: 'Préparations privées', price: 'Payant', budget: 2, d: 'Des organismes privés proposent aussi des préparations, en ligne ou en présentiel. Pour l’instant, Y-Seck met en avant les solutions gratuites ou au prix d’une inscription à l’université, pour que chacun parte avec les mêmes chances.' }
+      { id: 'privees', t: 'Préparations privées', price: 'Payant', budget: 2, d: 'Des organismes privés proposent aussi des préparations, en ligne ou en présentiel. Nous avons fait le choix de mettre en avant les solutions gratuites ou au prix d’une inscription à l’université.' }
     ],
     talentsMapUrl: 'https://www.fonction-publique.gouv.fr/cartographie-prepas-talents',
     ipagUrl: 'https://www.ipag-cpag.fr',
