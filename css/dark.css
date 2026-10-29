@@ -1220,3 +1220,5 @@ html.dark body .update-notice .update-notice-copy b { color:#FFF !important; }
 html.dark body .update-notice .update-notice-copy .update-notice-detail { color:#A8A8AD !important; }
 html.dark body .update-notice .update-notice-action { border:0 !important; background:#FFF !important; color:#000 !important; }
 html.dark body .update-notice .update-notice-dismiss { border:0 !important; background:#2C2C2E !important; color:#FFF !important; }
+/* Menu du bas en sombre : la petite barre de l'onglet actif en jaune accent. */
+html.dark .tabbar a.on::before { background:#E0FA6E !important; }
