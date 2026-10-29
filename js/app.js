@@ -157,6 +157,20 @@
     try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) { /* stockage indisponible */ }
     profileSnapshot=current;
   }
+  /* Espace perso : pas de défilement quand tous les blocs tiennent à l'écran. */
+  var homeLocked = false;
+  function lockHome(on) {
+    homeLocked = on;
+    var de = document.documentElement;
+    if (!de || !de.classList || typeof requestAnimationFrame !== 'function') return;
+    de.classList.remove('home-locked');
+    if (!on) return;
+    requestAnimationFrame(function () {
+      if (!homeLocked) return;
+      de.classList.toggle('home-locked', de.scrollHeight <= window.innerHeight + 1);
+    });
+  }
+  window.addEventListener('resize', function () { if (homeLocked) lockHome(true); });
   function set(patch) { Object.assign(S, patch); save(); render(); }
 
   /* ---------- Icônes ---------- */
@@ -2747,7 +2761,8 @@
     var contextCategories=contextJob?jobCategories(contextJob).filter(function(c){return ['A+','A','B','C','CDD'].indexOf(c)>-1;}):[];
     /* Barre du haut : seulement la catégorie choisie sur la fiche. */
     if(contextCategories.length>1&&theme&&contextCategories.indexOf(theme)>-1)contextCategories=[theme];
-    UI.afterRender({root:root,noBar:r.name==='fiche'||((r.name==='concours-fiche'||r.name==='concours-test')&&!S.done),title:r.name==='metiers'?'Explorer les métiers':r.name==='concours-liste'?'Explorer les concours':(t?t.textContent:'Y-Seck'),topLevel:['accueil','enfant','famille','metiers','concours-liste','favoris','moi'].indexOf(r.name)>-1,profileField:r.name==='moi'&&editingField?profileFieldContent(editingField):'',profileFieldTitle:editingField?PROFILE_FIELDS[editingField]:'',isJobs:r.name==='metiers'||r.name==='concours-liste',category:contextCategories.length===1?{label:contextCategories[0],className:catClass(contextCategories[0])}:null,categories:contextCategories.length>1?contextCategories.map(function(c){return {label:c,className:catClass(c)};}):[],summary:r.name==='metiers'||r.name==='concours-liste'?filterSummary():'',filters:r.name==='metiers'||r.name==='concours-liste'?jobFilters():r.name==='calendrier'&&!r.arg?calFilters():r.name==='bibliographie'?bookFilters(jobById(r.arg)):'',filtersTitle:r.name==='concours-liste'?'Filtrer les concours':r.name==='calendrier'?'Filtrer les dates':r.name==='bibliographie'?'Filtrer les ouvrages':'Filtrer les métiers',resourceFilters:['annales','ressources-biblio'].indexOf(r.name)>-1?studyFilters(jobById(r.arg),r.name==='ressources-biblio'):'',changed:changed});
+    UI.afterRender({root:root,noBar:['accueil','enfant','famille'].indexOf(r.name)>-1||r.name==='fiche'||((r.name==='concours-fiche'||r.name==='concours-test')&&!S.done),title:r.name==='metiers'?'Explorer les métiers':r.name==='concours-liste'?'Explorer les concours':(t?t.textContent:'Y-Seck'),topLevel:['accueil','enfant','famille','metiers','concours-liste','favoris','moi'].indexOf(r.name)>-1,profileField:r.name==='moi'&&editingField?profileFieldContent(editingField):'',profileFieldTitle:editingField?PROFILE_FIELDS[editingField]:'',isJobs:r.name==='metiers'||r.name==='concours-liste',category:contextCategories.length===1?{label:contextCategories[0],className:catClass(contextCategories[0])}:null,categories:contextCategories.length>1?contextCategories.map(function(c){return {label:c,className:catClass(c)};}):[],summary:r.name==='metiers'||r.name==='concours-liste'?filterSummary():'',filters:r.name==='metiers'||r.name==='concours-liste'?jobFilters():r.name==='calendrier'&&!r.arg?calFilters():r.name==='bibliographie'?bookFilters(jobById(r.arg)):'',filtersTitle:r.name==='concours-liste'?'Filtrer les concours':r.name==='calendrier'?'Filtrer les dates':r.name==='bibliographie'?'Filtrer les ouvrages':'Filtrer les métiers',resourceFilters:['annales','ressources-biblio'].indexOf(r.name)>-1?studyFilters(jobById(r.arg),r.name==='ressources-biblio'):'',changed:changed});
+    lockHome(['accueil','enfant','famille'].indexOf(r.name)>-1);
     /* Arrivée sur une fiche métier ou concours : la barre du haut part du blanc (texte noir), puis la couleur de la catégorie la remplit de gauche à droite, en dégradé. */
     if (changed && (r.name === 'metier' || r.name === 'concours-fiche') && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
       var ctxBar = document.querySelector('.context-bar');

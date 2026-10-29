@@ -2580,3 +2580,5 @@ html:not(.dark):not([data-contrast="true"]) #app .prep-page :is(.btn.outline, bu
 html:not(.dark):not([data-contrast="true"]) #app .prep-page :is(.btn.outline, button.chip:not(.on)):hover { background:#FFF !important; }
 /* Coche « Niveau d'études compatible » : centrage optique dans la pastille. */
 .job-fit-check svg { transform:translate(-0.6px, 0.5px); }
+/* Espace perso : écran fixe quand tout tient (pas de rebond ni de défilement). */
+html.home-locked, html.home-locked body { overflow:hidden; overscroll-behavior:none; height:100%; }
