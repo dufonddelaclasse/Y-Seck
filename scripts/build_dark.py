@@ -404,7 +404,7 @@ html.dark { --hair: rgba(255,255,255,.1); }
 /* Popup « Votre défi » en sombre : mêmes coins arrondis, cartes anthracite. */
 html.dark #app .sheet-content .opt.ambition-opt, html.dark .sheet-content .opt.ambition-opt { min-height:0; border-radius:22px !important; }
 /* Switch Métiers / Concours en sombre : flux violet du bloc métiers, texte actif en blanc. */
-html.dark #app .explore-switch[role="tablist"][data-on]::before { background:var(--discover-flow) 0 0 / 200% 100% repeat-x !important; animation:discover-flow 7s linear infinite; }
+html.dark #app .explore-switch[role="tablist"][data-on]::before { background-color:transparent !important; background-image:var(--discover-flow) !important; background-size:200% 100% !important; background-repeat:repeat-x !important; animation:discover-flow 7s linear infinite; }
 html.dark #app .explore-switch[role="tablist"][data-on] :is(a.on, button.on, a[aria-selected="true"]) { color:#FFF !important; }
 @media (prefers-reduced-motion:reduce) { html.dark #app .explore-switch[role="tablist"][data-on]::before { animation:none; background:var(--brand) !important; } }
 html.dark #app .explore-switch[role="tablist"][data-on="1"]::before { background:#DDC7FF !important; animation:none; }
@@ -413,10 +413,18 @@ html.dark #app .explore-switch[role="tablist"][data-on="1"] :is(a.on, button.on,
 html.dark #app .intro-tabs-screen .fp-tabs { background:#1C1C1E !important; border:0 !important; }
 html.dark #app .intro-tabs-screen .fp-tab { color:#C2C2C6 !important; }
 html.dark #app .intro-tabs-screen .fp-tab[aria-selected="true"] { color:#FFF !important; }
-html.dark #app .intro-tabs-screen .fp-tabs .fp-ink { background:var(--discover-flow) 0 0 / 200% 100% repeat-x !important; }
+html.dark #app .intro-tabs-screen .fp-tabs .fp-ink { background-color:transparent !important; background-image:var(--discover-flow) !important; background-size:200% 100% !important; background-repeat:repeat-x !important; animation:discover-flow 7s linear infinite; }
 /* 4 catégories : curseur de la teinte douce de la catégorie, aussi en sombre. */
 html.dark #app .intro-tabs-screen .cat-tabs .fp-ink { background:var(--ink-tint) !important; animation:none !important; }
 html.dark #app .intro-tabs-screen .cat-tabs .fp-tab[aria-selected="true"] .cat.sm { box-shadow:none !important; }
+/* Dates des concours : switch comme l’onboarding, aussi en sombre. */
+html.dark #app .info-dates .fp-tabs { background:#1C1C1E !important; border:0 !important; }
+html.dark #app .info-dates .fp-tab { color:#C2C2C6 !important; }
+html.dark #app .info-dates .fp-tab[aria-selected="true"] { color:#FFF !important; }
+html.dark #app .info-dates .fp-tabs .fp-ink { background-color:transparent !important; background-image:var(--discover-flow) !important; background-size:200% 100% !important; background-repeat:repeat-x !important; }
+html.dark #app .info-dates .cat-tabs .fp-ink { background:var(--ink-tint) !important; animation:none !important; }
+html.dark #app .info-dates .cat-tabs .fp-tab[aria-selected="true"] .cat.sm { box-shadow:none !important; }
+@media (prefers-reduced-motion:reduce) { html.dark #app :is(.intro-tabs-screen, .info-dates) .fp-tabs .fp-ink, html.dark #app .explore-switch[role="tablist"][data-on]::before { animation:none !important; background-image:none !important; background-color:var(--brand) !important; } }
 """
 
 if __name__ == '__main__':

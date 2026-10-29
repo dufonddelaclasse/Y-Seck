@@ -2627,7 +2627,7 @@ html:not(.dark):not([data-contrast="true"]) :is(#app, .sheet) button.chip:not(.c
 html:not(.dark):not([data-contrast="true"]) :is(#app, .sheet) button.chip.on:not(.category-choice), html:not(.dark):not([data-contrast="true"]) :is(#app, .sheet) button.chip.on:not(.category-choice):hover { background:#141414 !important; border:1.5px solid #141414 !important; color:#FFF !important; box-shadow:none !important; }
 html:not(.dark):not([data-contrast="true"]) :is(#app, .sheet) button.chip.on:not(.category-choice) :is(svg, span) { color:#FFF !important; }
 /* Onboarding (3 fonctions publiques, 4 catégories) : onglets en switch, curseur au flux de couleur du bloc métiers, qui coulisse au doigt. */
-.intro-tabs-screen .fp-tabs { margin:14px 15px 0; padding:4px; gap:0; border:0; border-radius:999px; background:#E3E3E3; touch-action:pan-y; user-select:none; -webkit-user-select:none; }
+.intro-tabs-screen .fp-tabs { margin:14px 6px 0; padding:4px; gap:0; border:0; border-radius:999px; background:#E3E3E3; touch-action:pan-y; user-select:none; -webkit-user-select:none; }
 .intro-tabs-screen .fp-tab { flex:1 1 0; position:relative; z-index:1; min-height:44px; padding:4px 6px; border-radius:999px; color:#55555C; font-size:.9375rem; font-weight:500; transition:color .34s; }
 .intro-tabs-screen .fp-tab[aria-selected="true"] { color:#FFF; text-shadow:0 1px 10px rgba(13,3,59,.45), 0 0 2px rgba(13,3,59,.25); }
 .intro-tabs-screen .fp-tab::after { display:none !important; }
@@ -2641,3 +2641,22 @@ html[data-contrast="true"] .intro-tabs-screen .fp-tabs .fp-ink { animation:none;
 /* Onboarding, 4 catégories : curseur de la teinte douce de la catégorie, sans dégradé. */
 html:not([data-contrast="true"]) #app .intro-tabs-screen .cat-tabs .fp-ink { background:var(--ink-tint) !important; animation:none; }
 #app .intro-tabs-screen .cat-tabs .fp-tab[aria-selected="true"] .cat.sm { box-shadow:none; }
+/* Dates des concours (Informations générales) : même switch que l’onboarding, aligné sur les marges du texte. */
+.info-dates .fp-panel .category-fit { margin-top:4px; }
+.info-dates .fp-tabs { margin-top:-12px; }
+.info-dates .fp-tab { min-height:44px; padding-top:4px; padding-bottom:4px; }
+.info-dates .fp-panel { gap:10px; padding-top:18px; }
+.info-dates .fp-note { margin-top:20px; }
+.info-dates .fp-tabs { margin:14px 0 0; padding:4px; gap:0; border:0; border-radius:999px; background:#E3E3E3; touch-action:pan-y; user-select:none; -webkit-user-select:none; }
+.info-dates .fp-tab { flex:1 1 0; position:relative; z-index:1; min-height:44px; padding:4px 6px; border-radius:999px; color:#55555C; font-size:.9375rem; font-weight:500; transition:color .34s; }
+.info-dates .fp-tab[aria-selected="true"] { color:#FFF; text-shadow:0 1px 10px rgba(13,3,59,.45), 0 0 2px rgba(13,3,59,.25); }
+.info-dates .fp-tab::after { display:none !important; }
+.info-dates .fp-tab-icon { display:none; }
+.info-dates .fp-tabs .fp-ink { display:block; top:4px; bottom:4px; left:0; height:auto; border-radius:999px; background:var(--discover-flow) 0 0 / 200% 100% repeat-x; animation:discover-flow 7s linear infinite; z-index:0; }
+.info-dates .fp-tabs.inked .fp-ink { transition:transform .34s cubic-bezier(.3,.7,.2,1), width .34s cubic-bezier(.3,.7,.2,1); }
+.info-dates .fp-tabs.ink-dragging .fp-ink { transition:none; }
+.info-dates .cat-tabs .fp-tab[aria-selected="true"] .cat.sm { box-shadow:0 0 0 2px #FFF; }
+@media (prefers-reduced-motion:reduce) { .info-dates .fp-tabs .fp-ink { animation:none; background:var(--brand); } }
+html[data-contrast="true"] .info-dates .fp-tabs .fp-ink { animation:none; background:#000; }
+html:not([data-contrast="true"]) #app .info-dates .cat-tabs .fp-ink { background:var(--ink-tint) !important; animation:none; }
+#app .info-dates .cat-tabs .fp-tab[aria-selected="true"] .cat.sm { box-shadow:none; }

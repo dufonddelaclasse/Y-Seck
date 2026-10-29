@@ -711,7 +711,7 @@
     var tab = tabs[index], panel = track.children[index];
     track.style.transform = 'translateX(' + (drag ? 'calc(' + (-100 * index) + '% + ' + drag + 'px)' : (-100 * index) + '%') + ')';
     /* Onboarding : le curseur suit le contenu glissé au doigt. */
-    if (drag && tab && bar.closest('.intro-tabs-screen')) {
+    if (drag && tab && bar.closest('.intro-tabs-screen, .info-dates')) {
       var vw = track.parentNode.offsetWidth || 1, step = tab.offsetWidth;
       bar.classList.add('ink-dragging');
       bar.style.setProperty('--ink-x', Math.max(tabs[0].offsetLeft, Math.min(tabs[tabs.length - 1].offsetLeft, tab.offsetLeft - drag * step / vw)) + 'px');
@@ -1402,7 +1402,7 @@
     var cur = CAL_CATS.indexOf(S.infoTab) > -1 ? S.infoTab : 'A+', all = upcoming().slice().sort(calendarOrder), lim = S.infoLimits || {};
     return '<div class="info-dates"><div class="fp-tabs cat-tabs" role="tablist" aria-label="Dates par catégorie">' + CAL_CATS.map(function (c) {
         var k = catClass(c).slice(4);
-        return '<button type="button" class="fp-tab" role="tab" id="date-tab-' + k + '" aria-controls="date-panel-' + k + '" aria-selected="' + (c === cur) + '"' + attr('action', 'fpTab') + attr('v', k) + ' style="--tab-color:var(--cat-' + k.toLowerCase() + ')">' +
+        return '<button type="button" class="fp-tab" role="tab" id="date-tab-' + k + '" aria-controls="date-panel-' + k + '" aria-selected="' + (c === cur) + '"' + attr('action', 'fpTab') + attr('v', k) + ' style="--tab-color:var(--cat-' + k.toLowerCase() + ');--tab-tint:var(--cat-' + k.toLowerCase() + '-tint)">' +
           '<span class="cat sm ' + catClass(c) + '" aria-hidden="true">' + c + '</span><span class="sr-only">Catégorie ' + c + '</span></button>';
       }).join('') + FP_INK + '</div><div class="fp-viewport"><div class="fp-track">' + CAL_CATS.map(function (c) {
         var k = catClass(c).slice(4), list = all.filter(function (x) { return calendarCategory(x, null) === c; }), n = lim[c] || 20;
@@ -2906,7 +2906,7 @@
   /* Onboarding : le curseur des onglets coulisse au doigt, il se cale sur l'onglet le plus proche au relâcher. */
   var inkDrag=null,inkClick=0;
   root.addEventListener('pointerdown',function(e){
-    var bar=e.target.closest('.intro-tabs-screen .fp-tabs');
+    var bar=e.target.closest(':is(.intro-tabs-screen, .info-dates) .fp-tabs');
     if(!bar||e.button>0)return;
     var tabs=[].slice.call(bar.querySelectorAll('.fp-tab')),cur=Math.max(0,tabs.map(function(t){return t.getAttribute('aria-selected');}).indexOf('true'));
     inkDrag={id:e.pointerId,bar:bar,tabs:tabs,x:e.clientX,y:e.clientY,start:tabs[cur].offsetLeft,ink:tabs[cur].offsetLeft,active:false};
@@ -2926,7 +2926,7 @@
   }
   window.addEventListener('pointerup',endInkDrag,{passive:true});
   window.addEventListener('pointercancel',endInkDrag,{passive:true});
-  root.addEventListener('click',function(e){if(Date.now()-inkClick<400&&e.target.closest&&e.target.closest('.intro-tabs-screen .fp-tabs')){e.preventDefault();e.stopPropagation();}},true);
+  root.addEventListener('click',function(e){if(Date.now()-inkClick<400&&e.target.closest&&e.target.closest(':is(.intro-tabs-screen, .info-dates) .fp-tabs')){e.preventDefault();e.stopPropagation();}},true);
 
   /* Favoris : glisser une carte vers la gauche dévoile « Retirer » ; un glissement long demande directement la confirmation. */
   var swipe=null,swipeClick=0,SWIPE_OPEN=96;
