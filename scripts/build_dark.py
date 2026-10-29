@@ -301,7 +301,7 @@ html.dark #app .btn.prep-float { box-shadow:0 8px 24px rgba(0,0,0,.6); }
 
 /* Switch boursier : rail anthracite, curseur coloré, texte noir sur le curseur. */
 html.dark #app .explore-switch, html.dark #app .bourse-switch { background:#1C1C1E !important; }
-html.dark #app .explore-switch[data-on]::before, html.dark #app .explore-switch.bourse-switch[data-on]::before { background:var(--pill-on) !important; }
+html.dark #app .explore-switch[data-on]::before, html.dark #app .explore-switch.bourse-switch[data-on]::before { background-color:var(--pill-on) !important; background-image:none !important; }
 html.dark #app .explore-switch[data-on] :is(a, button) { color:#FFF !important; }
 html.dark #app .explore-switch[data-on] :is(a.on, button.on, a[aria-selected="true"]) { color:#000 !important; }
 
