@@ -2684,10 +2684,3 @@ html:not(.dark):not([data-contrast="true"]) #app:not(.themed):not(.onboarding) .
 .update-notice-detail { font-size:.8125rem; line-height:1.4; color:var(--muted); }
 html.dark body .update-notice { border:1px solid #2C2C2E !important; box-shadow:none !important; }
 html.dark body .update-notice .update-notice-copy .update-notice-detail { color:#A8A8AD !important; }
-/* Barre du haut de l'Explorer : « Explorer » puis le switch Métiers / Concours en miniature, même aspect. */
-.context-bar.top-level:has(.context-switch) { grid-template-columns:auto minmax(0,1fr) auto; column-gap:12px; }
-.context-switch { min-width:0; display:flex; justify-content:flex-start; }
-.context-switch .explore-switch { width:100%; max-width:200px; margin:0; padding:3px; gap:2px; }
-.context-switch .explore-switch a { min-height:30px; font-size:.8125rem; }
-.context-switch .explore-switch[data-on]::before { top:3px; bottom:3px; left:3px; width:calc(50% - 4px); }
-.context-switch .explore-switch[data-on="1"]::before { transform:translateX(calc(100% + 2px)); }

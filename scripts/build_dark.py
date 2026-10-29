@@ -441,13 +441,6 @@ html.dark body .update-notice .update-notice-action { border:0 !important; backg
 html.dark body .update-notice .update-notice-dismiss { border:0 !important; background:#2C2C2E !important; color:#FFF !important; }
 /* Menu du bas en sombre : la petite barre de l'onglet actif en jaune accent. */
 html.dark .tabbar a.on::before { background:#E0FA6E !important; }
-/* Switch miniature de la barre du haut (Explorer), même aspect qu'en page. */
-html.dark .context-bar .context-switch .explore-switch { background:#1C1C1E !important; }
-html.dark .context-bar .context-switch .explore-switch a { color:#FFF !important; background:transparent !important; }
-html.dark .context-bar .context-switch .explore-switch[data-on]::before { background:var(--discover-flow) 0 0 / 200% 100% repeat-x !important; animation:discover-flow 7s linear infinite; }
-html.dark .context-bar .context-switch .explore-switch[data-on="1"]::before { background:#DDC7FF !important; animation:none; }
-html.dark .context-bar .context-switch .explore-switch[data-on="1"] a.on { color:#161616 !important; text-shadow:none; }
-@media (prefers-reduced-motion:reduce) { html.dark .context-bar .context-switch .explore-switch[data-on="0"]::before { animation:none; background:var(--brand) !important; } }
 """
 
 if __name__ == '__main__':
