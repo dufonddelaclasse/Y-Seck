@@ -2486,12 +2486,12 @@
     return '<main class="screen top-tight">' + back('#/moi', 'Profil') +
       '<span class="eyebrow">Informations</span><h1 class="sm">Mentions légales</h1>' +
       '<div class="prose">' +
-      '<h2>Éditeur</h2><p>' + esc(L.publisher) + '<br>' + mail(L.contact) + '</p>' +
-      '<h2>Directrice de la publication</h2><p>' + esc(L.director) + '</p>' +
-      '<h2>Conception</h2><p>' + esc(L.design) + '</p>' +
-      '<h2>Hébergement</h2><p>' + esc(L.host) + ', ' + esc(L.hostAddress) + '</p>' +
-      '<h2>Sources</h2><p>Chaque session renvoie à son avis officiel. Les catégories observées dans les offres ne constituent pas une condition de diplôme.</p>' + (D.catalogSources || []).map(function (s) { return '<p>' + ext(s.url, s.name, 'link-plain') + '<span class="small">Vérifié le ' + esc(s.checked) + ' · ' + esc(s.note) + '</span></p>'; }).join('') +
-      '<h2>Polices de caractères</h2><p>Geologica et OpenDyslexic, sous licence SIL Open Font License, sont hébergées avec l’application.</p>' +
+      '<h2 class="no-icon">Éditeur</h2><p>' + esc(L.publisher) + '<br>' + mail(L.contact) + '</p><p>' + esc(L.design) + '<br>' + mail(L.designContact) + '</p>' +
+      '<h2 class="no-icon">Direction de la publication</h2><p>' + esc(L.director) + '</p><p>' + esc(L.design) + '</p>' +
+      '<h2 class="no-icon">Conception</h2><p>' + esc(L.publisher) + '</p><p>' + esc(L.design) + '</p>' +
+      '<h2 class="no-icon">Hébergement</h2><p>' + esc(L.host) + ', ' + esc(L.hostAddress) + '</p>' +
+      '<h2 class="no-icon">Sources</h2><p>Chaque session renvoie à son avis officiel. Les catégories observées dans les offres ne constituent pas une condition de diplôme.</p>' + (D.catalogSources || []).map(function (s) { return '<p>' + ext(s.url, s.name, 'link-plain') + '<span class="small">Vérifié le ' + esc(s.checked) + ' · ' + esc(s.note) + '</span></p>'; }).join('') +
+      '<h2 class="no-icon">Polices de caractères</h2><p>Geologica et OpenDyslexic, sous licence SIL Open Font License, sont hébergées avec l’application.</p>' +
       '</div></main>' + tabbar('moi');
   };
 

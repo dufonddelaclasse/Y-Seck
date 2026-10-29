@@ -569,6 +569,7 @@
       contact: 'yacineseckdore@gmail.com',
       director: 'Yacine Seck',
       design: 'Roche Conseil',
+      designContact: 'alexis.afonso@rocheconseil.fr',
       host: 'GitHub, Inc. (GitHub Pages)',
       hostAddress: '88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis',
       updated: '15 octobre 2026'
