@@ -445,6 +445,9 @@ html.dark .tabbar a.on::before { background:#E0FA6E !important; }
 html.dark #app .aide-tile { background:#FFF !important; color:var(--theme, var(--brand)) !important; border:2px solid var(--theme, var(--brand)) !important; }
 html.dark #app .aide-tile :is(span, svg) { color:var(--theme, var(--brand)) !important; }
 html.dark #app .aide-ico { background:var(--theme-tint, #DDC7FF) !important; }
+/* Pastille contractuelle du défi en sombre : blanche, picto noir. */
+html.dark :is(#app, .sheet) .opt .defi-cats .cat.cat-CDD { background:#FFF !important; box-shadow:inset 0 0 0 1.5px #BDBDB8 !important; }
+html.dark :is(#app, .sheet) .opt .defi-cats .cat.cat-CDD, html.dark :is(#app, .sheet) .opt .defi-cats .cat.cat-CDD * { color:#141414 !important; }
 """
 
 if __name__ == '__main__':
