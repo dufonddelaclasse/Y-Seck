@@ -222,3 +222,15 @@ Restent au-delà de 60 : Technique (92 : ateliers, maintenance, ouvriers du bât
 - Anomalies de données repérées dans les fiches source :
   - fpenv023 a un titre qui évoque la montagne, mais sa fiche parle de bâtiment ;
   - fpmed045 (infirmier perfusionniste) a la description du puériculteur.
+
+## 9. Ajustement du 30 octobre (soir) : proches comptés, pistes resserrées
+
+Demande d'Alexis : les métiers proches doivent s'afficher directement et être comptés ; « peuvent aussi vous intéresser » ne doit garder que des métiers liés de plus loin, pas une tonne.
+
+Hiérarchie appliquée :
+1. Cœur : compté « pour vous », en tête.
+2. Proche principal (le premier proche de chaque métier) : compté « pour vous », sous l'intertitre « N métiers aussi en lien avec … ». Administration n'est pas comptée comme proche, car elle figure dans presque tous les métiers publics. Réglage : `COUNTED_NEAR` et `UNCOUNTED_NEAR` dans `js/catalog.js`.
+3. Proches secondaires, puis métiers au cœur d'un domaine voisin du domaine coché (graphe orienté `settings.domainGraph`) : « peuvent aussi vous intéresser », plafonnés à 60 métiers et 30 concours.
+4. Le reste (simple mention, sans lien) n'est plus proposé dans ces listes. La recherche et le filtre restent ouverts sur tout le catalogue.
+
+Résultat (métiers pour vous + pistes) : 6e + Défense 42 + 60 ; 3e + Sécurité + Santé 225 + 60 ; Terminale + Administration 79 + 60 ; Bac+3 + Numérique sélectif 70 + 46 ; Bac+3 + Santé 115 + 60 ; Bac+5 + Recherche 139 + 60 ; Bac+5 + Administration sélectif 61 + 60 ; Reconversion Bac+2 + Finances 72 + 60 ; Parent + Environnement 87 + 60 ; 6e + Arts 23 + 43.

@@ -5,6 +5,10 @@
   /* Classement des métiers par domaine en trois cercles (cœur, proches, lointain), fichiers domain-tags-NN.json.
      À false : retour exact à l’ancien calcul (domaine RMFP, famille ou intitulé), sans toucher aux données. */
   var STRICT_DOMAINS = true;
+  /* Proches comptés dans « pour vous » : le premier proche de chaque métier (le plus important), sauf Administration,
+     présente dans presque tous les métiers publics. Les autres proches vont dans « peuvent aussi vous intéresser ».
+     COUNTED_NEAR = 4 compterait tous les proches. */
+  var COUNTED_NEAR = 1, UNCOUNTED_NEAR = ['Administration'];
   /* Titres au masculin puis au féminin : « Administrateur - Administratrice ». */
   var GENDER_PLAIN = {
     'Commandant d\'unité de combat': 'Commandant - Commandante d’unité de combat', 'Démineur': 'Démineur - Démineuse', 'Sapeur-Sauveteur': 'Sapeur-sauveteur - Sapeuse-sauveteuse', 'Maçon': 'Maçon - Maçonne',
@@ -172,12 +176,11 @@
      Proches : secteur d’exercice ou compétence voisine, en tête des pistes « peuvent aussi vous intéresser ».
      Voisins : domaines reliés au cœur par le graphe des domaines (settings.domainGraph), juste après.
      Lointain : simple mention dans le texte (ancien rattachement), en fin de pistes. */
+  /* Graphe orienté : pour un domaine coché X, ses voisins sont ceux listés dans domainGraph[X].
+     graph[c] donne les domaines cochables pour lesquels un métier au cœur c est un voisin. */
   var graph = {};
   Object.keys(D.domainGraph || {}).forEach(function (d) {
-    ((D.domainGraph[d] || {}).proches || []).forEach(function (p) {
-      (graph[d] = graph[d] || []).indexOf(p) < 0 && graph[d].push(p);
-      (graph[p] = graph[p] || []).indexOf(d) < 0 && graph[p].push(d);
-    });
+    ((D.domainGraph[d] || {}).proches || []).forEach(function (p) { (graph[p] = graph[p] || []).indexOf(d) < 0 && graph[p].push(d); });
   });
   D.domainNeighbours = graph;
   var tagBy = {};
@@ -186,10 +189,11 @@
   D.jobs.forEach(function (job) {
     var tag = tagBy[job.id];
     job.textInterests = job.interests.slice();
-    if (!tag) { job.coreDomains = job.strongInterests.slice(); job.nearDomains = []; job.graphDomains = []; return; }
+    if (!tag) { job.coreDomains = job.strongInterests.slice(); job.nearDomains = []; job.nearCounted = []; job.graphDomains = []; return; }
     var core = tag.coeur.slice(), near = (tag.proches || []).filter(function (d) { return core.indexOf(d) < 0; }), around = [];
     core.forEach(function (c) { (graph[c] || []).forEach(function (d) { if (core.indexOf(d) < 0 && near.indexOf(d) < 0 && around.indexOf(d) < 0) around.push(d); }); });
     job.coreDomains = core; job.nearDomains = near; job.graphDomains = around;
+    job.nearCounted = near.slice(0, COUNTED_NEAR).filter(function (d) { return UNCOUNTED_NEAR.indexOf(d) < 0; });
     job.strongInterests = core.slice();
     job.interests = core.concat(near).concat(job.domain && core.indexOf(job.domain) < 0 && near.indexOf(job.domain) < 0 ? [job.domain] : []);
   });

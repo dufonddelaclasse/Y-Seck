@@ -2705,3 +2705,5 @@ html[data-contrast="true"] .aide-tile { background:#000; color:#FFF; }
 /* Défi « Explorer aussi les recrutements sans concours » : pastille contractuelle blanche cerclée, picto noir, visible sur tous les fonds. */
 html:not([data-contrast="true"]) :is(#app, .sheet) .opt .defi-cats .cat.cat-CDD { background:#FFF !important; box-shadow:inset 0 0 0 1.5px #BDBDB8 !important; }
 html:not([data-contrast="true"]) :is(#app, .sheet) .opt .defi-cats .cat.cat-CDD, html:not([data-contrast="true"]) :is(#app, .sheet) .opt .defi-cats .cat.cat-CDD * { color:#141414 !important; }
+/* Explorer : intertitre entre les métiers au cœur des domaines cochés et les métiers proches (comptés « pour vous »). */
+.list-subhead { margin:24px 0 2px; font-size:.9375rem; font-weight:500; line-height:1.35; color:var(--ink); }

@@ -932,6 +932,7 @@ html:where(.dark).dark body .update-notice .update-notice-copy .update-notice-de
 :where(html.dark) .aide-tile:hover, :where(html.dark) .aide-tile:active { color:var(--theme-ink, var(--brand)); background:#292929; }
 :where(html.dark) .aide-ico { background:var(--theme-tint, var(--lilac)); }
 :where(html.dark) .aide-ico svg { color:var(--theme-ink, var(--brand)); }
+:where(html.dark) .list-subhead { color:var(--ink); }
 
 /* Retouches */
 html.dark .app .prep:not(.prep-static):not(.talents-card):not(.talents-feature) { background:#292929 !important; }

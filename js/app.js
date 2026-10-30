@@ -531,12 +531,14 @@
   /* Domaines d’un métier pour les filtres : cœur et proches quand le classement par cercles est actif, sinon l’ancien rattachement large. */
   function jobDomainSet(job) { return D.strictDomains && job.coreDomains ? job.coreDomains.concat(job.nearDomains || []) : (job.interests || [job.domain]); }
   function matchesDomains(job, domains) { return domains.some(function(id){return jobDomainSet(job).indexOf(id)>-1;}); }
-  /* Cercle d’un métier pour les domaines cochés : 6 cœur, 4 proche, 3 domaine voisin du cœur (graphe), 2 simple mention, 0 sinon. */
+  /* Cercle d’un métier pour les domaines cochés : 6 cœur et 5 proche principal (comptés « pour vous »), 4 autre proche et
+     3 domaine voisin du domaine coché (« peuvent aussi vous intéresser »), 2 simple mention et 0 : non proposés dans ces listes. */
   function domainTier(j, doms) {
     if (!doms.length) return 0;
     var has = function (list) { return (list || []).some(function (d) { return doms.indexOf(d) > -1; }); };
     if (has(j.strongInterests || j.interests || [j.domain])) return 6;
     if (!D.strictDomains) return has(j.interests) ? 2 : 0;
+    if (has(j.nearCounted)) return 5;
     if (has(j.nearDomains)) return 4;
     if (has(j.graphDomains)) return 3;
     if (has(j.textInterests)) return 2;
@@ -578,7 +580,8 @@
   function wantedAmbitions() { return (S.ambitions || []).filter(function (a) { return a !== 'nsp'; }); }
   function ambitionOk(j) { var w = wantedAmbitions(); if (!w.length) return true; var have = jobAmbitions(j); return w.some(function (a) { return have.indexOf(a) > -1; }); }
   function matchedAmbitions(j) { var have = jobAmbitions(j); return wantedAmbitions().filter(function (a) { return have.indexOf(a) > -1; }); }
-  function jobFitsCriteria(j, doms) { return (!doms.length || matchesStrong(j, doms)) && ambitionOk(j); }
+  /* Correspondance « pour vous » : le domaine coché est au cœur du métier ou fait partie de ses proches (classement par cercles). */
+  function jobFitsCriteria(j, doms) { return (!doms.length || (D.strictDomains ? domainTier(j, doms) >= 5 : matchesStrong(j, doms))) && ambitionOk(j); }
   function isPerfectJob(j, doms) { return passesLevelCategory(j) && jobFitsCriteria(j, doms); }
   function partialScore(j, doms) {
     return domainTier(j, doms) + (wantedAmbitions().length && ambitionOk(j) ? 3 : 0) + (passesLevelCategory(j) ? 1 : 0) + sharedTraits(j).length;
@@ -1009,14 +1012,28 @@
   function splitJobs() {
     var doms = activeDomains(), cats = selCats(), fps = selFps();
     var base = D.jobs.filter(function (j) { return passesCats(j, cats) && j.fp.split('').some(function (f) { return fps.indexOf(f) > -1; }); });
-    var perfect = base.filter(function (j) { return isPerfectJob(j, doms); }), others = base.filter(function (j) { return perfect.indexOf(j) < 0; });
+    /* Autres pistes : seulement les métiers liés de plus loin (domaines voisins du domaine coché), pas tout le catalogue. */
+    var perfect = base.filter(function (j) { return isPerfectJob(j, doms); }), others = base.filter(function (j) { return perfect.indexOf(j) < 0 && (!D.strictDomains || !doms.length || domainTier(j, doms) >= 3); });
     /* « Pour vous » : catégories dans l’ordre du défi, puis affinités. « Autres pistes » : cercle (proches, voisins, mentions), puis catégories, puis affinités. */
     var rk = {}, tier = {}, ps = {}, sc = {};
     base.forEach(function (j) { rk[j.id] = jobCatRank(j); sc[j.id] = score(j); });
-    others.forEach(function (j) { tier[j.id] = domainTier(j, doms); ps[j.id] = partialScore(j, doms); });
-    perfect = contractsLater(perfect.sort(function (a, b) { return rk[a.id] - rk[b.id] || sc[b.id] - sc[a.id] || (isOpen(a) ? 0 : 1) - (isOpen(b) ? 0 : 1); }));
+    base.forEach(function (j) { tier[j.id] = domainTier(j, doms); });
+    others.forEach(function (j) { ps[j.id] = partialScore(j, doms); });
+    /* Cœur d’abord, puis les métiers proches des domaines cochés, chaque groupe dans l’ordre des catégories du défi. */
+    var core = perfect.filter(function (j) { return tier[j.id] >= 6 || !doms.length; }), near = perfect.filter(function (j) { return core.indexOf(j) < 0; });
+    var perfectSort = function (a, b) { return rk[a.id] - rk[b.id] || sc[b.id] - sc[a.id] || (isOpen(a) ? 0 : 1) - (isOpen(b) ? 0 : 1); };
+    core = contractsLater(core.sort(perfectSort)); near = contractsLater(near.sort(perfectSort));
+    perfect = core.concat(near);
     others = contractsLater(others.sort(function (a, b) { return tier[b.id] - tier[a.id] || rk[a.id] - rk[b.id] || ps[b.id] - ps[a.id] || sc[b.id] - sc[a.id]; }));
-    return { perfect: perfect, others: others };
+    /* Pistes plafonnées aux 60 plus proches : des suggestions, pas tout le catalogue (la recherche reste ouverte sur tout). */
+    if (D.strictDomains && doms.length) others = others.slice(0, 60);
+    return { perfect: perfect, others: others, coreCount: core.length };
+  }
+  /* Intertitre entre le cœur et les métiers ou concours proches des domaines cochés. */
+  function nearHeading(doms, n, one, many) {
+    var names = doms.map(function (d) { return D.domainLabels[d] || d; });
+    var list = names.length > 1 ? names.slice(0, -1).join(', ') + ' et ' + names[names.length - 1] : names[0];
+    return '<h3 class="list-subhead no-icon">' + n + ' ' + (n > 1 ? many : one) + ' aussi en lien avec ' + esc(list) + '</h3>';
   }
   /* Chaque card de métier ou de concours porte une petite flèche : elle s’ouvre. */
   function jobRow(j) {
@@ -1071,17 +1088,31 @@
     if (catalogReady) c._core = out;
     return out;
   }
+  /* Domaines proches d’un concours : même règle que le cœur, en comptant aussi les domaines proches de ses métiers. */
+  function concoursNear(c) {
+    if (c._near && catalogReady) return c._near;
+    var jobs = concoursJobs(c), tally = {}, out = [], core = concoursCore(c);
+    var add = function (d) { if (out.indexOf(d) < 0 && core.indexOf(d) < 0) out.push(d); };
+    jobs.forEach(function (j) { (j.strongInterests || []).concat(j.nearCounted || []).forEach(function (d) { tally[d] = (tally[d] || 0) + 1; }); });
+    jobs.filter(function (j) { return !j.rmfpDomain && jobRef(j) === c; }).forEach(function (j) { (j.nearCounted || []).forEach(add); });
+    Object.keys(tally).forEach(function (d) { if (jobs.length <= 3 || tally[d] >= Math.max(2, jobs.length / 4)) add(d); });
+    if (catalogReady) c._near = out;
+    return out;
+  }
+  /* Cercle d’un concours : 6 cœur, 5 proche (comptés « pour vous »), 4 un métier du concours touche le domaine, puis voisins et mentions. */
   function concoursTier(c, doms) {
     if (!doms.length) return 0;
     if (!D.strictDomains) return concoursJobs(c).reduce(function (m, j) { return Math.max(m, domainTier(j, doms)); }, 0);
-    if (concoursCore(c).some(function (d) { return doms.indexOf(d) > -1; })) return 6;
+    var has = function (list) { return list.some(function (d) { return doms.indexOf(d) > -1; }); };
+    if (has(concoursCore(c))) return 6;
+    if (has(concoursNear(c))) return 5;
     var best = concoursJobs(c).reduce(function (m, j) { return Math.max(m, domainTier(j, doms)); }, 0);
-    return best === 6 ? 5 : best;
+    return best >= 4 ? 4 : best;
   }
   function isPerfectConcours(c, doms) {
     if (defaultCats().indexOf(c.cat) < 0) return false;
     if (!doms.length) return concoursJobs(c).some(function (j) { return jobFitsCriteria(j, doms); });
-    return concoursTier(c, doms) === 6 && concoursJobs(c).some(function (j) { return ambitionOk(j); });
+    return concoursTier(c, doms) >= (D.strictDomains ? 5 : 6) && concoursJobs(c).some(function (j) { return ambitionOk(j); });
   }
   function concoursCatOrder(a, b) { return catRankOf([a.cat]) - catRankOf([b.cat]) || a.name.localeCompare(b.name, 'fr'); }
   function myConcours() { return D.concours.filter(function (c) { return isPerfectConcours(c, S.domains); }).sort(concoursCatOrder); }
@@ -1090,11 +1121,16 @@
   function splitConcours() {
     var doms = activeDomains(), cats = concoursCats(), fps = selFps();
     var base = D.concours.filter(function (c) { return cats.indexOf(c.cat) > -1 && fps.indexOf(c.fp) > -1; });
-    var perfect = base.filter(function (c) { return isPerfectConcours(c, doms); }).sort(concoursCatOrder);
+    var perfect = base.filter(function (c) { return isPerfectConcours(c, doms); }), pt = {};
+    perfect.forEach(function (c) { pt[c.id] = concoursTier(c, doms); });
+    perfect.sort(function (a, b) { return (pt[b.id] >= 6 ? 1 : 0) - (pt[a.id] >= 6 ? 1 : 0) || concoursCatOrder(a, b); });
+    var coreCount = doms.length ? perfect.filter(function (c) { return pt[c.id] >= 6; }).length : perfect.length;
     var ct = {}, cp = {}, rest = base.filter(function (c) { return perfect.indexOf(c) < 0; });
     rest.forEach(function (c) { ct[c.id] = concoursTier(c, doms); cp[c.id] = concoursPartial(c, doms); });
+    if (D.strictDomains && doms.length) rest = rest.filter(function (c) { return ct[c.id] >= 3; });
     var others = rest.sort(function (a, b) { return ct[b.id] - ct[a.id] || concoursCatOrder(a, b) || cp[b.id] - cp[a.id]; });
-    return { perfect: perfect, others: others };
+    if (D.strictDomains && doms.length) others = others.slice(0, 30);
+    return { perfect: perfect, others: others, coreCount: coreCount };
   }
   /* Auto-complétion : métiers et concours dont le nom commence par la saisie d’abord, puis ceux qui la contiennent. */
   function concoursSearchText(c) { if (!c._search) { var raw = c.name + ' ' + c.metiers + ' ' + c.domain + ' ' + (c.school || ''); c._search = ' ' + searchNorm(raw) + ' ' + feminineForms(raw) + ' '; } return c._search; }
@@ -1162,7 +1198,8 @@
       var sp = splitConcours(), np = sp.perfect.length, lim = S.concoursLimit || 60, others = sp.others.slice(0, lim);
       return '<p class="small">' + np + ' concours ' + (isParent() ? 'pour votre enfant' : 'pour vous') + '</p>' +
         (np ? '' : '<p class="empty">Aucun concours ne correspond à tous ' + (isParent() ? 'ses' : 'vos') + ' critères. Voici des pistes proches.</p>') +
-        sp.perfect.map(concoursRow).join('') +
+        sp.perfect.slice(0, sp.coreCount).map(concoursRow).join('') +
+        (sp.perfect.length > sp.coreCount ? (sp.coreCount ? nearHeading(activeDomains(), sp.perfect.length - sp.coreCount, 'concours', 'concours') : '') + sp.perfect.slice(sp.coreCount).map(concoursRow).join('') : '') +
         alsoBlock(sp.others.length, 'concours', 'concours', S.showOthersConcours, 'showOthersConcours', 'Explorer d’autres concours') +
         (S.showOthersConcours ? others.map(concoursRow).join('') + (others.length < sp.others.length ? '<button type="button" class="btn outline mt-s" data-action="moreConcours">Afficher 60 concours de plus</button>' : '') : '');
     }
@@ -1176,7 +1213,8 @@
       var sp = splitJobs(), np = sp.perfect.length, others = sp.others.slice(0, S.jobLimit || 60);
       return '<p class="small">' + np + ' métier' + (np > 1 ? 's' : '') + ' ' + (isParent() ? 'pour votre enfant' : 'pour vous') + '</p>' +
         (np ? '' : '<p class="empty">Aucun métier ne correspond à tous ' + (isParent() ? 'ses' : 'vos') + ' critères. Voici des pistes proches.</p>') +
-        sp.perfect.map(jobRow).join('') +
+        sp.perfect.slice(0, sp.coreCount).map(jobRow).join('') +
+        (sp.perfect.length > sp.coreCount ? (sp.coreCount ? nearHeading(activeDomains(), sp.perfect.length - sp.coreCount, 'métier', 'métiers') : '') + sp.perfect.slice(sp.coreCount).map(jobRow).join('') : '') +
         alsoBlock(sp.others.length, 'métier', 'métiers', S.showOthersJobs, 'showOthersJobs', 'Explorer d’autres métiers') +
         (S.showOthersJobs ? others.map(jobRow).join('') + (others.length < sp.others.length ? '<button type="button" class="btn outline mt-s" data-action="moreJobs">Afficher 60 métiers de plus</button>' : '') : '');
     }
