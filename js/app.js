@@ -989,7 +989,8 @@
       if (amb.length) badges += '<span class="fit like">' + (isParent() ? 'Son ambition' : 'Votre ambition') + ' : ' + esc(amb.map(function (a) { return AMB_SHORT[a]; }).join(', ')) + '</span>';
       badges += recoFits(isContractJob(j) ? [] : jobRefs(j));
       var rowCats = S.metCats || (defiCats() ? defaultCats() : null), shownCats = rowCats ? jobCategories(j).filter(function (c) { return rowCats.indexOf(c) > -1; }) : [];
-      return '<a class="list-row job-row job-' + catClass(shownCats.length ? shownCats[0] : displayCategory(j)) + '" href="#/metier/' + j.id + '">' + jobBadges(j, shownCats.length ? rowCats : null) +
+      /* La catégorie affichée dans la liste (selon les filtres) est transmise à la fiche, qui s'ouvre sur elle. */
+      return '<a class="list-row job-row job-' + catClass(shownCats.length ? shownCats[0] : displayCategory(j)) + '" href="#/metier/' + j.id + '"' + (shownCats.length ? attr('cat', shownCats[0]) : '') + '>' + jobBadges(j, shownCats.length ? rowCats : null) +
         '<div class="main"><span class="name">' + esc(j.name) + '</span><span class="meta">' + esc(j.domain + ' · ' + fpNames(j.fp).join(', ')) + '</span>' +
         (badges ? '<span class="fits">' + badges + '</span>' : '') + '</div>' + '<span class="row-chev" aria-hidden="true">' + I.chev + '</span></a>';
   }
@@ -2642,6 +2643,13 @@
     explorePane(main).forEach(function (el) { el.classList.add('explore-in-' + dir); });
     setTimeout(function () { explorePane(main).forEach(function (el) { el.classList.remove('explore-in-' + dir); }); }, EXPLORE_MS + 40);
   }
+  /* Explorer : la fiche d'un métier sur plusieurs catégories s'ouvre sur la catégorie montrée dans la liste filtrée. */
+  document.addEventListener('click', function (e) {
+    var row = e.target.closest && e.target.closest('a.job-row[data-cat]');
+    if (!row) return;
+    var m = /#\/metier\/([^\/?#]+)/.exec(row.getAttribute('href') || '');
+    if (m) tripCatPick = { job: m[1], cat: row.getAttribute('data-cat') };
+  }, true);
   document.addEventListener('click', function (e) {
     var a = e.target.closest && e.target.closest('.explore-switch[role="tablist"] a');
     if (!a || a.classList.contains('on') || e.metaKey || e.ctrlKey || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
