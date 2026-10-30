@@ -933,6 +933,14 @@ html:where(.dark).dark body .update-notice .update-notice-copy .update-notice-de
 :where(html.dark) .aide-ico { background:var(--theme-tint, var(--lilac)); }
 :where(html.dark) .aide-ico svg { color:var(--theme-ink, var(--brand)); }
 :where(html.dark) .list-subhead { color:var(--ink); }
+:where(html.dark) .reco-path-num { background:var(--accent-tint); color:var(--blue); }
+:where(html.dark) .reco-path.on .reco-path-num { background:var(--accent); color:#FFFFFF; }
+:where(html.dark) .reco-key-item { border:0; background:transparent; }
+:where(html.dark) .suggest-empty { color:var(--muted); }
+:where(html.dark) .reco-voie.first { border:2px solid var(--accent); }
+:where(html.dark) .reco-first { color:var(--blue); }
+:where(html.dark) .reco-handicap { border:1px solid var(--line-2); }
+:where(html.dark) .reco-handicap .small { color:var(--muted); }
 
 /* Retouches */
 html.dark .app .prep:not(.prep-static):not(.talents-card):not(.talents-feature) { background:#292929 !important; }
@@ -1086,8 +1094,9 @@ html.dark #app .prep .price { color:#000 !important; }
 html.dark #app .prep .price.price-neutral { background:#FFF !important; color:#000 !important; }
 
 /* Bouton principal : plein, texte noir. */
-html.dark #app .btn:not(.outline):not(.white) { background:var(--pill-on) !important; border-color:var(--pill-on) !important; color:#000 !important; }
-html.dark #app .btn:not(.outline):not(.white) svg { color:#000 !important; }
+html.dark #app .btn:not(.outline):not(.white):not([disabled]) { background:var(--pill-on) !important; border-color:var(--pill-on) !important; color:#000 !important; }
+html.dark #app .btn:not(.outline):not(.white):not([disabled]) svg { color:#000 !important; }
+html.dark #app .btn[disabled] { background:#4C4C4C !important; border-color:#4C4C4C !important; color:#A7A7A7 !important; }
 html.dark #app .btn.prep-float { box-shadow:0 8px 24px rgba(0,0,0,.6); }
 
 /* Switch boursier : rail anthracite, curseur coloré, texte noir sur le curseur. */

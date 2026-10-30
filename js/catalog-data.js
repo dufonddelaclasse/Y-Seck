@@ -10,7 +10,7 @@
   try { saved = JSON.parse(localStorage.getItem('ofp-state-v1')) || {}; } catch (e) { saved = null; }
   /* Stockage indisponible : tout le catalogue, comme avant. */
   var onboardingOnly = !!saved && !saved.done;
-  var ONBOARDING_PARTS = ['catalogue/metadata.json'];
+  var ONBOARDING_PARTS = ['catalogue/metadata.json', 'catalogue/reconversion-01.json'];
   /* Collections attendues par catalog.js, vides tant que le catalogue n’est pas chargé. */
   function emptyData() { return { legacyJobs: [], rmfp: [], links: [], routes: [], talents: [], talentsGeo: {}, calendar: [] }; }
   var manifest = null;
@@ -41,7 +41,7 @@
   /* Fin de l’onboarding : lecture de tout le catalogue, puis nouvelle préparation des données. */
   function loadAll() {
     if (window.YSECK_CATALOG.full) return Promise.resolve();
-    return readParts(manifest.parts).then(publish).then(function () { return script('js/catalog.js?v=20261029-327'); })
+    return readParts(manifest.parts).then(publish).then(function () { return script('js/catalog.js?v=20261031-328'); })
       .then(function () { window.YSECK_CATALOG.full = true; });
   }
   read('data/catalogue.json').then(function (m) {
@@ -51,7 +51,7 @@
   }).then(function (parts) {
     publish(parts);
     window.YSECK_CATALOG = { full: !onboardingOnly, loadAll: loadAll };
-    return script('js/catalog.js?v=20261029-327').then(function () { return script('js/app.js?v=20261029-327'); });
+    return script('js/catalog.js?v=20261031-328').then(function () { return script('js/app.js?v=20261031-328'); });
   }).catch(function (error) {
     console.error('Chargement du catalogue :', error);
     root.innerHTML = '<main class="screen"><h1>Chargement interrompu</h1><p>Les données n’ont pas pu être chargées. Vérifiez votre connexion puis réessayez.</p><button class="btn" id="retry-data">Réessayer</button></main>';

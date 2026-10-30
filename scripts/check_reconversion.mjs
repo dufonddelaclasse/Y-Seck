@@ -1,0 +1,145 @@
+// Recette du profil « en reconversion » : parcours, mots-clés, moteur des voies d'accès et écran du budget.
+// Usage : node scripts/check_reconversion.mjs
+import fs from 'node:fs';
+import vm from 'node:vm';
+import assert from 'node:assert/strict';
+
+const root = new URL('../', import.meta.url);
+const read = p => fs.readFileSync(new URL(p, root), 'utf8');
+const manifest = JSON.parse(read('data/catalogue.json'));
+assert(manifest.parts.includes('catalogue/reconversion-01.json'), 'La base reconversion doit figurer dans le manifeste.');
+assert(read('js/catalog-data.js').includes("'catalogue/reconversion-01.json'"), 'La base reconversion doit être chargée dès l’onboarding.');
+
+// Pendant l'onboarding, seuls metadata.json et la base reconversion sont lus : le test reproduit cette situation.
+const db = {};
+for (const part of ['catalogue/metadata.json', 'catalogue/reconversion-01.json']) {
+  for (const [k, v] of Object.entries(JSON.parse(read('data/' + part)))) { if (Array.isArray(v)) (db[k] ||= []).push(...v); else db[k] = v; }
+}
+Object.assign(db, { legacyJobs: [], rmfp: [], links: [], routes: [], talents: [], talentsGeo: db.talentsGeo || {}, calendar: [] });
+const R = db.reconversion;
+assert.equal(R.jobs.length, 1069, 'Une entrée par fiche RMFP.');
+assert(R.jobs.every(j => j[3].length >= 2 && j[3].length <= 10), 'Chaque fiche porte entre 2 et 10 mots-clés.');
+assert(R.jobs.filter(j => j[3].length === 10).length > 800, 'La grande majorité des fiches a ses 10 mots-clés.');
+assert(R.professions.every(p => p.jobs.length), 'Chaque métier du privé est rattaché à au moins une fiche.');
+
+function start() {
+  const events = { root: {}, document: {} }, fields = {};
+  const app = { addEventListener(type, fn) { events.root[type] = fn; }, querySelector() { return null; }, querySelectorAll() { return []; }, classList: { toggle() {}, contains() { return false; } }, innerHTML: '' };
+  const location = { hash: '#/choix-profil' };
+  let stored = null;
+  const context = {
+    window: { PUBLIC_DATA: db, YSECK_CATALOG: { full: false, loadAll() { return Promise.resolve(); } }, addEventListener() {}, scrollTo() {} }, location,
+    history: { pushState(_s, _t, h) { location.hash = h; }, replaceState(_s, _t, h) { location.hash = h; } },
+    document: { getElementById(id) { return id === 'app' ? app : fields[id] || null; }, querySelector() { return null; }, querySelectorAll() { return []; }, addEventListener(type, fn) { events.document[type] = fn; }, documentElement: { dataset: {} }, activeElement: null },
+    localStorage: { getItem() { return stored; }, setItem(_k, v) { stored = v; } },
+    matchMedia() { return { matches: false }; }, setTimeout() { return 0; }, clearTimeout() {}, requestAnimationFrame() {}
+  };
+  vm.createContext(context);
+  for (const f of ['js/data.js', 'js/catalog.js', 'js/ui.js']) vm.runInContext(read(f), context);
+  context.window.YSECK_UI.afterRender = () => {};
+  const source = read('js/app.js').replace('  UI.init();\n  render();\n  booted = true;',
+    '  window.tests={screens,S,render,recoVoies:recoVoies,recoNeedsBudget:recoNeedsBudget,recoKeyMatches:recoKeyMatches,recoSuggested:recoSuggested,recoDomains:recoDomains,setHandicap:function(v){recoHandicap=v;}};');
+  vm.runInContext(source, context);
+  const click = (action, value, extra) => {
+    const element = Object.assign({ getAttribute(k) { return k === 'data-action' ? action : k === 'data-v' ? value : null; }, closest() { return null; } }, extra || {});
+    events.document.click({ target: { closest(sel) { return sel === '[data-action]' ? element : null; } }, detail: 0, preventDefault() {} });
+  };
+  const submit = id => events.root.submit({ target: { id }, preventDefault() {} });
+  return { ...context.window.tests, location, click, submit, events, fields };
+}
+
+// Parcours : prénom, niveau, expérience, projet, métier ; puis budget ou fin selon les voies.
+const t = start();
+t.click('profile', 'rec');
+t.S.name = 'Léa';
+t.click('level', 'Bac');
+t.submit('study-form');
+assert.equal(t.location.hash, '#/experience', 'L’expérience suit le niveau d’études.');
+const exp = t.screens.experience();
+for (const label of ['Moins de 4 ans', '4 à 5 ans', '5 à 7 ans', '7 ans et plus']) assert(exp.includes(label), 'Tranche proposée : ' + label);
+assert(exp.includes('Étape 3 / 6'));
+t.click('experience', '7+');
+const projet = t.screens.projet();
+assert(projet.includes('Apporter votre expérience pour travailler dans la fonction publique') && projet.includes('Explorer de nouveaux horizons'));
+assert(!projet.includes('boursier'), 'Aucune question boursier·e dans le profil reconversion.');
+t.click('recoPath', 'metier');
+assert(t.screens.projet().includes('href="#/metier-prive"'));
+const metier = t.screens['metier-prive']();
+assert(metier.includes('id="reco-job"') && metier.includes('id="reco-key"') && metier.includes('role="combobox"'));
+assert(metier.includes('Voir mes voies d’accès') && metier.includes('Une passerelle'), 'Le bouton des voies d’accès est présenté avec la définition des passerelles.');
+assert(metier.includes('Pour commencer :'), 'Sans métier saisi, des mots-clés fréquents sont déjà proposés.');
+assert(metier.includes('disabled'), 'Il faut un métier ou un mot-clé pour continuer.');
+assert(!metier.includes('interets') && !metier.includes('traits'), 'La branche métier saute les centres d’intérêt et « ce qui vous ressemble ».');
+
+// Mots-clés : autocomplétion dès la première lettre, uniquement depuis la base, liés au métier saisi.
+assert(t.recoKeyMatches('c').length > 0, 'Suggestions dès la première lettre.');
+assert(t.recoKeyMatches('zzqx').length === 0, 'Un mot hors de la base n’est jamais proposé.');
+assert(t.recoKeyMatches('comp').every(l => R.keywords.includes(l)));
+t.S.recoJob = 'comptable';
+const linked = t.recoSuggested();
+assert(linked.some(l => /compt/i.test(l)), 'Le métier saisi fait remonter ses mots-clés : ' + linked.join(', '));
+assert(t.screens['metier-prive']().includes('Liés à votre métier :'));
+const first = linked[0];
+t.click('recoKey', first);
+assert.deepEqual([...t.S.recoKeys], [first]);
+assert(t.S.domains.length >= 1 && t.S.domains.length <= 2, 'Deux domaines au plus sont déduits du métier.');
+for (const k of R.keywords.slice(0, 12)) t.click('recoKey', k);
+assert(t.S.recoKeys.length <= 10, 'Dix mots-clés au plus.');
+
+// Budget : jamais de question boursier·e, mention Prépas Talents pour les demandeurs d'emploi.
+const sit = t.screens.situation();
+assert(!sit.includes('data-action="boursier"') && !/boursier·e \?/.test(sit), 'Pas de question boursier·e.');
+assert(sit.includes('Prépas Talents') && sit.includes('Demandeur·se d’emploi'), 'Mention Prépas Talents pour les demandeurs d’emploi.');
+assert(sit.includes('Frais d’inscription uniquement') && !sit.includes('Gratuit uniquement'));
+assert(sit.includes('href="#/metier-prive"'), 'Retour vers le métier depuis le budget.');
+
+// Les huit profils de recette du plan d'action.
+const ids = () => JSON.parse(JSON.stringify(t.recoVoies().map(v => v.id)));
+function profile({ level, exp, path = 'metier', job = '', handicap = false }) {
+  t.S.level = level; t.S.experience = exp; t.S.recoPath = path; t.S.recoJob = job; t.S.recoKeys = []; t.setHandicap(handicap);
+  return { voies: ids(), budget: t.recoNeedsBudget() };
+}
+const cases = [
+  ['Avocate, 12 ans', { level: 'Bac+5', exp: '7+', job: 'avocate' }, ['enm-pro', 'troisieme', 'contrat', 'externe', 'sansconcours'], true],
+  ['Infirmier libéral, 6 ans', { level: 'Bac+3', exp: '5-7', job: 'infirmier libéral' }, ['titres-fph', 'contrat', 'sansconcours'], false],
+  ['Ingénieur BTP, 3 ans', { level: 'Bac+5', exp: '0-4', job: 'ingénieur btp' }, ['contrat', 'externe', 'sansconcours'], true],
+  ['Commercial, 8 ans, bac', { level: 'Bac', exp: '7+', job: 'commercial' }, ['troisieme', 'contrat', 'externe', 'sansconcours'], true],
+  ['Ouvrière sans diplôme, 5 ans', { level: 'Sans diplôme', exp: '5-7', job: 'ouvrière de production' }, ['troisieme', 'contrat', 'externe', 'sansconcours'], true],
+  ['Développeur, 4 ans, bac+2', { level: 'Bac+2', exp: '4-5', job: 'développeur' }, ['troisieme', 'contrat', 'externe', 'sansconcours'], true],
+  ['Ancien militaire, 10 ans, bac', { level: 'Bac', exp: '7+', job: 'ancien militaire' }, ['emplois-reserves', 'troisieme', 'contrat', 'externe', 'sansconcours'], true],
+  ['Caissière RQTH, 2 ans, CAP (branche 2)', { level: 'CAP', exp: '0-4', path: 'nouveau', job: '', handicap: true }, ['contrat', 'externe', 'sansconcours', 'boe'], true]
+];
+for (const [name, input, voies, budget] of cases) {
+  const got = profile(input);
+  assert.deepEqual(got.voies, voies, name + ' : voies ' + got.voies.join(', '));
+  assert.equal(got.budget, budget, name + ' : écran budget ' + (budget ? 'attendu' : 'à sauter'));
+}
+
+// Durées du 3e concours : 4 ans (FPT, ENM), 5 ans (IRA, enseignement), 6 ans (INSP).
+profile({ level: 'Bac', exp: '4-5', job: 'commercial' });
+let tc = t.recoVoies().find(v => v.id === 'troisieme').text;
+assert(/attaché/.test(tc) && !/IRA/.test(tc) && !/INSP/.test(tc));
+profile({ level: 'Bac', exp: '5-7', job: 'commercial' });
+tc = t.recoVoies().find(v => v.id === 'troisieme').text;
+assert(/IRA/.test(tc) && !/INSP/.test(tc));
+profile({ level: 'Bac', exp: '7+', job: 'commercial' });
+assert(/INSP/.test(t.recoVoies().find(v => v.id === 'troisieme').text));
+
+// Sans concours en jeu, la branche métier finit directement ; avec concours, elle passe par le budget.
+profile({ level: 'Bac+3', exp: '5-7', job: 'infirmière' });
+assert(t.screens['metier-prive']().includes('data-action="finish"'));
+profile({ level: 'Bac', exp: '7+', job: 'commercial' });
+assert(t.screens['metier-prive']().includes('href="#/situation"'));
+
+// Voies : la première porte le repère, chaque voie cite sa source, la case handicap n'est pas enregistrée.
+const voies = t.screens.voies();
+assert(voies.includes('La plus directe pour vous') && voies.includes('Source :') && voies.includes('data-action="recoHandicap"'));
+t.setHandicap(true);
+assert(!JSON.stringify(t.S).includes('handicap'), 'La situation de handicap n’est jamais enregistrée.');
+
+// Branche 2 : questionnaire étudiant sans la question boursier·e.
+t.S.recoPath = 'nouveau';
+assert(t.screens.interets().includes('href="#/projet"') && t.screens.interets().includes('Étape 5 / 8'));
+assert(t.screens.situation().includes('href="#/traits"') && !t.screens.situation().includes('data-action="boursier"'));
+
+console.log('Reconversion vérifiée : base de ' + R.keywords.length + ' mots-clés, ' + R.professions.length + ' métiers du privé, parcours, autocomplétion, budget sans boursier·e, 8 profils de recette.');

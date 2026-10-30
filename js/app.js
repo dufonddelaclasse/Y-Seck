@@ -8,12 +8,12 @@
   var talentIntroAnimate = false, nameAnimate = false, interestGesture = null;
   /* Premier passage : seul l’onboarding est chargé ; le catalogue complet arrive à la fin de la création du profil. */
   var catalogReady = !window.YSECK_CATALOG || window.YSECK_CATALOG.full, catalogLoading = false, dashboardEnter = false, profileFinished = false;
-  var LIGHT_ROUTES = ['bienvenue', 'versants', 'categories-intro', 'choix-profil', 'profil', 'niveau', 'interets', 'traits', 'situation', 'confidentialite', 'accessibilite', 'mentions'];
+  var LIGHT_ROUTES = ['bienvenue', 'versants', 'categories-intro', 'choix-profil', 'profil', 'niveau', 'experience', 'projet', 'metier-prive', 'voies', 'interets', 'traits', 'situation', 'confidentialite', 'accessibilite', 'mentions'];
   var KEY = 'ofp-state-v1';
 
   /* ---------- État ---------- */
   var defaults = {
-    profile: null, level: null, domains: [], traits: [], ambitions: [], defis: [], agentPublic: null, experience: null, boursier: null, budget: null, done: false, pendingChanges: false,
+    profile: null, level: null, domains: [], traits: [], ambitions: [], defis: [], agentPublic: null, experience: null, recoPath: null, recoJob: '', recoKeys: [], boursier: null, budget: null, done: false, pendingChanges: false,
     metDomains: null, metCats: null, metFps: null, q: '', calCat: 'Toutes', calCats: null, calFps: null, track: 'Administratif',
     prepBudget: null, alert: false, openCat: null, region: 'Toutes', talentsAll: false,
     name: '', location: null, favorites: [], children: [], activeChild: null, personalProfiles: {},
@@ -21,9 +21,9 @@
     contrast: false, largeText: false, dysFont: false, colorMode: 'auto', cq: '', filterHintSeen: false, tipSeen: {}, bookQ: '', bookSubject: 'Toutes', bookCategory: 'A', bookFp: 'Tous',
     resQ: '', resCat: 'Toutes', resFp: 'Tous', resCats: null, resFps: null, resKind: 'Tous', resYear: 'Toutes', resLimit: 40, installOffered: false
   };
-  var PERSON_FIELDS = ['name', 'level', 'domains', 'traits', 'ambitions', 'defis', 'agentPublic', 'experience', 'boursier', 'budget', 'done', 'location', 'favorites', 'pendingChanges', 'validated'];
-  var PROFILE_SCREENS = ['moi', 'profil', 'niveau', 'interets', 'ambition', 'traits', 'situation'];
-  var EDITABLE_FIELDS = ['name', 'level', 'domains', 'traits', 'ambitions', 'defis', 'agentPublic', 'experience', 'boursier', 'budget', 'location'];
+  var PERSON_FIELDS = ['name', 'level', 'domains', 'traits', 'ambitions', 'defis', 'agentPublic', 'experience', 'recoPath', 'recoJob', 'recoKeys', 'boursier', 'budget', 'done', 'location', 'favorites', 'pendingChanges', 'validated'];
+  var PROFILE_SCREENS = ['moi', 'profil', 'niveau', 'experience', 'projet', 'metier-prive', 'voies', 'interets', 'ambition', 'traits', 'situation'];
+  var EDITABLE_FIELDS = ['name', 'level', 'domains', 'traits', 'ambitions', 'defis', 'agentPublic', 'experience', 'recoPath', 'recoJob', 'recoKeys', 'boursier', 'budget', 'location'];
   var S = load();
   /* Profil enregistré avant octobre 2026 : sans version validée, aucune modification n’est considérée en attente. */
   if (S.done && !S.validated) S.pendingChanges = false;
@@ -49,7 +49,7 @@
   var UNI_PREPS = ['ipag', 'iep'];
   function prepPrice(p) { return UNI_PREPS.indexOf(p.id) > -1 ? (S.boursier === 'Oui' ? 'Gratuit' : 'Frais d’inscription') : p.price; }
   function prepBudget(p) { return UNI_PREPS.indexOf(p.id) > -1 ? (S.boursier === 'Oui' ? 0 : 1) : p.budget; }
-  function blankPerson(name) { return { name: name || '', level: null, domains: [], traits: [], ambitions: [], defis: [], agentPublic: null, experience: null, boursier: null, budget: null, done: false, location: null, favorites: [], pendingChanges: false, validated: null }; }
+  function blankPerson(name) { return { name: name || '', level: null, domains: [], traits: [], ambitions: [], defis: [], agentPublic: null, experience: null, recoPath: null, recoJob: '', recoKeys: [], boursier: null, budget: null, done: false, location: null, favorites: [], pendingChanges: false, validated: null }; }
   function profileSignature() { return JSON.stringify(EDITABLE_FIELDS.map(function(k){return S[k];})); }
   function profileNeedsValidation() { return !!(S.done && S.pendingChanges); }
   /* Les réponses sont comparées à la dernière version validée : revenir en arrière retire le bouton « Terminer les modifications ». */
@@ -394,7 +394,7 @@
   var RANK = {
     '6e': 0, '5e': 0, '4e': 0, '3e': 0, 'Seconde': 1, 'Première': 1, 'Terminale': 1,
     'Bac+1 / +2': 2, 'Bac+3': 4, 'Bac+5': 5, 'Doctorat': 6,
-    'Sans diplôme': 0, 'Brevet': 1, 'CAP / BEP': 1, 'Bac': 2, 'Bac+2': 3
+    'Sans diplôme': 0, 'Brevet': 1, 'CAP / BEP': 1, 'CAP': 1, 'BEP': 1, 'Bac': 2, 'Bac+2': 3, 'Bac+4': 4
   };
   var NEED = ['', 'Avec le brevet ou un CAP', 'Avec le bac', 'Avec un Bac+2', 'Avec un Bac+3', 'Avec un Bac+5', 'Avec un doctorat'];
   var DIP = ['Sans diplôme', 'Brevet ou CAP', 'Bac', 'Bac+2', 'Bac+3', 'Bac+5', 'Doctorat'];
@@ -520,7 +520,7 @@
     if (!l) return 'A+, A, B ou C selon votre diplôme.';
     if (['6e', '5e', '4e', '3e'].indexOf(l) > -1) return 'Avec le brevet : certains concours C. Avec le bac : B.';
     if (l === 'Sans diplôme') return 'Catégorie C sans concours, PACTE ou contrat.';
-    if (l === 'Brevet' || l === 'CAP / BEP') return 'Catégorie C dès maintenant. B avec le bac.';
+    if (l === 'Brevet' || l === 'CAP / BEP' || l === 'CAP' || l === 'BEP') return 'Catégorie C dès maintenant. B avec le bac.';
     if (l === 'Seconde' || l === 'Première' || l === 'Terminale') return 'Avec le bac : B et C. Avec une licence : A et A+.';
     if (l === 'Bac+1 / +2' || l === 'Bac' || l === 'Bac+2') return 'B et C dès maintenant. A et A+ avec une licence.';
     return 'A+, A et B : selon le diplôme spécifique et les conditions du concours.';
@@ -810,7 +810,7 @@
   screens.profil = function () {
     if(!S.profile)return screens['choix-profil']();
     if(isParent()&&!activeChild())return screens.famille();
-    return '<form id="identity-form" class="profile-form"><main class="screen identity-screen"><div class="topbar">' + back(S.done?'#/moi':familyEstablished()?'#/accueil':'#/choix-profil','Retour') + '<span class="sr-only">Étape 1 / '+STEPS+'</span></div>'+progress(1,STEPS)+
+    return '<form id="identity-form" class="profile-form"><main class="screen identity-screen"><div class="topbar">' + back(S.done?'#/moi':familyEstablished()?'#/accueil':'#/choix-profil','Retour') + '<span class="sr-only">Étape 1 / '+stepTotal()+'</span></div>'+progress(1,stepTotal())+
       '<h1 class="mt-l" id="identity-title">'+(isParent()?'Le prénom de votre enfant':'Votre prénom')+'</h1>'+
       '<div class="name-entry"><input class="name-line" id="person-name" name="first-name" aria-labelledby="identity-title" aria-describedby="name-hint" required maxlength="50" enterkeyhint="done" autocomplete="'+(isParent()?'off':'given-name')+'" placeholder="Prénom ou pseudo" value="'+esc(S.name)+'"><button type="button" class="name-confirm" id="name-confirm" data-action="confirmName" aria-label="Valider le prénom"'+(S.name.trim()?'':' disabled')+'>'+I.check+'</button></div>'+
       '<p class="small m0" id="name-hint">'+(isParent()?'Le prénom ou pseudo qui identifiera son parcours.':'Le prénom ou pseudo affiché dans votre espace.')+'</p>'+
@@ -818,32 +818,213 @@
       '</main><div class="footer"><span class="small center" id="hint-continue"'+(nameReady()?' hidden':'')+'>Renseignez un prénom pour continuer.</span><button type="submit" class="btn" id="identity-continue"'+(nameReady()?'':' disabled')+'>'+profileSubmitLabel('Continuer')+'</button></div></form>';
   };
 
-  /* Reconversion : deux questions qui ouvrent le concours interne et le 3e concours. */
-  var RECO_QUESTIONS = [['agentPublic', 'Travaillez-vous déjà dans la fonction publique ?', 'Fonctionnaire ou contractuel : le concours interne vous est ouvert.'],
-    ['experience', 'Avez-vous une expérience professionnelle, associative ou d’élu ?', 'Le 3e concours s’ouvre sans diplôme, avec quelques années d’expérience.']];
-  function reconversionQuestions() {
-    return RECO_QUESTIONS.map(function (q) {
-      return '<section class="stack mt-m"><h2 class="h3 no-icon">' + esc(q[1]) + '</h2><p class="small m0">' + esc(q[2]) + '</p><div class="grid-2">' + ['Oui', 'Non'].map(function (v) {
-        var on = S[q[0]] === v;
-        return '<button type="button" class="opt sm center' + (on ? ' on' : '') + '" aria-pressed="' + on + '"' + attr('action', q[0]) + attr('v', v) + '>' + v + '</button>';
-      }).join('') + '</div></section>';
-    }).join('');
+  /* ---------- Reconversion : personnes venant du privé ----------
+     Niveau d’études, années d’expérience, puis deux branches : continuer son métier dans le public (métier, mots-clés,
+     voies d’accès, budget si un concours est en jeu) ou changer de métier (suite du questionnaire étudiant).
+     Données : data/catalogue/reconversion-01.json (scripts/build_reconversion.mjs), chargé dès l’onboarding. */
+  var RECO_EXPERIENCE = [['0-4', 'Moins de 4 ans', 0], ['4-5', '4 à 5 ans', 4], ['5-7', '5 à 7 ans', 5], ['7+', '7 ans et plus', 7]];
+  var RECO_PATHS = [['metier', 'Apporter votre expérience pour travailler dans la fonction publique', 'Continuer votre métier, ou un métier proche, dans le public'],
+    ['nouveau', 'Explorer de nouveaux horizons', 'Découvrir les métiers qui vous ressemblent']];
+  var RECO_MAX_KEYS = 10;
+  /* La case handicap n’est jamais enregistrée : elle sert seulement à afficher la voie dédiée pendant la session. */
+  var recoHandicap = false;
+  function recoData() { var p = window.PUBLIC_DATA || {}; return p.reconversion || null; }
+  function isReco() { return S.profile === 'rec'; }
+  /* Années d’expérience : borne basse de la tranche ; « Oui » des profils d’avant novembre 2026 vaut 4 ans. */
+  function recoYears() { if (S.experience === 'Oui') return 4; var e = RECO_EXPERIENCE.filter(function (x) { return x[0] === S.experience; })[0]; return e ? e[2] : null; }
+  function experienceLabel() { var e = RECO_EXPERIENCE.filter(function (x) { return x[0] === S.experience; })[0]; return e ? e[1] : S.experience === 'Oui' ? 'Oui' : 'Non renseigné'; }
+  function recoNorm(t) { return searchNorm(t || ''); }
+  /* Métiers du privé reconnus dans le champ « Votre métier » : alias exact, début d’alias ou intitulé. */
+  function recoProfessions(text) {
+    var R = recoData(), q = recoNorm(text);
+    if (!R || q.length < 3) return [];
+    return R.professions.map(function (p) {
+      var score = 0;
+      p.a.forEach(function (a) { if (a === q) score = Math.max(score, 4); else if (a.indexOf(q) === 0 || q.indexOf(a + ' ') === 0) score = Math.max(score, 3); else if (a.length > 3 && (' ' + q + ' ').indexOf(' ' + a + ' ') > -1) score = Math.max(score, 2); });
+      if (!score && recoNorm(p.t).indexOf(q) > -1) score = 1;
+      return { p: p, score: score };
+    }).filter(function (x) { return x.score; }).sort(function (x, y) { return y.score - x.score; }).slice(0, 2).map(function (x) { return x.p; });
+  }
+  /* Fiches liées au métier saisi : celles du métier du privé reconnu, puis les intitulés qui contiennent les mots tapés. */
+  function recoJobsFromText(text) {
+    var R = recoData(); if (!R) return [];
+    var out = [], words = recoNorm(text).split(' ').filter(function (w) { return w.length >= 3; });
+    recoProfessions(text).forEach(function (p) { p.jobs.forEach(function (i) { if (out.indexOf(i) < 0) out.push(i); }); });
+    if (words.length) R.jobs.forEach(function (j, i) { if (out.length < 20 && out.indexOf(i) < 0) { var n = ' ' + recoNorm(j[1]) + ' '; if (words.every(function (w) { return n.indexOf(' ' + w) > -1; })) out.push(i); } });
+    return out;
+  }
+  function recoKeyIndex(label) { var R = recoData(); return R ? R.keywords.indexOf(label) : -1; }
+  /* Mots-clés proposés sous le champ : ceux des fiches liées au métier saisi, les plus partagés d’abord ; sinon les mots-clés fréquents. */
+  function recoSuggested() {
+    var R = recoData(); if (!R) return [];
+    var count = {}, order = [];
+    recoJobsFromText(S.recoJob).forEach(function (i, rank) { R.jobs[i][3].forEach(function (k, pos) { if (count[k] === undefined) { count[k] = 0; order.push(k); } count[k] += 3 - Math.min(2, rank / 4) - pos / 10; }); });
+    var list = order.sort(function (x, y) { return count[y] - count[x]; });
+    if (!list.length) list = R.frequent.slice();
+    return list.map(function (k) { return R.keywords[k]; }).filter(function (l) { return S.recoKeys.indexOf(l) < 0; }).slice(0, 12);
+  }
+  /* Autocomplétion : seuls les mots-clés de la base sont proposés, dès la première lettre ; les mots-clés liés au métier passent devant. */
+  function recoKeyMatches(q) {
+    var R = recoData(), n = recoNorm(q);
+    if (!R || !n) return [];
+    var near = recoSuggested(), starts = [], inside = [];
+    R.keywords.forEach(function (l) {
+      if (S.recoKeys.indexOf(l) > -1) return;
+      var k = recoNorm(l);
+      if (k.indexOf(n) === 0) starts.push(l); else if (k.indexOf(' ' + n) > -1) inside.push(l);
+    });
+    var rank = function (l) { var i = near.indexOf(l); return i < 0 ? 99 : i; };
+    starts.sort(function (x, y) { return rank(x) - rank(y) || x.length - y.length; });
+    inside.sort(function (x, y) { return rank(x) - rank(y) || x.length - y.length; });
+    /* « note » et « notes » : une seule forme proposée. */
+    var seen = {};
+    return starts.concat(inside).filter(function (l) { var k = recoNorm(l).replace(/[sx]$/, ''); if (seen[k]) return false; seen[k] = 1; return true; }).slice(0, 6);
+  }
+  /* Domaines présélectionnés pour l’Explorer (la branche « métier » saute l’écran des centres d’intérêt) :
+     les deux domaines les plus représentés parmi les fiches liées au métier et aux mots-clés choisis. */
+  function recoDomains() {
+    var R = recoData(); if (!R) return [];
+    var score = {}, keys = S.recoKeys.map(recoKeyIndex).filter(function (k) { return k > -1; });
+    recoJobsFromText(S.recoJob).forEach(function (i) { R.jobs[i][2].forEach(function (d) { score[d] = (score[d] || 0) + 2; }); });
+    if (keys.length) R.jobs.forEach(function (j) { var hit = j[3].filter(function (k) { return keys.indexOf(k) > -1; }).length; if (hit) j[2].forEach(function (d) { score[d] = (score[d] || 0) + hit; }); });
+    return Object.keys(score).filter(function (d) { return D.domains.indexOf(d) > -1; }).sort(function (x, y) { return score[y] - score[x]; }).slice(0, 2);
+  }
+  function syncRecoDomains() { if (isReco() && S.recoPath === 'metier') S.domains = recoDomains(); }
+  function recoPasserelles() {
+    var R = recoData(), ids = [];
+    if (!R) return [];
+    recoProfessions(S.recoJob).forEach(function (p) { if (p.p && ids.indexOf(p.p) < 0) ids.push(p.p); });
+    return ids.map(function (id) { return Object.assign({ id: id }, R.passerelles[id]); }).filter(function (p) { return p.title; });
+  }
+  function catsForRank(r) { return r >= 4 ? 'A, B ou C' : r >= 2 ? 'B ou C' : 'C'; }
+  /* Moteur des voies d’accès : diplôme, expérience, métier et case handicap décident de ce qui s’affiche.
+     Chaque voie dit si elle passe par un concours : l’écran du budget n’apparaît que dans ce cas. */
+  function recoVoies() {
+    var rank = userRank(), years = recoYears(), pass = recoPasserelles(), out = [];
+    var titres = pass.filter(function (p) { return /^titres-/.test(p.id); });
+    pass.filter(function (p) { return !/^titres-/.test(p.id); }).forEach(function (p) { out.push({ id: p.id, kind: 'Passerelle', title: p.title, text: p.text, concours: p.concours, url: p.url, source: p.source }); });
+    titres.forEach(function (p) { out.push({ id: p.id, kind: 'Sur titres', title: p.title, text: p.text, concours: false, url: p.url, source: p.source }); });
+    if (!titres.length && years !== null && years >= 4) {
+      var list = ['attaché·e, rédacteur·rice ou adjoint·e territorial·e', '3e concours de l’ENM (magistrature)'];
+      if (years >= 5) list.push('IRA (attaché·e de l’État)', 'professeur·e des écoles ou du second degré');
+      if (years >= 6) list.push('INSP (haute fonction publique)');
+      out.push({ id: 'troisieme', kind: 'Avec concours', title: 'Le 3e concours', text: 'Ouvert grâce à votre expérience, sans condition de diplôme. Avec ' + (years >= 7 ? '7 ans et plus' : years + ' ans') + ' : ' + list.join(', ') + '.', concours: true, url: 'https://www.fonction-publique.gouv.fr/devenir-agent-public/les-conditions-dacces-propres-aux-3emes-concours', source: 'DGAFP' });
+    }
+    out.push({ id: 'contrat', kind: 'Sans concours', title: 'Le contrat', text: 'Candidature sur offre, comme dans le privé. Avec votre diplôme : postes de catégorie ' + catsForRank(rank === null ? 0 : rank) + '. CDD de 3 ans au plus, CDI possible après 6 ans.', concours: false, url: 'https://choisirleservicepublic.gouv.fr/', source: 'Choisir le service public' });
+    if (!titres.length) out.push({ id: 'externe', kind: 'Avec concours', title: 'Le concours externe', text: 'Ouvert à tous sur diplôme, sans limite d’âge (sauf police, pénitentiaire et armées). Avec votre diplôme : catégorie ' + catsForRank(rank === null ? 0 : rank) + '.' + (rank === 6 ? ' Avec un doctorat : concours spécial « Docteurs » de l’INSP.' : ''), concours: true, url: D.calendarUrl || 'https://www.fonction-publique.gouv.fr/devenir-agent-public/calendrier-general-concours', source: 'Calendrier général des concours' });
+    out.push({ id: 'sansconcours', kind: 'Sans concours', title: 'Le recrutement direct en catégorie C', text: 'Adjoint·e administratif·ve ou technique : sur CV et entretien, sans diplôme ni limite d’âge. Titularisation après un an.', concours: false, url: 'https://www.fonction-publique.gouv.fr/devenir-agent-public/les-recrutements-sans-concours', source: 'DGAFP' });
+    if (recoHandicap) out.push({ id: 'boe', kind: 'Sans concours', title: 'La voie contractuelle handicap', text: 'Un contrat d’un an, puis la titularisation, en catégorie A, B ou C. Mêmes diplômes que le concours externe. Il faut une reconnaissance de travailleur handicapé (RQTH) ou équivalent.', concours: false, url: 'https://www.francetravail.fr/candidat/handicap-et-talents/conseils-pratiques/travailler-dans-la-fonction-publ.html', source: 'France Travail' });
+    return out;
+  }
+  /* Branche « métier » : l’écran du budget s’affiche si au moins une voie retenue passe par un concours. */
+  function recoNeedsBudget() { return S.recoPath !== 'metier' || recoVoies().some(function (v) { return v.concours; }); }
+  function recoMetierReady() { return !!(S.recoJob.trim() || S.recoKeys.length); }
+  /* Étapes : prénom, niveau, expérience, projet, puis 2 écrans (métier, budget) ou 4 (questionnaire étudiant). */
+  function stepTotal() { return isReco() ? (S.recoPath === 'nouveau' ? 8 : 6) : STEPS; }
+  function stepOf(name) {
+    if (!isReco()) return { niveau: 2, interets: 3, ambition: 4, traits: 5, situation: 6 }[name] || 1;
+    return S.recoPath !== 'nouveau' ? ({ niveau: 2, experience: 3, projet: 4, 'metier-prive': 5, voies: 5, situation: 6 }[name] || 1)
+      : ({ niveau: 2, experience: 3, projet: 4, interets: 5, ambition: 6, traits: 7, situation: 8 }[name] || 1);
+  }
+  function stepBar(name) { var n = stepOf(name), t = stepTotal(); return '<span class="sr-only">Étape ' + n + ' / ' + t + '</span></div>' + progress(n, t); }
+  /* Après le métier : budget si un concours est en jeu, sinon fin du profil. */
+  function recoAfterMetier(label) {
+    if (profileNeedsValidation()) return profileContinuation('#/accueil', '');
+    if (S.done) return '<a class="btn" href="#/moi">Revenir au profil</a>';
+    if (!recoMetierReady()) return '<span class="small center">Indiquez votre métier ou choisissez un mot-clé.</span><button type="button" class="btn" disabled>' + label + '</button>';
+    return recoNeedsBudget() ? '<a class="btn" href="#/situation">' + label + '</a>' : '<a class="btn" href="#/accueil" data-action="finish">Voir mon parcours</a>';
   }
   screens.niveau = function () {
     if(!nameReady())return screens.profil();
-    var list=S.profile==='rec'?D.levels.adult:D.levels.school;
+    var list=isReco()?D.levels.adult:D.levels.school;
     var title=isParent()?'Son niveau d’études':'Votre niveau d’études';
-    return '<form id="study-form" class="profile-form"><main class="screen"><div class="topbar">'+back('#/profil','Retour')+'<span class="sr-only">Étape 2 / '+STEPS+'</span></div>'+progress(2,STEPS)+
-      '<h1 class="mt-l">'+title+'</h1><p class="lead">'+(isParent()?'Choisissez son niveau actuel ou le dernier diplôme obtenu.':'Choisissez votre niveau actuel ou le dernier diplôme obtenu.')+'</p>'+
-      '<div class="row mt-m" role="group" aria-label="'+title+'">'+list.map(function(l){return chip('level',l,l,S.level===l);}).join('')+'</div>'+(S.profile==='rec'?reconversionQuestions():'')+'</main>'+
+    return '<form id="study-form" class="profile-form"><main class="screen"><div class="topbar">'+back('#/profil','Retour')+stepBar('niveau')+
+      '<h1 class="mt-l">'+title+'</h1><p class="lead">'+(isReco()?'Votre plus haut diplôme obtenu.':isParent()?'Choisissez son niveau actuel ou le dernier diplôme obtenu.':'Choisissez votre niveau actuel ou le dernier diplôme obtenu.')+'</p>'+
+      '<div class="row mt-m" role="group" aria-label="'+title+'">'+list.map(function(l){return chip('level',l,l,S.level===l);}).join('')+'</div>'+
+      (isReco()?'<p class="small mt-s">Diplôme obtenu à l’étranger : choisissez le niveau équivalent. Une équivalence se demande ensuite auprès de l’organisateur du concours.</p>':'')+'</main>'+
       '<div class="footer"><span class="small center"'+(S.level?' hidden':'')+'>Choisissez un niveau pour continuer.</span><button type="submit" class="btn"'+(S.level?'':' disabled')+'>'+profileSubmitLabel('Continuer')+'</button></div></form>';
+  };
+  screens.experience = function () {
+    if (!isReco()) return screens.niveau();
+    return '<main class="screen"><div class="topbar">' + back('#/niveau', 'Retour') + stepBar('experience') +
+      '<h1 class="mt-l">Depuis combien de temps travaillez-vous ?</h1>' +
+      '<p class="lead">Salariat, travail indépendant, intérim, apprentissage, mandat d’élu ou responsabilité associative : tout compte. Les années passées comme agent public ne comptent pas.</p>' +
+      '<div class="stack mt-s" role="group" aria-label="Années d’expérience">' + RECO_EXPERIENCE.map(function (x) {
+        var on = S.experience === x[0];
+        return '<button type="button" class="opt' + (on ? ' on' : '') + '" aria-pressed="' + on + '"' + attr('action', 'experience') + attr('v', x[0]) + '><span>' + esc(x[1]) + '</span>' + (on ? I.check : '') + '</button>';
+      }).join('') + '</div>' +
+      '<p class="small mt-s">Dès 4 ans, le 3e concours vous est ouvert, sans condition de diplôme.</p></main>' +
+      '<div class="footer">' + profileContinuation('#/projet', 'Continuer', !!S.experience) + '</div>';
+  };
+  screens.projet = function () {
+    if (!isReco()) return screens.niveau();
+    return '<main class="screen"><div class="topbar">' + back('#/experience', 'Retour') + stepBar('projet') +
+      '<h1 class="mt-l">Vous souhaitez</h1>' +
+      '<div class="stack mt-s" role="group" aria-label="Votre projet">' + RECO_PATHS.map(function (x, i) {
+        var on = S.recoPath === x[0];
+        return '<button type="button" class="opt ambition-opt reco-path' + (on ? ' on' : '') + '" aria-pressed="' + on + '"' + attr('action', 'recoPath') + attr('v', x[0]) + '><span class="reco-path-num" aria-hidden="true">' + (i + 1) + '</span><span class="ambition-copy"><span class="ambition-t">' + esc(x[1]) + '</span><span class="ambition-d">' + esc(x[2]) + '</span></span>' + (on ? I.check : '') + '</button>';
+      }).join('') + '</div></main>' +
+      '<div class="footer">' + profileContinuation(S.recoPath === 'nouveau' ? '#/interets' : '#/metier-prive', 'Continuer', !!S.recoPath) + '</div>';
+  };
+  function recoKeyChips() {
+    return S.recoKeys.length ? '<div class="row reco-chosen" role="list" aria-label="Mots-clés choisis">' + S.recoKeys.map(function (l) {
+      return '<span role="listitem"><button type="button" class="chip on reco-key-chip"' + attr('action', 'recoKey') + attr('v', l) + ' aria-label="Retirer ' + esc(l) + '">' + esc(l) + '<span class="reco-key-x" aria-hidden="true">×</span></button></span>';
+    }).join('') + '</div>' : '';
+  }
+  function recoSuggestChips() {
+    var list = recoSuggested();
+    if (!list.length || S.recoKeys.length >= RECO_MAX_KEYS) return '';
+    return '<p class="small m0">' + (recoJobsFromText(S.recoJob).length ? 'Liés à votre métier :' : 'Pour commencer :') + '</p><div class="row reco-suggest">' + list.map(function (l) { return chip('recoKey', l, l, false); }).join('') + '</div>';
+  }
+  function recoKeySuggestHtml(q) {
+    return recoKeyMatches(q).map(function (l) { return '<li><button type="button" class="suggest-item reco-key-item"' + attr('action', 'recoKey') + attr('v', l) + '><span class="suggest-label">' + esc(l) + '</span></button></li>'; }).join('');
+  }
+  function updateRecoKeySuggest(show) {
+    var box = document.getElementById('reco-key-suggest'), input = document.getElementById('reco-key');
+    if (!box || !input) return;
+    var html = show ? recoKeySuggestHtml(input.value) : '';
+    box.innerHTML = html || (show && input.value.trim() ? '<li class="suggest-empty small">Aucun mot-clé ne commence ainsi. Essayez un autre mot.</li>' : '');
+    box.hidden = !box.innerHTML; input.setAttribute('aria-expanded', String(!!html));
+  }
+  function refreshRecoSuggest() { var z = document.getElementById('reco-suggest-zone'); if (z) z.innerHTML = recoSuggestChips(); var f = document.querySelector('.reco-footer'); if (f) f.innerHTML = recoAfterMetier('Continuer'); }
+  screens['metier-prive'] = function () {
+    if (!isReco()) return screens.niveau();
+    var full = S.recoKeys.length >= RECO_MAX_KEYS;
+    return '<main class="screen reco-metier"><div class="topbar">' + back(S.done ? '#/moi' : '#/projet', S.done ? 'Profil' : 'Retour') + stepBar('metier-prive') +
+      '<h1 class="mt-l"><label for="reco-job">Quel est votre métier ?</label></h1>' +
+      '<div class="field reco-job-field"><input id="reco-job" type="text" autocomplete="organization-title" enterkeyhint="next" maxlength="80" placeholder="Par exemple : comptable, infirmière, chef de chantier" value="' + esc(S.recoJob) + '"></div>' +
+      '<h2 class="h3 mt-m no-icon" id="reco-key-title">Vos mots-clés <span class="small">(' + S.recoKeys.length + ' / ' + RECO_MAX_KEYS + ')</span></h2>' +
+      '<p class="small m0">Ce que vous faites au quotidien. Les suggestions viennent des fiches métiers de l’application.</p>' +
+      recoKeyChips() +
+      (full ? '<p class="small">Vous avez choisi 10 mots-clés. Retirez-en un pour en ajouter un autre.</p>' :
+      '<div class="search reco-key-search">' + I.search + '<label class="sr-only" for="reco-key">Chercher un mot-clé</label><input id="reco-key" type="search" role="combobox" aria-autocomplete="list" aria-controls="reco-key-suggest" aria-expanded="false" aria-describedby="reco-key-title" autocomplete="off" enterkeyhint="search" placeholder="Chercher un mot-clé"><ul class="suggest" id="reco-key-suggest" aria-label="Mots-clés proposés" hidden></ul></div>') +
+      '<div id="reco-suggest-zone" class="stack reco-suggest-zone">' + recoSuggestChips() + '</div>' +
+      '<section class="callout tint-blue reco-passerelle mt-m"><span class="pin"></span><div><h2 class="h3 no-icon m0">Les passerelles</h2>' +
+      '<p>Une passerelle, c’est un accès direct à la fonction publique réservé à certaines professions : avocat·e, médecin, soignant·e, ancien·ne militaire… Pour les autres métiers, votre expérience ouvre le 3e concours et le contrat.</p>' +
+      '<a class="btn outline sm" href="#/voies">Voir mes voies d’accès</a></div></section></main>' +
+      '<div class="footer reco-footer">' + recoAfterMetier('Continuer') + '</div>';
+  };
+  screens.voies = function () {
+    if (!isReco()) return screens.niveau();
+    var list = recoVoies(), profs = recoProfessions(S.recoJob);
+    return '<main class="screen reco-voies"><div class="topbar">' + back(S.done ? '#/moi' : S.recoPath === 'metier' ? '#/metier-prive' : '#/projet', S.done ? 'Profil' : 'Retour') + (S.done ? '</div>' : stepBar('voies')) +
+      '<h1 class="mt-l">Vos voies d’accès</h1>' +
+      '<p class="lead">Selon votre profil : ' + [profs.length ? profs[0].t : S.recoJob.trim(), S.level, recoYears() !== null ? experienceLabel().toLowerCase() + ' d’expérience' : ''].filter(Boolean).map(esc).join(' · ') + '.</p>' +
+      '<div class="stack mt-s">' + list.map(function (v, i) {
+        return '<article class="prep reco-voie' + (i === 0 ? ' first' : '') + '"><div class="head"><h2 class="h3 no-icon">' + esc(v.title) + '</h2>' +
+          '<span class="status-pill ' + (v.concours ? 'status-plan' : 'status-ok') + '">' + (v.concours ? 'Avec concours' : 'Sans concours') + '</span></div>' +
+          (i === 0 ? '<p class="reco-first">' + I.check + '<span>La plus directe pour vous</span></p>' : '') +
+          '<p>' + esc(v.text) + '</p>' + ext(v.url, 'Source : ' + v.source, 'link-plain') + '</article>';
+      }).join('') + '</div>' +
+      '<label class="reco-handicap mt-m"><input type="checkbox" data-action="recoHandicap"' + (recoHandicap ? ' checked' : '') + '><span>Je suis en situation de handicap (RQTH ou autre reconnaissance). <span class="small">Non enregistré : sert seulement à afficher la voie dédiée.</span></span></label>' +
+      '<p class="small mt-s">Les conditions exactes (durées, diplômes) sont fixées concours par concours : vérifiez toujours l’avis officiel.</p></main>' +
+      (S.done ? tabbar('moi') : '<div class="footer">' + (S.recoPath === 'metier' ? recoAfterMetier('Continuer') : '<a class="btn" href="#/projet">Continuer</a>') + '</div>');
   };
 
   screens.interets = function () {
     var n = S.domains.length;
     return '<main class="screen">' +
-      '<div class="topbar">' + back('#/niveau', 'Retour') + '<span class="sr-only">Étape 3 / ' + STEPS + '</span></div>' +
-      progress(3, STEPS) +
+      '<div class="topbar">' + back(isReco() ? '#/projet' : '#/niveau', 'Retour') + stepBar('interets') +
       '<h1 class="mt-l">' + (isParent() ? 'Ce qui attire votre enfant' : 'Ce qui vous attire') + '</h1>' +
       '<p class="lead">Choisissez au moins un domaine pour continuer.</p>' +
       '<div class="grid-2 interest-grid mt-s">' + D.domains.map(function (d) {
@@ -856,8 +1037,7 @@
   /* Étape « Votre ambition » : deux choix au plus, ou « Je ne sais pas encore ». */
   screens.ambition = function () {
     return '<main class="screen">' +
-      '<div class="topbar">' + back('#/interets', 'Retour') + '<span class="sr-only">Étape 4 / ' + STEPS + '</span></div>' +
-      progress(4, STEPS) +
+      '<div class="topbar">' + back('#/interets', 'Retour') + stepBar('ambition') +
       '<h1 class="mt-l">' + (isParent() ? 'Son ambition' : 'Votre ambition') + '</h1>' +
       '<p class="lead">' + (isParent() ? 'Quel défi votre enfant est-il prêt à relever pour accéder à son métier ?' : 'Quel défi êtes-vous prêt·e à relever pour accéder à votre métier ?') + ' Trois choix au plus : vos réponses trient les catégories de concours proposées.</p>' +
       defiOptions() +
@@ -881,8 +1061,7 @@
   screens.traits = function () {
     var n = S.traits.length;
     return '<main class="screen">' +
-      '<div class="topbar">' + back('#/ambition', 'Retour') + '<span class="sr-only">Étape 5 / ' + STEPS + '</span></div>' +
-      progress(5, STEPS) +
+      '<div class="topbar">' + back('#/ambition', 'Retour') + stepBar('traits') +
       '<h1 class="mt-l">' + (isParent() ? 'Ce qui lui ressemble' : 'Ce qui vous ressemble') + '</h1>' +
       '<p class="lead">Choisissez sans limite : il n’y a pas de mauvaise réponse.</p>' +
       D.traitGroups.map(function (g) {
@@ -894,12 +1073,29 @@
       profileContinuation('#/situation','Continuer',n>0)+(n?'':skipStep('#/situation'))+'</div>';
   };
 
+  /* Reconversion : jamais de question boursier·e ; une mention Prépas Talents pour les demandeurs d’emploi. */
+  function recoSituation() {
+    var ready = !!S.budget;
+    return '<main class="screen">' +
+      '<div class="topbar">' + back(S.recoPath === 'metier' ? '#/metier-prive' : '#/traits', 'Retour') + stepBar('situation') +
+      '<h1 class="mt-l">Votre budget pour vous préparer</h1>' +
+      '<p class="lead">Pour vous proposer des préparations aux concours à votre portée.</p>' +
+      '<div class="stack mt-s">' + budgetOptions(null).map(function (b) {
+        var on = S.budget === b;
+        return '<button type="button" class="opt sm' + (on ? ' on' : '') + '" aria-pressed="' + on + '"' + attr('action', 'budget') + attr('v', b) + '><span>' + b + '</span>' + (on ? I.check : '') + '</button>';
+      }).join('') + '</div>' +
+      '<section class="callout tint-yellow reco-talents mt-m"><span class="pin"></span><div><h2 class="h3 no-icon m0">Demandeur·se d’emploi ?</h2>' +
+      '<p>Les Prépas Talents sont gratuites et vous sont ouvertes, sous conditions de ressources, avec une bourse de ' + esc(D.talentsGrantLabel || '5 000 €') + ' par an. Elles préparent aux concours de catégorie A et B.</p>' +
+      ext(D.talentsMapUrl || 'https://www.fonction-publique.gouv.fr/cartographie-prepas-talents', 'Trouver une Prépa Talents', 'link-plain') + '</div></section>' +
+      '<p class="small mt-s">Salarié·e : le compte personnel de formation (CPF) peut financer une préparation référencée.</p>' +
+      '</main><div class="footer">' + (profileNeedsValidation() ? profileContinuation('#/accueil', '') : (ready ? '<a class="btn" href="#/accueil" data-action="finish">Voir mon parcours</a>' : '<span class="small center">Choisissez un budget pour continuer.</span><button type="button" class="btn" disabled>Voir mon parcours</button>')) + '</div>';
+  }
   screens.situation = function () {
+    if (isReco()) return recoSituation();
     var q = isParent() ? 'Votre enfant est-il boursier·e ?' : 'Êtes-vous boursier·e ?';
     var budgets = budgetOptions(S.boursier);
     return '<main class="screen">' +
-      '<div class="topbar">' + back('#/traits', 'Retour') + '<span class="sr-only">Étape 6 / ' + STEPS + '</span></div>' +
-      progress(6, STEPS) +
+      '<div class="topbar">' + back('#/traits', 'Retour') + stepBar('situation') +
       '<h1 class="mt-l">' + (isParent() ? 'Sa situation' : 'Votre situation') + '</h1>' +
       '<h2 class="h3 mt-s">' + q + '</h2>' +
       '<div class="grid-2">' + ['Oui', 'Non'].map(function (v) {
@@ -1173,7 +1369,7 @@
   function recoFits(refs) {
     if (S.profile !== 'rec' || !refs.length) return '';
     var v = refs.map(function (c) { return c.voies || ''; }).join(' '), out = '';
-    if (S.experience === 'Oui' && /troisi[eè]me|3e concours/i.test(v)) out += '<span class="fit on">3e concours possible<br>Conditions à vérifier</span>';
+    if (recoYears() !== null && recoYears() >= 4 && /troisi[eè]me|3e concours/i.test(v)) out += '<span class="fit on">3e concours possible<br>Conditions à vérifier</span>';
     if (S.agentPublic === 'Oui' && /intern/i.test(v)) out += '<span class="fit on">Concours interne possible<br>Conditions à vérifier</span>';
     return out;
   }
@@ -1369,7 +1565,7 @@
       if (here < 0) here = stops.findIndex(function (s) { return s.zone === 'Lycée'; });
       stops.forEach(function (s, i) { s.done = i < here; s.here = i === here; });
     } else if (level && level !== 'Sans diplôme' && rank !== null) {
-      var keep = ['Brevet', 'CAP / BEP'].indexOf(level) > -1 ? ['Lycée'] : [];
+      var keep = ['Brevet', 'CAP / BEP', 'CAP', 'BEP'].indexOf(level) > -1 ? ['Lycée'] : [];
       stops = stops.filter(function (s) { return s.zone !== 'Collège' && (s.zone !== 'Lycée' || keep.length) && !(s.zone === 'Études supérieures' && s.rank !== null && s.rank <= rank); });
       stops.unshift({ zone: keep.length ? 'Lycée' : 'Études supérieures', label: 'Votre niveau : ' + level, detail: rank >= L ? 'Niveau de diplôme suffisant pour ce métier' : '', here: true });
     }
@@ -1723,7 +1919,7 @@
   }
   /* ---------- Fiche concours : frise façon itinéraire de transport, du point de départ au concours ---------- */
   /* Position sur la frise en années depuis l’entrée en 6e : le bac tombe à 7, la licence à 10. */
-  var TRIP_POS = { '6e': 0, '5e': 1, '4e': 2, '3e': 3, 'Seconde': 4, 'Première': 5, 'Terminale': 6, 'Sans diplôme': 4, 'Brevet': 4, 'CAP / BEP': 5, 'Bac': 7, 'Bac+1 / +2': 8, 'Bac+2': 9, 'Bac+3': 10, 'Bac+5': 12, 'Doctorat': 15 };
+  var TRIP_POS = { '6e': 0, '5e': 1, '4e': 2, '3e': 3, 'Seconde': 4, 'Première': 5, 'Terminale': 6, 'Sans diplôme': 4, 'Brevet': 4, 'CAP / BEP': 5, 'CAP': 5, 'BEP': 5, 'Bac': 7, 'Bac+4': 11, 'Bac+1 / +2': 8, 'Bac+2': 9, 'Bac+3': 10, 'Bac+5': 12, 'Doctorat': 15 };
   var TRIP_AFTER_BAC = [0, 0, 0, 2, 3, 5, 8];
   I.journey = '<svg class="journey-icon" viewBox="0 0 200 844" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M100 2a72 72 0 0 1 72 72c0 46-50 86-72 108-22-22-72-62-72-108A72 72 0 0 1 100 2zm0 38a34 34 0 1 0 0 68 34 34 0 1 0 0-68z"/><g transform="translate(-6.6 202.6) scale(9)" fill="none" stroke="currentColor" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.4" cy="3.6" r="1.9" fill="currentColor" stroke="none"/><path d="M12.6 7.6 11.4 13.2M12.4 8.4l-2.9 2-.8 2.6M12.6 8.6l2.2 2 2.6.9M11.4 13.2l2.5 3.2.2 4.2M11.4 13.2l-1.5 3.7-2.6 3.6"/></g><circle cx="100" cy="448" r="11"/><circle cx="100" cy="537" r="11"/><circle cx="100" cy="627" r="11"/><circle cx="100" cy="762" r="68"/></svg>';
   I.walk = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="13.4" cy="3.6" r="1.9" fill="currentColor" stroke="none"/><path d="M12.6 7.6 11.4 13.2M12.4 8.4l-2.9 2-.8 2.6M12.6 8.6l2.2 2 2.6.9M11.4 13.2l2.5 3.2.2 4.2M11.4 13.2l-1.5 3.7-2.6 3.6"/></svg>';
@@ -2524,7 +2720,7 @@
   /* ---------- Profil et informations légales ---------- */
   var PROFILE_LABEL = { etu: 'Étudiant·e', par: 'Parent', rec: 'En reconversion' };
 
-  var PROFILE_FIELDS = { profile: 'Profil', level: 'Niveau d’études', domains: 'Domaines', defis: 'Votre défi', agentPublic: 'Déjà dans la fonction publique', experience: 'Expérience', traits: 'Ce qui vous ressemble', boursier: 'Boursier·e', budget: 'Budget pour se préparer' };
+  var PROFILE_FIELDS = { profile: 'Profil', level: 'Niveau d’études', domains: 'Domaines', defis: 'Votre défi', agentPublic: 'Déjà dans la fonction publique', experience: 'Expérience', recoPath: 'Votre projet', traits: 'Ce qui vous ressemble', boursier: 'Boursier·e', budget: 'Budget pour se préparer' };
   /* Fenêtre de modification : uniquement les options du point choisi. */
   function profileFieldContent(field) {
     var body = '';
@@ -2534,7 +2730,8 @@
     if (field === 'traits') body = D.traitGroups.map(function (g) { return '<section class="stack mt-s"><h3 class="no-icon">' + esc(g.title) + '</h3><div class="row">' + g.items.map(function (t) { return chip('trait', t[0], t[1], S.traits.indexOf(t[0]) > -1); }).join('') + '</div></section>'; }).join('');
     if (field === 'ambitions') body = '<p class="small m0">Deux choix au plus.</p>' + ambitionOptions();
     if (field === 'defis') body = '<p class="small m0">Trois choix au plus. Vos réponses trient les catégories de concours proposées.</p>' + defiOptions();
-    if (field === 'agentPublic' || field === 'experience') { var rq = RECO_QUESTIONS.filter(function (q) { return q[0] === field; })[0]; body = '<p class="body">' + esc(rq[1]) + '</p><p class="small">' + esc(rq[2]) + '</p><div class="grid-2">' + ['Oui', 'Non'].map(function (v) { var on = S[field] === v; return '<button type="button" class="opt sm center' + (on ? ' on' : '') + '" aria-pressed="' + on + '"' + attr('action', field) + attr('v', v) + '>' + v + '</button>'; }).join('') + '</div>'; }
+    if (field === 'experience') body = '<p class="small">Salariat, indépendant, intérim, apprentissage, mandat d’élu ou responsabilité associative.</p><div class="stack">' + RECO_EXPERIENCE.map(function (x) { var on = S.experience === x[0]; return '<button type="button" class="opt sm' + (on ? ' on' : '') + '" aria-pressed="' + on + '"' + attr('action', 'experience') + attr('v', x[0]) + '><span>' + esc(x[1]) + '</span>' + (on ? I.check : '') + '</button>'; }).join('') + '</div>';
+    if (field === 'recoPath') body = '<div class="stack">' + RECO_PATHS.map(function (x) { var on = S.recoPath === x[0]; return '<button type="button" class="opt sm' + (on ? ' on' : '') + '" aria-pressed="' + on + '"' + attr('action', 'recoPath') + attr('v', x[0]) + '><span>' + esc(x[1]) + '</span>' + (on ? I.check : '') + '</button>'; }).join('') + '</div>' + (S.recoPath === 'nouveau' ? '<p class="small">Vos centres d’intérêt se modifient dans la ligne « Domaines ».</p>' : '');
     if (field === 'boursier') body = '<div class="grid-2">' + ['Oui', 'Non'].map(function (v) { var on = S.boursier === v; return '<button type="button" class="opt sm center' + (on ? ' on' : '') + '" aria-pressed="' + on + '"' + attr('action', 'boursier') + attr('v', v) + '>' + v + '</button>'; }).join('') + '</div>';
     if (field === 'budget') body = '<div class="stack">' + budgetOptions(S.boursier).map(function (b) { var on = S.budget === b; return '<button type="button" class="opt sm' + (on ? ' on' : '') + '" aria-pressed="' + on + '"' + attr('action', 'budget') + attr('v', b) + '><span>' + b + '</span>' + (on ? I.check : '') + '</button>'; }).join('') + '</div>';
     return body + '<div class="sheet-actions"><button type="button" class="btn" data-ui="close">Fermer</button></div>';
@@ -2542,21 +2739,27 @@
   screens.moi = function () {
     if(isParent()&&!activeChild())return '<main class="screen pt"><h1>Vos profils</h1><p class="body">Aucun profil enfant pour le moment.</p><button type="button" class="btn" data-action="addChild">Ajouter un profil</button><button type="button" class="danger-link" data-action="wipe">Effacer mes données</button></main>'+tabbar('moi');
     var rows = [
-      ['Profil', S.profile ? PROFILE_LABEL[S.profile] : 'Non renseigné'],
-      [isParent() ? 'Niveau de votre enfant' : 'Niveau', S.level || 'Non renseigné'],
-      ['Domaines', S.domains.length ? S.domains.map(domainLabel).join(', ') : 'Tous'],
-      [isParent() ? 'Son défi' : 'Votre défi', S.defis.length ? S.defis.map(function (d) { return (DEFIS.filter(function (x) { return x[0] === d; })[0] || ['', d])[1]; }).join(', ') : 'Non renseigné'],
-      [isParent() ? 'Ce qui lui ressemble' : 'Ce qui vous ressemble', S.traits.length ? S.traits.map(traitLabel).join(', ') : 'Non renseigné'],
-      ['Boursier·e', S.boursier || 'Non renseigné'],
-      ['Budget', S.budget || 'Non renseigné']
-    ].concat(S.profile === 'rec' ? [['Déjà dans la fonction publique', S.agentPublic || 'Non renseigné'], ['Expérience professionnelle, associative ou d’élu', S.experience || 'Non renseigné']] : []);
-    var rowFields = ['profile', 'level', 'domains', 'defis', 'traits', 'boursier', 'budget', 'agentPublic', 'experience'];
+      ['Profil', S.profile ? PROFILE_LABEL[S.profile] : 'Non renseigné', 'profile'],
+      [isParent() ? 'Niveau de votre enfant' : 'Niveau', S.level || 'Non renseigné', 'level']];
+    /* Reconversion : expérience, projet, puis le métier et ses mots-clés (branche 1) ou le questionnaire (branche 2). Jamais de boursier·e. */
+    if (isReco()) {
+      rows.push(['Expérience', experienceLabel(), 'experience'], ['Votre projet', (RECO_PATHS.filter(function (x) { return x[0] === S.recoPath; })[0] || ['', 'Non renseigné'])[1], 'recoPath']);
+      if (S.recoPath === 'metier') rows.push(['Votre métier et vos mots-clés', [S.recoJob.trim()].concat(S.recoKeys).filter(function (x, i, all) { return x && all.map(recoNorm).indexOf(recoNorm(x)) === i; }).join(', ') || 'Non renseigné', '#/metier-prive'], ['Vos voies d’accès', recoVoies().map(function (v) { return v.title; }).slice(0, 3).join(', '), '#/voies']);
+    }
+    if (!isReco() || S.recoPath !== 'metier') rows.push(
+      ['Domaines', S.domains.length ? S.domains.map(domainLabel).join(', ') : 'Tous', 'domains'],
+      [isParent() ? 'Son défi' : 'Votre défi', S.defis.length ? S.defis.map(function (d) { return (DEFIS.filter(function (x) { return x[0] === d; })[0] || ['', d])[1]; }).join(', ') : 'Non renseigné', 'defis'],
+      [isParent() ? 'Ce qui lui ressemble' : 'Ce qui vous ressemble', S.traits.length ? S.traits.map(traitLabel).join(', ') : 'Non renseigné', 'traits']);
+    if (!isReco()) rows.push(['Boursier·e', S.boursier || 'Non renseigné', 'boursier']);
+    rows.push(['Budget', S.budget || 'Non renseigné', 'budget']);
     return '<main class="screen pt">' +
       (profileReturn ? back(profileReturn, 'Prépas Talents') : '') +
       '<h1>' + (isParent() ? 'Le profil de ' + esc(childName()) : 'Votre profil') + '</h1>' + childSelector() +
       '<p class="small m0">Touchez une ligne pour modifier votre réponse.</p>' +
-      '<div class="list m0 profile-rows">' + rows.map(function (r, i) {
-        return '<button type="button" class="list-row profile-row" data-action="editField"' + attr('v', rowFields[i]) + ' aria-haspopup="dialog"><span class="main"><span class="meta">' + esc(r[0]) + '</span><span class="name sm">' + esc(r[1]) + '</span></span>' + I.chev + '</button>';
+      '<div class="list m0 profile-rows">' + rows.map(function (r) {
+        /* Une ligne qui renvoie à un écran (métier, voies) est un lien ; les autres ouvrent la fenêtre de modification. */
+        if (r[2].charAt(0) === '#') return '<a class="list-row profile-row" href="' + r[2] + '"><span class="main"><span class="meta">' + esc(r[0]) + '</span><span class="name sm">' + esc(r[1]) + '</span></span>' + I.chev + '</a>';
+        return '<button type="button" class="list-row profile-row" data-action="editField"' + attr('v', r[2]) + ' aria-haspopup="dialog"><span class="main"><span class="meta">' + esc(r[0]) + '</span><span class="name sm">' + esc(r[1]) + '</span></span>' + I.chev + '</button>';
       }).join('') + '</div>' +
       locationForm() +
       (isParent()?'<button type="button" class="danger-link" data-action="deleteChild">Effacer ce profil</button>':'<button type="button" class="danger-link" data-action="wipe">Effacer mes données</button>') +
@@ -2809,7 +3012,7 @@
     if (profileReturn && r.name !== 'moi') profileReturn = null;
     if (r.name === 'preparer') prepFocus = r.arg2 && concoursByKey(r.arg2) ? { job: r.arg, key: r.arg2 } : null;
     else if (prepFocus && PREP_PAGES.indexOf(r.name) < 0) prepFocus = null;
-    if(['niveau','interets','ambition','traits','situation'].indexOf(r.name)>-1){
+    if(['niveau','experience','projet','metier-prive','voies','interets','ambition','traits','situation'].indexOf(r.name)>-1){
       var required=!S.profile?'choix-profil':!nameReady()?'profil':(!S.level&&r.name!=='niveau'?'niveau':null);
       if(required){r={name:required};history.replaceState(null,'','#/'+required);}
     }
@@ -3196,6 +3399,17 @@
         set({ defis: df, metCats: null, jobLimit: 60 }); break;
       }
       case 'agentPublic': case 'experience': { var rp = {}; rp[a] = S[a] === v ? null : v; set(rp); break; }
+      case 'recoPath': S.recoPath = S.recoPath === v ? null : v; syncRecoDomains(); save(); render(); break;
+      case 'recoKey': {
+        var fromList = !!el.closest('#reco-key-suggest'), had = S.recoKeys.indexOf(v) > -1;
+        if (!had && S.recoKeys.length >= RECO_MAX_KEYS) { announce('Dix mots-clés au plus.'); break; }
+        S.recoKeys = had ? S.recoKeys.filter(function (k) { return k !== v; }) : S.recoKeys.concat(v);
+        syncRecoDomains(); save(); render();
+        announce(had ? 'Mot-clé retiré : ' + v : 'Mot-clé ajouté : ' + v);
+        var again = document.getElementById(fromList || had ? 'reco-key' : 'reco-key'); if (again && fromList) again.focus({ preventScroll: true });
+        break;
+      }
+      case 'recoHandicap': recoHandicap = !!el.checked; render(); break;
       case 'showOthersJobs': set({ showOthersJobs: true }); anchorAlso(); break;
       case 'showOthersConcours': set({ showOthersConcours: true }); anchorAlso(); break;
       case 'moreConcours': set({ concoursLimit: (S.concoursLimit || 60) + 60 }); break;
@@ -3207,7 +3421,7 @@
       case 'budget': set({ budget: v, prepBudget: null }); break;
       case 'go': location.hash = '#/' + v; break;
       case 'startProfile': S.introSeen = true; save(); navigate(familyEstablished()?'#/profil':'#/choix-profil'); break;
-      case 'finish': e.preventDefault(); if(!identityReady()){navigate(nameReady()?'#/niveau':'#/profil');announce(nameReady()?'Choisissez un niveau pour continuer.':'Renseignez un prénom pour continuer.');break;} S.done = true; markValidated();profileSnapshot=profileSignature();save(); profileFinished = true; navigate('#/accueil'); break;
+      case 'finish': e.preventDefault(); syncRecoDomains(); if(!identityReady()){navigate(nameReady()?'#/niveau':'#/profil');announce(nameReady()?'Choisissez un niveau pour continuer.':'Renseignez un prénom pour continuer.');break;} S.done = true; markValidated();profileSnapshot=profileSignature();save(); profileFinished = true; navigate('#/accueil'); break;
       case 'clearSearch': {
         e.preventDefault(); clearTimeout(searchTimer);
         if(v==='q'){if(onConcoursPage())S.cq='';else{S.q='';S.jobLimit=60;}}
@@ -3312,6 +3526,9 @@
   root.addEventListener('input', function (e) {
     if(e.target.matches('.search input')){var clear=e.target.closest('.search').querySelector('.search-clear');if(clear)clear.hidden=!e.target.value;var go=e.target.closest('.search').querySelector('.search-go');if(go)go.classList.toggle('ready',!!e.target.value);}
     if(e.target.id==='location-query'){locationQuery=e.target.value;locationSearchId++;return;}
+    /* Reconversion : le métier saisi met à jour les mots-clés proposés sans redessiner l’écran (le clavier reste ouvert). */
+    if(e.target.id==='reco-job'){S.recoJob=e.target.value;syncRecoDomains();save();refreshRecoSuggest();return;}
+    if(e.target.id==='reco-key'){updateRecoKeySuggest(true);return;}
     if(e.target.id==='res-q'){S.resQ=e.target.value;S.resLimit=40;save();document.getElementById('study-results').innerHTML=studyResults(jobById(route().arg),route().name==='ressources-biblio');return;}
     if (e.target.id === 'book-q') { S.bookQ=e.target.value;save();document.getElementById('books').innerHTML=bookList(jobById(route().arg));return; }
     if (e.target.id === 'cal-q') {
@@ -3343,7 +3560,18 @@
     if(e.target.id!=='person-name')return;
     var screen=e.target.closest('.identity-screen');if(screen)screen.classList.remove('typing');
   });
-  root.addEventListener('focusin',function(e){ if(e.target.id==='q'&&e.target.value)updateSuggest(true); });
+  root.addEventListener('focusin',function(e){ if(e.target.id==='q'&&e.target.value)updateSuggest(true); if(e.target.id==='reco-key'&&e.target.value)updateRecoKeySuggest(true); });
+  root.addEventListener('focusout',function(e){ if(e.target.id==='reco-key')setTimeout(function(){var a=document.activeElement;if(!a||!a.closest||!a.closest('#reco-key-suggest'))updateRecoKeySuggest(false);},180); });
+  root.addEventListener('keydown',function(e){
+    if(e.target.id==='reco-job'&&e.key==='Enter'&&!e.isComposing){e.preventDefault();var k=document.getElementById('reco-key');if(k)k.focus();else e.target.blur();return;}
+    if(e.target.id==='reco-key'){
+      if(e.key==='Escape'){updateRecoKeySuggest(false);return;}
+      if(e.key==='ArrowDown'){var first=document.querySelector('#reco-key-suggest button');if(first){e.preventDefault();first.focus();}return;}
+      /* Entrée : le premier mot-clé proposé est ajouté ; un mot hors de la base n’est jamais enregistré. */
+      if(e.key==='Enter'&&!e.isComposing&&e.keyCode!==229){e.preventDefault();e.stopPropagation();var pick=document.querySelector('#reco-key-suggest button');if(pick)pick.click();else announce('Choisissez un mot-clé dans la liste.');return;}
+    }
+    if(e.target.closest&&e.target.closest('#reco-key-suggest')&&(e.key==='ArrowDown'||e.key==='ArrowUp')){var items=[].slice.call(document.querySelectorAll('#reco-key-suggest button')),i=items.indexOf(e.target);e.preventDefault();if(e.key==='ArrowDown'&&items[i+1])items[i+1].focus();else if(e.key==='ArrowUp')(items[i-1]||document.getElementById('reco-key')).focus();}
+  },true);
   root.addEventListener('focusout',function(e){ if(e.target.id==='cal-q')setTimeout(function(){var a=document.activeElement;if(!a||!a.closest||!a.closest('#cal-suggest'))updateCalSuggest(false);},180); });
   root.addEventListener('focusout',function(e){ if(e.target.id==='q')setTimeout(function(){var a=document.activeElement;if(!a||!a.closest||!a.closest('#q-suggest'))updateSuggest(false);},180); });
   root.addEventListener('keydown',function(e){
@@ -3359,7 +3587,7 @@
     if(e.target.id==='identity-form'){e.preventDefault();confirmName(true);return;}
     if(e.target.id!=='study-form')return;
     e.preventDefault();if(!identityReady())return;
-    if(profileNeedsValidation()){validateProfile();return;}save();navigate('#/interets');
+    if(profileNeedsValidation()){validateProfile();return;}save();navigate(isReco()?'#/experience':'#/interets');
   });
 
   UI.init();

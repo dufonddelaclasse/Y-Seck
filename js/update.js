@@ -1,7 +1,7 @@
 /* Une nouvelle version est proposée sans interrompre le parcours ni la saisie. */
 (function () {
   'use strict';
-  var currentVersion = '20261029-327';
+  var currentVersion = '20261031-328';
   var latestVersion = null, dismissedVersion = null, notice = null;
   var lastCheck = null, checking = false;
   var onboarding = ['bienvenue', 'versants', 'categories-intro', 'choix-profil', 'profil', 'niveau', 'interets', 'traits', 'situation'];
