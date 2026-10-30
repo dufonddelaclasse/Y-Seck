@@ -2707,3 +2707,10 @@ html:not([data-contrast="true"]) :is(#app, .sheet) .opt .defi-cats .cat.cat-CDD 
 html:not([data-contrast="true"]) :is(#app, .sheet) .opt .defi-cats .cat.cat-CDD, html:not([data-contrast="true"]) :is(#app, .sheet) .opt .defi-cats .cat.cat-CDD * { color:#141414 !important; }
 /* Explorer : intertitre entre les métiers au cœur des domaines cochés et les métiers proches (comptés « pour vous »). */
 .list-subhead { margin:24px 0 2px; font-size:.9375rem; font-weight:500; line-height:1.35; color:var(--ink); }
+/* Cards métiers et concours : pastilles de catégorie à la taille et à la place de celles des 4 catégories (30px, en haut à gauche, calées sur le haut du titre).
+   Plusieurs catégories : pastilles plus petites, empilées dans la même colonne de 30px. */
+.list-row.job-row > .cat { width:30px; height:30px; font-size:.8125rem; }
+.list-row.job-row > .cat.cat-Ap { font-size:.75rem; }
+.list-row.job-row > .job-categories { width:30px; flex-direction:column; flex-wrap:nowrap; align-items:center; gap:3px; }
+.list-row.job-row > .job-categories .cat.sm { width:22px; height:22px; font-size:.625rem; }
+.list-row.job-row > .cat svg, .list-row.job-row > .cat .contract-icon { width:58%; height:58%; }
