@@ -66,11 +66,15 @@ for (const profile of ['etu','par','rec']) {
   assert(second.includes('Étape 2 / 6')&&second.includes('href="#/profil"'));
   assert(second.includes('data-action="level"')&&!second.includes('id="person-name"'));
   assert(second.includes('data-action="level" data-v="Bac"'),'Le niveau Bac doit être proposé pour chaque type de profil.');
-  assert.equal(second.includes('data-v="CAP / BEP"'),profile==='rec');
+  /* Reconversion : CAP et BEP séparés, Bac+4 et doctorat, sans classes de collège ou de lycée. */
+  assert.equal(second.includes('data-v="CAP"')&&second.includes('data-v="BEP"')&&second.includes('data-v="Bac+4"'),profile==='rec');
+  assert.equal(second.includes('data-v="Seconde"'),profile!=='rec');
   t.submit('study-form');assert.equal(t.location.hash,'#/niveau','Un niveau doit être choisi avant de poursuivre.');
   t.location.hash='#/interets';t.render();
   assert.equal(t.location.hash,'#/niveau','Un lien direct ne doit pas sauter le niveau obligatoire.');
-  t.click('level',profile==='rec'?'CAP / BEP':'Seconde');t.submit('study-form');
+  t.click('level',profile==='rec'?'CAP':'Seconde');t.submit('study-form');
+  /* Reconversion : l’expérience suit le niveau ; son parcours est contrôlé dans check_reconversion.mjs. */
+  if(profile==='rec'){assert.equal(t.location.hash,'#/experience');continue;}
   assert.equal(t.location.hash,'#/interets');
   assert(t.screens.interets().includes('Étape 3 / 6')&&t.screens.interets().includes('href="#/niveau"'));
   assert(t.screens.traits().includes('Étape 5 / 6')&&t.screens.ambition().includes('Étape 4 / 6'));

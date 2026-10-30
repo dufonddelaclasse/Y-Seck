@@ -295,8 +295,9 @@ html.dark #app .prep .price { color:#000 !important; }
 html.dark #app .prep .price.price-neutral { background:#FFF !important; color:#000 !important; }
 
 /* Bouton principal : plein, texte noir. */
-html.dark #app .btn:not(.outline):not(.white) { background:var(--pill-on) !important; border-color:var(--pill-on) !important; color:#000 !important; }
-html.dark #app .btn:not(.outline):not(.white) svg { color:#000 !important; }
+html.dark #app .btn:not(.outline):not(.white):not([disabled]) { background:var(--pill-on) !important; border-color:var(--pill-on) !important; color:#000 !important; }
+html.dark #app .btn:not(.outline):not(.white):not([disabled]) svg { color:#000 !important; }
+html.dark #app .btn[disabled] { background:#4C4C4C !important; border-color:#4C4C4C !important; color:#A7A7A7 !important; }
 html.dark #app .btn.prep-float { box-shadow:0 8px 24px rgba(0,0,0,.6); }
 
 /* Switch boursier : rail anthracite, curseur coloré, texte noir sur le curseur. */

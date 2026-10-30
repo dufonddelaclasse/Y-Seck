@@ -3,6 +3,7 @@
   "checked": "2026-10-17",
   "parts": [
     "catalogue/metadata.json",
+    "catalogue/reconversion-01.json",
     "catalogue/rmfp-01.json",
     "catalogue/rmfp-02.json",
     "catalogue/rmfp-03.json",
