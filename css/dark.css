@@ -928,6 +928,10 @@ html:where(.dark).dark body .update-notice .update-notice-copy .update-notice-de
 :where(html.dark) .aide-ico { background:rgba(41,41,41,0.18); }
 :where(html.dark) .aide-ico svg { color:#FFF; }
 :where(html.dark) .aide-tile:focus-visible { outline:3px solid var(--ink); }
+:where(html.dark) .aide-tile { background:#292929; border:2px solid var(--theme, var(--brand)); color:var(--theme-ink, var(--brand)); }
+:where(html.dark) .aide-tile:hover, :where(html.dark) .aide-tile:active { color:var(--theme-ink, var(--brand)); background:#292929; }
+:where(html.dark) .aide-ico { background:var(--theme-tint, var(--lilac)); }
+:where(html.dark) .aide-ico svg { color:var(--theme-ink, var(--brand)); }
 
 /* Retouches */
 html.dark .app .prep:not(.prep-static):not(.talents-card):not(.talents-feature) { background:#292929 !important; }
@@ -1227,7 +1231,7 @@ html.dark body .update-notice .update-notice-action { border:0 !important; backg
 html.dark body .update-notice .update-notice-dismiss { border:0 !important; background:#2C2C2E !important; color:#FFF !important; }
 /* Menu du bas en sombre : la petite barre de l'onglet actif en jaune accent. */
 html.dark .tabbar a.on::before { background:#E0FA6E !important; }
-/* Aides (Se préparer) : blocs à la couleur du concours, texte blanc, aussi en sombre. */
-html.dark #app .aide-tile { background:var(--theme, var(--brand)) !important; color:#FFF !important; border:0 !important; }
-html.dark #app .aide-tile :is(span, svg) { color:#FFF !important; }
-html.dark #app .aide-ico { background:rgba(255,255,255,.18) !important; }
+/* Aides (Se préparer) en sombre : même rendu qu'en clair, fond blanc, contour, texte et picto à la couleur de la catégorie. */
+html.dark #app .aide-tile { background:#FFF !important; color:var(--theme, var(--brand)) !important; border:2px solid var(--theme, var(--brand)) !important; }
+html.dark #app .aide-tile :is(span, svg) { color:var(--theme, var(--brand)) !important; }
+html.dark #app .aide-ico { background:var(--theme-tint, #DDC7FF) !important; }

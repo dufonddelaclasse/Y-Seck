@@ -2695,3 +2695,10 @@ html.dark body .update-notice .update-notice-copy .update-notice-detail { color:
 html:is([data-large-text="true"],[data-dys-font="true"]) .aide-tile { aspect-ratio:auto; min-height:150px; }
 html[data-contrast="true"] .aide-tile { background:#000; color:#FFF; }
 .aide-tile { min-width:0; }
+/* Aides : fond blanc, contour, texte et picto à la couleur de la catégorie ; pas de coupure de mots. */
+.aide-tile { background:#FFF; border:2px solid var(--theme, var(--brand)); color:var(--theme, var(--brand)); }
+.aide-tile:hover, .aide-tile:active { color:var(--theme, var(--brand)); filter:none; background:#FFF; }
+.aide-ico { background:var(--theme-tint, var(--lilac)); }
+.aide-ico svg { color:var(--theme, var(--brand)); }
+.aide-t { hyphens:none; -webkit-hyphens:none; overflow-wrap:normal; word-break:keep-all; }
+.aide-t { font-size:.875rem; }
