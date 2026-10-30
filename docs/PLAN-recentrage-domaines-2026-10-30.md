@@ -234,3 +234,24 @@ Hiérarchie appliquée :
 4. Le reste (simple mention, sans lien) n'est plus proposé dans ces listes. La recherche et le filtre restent ouverts sur tout le catalogue.
 
 Résultat (métiers pour vous + pistes) : 6e + Défense 42 + 60 ; 3e + Sécurité + Santé 225 + 60 ; Terminale + Administration 79 + 60 ; Bac+3 + Numérique sélectif 70 + 46 ; Bac+3 + Santé 115 + 60 ; Bac+5 + Recherche 139 + 60 ; Bac+5 + Administration sélectif 61 + 60 ; Reconversion Bac+2 + Finances 72 + 60 ; Parent + Environnement 87 + 60 ; 6e + Arts 23 + 43.
+
+## 10. Tri resserré (30 octobre, 19 h)
+
+Constat d'Alexis : l'IPEF et le concours de chargé de recherche remontaient dans « peuvent aussi vous intéresser » pour un profil Éducation, Arts, Communication, Culture.
+
+- Concours : le cercle se juge désormais sur l'ensemble des métiers du concours, jamais sur un seul (`concoursFar` : un domaine doit revenir chez au moins un quart de ses métiers). Avant, un seul directeur sur 6 suffisait à faire remonter l'IPEF.
+- Graphe : Éducation n'a plus Recherche comme voisin (Enfance et Sport seulement).
+- Métiers : le proche principal n'est compté « pour vous » que s'il est un domaine voisin du cœur du métier. Archiviste (Documentation, proche Culture) est compté. Imprimeur (Technique, proche Arts) et médecin scolaire (Santé, proche Éducation) passent dans les pistes.
+
+Résultat, métiers pour vous + pistes, puis concours :
+
+| Profil | Métiers | Concours |
+|---|---|---|
+| 6e + Défense | 35 + 60 | 10 + 26 |
+| 3e + Sécurité + Santé | 180 + 60 | 53 + 30 |
+| Terminale + Administration | 79 + 60 | 16 + 30 |
+| Bac+3 + Santé | 91 + 60 | 32 + 22 |
+| Bac+5 + Recherche | 102 + 60 | 11 + 30 |
+| Parent + Environnement | 72 + 60 | 7 + 15 |
+| 6e + Arts | 17 + 49 | 6 + 11 |
+| Bac+5 + Éducation, Arts, Communication, Culture | 95 + 60 | 36 + 14 |

@@ -183,6 +183,11 @@
     ((D.domainGraph[d] || {}).proches || []).forEach(function (p) { (graph[p] = graph[p] || []).indexOf(d) < 0 && graph[p].push(d); });
   });
   D.domainNeighbours = graph;
+  /* Voisinage dans les deux sens, pour juger si un proche est vraiment parent du cœur du métier. */
+  var linked = {};
+  Object.keys(D.domainGraph || {}).forEach(function (d) {
+    ((D.domainGraph[d] || {}).proches || []).forEach(function (p) { (linked[d] = linked[d] || {})[p] = true; (linked[p] = linked[p] || {})[d] = true; });
+  });
   var tagBy = {};
   if (STRICT_DOMAINS) (P.domainTags || []).forEach(function (t) { tagBy[t.job] = t; });
   D.strictDomains = STRICT_DOMAINS && Object.keys(tagBy).length > 0;
@@ -193,7 +198,9 @@
     var core = tag.coeur.slice(), near = (tag.proches || []).filter(function (d) { return core.indexOf(d) < 0; }), around = [];
     core.forEach(function (c) { (graph[c] || []).forEach(function (d) { if (core.indexOf(d) < 0 && near.indexOf(d) < 0 && around.indexOf(d) < 0) around.push(d); }); });
     job.coreDomains = core; job.nearDomains = near; job.graphDomains = around;
-    job.nearCounted = near.slice(0, COUNTED_NEAR).filter(function (d) { return UNCOUNTED_NEAR.indexOf(d) < 0; });
+    /* Proche compté « pour vous » : le principal, seulement s’il est un domaine voisin du cœur (archiviste : Documentation ~ Culture,
+       sous-officier de gendarmerie : Sécurité ~ Défense). Sinon (imprimeur : Technique ~ Arts), il reste une piste. */
+    job.nearCounted = near.slice(0, COUNTED_NEAR).filter(function (d) { return UNCOUNTED_NEAR.indexOf(d) < 0 && core.some(function (c) { return linked[c] && linked[c][d]; }); });
     job.strongInterests = core.slice();
     job.interests = core.concat(near).concat(job.domain && core.indexOf(job.domain) < 0 && near.indexOf(job.domain) < 0 ? [job.domain] : []);
   });

@@ -1099,15 +1099,27 @@
     if (catalogReady) c._near = out;
     return out;
   }
-  /* Cercle d’un concours : 6 cœur, 5 proche (comptés « pour vous »), 4 un métier du concours touche le domaine, puis voisins et mentions. */
+  /* Domaines liés de plus loin à un concours : proches secondaires qui reviennent chez au moins un quart de ses métiers. */
+  function concoursFar(c) {
+    if (c._far && catalogReady) return c._far;
+    var jobs = concoursJobs(c), tally = {}, out = [], skip = concoursCore(c).concat(concoursNear(c));
+    jobs.forEach(function (j) { (j.strongInterests || []).concat(j.nearDomains || []).forEach(function (d) { tally[d] = (tally[d] || 0) + 1; }); });
+    Object.keys(tally).forEach(function (d) { if (skip.indexOf(d) < 0 && (jobs.length <= 3 || tally[d] >= Math.max(2, jobs.length / 4))) out.push(d); });
+    if (catalogReady) c._far = out;
+    return out;
+  }
+  /* Cercle d’un concours, toujours jugé sur l’ensemble de ses métiers (jamais sur un seul) :
+     6 cœur et 5 proche (comptés « pour vous »), 4 proche secondaire, 3 son domaine principal est voisin du domaine coché. */
   function concoursTier(c, doms) {
     if (!doms.length) return 0;
     if (!D.strictDomains) return concoursJobs(c).reduce(function (m, j) { return Math.max(m, domainTier(j, doms)); }, 0);
     var has = function (list) { return list.some(function (d) { return doms.indexOf(d) > -1; }); };
-    if (has(concoursCore(c))) return 6;
+    var core = concoursCore(c);
+    if (has(core)) return 6;
     if (has(concoursNear(c))) return 5;
-    var best = concoursJobs(c).reduce(function (m, j) { return Math.max(m, domainTier(j, doms)); }, 0);
-    return best >= 4 ? 4 : best;
+    if (has(concoursFar(c))) return 4;
+    var around = []; core.forEach(function (d) { (D.domainNeighbours[d] || []).forEach(function (x) { if (around.indexOf(x) < 0) around.push(x); }); });
+    return has(around) ? 3 : 0;
   }
   function isPerfectConcours(c, doms) {
     if (defaultCats().indexOf(c.cat) < 0) return false;
