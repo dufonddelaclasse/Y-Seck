@@ -162,3 +162,63 @@ Dans « peuvent aussi vous intéresser », le tri devient : cercle (proche avant
 - Gendarmerie et sapeurs-pompiers militaires : cœur Sécurité ou cœur Défense ? Proposition : Sécurité, avec Défense en proche.
 - Faut-il montrer, sur chaque card de la liste « peuvent aussi vous intéresser », pourquoi le métier est proposé (« proche de Défense ») ? Pas prévu dans ce plan, facile à ajouter ensuite via `partialScore`.
 - Le seuil de 60 métiers cœur par domaine est une cible, pas une règle : si Santé en garde 80 parce que ce sont bien 80 métiers de soin, c'est juste.
+
+## 8. Résultat (exécuté le 30 octobre 2026)
+
+### Métiers et concours « pour vous », avant / après
+
+| Profil | Métiers avant | Métiers après | Concours avant | Concours après |
+|---|---|---|---|---|
+| 6e + Défense | 33 | 27 | 14 | 8 |
+| 6e + Défense + « rapide » | 29 | 25 | 6 | 2 |
+| 3e + Sécurité + Santé | 178 | 131 | 74 | 49 |
+| Terminale + Administration | 207 | 79 | 40 | 16 |
+| Bac+3 + Numérique + « sélectif » | 48 | 51 | 9 | 3 |
+| Bac+3 + Santé | 84 | 77 | 35 | 31 |
+| Bac+5 + Recherche | 120 | 82 | 7 | 8 |
+| Bac+5 + Administration + « sélectif » | 161 | 61 | 21 | 9 |
+| Reconversion Bac+2 + Finances | 38 | 43 | 18 | 9 |
+| Parent (Première) + Environnement | 168 | 49 | 29 | 6 |
+| 6e + Arts | 9 | 13 | 26 | 6 |
+| Sans domaine coché | 1 134 | 1 134 | 174 | 174 |
+
+Les domaines qui montent légèrement (Numérique, Finances, Arts) récupèrent des métiers qui leur appartiennent vraiment et qui étaient rangés ailleurs (informaticiens de la recherche, contrôleurs financiers, ateliers graphiques).
+
+### Métiers au cœur de chaque domaine (tous niveaux confondus)
+
+Avant (rattachement large) puis après (cœur seul) : Administration 207 → 79, Environnement 168 → 49, Technique 130 → 92, Transports 129 → 41, Recherche 123 → 84, Santé 90 → 83, Sécurité 88 → 50, Inspection 74 → 50, Culture 65 → 23, Urbanisme 65 → 30, Numérique 55 → 58, Justice 51 → 57, Défense 33 → 27.
+
+Restent au-delà de 60 : Technique (92 : ateliers, maintenance, ouvriers du bâtiment, propreté), Recherche (84 : ingénieurs et techniciens qui font eux-mêmes de la science), Santé (83 : soignants et paramédicaux), Administration (79 : direction, pilotage, gestion administrative générale). Ce sont bien des métiers de ces domaines.
+
+### Ce qui a été fait
+
+- `scripts/export_domain_corpus.mjs` : export du corpus (data/work/, ignoré par git).
+- `data/catalogue/domain-tags-01.json` à `-19.json` : 1 134 métiers classés à la main, cœur (1 ou 2) et proches (0 à 4). Guide de classement : data/work/GUIDE-classement.md (non publié).
+- `data/catalogue/metadata.json` : `settings.domainGraph`, les domaines voisins (rendu symétrique au chargement).
+- `js/catalog.js` : interrupteur `STRICT_DOMAINS` ; chaque métier reçoit `coreDomains`, `nearDomains`, `graphDomains`, `textInterests`.
+- `js/app.js` :
+  - `domainTier` (6 cœur, 4 proche, 3 voisin, 2 simple mention) ;
+  - `partialScore` ;
+  - `concoursCore` et `concoursTier` : un concours est « pour vous » si le domaine est celui de son métier historique principal ou d'au moins un quart de ses métiers ;
+  - `catOrder` et le tri par catégorie selon le défi ;
+  - catégorie mise en avant sur les cards et transmise à la fiche.
+- `scripts/check_domain_tags.mjs` : nouveau test (chaque métier classé une fois, 1 ou 2 cœurs, domaines connus, effectifs imprimés).
+
+### Retour arrière
+
+- Partiel, sans toucher aux données : `var STRICT_DOMAINS = false;` en tête de `js/catalog.js` (vérifié : mêmes compteurs qu'avant sur tous les profils types).
+- Complet : la branche `sauvegarde/avant-recentrage-domaines` sur GitHub.
+
+### Arbitrages pris pendant le classement
+
+- Gendarmerie : Sécurité en cœur, Défense en proche.
+- Pompiers et sécurité civile : Secours en cœur, Sécurité en proche.
+- Surveillants pénitentiaires : Justice + Sécurité.
+- Éducateurs PJJ et CPIP : Justice + Social.
+- Fonctions de soutien aux armées : cœur de leur fonction, Défense en proche. C'est le cas de la confection textile, du fauconnier, de la radioprotection et de la météo.
+- Secrétaire médical et gestionnaires de scolarité : Administration en cœur, le secteur en proche.
+- Déchets : Environnement en cœur. Eau potable et assainissement côté ouvrages : Technique en cœur.
+- Prévention des risques professionnels : RH en cœur, Santé et Sécurité en proches.
+- Anomalies de données repérées dans les fiches source :
+  - fpenv023 a un titre qui évoque la montagne, mais sa fiche parle de bâtiment ;
+  - fpmed045 (infirmier perfusionniste) a la description du puériculteur.

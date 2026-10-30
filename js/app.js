@@ -1056,13 +1056,18 @@
       return true;
     }).sort(concoursOrder);
   }
-  /* Domaines cœur d’un concours : ceux qui reviennent chez ses métiers (au moins un sur cinq, ou le plus fréquent).
-     Un grand concours généraliste (attaché, technicien…) ne remonte donc pas pour un métier isolé qu’il dessert aussi. */
+  /* Domaines cœur d’un concours : ceux de son métier principal (le métier historique qui y mène), puis ceux qui reviennent
+     chez au moins un quart de ses métiers (deux au minimum). Un grand concours généraliste (attaché, technicien…)
+     ne remonte donc pas pour un métier isolé qu’il dessert aussi. */
   function concoursCore(c) {
     if (c._core && catalogReady) return c._core;
-    var jobs = concoursJobs(c), tally = {}, max = 0;
+    var jobs = concoursJobs(c), tally = {}, max = 0, out = [];
     jobs.forEach(function (j) { (j.strongInterests || []).forEach(function (d) { tally[d] = (tally[d] || 0) + 1; if (tally[d] > max) max = tally[d]; }); });
-    var out = Object.keys(tally).filter(function (d) { return tally[d] === max || tally[d] >= jobs.length / 5; });
+    var add = function (d) { if (out.indexOf(d) < 0) out.push(d); };
+    jobs.filter(function (j) { return !j.rmfpDomain && jobRef(j) === c; }).forEach(function (j) { (j.strongInterests || []).forEach(add); });
+    if (jobs.length <= 3) Object.keys(tally).forEach(add);
+    else Object.keys(tally).forEach(function (d) { if (tally[d] >= Math.max(2, jobs.length / 4)) add(d); });
+    if (!out.length) Object.keys(tally).forEach(function (d) { if (tally[d] === max) add(d); });
     if (catalogReady) c._core = out;
     return out;
   }
