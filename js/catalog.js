@@ -2,6 +2,9 @@
   'use strict';
   var D = window.DATA, P = window.PUBLIC_DATA;
   Object.assign(D, P.settings || {});
+  /* Classement des métiers par domaine en trois cercles (cœur, proches, lointain), fichiers domain-tags-NN.json.
+     À false : retour exact à l’ancien calcul (domaine RMFP, famille ou intitulé), sans toucher aux données. */
+  var STRICT_DOMAINS = true;
   /* Titres au masculin puis au féminin : « Administrateur - Administratrice ». */
   var GENDER_PLAIN = {
     'Commandant d\'unité de combat': 'Commandant - Commandante d’unité de combat', 'Démineur': 'Démineur - Démineuse', 'Sapeur-Sauveteur': 'Sapeur-sauveteur - Sapeuse-sauveteuse', 'Maçon': 'Maçon - Maçonne',
@@ -164,6 +167,31 @@
     job.strongInterests=interests.filter(function(rule){var option=rule.option;return option.id===job.domain||
       (option.rmfpDomains||[]).indexOf(job.rmfpDomain)>-1||(option.families||[]).indexOf(job.family)>-1||
       (rule.namePattern&&rule.namePattern.test(name));}).map(function(rule){return rule.option.id;});
+  });
+  /* Cercles de domaines. Cœur : l’objet même du métier, seul compté dans les correspondances « pour vous ».
+     Proches : secteur d’exercice ou compétence voisine, en tête des pistes « peuvent aussi vous intéresser ».
+     Voisins : domaines reliés au cœur par le graphe des domaines (settings.domainGraph), juste après.
+     Lointain : simple mention dans le texte (ancien rattachement), en fin de pistes. */
+  var graph = {};
+  Object.keys(D.domainGraph || {}).forEach(function (d) {
+    ((D.domainGraph[d] || {}).proches || []).forEach(function (p) {
+      (graph[d] = graph[d] || []).indexOf(p) < 0 && graph[d].push(p);
+      (graph[p] = graph[p] || []).indexOf(d) < 0 && graph[p].push(d);
+    });
+  });
+  D.domainNeighbours = graph;
+  var tagBy = {};
+  if (STRICT_DOMAINS) (P.domainTags || []).forEach(function (t) { tagBy[t.job] = t; });
+  D.strictDomains = STRICT_DOMAINS && Object.keys(tagBy).length > 0;
+  D.jobs.forEach(function (job) {
+    var tag = tagBy[job.id];
+    job.textInterests = job.interests.slice();
+    if (!tag) { job.coreDomains = job.strongInterests.slice(); job.nearDomains = []; job.graphDomains = []; return; }
+    var core = tag.coeur.slice(), near = (tag.proches || []).filter(function (d) { return core.indexOf(d) < 0; }), around = [];
+    core.forEach(function (c) { (graph[c] || []).forEach(function (d) { if (core.indexOf(d) < 0 && near.indexOf(d) < 0 && around.indexOf(d) < 0) around.push(d); }); });
+    job.coreDomains = core; job.nearDomains = near; job.graphDomains = around;
+    job.strongInterests = core.slice();
+    job.interests = core.concat(near).concat(job.domain && core.indexOf(job.domain) < 0 && near.indexOf(job.domain) < 0 ? [job.domain] : []);
   });
   D.calendar = P.calendar.filter(function(c){return !c.duplicateOf;});
   /* Prochaines sessions attendues, quand les dates ne sont pas encore publiées (recherche du 19 octobre 2026). */

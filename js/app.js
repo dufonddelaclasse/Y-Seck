@@ -437,9 +437,9 @@
     var routes=(confirmed.length?confirmed:links).map(function(l){return D.accessRoutes[l.routeId];}).filter(Boolean);
     return order.filter(function(c){return routes.some(function(r){return r.cat===c&&r.fp.split('').some(function(f){return j.fp.indexOf(f)>-1;});});});
   }
-  function jobBadges(j, only) {
+  function jobBadges(j, only, ordered) {
     if(j.cat!=='V'&&!only||isContractJob(j))return catBadge(displayCategory(j));
-    var cats=jobCategories(j);
+    var cats=ordered?orderedCats(jobCategories(j)):jobCategories(j);
     /* Liste filtrée par catégorie : seules les catégories retenues apparaissent sur la card. */
     if(only){var kept=cats.filter(function(c){return only.indexOf(c)>-1;});if(kept.length)cats=kept;}
     if(cats.length===1)return catBadge(cats[0]);
@@ -489,6 +489,30 @@
     return own.some(function (c) { return cats.indexOf(c) > -1; });
   }
   function passesLevelCategory(j) { return passesCats(j, defaultCats()); }
+  /* Ordre de préférence des catégories, selon le défi : les hautes fonctions d’abord pour un concours sélectif,
+     la voie la plus courte d’abord pour un accès rapide. Sans défi : du niveau de la personne vers les autres. */
+  var CAT_ORDERS = { selectif: ['A+', 'A', 'B', 'C', 'CDD'], exigeante: ['A', 'A+', 'B', 'C', 'CDD'], rapide: ['C', 'B', 'A', 'A+', 'CDD'], evoluer: ['B', 'C', 'A', 'A+', 'CDD'] };
+  function catOrder() {
+    var picks = (S.defis || []).filter(function (d) { return d !== 'nsp'; });
+    var main = DEFIS.map(function (d) { return d[0]; }).filter(function (id) { return picks.indexOf(id) > -1 && CAT_ORDERS[id]; });
+    var order, r = userRank();
+    if (main.length) order = CAT_ORDERS[main[0]].slice();
+    else order = r === null ? ['B', 'C', 'A', 'A+', 'CDD'] : r >= RANK['Bac+3'] ? ['A', 'A+', 'B', 'C', 'CDD'] : r >= RANK['Bac'] ? ['B', 'C', 'A', 'A+', 'CDD'] : ['C', 'B', 'A', 'A+', 'CDD'];
+    if (picks.indexOf('sansconcours') > -1) {
+      /* Sans concours : les contractuels remontent juste après les catégories des autres défis (en tête si c’est le seul défi). */
+      var kept = []; DEFIS.forEach(function (d) { if (picks.indexOf(d[0]) > -1 && d[2] && d[0] !== 'sansconcours') d[2].forEach(function (c) { if (kept.indexOf(c) < 0) kept.push(c); }); });
+      order = order.filter(function (c) { return c !== 'CDD'; });
+      var at = 0; order.forEach(function (c, i) { if (kept.indexOf(c) > -1) at = i + 1; });
+      order.splice(at, 0, 'CDD');
+    }
+    return order;
+  }
+  function catRankOf(cats) { var o = catOrder(), best = 99; (cats || []).forEach(function (c) { var i = o.indexOf(c); if (i > -1 && i < best) best = i; }); return best; }
+  function orderedCats(cats) { var o = catOrder(); return (cats || []).slice().sort(function (a, b) { return (o.indexOf(a) < 0 ? 99 : o.indexOf(a)) - (o.indexOf(b) < 0 ? 99 : o.indexOf(b)); }); }
+  /* Catégories d’un métier retenues par les filtres (ou toutes), dans l’ordre du défi. */
+  function jobShownCats(j) { var cats = jobCategories(j), sel = selCats(), kept = cats.filter(function (c) { return sel.indexOf(c) > -1; }); return orderedCats(kept.length ? kept : cats); }
+  function jobCatRank(j) { return catRankOf(jobShownCats(j)); }
+  function onlySansConcours() { var p = (S.defis || []).filter(function (d) { return d !== 'nsp'; }); return p.length === 1 && p[0] === 'sansconcours'; }
   function toggled(list, v, all) { var next = list.indexOf(v) > -1 ? list.filter(function (x) { return x !== v; }) : list.concat(v); return all.filter(function (x) { return next.indexOf(x) > -1; }); }
 
   function reachable() {
@@ -504,7 +528,20 @@
 
   /* ---------- Correspondance métiers ---------- */
   function sharedTraits(j) { return (j.traits || []).filter(function (t) { return S.traits.indexOf(t) > -1; }); }
-  function matchesDomains(job, domains) { return domains.some(function(id){return (job.interests || [job.domain]).indexOf(id)>-1;}); }
+  /* Domaines d’un métier pour les filtres : cœur et proches quand le classement par cercles est actif, sinon l’ancien rattachement large. */
+  function jobDomainSet(job) { return D.strictDomains && job.coreDomains ? job.coreDomains.concat(job.nearDomains || []) : (job.interests || [job.domain]); }
+  function matchesDomains(job, domains) { return domains.some(function(id){return jobDomainSet(job).indexOf(id)>-1;}); }
+  /* Cercle d’un métier pour les domaines cochés : 6 cœur, 4 proche, 3 domaine voisin du cœur (graphe), 2 simple mention, 0 sinon. */
+  function domainTier(j, doms) {
+    if (!doms.length) return 0;
+    var has = function (list) { return (list || []).some(function (d) { return doms.indexOf(d) > -1; }); };
+    if (has(j.strongInterests || j.interests || [j.domain])) return 6;
+    if (!D.strictDomains) return has(j.interests) ? 2 : 0;
+    if (has(j.nearDomains)) return 4;
+    if (has(j.graphDomains)) return 3;
+    if (has(j.textInterests)) return 2;
+    return 0;
+  }
   function score(j) { return (matchesDomains(j,S.domains) ? 3 : 0) + sharedTraits(j).length; }
   /* Correspondance « parfaite » : un domaine choisi au sens strict (domaine, famille ou intitulé du métier), une ambition choisie
      et un niveau d’études compatible. Les autres métiers restent proposés, à la suite, comme pistes de découverte. */
@@ -544,14 +581,16 @@
   function jobFitsCriteria(j, doms) { return (!doms.length || matchesStrong(j, doms)) && ambitionOk(j); }
   function isPerfectJob(j, doms) { return passesLevelCategory(j) && jobFitsCriteria(j, doms); }
   function partialScore(j, doms) {
-    return (doms.length && matchesStrong(j, doms) ? 4 : doms.length && matchesDomains(j, doms) ? 2 : 0) + (wantedAmbitions().length && ambitionOk(j) ? 3 : 0) + (passesLevelCategory(j) ? 1 : 0) + sharedTraits(j).length;
+    return domainTier(j, doms) + (wantedAmbitions().length && ambitionOk(j) ? 3 : 0) + (passesLevelCategory(j) ? 1 : 0) + sharedTraits(j).length;
   }
   function myJobs() {
     var base = D.jobs.filter(function (j) { return isPerfectJob(j, S.domains); });
-    return contractsLater(base.sort(function (a, b) { return score(b) - score(a); }));
+    var rk = {}, sc = {}; base.forEach(function (j) { rk[j.id] = jobCatRank(j); sc[j.id] = score(j); });
+    return contractsLater(base.sort(function (a, b) { return rk[a.id] - rk[b.id] || sc[b.id] - sc[a.id]; }));
   }
   /* Les quatre premières places reviennent aux métiers de catégorie A+, A, B ou C : les contractuels arrivent ensuite. */
   function contractsLater(list) {
+    if (onlySansConcours()) return list;
     var head = list.filter(function (j) { return !isContractJob(j); }).slice(0, 4);
     return head.concat(list.filter(function (j) { return head.indexOf(j) === -1; }));
   }
@@ -971,8 +1010,12 @@
     var doms = activeDomains(), cats = selCats(), fps = selFps();
     var base = D.jobs.filter(function (j) { return passesCats(j, cats) && j.fp.split('').some(function (f) { return fps.indexOf(f) > -1; }); });
     var perfect = base.filter(function (j) { return isPerfectJob(j, doms); }), others = base.filter(function (j) { return perfect.indexOf(j) < 0; });
-    perfect = contractsLater(perfect.sort(function (a, b) { return score(b) - score(a) || (isOpen(a) ? 0 : 1) - (isOpen(b) ? 0 : 1); }));
-    others = contractsLater(others.sort(function (a, b) { return partialScore(b, doms) - partialScore(a, doms) || score(b) - score(a); }));
+    /* « Pour vous » : catégories dans l’ordre du défi, puis affinités. « Autres pistes » : cercle (proches, voisins, mentions), puis catégories, puis affinités. */
+    var rk = {}, tier = {}, ps = {}, sc = {};
+    base.forEach(function (j) { rk[j.id] = jobCatRank(j); sc[j.id] = score(j); });
+    others.forEach(function (j) { tier[j.id] = domainTier(j, doms); ps[j.id] = partialScore(j, doms); });
+    perfect = contractsLater(perfect.sort(function (a, b) { return rk[a.id] - rk[b.id] || sc[b.id] - sc[a.id] || (isOpen(a) ? 0 : 1) - (isOpen(b) ? 0 : 1); }));
+    others = contractsLater(others.sort(function (a, b) { return tier[b.id] - tier[a.id] || rk[a.id] - rk[b.id] || ps[b.id] - ps[a.id] || sc[b.id] - sc[a.id]; }));
     return { perfect: perfect, others: others };
   }
   /* Chaque card de métier ou de concours porte une petite flèche : elle s’ouvre. */
@@ -988,9 +1031,11 @@
       var amb = matchedAmbitions(j);
       if (amb.length) badges += '<span class="fit like">' + (isParent() ? 'Son ambition' : 'Votre ambition') + ' : ' + esc(amb.map(function (a) { return AMB_SHORT[a]; }).join(', ')) + '</span>';
       badges += recoFits(isContractJob(j) ? [] : jobRefs(j));
-      var rowCats = S.metCats || (defiCats() ? defaultCats() : null), shownCats = rowCats ? jobCategories(j).filter(function (c) { return rowCats.indexOf(c) > -1; }) : [];
-      /* La catégorie affichée dans la liste (selon les filtres) est transmise à la fiche, qui s'ouvre sur elle. */
-      return '<a class="list-row job-row job-' + catClass(shownCats.length ? shownCats[0] : displayCategory(j)) + '" href="#/metier/' + j.id + '"' + (shownCats.length ? attr('cat', shownCats[0]) : '') + '>' + jobBadges(j, shownCats.length ? rowCats : null) +
+      var rowCats = S.metCats || (defiCats() ? defaultCats() : null), shownCats = rowCats ? orderedCats(jobCategories(j).filter(function (c) { return rowCats.indexOf(c) > -1; })) : [];
+      /* Métier sur plusieurs catégories : la première est celle que le défi met en avant. */
+      if (!shownCats.length && !isContractJob(j) && jobCategories(j).length > 1) shownCats = orderedCats(jobCategories(j));
+      /* La catégorie affichée dans la liste (selon les filtres et le défi) est transmise à la fiche, qui s'ouvre sur elle. */
+      return '<a class="list-row job-row job-' + catClass(shownCats.length ? shownCats[0] : displayCategory(j)) + '" href="#/metier/' + j.id + '"' + (shownCats.length ? attr('cat', shownCats[0]) : '') + '>' + jobBadges(j, shownCats.length ? (rowCats || shownCats) : null, true) +
         '<div class="main"><span class="name">' + esc(j.name) + '</span><span class="meta">' + esc(j.domain + ' · ' + fpNames(j.fp).join(', ')) + '</span>' +
         (badges ? '<span class="fits">' + badges + '</span>' : '') + '</div>' + '<span class="row-chev" aria-hidden="true">' + I.chev + '</span></a>';
   }
@@ -1011,15 +1056,39 @@
       return true;
     }).sort(concoursOrder);
   }
-  function isPerfectConcours(c, doms) { return defaultCats().indexOf(c.cat) > -1 && concoursJobs(c).some(function (j) { return jobFitsCriteria(j, doms); }); }
-  function myConcours() { return D.concours.filter(function (c) { return isPerfectConcours(c, S.domains); }); }
-  function concoursPartial(c, doms) { return concoursJobs(c).reduce(function (m, j) { return Math.max(m, partialScore(j, doms)); }, 0); }
+  /* Domaines cœur d’un concours : ceux qui reviennent chez ses métiers (au moins un sur cinq, ou le plus fréquent).
+     Un grand concours généraliste (attaché, technicien…) ne remonte donc pas pour un métier isolé qu’il dessert aussi. */
+  function concoursCore(c) {
+    if (c._core && catalogReady) return c._core;
+    var jobs = concoursJobs(c), tally = {}, max = 0;
+    jobs.forEach(function (j) { (j.strongInterests || []).forEach(function (d) { tally[d] = (tally[d] || 0) + 1; if (tally[d] > max) max = tally[d]; }); });
+    var out = Object.keys(tally).filter(function (d) { return tally[d] === max || tally[d] >= jobs.length / 5; });
+    if (catalogReady) c._core = out;
+    return out;
+  }
+  function concoursTier(c, doms) {
+    if (!doms.length) return 0;
+    if (!D.strictDomains) return concoursJobs(c).reduce(function (m, j) { return Math.max(m, domainTier(j, doms)); }, 0);
+    if (concoursCore(c).some(function (d) { return doms.indexOf(d) > -1; })) return 6;
+    var best = concoursJobs(c).reduce(function (m, j) { return Math.max(m, domainTier(j, doms)); }, 0);
+    return best === 6 ? 5 : best;
+  }
+  function isPerfectConcours(c, doms) {
+    if (defaultCats().indexOf(c.cat) < 0) return false;
+    if (!doms.length) return concoursJobs(c).some(function (j) { return jobFitsCriteria(j, doms); });
+    return concoursTier(c, doms) === 6 && concoursJobs(c).some(function (j) { return ambitionOk(j); });
+  }
+  function concoursCatOrder(a, b) { return catRankOf([a.cat]) - catRankOf([b.cat]) || a.name.localeCompare(b.name, 'fr'); }
+  function myConcours() { return D.concours.filter(function (c) { return isPerfectConcours(c, S.domains); }).sort(concoursCatOrder); }
+  function concoursPartial(c, doms) { return concoursTier(c, doms) * 10 + concoursJobs(c).reduce(function (m, j) { return Math.max(m, partialScore(j, doms) - domainTier(j, doms)); }, 0); }
   function explorerSplitConcours() { return !searchWords(S.cq).length && S.metMode !== 'all' && (activeDomains().length > 0 || wantedAmbitions().length > 0); }
   function splitConcours() {
     var doms = activeDomains(), cats = concoursCats(), fps = selFps();
     var base = D.concours.filter(function (c) { return cats.indexOf(c.cat) > -1 && fps.indexOf(c.fp) > -1; });
-    var perfect = base.filter(function (c) { return isPerfectConcours(c, doms); }).sort(concoursOrder);
-    var others = base.filter(function (c) { return perfect.indexOf(c) < 0; }).sort(function (a, b) { return concoursPartial(b, doms) - concoursPartial(a, doms) || concoursOrder(a, b); });
+    var perfect = base.filter(function (c) { return isPerfectConcours(c, doms); }).sort(concoursCatOrder);
+    var ct = {}, cp = {}, rest = base.filter(function (c) { return perfect.indexOf(c) < 0; });
+    rest.forEach(function (c) { ct[c.id] = concoursTier(c, doms); cp[c.id] = concoursPartial(c, doms); });
+    var others = rest.sort(function (a, b) { return ct[b.id] - ct[a.id] || concoursCatOrder(a, b) || cp[b.id] - cp[a.id]; });
     return { perfect: perfect, others: others };
   }
   /* Auto-complétion : métiers et concours dont le nom commence par la saisie d’abord, puis ceux qui la contiennent. */
