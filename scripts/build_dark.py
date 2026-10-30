@@ -200,11 +200,11 @@ html.dark .sheet-content button.chip.category-choice[data-action="metCat"]:not(.
 html.dark .job-row .fits .fit, html.dark .job-row .fit { background:#2E2E33 !important; border:0 !important; box-shadow:none !important; color:#E2E2E6 !important; }
 html.dark .job-row .fit * { color:#E2E2E6 !important; }
 html.dark .app.theme-Ap, html.dark body.theme-Ap { --lt:#DDC7FF; } html.dark .app.theme-A, html.dark body.theme-A { --lt:#BEF1FD; }
-html.dark .app.theme-B, html.dark body.theme-B { --lt:#CCFFED; } html.dark .app.theme-C, html.dark body.theme-C { --lt:#FFE8D9; } html.dark .app.theme-CDD, html.dark body.theme-CDD { --lt:#E2E2E6; }
+html.dark .app.theme-B, html.dark body.theme-B { --lt:#CCFFED; } html.dark .app.theme-C, html.dark body.theme-C { --lt:#C4FFDC; } html.dark .app.theme-CDD, html.dark body.theme-CDD { --lt:#E2E2E6; }
 html.dark :is(.catcard-wrap.tint-blue,.preparation-card.prep-cat-Ap,.intro-category-fold.tint-blue) { --cc:#DDC7FF; }
 html.dark :is(.catcard-wrap.tint-mint,.preparation-card.prep-cat-A,.intro-category-fold.tint-mint) { --cc:#BEF1FD; }
 html.dark :is(.catcard-wrap.tint-cyan,.preparation-card.prep-cat-B,.intro-category-fold.tint-cyan) { --cc:#CCFFED; }
-html.dark :is(.catcard-wrap.tint-yellow,.preparation-card.prep-cat-C,.intro-category-fold.tint-yellow) { --cc:#FFE8D9; }
+html.dark :is(.catcard-wrap.tint-yellow,.preparation-card.prep-cat-C,.intro-category-fold.tint-yellow) { --cc:#C4FFDC; }
 html.dark :is(.catcard-wrap,.intro-category-fold) { background:transparent !important; border:1.5px solid var(--cc,#5A5A60) !important; box-shadow:none !important; }
 html.dark .catcard-wrap :is(.catcard,.catcard-panel,.explain) { background:transparent !important; }
 html.dark .job-page .job-match { background:none !important; box-shadow:none !important; color:var(--theme-ink) !important; }
@@ -219,11 +219,11 @@ html.dark .job-row .fit.like { background:transparent !important; box-shadow:ins
 html.dark :is(.personal-home .study-level,.trip .study-level,.home-interest,.tag.tag-btn,.job-page .job-meta .tag) { background:#45454A !important; border:0 !important; color:#E2E2E6 !important; }
 html.dark :is(.personal-home .study-level,.trip .study-level,.home-interest) svg { color:#D4D4D8 !important; }
 html.dark :is(#jobs .job-row,.job-cards .job-row,.home-access,.home-shortcuts a,.profile-row,.prep:not(.talents-card),.study-card,.book-card,.family-card,.ref-card,.parcours-card,.concours-page .job-section .ref-panel) { background:#161616 !important; }
-html.dark { --theme-ink:#B3A6FF; --cat-ap-ink:#B9A8FF; --cat-a-ink:#9BA6FF; --cat-b-ink:#6FD6D6; --cat-c-ink:#FFA982; }
+html.dark { --theme-ink:#B3A6FF; --cat-ap-ink:#B9A8FF; --cat-a-ink:#9BA6FF; --cat-b-ink:#6FD6D6; --cat-c-ink:#7DE3A5; }
 html.dark .app.theme-Ap, html.dark body.theme-Ap { --theme-ink:#B9A8FF; } html.dark .app.theme-A, html.dark body.theme-A { --theme-ink:#9BA6FF; } html.dark .app.theme-B, html.dark body.theme-B { --theme-ink:#6FD6D6; }
-html.dark .app.theme-C, html.dark body.theme-C { --theme-ink:#FFA982; } html.dark .app.theme-CDD, html.dark body.theme-CDD { --theme-ink:#E2E2E6; }
+html.dark .app.theme-C, html.dark body.theme-C { --theme-ink:#7DE3A5; } html.dark .app.theme-CDD, html.dark body.theme-CDD { --theme-ink:#E2E2E6; }
 html.dark .app.theme-Ap { --theme-deep:#B9A8FF; } html.dark .app.theme-A { --theme-deep:#9BA6FF; } html.dark .app.theme-B { --theme-deep:#6FD6D6; }
-html.dark .app.theme-C { --theme-deep:#FFA982; } html.dark .app.theme-CDD { --theme-deep:#E2E2E6; }
+html.dark .app.theme-C { --theme-deep:#7DE3A5; } html.dark .app.theme-CDD { --theme-deep:#E2E2E6; }
 html.dark .app.themed .eyebrow, html.dark .app.themed .section-heading { color:var(--theme-deep); }
 html.dark .personal-home .home-concours, html.dark .personal-home .home-concours:hover { background:#DCD3FF; color:#161616; }
 html.dark .personal-home .home-concours :is(.home-feature-copy b, .home-feature-copy > span, .home-count) { color:#161616; }
@@ -251,14 +251,14 @@ html.dark {
   --bg:#000; --surface:#1C1C1E; --card-bg:#1C1C1E; --card-line:transparent; --soft:#2A2A2D;
   --ink:#FFFFFF; --ink-2:#E6E6E6; --muted:#A8A8AD; --line:#2C2C2F; --line-2:#3A3A3E;
   /* Couleurs de catégories et teintes : valeurs du mode clair. */
-  --cat-ap:#3C05FF; --cat-a:#0051FF; --cat-b:#0096AD; --cat-c:#FF804A;
-  --cat-ap-tint:#DDC7FF; --cat-a-tint:#BEF1FD; --cat-b-tint:#CCFFED; --cat-c-tint:#FFE8D9; --cat-cdd-tint:#F1F1EE;
+  --cat-ap:#3C05FF; --cat-a:#0051FF; --cat-b:#0096AD; --cat-c:#33CF71;
+  --cat-ap-tint:#DDC7FF; --cat-a-tint:#BEF1FD; --cat-b-tint:#CCFFED; --cat-c-tint:#C4FFDC; --cat-cdd-tint:#F1F1EE;
   --lime:#E0FA6E; --pill-on:#E0FA6E;
 }
 html.dark .app.theme-Ap { --theme-tint:#DDC7FF; --pill-on:#DDC7FF; }
 html.dark .app.theme-A { --theme-tint:#BEF1FD; --pill-on:#BEF1FD; }
 html.dark .app.theme-B { --theme-tint:#CCFFED; --pill-on:#CCFFED; }
-html.dark .app.theme-C { --theme-tint:#FFE8D9; --pill-on:#FFE8D9; }
+html.dark .app.theme-C { --theme-tint:#C4FFDC; --pill-on:#C4FFDC; }
 
 /* ---------- Fond noir partout ---------- */
 html.dark, html.dark body, html.dark .app, html.dark .app main, html.dark .footer { background:#000 !important; }

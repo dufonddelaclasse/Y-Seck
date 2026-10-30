@@ -1712,7 +1712,7 @@
   function tripSeps(cat) { return '<span class="trip-seps" aria-hidden="true">' + new Array(({ 'A+': 4, A: 3, B: 2 }[cat] || 1) + 1).join('<span class="trip-sep"></span>') + '</span>'; }
   function tripWho(level, testLevel) { return level ? (isParent() && !testLevel ? 'Niveau de ' + childName() : 'Mon niveau') : 'Entrée en 6e'; }
   var FP_FULL = { E: 'Fonction publique de l’État', T: 'Fonction publique territoriale', H: 'Fonction publique hospitalière' };
-  var CAT_VARS = { 'A+': ['--cat-ap', '#3C05FF'], A: ['--cat-a', '#0051FF'], B: ['--cat-b', '#00707F'], C: ['--cat-c', '#A8461B'] };
+  var CAT_VARS = { 'A+': ['--cat-ap', '#3C05FF'], A: ['--cat-a', '#0051FF'], B: ['--cat-b', '#00707F'], C: ['--cat-c', '#18844A'] };
   function tripStop(cls, node, name, body, track, style) {
     return '<li class="trip-item ' + cls + '"' + (style ? ' style="' + style + '"' : '') + '><span class="trip-rail" aria-hidden="true">' + node + (track ? '<i class="trip-track ' + track + '"></i>' : '') + '</span><div class="trip-body">' +
       (name ? '<p class="trip-name">' + name + '</p>' : '') + body + '</div></li>';

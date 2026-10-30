@@ -889,7 +889,7 @@ html[data-contrast="true"] .update-notice { background:#FFF; color:#000; border-
   --cat-ap:#3C05FF; --cat-ap-tint:#DDC7FF; --cat-ap-deep:#3C05FF;
   --cat-a:#0051FF; --cat-a-tint:#BEF1FD; --cat-a-deep:#0051FF;
   --cat-b:#0096AD; --cat-b-tint:#CCFFED; --cat-b-deep:#00707F;
-  --cat-c:#FF804A; --cat-c-tint:#FFE8D9; --cat-c-deep:#A8461B;
+  --cat-c:#33CF71; --cat-c-tint:#C4FFDC; --cat-c-deep:#18844A;
   --cat-cdd:#FFFFFF; --cat-cdd-tint:#F1F1EE; --cat-cdd-deep:#36363C;
   --fit-tint:#EEFFD9; --fit-ink:#3B5E12;
   --mint:var(--cat-b); --mint-tint:var(--cat-b-tint); --cyan:var(--cat-a); --cyan-tint:var(--cat-a-tint); --yellow:var(--sun); --yellow-tint:var(--sun-soft);
@@ -1908,7 +1908,7 @@ html[data-contrast="true"] .personal-home .home-concours { background:#FFF; bord
 .app.theme-Ap .concours-trip { --trip-ink:#3C05FF; }
 .app.theme-A .concours-trip { --trip-ink:#0051FF; }
 .app.theme-B .concours-trip { --trip-ink:#00707F; }
-.app.theme-C .concours-trip { --trip-ink:#A8461B; }
+.app.theme-C .concours-trip { --trip-ink:#18844A; }
 .trip-all-dates { display:inline-block; margin-top:16px; font-size:1rem; font-weight:500; color:var(--trip-ink, var(--brand)); text-decoration:underline; text-underline-offset:3px; }
 .trip-all-dates:hover { color:var(--trip-ink, var(--brand)); }
 html.dark .trip-all-dates, html.dark .trip-all-dates:hover { color:var(--lt, var(--theme)); }
