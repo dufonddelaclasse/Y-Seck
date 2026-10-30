@@ -441,6 +441,10 @@ html.dark body .update-notice .update-notice-action { border:0 !important; backg
 html.dark body .update-notice .update-notice-dismiss { border:0 !important; background:#2C2C2E !important; color:#FFF !important; }
 /* Menu du bas en sombre : la petite barre de l'onglet actif en jaune accent. */
 html.dark .tabbar a.on::before { background:#E0FA6E !important; }
+/* Aides (Se préparer) : blocs à la couleur du concours, texte blanc, aussi en sombre. */
+html.dark #app .aide-tile { background:var(--theme, var(--brand)) !important; color:#FFF !important; border:0 !important; }
+html.dark #app .aide-tile :is(span, svg) { color:#FFF !important; }
+html.dark #app .aide-ico { background:rgba(255,255,255,.18) !important; }
 """
 
 if __name__ == '__main__':

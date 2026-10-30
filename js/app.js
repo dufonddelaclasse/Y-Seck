@@ -2109,8 +2109,9 @@
       return true;
     });
     return '<section class="stack mt-l" id="aides"><h2 class="section-heading no-icon">'+I.book+'Aides</h2>' +
-      '<a class="btn outline" href="#/annales'+(job?'/'+job.id:'')+'">'+I.book+'Annales et rapports de jury</a>' +
-      '<a class="btn outline" href="#/bibliographie'+(job?'/'+job.id:'')+'">Recommandations bibliographiques</a></section><section class="stack mt-l" id="preparations"><h2 class="section-heading no-icon" id="prep-title" tabindex="-1">'+I.pin+'Prépas</h2>' +
+      /* Deux blocs carrés côte à côte, à la couleur du concours : pictogramme en haut, intitulé en bas. */
+      '<div class="aide-tiles"><a class="aide-tile" href="#/annales'+(job?'/'+job.id:'')+'"><span class="aide-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg></span><span class="aide-t">Annales et rapports de jury</span></a>' +
+      '<a class="aide-tile" href="#/bibliographie'+(job?'/'+job.id:'')+'"><span class="aide-ico" aria-hidden="true">'+I.book+'</span><span class="aide-t">Recommandations bibliographiques</span></a></div></section><section class="stack mt-l" id="preparations"><h2 class="section-heading no-icon" id="prep-title" tabindex="-1">'+I.pin+'Prépas</h2>' +
       '<div class="explore-switch bourse-switch" role="group" aria-label="' + (isParent() ? 'Mon enfant est-il boursier ?' : 'Êtes-vous boursier ?') + '" data-on="' + (on ? 0 : 1) + '">' + [['Oui', 'Boursier·e'], ['Non', 'Non boursier·e']].map(function (o) {
         var pressed = (o[0] === 'Oui') === on;
         return '<button type="button" class="' + (pressed ? 'on' : '') + '" aria-pressed="' + pressed + '" data-action="toggleBoursier"' + attr('v', o[0]) + '>' + esc(o[1]) + '</button>';

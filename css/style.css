@@ -2684,3 +2684,14 @@ html:not(.dark):not([data-contrast="true"]) #app:not(.themed):not(.onboarding) .
 .update-notice-detail { font-size:.8125rem; line-height:1.4; color:var(--muted); }
 html.dark body .update-notice { border:1px solid #2C2C2E !important; box-shadow:none !important; }
 html.dark body .update-notice .update-notice-copy .update-notice-detail { color:#A8A8AD !important; }
+/* Se préparer, Aides : deux blocs carrés côte à côte, à la couleur du concours. */
+.aide-tiles { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:12px; }
+.aide-tile { display:flex; flex-direction:column; justify-content:space-between; gap:12px; aspect-ratio:1 / 1; padding:16px; border-radius:24px; background:var(--theme, var(--brand)); color:#FFF; text-decoration:none; }
+.aide-tile:hover, .aide-tile:active { color:#FFF; filter:brightness(1.06); }
+.aide-ico { display:grid; place-items:center; width:44px; height:44px; border-radius:14px; background:rgba(255,255,255,.18); }
+.aide-ico svg { width:26px; height:26px; color:#FFF; }
+.aide-t { font-size:.9375rem; font-weight:500; line-height:1.25; overflow-wrap:normal; word-break:normal; hyphens:auto; -webkit-hyphens:auto; }
+.aide-tile:focus-visible { outline:3px solid var(--ink); outline-offset:3px; }
+html:is([data-large-text="true"],[data-dys-font="true"]) .aide-tile { aspect-ratio:auto; min-height:150px; }
+html[data-contrast="true"] .aide-tile { background:#000; color:#FFF; }
+.aide-tile { min-width:0; }
