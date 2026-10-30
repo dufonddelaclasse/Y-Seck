@@ -111,6 +111,30 @@ Dans `js/app.js` :
 - Espace perso : `myJobs` / `myConcours` utilisent déjà `isPerfectJob` / `isPerfectConcours`, les chiffres se recentrent donc sans autre changement.
 - Onboarding et profil : rien à changer, le choix des domaines reste le même.
 
+### Étape 3 bis : ordonner les résultats selon le défi (hiérarchie des catégories)
+
+Aujourd'hui le défi ne fait que filtrer (`defiCats` : « sélectif » garde A+ et A, « rapide » et « évoluer » gardent B et C, croisés avec le niveau par `defaultCats`). À l'intérieur d'une liste, l'ordre ne tient pas compte de la catégorie : `splitJobs` trie par `score` (domaine puis traits). Il faut que la hiérarchie des catégories suive le défi, dans « pour vous » comme dans « peuvent aussi vous intéresser », et pour tous les profils.
+
+Règle à coder dans `js/app.js`, fonction nouvelle `catOrder()` qui renvoie l'ordre de préférence des catégories :
+- défi `selectif` : A+, A, B, C, CDD (les hautes fonctions d'abord) ;
+- défi `exigeante` : A, A+, B, C, CDD ;
+- défi `rapide` : C, B, A, A+, CDD (la voie la plus courte d'abord) ;
+- défi `evoluer` : B, C, A, A+, CDD ;
+- défi `sansconcours` combiné à un autre : l'ordre de l'autre défi, les CDD remontent juste après les catégories retenues ;
+- plusieurs défis cochés : on garde l'ordre du premier dans la liste `DEFIS` (le plus ambitieux prime), les catégories des autres défis suivent ;
+- sans défi (`nsp` ou rien) : l'ordre du niveau, du plus proche de l'utilisateur au plus lointain. Avec un Bac+3 ou plus : A, A+, B, C ; en dessous : C, B, A, A+ ; sans niveau renseigné : B, C, A, A+.
+
+Appliquer `catOrder()` comme premier critère de tri, avant `score`, dans :
+- `splitJobs` (listes `perfect` et `others`) et `myJobs` ;
+- `splitConcours` et `myConcours` (la catégorie d'un concours est `c.cat`) ;
+- la catégorie d'un métier à plusieurs catégories est la meilleure selon `catOrder()` parmi `jobCategories(j)`, et c'est aussi celle que la card affiche en premier (voir `shownCats` dans `jobRow`, qui suit déjà les filtres : lui faire suivre aussi cet ordre).
+
+Dans « peuvent aussi vous intéresser », le tri devient : cercle (proche avant lointain avant reste), puis `catOrder()`, puis `score`. Ainsi, avec « rapide », un collégien voit d'abord les métiers B et C de son domaine, puis les B et C des domaines proches, et les A+ en toute fin. Avec « sélectif », l'inverse.
+
+`contractsLater` (les quatre premières places aux métiers sous concours) reste en vigueur sauf si le défi `sansconcours` est le seul coché.
+
+À vérifier à l'étape 4 : 6e + Défense + « rapide » (C et B en tête), Bac+5 + Administration + « sélectif » (A+ en tête : administrateur de l'État avant attaché), Bac+3 + Santé sans défi (A puis A+ puis B), et le même profil après changement de défi dans « Votre défi » du profil (l'ordre doit se mettre à jour sans recharger).
+
 ### Étape 4 : vérifier (Playwright + tests, 45 min)
 
 - Rejouer les profils type et noter les chiffres avant / après, pour couvrir tous les cas : 6e + Défense ; 3e + Sécurité + Santé ; Terminale + Administration ; Bac+3 + Numérique avec le défi « sélectif » ; Bac+5 + Recherche ; reconversion (agent public, Bac+2) + Finances ; parent d'un lycéen + Environnement ; profil sans domaine coché (la liste complète doit rester accessible). Avant, tous niveaux confondus : 33, 88+90, 207, 55, 123, 38, 168.
@@ -128,7 +152,7 @@ Dans `js/app.js` :
 
 ## 6. Ce qui ne change pas
 
-- La logique de niveau et de défi (`defaultCats`, `passesLevelCategory`) : elle s'applique après les cercles, comme aujourd'hui.
+- La logique de niveau et de défi comme filtre (`defaultCats`, `passesLevelCategory`) : elle s'applique après les cercles, comme aujourd'hui. Le défi gagne en plus un rôle d'ordre (étape 3 bis).
 - Les traits (« Ce qui vous ressemble ») : ils restent un critère de tri, pas de sélection.
 - Les 37 domaines proposés à l'onboarding : on ne touche pas à la liste, seulement à ce qui s'y rattache.
 - Le compteur jaune, le bouton « Explorer d'autres métiers », les « Afficher 60 de plus » : inchangés.
