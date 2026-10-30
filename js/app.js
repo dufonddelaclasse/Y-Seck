@@ -1030,10 +1030,10 @@
     return { perfect: perfect, others: others, coreCount: core.length };
   }
   /* Intertitre entre le cœur et les métiers ou concours proches des domaines cochés. */
+  /* Même présentation que le compteur des autres pistes : chiffre dans la pastille jaune, puis le libellé. */
   function nearHeading(doms, n, one, many) {
-    var names = doms.map(function (d) { return D.domainLabels[d] || d; });
-    var list = names.length > 1 ? names.slice(0, -1).join(', ') + ' et ' + names[names.length - 1] : names[0];
-    return '<h3 class="list-subhead no-icon">' + n + ' ' + (n > 1 ? many : one) + ' aussi en lien avec ' + esc(list) + '</h3>';
+    var what = doms.length === 1 ? 'aussi en lien avec ' + (D.domainLabels[doms[0]] || doms[0]) : 'proches de ' + (isParent() ? 'ses' : 'vos') + ' domaines';
+    return '<div class="also-block near-block"><div class="talents-counter also-counter"><span class="home-tile home-count' + countSize(n) + '">' + n + '</span><span class="talents-counter-copy"><b>' + (n > 1 ? many : one) + ' ' + esc(what) + '</b></span></div></div>';
   }
   /* Chaque card de métier ou de concours porte une petite flèche : elle s’ouvre. */
   function jobRow(j) {
@@ -2826,7 +2826,10 @@
     if(matchMedia('(prefers-reduced-motion: reduce)').matches)slide=null;
     var animateJob=!!slide;
     jobSlideRequested=false;
+    var prevName = lastRoute ? lastRoute.split('/')[0] : null;
     lastRoute = key;
+    /* Autres pistes repliées à chaque nouvelle entrée dans l’Explorer ; elles restent ouvertes au retour d’une fiche. */
+    if(changed&&(r.name==='metiers'||r.name==='concours-liste')&&['metiers','concours-liste','metier','concours-fiche','preparer','fiche'].indexOf(prevName)<0){S.showOthersJobs=false;S.showOthersConcours=false;}
     if(changed&&['annales','ressources-biblio'].indexOf(r.name)>-1){S.resQ='';S.resCat=r.name==='ressources-biblio'?bibliographyCategory(jobById(r.arg)):'Toutes';S.resFp='Tous';S.resCats=null;S.resFps=null;S.resKind='Tous';S.resYear='Toutes';S.resLimit=40;}
     if(changed&&r.name==='calendrier'&&r.arg){S.calCat='Toutes';S.calFp='Tous';S.calQ='';S.calView='upcoming';S.calLimit=40;}
     if(changed&&r.name==='prepa'&&r.arg==='talents'&&r.arg2)S.talentsAll=false;
