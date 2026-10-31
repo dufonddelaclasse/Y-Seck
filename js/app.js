@@ -995,9 +995,10 @@
       '<div class="name-entry"><input class="name-line" id="reco-job" type="text" aria-labelledby="reco-job-title" autocomplete="organization-title" enterkeyhint="done" maxlength="80" placeholder="Par exemple : comptable, infirmière…" value="' + esc(S.recoJob) + '"><button type="button" class="name-confirm" id="reco-job-confirm" data-action="confirmRecoJob" aria-label="Valider le métier"' + (S.recoJob.trim() ? '' : ' disabled') + '>' + I.check + '</button></div>' +
       '<h2 class="h3 mt-m no-icon" id="reco-key-title">Vos mots-clés <span class="small">(' + S.recoKeys.length + ' / ' + RECO_MAX_KEYS + ')</span></h2>' +
       '<p class="small m0">Ce que vous faites au quotidien. Les suggestions viennent des fiches métiers de l’application.</p>' +
-      recoKeyChips() +
+      /* La recherche reste au-dessus des mots-clés choisis, qui s'empilent dessous. */
       (full ? '<p class="small">Vous avez choisi 10 mots-clés. Retirez-en un pour en ajouter un autre.</p>' :
       '<div class="search reco-key-search">' + I.search + '<label class="sr-only" for="reco-key">Chercher un mot-clé</label><input id="reco-key" type="search" role="combobox" aria-autocomplete="list" aria-controls="reco-key-suggest" aria-expanded="false" aria-describedby="reco-key-title" autocomplete="off" enterkeyhint="search" placeholder="Chercher un mot-clé"><ul class="suggest" id="reco-key-suggest" aria-label="Mots-clés proposés" hidden></ul></div>') +
+      recoKeyChips() +
       '<div id="reco-suggest-zone" class="stack reco-suggest-zone">' + recoSuggestChips() + '</div></main>' +
       '<div class="footer reco-footer">' + recoAfterMetier('Continuer') + '</div>';
   };
