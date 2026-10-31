@@ -1,87 +1,1282 @@
 {
   "_note": "Métiers du privé : [intitulé affiché, alias tapés par l'usager, termes cherchés dans les intitulés et mots-clés des fiches RMFP, passerelle]. Les termes sont en minuscules sans accents.",
   "professions": [
-    ["Avocat·e", ["avocat", "avocate", "collaborateur avocat", "collaboratrice avocate"], ["juridique", "contentieux", "juriste"], "enm-pro"],
-    ["Juriste", ["juriste", "juriste d entreprise", "conseil juridique", "legal counsel", "paralegal"], ["juridique", "contentieux", "juriste"], null],
-    ["Notaire, clerc de notaire", ["notaire", "clerc de notaire", "clerc"], ["juridique", "foncier", "domanial"], null],
-    ["Commissaire de justice, huissier", ["huissier", "commissaire de justice"], ["recouvrement", "contentieux", "juridique"], null],
-    ["Médecin", ["medecin", "docteur en medecine", "generaliste", "chirurgien", "urgentiste", "specialiste"], ["medecin"], "cnph"],
-    ["Pharmacien·ne", ["pharmacien", "pharmacienne"], ["pharmacien"], "cnph"],
-    ["Chirurgien·ne-dentiste", ["dentiste", "chirurgien dentiste", "orthodontiste"], ["dentaire", "odontolog"], "cnph"],
-    ["Infirmier·ère", ["infirmier", "infirmiere", "ide", "infirmier liberal", "infirmiere liberale", "ibode", "iade"], ["infirmier"], "titres-fph"],
-    ["Aide-soignant·e", ["aide soignant", "aide soignante"], ["aide soignant", "soignant"], "titres-fph"],
-    ["Auxiliaire de puériculture", ["auxiliaire de puericulture"], ["puericult"], "titres-fph"],
-    ["Sage-femme", ["sage femme", "maieuticien"], ["sage femme"], "titres-fph"],
-    ["Masseur·se-kinésithérapeute", ["kine", "kinesitherapeute", "masseur kinesitherapeute"], ["kinesitherapeute", "masseur"], "titres-fph"],
-    ["Manipulateur·rice en radiologie", ["manipulateur radio", "manipulatrice radio", "manipulateur en electroradiologie"], ["manipulat", "radiolog"], "titres-fph"],
-    ["Ergothérapeute, psychomotricien·ne, orthophoniste", ["ergotherapeute", "psychomotricien", "psychomotricienne", "orthophoniste", "orthoptiste"], ["ergotherapeute", "psychomotricien", "orthophon", "orthopt"], "titres-fph"],
-    ["Préparateur·rice en pharmacie", ["preparateur en pharmacie", "preparatrice en pharmacie"], ["preparateur en pharmacie"], "titres-fph"],
-    ["Technicien·ne de laboratoire médical", ["technicien de laboratoire", "laborantin", "technicienne de laboratoire", "biologie medicale"], ["technicien de laboratoire", "laboratoire"], "titres-fph"],
-    ["Ambulancier·ère", ["ambulancier", "ambulanciere"], ["ambulancier"], null],
-    ["Psychologue", ["psychologue", "psy", "neuropsychologue"], ["psychologue"], null],
-    ["Diététicien·ne", ["dieteticien", "dieteticienne", "nutritionniste"], ["dieteticien"], null],
-    ["Éducateur·rice spécialisé·e", ["educateur specialise", "educatrice specialisee", "moniteur educateur", "educateur"], ["educateur", "educatif"], "titres-social"],
-    ["Assistant·e de service social", ["assistant social", "assistante sociale", "assistante de service social", "travailleur social", "cesf", "conseiller en economie sociale familiale"], ["travailleur social", "service social", "social"], "titres-social"],
-    ["Éducateur·rice de jeunes enfants", ["educateur de jeunes enfants", "educatrice de jeunes enfants", "eje"], ["jeunes enfants", "petite enfance"], "titres-social"],
-    ["Auxiliaire de vie, aide à domicile", ["auxiliaire de vie", "aide a domicile", "aide menagere", "assistant de vie", "accompagnant educatif et social", "aes"], ["accueillant", "personnes agees", "aide a la personne", "petite enfance"], null],
-    ["Assistant·e maternel·le, ATSEM", ["assistante maternelle", "atsem", "nounou", "garde d enfants", "auxiliaire petite enfance"], ["petite enfance", "jeune enfant", "accueillant"], null],
-    ["Animateur·rice", ["animateur", "animatrice", "bafa", "animateur socioculturel", "animateur periscolaire"], ["animateur educatif", "periscolaire", "accueil de loisirs"], null],
-    ["Professeur·e, enseignant·e", ["professeur", "enseignant", "enseignante", "prof", "professeur des ecoles"], ["enseignant"], null],
-    ["Formateur·rice", ["formateur", "formatrice", "ingenieur pedagogique", "consultant formation"], ["formateur", "formation"], null],
-    ["Ingénieur·e BTP, génie civil", ["ingenieur btp", "ingenieur genie civil", "ingenieur travaux", "ingenieur structure", "ingenieur batiment"], ["ingenieur de maintenance ou de travaux", "travaux", "ouvrages d art", "batiment"], null],
-    ["Ingénieur·e industrie, mécanique, électronique", ["ingenieur", "ingenieur mecanique", "ingenieur industriel", "ingenieur production", "ingenieur methodes", "ingenieur electronique"], ["ingenieur", "genie mecanique", "genie electrique"], null],
-    ["Ingénieur·e énergie, eau, environnement", ["ingenieur energie", "ingenieur environnement", "ingenieur hse", "ingenieur eau", "ingenieur qse"], ["energie", "eau potable", "environnement", "risques"], null],
-    ["Architecte, urbaniste, paysagiste", ["architecte", "urbaniste", "architecte d interieur", "paysagiste concepteur"], ["architecte", "urbanisme", "paysage"], null],
-    ["Géomètre, dessinateur·rice, projeteur·se", ["geometre", "dessinateur", "projeteur", "topographe", "dessinateur cao", "autocad"], ["geometre", "dessinateur", "cartographe"], null],
-    ["Chef de chantier, conducteur·rice de travaux", ["chef de chantier", "conducteur de travaux", "chef d equipe btp", "chef de travaux"], ["conducteur de travaux", "travaux", "batiment"], null],
-    ["Maçon·ne, ouvrier·ère du bâtiment", ["macon", "ouvrier du batiment", "carreleur", "platrier", "couvreur", "charpentier", "serrurier"], ["macon", "batiment"], null],
-    ["Électricien·ne", ["electricien", "electricienne", "electrotechnicien", "electromecanicien"], ["electricien", "electromecanicien", "genie electrique"], null],
-    ["Plombier·ère, chauffagiste", ["plombier", "chauffagiste", "frigoriste", "climaticien", "cvc"], ["plombier", "chauffagiste", "chauffage"], null],
-    ["Menuisier·ère, ébéniste", ["menuisier", "ebeniste", "agenceur", "charpentier bois"], ["menuisier"], null],
-    ["Peintre en bâtiment", ["peintre", "peintre en batiment", "solier", "facadier"], ["peintre"], null],
-    ["Mécanicien·ne", ["mecanicien", "garagiste", "carrossier", "mecanicien auto", "mecanicien poids lourds", "technicien automobile"], ["mecanicien", "vehicules"], null],
-    ["Technicien·ne de maintenance", ["technicien de maintenance", "agent de maintenance", "maintenance industrielle", "technicien sav"], ["technicien de maintenance", "maintenance"], null],
-    ["Ouvrier·ère de production, opérateur·rice", ["ouvrier", "operateur de production", "agent de production", "conducteur de ligne", "usine", "ouvrier qualifie"], ["operateur", "atelier", "production"], null],
-    ["Conducteur·rice d’engins", ["conducteur d engins", "grutier", "pelleteur", "cariste"], ["conducteur d engins", "engins"], null],
-    ["Jardinier·ère, agent·e d’espaces verts", ["jardinier", "paysagiste", "espaces verts", "elagueur", "horticulteur", "agent d espaces verts"], ["jardinier", "espaces verts"], null],
-    ["Agriculteur·rice, technicien·ne agricole", ["agriculteur", "eleveur", "technicien agricole", "viticulteur", "maraicher", "exploitant agricole"], ["agricole", "elevage", "production animale"], null],
-    ["Vétérinaire, auxiliaire vétérinaire", ["veterinaire", "asv", "auxiliaire veterinaire", "soigneur animalier"], ["veterinaire", "animaux"], null],
-    ["Cuisinier·ère, commis de cuisine", ["cuisinier", "cuisiniere", "commis de cuisine", "chef de cuisine", "restauration collective", "second de cuisine"], ["cuisinier", "cuisine"], null],
-    ["Agent·e d’entretien, de propreté", ["agent d entretien", "agent de proprete", "femme de menage", "technicien de surface", "nettoyage", "agent de service"], ["bio nettoyage", "proprete", "entretien"], null],
-    ["Agent·e de collecte, déchets", ["eboueur", "agent de collecte", "ripeur", "agent de dechetterie", "tri des dechets"], ["dechets", "decheterie", "collecte"], null],
-    ["Chauffeur·se, conducteur·rice", ["chauffeur", "conducteur", "chauffeur poids lourd", "conducteur de bus", "livreur", "routier", "vtc", "taxi"], ["conducteur", "chauffeur", "transport"], null],
-    ["Logisticien·ne, magasinier·ère", ["logisticien", "magasinier", "preparateur de commandes", "gestionnaire de stock", "supply chain", "approvisionneur"], ["logistique", "magasinier", "stocks"], null],
-    ["Agent·e de sécurité", ["agent de securite", "agent de surveillance", "vigile", "ssiap", "agent de prevention", "agent de surete"], ["surveillance", "securite incendie", "surete"], null],
-    ["Militaire, ancien·ne militaire", ["militaire", "ancien militaire", "soldat", "sous officier", "officier", "gendarme", "marin militaire", "legionnaire"], ["forces armees", "militaire", "defense"], "emplois-reserves"],
-    ["Sapeur·se-pompier volontaire", ["pompier", "sapeur pompier", "pompier volontaire", "spv"], ["incendie", "secours"], null],
-    ["Commercial·e", ["commercial", "commerciale", "charge d affaires", "business developer", "technico commercial", "ingenieur commercial", "account manager"], ["commercial", "commerciale", "ventes"], null],
-    ["Vendeur·se, employé·e de commerce", ["vendeur", "vendeuse", "conseiller de vente", "employe de commerce", "employe libre service", "caissier", "caissiere", "hote de caisse"], ["accueil", "vente", "regie"], null],
-    ["Agent·e d’accueil, hôte·sse", ["agent d accueil", "hotesse", "hote d accueil", "standardiste", "receptionniste"], ["accueil"], null],
-    ["Conseiller·ère clientèle, téléconseiller·ère", ["conseiller clientele", "teleconseiller", "service client", "charge de clientele", "conseiller client"], ["accueil", "relation usagers", "usagers"], null],
-    ["Assistant·e de direction, secrétaire", ["assistant", "assistante", "secretaire", "assistant de direction", "office manager", "assistant administratif", "assistante administrative"], ["assistant", "secretariat", "administratif"], null],
-    ["Comptable", ["comptable", "aide comptable", "expert comptable", "collaborateur comptable", "gestionnaire comptable", "chef comptable"], ["comptable", "comptabilite"], null],
-    ["Contrôleur·se de gestion, auditeur·rice", ["controleur de gestion", "analyste financier", "financier", "auditeur", "audit", "daf"], ["controle de gestion", "controleur de gestion", "auditeur", "audit"], null],
-    ["Banque, assurance", ["banquier", "conseiller bancaire", "charge de clientele bancaire", "assureur", "gestionnaire de sinistres", "conseiller financier"], ["assurances", "financier", "recouvrement"], null],
-    ["Gestionnaire de paie, chargé·e RH", ["gestionnaire de paie", "charge rh", "responsable rh", "drh", "recruteur", "charge de recrutement", "ressources humaines", "rh"], ["paie", "ressources humaines", "recrutement"], null],
-    ["Acheteur·se", ["acheteur", "acheteuse", "responsable achats", "approvisionneur", "purchasing"], ["acheteur", "achats", "achat"], null],
-    ["Chef·fe de projet, consultant·e", ["chef de projet", "consultant", "consultante", "project manager", "pmo", "product owner"], ["chef de projet", "projet"], null],
-    ["Manager, directeur·rice", ["manager", "directeur", "directrice", "responsable", "chef de service", "gerant", "dirigeant"], ["directeur", "responsable"], null],
-    ["Chargé·e de communication, marketing", ["charge de communication", "communication", "marketing", "community manager", "chef de produit", "relations presse", "brand manager"], ["communication", "reseaux sociaux", "evenementiel"], null],
-    ["Journaliste, rédacteur·rice", ["journaliste", "redacteur", "redactrice", "pigiste", "editeur", "concepteur redacteur"], ["journaliste", "redacteur", "edition"], null],
-    ["Graphiste, designer, directeur·rice artistique", ["graphiste", "designer", "directeur artistique", "ux designer", "webdesigner", "illustrateur", "da"], ["creation graphique", "graphique", "design"], null],
-    ["Photographe, vidéaste", ["photographe", "videaste", "monteur", "cadreur", "realisateur", "jri"], ["photographe", "audiovisuel", "journaliste reporter d image"], null],
-    ["Développeur·se, informaticien·ne", ["developpeur", "developpeuse", "informaticien", "dev", "programmeur", "full stack", "devops", "ingenieur logiciel"], ["developpeur", "applications", "logiciel"], null],
-    ["Administrateur·rice systèmes et réseaux", ["administrateur systeme", "administrateur reseau", "technicien informatique", "support informatique", "helpdesk", "technicien reseau"], ["systemes", "reseaux", "informatique"], null],
-    ["Data, cybersécurité", ["data analyst", "data scientist", "data engineer", "cybersecurite", "pentester", "rssi", "analyste soc"], ["donnees", "analyste", "securite des systemes", "incidents informatiques"], null],
-    ["Chercheur·se, ingénieur·e R&D", ["chercheur", "chercheuse", "ingenieur recherche", "r d", "doctorant", "post doc"], ["recherche", "laboratoire de recherche"], null],
-    ["Documentaliste, bibliothécaire, archiviste", ["documentaliste", "bibliothecaire", "archiviste", "libraire"], ["bibliothecaire", "archiviste", "documentaliste"], null],
-    ["Métiers de la culture, médiation, patrimoine", ["mediateur culturel", "charge de production", "guide conferencier", "conservateur", "restaurateur d art", "regisseur"], ["mediateur", "patrimoine", "culturel"], null],
-    ["Artiste, musicien·ne, technicien·ne du spectacle", ["artiste", "musicien", "comedien", "danseur", "intermittent", "technicien du spectacle", "regisseur son"], ["artiste", "spectacle", "artistique"], null],
-    ["Coach sportif·ve, éducateur·rice sportif·ve", ["coach sportif", "educateur sportif", "moniteur", "maitre nageur", "entraineur", "bpjeps"], ["sport", "activites physiques", "educateur sportif"], null],
-    ["Tourisme, hôtellerie", ["agent de voyage", "tourisme", "hotellerie", "receptionniste hotel", "guide touristique", "conseiller en sejours"], ["tourisme"], null],
-    ["Agent·e immobilier, gestionnaire de biens", ["agent immobilier", "gestionnaire immobilier", "syndic", "gestionnaire locatif", "gestionnaire de patrimoine"], ["immobilier", "patrimoine immobilier", "logement"], null],
-    ["Traducteur·rice, interprète", ["traducteur", "traductrice", "interprete"], ["traducteur", "interprete"], null],
-    ["Marin, métiers de la mer", ["marin", "matelot", "pecheur", "officier de marine marchande", "capitaine"], ["marins", "maritime", "littoral"], null],
-    ["Pilote, métiers de l’aérien", ["pilote", "steward", "hotesse de l air", "controleur aerien", "mecanicien aeronautique", "personnel navigant"], ["pilote", "aerien", "aeronautiques"], null]
+    [
+      "Avocat·e",
+      [
+        "avocat",
+        "avocate",
+        "collaborateur avocat",
+        "collaboratrice avocate"
+      ],
+      [
+        "juridique",
+        "contentieux",
+        "juriste"
+      ],
+      "enm-pro"
+    ],
+    [
+      "Juriste",
+      [
+        "juriste",
+        "juriste d entreprise",
+        "conseil juridique",
+        "legal counsel",
+        "paralegal"
+      ],
+      [
+        "juridique",
+        "contentieux",
+        "juriste"
+      ],
+      null
+    ],
+    [
+      "Notaire, clerc de notaire",
+      [
+        "notaire",
+        "clerc de notaire",
+        "clerc"
+      ],
+      [
+        "juridique",
+        "foncier",
+        "domanial"
+      ],
+      null
+    ],
+    [
+      "Commissaire de justice, huissier",
+      [
+        "huissier",
+        "commissaire de justice"
+      ],
+      [
+        "recouvrement",
+        "contentieux",
+        "juridique"
+      ],
+      null
+    ],
+    [
+      "Médecin",
+      [
+        "medecin",
+        "docteur en medecine",
+        "generaliste",
+        "chirurgien",
+        "urgentiste",
+        "specialiste"
+      ],
+      [
+        "medecin"
+      ],
+      "cnph"
+    ],
+    [
+      "Pharmacien·ne",
+      [
+        "pharmacien",
+        "pharmacienne"
+      ],
+      [
+        "pharmacien"
+      ],
+      "cnph"
+    ],
+    [
+      "Chirurgien·ne-dentiste",
+      [
+        "dentiste",
+        "chirurgien dentiste",
+        "orthodontiste"
+      ],
+      [
+        "dentaire",
+        "odontolog"
+      ],
+      "cnph"
+    ],
+    [
+      "Infirmier·ère",
+      [
+        "infirmier",
+        "infirmiere",
+        "ide",
+        "infirmier liberal",
+        "infirmiere liberale",
+        "ibode",
+        "iade"
+      ],
+      [
+        "infirmier"
+      ],
+      "titres-fph"
+    ],
+    [
+      "Aide-soignant·e",
+      [
+        "aide soignant",
+        "aide soignante"
+      ],
+      [
+        "aide soignant",
+        "soignant"
+      ],
+      "titres-fph"
+    ],
+    [
+      "Auxiliaire de puériculture",
+      [
+        "auxiliaire de puericulture"
+      ],
+      [
+        "puericult"
+      ],
+      "titres-fph"
+    ],
+    [
+      "Sage-femme",
+      [
+        "sage femme",
+        "maieuticien"
+      ],
+      [
+        "sage femme"
+      ],
+      "titres-fph"
+    ],
+    [
+      "Masseur·se-kinésithérapeute",
+      [
+        "kine",
+        "kinesitherapeute",
+        "masseur kinesitherapeute"
+      ],
+      [
+        "kinesitherapeute",
+        "masseur"
+      ],
+      "titres-fph"
+    ],
+    [
+      "Manipulateur·rice en radiologie",
+      [
+        "manipulateur radio",
+        "manipulatrice radio",
+        "manipulateur en electroradiologie"
+      ],
+      [
+        "manipulat",
+        "radiolog"
+      ],
+      "titres-fph"
+    ],
+    [
+      "Ergothérapeute, psychomotricien·ne, orthophoniste",
+      [
+        "ergotherapeute",
+        "psychomotricien",
+        "psychomotricienne",
+        "orthophoniste",
+        "orthoptiste"
+      ],
+      [
+        "ergotherapeute",
+        "psychomotricien",
+        "orthophon",
+        "orthopt"
+      ],
+      "titres-fph"
+    ],
+    [
+      "Préparateur·rice en pharmacie",
+      [
+        "preparateur en pharmacie",
+        "preparatrice en pharmacie"
+      ],
+      [
+        "preparateur en pharmacie"
+      ],
+      "titres-fph"
+    ],
+    [
+      "Technicien·ne de laboratoire médical",
+      [
+        "technicien de laboratoire",
+        "laborantin",
+        "technicienne de laboratoire",
+        "biologie medicale"
+      ],
+      [
+        "technicien de laboratoire",
+        "laboratoire"
+      ],
+      "titres-fph"
+    ],
+    [
+      "Ambulancier·ère",
+      [
+        "ambulancier",
+        "ambulanciere"
+      ],
+      [
+        "ambulancier"
+      ],
+      null
+    ],
+    [
+      "Psychologue",
+      [
+        "psychologue",
+        "psy",
+        "neuropsychologue"
+      ],
+      [
+        "psychologue"
+      ],
+      null
+    ],
+    [
+      "Diététicien·ne",
+      [
+        "dieteticien",
+        "dieteticienne",
+        "nutritionniste"
+      ],
+      [
+        "dieteticien"
+      ],
+      null
+    ],
+    [
+      "Éducateur·rice spécialisé·e",
+      [
+        "educateur specialise",
+        "educatrice specialisee",
+        "moniteur educateur",
+        "educateur"
+      ],
+      [
+        "educateur",
+        "educatif"
+      ],
+      "titres-social"
+    ],
+    [
+      "Assistant·e de service social",
+      [
+        "assistant social",
+        "assistante sociale",
+        "assistante de service social",
+        "travailleur social",
+        "cesf",
+        "conseiller en economie sociale familiale"
+      ],
+      [
+        "travailleur social",
+        "service social",
+        "social"
+      ],
+      "titres-social"
+    ],
+    [
+      "Éducateur·rice de jeunes enfants",
+      [
+        "educateur de jeunes enfants",
+        "educatrice de jeunes enfants",
+        "eje"
+      ],
+      [
+        "jeunes enfants",
+        "petite enfance"
+      ],
+      "titres-social"
+    ],
+    [
+      "Auxiliaire de vie, aide à domicile",
+      [
+        "auxiliaire de vie",
+        "aide a domicile",
+        "aide menagere",
+        "assistant de vie",
+        "accompagnant educatif et social",
+        "aes"
+      ],
+      [
+        "accueillant",
+        "personnes agees",
+        "aide a la personne",
+        "petite enfance"
+      ],
+      null
+    ],
+    [
+      "Assistant·e maternel·le, ATSEM",
+      [
+        "assistante maternelle",
+        "atsem",
+        "nounou",
+        "garde d enfants",
+        "auxiliaire petite enfance"
+      ],
+      [
+        "petite enfance",
+        "jeune enfant",
+        "accueillant"
+      ],
+      null
+    ],
+    [
+      "Animateur·rice",
+      [
+        "animateur",
+        "animatrice",
+        "bafa",
+        "animateur socioculturel",
+        "animateur periscolaire"
+      ],
+      [
+        "animateur educatif",
+        "periscolaire",
+        "accueil de loisirs"
+      ],
+      null
+    ],
+    [
+      "Professeur·e, enseignant·e",
+      [
+        "professeur",
+        "enseignant",
+        "enseignante",
+        "prof",
+        "professeur des ecoles"
+      ],
+      [
+        "enseignant"
+      ],
+      null
+    ],
+    [
+      "Formateur·rice",
+      [
+        "formateur",
+        "formatrice",
+        "ingenieur pedagogique",
+        "consultant formation"
+      ],
+      [
+        "formateur",
+        "formation"
+      ],
+      null
+    ],
+    [
+      "Ingénieur·e BTP, génie civil",
+      [
+        "ingenieur btp",
+        "ingenieur genie civil",
+        "ingenieur travaux",
+        "ingenieur structure",
+        "ingenieur batiment"
+      ],
+      [
+        "ingenieur de maintenance ou de travaux",
+        "travaux",
+        "ouvrages d art",
+        "batiment"
+      ],
+      null
+    ],
+    [
+      "Ingénieur·e industrie, mécanique, électronique",
+      [
+        "ingenieur",
+        "ingenieur mecanique",
+        "ingenieur industriel",
+        "ingenieur production",
+        "ingenieur methodes",
+        "ingenieur electronique"
+      ],
+      [
+        "ingenieur",
+        "genie mecanique",
+        "genie electrique"
+      ],
+      null
+    ],
+    [
+      "Ingénieur·e énergie, eau, environnement",
+      [
+        "ingenieur energie",
+        "ingenieur environnement",
+        "ingenieur hse",
+        "ingenieur eau",
+        "ingenieur qse"
+      ],
+      [
+        "energie",
+        "eau potable",
+        "environnement",
+        "risques"
+      ],
+      null
+    ],
+    [
+      "Architecte, urbaniste, paysagiste",
+      [
+        "architecte",
+        "urbaniste",
+        "architecte d interieur",
+        "paysagiste concepteur"
+      ],
+      [
+        "architecte",
+        "urbanisme",
+        "paysage"
+      ],
+      null
+    ],
+    [
+      "Géomètre, dessinateur·rice, projeteur·se",
+      [
+        "geometre",
+        "dessinateur",
+        "projeteur",
+        "topographe",
+        "dessinateur cao",
+        "autocad"
+      ],
+      [
+        "geometre",
+        "dessinateur",
+        "cartographe"
+      ],
+      null
+    ],
+    [
+      "Chef de chantier, conducteur·rice de travaux",
+      [
+        "chef de chantier",
+        "conducteur de travaux",
+        "chef d equipe btp",
+        "chef de travaux"
+      ],
+      [
+        "conducteur de travaux",
+        "travaux",
+        "batiment"
+      ],
+      null
+    ],
+    [
+      "Maçon·ne, ouvrier·ère du bâtiment",
+      [
+        "macon",
+        "ouvrier du batiment",
+        "carreleur",
+        "platrier",
+        "couvreur",
+        "charpentier",
+        "serrurier"
+      ],
+      [
+        "macon",
+        "batiment"
+      ],
+      null
+    ],
+    [
+      "Électricien·ne",
+      [
+        "electricien",
+        "electricienne",
+        "electrotechnicien",
+        "electromecanicien"
+      ],
+      [
+        "electricien",
+        "electromecanicien",
+        "genie electrique"
+      ],
+      null
+    ],
+    [
+      "Plombier·ère, chauffagiste",
+      [
+        "plombier",
+        "chauffagiste",
+        "frigoriste",
+        "climaticien",
+        "cvc"
+      ],
+      [
+        "plombier",
+        "chauffagiste",
+        "chauffage"
+      ],
+      null
+    ],
+    [
+      "Menuisier·ère, ébéniste",
+      [
+        "menuisier",
+        "ebeniste",
+        "agenceur",
+        "charpentier bois"
+      ],
+      [
+        "menuisier"
+      ],
+      null
+    ],
+    [
+      "Peintre en bâtiment",
+      [
+        "peintre",
+        "peintre en batiment",
+        "solier",
+        "facadier"
+      ],
+      [
+        "peintre"
+      ],
+      null
+    ],
+    [
+      "Mécanicien·ne",
+      [
+        "mecanicien",
+        "garagiste",
+        "carrossier",
+        "mecanicien auto",
+        "mecanicien poids lourds",
+        "technicien automobile"
+      ],
+      [
+        "mecanicien",
+        "vehicules"
+      ],
+      null
+    ],
+    [
+      "Technicien·ne de maintenance",
+      [
+        "technicien de maintenance",
+        "agent de maintenance",
+        "maintenance industrielle",
+        "technicien sav"
+      ],
+      [
+        "technicien de maintenance",
+        "maintenance"
+      ],
+      null
+    ],
+    [
+      "Ouvrier·ère de production, opérateur·rice",
+      [
+        "ouvrier",
+        "operateur de production",
+        "agent de production",
+        "conducteur de ligne",
+        "usine",
+        "ouvrier qualifie"
+      ],
+      [
+        "operateur",
+        "atelier",
+        "production"
+      ],
+      null
+    ],
+    [
+      "Conducteur·rice d’engins",
+      [
+        "conducteur d engins",
+        "grutier",
+        "pelleteur",
+        "cariste"
+      ],
+      [
+        "conducteur d engins",
+        "engins"
+      ],
+      null
+    ],
+    [
+      "Jardinier·ère, agent·e d’espaces verts",
+      [
+        "jardinier",
+        "paysagiste",
+        "espaces verts",
+        "elagueur",
+        "horticulteur",
+        "agent d espaces verts"
+      ],
+      [
+        "jardinier",
+        "espaces verts"
+      ],
+      null
+    ],
+    [
+      "Agriculteur·rice, technicien·ne agricole",
+      [
+        "agriculteur",
+        "eleveur",
+        "technicien agricole",
+        "viticulteur",
+        "maraicher",
+        "exploitant agricole"
+      ],
+      [
+        "agricole",
+        "elevage",
+        "production animale"
+      ],
+      null
+    ],
+    [
+      "Vétérinaire, auxiliaire vétérinaire",
+      [
+        "veterinaire",
+        "asv",
+        "auxiliaire veterinaire",
+        "soigneur animalier"
+      ],
+      [
+        "veterinaire",
+        "animaux"
+      ],
+      null
+    ],
+    [
+      "Cuisinier·ère, commis de cuisine",
+      [
+        "cuisinier",
+        "cuisiniere",
+        "commis de cuisine",
+        "chef de cuisine",
+        "restauration collective",
+        "second de cuisine"
+      ],
+      [
+        "cuisinier",
+        "cuisine"
+      ],
+      null
+    ],
+    [
+      "Agent·e d’entretien, de propreté",
+      [
+        "agent d entretien",
+        "agent de proprete",
+        "femme de menage",
+        "technicien de surface",
+        "nettoyage",
+        "agent de service"
+      ],
+      [
+        "bio nettoyage",
+        "proprete",
+        "entretien"
+      ],
+      null
+    ],
+    [
+      "Agent·e de collecte, déchets",
+      [
+        "eboueur",
+        "agent de collecte",
+        "ripeur",
+        "agent de dechetterie",
+        "tri des dechets"
+      ],
+      [
+        "dechets",
+        "decheterie",
+        "collecte"
+      ],
+      null
+    ],
+    [
+      "Chauffeur·se, conducteur·rice",
+      [
+        "chauffeur",
+        "conducteur",
+        "chauffeur poids lourd",
+        "conducteur de bus",
+        "livreur",
+        "routier",
+        "vtc",
+        "taxi"
+      ],
+      [
+        "conducteur",
+        "chauffeur",
+        "transport"
+      ],
+      null
+    ],
+    [
+      "Logisticien·ne, magasinier·ère",
+      [
+        "logisticien",
+        "magasinier",
+        "preparateur de commandes",
+        "gestionnaire de stock",
+        "supply chain",
+        "approvisionneur"
+      ],
+      [
+        "logistique",
+        "magasinier",
+        "stocks"
+      ],
+      null
+    ],
+    [
+      "Agent·e de sécurité",
+      [
+        "agent de securite",
+        "agent de surveillance",
+        "vigile",
+        "ssiap",
+        "agent de prevention",
+        "agent de surete"
+      ],
+      [
+        "surveillance",
+        "securite incendie",
+        "surete"
+      ],
+      null
+    ],
+    [
+      "Militaire, ancien·ne militaire",
+      [
+        "militaire",
+        "ancien militaire",
+        "soldat",
+        "sous officier",
+        "officier",
+        "gendarme",
+        "marin militaire",
+        "legionnaire"
+      ],
+      [
+        "forces armees",
+        "militaire",
+        "defense"
+      ],
+      "emplois-reserves"
+    ],
+    [
+      "Sapeur·se-pompier volontaire",
+      [
+        "pompier",
+        "sapeur pompier",
+        "pompier volontaire",
+        "spv"
+      ],
+      [
+        "incendie",
+        "secours"
+      ],
+      null
+    ],
+    [
+      "Commercial·e",
+      [
+        "commercial",
+        "commerciale",
+        "charge d affaires",
+        "business developer",
+        "technico commercial",
+        "ingenieur commercial",
+        "account manager"
+      ],
+      [
+        "commercial",
+        "commerciale",
+        "ventes"
+      ],
+      null
+    ],
+    [
+      "Vendeur·se, employé·e de commerce",
+      [
+        "vendeur",
+        "vendeuse",
+        "conseiller de vente",
+        "employe de commerce",
+        "employe libre service",
+        "caissier",
+        "caissiere",
+        "hote de caisse"
+      ],
+      [
+        "ventes",
+        "vente",
+        "commercial",
+        "commerciale",
+        "caisse"
+      ],
+      null
+    ],
+    [
+      "Agent·e d’accueil, hôte·sse",
+      [
+        "agent d accueil",
+        "hotesse",
+        "hote d accueil",
+        "standardiste",
+        "receptionniste"
+      ],
+      [
+        "accueil"
+      ],
+      null
+    ],
+    [
+      "Conseiller·ère clientèle, téléconseiller·ère",
+      [
+        "conseiller clientele",
+        "teleconseiller",
+        "service client",
+        "charge de clientele",
+        "conseiller client"
+      ],
+      [
+        "accueil",
+        "relation usagers",
+        "usagers"
+      ],
+      null
+    ],
+    [
+      "Assistant·e de direction, secrétaire",
+      [
+        "assistant",
+        "assistante",
+        "secretaire",
+        "assistant de direction",
+        "office manager",
+        "assistant administratif",
+        "assistante administrative"
+      ],
+      [
+        "assistant",
+        "secretariat",
+        "administratif"
+      ],
+      null
+    ],
+    [
+      "Comptable",
+      [
+        "comptable",
+        "aide comptable",
+        "expert comptable",
+        "collaborateur comptable",
+        "gestionnaire comptable",
+        "chef comptable"
+      ],
+      [
+        "comptable",
+        "comptabilite"
+      ],
+      null
+    ],
+    [
+      "Contrôleur·se de gestion, auditeur·rice",
+      [
+        "controleur de gestion",
+        "analyste financier",
+        "financier",
+        "auditeur",
+        "audit",
+        "daf"
+      ],
+      [
+        "controle de gestion",
+        "controleur de gestion",
+        "auditeur",
+        "audit"
+      ],
+      null
+    ],
+    [
+      "Banque, assurance",
+      [
+        "banquier",
+        "conseiller bancaire",
+        "charge de clientele bancaire",
+        "assureur",
+        "gestionnaire de sinistres",
+        "conseiller financier"
+      ],
+      [
+        "assurances",
+        "financier",
+        "recouvrement"
+      ],
+      null
+    ],
+    [
+      "Gestionnaire de paie, chargé·e RH",
+      [
+        "gestionnaire de paie",
+        "charge rh",
+        "responsable rh",
+        "drh",
+        "recruteur",
+        "charge de recrutement",
+        "ressources humaines",
+        "rh"
+      ],
+      [
+        "paie",
+        "ressources humaines",
+        "recrutement"
+      ],
+      null
+    ],
+    [
+      "Acheteur·se",
+      [
+        "acheteur",
+        "acheteuse",
+        "responsable achats",
+        "approvisionneur",
+        "purchasing"
+      ],
+      [
+        "acheteur",
+        "achats",
+        "achat"
+      ],
+      null
+    ],
+    [
+      "Chef·fe de projet, consultant·e",
+      [
+        "chef de projet",
+        "consultant",
+        "consultante",
+        "project manager",
+        "pmo",
+        "product owner"
+      ],
+      [
+        "chef de projet",
+        "projet"
+      ],
+      null
+    ],
+    [
+      "Manager, directeur·rice",
+      [
+        "manager",
+        "directeur",
+        "directrice",
+        "responsable",
+        "chef de service",
+        "gerant",
+        "dirigeant"
+      ],
+      [
+        "directeur",
+        "responsable"
+      ],
+      null
+    ],
+    [
+      "Chargé·e de communication, marketing",
+      [
+        "charge de communication",
+        "communication",
+        "marketing",
+        "community manager",
+        "chef de produit",
+        "relations presse",
+        "brand manager"
+      ],
+      [
+        "communication",
+        "reseaux sociaux",
+        "evenementiel"
+      ],
+      null
+    ],
+    [
+      "Journaliste, rédacteur·rice",
+      [
+        "journaliste",
+        "redacteur",
+        "redactrice",
+        "pigiste",
+        "editeur",
+        "concepteur redacteur"
+      ],
+      [
+        "journaliste",
+        "redacteur",
+        "edition"
+      ],
+      null
+    ],
+    [
+      "Graphiste, designer, directeur·rice artistique",
+      [
+        "graphiste",
+        "designer",
+        "directeur artistique",
+        "ux designer",
+        "webdesigner",
+        "illustrateur",
+        "da"
+      ],
+      [
+        "creation graphique",
+        "graphique",
+        "design"
+      ],
+      null
+    ],
+    [
+      "Photographe, vidéaste",
+      [
+        "photographe",
+        "videaste",
+        "monteur",
+        "cadreur",
+        "realisateur",
+        "jri"
+      ],
+      [
+        "photographe",
+        "audiovisuel",
+        "journaliste reporter d image"
+      ],
+      null
+    ],
+    [
+      "Développeur·se, informaticien·ne",
+      [
+        "developpeur",
+        "developpeuse",
+        "informaticien",
+        "dev",
+        "programmeur",
+        "full stack",
+        "devops",
+        "ingenieur logiciel"
+      ],
+      [
+        "developpeur",
+        "applications",
+        "logiciel"
+      ],
+      null
+    ],
+    [
+      "Administrateur·rice systèmes et réseaux",
+      [
+        "administrateur systeme",
+        "administrateur reseau",
+        "technicien informatique",
+        "support informatique",
+        "helpdesk",
+        "technicien reseau"
+      ],
+      [
+        "systemes",
+        "reseaux",
+        "informatique"
+      ],
+      null
+    ],
+    [
+      "Data, cybersécurité",
+      [
+        "data analyst",
+        "data scientist",
+        "data engineer",
+        "cybersecurite",
+        "pentester",
+        "rssi",
+        "analyste soc"
+      ],
+      [
+        "donnees",
+        "analyste",
+        "securite des systemes",
+        "incidents informatiques"
+      ],
+      null
+    ],
+    [
+      "Chercheur·se, ingénieur·e R&D",
+      [
+        "chercheur",
+        "chercheuse",
+        "ingenieur recherche",
+        "r d",
+        "doctorant",
+        "post doc"
+      ],
+      [
+        "recherche",
+        "laboratoire de recherche"
+      ],
+      null
+    ],
+    [
+      "Documentaliste, bibliothécaire, archiviste",
+      [
+        "documentaliste",
+        "bibliothecaire",
+        "archiviste",
+        "libraire"
+      ],
+      [
+        "bibliothecaire",
+        "archiviste",
+        "documentaliste"
+      ],
+      null
+    ],
+    [
+      "Métiers de la culture, médiation, patrimoine",
+      [
+        "mediateur culturel",
+        "charge de production",
+        "guide conferencier",
+        "conservateur",
+        "restaurateur d art",
+        "regisseur"
+      ],
+      [
+        "mediateur",
+        "patrimoine",
+        "culturel"
+      ],
+      null
+    ],
+    [
+      "Artiste, musicien·ne, technicien·ne du spectacle",
+      [
+        "artiste",
+        "musicien",
+        "comedien",
+        "danseur",
+        "intermittent",
+        "technicien du spectacle",
+        "regisseur son"
+      ],
+      [
+        "artiste",
+        "spectacle",
+        "artistique"
+      ],
+      null
+    ],
+    [
+      "Coach sportif·ve, éducateur·rice sportif·ve",
+      [
+        "coach sportif",
+        "educateur sportif",
+        "moniteur",
+        "maitre nageur",
+        "entraineur",
+        "bpjeps"
+      ],
+      [
+        "sport",
+        "activites physiques",
+        "educateur sportif"
+      ],
+      null
+    ],
+    [
+      "Tourisme, hôtellerie",
+      [
+        "agent de voyage",
+        "tourisme",
+        "hotellerie",
+        "receptionniste hotel",
+        "guide touristique",
+        "conseiller en sejours"
+      ],
+      [
+        "tourisme"
+      ],
+      null
+    ],
+    [
+      "Agent·e immobilier, gestionnaire de biens",
+      [
+        "agent immobilier",
+        "gestionnaire immobilier",
+        "syndic",
+        "gestionnaire locatif",
+        "gestionnaire de patrimoine"
+      ],
+      [
+        "immobilier",
+        "patrimoine immobilier",
+        "logement"
+      ],
+      null
+    ],
+    [
+      "Traducteur·rice, interprète",
+      [
+        "traducteur",
+        "traductrice",
+        "interprete"
+      ],
+      [
+        "traducteur",
+        "interprete"
+      ],
+      null
+    ],
+    [
+      "Marin, métiers de la mer",
+      [
+        "marin",
+        "matelot",
+        "pecheur",
+        "officier de marine marchande",
+        "capitaine"
+      ],
+      [
+        "marins",
+        "maritime",
+        "littoral"
+      ],
+      null
+    ],
+    [
+      "Pilote, métiers de l’aérien",
+      [
+        "pilote",
+        "steward",
+        "hotesse de l air",
+        "controleur aerien",
+        "mecanicien aeronautique",
+        "personnel navigant"
+      ],
+      [
+        "pilote",
+        "aerien",
+        "aeronautiques"
+      ],
+      null
+    ]
   ]
 }

@@ -800,7 +800,7 @@
 
   screens['choix-profil'] = function () {
     if(familyEstablished())return screens.profil();
-    var profiles = [['etu', 'Étudiant·e'], ['par', 'Parent'], ['rec', 'En reconversion']];
+    var profiles = PROFILE_CHOICES;
     return '<main class="screen profile-choice">' + back('#/categories-intro','Retour') +
       '<h1 class="mt-l">Vous êtes</h1><p class="lead">Le parcours s’adapte à votre profil.</p><div class="stack mt-s">' + profiles.map(function (p) {
         var on = S.profile === p[0];
@@ -829,7 +829,8 @@
   /* La case handicap n’est jamais enregistrée : elle sert seulement à afficher la voie dédiée pendant la session. */
   var recoHandicap = false;
   function recoData() { var p = window.PUBLIC_DATA || {}; return p.reconversion || null; }
-  function isReco() { return S.profile === 'rec'; }
+  var PROFILE_CHOICES = [['etu', 'Étudiant·e'], ['par', 'Parent'], ['rec', 'En reconversion'], ['dem', 'Demandeur·se d’emploi']];
+  function isReco() { return S.profile === 'rec' || S.profile === 'dem'; }
   /* Années d’expérience : borne basse de la tranche ; « Oui » des profils d’avant novembre 2026 vaut 4 ans. */
   function recoYears() { if (S.experience === 'Oui') return 4; var e = RECO_EXPERIENCE.filter(function (x) { return x[0] === S.experience; })[0]; return e ? e[2] : null; }
   function experienceLabel() { var e = RECO_EXPERIENCE.filter(function (x) { return x[0] === S.experience; })[0]; return e ? e[1] : S.experience === 'Oui' ? 'Oui' : 'Non renseigné'; }
@@ -923,16 +924,15 @@
   function stepTotal() { return isReco() ? (S.recoPath === 'nouveau' ? 8 : 6) : STEPS; }
   function stepOf(name) {
     if (!isReco()) return { niveau: 2, interets: 3, ambition: 4, traits: 5, situation: 6 }[name] || 1;
-    return S.recoPath !== 'nouveau' ? ({ niveau: 2, experience: 3, projet: 4, 'metier-prive': 5, voies: 5, situation: 6 }[name] || 1)
+    return S.recoPath !== 'nouveau' ? ({ niveau: 2, experience: 3, projet: 4, 'metier-prive': 5, situation: 6 }[name] || 1)
       : ({ niveau: 2, experience: 3, projet: 4, interets: 5, ambition: 6, traits: 7, situation: 8 }[name] || 1);
   }
   function stepBar(name) { var n = stepOf(name), t = stepTotal(); return '<span class="sr-only">Étape ' + n + ' / ' + t + '</span></div>' + progress(n, t); }
-  /* Après le métier : budget si un concours est en jeu, sinon fin du profil. */
+  /* Après le métier : l’écran du budget, puis les voies d’accès. */
   function recoAfterMetier(label) {
     if (profileNeedsValidation()) return profileContinuation('#/accueil', '');
     if (S.done) return '<a class="btn" href="#/moi">Revenir au profil</a>';
-    if (!recoMetierReady()) return '<span class="small center">Indiquez votre métier ou choisissez un mot-clé.</span><button type="button" class="btn" disabled>' + label + '</button>';
-    return recoNeedsBudget() ? '<a class="btn" href="#/situation">' + label + '</a>' : '<a class="btn" href="#/accueil" data-action="finish">Voir mon parcours</a>';
+    return recoMetierReady() ? '<a class="btn" href="#/situation">' + label + '</a>' : '<button type="button" class="btn" disabled>' + label + '</button>';
   }
   screens.niveau = function () {
     if(!nameReady())return screens.profil();
@@ -962,7 +962,7 @@
       '<h1 class="mt-l">Vous souhaitez</h1>' +
       '<div class="stack mt-s" role="group" aria-label="Votre projet">' + RECO_PATHS.map(function (x, i) {
         var on = S.recoPath === x[0];
-        return '<button type="button" class="opt ambition-opt reco-path' + (on ? ' on' : '') + '" aria-pressed="' + on + '"' + attr('action', 'recoPath') + attr('v', x[0]) + '><span class="reco-path-num" aria-hidden="true">' + (i + 1) + '</span><span class="ambition-copy"><span class="ambition-t">' + esc(x[1]) + '</span><span class="ambition-d">' + esc(x[2]) + '</span></span>' + (on ? I.check : '') + '</button>';
+        return '<button type="button" class="opt ambition-opt' + (on ? ' on' : '') + '" aria-pressed="' + on + '"' + attr('action', 'recoPath') + attr('v', x[0]) + '><span class="ambition-copy"><span class="ambition-t">' + esc(x[1]) + '</span><span class="ambition-d">' + esc(x[2]) + '</span></span>' + (on ? I.check : '') + '</button>';
       }).join('') + '</div></main>' +
       '<div class="footer">' + profileContinuation(S.recoPath === 'nouveau' ? '#/interets' : '#/metier-prive', 'Continuer', !!S.recoPath) + '</div>';
   };
@@ -991,23 +991,27 @@
     if (!isReco()) return screens.niveau();
     var full = S.recoKeys.length >= RECO_MAX_KEYS;
     return '<main class="screen reco-metier"><div class="topbar">' + back(S.done ? '#/moi' : '#/projet', S.done ? 'Profil' : 'Retour') + stepBar('metier-prive') +
-      '<h1 class="mt-l"><label for="reco-job">Quel est votre métier ?</label></h1>' +
-      '<div class="field reco-job-field"><input id="reco-job" type="text" autocomplete="organization-title" enterkeyhint="next" maxlength="80" placeholder="Par exemple : comptable, infirmière, chef de chantier" value="' + esc(S.recoJob) + '"></div>' +
+      '<h1 class="mt-l" id="reco-job-title">Quel est votre métier ?</h1>' +
+      '<div class="name-entry"><input class="name-line" id="reco-job" type="text" aria-labelledby="reco-job-title" autocomplete="organization-title" enterkeyhint="done" maxlength="80" placeholder="Par exemple : comptable, infirmière…" value="' + esc(S.recoJob) + '"><button type="button" class="name-confirm" id="reco-job-confirm" data-action="confirmRecoJob" aria-label="Valider le métier"' + (S.recoJob.trim() ? '' : ' disabled') + '>' + I.check + '</button></div>' +
       '<h2 class="h3 mt-m no-icon" id="reco-key-title">Vos mots-clés <span class="small">(' + S.recoKeys.length + ' / ' + RECO_MAX_KEYS + ')</span></h2>' +
       '<p class="small m0">Ce que vous faites au quotidien. Les suggestions viennent des fiches métiers de l’application.</p>' +
       recoKeyChips() +
       (full ? '<p class="small">Vous avez choisi 10 mots-clés. Retirez-en un pour en ajouter un autre.</p>' :
       '<div class="search reco-key-search">' + I.search + '<label class="sr-only" for="reco-key">Chercher un mot-clé</label><input id="reco-key" type="search" role="combobox" aria-autocomplete="list" aria-controls="reco-key-suggest" aria-expanded="false" aria-describedby="reco-key-title" autocomplete="off" enterkeyhint="search" placeholder="Chercher un mot-clé"><ul class="suggest" id="reco-key-suggest" aria-label="Mots-clés proposés" hidden></ul></div>') +
-      '<div id="reco-suggest-zone" class="stack reco-suggest-zone">' + recoSuggestChips() + '</div>' +
-      '<section class="callout tint-blue reco-passerelle mt-m"><span class="pin"></span><div><h2 class="h3 no-icon m0">Les passerelles</h2>' +
-      '<p>Une passerelle, c’est un accès direct à la fonction publique réservé à certaines professions : avocat·e, médecin, soignant·e, ancien·ne militaire… Pour les autres métiers, votre expérience ouvre le 3e concours et le contrat.</p>' +
-      '<a class="btn outline sm" href="#/voies">Voir mes voies d’accès</a></div></section></main>' +
+      '<div id="reco-suggest-zone" class="stack reco-suggest-zone">' + recoSuggestChips() + '</div></main>' +
       '<div class="footer reco-footer">' + recoAfterMetier('Continuer') + '</div>';
   };
+  /* Coche du métier : enregistre et referme le clavier, comme pour le prénom. */
+  function confirmRecoJob() {
+    var input = document.getElementById('reco-job'); if (!input) return;
+    S.recoJob = input.value.trim(); input.value = S.recoJob; syncRecoDomains(); save(); input.blur();
+    refreshRecoSuggest(); announce('Métier enregistré.');
+  }
+  /* Page de consultation, hors charte de l’onboarding : ouverte depuis le budget en fin de profil, puis depuis l’espace perso. */
   screens.voies = function () {
     if (!isReco()) return screens.niveau();
     var list = recoVoies(), profs = recoProfessions(S.recoJob);
-    return '<main class="screen reco-voies"><div class="topbar">' + back(S.done ? '#/moi' : S.recoPath === 'metier' ? '#/metier-prive' : '#/projet', S.done ? 'Profil' : 'Retour') + (S.done ? '</div>' : stepBar('voies')) +
+    return '<main class="screen reco-voies top-tight">' + back(S.done ? '#/accueil' : '#/situation', S.done ? 'Accueil' : 'Retour') +
       '<h1 class="mt-l">Vos voies d’accès</h1>' +
       '<p class="lead">Selon votre profil : ' + [profs.length ? profs[0].t : S.recoJob.trim(), S.level, recoYears() !== null ? experienceLabel().toLowerCase() + ' d’expérience' : ''].filter(Boolean).map(esc).join(' · ') + '.</p>' +
       '<div class="stack mt-s">' + list.map(function (v, i) {
@@ -1017,8 +1021,9 @@
           '<p>' + esc(v.text) + '</p>' + ext(v.url, 'Source : ' + v.source, 'link-plain') + '</article>';
       }).join('') + '</div>' +
       '<label class="reco-handicap mt-m"><input type="checkbox" data-action="recoHandicap"' + (recoHandicap ? ' checked' : '') + '><span>Je suis en situation de handicap (RQTH ou autre reconnaissance). <span class="small">Non enregistré : sert seulement à afficher la voie dédiée.</span></span></label>' +
-      '<p class="small mt-s">Les conditions exactes (durées, diplômes) sont fixées concours par concours : vérifiez toujours l’avis officiel.</p></main>' +
-      (S.done ? tabbar('moi') : '<div class="footer">' + (S.recoPath === 'metier' ? recoAfterMetier('Continuer') : '<a class="btn" href="#/projet">Continuer</a>') + '</div>');
+      '<p class="notice reco-disclaimer mt-m">' + I.info + '<span>Cette application a pour vocation d’éclairer vos choix. Elle ne se substitue ni aux textes officiels, ni aux organisateurs de concours, seuls à même de confirmer les conditions d’accès à la date de votre candidature.</span></p>' +
+      /* Profil terminé : le bouton suit le contenu, au-dessus du menu ; pendant le profil, il reste fixé en bas. */
+      (S.done ? '<a class="btn mt-m" href="#/metiers">Découvrir les métiers et concours</a></main>' + tabbar('accueil') : '</main><div class="footer"><a class="btn" href="#/accueil" data-action="finish">Découvrir les métiers et concours</a></div>');
   };
 
   screens.interets = function () {
@@ -1084,11 +1089,11 @@
         var on = S.budget === b;
         return '<button type="button" class="opt sm' + (on ? ' on' : '') + '" aria-pressed="' + on + '"' + attr('action', 'budget') + attr('v', b) + '><span>' + b + '</span>' + (on ? I.check : '') + '</button>';
       }).join('') + '</div>' +
-      '<section class="callout tint-yellow reco-talents mt-m"><span class="pin"></span><div><h2 class="h3 no-icon m0">Demandeur·se d’emploi ?</h2>' +
-      '<p>Les Prépas Talents sont gratuites et vous sont ouvertes, sous conditions de ressources, avec une bourse de ' + esc(D.talentsGrantLabel || '5 000 €') + ' par an. Elles préparent aux concours de catégorie A et B.</p>' +
+      '<section class="callout tint-yellow reco-talents mt-m"><span class="pin"></span><div><h2 class="h3 no-icon m0">' + (S.profile === 'dem' ? 'Les Prépas Talents' : 'Demandeur·se d’emploi ?') + '</h2>' +
+      '<p>Les Prépas Talents sont gratuites et ' + (S.profile === 'dem' ? 'ouvertes aux demandeur·ses d’emploi' : 'vous sont ouvertes') + ', sous conditions de ressources, avec une bourse de ' + esc(D.talentsGrantLabel || '5 000 €') + ' par an. Elles préparent aux concours de catégorie A et B.</p>' +
       ext(D.talentsMapUrl || 'https://www.fonction-publique.gouv.fr/cartographie-prepas-talents', 'Trouver une Prépa Talents', 'link-plain') + '</div></section>' +
       '<p class="small mt-s">Salarié·e : le compte personnel de formation (CPF) peut financer une préparation référencée.</p>' +
-      '</main><div class="footer">' + (profileNeedsValidation() ? profileContinuation('#/accueil', '') : (ready ? '<a class="btn" href="#/accueil" data-action="finish">Voir mon parcours</a>' : '<span class="small center">Choisissez un budget pour continuer.</span><button type="button" class="btn" disabled>Voir mon parcours</button>')) + '</div>';
+      '</main><div class="footer">' + (profileNeedsValidation() ? profileContinuation('#/accueil', '') : (ready ? '<a class="btn" href="#/voies">Voir les voies d’accès</a>' : '<button type="button" class="btn" disabled>Voir les voies d’accès</button>')) + '</div>';
   }
   screens.situation = function () {
     if (isReco()) return recoSituation();
@@ -1131,6 +1136,7 @@
       '<div class="home-features mt-s"><a class="home-feature home-discover" href="#/metiers" data-action="discoverJobs"><span class="home-tile home-count' + countSize(jobs.length) + '">' + jobs.length + '</span><span class="home-feature-copy"><b>' + (isParent() ? 'Ses métiers à découvrir' : 'Vos métiers à découvrir') + '</b><span>sélectionnés pour ' + (isParent() ? 'votre enfant' : 'vous') + '.</span></span><span class="home-go">' + I.arrow + '</span></a>' +
       '<a class="home-feature home-concours" href="#/concours-liste" data-action="discoverConcours"><span class="home-tile home-count' + countSize(concours.length) + '">' + concours.length + '</span><span class="home-feature-copy"><b>' + (isParent() ? 'Ses concours' : 'Vos concours') + '</b><span>sélectionnés pour ' + (isParent() ? 'votre enfant' : 'vous') + '.</span></span><span class="home-go">' + I.arrow + '</span></a>' +
       '<a class="home-feature home-access" href="#/concours"><span class="home-tile home-tile-parcours">' + I.journey + '</span><span class="home-feature-copy"><b>Informations générales</b><span>Les concours, les fonctions publiques et les prépas</span></span><span class="home-go">' + I.arrow + '</span></a></div>' +
+      (isReco() ? '<a class="home-feature home-access reco-home-voies" href="#/voies"><span class="home-tile home-tile-parcours">' + I.route + '</span><span class="home-feature-copy"><b>Vos voies d’accès</b><span>Passerelles, concours et contrat selon votre profil</span></span><span class="home-go">' + I.arrow + '</span></a>' : '') +
       '<div class="grid-2 home-shortcuts"><a href="#/favoris"><span class="home-tile home-count' + countSize(S.favorites.length) + '">' + S.favorites.length + '</span><span><b>' + (isParent() ? 'Ses favoris' : 'Vos favoris') + '</b></span></a><a href="#/interets"><span class="home-tile">' + I.pencil + '</span><span><b>' + (isParent() ? 'Son projet' : 'Votre projet') + '</b></span></a></div>' +
       '</main>' + tabbar('accueil');
   }
@@ -1367,7 +1373,7 @@
   /* Ligne de concours, comme une ligne de métier : niveau d’études requis au regard du profil. */
   /* Reconversion : concours interne ou 3e concours ouverts selon les réponses du profil. */
   function recoFits(refs) {
-    if (S.profile !== 'rec' || !refs.length) return '';
+    if (!isReco() || !refs.length) return '';
     var v = refs.map(function (c) { return c.voies || ''; }).join(' '), out = '';
     if (recoYears() !== null && recoYears() >= 4 && /troisi[eè]me|3e concours/i.test(v)) out += '<span class="fit on">3e concours possible<br>Conditions à vérifier</span>';
     if (S.agentPublic === 'Oui' && /intern/i.test(v)) out += '<span class="fit on">Concours interne possible<br>Conditions à vérifier</span>';
@@ -2718,14 +2724,14 @@
 
 
   /* ---------- Profil et informations légales ---------- */
-  var PROFILE_LABEL = { etu: 'Étudiant·e', par: 'Parent', rec: 'En reconversion' };
+  var PROFILE_LABEL = { etu: 'Étudiant·e', par: 'Parent', rec: 'En reconversion', dem: 'Demandeur·se d’emploi' };
 
   var PROFILE_FIELDS = { profile: 'Profil', level: 'Niveau d’études', domains: 'Domaines', defis: 'Votre défi', agentPublic: 'Déjà dans la fonction publique', experience: 'Expérience', recoPath: 'Votre projet', traits: 'Ce qui vous ressemble', boursier: 'Boursier·e', budget: 'Budget pour se préparer' };
   /* Fenêtre de modification : uniquement les options du point choisi. */
   function profileFieldContent(field) {
     var body = '';
-    if (field === 'profile') body = '<div class="stack">' + [['etu', 'Étudiant·e'], ['par', 'Parent'], ['rec', 'En reconversion']].map(function (p) { var on = S.profile === p[0]; return '<button type="button" class="opt' + (on ? ' on' : '') + '" aria-pressed="' + on + '"' + attr('action', 'profile') + attr('v', p[0]) + '><span>' + p[1] + '</span>' + (on ? I.check : '') + '</button>'; }).join('') + '</div>';
-    if (field === 'level') body = '<div class="row">' + (S.profile === 'rec' ? D.levels.adult : D.levels.school).map(function (l) { return chip('level', l, l, S.level === l); }).join('') + '</div>';
+    if (field === 'profile') body = '<div class="stack">' + PROFILE_CHOICES.map(function (p) { var on = S.profile === p[0]; return '<button type="button" class="opt' + (on ? ' on' : '') + '" aria-pressed="' + on + '"' + attr('action', 'profile') + attr('v', p[0]) + '><span>' + p[1] + '</span>' + (on ? I.check : '') + '</button>'; }).join('') + '</div>';
+    if (field === 'level') body = '<div class="row">' + (isReco() ? D.levels.adult : D.levels.school).map(function (l) { return chip('level', l, l, S.level === l); }).join('') + '</div>';
     if (field === 'domains') body = '<div class="grid-2 interest-grid">' + D.domains.map(function (d) { var on = S.domains.indexOf(d) > -1; return '<button type="button" class="interest-option' + (on ? ' on' : '') + '" aria-pressed="' + on + '"' + attr('action', 'domain') + attr('v', d) + '><span class="interest-name">' + esc(domainLabel(d)) + '</span><span class="interest-check" aria-hidden="true">' + (on ? I.check : '') + '</span></button>'; }).join('') + '</div>';
     if (field === 'traits') body = D.traitGroups.map(function (g) { return '<section class="stack mt-s"><h3 class="no-icon">' + esc(g.title) + '</h3><div class="row">' + g.items.map(function (t) { return chip('trait', t[0], t[1], S.traits.indexOf(t[0]) > -1); }).join('') + '</div></section>'; }).join('');
     if (field === 'ambitions') body = '<p class="small m0">Deux choix au plus.</p>' + ambitionOptions();
@@ -2781,7 +2787,7 @@
       '<p><strong>En bref : vos réponses restent sur votre appareil.</strong> Pas de compte, pas de cookie, pas de mesure d’audience, pas de publicité.</p>' +
       '<h2>Responsable du traitement</h2><p>' + esc(L.publisher) + '. Contact : ' + mail(L.contact) + '.</p>' +
       '<h2>Ce qui est enregistré</h2><ul>' +
-      '<li>Le profil (étudiant·e, parent, reconversion) et le niveau d’étude.</li>' +
+      '<li>Le profil (étudiant·e, parent, reconversion, demandeur·se d’emploi) et le niveau d’étude.</li>' +
       '<li>Les domaines et les traits choisis (« Ce qui vous ressemble »), la situation de bourse et le budget indiqués.</li>' +
       '<li>Les réglages d’affichage (filtres, région, confort de lecture).</li>' +
       '<li>Le prénom ou pseudo, les profils enfants, la commune choisie et les métiers favoris.</li></ul>' +
@@ -3098,7 +3104,7 @@
     if(r.name==='calendrier'&&r.arg==='concours'&&r.arg2){var datedConcours=concoursByKey(r.arg2);if(datedConcours)theme=datedConcours.cat;}
     var themeKey=theme?catClass(theme).slice(4):null;
     ['Ap','A','B','C','CDD'].forEach(function(k){root.classList.toggle('theme-'+k,k===themeKey);if(document.body&&document.body.classList)document.body.classList.toggle('theme-'+k,k===themeKey);});
-    var onboarding=['bienvenue','versants','categories-intro','choix-profil','profil','niveau','interets','ambition','traits','situation'].indexOf(r.name)>-1;
+    var onboarding=['bienvenue','versants','categories-intro','choix-profil','profil','niveau','experience','projet','metier-prive','interets','ambition','traits','situation'].indexOf(r.name)>-1||(r.name==='voies'&&!S.done);
     root.classList.toggle('onboarding',onboarding);
     if(document.body&&document.body.classList){document.body.classList.toggle('themed',!!themeKey);}
     root.classList.toggle('themed',!!themeKey);
@@ -3410,6 +3416,7 @@
         break;
       }
       case 'recoHandicap': recoHandicap = !!el.checked; render(); break;
+      case 'confirmRecoJob': confirmRecoJob(); break;
       case 'showOthersJobs': set({ showOthersJobs: true }); anchorAlso(); break;
       case 'showOthersConcours': set({ showOthersConcours: true }); anchorAlso(); break;
       case 'moreConcours': set({ concoursLimit: (S.concoursLimit || 60) + 60 }); break;
@@ -3527,7 +3534,7 @@
     if(e.target.matches('.search input')){var clear=e.target.closest('.search').querySelector('.search-clear');if(clear)clear.hidden=!e.target.value;var go=e.target.closest('.search').querySelector('.search-go');if(go)go.classList.toggle('ready',!!e.target.value);}
     if(e.target.id==='location-query'){locationQuery=e.target.value;locationSearchId++;return;}
     /* Reconversion : le métier saisi met à jour les mots-clés proposés sans redessiner l’écran (le clavier reste ouvert). */
-    if(e.target.id==='reco-job'){S.recoJob=e.target.value;syncRecoDomains();save();refreshRecoSuggest();return;}
+    if(e.target.id==='reco-job'){S.recoJob=e.target.value;syncRecoDomains();save();refreshRecoSuggest();var ok=document.getElementById('reco-job-confirm');if(ok)ok.disabled=!S.recoJob.trim();return;}
     if(e.target.id==='reco-key'){updateRecoKeySuggest(true);return;}
     if(e.target.id==='res-q'){S.resQ=e.target.value;S.resLimit=40;save();document.getElementById('study-results').innerHTML=studyResults(jobById(route().arg),route().name==='ressources-biblio');return;}
     if (e.target.id === 'book-q') { S.bookQ=e.target.value;save();document.getElementById('books').innerHTML=bookList(jobById(route().arg));return; }
@@ -3563,7 +3570,7 @@
   root.addEventListener('focusin',function(e){ if(e.target.id==='q'&&e.target.value)updateSuggest(true); if(e.target.id==='reco-key'&&e.target.value)updateRecoKeySuggest(true); });
   root.addEventListener('focusout',function(e){ if(e.target.id==='reco-key')setTimeout(function(){var a=document.activeElement;if(!a||!a.closest||!a.closest('#reco-key-suggest'))updateRecoKeySuggest(false);},180); });
   root.addEventListener('keydown',function(e){
-    if(e.target.id==='reco-job'&&e.key==='Enter'&&!e.isComposing){e.preventDefault();var k=document.getElementById('reco-key');if(k)k.focus();else e.target.blur();return;}
+    if(e.target.id==='reco-job'&&e.key==='Enter'&&!e.isComposing&&e.keyCode!==229){e.preventDefault();confirmRecoJob();return;}
     if(e.target.id==='reco-key'){
       if(e.key==='Escape'){updateRecoKeySuggest(false);return;}
       if(e.key==='ArrowDown'){var first=document.querySelector('#reco-key-suggest button');if(first){e.preventDefault();first.focus();}return;}

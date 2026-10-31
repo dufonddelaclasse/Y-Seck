@@ -2717,22 +2717,20 @@ html:not([data-contrast="true"]) :is(#app, .sheet) .opt .defi-cats .cat.cat-CDD,
 /* Cards métiers et concours : marges des blocs de couleur des 4 catégories (16px), la pastille épouse l’arrondi du coin. */
 .app:not(.onboarding) :is(#jobs, .job-cards) .list-row:is(.job-row, .concours-row) { gap:14px; padding:16px 22px 18px 16px; }
 
-/* Reconversion : projet, métier et mots-clés, voies d’accès. Mode sombre généré par scripts/build_dark.py. */
-.reco-path { align-items:flex-start; }
-.reco-path-num { display:inline-flex; flex:none; align-items:center; justify-content:center; width:30px; height:30px; border-radius:50%; background:var(--accent-tint); color:var(--accent); font-weight:700; }
-.reco-path.on .reco-path-num { background:var(--accent); color:#FFFFFF; }
-.reco-job-field { margin-top:12px; }
+/* Reconversion : métier et mots-clés, voies d’accès. Mode sombre généré par scripts/build_dark.py. */
 .reco-key-search { position:relative; margin-top:12px; }
 .reco-key-search .suggest { max-height:288px; overflow-y:auto; }
 .reco-key-item { width:100%; border:0; background:transparent; font:inherit; text-align:left; cursor:pointer; }
 .suggest-empty { padding:10px 12px; color:var(--muted); }
-.reco-chosen { margin-top:12px; }
+.reco-chosen { margin-top:12px; gap:6px; }
+.reco-suggest { gap:6px; }
+/* Pastilles compactes, comme les repères de l’espace perso (niveau, centres d’intérêt). */
+.reco-chosen .chip, .reco-suggest .chip { min-height:0; padding:6px 12px; font-size:.875rem; font-weight:400; line-height:1.35; }
 .reco-key-chip { display:inline-flex; align-items:center; gap:6px; }
-.reco-key-x { font-size:1.125rem; line-height:1; }
+.reco-key-x { font-size:1.0625rem; line-height:1; }
 .reco-suggest-zone { margin-top:14px; gap:8px; }
 .reco-suggest .chip { border-style:dashed; }
-.reco-passerelle .btn { margin-top:10px; }
-.reco-passerelle p, .reco-talents p { margin:6px 0 0; }
+.reco-talents p { margin:6px 0 0; }
 .reco-voie .head { display:flex; align-items:flex-start; justify-content:space-between; gap:10px; }
 .reco-voie .head .status-pill { flex:none; }
 .reco-voie.first { border:2px solid var(--accent); }
@@ -2741,3 +2739,4 @@ html:not([data-contrast="true"]) :is(#app, .sheet) .opt .defi-cats .cat.cat-CDD,
 .reco-handicap { display:flex; align-items:flex-start; gap:12px; padding:14px 16px; border:1px solid var(--line-2); border-radius:18px; font-size:.9375rem; line-height:1.4; cursor:pointer; }
 .reco-handicap input { flex:none; width:22px; height:22px; margin:1px 0 0; accent-color:var(--accent); }
 .reco-handicap .small { display:block; margin-top:4px; color:var(--muted); }
+.reco-disclaimer { font-size:.875rem; color:var(--muted); }

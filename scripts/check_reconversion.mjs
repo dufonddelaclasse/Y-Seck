@@ -61,14 +61,16 @@ assert(exp.includes('Étape 3 / 6'));
 t.click('experience', '7+');
 const projet = t.screens.projet();
 assert(projet.includes('Apporter votre expérience pour travailler dans la fonction publique') && projet.includes('Explorer de nouveaux horizons'));
+assert(!projet.includes('reco-path-num'), 'Les choix ne sont pas numérotés.');
 assert(!projet.includes('boursier'), 'Aucune question boursier·e dans le profil reconversion.');
 t.click('recoPath', 'metier');
 assert(t.screens.projet().includes('href="#/metier-prive"'));
 const metier = t.screens['metier-prive']();
-assert(metier.includes('id="reco-job"') && metier.includes('id="reco-key"') && metier.includes('role="combobox"'));
-assert(metier.includes('Voir mes voies d’accès') && metier.includes('Une passerelle'), 'Le bouton des voies d’accès est présenté avec la définition des passerelles.');
+assert(metier.includes('id="reco-job"') && metier.includes('class="name-line"') && metier.includes('id="reco-job-confirm"') && metier.includes('id="reco-key"') && metier.includes('role="combobox"'));
+assert(!metier.includes('voies'), 'Les voies d’accès ne sont plus sur l’écran métier : elles suivent le budget.');
 assert(metier.includes('Pour commencer :'), 'Sans métier saisi, des mots-clés fréquents sont déjà proposés.');
-assert(metier.includes('disabled'), 'Il faut un métier ou un mot-clé pour continuer.');
+assert(metier.includes('disabled>Continuer'), 'Il faut un métier ou un mot-clé pour continuer.');
+assert(!metier.includes('<span class="small center">'), 'Pas de ligne d’aide au-dessus du bouton.');
 assert(!metier.includes('interets') && !metier.includes('traits'), 'La branche métier saute les centres d’intérêt et « ce qui vous ressemble ».');
 
 // Mots-clés : autocomplétion dès la première lettre, uniquement depuis la base, liés au métier saisi.
@@ -92,12 +94,15 @@ assert(!sit.includes('data-action="boursier"') && !/boursier·e \?/.test(sit), '
 assert(sit.includes('Prépas Talents') && sit.includes('Demandeur·se d’emploi'), 'Mention Prépas Talents pour les demandeurs d’emploi.');
 assert(sit.includes('Frais d’inscription uniquement') && !sit.includes('Gratuit uniquement'));
 assert(sit.includes('href="#/metier-prive"'), 'Retour vers le métier depuis le budget.');
+t.S.budget = 'Je ne sais pas';
+assert(t.screens.situation().includes('href="#/voies"') && t.screens.situation().includes('Voir les voies d’accès'), 'Le budget mène aux voies d’accès.');
+t.S.budget = null;
 
 // Les huit profils de recette du plan d'action.
 const ids = () => JSON.parse(JSON.stringify(t.recoVoies().map(v => v.id)));
 function profile({ level, exp, path = 'metier', job = '', handicap = false }) {
   t.S.level = level; t.S.experience = exp; t.S.recoPath = path; t.S.recoJob = job; t.S.recoKeys = []; t.setHandicap(handicap);
-  return { voies: ids(), budget: t.recoNeedsBudget() };
+  return { voies: ids() };
 }
 const cases = [
   ['Avocate, 12 ans', { level: 'Bac+5', exp: '7+', job: 'avocate' }, ['enm-pro', 'troisieme', 'contrat', 'externe', 'sansconcours'], true],
@@ -109,10 +114,9 @@ const cases = [
   ['Ancien militaire, 10 ans, bac', { level: 'Bac', exp: '7+', job: 'ancien militaire' }, ['emplois-reserves', 'troisieme', 'contrat', 'externe', 'sansconcours'], true],
   ['Caissière RQTH, 2 ans, CAP (branche 2)', { level: 'CAP', exp: '0-4', path: 'nouveau', job: '', handicap: true }, ['contrat', 'externe', 'sansconcours', 'boe'], true]
 ];
-for (const [name, input, voies, budget] of cases) {
+for (const [name, input, voies] of cases) {
   const got = profile(input);
   assert.deepEqual(got.voies, voies, name + ' : voies ' + got.voies.join(', '));
-  assert.equal(got.budget, budget, name + ' : écran budget ' + (budget ? 'attendu' : 'à sauter'));
 }
 
 // Durées du 3e concours : 4 ans (FPT, ENM), 5 ans (IRA, enseignement), 6 ans (INSP).
@@ -125,15 +129,19 @@ assert(/IRA/.test(tc) && !/INSP/.test(tc));
 profile({ level: 'Bac', exp: '7+', job: 'commercial' });
 assert(/INSP/.test(t.recoVoies().find(v => v.id === 'troisieme').text));
 
-// Sans concours en jeu, la branche métier finit directement ; avec concours, elle passe par le budget.
+// Le métier mène toujours au budget.
 profile({ level: 'Bac+3', exp: '5-7', job: 'infirmière' });
-assert(t.screens['metier-prive']().includes('data-action="finish"'));
-profile({ level: 'Bac', exp: '7+', job: 'commercial' });
 assert(t.screens['metier-prive']().includes('href="#/situation"'));
 
-// Voies : la première porte le repère, chaque voie cite sa source, la case handicap n'est pas enregistrée.
+// Voies : page de consultation (pas de frise), repère sur la première, sources, case handicap, réserve et bouton de fin.
 const voies = t.screens.voies();
+assert(!voies.includes('class="progress"') && voies.includes('href="#/situation"'));
 assert(voies.includes('La plus directe pour vous') && voies.includes('Source :') && voies.includes('data-action="recoHandicap"'));
+assert(voies.includes('ne se substitue ni aux textes officiels') && voies.includes('data-action="finish"') && voies.includes('Découvrir les métiers et concours'));
+t.S.done = true;
+const voiesDone = t.screens.voies();
+assert(voiesDone.includes('href="#/accueil"') && voiesDone.includes('href="#/metiers"') && voiesDone.includes('class="tabbar"'), 'Une fois le profil terminé, la page reste consultable depuis l’espace perso.');
+t.S.done = false;
 t.setHandicap(true);
 assert(!JSON.stringify(t.S).includes('handicap'), 'La situation de handicap n’est jamais enregistrée.');
 
@@ -142,4 +150,29 @@ t.S.recoPath = 'nouveau';
 assert(t.screens.interets().includes('href="#/projet"') && t.screens.interets().includes('Étape 5 / 8'));
 assert(t.screens.situation().includes('href="#/traits"') && !t.screens.situation().includes('data-action="boursier"'));
 
-console.log('Reconversion vérifiée : base de ' + R.keywords.length + ' mots-clés, ' + R.professions.length + ' métiers du privé, parcours, autocomplétion, budget sans boursier·e, 8 profils de recette.');
+// Demandeur·se d'emploi : même parcours.
+const d = start();
+d.click('profile', 'dem');
+assert.equal(d.S.profile, 'dem');
+d.S.name = 'Sam'; d.click('level', 'Bac+2'); d.submit('study-form');
+assert.equal(d.location.hash, '#/experience', 'Le profil demandeur d’emploi suit le parcours reconversion.');
+d.click('experience', '4-5'); d.click('recoPath', 'metier'); d.S.recoJob = 'vendeur'; d.S.budget = 'Je ne sais pas';
+assert(d.screens.situation().includes('ouvertes aux demandeur·ses d’emploi') && !d.screens.situation().includes('data-action="boursier"'));
+assert(d.screens.voies().includes('Vos voies d’accès'));
+
+// Règle : « en reconversion » et « demandeur·se d'emploi » partagent chaque écran. Toute divergence hors libellé du profil échoue ici.
+function walk(profileId) {
+  const w = start(); w.click('profile', profileId);
+  w.S.name = 'Sam'; w.S.level = 'Bac+2'; w.S.experience = '4-5'; w.S.recoPath = 'metier'; w.S.recoJob = 'vendeur'; w.S.recoKeys = ['vente']; w.S.budget = 'Je ne sais pas';
+  const out = {};
+  for (const name of ['niveau', 'experience', 'projet', 'metier-prive', 'situation', 'voies']) out[name] = w.screens[name]();
+  w.S.recoPath = 'nouveau';
+  for (const name of ['interets', 'ambition', 'traits', 'situation']) out['nouveau-' + name] = w.screens[name]();
+  w.S.done = true; out.moi = w.screens.moi(); out.voiesDone = w.screens.voies(); out.accueil = w.screens.accueil();
+  return out;
+}
+const rec = walk('rec'), dem = walk('dem');
+const neutral = html => html.replace(/Les Prépas Talents<\/h2>|Demandeur·se d’emploi \?<\/h2>/g, 'TITRE</h2>').replace(/ouvertes aux demandeur·ses d’emploi|vous sont ouvertes/g, 'OUVERTES').replace(/En reconversion|Demandeur·se d’emploi/g, 'PROFIL');
+for (const k of Object.keys(rec)) assert.equal(neutral(dem[k]), neutral(rec[k]), 'Écran « ' + k + ' » : les profils reconversion et demandeur d’emploi doivent rester identiques.');
+
+console.log('Reconversion vérifiée : base de ' + R.keywords.length + ' mots-clés, ' + R.professions.length + ' métiers du privé, parcours, autocomplétion, budget sans boursier·e, 8 profils de recette, parité reconversion / demandeur d’emploi.');
