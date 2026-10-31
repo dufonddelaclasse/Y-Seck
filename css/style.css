@@ -2739,4 +2739,4 @@ html:not([data-contrast="true"]) :is(#app, .sheet) .opt .defi-cats .cat.cat-CDD,
 .reco-handicap { display:flex; align-items:flex-start; gap:12px; padding:14px 16px; border:1px solid var(--line-2); border-radius:18px; font-size:.9375rem; line-height:1.4; cursor:pointer; }
 .reco-handicap input { flex:none; width:22px; height:22px; margin:1px 0 0; accent-color:var(--accent); }
 .reco-handicap .small { display:block; margin-top:4px; color:var(--muted); }
-.reco-disclaimer { font-size:.875rem; color:var(--muted); }
+.app-mention { margin:22px 0 0; font-size:.6875rem; line-height:1.45; color:var(--muted); }

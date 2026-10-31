@@ -1022,7 +1022,7 @@
           '<p>' + esc(v.text) + '</p>' + ext(v.url, 'Source : ' + v.source, 'link-plain') + '</article>';
       }).join('') + '</div>' +
       '<label class="reco-handicap mt-m"><input type="checkbox" data-action="recoHandicap"' + (recoHandicap ? ' checked' : '') + '><span>Je suis en situation de handicap (RQTH ou autre reconnaissance). <span class="small">Non enregistré : sert seulement à afficher la voie dédiée.</span></span></label>' +
-      '<p class="notice reco-disclaimer mt-m">' + I.info + '<span>Cette application a pour vocation d’éclairer vos choix. Elle ne se substitue ni aux textes officiels, ni aux organisateurs de concours, seuls à même de confirmer les conditions d’accès à la date de votre candidature.</span></p>' +
+      '<p class="small mt-s">Les conditions exactes (durées, diplômes) sont fixées concours par concours : vérifiez toujours l’avis officiel.</p>' +
       /* Profil terminé : le bouton suit le contenu, au-dessus du menu ; pendant le profil, il reste fixé en bas. */
       (S.done ? '<a class="btn mt-m" href="#/metiers">Découvrir les métiers et concours</a></main>' + tabbar('accueil') : '</main><div class="footer"><a class="btn" href="#/accueil" data-action="finish">Découvrir les métiers et concours</a></div>');
   };
@@ -1125,6 +1125,8 @@
   function countSize(n) { var d=String(n).length; return d>=4?' digits-4':d===3?' digits-3':''; }
   /* Prénom de l’accueil : il s’anime une seule fois, à l’arrivée sur l’espace personnel. */
   function homeName(name) { return '<span class="home-name' + (nameAnimate ? ' home-name-enter' : '') + '">' + esc(name) + '</span>'; }
+  /* Mention de prudence, en tout petit, au bas des espaces personnels. */
+  var APP_MENTION = '<p class="app-mention">Cette application a pour vocation d’éclairer vos choix. Elle ne se substitue ni aux textes officiels, ni aux organisateurs de concours, seuls à même de confirmer les conditions d’accès à la date de votre candidature.</p>';
   function personalHome() {
     var jobs = myJobs(), concours = myConcours();
     return '<main class="screen pt personal-home">' +
@@ -1139,7 +1141,7 @@
       '<a class="home-feature home-access" href="#/concours"><span class="home-tile home-tile-parcours">' + I.journey + '</span><span class="home-feature-copy"><b>Informations générales</b><span>Les concours, les fonctions publiques et les prépas</span></span><span class="home-go">' + I.arrow + '</span></a></div>' +
       (isReco() ? '<a class="home-feature home-access reco-home-voies" href="#/voies"><span class="home-tile home-tile-parcours">' + I.route + '</span><span class="home-feature-copy"><b>Vos voies d’accès</b><span>Passerelles, concours et contrat selon votre profil</span></span><span class="home-go">' + I.arrow + '</span></a>' : '') +
       '<div class="grid-2 home-shortcuts"><a href="#/favoris"><span class="home-tile home-count' + countSize(S.favorites.length) + '">' + S.favorites.length + '</span><span><b>' + (isParent() ? 'Ses favoris' : 'Vos favoris') + '</b></span></a><a href="#/interets"><span class="home-tile">' + I.pencil + '</span><span><b>' + (isParent() ? 'Son projet' : 'Votre projet') + '</b></span></a></div>' +
-      '</main>' + tabbar('accueil');
+      APP_MENTION + '</main>' + tabbar('accueil');
   }
   screens.accueil = function () { return isParent() ? screens.famille() : personalHome(); };
   screens.enfant = function () { return personalHome(); };
@@ -1156,7 +1158,7 @@
       '<div class="grid-2 home-shortcuts"><a href="#/moi"><span class="home-tile home-count' + countSize(completed) + '">' + completed + '</span><span><b>Complété' + (completed > 1 ? 's' : '') + '</b> <span>sur ' + S.children.length + ' profil' + (S.children.length > 1 ? 's' : '') + '</span></span></a>' +
       '<a href="#/profil" data-action="addChild"><span class="home-tile">' + I.plus + '</span><span><b>Ajouter</b> <span>un enfant</span></span></a></div>' +
       (S.children.length?'':'<button type="button" class="btn danger" data-action="wipe">Effacer mes données</button>')+
-      '<p class="small">Chaque enfant conserve ses choix, son lieu de vie et ses favoris. Les informations restent sur cet appareil.</p></main>' + tabbar('accueil');
+      '<p class="small">Chaque enfant conserve ses choix, son lieu de vie et ses favoris. Les informations restent sur cet appareil.</p>' + APP_MENTION + '</main>' + tabbar('accueil');
   };
   function childSelector() {
     if (!isParent()||!S.children.length) return '';
