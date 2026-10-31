@@ -829,7 +829,7 @@
   /* La case handicap n’est jamais enregistrée : elle sert seulement à afficher la voie dédiée pendant la session. */
   var recoHandicap = false;
   function recoData() { var p = window.PUBLIC_DATA || {}; return p.reconversion || null; }
-  var PROFILE_CHOICES = [['etu', 'Élève / Étudiant·e'], ['par', 'Parent'], ['rec', 'En reconversion'], ['dem', 'Demandeur·se d’emploi']];
+  var PROFILE_CHOICES = [['etu', 'Élève / Étudiant·e'], ['par', 'Parent'], ['rec', 'En reconversion'], ['dem', 'En recherche d’emploi']];
   function isReco() { return S.profile === 'rec' || S.profile === 'dem'; }
   /* Années d’expérience : borne basse de la tranche ; « Oui » des profils d’avant novembre 2026 vaut 4 ans. */
   function recoYears() { if (S.experience === 'Oui') return 4; var e = RECO_EXPERIENCE.filter(function (x) { return x[0] === S.experience; })[0]; return e ? e[2] : null; }
@@ -2725,7 +2725,7 @@
 
 
   /* ---------- Profil et informations légales ---------- */
-  var PROFILE_LABEL = { etu: 'Élève / Étudiant·e', par: 'Parent', rec: 'En reconversion', dem: 'Demandeur·se d’emploi' };
+  var PROFILE_LABEL = { etu: 'Élève / Étudiant·e', par: 'Parent', rec: 'En reconversion', dem: 'En recherche d’emploi' };
 
   var PROFILE_FIELDS = { profile: 'Profil', level: 'Niveau d’études', domains: 'Domaines', defis: 'Votre défi', agentPublic: 'Déjà dans la fonction publique', experience: 'Expérience', recoPath: 'Votre projet', traits: 'Ce qui vous ressemble', boursier: 'Boursier·e', budget: 'Budget pour se préparer' };
   /* Fenêtre de modification : uniquement les options du point choisi. */
@@ -2788,7 +2788,7 @@
       '<p><strong>En bref : vos réponses restent sur votre appareil.</strong> Pas de compte, pas de cookie, pas de mesure d’audience, pas de publicité.</p>' +
       '<h2>Responsable du traitement</h2><p>' + esc(L.publisher) + '. Contact : ' + mail(L.contact) + '.</p>' +
       '<h2>Ce qui est enregistré</h2><ul>' +
-      '<li>Le profil (étudiant·e, parent, reconversion, demandeur·se d’emploi) et le niveau d’étude.</li>' +
+      '<li>Le profil (élève ou étudiant·e, parent, reconversion, recherche d’emploi) et le niveau d’étude.</li>' +
       '<li>Les domaines et les traits choisis (« Ce qui vous ressemble »), la situation de bourse et le budget indiqués.</li>' +
       '<li>Les réglages d’affichage (filtres, région, confort de lecture).</li>' +
       '<li>Le prénom ou pseudo, les profils enfants, la commune choisie et les métiers favoris.</li></ul>' +

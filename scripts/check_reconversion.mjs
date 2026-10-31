@@ -172,7 +172,7 @@ function walk(profileId) {
   return out;
 }
 const rec = walk('rec'), dem = walk('dem');
-const neutral = html => html.replace(/Les Prépas Talents<\/h2>|Demandeur·se d’emploi \?<\/h2>/g, 'TITRE</h2>').replace(/ouvertes aux demandeur·ses d’emploi|vous sont ouvertes/g, 'OUVERTES').replace(/En reconversion|Demandeur·se d’emploi/g, 'PROFIL');
+const neutral = html => html.replace(/Les Prépas Talents<\/h2>|Demandeur·se d’emploi \?<\/h2>/g, 'TITRE</h2>').replace(/ouvertes aux demandeur·ses d’emploi|vous sont ouvertes/g, 'OUVERTES').replace(/En reconversion|En recherche d’emploi/g, 'PROFIL');
 for (const k of Object.keys(rec)) assert.equal(neutral(dem[k]), neutral(rec[k]), 'Écran « ' + k + ' » : les profils reconversion et demandeur d’emploi doivent rester identiques.');
 
 console.log('Reconversion vérifiée : base de ' + R.keywords.length + ' mots-clés, ' + R.professions.length + ' métiers du privé, parcours, autocomplétion, budget sans boursier·e, 8 profils de recette, parité reconversion / demandeur d’emploi.');
